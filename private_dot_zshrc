@@ -1,0 +1,384 @@
+# # # WIP: Disable warning that instant prompt is in use as iTerm needs to send commands for status bar before fully loaded
+# # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+#
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block, everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+# Path to your oh-my-zsh installation.
+export ZSH=~/.oh-my-zsh
+# export ZSH_CUSTOM=$ZSH  # Set in `$ZSH/oh-my-zsh.sh`
+
+# Look in ~/.oh-my-zsh/themes/
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# Setup with `p10k configure` or manually with `source $ZSH_CUSTOM/themes/powerlevel10k/powerlevel10k.zsh-theme`
+
+# ZSH_THEME="spaceship"
+# # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# agnoster
+# # https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
+# powerlevel10k - installed: https://github.com/romkatv/powerlevel10k
+# oxide
+# Bullet train
+# lambda-mod
+# Spaceship ZSH
+# # Alien
+# # Kayid Theme
+# Halil
+
+# Theme settings
+export TERM="xterm-256color"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Start User ZSH ZSH Settings
+
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
+plugins=(
+#   # autopep8 - is this installing a separate ___?
+#   battery
+#   # branch
+#   brew
+#   # bundler
+#   # cake
+#   # cask
+#   # catimg
+#   # celery
+#   # chucknorris
+#   # codeclimate
+#   # coffee
+#   colored-man-pages
+#   colorize
+#   command-not-found
+#   common-aliases
+#   compleat
+#   # composer
+#   # copybuffer
+#   copydir
+#   copyfile
+#   # cp
+#   # cpanm
+#   dash
+#   dircycle
+#   dirhistory
+#   # dirpersist
+#   # dnf
+#   # dnote
+#   # docker
+#   # doctl
+#   # dotenv
+#   # droplr
+#   # emoji
+#   # emoji-clock
+#   # emotty
+#   encode64
+#   # extract
+#   # fancy-ctrl-z
+#   # fasd
+#   # fbterm
+#   # fd
+#   # firewalld
+#   # frontend-search
+#   # fzf
+#   # gas
+#   # gb
+#   git
+#   git-auto-fetch
+#   git-extras
+#   gitfast
+#   # git-flow
+#   # github
+#   # git-hubflow
+#   gitignore
+#   # git-prompt
+#   # git-remote-branch
+#   # glassfish
+#   # globalias
+#   # gnu-utils
+#   gulp
+#   # hanami
+#   history
+#   # history-substring-search
+#   # homestead
+#   # httpie
+#   iterm2
+#   jsontools
+#   # kate
+#   # keychain
+#   # kitchen
+#   # knife
+#   # last-working-dir - may interfere with VS Code
+#   # lighthouse
+#   lol
+#   # macports
+#   # magic-enter
+#   man
+#   # marked2
+#   # meteor
+#   # mix
+#   # mix-fast
+#   # mosh
+#   # nanoc
+#   # ng
+#   nmap
+#   # node - is this installing a separate ___?
+#   # nomad
+#   # npm - is this installing a separate ___?
+#   # npx - is this installing a separate ___?
+#   # nvm - is this installing a separate ___?
+#   # oc
+#   osx
+#   # otp
+#   # pep8 - is this installing a separate ___?
+#   # percol
+#   # per-directory-history
+#   # perms
+#   # phing
+#   # pip - may interfere with conda?
+#   # pipenv
+#   # pj
+#   # please
+#   # pod
+#   # pow
+#   # powder
+#   # powify
+#   # profiles
+#   # pyenv
+#   # python - may interfere with conda?
+#   # rand-quote
+#   # react-native
+#   # repo
+#   # ripgrep
+#   # rsync
+#   # safe-paste
+#   # salt
+#   # sbt
+#   # scd
+#   # screen
+#   # scw
+#   # sdk
+#   # sfdx
+#   # sfffe
+#   # shrink-path
+#   # singlechar
+#   # spring
+#   # sprunge
+#   # ssh-agent
+#   # stack
+#   sublime
+#   sudo
+#   # supervisor
+#   # svcat
+#   # siftpm
+#   # symfony2
+#   # systemadmin
+#   # systemd
+#   # taskwarrior
+#   # terminalapp  (Not known to ZSH in Jul2020?)
+#   # terminitor
+#   # terraform
+#   thefuck
+#   themes
+#   # tig
+#   # timer
+#   # tmux
+#   # transfer
+#   # tugboat
+#   # ubuntu
+#   # ufw
+#   # urltools
+#   # vault
+#   # virtualenv
+#   # virtualenvwrapper
+#   vscode
+#   # vundle
+#   # wakeonlan
+#   wd
+#   # web-search
+#   # wp-cli
+#   # xcode
+#   # yarn
+#   # yum
+#   # z
+#   # zeus
+#   # zsh-navigation-tools
+#   # The `zsh_reload` plugin is deprecated and will be removed.
+#   #   Use `omz reload` or `exec zsh` instead.
+#   # zsh_reload
+
+  # Git checkouts
+  # See: https://github.com/zdharma/fast-syntax-highlighting#oh-my-zsh
+  fast-syntax-highlighting
+  # # See: https://github.com/zsh-users/zsh-completions
+  # zsh-completions
+
+  # From Colin
+  # lein
+  # zsh-nvm
+
+  # # From: https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/
+  # zsh-autosuggestions
+  # zsh-syntax-highlighting
+  # mouse
+)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Start Create PATH
+
+# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+# # MacPorts Installer addition on 2014-08-06_at_07:06:32: adding an appropriate PATH variable for use with MacPorts.
+# export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
+# # TODO: WHAT IS THIS?
+# export PATH="$HOME/.parts/autoparts/bin:$PATH"
+
+# # Add path to mlint for Sublime Linter (No Matlab anymore...)
+# export PATH="/Applications/MATLAB_R2015b.app/bin/maci64/:$PATH"
+
+# Add scripts from custom bin/ directory
+export PATH=$PATH:$HOME/bin/
+
+# NVM Installation
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add sbin path for Homebrew
+export PATH="/usr/local/sbin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# > pipx install to a different location
+# # Add poetry and completions to shell
+# source $HOME/.poetry/env
+# poetry completions bash > $(brew --prefix)/etc/bash_completion.d/poetry.bash-completion
+
+# ----------------------------------------------------------------------------------------------------------------------
+# User configuration
+
+source $ZSH/oh-my-zsh.sh
+
+# Export GPG Key for Git Commit Signing
+export GPG_TTY=$(tty)
+
+# # RBENV
+# export RBENV_ROOT=/usr/local/var/rbenv
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# # NODENV
+# export NODENV_ROOT=/usr/local/var/nodenv
+# if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+
+# # HOMEBREW
+# export HOMEBREW_NO_ANALYTICS=1
+
+# # BREWFILE
+# export HOMEBREW_BREWFILE=~/Brewfile
+# export HOMEBREW_BREWFILE_APPSTORE=0
+
+# ----------------------------------------------------------------------------------------------------------------------
+# TBD - from bash...
+
+# [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+
+# Don't put duplicate lines in the history
+# https://www.eriwen.com/bash/effective-shorthand/
+export HISTCONTROL=ignoredups
+
+# # iTerm Shell integration
+# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# Set an alias for thefuck installed with brew: https://github.com/nvbn/thefuck
+eval $(thefuck --alias oop)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '~/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# ----------------------------------------------------------------------------------------------------------------------
+# Lines added through additional installs
+
+# **********************************************************************************************************************
+
+# https://github.com/junegunn/fzf
+# To install useful key bindings and fuzzy completion:
+# Run once!
+# $(brew --prefix)/opt/fzf/install
+# To uninstall!
+# $(brew --prefix)/opt/fzf/uninstall
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# cat $(fzf)
+
+# https://github.com/ajeetdsouza/zoxide
+# After fzf
+eval "$(zoxide init zsh)"
+# zoxide query  --list --score
+# z foo              # cd into highest ranked directory matching foo
+# z foo bar          # cd into highest ranked directory matching foo and bar
+#
+# z ~/foo            # z also works like a regular cd command
+# z foo/             # cd into relative path
+# z ..               # cd one level up
+# z -                # cd into previous directory
+#
+# zi foo             # cd with interactive selection (using fzf)
+#
+# z foo<SPACE><TAB>  # show interactive completions (zoxide v0.7.10+, bash/fish/zsh only)
+
+# TODO: Sync gh and krew plugins
+# gh extension list
+# kubectl krew list ??
+# brew list --versions && brew doctor && brew outdated
+# pipx list
+
+# Turn On Better Exceptions for Python
+export BETTER_EXCEPTIONS=1
+
+export PR_CHECKOUT_DIR=~/developer/checkouts
+alias clone-pr() {
+    cd $PR_CHECKOUT_DIR && gh repo clone $1 $1/pr$2 && cd $1/pr$2 && gh pr checkout $2 --force
+}
+# clone-pr timothycrosley/pdocs 25
+# clone-pr dash_charts 25
+
+# **********************************************************************************************************************
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export JDK_HOME=/Users/kyleking/.sdkman/candidates/java/current/
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/kyleking/.sdkman"
+[[ -s "/Users/kyleking/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/kyleking/.sdkman/bin/sdkman-init.sh"
+
+# Created by `userpath` on 2020-12-27 23:35:17
+export PATH="$PATH:/Users/kyleking/.local/bin"

@@ -1,0 +1,54 @@
+[user]
+	name = Kyle King
+	email = KyleKing@users.noreply.github.com
+	signingkey = {{ .github.signingkey }}
+[credential]
+	helper = osxkeychain
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[init]
+	defaultBranch = main
+[push]
+	default = simple
+[core]
+	pager = cat
+	editor = subl -n -w
+	excludesfile = /Users/kyleking/.gitignore_global
+	autocrlf = input
+	eol = lf
+[color]
+	ui = true
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[alias]
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+[diff]
+	guitool = delta
+[mergetool "delta"]
+	path = /usr/local/bin/delta
+[difftool "kdiff3"]
+	path = /usr/local/bin/kdiff3
+[merge]
+	tool = kdiff3
+[mergetool "kdiff3"]
+	path = /usr/local/bin/kdiff3
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
