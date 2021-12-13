@@ -33,6 +33,9 @@
 	sync = !legit sync \"$@\"
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
+	# Based on: https://stackoverflow.com/a/65746041/3219667
+	# Use: git publish-branch
+	publish-branch = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
 [diff]
 	guitool = delta
 [mergetool "delta"]
@@ -46,9 +49,11 @@
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-	required = true
 	process = git-lfs filter-process
+	required = true
 [commit]
 	gpgsign = true
 [gpg]
 	program = /usr/local/MacGPG2/bin/gpg2
+[tag]
+	forceSignAnnotated = true

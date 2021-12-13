@@ -39,9 +39,7 @@ export TERM="xterm-256color"
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
 plugins=(
 #   # autopep8 - is this installing a separate ___?
-#   battery
 #   # branch
-#   brew
 #   # bundler
 #   # cake
 #   # cask
@@ -50,20 +48,10 @@ plugins=(
 #   # chucknorris
 #   # codeclimate
 #   # coffee
-#   colored-man-pages
-#   colorize
-#   command-not-found
-#   common-aliases
-#   compleat
 #   # composer
 #   # copybuffer
-#   copydir
-#   copyfile
 #   # cp
 #   # cpanm
-#   dash
-#   dircycle
-#   dirhistory
 #   # dirpersist
 #   # dnf
 #   # dnote
@@ -74,7 +62,6 @@ plugins=(
 #   # emoji
 #   # emoji-clock
 #   # emotty
-#   encode64
 #   # extract
 #   # fancy-ctrl-z
 #   # fasd
@@ -85,37 +72,26 @@ plugins=(
 #   # fzf
 #   # gas
 #   # gb
-#   git
-#   git-auto-fetch
-#   git-extras
-#   gitfast
 #   # git-flow
-#   # github
 #   # git-hubflow
-#   gitignore
 #   # git-prompt
 #   # git-remote-branch
+#   # github
 #   # glassfish
 #   # globalias
 #   # gnu-utils
-#   gulp
 #   # hanami
-#   history
 #   # history-substring-search
 #   # homestead
 #   # httpie
-#   iterm2
-#   jsontools
 #   # kate
 #   # keychain
 #   # kitchen
 #   # knife
 #   # last-working-dir - may interfere with VS Code
 #   # lighthouse
-#   lol
 #   # macports
 #   # magic-enter
-#   man
 #   # marked2
 #   # meteor
 #   # mix
@@ -123,18 +99,16 @@ plugins=(
 #   # mosh
 #   # nanoc
 #   # ng
-#   nmap
 #   # node - is this installing a separate ___?
 #   # nomad
 #   # npm - is this installing a separate ___?
 #   # npx - is this installing a separate ___?
 #   # nvm - is this installing a separate ___?
 #   # oc
-#   osx
 #   # otp
 #   # pep8 - is this installing a separate ___?
-#   # percol
 #   # per-directory-history
+#   # percol
 #   # perms
 #   # phing
 #   # pip - may interfere with conda?
@@ -163,16 +137,14 @@ plugins=(
 #   # sfdx
 #   # sfffe
 #   # shrink-path
+#   # siftpm
 #   # singlechar
 #   # spring
 #   # sprunge
 #   # ssh-agent
 #   # stack
-#   sublime
-#   sudo
 #   # supervisor
 #   # svcat
-#   # siftpm
 #   # symfony2
 #   # systemadmin
 #   # systemd
@@ -180,8 +152,6 @@ plugins=(
 #   # terminalapp  (Not known to ZSH in Jul2020?)
 #   # terminitor
 #   # terraform
-#   thefuck
-#   themes
 #   # tig
 #   # timer
 #   # tmux
@@ -193,10 +163,8 @@ plugins=(
 #   # vault
 #   # virtualenv
 #   # virtualenvwrapper
-#   vscode
 #   # vundle
 #   # wakeonlan
-#   wd
 #   # web-search
 #   # wp-cli
 #   # xcode
@@ -205,9 +173,38 @@ plugins=(
 #   # z
 #   # zeus
 #   # zsh-navigation-tools
-#   # The `zsh_reload` plugin is deprecated and will be removed.
-#   #   Use `omz reload` or `exec zsh` instead.
-#   # zsh_reload
+#   battery
+#   brew
+#   colored-man-pages
+#   colorize
+#   command-not-found
+#   common-aliases
+#   compleat
+#   copydir
+#   copyfile
+#   dash
+#   dircycle
+#   dirhistory
+#   encode64
+#   git
+#   git-auto-fetch
+#   git-extras
+#   gitfast
+#   gitignore
+#   gulp
+#   history
+#   iterm2
+#   jsontools
+#   lol
+#   man
+#   nmap
+#   osx
+#   sublime
+#   sudo
+#   thefuck
+#   themes
+#   vscode
+#   wd
 
   # Git checkouts
   # See: https://github.com/zdharma/fast-syntax-highlighting#oh-my-zsh
@@ -361,8 +358,10 @@ eval "$(zoxide init zsh)"
 export BETTER_EXCEPTIONS=1
 
 export PR_CHECKOUT_DIR=~/developer/checkouts
-alias clone-pr() {
-    cd $PR_CHECKOUT_DIR && gh repo clone $1 $1/pr$2 && cd $1/pr$2 && gh pr checkout $2 --force
+if [[ -d $PR_CHECKOUT_DIR ]] {
+    alias clone-pr() {
+        cd $PR_CHECKOUT_DIR && gh repo clone $1 $1/pr$2 && cd $1/pr$2 && gh pr checkout $2 --force
+    }
 }
 # clone-pr timothycrosley/pdocs 25
 # clone-pr dash_charts 25
