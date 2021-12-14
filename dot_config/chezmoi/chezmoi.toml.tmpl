@@ -1,0 +1,13 @@
+# Chezmoi self-referential template. Use this format and fill in all values
+#	There will be errors for any missing data
+
+[data]
+email = "{{ .email }}"
+
+[data.github]
+signingkey = "{{ .github.signingkey }}"
+
+[data.poetry]
+repositories = '''
+{{ .poetry.repositories }}
+'''

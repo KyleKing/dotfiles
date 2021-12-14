@@ -1,8 +1,0 @@
-{
-  "stackOrchestrator" : "swarm",
-  "credsStore" : "desktop",
-  "auths" : {
-
-  },
-  "experimental" : "disabled"
-}
