@@ -1,47 +1,58 @@
-# # # WIP: Disable warning that instant prompt is in use as iTerm needs to send commands for status bar before fully loaded
-# # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-#
-# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# # Initialization code that may require console input (password prompts, [y/n]
-# # confirmations, etc.) must go above this block, everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+# Sourced for interactive shells - https://unix.stackexchange.com/a/487889
 
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH="/Users/kyleking/.oh-my-zsh"
 # export ZSH_CUSTOM=$ZSH  # Set in `$ZSH/oh-my-zsh.sh`
 
-# Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# Setup with `p10k configure` or manually with `source $ZSH_CUSTOM/themes/powerlevel10k/powerlevel10k.zsh-theme`
+# > Look in ~/.oh-my-zsh/themes/
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# Others: agnoster, oxide, Bullet train, lambda-mod, Spaceship ZSH, Halil
+# > Note: installed with brew and not oh-my-zsh
+source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+# Create a new configuration file `p10k configure` or modify an existing one at ~/.p10k.zsh
 
-# ZSH_THEME="spaceship"
-# # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# agnoster
-# # https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
-# powerlevel10k - installed: https://github.com/romkatv/powerlevel10k
-# oxide
-# Bullet train
-# lambda-mod
-# Spaceship ZSH
-# # Alien
-# # Kayid Theme
-# Halil
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
 
-# Theme settings
-export TERM="xterm-256color"
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Start User ZSH ZSH Settings
 
+# Use `omz plugin info <name>` to learn more about each. Prints the README (`omz plugin info zsh-autosuggestions`)
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
 plugins=(
-#   # autopep8 - is this installing a separate ___?
+#   # autopep8
 #   # branch
 #   # bundler
-#   # cake
 #   # cask
 #   # catimg
 #   # celery
@@ -50,7 +61,6 @@ plugins=(
 #   # coffee
 #   # composer
 #   # copybuffer
-#   # cp
 #   # cpanm
 #   # dirpersist
 #   # dnf
@@ -93,26 +103,24 @@ plugins=(
 #   # macports
 #   # magic-enter
 #   # marked2
-#   # meteor
 #   # mix
 #   # mix-fast
 #   # mosh
 #   # nanoc
 #   # ng
-#   # node - is this installing a separate ___?
+#   # node
 #   # nomad
-#   # npm - is this installing a separate ___?
-#   # npx - is this installing a separate ___?
-#   # nvm - is this installing a separate ___?
+#   # npm
+#   # npx
+#   # nvm
 #   # oc
 #   # otp
-#   # pep8 - is this installing a separate ___?
+#   # pep
 #   # per-directory-history
 #   # percol
 #   # perms
 #   # phing
-#   # pip - may interfere with conda?
-#   # pipenv
+#   # pip
 #   # pj
 #   # please
 #   # pod
@@ -121,7 +129,7 @@ plugins=(
 #   # powify
 #   # profiles
 #   # pyenv
-#   # python - may interfere with conda?
+#   # python
 #   # rand-quote
 #   # react-native
 #   # repo
@@ -149,7 +157,6 @@ plugins=(
 #   # systemadmin
 #   # systemd
 #   # taskwarrior
-#   # terminalapp  (Not known to ZSH in Jul2020?)
 #   # terminitor
 #   # terraform
 #   # tig
@@ -161,8 +168,6 @@ plugins=(
 #   # ufw
 #   # urltools
 #   # vault
-#   # virtualenv
-#   # virtualenvwrapper
 #   # vundle
 #   # wakeonlan
 #   # web-search
@@ -170,11 +175,9 @@ plugins=(
 #   # xcode
 #   # yarn
 #   # yum
-#   # z
 #   # zeus
 #   # zsh-navigation-tools
-#   battery
-#   brew
+
 #   colored-man-pages
 #   colorize
 #   command-not-found
@@ -182,35 +185,25 @@ plugins=(
 #   compleat
 #   copydir
 #   copyfile
-#   dash
+#   cp
 #   dircycle
 #   dirhistory
+#   docker
 #   encode64
 #   git
 #   git-auto-fetch
 #   git-extras
 #   gitfast
 #   gitignore
-#   gulp
-#   history
-#   iterm2
 #   jsontools
-#   lol
-#   man
 #   nmap
-#   osx
-#   sublime
 #   sudo
-#   thefuck
 #   themes
-#   vscode
-#   wd
 
-  # Git checkouts
-  # See: https://github.com/zdharma/fast-syntax-highlighting#oh-my-zsh
-  fast-syntax-highlighting
-  # # See: https://github.com/zsh-users/zsh-completions
-  # zsh-completions
+  # man
+  # history
+  # thefuck
+  # wd
 
   # From Colin
   # lein
@@ -220,92 +213,101 @@ plugins=(
   # zsh-autosuggestions
   # zsh-syntax-highlighting
   # mouse
+
+  # > lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
+
+  # > homebrew. Use: brewp (pin to prevent upgrade), brewsp (list pinned), bubu (update, upgrade, cleanup), bcubc (cask)
+  brew
+  # > Kapeli Dash. Use: `dash python:tuple`
+  dash
+  # > History. Use: h, hs <> (grep), hsi <> (grep -i)
+  history
+  # > Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
+  macos
+  # > Aliases for VSCode. Use: `vscd file file` (diff)
+  vscode
+  # PLANNED: Sublime?
+  sublime
+
+  # # Git checkouts
+  # # # See: https://github.com/zdharma/fast-syntax-highlighting#oh-my-zsh
+  # # fast-syntax-highlighting
+  # # # See: https://github.com/zsh-users/zsh-completions
+  # # zsh-completions
+
+  # # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+  # # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  # zsh-autosuggestions
+
+  # # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+  # # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  # # > Must be last!
+  # zsh-syntax-highlighting
 )
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Start Create PATH
+# Misc. Hacks
 
-# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-
-# # MacPorts Installer addition on 2014-08-06_at_07:06:32: adding an appropriate PATH variable for use with MacPorts.
-# export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-
-# # TODO: WHAT IS THIS?
-# export PATH="$HOME/.parts/autoparts/bin:$PATH"
-
-# # Add path to mlint for Sublime Linter (No Matlab anymore...)
-# export PATH="/Applications/MATLAB_R2015b.app/bin/maci64/:$PATH"
-
-# Add scripts from custom bin/ directory
-export PATH=$PATH:$HOME/bin/
-
-# NVM Installation
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Add sbin path for Homebrew
-export PATH="/usr/local/sbin:$PATH"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# > pipx install to a different location
-# # Add poetry and completions to shell
-# source $HOME/.poetry/env
-# poetry completions bash > $(brew --prefix)/etc/bash_completion.d/poetry.bash-completion
+# Fix for commit signing on the command line
+# See: https://stackoverflow.com/a/42265848/3219667
+export GPG_TTY=$(tty)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # User configuration
 
 source $ZSH/oh-my-zsh.sh
 
-# Export GPG Key for Git Commit Signing
-export GPG_TTY=$(tty)
+# export MANPATH="/usr/local/man:$MANPATH"
 
-# # RBENV
-# export RBENV_ROOT=/usr/local/var/rbenv
-# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# # NODENV
-# export NODENV_ROOT=/usr/local/var/nodenv
-# if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nano'
+# fi
 
-# # HOMEBREW
-# export HOMEBREW_NO_ANALYTICS=1
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# # BREWFILE
-# export HOMEBREW_BREWFILE=~/Brewfile
-# export HOMEBREW_BREWFILE_APPSTORE=0
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+# FYI: Global variables are used as aliases for commands that take pipe input
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ----------------------------------------------------------------------------------------------------------------------
-# TBD - from bash...
-
-# [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-
-# Don't put duplicate lines in the history
-# https://www.eriwen.com/bash/effective-shorthand/
-export HISTCONTROL=ignoredups
-
-# # iTerm Shell integration
-# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# Start User Stuff
 
 # Set an alias for thefuck installed with brew: https://github.com/nvbn/thefuck
 eval $(thefuck --alias oop)
 
+# Configuration for zsh-autosuggestions
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
+# Keyword shortcuts for different acceptance strategies
+# Tab: List of Suggestions for next word. Auto-accepts if only one option
+#   Tab (again): to scroll through list
+#
+# (ctrl space, ctrl shit n, ctrl shift p)
+bindkey '^ ' autosuggest-accept
+# Base on: https://github.com/zsh-users/zsh-autosuggestions/issues/609#issuecomment-904204583
+bindkey "^N" history-beginning-search-forward
+bindkey "^P" history-beginning-search-backward
+
+alias ppj="pbaspate | jq"
+alias t8="saml2aws -a dev exec -- terraform"
+alias copy-l="fc -ln 0 | tail -n 1 | pbcopy"
+
 # ----------------------------------------------------------------------------------------------------------------------
+# # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
+# export HISTCONTROL=ignoredups
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -315,23 +317,55 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
 
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit
 # End of lines added by compinstall
+
+# Source homebrew-installed completions
+# Explanantion: https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # ----------------------------------------------------------------------------------------------------------------------
-# Lines added through additional installs
+# Terminal Tool Configurations
 
-# **********************************************************************************************************************
+# # Source: https://github.com/jesseduffield/lazygit#changing-directory-on-exit
+# lzg() {
+#     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
 
-# https://github.com/junegunn/fzf
-# To install useful key bindings and fuzzy completion:
-# Run once!
-# $(brew --prefix)/opt/fzf/install
-# To uninstall!
-# $(brew --prefix)/opt/fzf/uninstall
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# cat $(fzf)
+#     lazygit "$@"
 
+#     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+#             cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+#             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+#     fi
+# }
+alias lzg='lazygit'
+
+# Source: https://github.com/jesseduffield/lazydocker
+alias lzd='lazydocker'
+
+# Map exa to ls with some default options
+alias ls='exa --icons --all'
+alias lsb='ls --long --header --created --git'
+alias lst='lsb -TL 2'
+
+# # If file exists, source special file
+# [ -f /.is_work ] && source ~/TBD/.workrc
+
+# # https://github.com/junegunn/fzf
+# # To install useful key bindings and fuzzy completion:
+# # Run once!
+# # $(brew --prefix)/opt/fzf/install
+# # To uninstall!
+# # $(brew --prefix)/opt/fzf/uninstall
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# # cat $(fzf)
 # https://github.com/ajeetdsouza/zoxide
 # After fzf
 eval "$(zoxide init zsh)"
@@ -354,9 +388,6 @@ eval "$(zoxide init zsh)"
 # brew list --versions && brew doctor && brew outdated
 # pipx list
 
-# Turn On Better Exceptions for Python
-export BETTER_EXCEPTIONS=1
-
 export PR_CHECKOUT_DIR=~/developer/checkouts
 if [[ -d $PR_CHECKOUT_DIR ]] {
     alias clone-pr() {
@@ -366,18 +397,63 @@ if [[ -d $PR_CHECKOUT_DIR ]] {
 # clone-pr timothycrosley/pdocs 25
 # clone-pr dash_charts 25
 
-# **********************************************************************************************************************
+# ----------------------------------------------------------------------------------------------------------------------
+# Lines added through additional installs
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export JDK_HOME=/Users/kyleking/.sdkman/candidates/java/current/
+# > pipx completions require bashcompinit
+# autoload -U bashcompinit
+# bashcompinit
+eval "$(register-python-argcomplete pipx)"
+
+# FYI: Deactivated iterm2 shell integration because marks keybaord shortcut (up-arrow) conflicted with history
+# # Install iTerm Shell Integration from Menu bar
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# One Password CLI session (created with "op signin my.1password.com kmking72@gmail.com")
+export OP_SESSION_my="-ukvw1Lu8pdlYU_bAdPWC3L6WbGEJKsyO1nan83PDcg"
+
+# Created by NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# # ----------------------------------------------------------------------------------------------------------------------
+# # Old Paths
+
+# # Add scripts from custom bin/ directory
+# export PATH=$PATH:$HOME/bin/
+
+# # NVM Installation
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# # Add sbin path for Homebrew
+# export PATH="/usr/local/sbin:$PATH"
+
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+#         . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+
+# ----------------------------------------------------------------------------------------------------------------------
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="/usr/local/opt/openjdk/bin:$PATH"
+# export JDK_HOME=/Users/kyleking/.sdkman/candidates/java/current/
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/kyleking/.sdkman"
-[[ -s "/Users/kyleking/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/kyleking/.sdkman/bin/sdkman-init.sh"
-
-# Created by `userpath` on 2020-12-27 23:35:17
-export PATH="$PATH:/Users/kyleking/.local/bin"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
