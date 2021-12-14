@@ -1,61 +1,61 @@
-[user]
-	name = Kyle King
-	email = {{ .github.email }}
-	signingkey = {{ .github.signingkey }}
+[alias]
+	branches = !legit branches
+	graft = !legit graft \"$@\"
+	harvest = !legit harvest \"$@\"
+	publish = !legit publish \"$@\"
+	sprout = !legit sprout \"$@\"
+	switch = !legit switch \"$@\"
+	sync = !legit sync \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	# Based on: https://stackoverflow.com/a/65746041/3219667
+	# Use: git publish-branch
+	publish-branch = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
+[color]
+	ui = true
+[commit]
+	gpgsign = true
 [credential]
 	helper = osxkeychain
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
-[init]
-	defaultBranch = main
-[push]
-	default = simple
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	editor = subl -n -w
 	excludesfile = /Users/kyleking/.gitignore_global
 	autocrlf = input
 	eol = lf
-[color]
-	ui = true
+[diff]
+	guitool = delta
+[difftool "kdiff3"]
+	path = /usr/local/bin/kdiff3
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
-[alias]
-	switch = !legit switch \"$@\"
-	branches = !legit branches
-	sprout = !legit sprout \"$@\"
-	unpublish = !legit unpublish \"$@\"
-	harvest = !legit harvest \"$@\"
-	sync = !legit sync \"$@\"
-	publish = !legit publish \"$@\"
-	graft = !legit graft \"$@\"
-	# Based on: https://stackoverflow.com/a/65746041/3219667
-	# Use: git publish-branch
-	publish-branch = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
-[diff]
-	guitool = delta
-[mergetool "delta"]
-	path = /usr/local/bin/delta
-[difftool "kdiff3"]
-	path = /usr/local/bin/kdiff3
-[merge]
-	tool = kdiff3
-[mergetool "kdiff3"]
-	path = /usr/local/bin/kdiff3
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[commit]
-	gpgsign = true
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
 [gpg]
 	program = {{ .github.gpg_program }}
-[tag]
-	forceSignAnnotated = true
 [interactive]
 	diffFilte = "diff-so-fancy --patch"
+[init]
+	defaultBranch = main
+[mergetool "delta"]
+	path = /usr/local/bin/delta
+[mergetool "kdiff3"]
+	path = /usr/local/bin/kdiff3
+[merge]
+	tool = delta
+[push]
+	default = simple
+[tag]
+	forceSignAnnotated = true
+[user]
+	name = Kyle King
+	email = {{ .github.email }}
+	signingkey = {{ .github.signingkey }}
