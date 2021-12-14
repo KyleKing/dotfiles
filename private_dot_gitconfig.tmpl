@@ -1,6 +1,6 @@
 [user]
 	name = Kyle King
-	email = KyleKing@users.noreply.github.com
+	email = {{ .github.email }}
 	signingkey = {{ .github.signingkey }}
 [credential]
 	helper = osxkeychain
@@ -13,7 +13,7 @@
 [push]
 	default = simple
 [core]
-	pager = cat
+	pager = diff-so-fancy | less --tabs=4 -RFX
 	editor = subl -n -w
 	excludesfile = /Users/kyleking/.gitignore_global
 	autocrlf = input
@@ -54,6 +54,8 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = /usr/local/MacGPG2/bin/gpg2
+	program = {{ .github.gpg_program }}
 [tag]
 	forceSignAnnotated = true
+[interactive]
+	diffFilte = "diff-so-fancy --patch"

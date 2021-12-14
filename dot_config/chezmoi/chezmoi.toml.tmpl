@@ -5,7 +5,9 @@
 email = "{{ .email }}"
 
 [data.github]
+email = "{{ .github.email }}"
 signingkey = "{{ .github.signingkey }}"
+gpg_program = "{{ .github.gpg_program }}"
 
 [data.poetry]
 repositories = '''
