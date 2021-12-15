@@ -1,0 +1,42 @@
+---
+# Common commands:
+# poetry run pre-commit install
+# poetry run pre-commit run --all-files --hook-stage commit
+# poetry run pre-commit run --all-files --hook-stage push
+# poetry run doit run pre_commit_hooks
+#
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-added-large-files
+      - id: check-json
+        exclude: "private_keybindings.json"
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-yaml
+        args: ["--unsafe"]
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+        args: ["--fix=auto"]
+      - id: pretty-format-json
+        args: ["--autofix"]
+        exclude: "private_keybindings.json"
+      - id: trailing-whitespace
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.1.0
+    hooks:
+      # Can't generate baseline with Py 3.8. Use exclude regex rules instead
+      # See: https://github.com/Yelp/detect-secrets/issues/452
+      - id: detect-secrets
+        # args: ["--baseline", ".secrets.baseline"]
+        exclude: "poetry.lock|cassettes/.*\\.yaml"
+        stages: [push]
