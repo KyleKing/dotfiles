@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"A File Icon",
+		"Babel",
 		"BracketHighlighter",
 		"Case Conversion",
 		"CodeMap",
@@ -22,6 +23,7 @@
 		"ProjectManager",
 		"SideBarEnhancements",
 		"SublimeLinter",
+		"SublimeLinter-annotations",
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-SpellCheckLinter",
 		"SublimeLinter-flake8",

@@ -1,0 +1,9 @@
+{
+	"extensions":
+	[
+		"private_dot_zshrc",
+		"private_dot_zshenv",
+		"private_dot_zprofile",
+		"conf",
+	],
+}
