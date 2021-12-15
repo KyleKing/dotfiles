@@ -1,0 +1,11 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/kyleking/.local/share/chezmoi",
+		},
+		{
+			"path": "/Users/kyleking/.config"
+		},
+	],
+}

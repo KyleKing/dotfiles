@@ -1,0 +1,35 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"BracketHighlighter",
+		"CodeMap",
+		"ColorSchemeSelector",
+		"Exact Quick Find",
+		"FindCursor",
+		"GitGutter",
+		"Neon Color Scheme",
+		"Oceanic Next Color Scheme",
+		"Package Control",
+		"Pretty JSON",
+		"ProjectManager",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-contrib-SpellCheckLinter",
+		"SublimeLinter-flake8",
+		"Tabnine",
+		"TabsExtra",
+		"Theme - Argonaut",
+		"Theme - Cobalt2",
+		"Theme - Gravity",
+		"Theme - Spacegray",
+		"ThemeTweaker",
+		"Themr",
+		"TOML",
+		"TrailingSpaces",
+	],
+}
