@@ -1,15 +1,8 @@
 [alias]
-	branches = !legit branches
-	graft = !legit graft \"$@\"
-	harvest = !legit harvest \"$@\"
-	publish = !legit publish \"$@\"
-	sprout = !legit sprout \"$@\"
-	switch = !legit switch \"$@\"
-	sync = !legit sync \"$@\"
-	unpublish = !legit unpublish \"$@\"
 	# Based on: https://stackoverflow.com/a/65746041/3219667
 	# Use: git publish-branch
 	publish-branch = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
+	# Previously used legit: https://github.com/frostming/legit
 [color]
 	ui = true
 [commit]
@@ -17,13 +10,15 @@
 [credential]
 	helper = osxkeychain
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
-	editor = subl -n -w
-	excludesfile = /Users/kyleking/.gitignore_global
+	pager = delta
+	editor = subl --wait --add
 	autocrlf = input
 	eol = lf
+[delta]
+	navigate = true
 [diff]
-	guitool = delta
+	# guitool = delta
+    colorMoved = default
 [difftool "kdiff3"]
 	path = /usr/local/bin/kdiff3
 [filter "hawser"]
@@ -42,15 +37,16 @@
 [gpg]
 	program = {{ .github.gpg_program }}
 [interactive]
-	diffFilte = "diff-so-fancy --patch"
+	diffFilter = delta --color-only
 [init]
 	defaultBranch = main
-[mergetool "delta"]
-	path = /usr/local/bin/delta
-[mergetool "kdiff3"]
-	path = /usr/local/bin/kdiff3
+# [mergetool "delta"]
+# 	path = /usr/local/bin/delta
+# [mergetool "kdiff3"]
+# 	path = /usr/local/bin/kdiff3
 [merge]
-	tool = delta
+	# tool = delta
+    conflictstyle = diff3
 [push]
 	default = simple
 [tag]
