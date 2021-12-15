@@ -1,0 +1,8 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+
+# Based on: https://www.chezmoi.io/docs/how-to/#use-brew-bundle-to-manage-your-brews-and-casks
+# But modified to only write the config rather than install
+
+brew bundle dump --file=- > ~/.config/my_config/scripts/Brewfile.{{- .computer_name -}}
+{{ end -}}
