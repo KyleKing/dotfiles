@@ -11,5 +11,9 @@ gpg_program = "{{ .github.gpg_program }}"
 
 [data.poetry]
 repositories = '''
-{{ .poetry.repositories }}
+{{- .poetry.repositories -}}
 '''
+
+[edit]
+command = "subl"
+args = ["--wait", "--add"]
