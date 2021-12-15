@@ -2,6 +2,7 @@
 	"ignored_packages":
 	[
 		"SublimeLinter-contrib-SpellCheckLinter",
+		"SublimeLinter-flake8",
 		"Vintage",
 	],
 	"theme": "Gravity One.sublime-theme",

@@ -13,7 +13,7 @@ source $MY_CONFIG/containers.sh
 source $MY_CONFIG/homebrew.sh
 
 # Optional source files
-[[ ! -f $MY_CONFIG/pal.sh ]] || source $MY_CONFIG/pal.sh
+[[ -f $MY_CONFIG/pal.sh ]] && source $MY_CONFIG/pal.sh
 
 # Must be last
 source $MY_CONFIG/_java.sh
