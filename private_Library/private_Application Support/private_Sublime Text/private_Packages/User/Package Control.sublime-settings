@@ -35,5 +35,6 @@
 		"TOML",
 		"TrailingSpaces",
 		"Z",
+		"ZSH",
 	],
 }
