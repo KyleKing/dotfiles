@@ -11,7 +11,6 @@ chmod 0600 "$HOME/.config/chezmoi/chezmoi.toml"
 
 Could use this to check if the file exists?
 
-
 ```zsh
 if [ ! -f "$HOME/.tbd" ]; then
   echo "TBD"
