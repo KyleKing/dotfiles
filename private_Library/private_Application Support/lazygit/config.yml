@@ -1,0 +1,16 @@
+# to skip without creating a new repo
+notARepository: 'skip'
+
+customCommands:
+  - key: '<f12>'
+    description: 'Publish local branch to origin'
+    command: 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+    context: 'localBranches'
+    loadingText: 'Publishing local branch...'
+git:
+  # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+
+# More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#struggling-to-see-selected-line

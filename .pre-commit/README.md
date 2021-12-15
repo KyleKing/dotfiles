@@ -17,3 +17,12 @@ if [ ! -f "$HOME/.tbd" ]; then
   echo "TBD"
 fi
 ```
+
+```sh
+pipx list > pipx_list.txt
+pip config list --verbose > pip_config.txt
+gh extension list > gh_extensions.txt
+kubectl krew list > krew_plugins.txt
+brew list --versions > brew_list.txt
+git config --global --list --show-origin > git_config.txt
+```
