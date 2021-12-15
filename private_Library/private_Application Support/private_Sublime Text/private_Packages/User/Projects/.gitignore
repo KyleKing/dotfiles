@@ -1,4 +1,5 @@
 # These files are computer specific and change too frequently to store in a VCS
 
-*.sublime-project
-recent.json
+**/*.sublime-project
+**/*.sublime-workspace
+**/recent.json
