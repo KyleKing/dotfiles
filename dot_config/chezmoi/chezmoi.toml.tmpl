@@ -1,24 +1,26 @@
 # Chezmoi self-referential template. Use this format and fill in all values
 #	There will be errors for any missing data
 
-{{- $email := promptString "Email" -}}
 [data]
-email = "{{ $email }}"
+email = "{{ .email }}"
+computer_name = "{{ .computer_name }}"
 
-{{- $github_email := promptString "Github Email" -}}
-{{- $github_signing_key := promptString "Github Signing Key" -}}
-{{- $github_gpg := promptString "Github GPG Program" -}}
 [data.github]
-email = "{{ $github_email }}"
-signingkey = "{{ $github_signing_key }}"
-gpg_program = "{{ $github_gpg }}"
+email = "{{ .github.email }}"
+signing_key = "{{ .github.signing_key }}"
+gpg_program = "{{ .github.gpg_program }}"
 
-{{- $poetry_repositories := promptString "Poetry Repositories TOML" -}}
 [data.poetry]
 repositories = '''
-{{- $poetry_repositories -}}
+{{- .poetry.repositories -}}
 '''
 
 [edit]
 command = "subl"
 args = ["--wait", "--add"]
+
+[diff]
+pager = "delta"
+
+[merge]
+command = "delta"
