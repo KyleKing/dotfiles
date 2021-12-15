@@ -4,9 +4,10 @@
 eval $(thefuck --alias oop)
 
 # Map exa to ls with some default options
-alias ls='exa --icons --all'
-alias lsb='ls --long --header --created --git'
-alias lst='lsb -TL 2'
+alias ls='exa --icons'
+alias lsa='ls --all'
+alias lsl='ls --long --header --created --git'
+alias lst='lsl -TL 2'
 
 # # https://github.com/junegunn/fzf
 # # To install useful key bindings and fuzzy completion:

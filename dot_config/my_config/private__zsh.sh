@@ -1,12 +1,11 @@
 # General ZSH Configuration
 
-# ----------------------------------------------------------------------------------------------------------------------
-# # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
-# export HISTCONTROL=ignoredups
+# Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
+export HISTCONTROL=ignoredups
 
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 bindkey -e
 
 # Based on: https://github.com/zsh-users/zsh-autosuggestions/issues/609#issuecomment-904204583

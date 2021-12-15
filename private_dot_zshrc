@@ -5,7 +5,7 @@ export MY_CONFIG=$HOME/.config/my_config
 
 source $MY_CONFIG/_omz.sh
 source $MY_CONFIG/_zsh.sh
-source $MY_CONFIG/_pythong.sh
+source $MY_CONFIG/_python.sh
 source $MY_CONFIG/_node.sh
 source $MY_CONFIG/_git.sh
 source $MY_CONFIG/cli_tools.sh
@@ -16,35 +16,4 @@ source $MY_CONFIG/homebrew.sh
 [[ ! -f $MY_CONFIG/pal.sh ]] || source $MY_CONFIG/pal.sh
 
 # Must be last
-source $MY_CONFIG/java.sh
-
-# # ----------------------------------------------------------------------------------------------------------------------
-# # Old Paths (Pending Removal)
-
-# FYI: Deactivated iterm2 shell integration because marks keybaord shortcut (up-arrow) conflicted with history
-# # Install iTerm Shell Integration from Menu bar
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# # Add scripts from custom bin/ directory
-# export PATH=$PATH:$HOME/bin/
-
-# # Add sbin path for Homebrew
-# export PATH="/usr/local/sbin:$PATH"
-
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-#         . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda initialize <<<
-
-# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-# export PATH="/usr/local/opt/openjdk/bin:$PATH"
+source $MY_CONFIG/_java.sh
