@@ -1,5 +1,10 @@
 # Sourced for interactive shells - https://unix.stackexchange.com/a/487889
 
+# fzf installer for useful key bindings and fuzzy completion: https://github.com/junegunn/fzf
+# 	Run once! $(brew --prefix)/opt/fzf/install
+# 	To uninstall! $(brew --prefix)/opt/fzf/uninstall
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config
 
@@ -13,7 +18,7 @@ source $MY_CONFIG/containers.sh
 source $MY_CONFIG/homebrew.sh
 
 # Optional source files
-[[ -f $MY_CONFIG/pal.sh ]] && source $MY_CONFIG/pal.sh
+[ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
 
 # Must be last
 source $MY_CONFIG/_java.sh
