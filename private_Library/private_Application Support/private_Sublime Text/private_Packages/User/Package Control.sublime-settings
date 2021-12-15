@@ -18,6 +18,7 @@
 		"Pretty JSON",
 		"ProjectManager",
 		"SideBarEnhancements",
+		"SingleTrailingNewLine",
 		"SublimeLinter",
 		"SublimeLinter-contrib-SpellCheckLinter",
 		"SublimeLinter-flake8",
