@@ -7,8 +7,10 @@
 	[
 		"A File Icon",
 		"BracketHighlighter",
+		"Case Conversion",
 		"CodeMap",
 		"ColorSchemeSelector",
+		"Dockerfile Syntax Highlighting",
 		"Exact Quick Find",
 		"FindCursor",
 		"GitGutter",

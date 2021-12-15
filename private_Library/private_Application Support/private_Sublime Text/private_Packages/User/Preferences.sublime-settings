@@ -5,22 +5,19 @@
 		"SublimeLinter-flake8",
 		"Vintage",
 	],
-	"theme": "Gravity One.sublime-theme",
-	"color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
-
 	"auto_complete": true,
 	"auto_complete_commit_on_tab": true,
-	"auto_complete_with_fields": true,
 	"auto_complete_trailing_symbols": true,
-
-	"close_windows_when_empty": true,
-
-	"trim_trailing_white_space_on_save": "all",
-	"trim_only_modified_white_space": false,
-	"ensure_newline_at_eof_on_save": true,
-
+	"auto_complete_with_fields": true,
 	"bold_folder_labels": true,
+	"close_windows_when_empty": true,
+	"color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
 	"font_size": 13,
-
+	"preview_on_click": "only_left",
+	"show_full_path": true,
 	"spell_check": false,
+	"theme": "Gravity One.sublime-theme",
+	"trim_only_modified_white_space": false,
+	"trim_trailing_white_space_on_save": "all",
 }
