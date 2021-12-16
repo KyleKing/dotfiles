@@ -2,7 +2,6 @@
 	"ignored_packages":
 	[
 		"SublimeLinter-contrib-SpellCheckLinter",
-		"SublimeLinter-flake8",
 		"Vintage",
 	],
 	"auto_complete": true,
@@ -17,7 +16,7 @@
 	"preview_on_click": "only_left",
 	"show_full_path": true,
 	"spell_check": false,
-	"theme": "Gravity One.sublime-theme",
+	"theme": "Gravity.sublime-theme",
 	"trim_only_modified_white_space": false,
 	"trim_trailing_white_space_on_save": "all",
 }
