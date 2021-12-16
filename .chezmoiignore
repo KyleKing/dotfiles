@@ -1,1 +1,7 @@
+*~
 .DS_Store
+
+# These files are computer specific and change too frequently to store in a VCS
+*.sublime-project
+*.sublime-workspace
+**/User/Projects/recent.json

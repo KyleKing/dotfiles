@@ -28,14 +28,14 @@ ch-rad() {
 		ch-add-dir ~/.config/my_config/
 		ch-add-dir ~/.config/zellij/
 		ch-add-dir ~/.gnupg/
-		ch-add-dir ~/Library/Application Support/lazygit/
-		ch-add-dir ~/Library/Application Support/lazydocker/
+		ch-add-dir ~/Library/Application\ Support/lazygit/
+		ch-add-dir ~/Library/Application\ Support/lazydocker/
 		# FIXME: Move Sublime and VSCode to Symlinks:
 		# 	https://github.com/twpayne/chezmoi/blob/master/docs/HOWTO.md#handle-configuration-files-which-are-externally-modified
-		ch-add-dir ~/Library/Application Support/Code/User/
-		ch-add-dir ~/Library/Application Support/Sublime Text/Packages/User/
-		ch-add-dir ~/Library/Application Support/prs/
-		ch-add-dir ~/Library/Application Support/pypoetry/
+		# ch-add-dir ~/Library/Application\ Support/Code/User/
+		# ch-add-dir ~/Library/Application\ Support/Sublime\ Text/Packages/User/
+		ch-add-dir ~/Library/Application\ Support/prs/
+		ch-add-dir ~/Library/Application\ Support/pypoetry/
 	else
 		RED='\033[0;31m'
 		NC='\033[0m'
