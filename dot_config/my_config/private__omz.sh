@@ -47,6 +47,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 
 # Use `omz plugin info <name>` to learn more about each. Prints the README (`omz plugin info zsh-autosuggestions`)
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
 plugins=(
@@ -160,8 +161,6 @@ plugins=(
 #   # terminitor
 #   # terraform
 #   # tig
-#   # timer
-#   # tmux
 #   # transfer
 #   # tugboat
 #   # ubuntu
@@ -224,10 +223,11 @@ plugins=(
   history
   # > Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
   macos
+  # > Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
+  timer
   # > Aliases for VSCode. Use: `vscd file file` (diff)
   vscode
-  # PLANNED: Sublime?
-  sublime
+  # > Sublime plugin doesn't provide any benefit over `subl``
 
   # Git checkouts
   # TODO: Add as git submodules to be avialable everywhere!

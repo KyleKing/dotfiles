@@ -6,5 +6,6 @@
 		"private_dot_zprofile",
 		"conf",
 		"private_dot_profile",
+		"private_dot_zlogin",
 	],
 }

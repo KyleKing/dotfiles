@@ -1,4 +1,101 @@
 ---
+# Full Example File with Comments: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+# # Colors (One Half Dark)
+# # https://github.com/sonph/onehalf/tree/master/alacritty
+# colors:
+#   primary:
+#     background: '0x282c34'
+#     foreground: '0xdcdfe4'
+
+#   normal:
+#     black: '0x282c34'
+#     red: '0xe06c75'
+#     green: '0x98c379'
+#     yellow: '0xe5c07b'
+#     blue: '0x61afef'
+#     magenta: '0xc678dd'
+#     cyan: '0x56b6c2'
+#     white: '0xdcdfe4'
+
+#   bright:
+#     black: '0x282c34'
+#     red: '0xe06c75'
+#     green: '0x98c379'
+#     yellow: '0xe5c07b'
+#     blue: '0x61afef'
+#     magenta: '0xc678dd'
+#     cyan: '0x56b6c2'
+#     white: '0xdcdfe4'
+
+# Colors (Tokyo Night)
+# https://github.com/folke/tokyonight.nvim/blob/main/extras/alacritty_tokyonight_night.yml
+colors:
+  # Default colors
+  primary:
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
+
+  # Normal colors
+  normal:
+    black:   '0x15161E'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
+
+  # Bright colors
+  bright:
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+
+# # Colors (Hyper)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#000000'
+#     foreground: '#ffffff'
+#   cursor:
+#     text: '#F81CE5'
+#     cursor: '#ffffff'
+
+#   # Normal colors
+#   normal:
+#     black:   '#000000'
+#     red:     '#fe0100'
+#     green:   '#00a600'
+#     yellow:  '#feff00'
+#     blue:    '#0066ff'
+#     magenta: '#cc00ff'
+#     cyan:    '#00ffff'
+#     white:   '#d0d0d0'
+
+#   # Bright colors
+#   bright:
+#     black:   '#808080'
+#     red:     '#fe0100'
+#     green:   '#00d900'
+#     yellow:  '#feff00'
+#     blue:    '#0066ff'
+#     magenta: '#cc00ff'
+#     cyan:    '#00ffff'
+#     white:   '#FFFFFF'
+
+draw_bold_text_with_bright_colors: true
+
 # Font Customization
 font:
   normal:
@@ -10,33 +107,73 @@ font:
   italic:
     family: Hack Nerd Font Mono
     style: Italic
-  size: 12
+  size: 13
+  # Better font rendering for mac
+  use_thin_strokes: true
 
-draw_bold_text_with_bright_colors: true
+# Docs: https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#macos
+key_bindings:
+  - { key: Comma,     mods: Command,      command:
+      {program: "sh", args: ["open", "~/.config/alacritty/alacritty.yml"]}     }
+  - { key: N,         mods: Command,      action: SpawnNewInstance       }
+  - { key: Space,     mods: Alt,          chars: " "                     }
+  - { key: Back, mods: Super, chars: "\x15" } # delete word/line
+  - { key: Left,     mods: Alt,     chars: "\x1bb"                       } # one word left
+  - { key: Right,    mods: Alt,     chars: "\x1bf"                       } # one word right
+  - { key: Left,     mods: Command, chars: "\x1bOH",   mode: AppCursor   } # Home
+  - { key: Right,    mods: Command, chars: "\x1bOF",   mode: AppCursor   } # End
 
-# Colors (One Half Dark)
-# https://github.com/sonph/onehalf/tree/master/alacritty
-colors:
-  primary:
-    background: '0x282c34'
-    foreground: '0xdcdfe4'
+  # Search Mode
+  - { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
+  - { key: Escape,                mode: Search,     action: SearchCancel          }
+  - { key: C,      mods: Control, mode: Search,     action: SearchCancel          }
+  - { key: U,      mods: Control, mode: Search,     action: SearchClear           }
+  - { key: W,      mods: Control, mode: Search,     action: SearchDeleteWord      }
+  - { key: P,      mods: Control, mode: Search,     action: SearchHistoryPrevious }
+  - { key: N,      mods: Control, mode: Search,     action: SearchHistoryNext     }
+  - { key: Up,                    mode: Search,     action: SearchHistoryPrevious }
+  - { key: Down,                  mode: Search,     action: SearchHistoryNext     }
+  - { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
+  - { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
 
-  normal:
-    black: '0x282c34'
-    red: '0xe06c75'
-    green: '0x98c379'
-    yellow: '0xe5c07b'
-    blue: '0x61afef'
-    magenta: '0xc678dd'
-    cyan: '0x56b6c2'
-    white: '0xdcdfe4'
+  # (macOS only)
+  - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
+  - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
+  - { key: Key0,           mods: Command,                    action: ResetFontSize         }
+  - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
+  - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
+  - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
+  - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
+  - { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
+  - { key: V,              mods: Command,                    action: Paste                 }
+  - { key: C,              mods: Command,                    action: Copy                  }
+  - { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
+  - { key: H,              mods: Command,                    action: Hide                  }
+  - { key: H,              mods: Command|Alt,                action: HideOtherApplications }
+  - { key: M,              mods: Command,                    action: Minimize              }
+  - { key: Q,              mods: Command,                    action: Quit                  }
+  - { key: W,              mods: Command,                    action: Quit                  }
+  - { key: N,              mods: Command,                    action: SpawnNewInstance      }
+  - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
+  - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
+  - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
-  bright:
-    black: '0x282c34'
-    red: '0xe06c75'
-    green: '0x98c379'
-    yellow: '0xe5c07b'
-    blue: '0x61afef'
-    magenta: '0xc678dd'
-    cyan: '0x56b6c2'
-    white: '0xdcdfe4'
+# Login shell with arguments
+shell:
+  program: /bin/zsh
+  args:
+    - -ilc
+    - zellij
+
+# selection:
+#   # This string contains all characters that are used as separators for
+#   # "semantic words" in Alacritty.
+#   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+#   # When true, selected text will be copied to the primary clipboard
+#   save_to_clipboard: true
+
+window:
+  # Remove buttons
+  decorations: none
+  # Open in full screen
+  startup_mode: SimpleFullscreen

@@ -5,9 +5,6 @@
 # 	To uninstall! $(brew --prefix)/opt/fzf/uninstall
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Source User Configuration Files
-export MY_CONFIG=$HOME/.config/my_config
-
 source $MY_CONFIG/_omz.sh
 source $MY_CONFIG/_zsh.sh
 source $MY_CONFIG/_python.sh
@@ -17,6 +14,7 @@ source $MY_CONFIG/cli_tools.sh
 source $MY_CONFIG/containers.sh
 source $MY_CONFIG/homebrew.sh
 source $MY_CONFIG/sync.sh
+source $MY_CONFIG/on_login.sh
 
 # Optional source files
 [ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
