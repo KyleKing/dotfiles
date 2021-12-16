@@ -39,6 +39,10 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Improve OMZ Timer (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
+export TIMER_FORMAT='[%d]'
+export TIMER_PRECISION=2
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/

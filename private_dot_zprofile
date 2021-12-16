@@ -3,10 +3,7 @@
 # Add sbin from homebrew
 export PATH="/usr/local/sbin:$PATH"
 
-# Turn On Better Exceptions for Python
-export BETTER_EXCEPTIONS=1
-
-# Created by `pipx``
+# Created by `pipx`
 export PATH="$PATH:/Users/kyleking/.local/bin"
 
 # # Export Preview Gitkrakken CLI

@@ -1,5 +1,8 @@
 # Python, pipx, and pyenv Configuration
 
+# Turn On Better Exceptions for Python
+export BETTER_EXCEPTIONS=1
+
 # Configure pyenv
 # https://github.com/pyenv/pyenv/issues/849#issuecomment-285229619
 export PYENV_ROOT="$HOME/.pyenv"
