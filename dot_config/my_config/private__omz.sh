@@ -229,11 +229,23 @@ plugins=(
   # PLANNED: Sublime?
   sublime
 
-  # # Git checkouts
-  # # # See: https://github.com/zdharma/fast-syntax-highlighting#oh-my-zsh
-  # # fast-syntax-highlighting
-  # # # See: https://github.com/zsh-users/zsh-completions
-  # # zsh-completions
+  # Git checkouts
+  # TODO: Add as git submodules to be avialable everywhere!
+  # TODO: Compare against zsh-autosuggestions/zsh-completions & zsh-syntax-highlighting/fast-syntax-highlighting
+  #
+  # git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  #   ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+  # # See: https://github.com/zdharma-continuum/fast-syntax-highlighting#oh-my-zsh
+  # fast-syntax-highlighting
+  #
+  # git clone https://github.com/zsh-users/zsh-completions \
+  #   ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+  # # See: https://github.com/zsh-users/zsh-completions
+  # zsh-completions
+  #
+  # # Install git-extra-commands
+  # # See: https://github.com/unixorn/git-extra-commands#oh-my-zsh
+  # git-extra-commands
 
   # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
   # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
