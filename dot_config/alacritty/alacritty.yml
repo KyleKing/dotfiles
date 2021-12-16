@@ -1,9 +1,6 @@
 ---
 # Full Example File with Comments: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
-# # Use Alt instead of Option because MacOS inserts the unicode character when Option and a letter is pressed
-# alt_send_esc: true
-
 # # Colors (One Half Dark)
 # # https://github.com/sonph/onehalf/tree/master/alacritty
 # colors:
@@ -127,7 +124,22 @@ key_bindings:
   - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
-  # HACK for option mapping to alt: https://github.com/alacritty/alacritty/issues/93#issuecomment-429651216
+  # Use Alt instead of Option because MacOS inserts the unicode character when Option and a letter is pressed
+  # HACK: Map Mac Option to Alt: https://github.com/alacritty/alacritty/issues/93#issuecomment-429651216
+  - { key: Key0,        mods: Alt,     chars: "\x1b0" }
+  - { key: Key1,        mods: Alt,     chars: "\x1b1" }
+  - { key: Key2,        mods: Alt,     chars: "\x1b2" }
+  - { key: Key3,        mods: Alt,     chars: "\x1b3" }
+  - { key: Key4,        mods: Alt,     chars: "\x1b4" }
+  - { key: Key5,        mods: Alt,     chars: "\x1b5" }
+  - { key: Key6,        mods: Alt,     chars: "\x1b6" }
+  - { key: Key7,        mods: Alt,     chars: "\x1b7" }
+  - { key: Key8,        mods: Alt,     chars: "\x1b8" }
+  - { key: Key9,        mods: Alt,     chars: "\x1b9" }
+  - { key: LBracket,    mods: Alt,     chars: "\x1b[" }
+  - { key: RBracket,    mods: Alt,     chars: "\x1b]" }
+  - { key: Minus,       mods: Alt,     chars: "\x1b-" }
+  - { key: Equals,      mods: Alt,     chars: "\x1b+" }
   - { key: A,        mods: Alt,     chars: "\x1ba" }
   - { key: B,        mods: Alt,     chars: "\x1bb" }
   - { key: C,        mods: Alt,     chars: "\x1bc" }
@@ -154,12 +166,7 @@ key_bindings:
   - { key: X,        mods: Alt,     chars: "\x1bx" }
   - { key: Y,        mods: Alt,     chars: "\x1by" }
   - { key: Z,        mods: Alt,     chars: "\x1bz" }
-  # # https://godoc.org/github.com/tiborvass/uniline/ansi#Code
-  # # https://github.com/jwilm/alacritty/issues/93#issuecomment-334790547
-  # - { key: F,  mods: Alt,           chars: "\x1bf"                       }
-  # - { key: B,  mods: Alt,           chars: "\x1bb"                       }
-  # # https://github.com/jwilm/alacritty/issues/93#issuecomment-427592040
-  # - { key: D,  mods: Alt,           chars: "\x1bd"                       }
+  # TODO: Need bindings for [, ], +, -
 
 # Login shell with arguments
 shell:
