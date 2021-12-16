@@ -1,6 +1,7 @@
 {
 	"ignored_packages":
 	[
+		"Git blame",
 		"SublimeLinter-contrib-SpellCheckLinter",
 		"Vintage",
 	],
