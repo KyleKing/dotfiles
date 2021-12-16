@@ -1,6 +1,9 @@
 ---
 # Full Example File with Comments: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
+# # Use Alt instead of Option because MacOS inserts the unicode character when Option and a letter is pressed
+# alt_send_esc: true
+
 # # Colors (One Half Dark)
 # # https://github.com/sonph/onehalf/tree/master/alacritty
 # colors:
@@ -28,71 +31,37 @@
 #     cyan: '0x56b6c2'
 #     white: '0xdcdfe4'
 
-# Colors (Tokyo Night)
-# https://github.com/folke/tokyonight.nvim/blob/main/extras/alacritty_tokyonight_night.yml
+# Colors (Hyper)
 colors:
   # Default colors
   primary:
-    background: '0x1a1b26'
-    foreground: '0xc0caf5'
+    background: '#000000'
+    foreground: '#ffffff'
+  cursor:
+    text: '#F81CE5'
+    cursor: '#ffffff'
 
   # Normal colors
   normal:
-    black:   '0x15161E'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xa9b1d6'
+    black:   '#000000'
+    red:     '#fe0100'
+    green:   '#00a600'
+    yellow:  '#feff00'
+    blue:    '#0066ff'
+    magenta: '#cc00ff'
+    cyan:    '#00ffff'
+    white:   '#d0d0d0'
 
   # Bright colors
   bright:
-    black:   '0x414868'
-    red:     '0xf7768e'
-    green:   '0x9ece6a'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xc0caf5'
-
-  indexed_colors:
-    - { index: 16, color: '0xff9e64' }
-    - { index: 17, color: '0xdb4b4b' }
-
-# # Colors (Hyper)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '#000000'
-#     foreground: '#ffffff'
-#   cursor:
-#     text: '#F81CE5'
-#     cursor: '#ffffff'
-
-#   # Normal colors
-#   normal:
-#     black:   '#000000'
-#     red:     '#fe0100'
-#     green:   '#00a600'
-#     yellow:  '#feff00'
-#     blue:    '#0066ff'
-#     magenta: '#cc00ff'
-#     cyan:    '#00ffff'
-#     white:   '#d0d0d0'
-
-#   # Bright colors
-#   bright:
-#     black:   '#808080'
-#     red:     '#fe0100'
-#     green:   '#00d900'
-#     yellow:  '#feff00'
-#     blue:    '#0066ff'
-#     magenta: '#cc00ff'
-#     cyan:    '#00ffff'
-#     white:   '#FFFFFF'
+    black:   '#808080'
+    red:     '#fe0100'
+    green:   '#00d900'
+    yellow:  '#feff00'
+    blue:    '#0066ff'
+    magenta: '#cc00ff'
+    cyan:    '#00ffff'
+    white:   '#FFFFFF'
 
 draw_bold_text_with_bright_colors: true
 
@@ -158,6 +127,40 @@ key_bindings:
   - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
+  # HACK for option mapping to alt: https://github.com/alacritty/alacritty/issues/93#issuecomment-429651216
+  - { key: A,        mods: Alt,     chars: "\x1ba" }
+  - { key: B,        mods: Alt,     chars: "\x1bb" }
+  - { key: C,        mods: Alt,     chars: "\x1bc" }
+  - { key: D,        mods: Alt,     chars: "\x1bd" }
+  - { key: E,        mods: Alt,     chars: "\x1be" }
+  - { key: F,        mods: Alt,     chars: "\x1bf" }
+  - { key: G,        mods: Alt,     chars: "\x1bg" }
+  - { key: H,        mods: Alt,     chars: "\x1bh" }
+  - { key: I,        mods: Alt,     chars: "\x1bi" }
+  - { key: J,        mods: Alt,     chars: "\x1bj" }
+  - { key: K,        mods: Alt,     chars: "\x1bk" }
+  - { key: L,        mods: Alt,     chars: "\x1bl" }
+  - { key: M,        mods: Alt,     chars: "\x1bm" }
+  - { key: N,        mods: Alt,     chars: "\x1bn" }
+  - { key: O,        mods: Alt,     chars: "\x1bo" }
+  - { key: P,        mods: Alt,     chars: "\x1bp" }
+  - { key: Q,        mods: Alt,     chars: "\x1bq" }
+  - { key: R,        mods: Alt,     chars: "\x1br" }
+  - { key: S,        mods: Alt,     chars: "\x1bs" }
+  - { key: T,        mods: Alt,     chars: "\x1bt" }
+  - { key: U,        mods: Alt,     chars: "\x1bu" }
+  - { key: V,        mods: Alt,     chars: "\x1bv" }
+  - { key: W,        mods: Alt,     chars: "\x1bw" }
+  - { key: X,        mods: Alt,     chars: "\x1bx" }
+  - { key: Y,        mods: Alt,     chars: "\x1by" }
+  - { key: Z,        mods: Alt,     chars: "\x1bz" }
+  # # https://godoc.org/github.com/tiborvass/uniline/ansi#Code
+  # # https://github.com/jwilm/alacritty/issues/93#issuecomment-334790547
+  # - { key: F,  mods: Alt,           chars: "\x1bf"                       }
+  # - { key: B,  mods: Alt,           chars: "\x1bb"                       }
+  # # https://github.com/jwilm/alacritty/issues/93#issuecomment-427592040
+  # - { key: D,  mods: Alt,           chars: "\x1bd"                       }
+
 # Login shell with arguments
 shell:
   program: /bin/zsh
@@ -175,5 +178,7 @@ shell:
 window:
   # Remove buttons
   decorations: none
-  # Open in full screen
-  startup_mode: SimpleFullscreen
+  # # Open in full screen
+  # startup_mode: SimpleFullscreen
+  # Maximized preserves the Mac menu bar
+  startup_mode: Maximized
