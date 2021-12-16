@@ -30,10 +30,17 @@ ch-rad() {
 		ch-add-dir ~/.gnupg/
 		ch-add-dir ~/Library/Application\ Support/lazygit/
 		ch-add-dir ~/Library/Application\ Support/lazydocker/
-		# FIXME: Move Sublime and VSCode to Symlinks:
+		# FIXME: Move VSCode to Symlinks:
 		# 	https://github.com/twpayne/chezmoi/blob/master/docs/HOWTO.md#handle-configuration-files-which-are-externally-modified
+		#
 		# ch-add-dir ~/Library/Application\ Support/Code/User/
-		# ch-add-dir ~/Library/Application\ Support/Sublime\ Text/Packages/User/
+		# chezmoi cd
+		# cd private_Library/private_Application\ Support/private_Sublime\ Text
+		# rm -rf User
+		# mv /Users/kyleking/Library/Application\ Support/Sublime\ Text/Packages/User/ ./User
+		# cd ~/Library/Application\ Support/Sublime\ Text/Packages/
+		# ln -s /Users/kyleking/.local/share/chezmoi/private_Library/private_Application\ Support/private_Sublime\ Text/private_Packages/User
+
 		ch-add-dir ~/Library/Application\ Support/prs/
 		ch-add-dir ~/Library/Application\ Support/pypoetry/
 	else
