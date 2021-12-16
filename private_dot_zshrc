@@ -16,6 +16,7 @@ source $MY_CONFIG/_git.sh
 source $MY_CONFIG/cli_tools.sh
 source $MY_CONFIG/containers.sh
 source $MY_CONFIG/homebrew.sh
+source $MY_CONFIG/sync.sh
 
 # Optional source files
 [ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
