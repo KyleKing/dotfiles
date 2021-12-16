@@ -7,6 +7,7 @@
 	[
 		"A File Icon",
 		"AdvancedNewFile",
+		"ayu",
 		"Babel",
 		"BracketHighlighter",
 		"Case Conversion",
@@ -20,7 +21,6 @@
 		"Git blame",
 		"GitGutter",
 		"Oceanic Next Color Scheme",
-		"One Half Color Schemes",
 		"Origami",
 		"Package Control",
 		"Pretty JSON",
@@ -33,6 +33,7 @@
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-SpellCheckLinter",
 		"SublimeLinter-flake8",
+		"SynthWave 84 - Color Scheme",
 		"Tabnine",
 		"TabsExtra",
 		"Terminus",
