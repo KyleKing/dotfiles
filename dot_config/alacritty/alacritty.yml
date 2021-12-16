@@ -153,7 +153,7 @@ shell:
   program: /bin/zsh
   args:
     - -ilc
-    - zellij
+    - "zellij attach --create alacritty"
 
 # selection:
 #   # This string contains all characters that are used as separators for
