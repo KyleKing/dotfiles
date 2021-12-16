@@ -6,7 +6,9 @@
 
 SCRIPT_DIR=~/.config/my_config/scripts/
 
-brew bundle dump --file=- > $SCRIPT_DIR/Brewfile.{{- .computer_name -}}
+# Note: no trailing -}} on this line:
+brew bundle dump --file=- > $SCRIPT_DIR/Brewfile.{{- .computer_name }}
+
 brew list --versions > $SCRIPT_DIR/brew_list.{{- .computer_name -}}.txt
 gh extension list > $SCRIPT_DIR/gh_extensions.{{- .computer_name -}}.txt
 git config --global --list --show-origin > $SCRIPT_DIR/git_config.{{- .computer_name -}}.txt

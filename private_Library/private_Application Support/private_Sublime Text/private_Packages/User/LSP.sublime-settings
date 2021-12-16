@@ -1,0 +1,28 @@
+{
+  "clients": {
+    "sourcery": {
+      "command": [
+        "sourcery",
+        "lsp"
+      ],
+      "enabled": true,
+      "languageId": "python",
+      "scopes": ["source.python"],
+      "syntaxes": [
+        "Packages/Python/Python.sublime-syntax",
+        "Packages/MagicPython/grammars/MagicPython.tmLanguage",
+        "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+      ],
+      "initializationOptions": {
+        "token": "FIXME: MOVE TO TEMPLATE!",
+        "extension_version": "sublime lsp",
+        "editor_version": "sublime"
+      },
+      "settings": {
+        "sourcery": {
+          "metricsEnabled": true
+        }
+      }
+    }
+  }
+}
