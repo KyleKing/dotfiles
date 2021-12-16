@@ -13,6 +13,9 @@
 #   Tokyo Night Storm variant: https://github.com/zatchheems/tokyo-night-alacritty-theme
 #   Tomorrow Night https://github.com/eendroroy/alacritty-theme/blob/master/themes/tomorrow_night.yaml
 #   Nord: https://github.com/eendroroy/alacritty-theme/blob/master/themes/nord.yaml
+# For Base6 Themes see here: https://github.com/chriskempson/base16
+#   And alacritty specifically: https://github.com/aarowill/base16-alacritty
+#   And random picker to see how each looks: http://chriskempson.com/projects/base16/
 
 # Colors (Tokyo Night Storm variant)
 colors:
