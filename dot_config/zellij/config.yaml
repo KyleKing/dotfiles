@@ -5,9 +5,6 @@
 # `zellij setup --check`
 # It should show current config locations and features that are enabled.
 
-# TODO: See documentation on layouts!
-#   https://zellij.dev/documentation/layouts.html
-
 keybinds:
     unbind: true
     normal:
@@ -380,9 +377,25 @@ plugins:
 #   - false
 #pane_frames: true
 
+themes:
+    # Tokyo Night Theme from: https://github.com/zellij-org/zellij/issues/769
+    toky_night:
+        bg: [36, 40, 59]
+        fg: [192, 202, 245]
+        gray: [29, 32, 47]
+        black: [29, 32, 47]
+        red: [247, 118, 142]
+        green: [158, 206, 106]
+        yellow: [224, 175, 104]
+        blue: [122, 162, 247]
+        magenta: [187, 154, 247]
+        cyan: [125, 207, 255]
+        white: [169, 177, 214]
+        orange: [255, 158, 100]
+
 # Choose the theme that is specified in the themes section.
 # Default: default
-#theme: default
+theme: toky_night
 
 # Choose the mode that zellij uses when starting up.
 # Default: normal

@@ -16,5 +16,11 @@ bindkey "^P" history-beginning-search-backward
 alias ppj="pbaspate | jq"
 alias copy-l="fc -ln 0 | tail -n 1 | pbcopy"
 
+# Ensure 256 Color
+export TERM=xterm-256color
+
+# Set global editor
+export EDITOR=subl
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'

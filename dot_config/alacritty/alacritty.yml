@@ -1,64 +1,45 @@
 ---
-# Full Example File with Comments: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+# Full Example Configuration with Comments: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
-# # Colors (One Half Dark)
-# # https://github.com/sonph/onehalf/tree/master/alacritty
-# colors:
-#   primary:
-#     background: '0x282c34'
-#     foreground: '0xdcdfe4'
+# Selection of Recommended Themes: https://github.com/eendroroy/alacritty-theme
+# Other Color Options
+#   Falcon: https://github.com/fenetikm/falcon/blob/master/alacritty/alacritty.yml
+#   Gruvbox Dark Alt: https://github.com/aarowill/base16-alacritty/blob/master/colors/base16-gruvbox-dark-hard.yml
+#   Gruvbox Dark: https://github.com/eendroroy/alacritty-theme/blob/master/themes/gruvbox_dark.yaml
+#   Moonlight II VSCode: https://github.com/eendroroy/alacritty-theme/blob/master/themes/moonlight_ii_vscode.yaml
+#   Palenight theme for Alacritty: https://github.com/eendroroy/alacritty-theme/blob/master/themes/palenight.yml
+#   Snazzy: https://github.com/eendroroy/alacritty-theme/blob/master/themes/snazzy.yaml
+#   Tokyo Night: https://github.com/eendroroy/alacritty-theme/blob/master/themes/tokyo-night.yaml
+#   Tokyo Night Storm variant: https://github.com/zatchheems/tokyo-night-alacritty-theme
+#   Tomorrow Night https://github.com/eendroroy/alacritty-theme/blob/master/themes/tomorrow_night.yaml
+#   Nord: https://github.com/eendroroy/alacritty-theme/blob/master/themes/nord.yaml
 
-#   normal:
-#     black: '0x282c34'
-#     red: '0xe06c75'
-#     green: '0x98c379'
-#     yellow: '0xe5c07b'
-#     blue: '0x61afef'
-#     magenta: '0xc678dd'
-#     cyan: '0x56b6c2'
-#     white: '0xdcdfe4'
-
-#   bright:
-#     black: '0x282c34'
-#     red: '0xe06c75'
-#     green: '0x98c379'
-#     yellow: '0xe5c07b'
-#     blue: '0x61afef'
-#     magenta: '0xc678dd'
-#     cyan: '0x56b6c2'
-#     white: '0xdcdfe4'
-
-# Colors (Hyper)
+# Colors (Tokyo Night Storm variant)
 colors:
   # Default colors
   primary:
-    background: '#000000'
-    foreground: '#ffffff'
-  cursor:
-    text: '#F81CE5'
-    cursor: '#ffffff'
-
+    background: '0x24283b'
+    foreground: '0xa9b1d6'
   # Normal colors
   normal:
-    black:   '#000000'
-    red:     '#fe0100'
-    green:   '#00a600'
-    yellow:  '#feff00'
-    blue:    '#0066ff'
-    magenta: '#cc00ff'
-    cyan:    '#00ffff'
-    white:   '#d0d0d0'
-
+    black:   '0x32344a'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xad8ee6'
+    cyan:    '0x449dab'
+    white:   '0x9699a8'
   # Bright colors
   bright:
-    black:   '#808080'
-    red:     '#fe0100'
-    green:   '#00d900'
-    yellow:  '#feff00'
-    blue:    '#0066ff'
-    magenta: '#cc00ff'
-    cyan:    '#00ffff'
-    white:   '#FFFFFF'
+    black:   '0x444b6a'
+    red:     '0xff7a93'
+    green:   '0xb9f27c'
+    yellow:  '0xff9e64'
+    blue:    '0x7da6ff'
+    magenta: '0xbb9af7'
+    cyan:    '0x0db9d7'
+    white:   '0xacb0d0'
 
 draw_bold_text_with_bright_colors: true
 
@@ -166,7 +147,6 @@ key_bindings:
   - { key: X,        mods: Alt,     chars: "\x1bx" }
   - { key: Y,        mods: Alt,     chars: "\x1by" }
   - { key: Z,        mods: Alt,     chars: "\x1bz" }
-  # TODO: Need bindings for [, ], +, -
 
 # Login shell with arguments
 shell:

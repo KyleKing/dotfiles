@@ -11,7 +11,7 @@
 	"auto_complete_with_fields": true,
 	"bold_folder_labels": true,
 	"close_windows_when_empty": true,
-	"color_scheme": "Packages/SynthWave 84 - Color Scheme/SynthWave 84.tmTheme",
+	"color_scheme": "gruvbox (Dark) (Hard).sublime-color-scheme",
 	"ensure_newline_at_eof_on_save": true,
 	"font_size": 13,
 	"preview_on_click": "only_left",
