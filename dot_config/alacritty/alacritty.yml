@@ -151,12 +151,13 @@ key_bindings:
   - { key: Y,        mods: Alt,     chars: "\x1by" }
   - { key: Z,        mods: Alt,     chars: "\x1bz" }
 
-# Login shell with arguments
-shell:
-  program: /bin/zsh
-  args:
-    - -ilc
-    - "zellij attach --create alacritty"
+# # FIXME: Turn off zellij by default because scrolling in lazygit is not supported
+# # Login shell with arguments
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - -ilc
+#     - "zellij attach --create alacritty"
 
 # selection:
 #   # This string contains all characters that are used as separators for
