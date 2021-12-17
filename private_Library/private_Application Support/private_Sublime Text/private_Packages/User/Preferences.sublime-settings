@@ -1002,7 +1002,6 @@
     ],
     "ignored_packages":
     [
-        "Color Highlight",
         "DocBlockr 2021 (DoxyDoxygen powered)",
         "Formatter",
         "Git blame",
