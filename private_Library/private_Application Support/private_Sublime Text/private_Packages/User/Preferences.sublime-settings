@@ -1002,9 +1002,13 @@
     ],
     "ignored_packages":
     [
+        "Color Highlight",
+        "DocBlockr 2021 (DoxyDoxygen powered)",
+        "Formatter",
         "Git blame",
+        "MagicPython",
         "SublimeLinter-contrib-SpellCheckLinter",
-        "Vintage"
+        "Vintage",
     ],
     "always_show_minimap_viewport": true,
     "auto_complete": true,
@@ -1103,5 +1107,5 @@
     "theme": "ayu-mirage.sublime-theme",
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
-    "word_wrap": true
+    "word_wrap": true,
 }
