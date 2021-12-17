@@ -1,0 +1,34 @@
+{
+    "default_config": {
+        "osx": "Zsh",
+    },
+    "256color": true,
+    "theme": "user",
+    "user_theme_colors": {
+        "background": "#2a2d30",
+        "foreground": "#a9b1d6",
+
+        "caret": "#a8b0d9",
+        "block_caret": "#a8b0d9",
+        "selection": "#2e273d",
+        "selection_foreground": "#a8b0d9",
+
+		"black":   "#32344a",
+		"red":     "#f7768e",
+		"green":   "#9ece6a",
+		"yellow":  "#e0af68",
+		"blue":    "#7aa2f7",
+		"magenta": "#ad8ee6",
+		"cyan":    "#449dab",
+		"white":   "#9699a8",
+
+		"light_black":   "#444b6a",
+		"light_red":     "#ff7a93",
+		"light_green":   "#b9f27c",
+		"light_yellow":  "#ff9e64",
+		"light_blue":    "#7da6ff",
+		"light_magenta": "#bb9af7",
+		"light_cyan":    "#0db9d7",
+		"light_white":   "#acb0d0",
+    },
+}
