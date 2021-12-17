@@ -4,16 +4,19 @@ export CHEZMOI_DIR=$(chezmoi source-path)
 
 ch-sync() {
 	# Pull latest version and apply to local files
+	eval $(op signin)
 	cd $CHEZMOI_DIR
 	chezmoi update --verbose
 }
 
 ch-scripts() {
 	# Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
+	~/.config/my_config/scripts/generate_machine_snapshot.sh
 }
 
 ch-rad() {
-	# Prevent overwriting chezmoi edits by checking for changes
+	eval $(op signin)
+	# Prevent overwriting chezmoi edits by checking for staged or unstaged changes
 	cd $CHEZMOI_DIR
 	if output=$(git status --porcelain) && [ -z "$output" ]; then
 		ch-scripts
