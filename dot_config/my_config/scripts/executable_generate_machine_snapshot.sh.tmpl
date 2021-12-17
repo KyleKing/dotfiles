@@ -1,5 +1,5 @@
 {{- if (eq .chezmoi.os "darwin") -}}
-#!/bin/zsh
+#!/bin/zsh -x
 
 # Could be modified to install from Brewfile, but prefer to capture machine state:
 #	https://www.chezmoi.io/docs/how-to/#use-brew-bundle-to-manage-your-brews-and-casks
@@ -9,9 +9,7 @@ SCRIPT_DIR=~/.config/my_config/scripts/
 # Note: no trailing -}} on this line:
 brew bundle dump --file=- > $SCRIPT_DIR/Brewfile.{{- .computer_name }}
 
-brew list --versions > $SCRIPT_DIR/brew_list.{{- .computer_name -}}.txt
 gh extension list > $SCRIPT_DIR/gh_extensions.{{- .computer_name -}}.txt
-git config --global --list --show-origin > $SCRIPT_DIR/git_config.{{- .computer_name -}}.txt
 kubectl krew list > $SCRIPT_DIR/krew_plugins.{{- .computer_name -}}.txt
 pipx list > $SCRIPT_DIR/pipx_list.{{- .computer_name -}}.txt
 pip config list --verbose > $SCRIPT_DIR/pip_config.{{- .computer_name -}}.txt
