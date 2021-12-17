@@ -1,20 +1,23 @@
 [
-  {
-    "args": {
-      "lines": true,
-      "plugin": {
-        "command": "bh_modules.bracketselect",
-        "type": [
-          "__all__"
-        ]
-      }
+    {
+        "args": {
+            "lines": true,
+            "plugin": {
+                "command": "bh_modules.bracketselect",
+                "type": ["__all__"]
+            }
+        },
+        "command": "bh_key",
+        "keys": ["ctrl+shift+m"],
+        "no_outside_adj": null
     },
-    "command": "bh_key",
-    "keys": [
-      "ctrl+shift+m"
-    ],
-    "no_outside_adj": null
-  },
+    {
+        "args": {
+            "action": "open_project_in_new_window"
+        },
+        "command": "project_manager",
+        "keys": ["super+ctrl+o"]
+    },
     {"keys": ["up"], "command": "theme_tweaker_brightness", "context": [{"key": "theme_tweaker"}], "args": {"direction": "+"}},
     {"keys": ["down"], "command": "theme_tweaker_brightness", "context": [{"key": "theme_tweaker"}], "args": {"direction": "-"}},
     {"keys": ["left"], "command": "theme_tweaker_contrast", "context": [{"key": "theme_tweaker"}], "args": {"direction": "-"}},
