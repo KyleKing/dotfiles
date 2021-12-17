@@ -1003,9 +1003,12 @@
     "ignored_packages":
     [
         "DocBlockr 2021 (DoxyDoxygen powered)",
+        "Focus File on Sidebar",
         "Formatter",
+        "Git badges like VS Code",
         "Git blame",
         "MagicPython",
+        "SideBarHider",
         "SublimeLinter-contrib-SpellCheckLinter",
         "Vintage",
     ],
@@ -1085,9 +1088,11 @@
         "doxyfiles",
         ".vscode",
         ".venv",
+        "__pycache__",
     ],
     "font_face": "Hack Nerd Font",
     "font_size": 13,
+    "highlight_line": true,
     "highlight_modified_tabs": true,
     "indent_guide_options":
     [
@@ -1098,6 +1103,7 @@
     "rulers":
     [
         80,
+        88,
         120
     ],
     "shift_tab_unindent": true,
