@@ -1,1 +1,1 @@
-gh prs	dlvhdr/gh-prs
+gh prs	dlvhdr/gh-prs	

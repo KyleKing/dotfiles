@@ -24,7 +24,6 @@ repos:
       - id: destroyed-symlinks
       - id: detect-private-key
       - id: end-of-file-fixer
-        exclude: "Terminus.hidden-color-scheme"
       - id: fix-byte-order-marker
       - id: mixed-line-ending
         args: ["--fix=auto"]
@@ -32,7 +31,7 @@ repos:
         args: ["--autofix"]
         exclude: "private_keybindings.json"
       - id: trailing-whitespace
-        exclude: "Terminus.hidden-color-scheme"
+        exclude: "gh_extensions.*"
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.1.0
     hooks:
