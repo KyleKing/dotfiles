@@ -1108,6 +1108,7 @@
     ],
     "shift_tab_unindent": true,
     "show_full_path": true,
+    "show_sidebar_button": false,
     "spell_check": true,
     "theme": "ayu-mirage.sublime-theme",
     "trim_only_modified_white_space": false,
