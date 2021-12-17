@@ -1,0 +1,42 @@
+{
+        "debug": false,
+        "delay": 0.2,
+        "lint_mode": "background",
+        "linters": {
+            "annotations": {
+                "@disable": false,
+                "args": [],
+                "errors": [
+                    "@fixme",
+                    "FIXME",
+                    "XXX"
+                ],
+                "excludes": [],
+                "warnings": [
+                    "@todo",
+                    "FYI",
+                    "NOTE",
+                    "README",
+                    "TODO",
+                    "WARN",
+                    "WIP",
+                ]
+            },
+    	    "flake8": {
+              "@disable": true,
+              "python": "python",
+    	      "args": [
+                  "--ignore=E265,E266,E262,E121,E123,E126,E24,E704,N802,N803,N806,N815,N816"
+    	      ]
+    	    },
+            "markdownlint": {
+                "@disable": false,
+                "args": ["-r", "~MD013,~MD046,~MD033,~MD007"]
+            },
+        },
+        "paths": {
+            "linux": [],
+            "osx": [],
+            "windows": []
+        }
+}
