@@ -21,6 +21,3 @@ export TERM=xterm-256color
 
 # Set global editor
 export EDITOR=subl
-
-# The following lines were added by compinstall
-zstyle :compinstall filename '~/.zshrc'
