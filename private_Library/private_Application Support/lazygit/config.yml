@@ -1,7 +1,14 @@
-# to skip without creating a new repo
+# Skip prompt to create a new repository if one not present
+# Allows for more seamlessly launching lazygit from anywhere and switching context with ctrl+r
 notARepository: 'skip'
 
 customCommands:
+  # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
+  - key: '<f11>'
+    description: 'Add Staged Files to Last Commit'
+    command: 'export MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 && git commit -m "$MSG"'
+    context: 'commits'
+    loadingText: 'Appending staged files to last commit...'
   - key: '<f12>'
     description: 'Publish local branch to origin'
     command: 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
@@ -13,4 +20,4 @@ git:
     colorArg: always
     pager: delta --dark --paging=never
 
-# More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#struggling-to-see-selected-line
+# More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
