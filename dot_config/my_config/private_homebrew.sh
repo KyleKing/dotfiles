@@ -9,3 +9,15 @@ then
   autoload -Uz compinit
   compinit
 fi
+
+# Preview fzf results with bat syntax highlighting
+# > cd ~/.config && fzfp
+fzfp () {
+  fzf --preview 'bat --color=always --style=numbers --line-range=:40 {}'
+}
+
+# Tail a file with syntax highlighting. Infers from extension or can be set manually
+# > btail ~/.zprofile zsh
+btail() {
+  tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
+}
