@@ -19,5 +19,8 @@ source $MY_CONFIG/on_login.sh
 # Optional source files
 [ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
 
-# Must be last
+# Must be near the end
 source $MY_CONFIG/_java.sh
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '~/.zshrc'
