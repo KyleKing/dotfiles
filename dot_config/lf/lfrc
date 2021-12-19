@@ -116,6 +116,7 @@ cmd fzf_jump ${{
     fi
     lf -remote "send $id $cmd \"$res\""
 }}
+# I believe this is `Ctrl+f`
 map <c-f> :fzf_jump
 
 # Use pistol for syntax-highlighted previews

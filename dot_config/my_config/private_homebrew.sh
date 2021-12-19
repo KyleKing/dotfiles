@@ -20,7 +20,7 @@ fzf-bat () {
 
 # Tail a file with syntax highlighting. Infers from extension or can be set manually
 # > btail ~/.zprofile zsh
-btail() {
+tail-bat() {
   tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
 }
 
@@ -31,3 +31,9 @@ source ~/.config/lf/lfcd.sh
 # Note: Pistol requires a difficult manual install
 # # Use pistol for previewing matches from fd
 # alias fd-pr="$EDITOR $(fd --extension py | fzf --preview='pistol {}')"
+
+# HSTR configuration - add this to ~/.zshrc
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
