@@ -119,5 +119,8 @@ cmd fzf_jump ${{
 # I believe this is `Ctrl+f`
 map <c-f> :fzf_jump
 
-# Use pistol for syntax-highlighted previews
-set previewer ~/.go/bin/pistol
+# Setup stpv (Requires manual install) for previews of images, pdf, and code!
+# See: TBD
+set previewer stpv
+set cleaner stpvimgclr
+&stpvimg --listen $id

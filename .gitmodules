@@ -1,3 +1,6 @@
 [submodule "dot_config/kitty/kitty_search"]
 	path = dot_config/kitty/kitty_search
 	url = https://github.com/trygveaa/kitty-kitten-search
+[submodule "dot_config/stpv/stpv"]
+	path = dot_config/stpv/stpv
+	url = https://github.com/Naheel-Azawy/stpv.git

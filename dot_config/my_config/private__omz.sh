@@ -227,11 +227,13 @@ plugins=(
   history
   # > Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
   macos
+  # > navi completions
+  navi
   # > Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
   timer
   # > Aliases for VSCode. Use: `vscd file file` (diff)
   vscode
-  # > Sublime plugin doesn't provide any benefit over `subl``
+  # > Sublime plugin doesn't provide any benefit over `subl`
 
   # Git checkouts
   # TODO: Add as git submodules to be avialable everywhere!
