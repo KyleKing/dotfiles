@@ -23,16 +23,6 @@ tail-bat() {
   tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
 }
 
-# load lf, but use cd on exit
-# https://github.com/gokcehan/lf/wiki/Tutorial#working-directory
-source ~/.config/lf/lfcd.sh
-
-# Note: Pistol requires a difficult manual install
-# # Use pistol for previewing matches from fd
-# alias fd-pr="$EDITOR $(fd --extension py | fzf --preview='pistol {}')"
-# # Chose stpv instead, which is installed as a submodule of chezmoi
-export PATH="$PATH:$(chezmoi source-path)/dot_config/stpv/stpv"
-
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
