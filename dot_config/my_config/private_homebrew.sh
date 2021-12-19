@@ -21,3 +21,7 @@ fzfp () {
 btail() {
   tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
 }
+
+# load lfcd cariant of lf
+# https://github.com/gokcehan/lf/wiki/Tutorial#working-directory
+source ~/.config/lf/lfcd.sh
