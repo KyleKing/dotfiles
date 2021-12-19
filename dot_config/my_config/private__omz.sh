@@ -1,43 +1,46 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 # Oh My ZSH (OMZ) Configuration
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/kyleking/.oh-my-zsh"
 # export ZSH_CUSTOM=$ZSH  # Set in `$ZSH/oh-my-zsh.sh`
 
-# > Look in ~/.oh-my-zsh/themes/
+# > Look in $HOME/.oh-my-zsh/themes/
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 # Others: agnoster, oxide, Bullet train, lambda-mod, Spaceship ZSH, Halil
 # > Note: installed with brew and not oh-my-zsh
-source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
-# Create a new configuration file `p10k configure` or modify an existing one at ~/.p10k.zsh
+source "$(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme"
+# Create a new configuration file `p10k configure` or modify an existing one at $HOME/.p10k.zsh
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+export HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# export DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# export DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# export ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
 # See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-COMPLETION_WAITING_DOTS="true"
+export COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# export ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Improve OMZ Timer (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
 export TIMER_FORMAT='[%d]'
@@ -48,13 +51,13 @@ export TIMER_PRECISION=2
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load? (plugins can be found in $HOME/.oh-my-zsh/plugins/*)
 
 # Use `omz plugin info <name>` to learn more about each. Prints the README (`omz plugin info zsh-autosuggestions`)
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
-plugins=(
+export plugins=(
 #   # autopep8
 #   # branch
 #   # bundler
@@ -228,7 +231,7 @@ plugins=(
   # > Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
   macos
   # > navi completions
-  navi
+  # FIXME: Might need to be installed with `eval $(navi widget zsh)`?
   # > Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
   timer
   # > Aliases for VSCode. Use: `vscd file file` (diff)
@@ -245,7 +248,7 @@ plugins=(
   # fast-syntax-highlighting
   #
   # git clone https://github.com/zsh-users/zsh-completions \
-  #   ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+  #   ${ZSH_CUSTOM:=$HOME/.oh-my-zsh/custom}/plugins/zsh-completions
   # # See: https://github.com/zsh-users/zsh-completions
   # zsh-completions
   #
@@ -254,11 +257,11 @@ plugins=(
   # git-extra-commands
 
   # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
-  # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   zsh-autosuggestions
 
   # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-  # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   # > Must be last!
   zsh-syntax-highlighting
 )
@@ -275,8 +278,8 @@ source $ZSH/oh-my-zsh.sh
 # FYI: Global variables are used as aliases for commands that take pipe input
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="mate $HOME/.zshrc"
+# alias ohmyzsh="mate $HOME/.oh-my-zsh"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Plugin configuration
@@ -290,5 +293,5 @@ export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 # (ctrl space, ctrl shit n, ctrl shift p)
 bindkey '^ ' autosuggest-accept
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
+[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
