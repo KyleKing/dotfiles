@@ -1,4 +1,7 @@
 {
+	"variables":
+	{
+	},
     "rules" : [
         // Deleted file or staged deleted file (visible only at folders)
         {
