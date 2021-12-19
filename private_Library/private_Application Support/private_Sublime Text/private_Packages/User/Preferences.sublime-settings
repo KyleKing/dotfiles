@@ -1098,6 +1098,7 @@
         "draw_normal",
         "draw_active"
     ],
+    "open_files_in_new_window": "never",
     "preview_on_click": "only_left",
     "rulers":
     [
