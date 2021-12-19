@@ -13,4 +13,7 @@ export PATH="$PATH:/Users/kyleking/.local/bin"
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config
 
+# Set bat as default Pager (instead of less)
+export PAGER=bat
+
 source $MY_CONFIG/on_login.sh

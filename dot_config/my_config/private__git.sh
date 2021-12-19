@@ -16,7 +16,7 @@ alias lzg='lazygit'
 export PR_CHECKOUT_DIR=~/developer/checkouts
 if [[ -d $PR_CHECKOUT_DIR ]] {
     alias clone-pr() {
-        cd $PR_CHECKOUT_DIR && gh repo clone $1 $1/pr$2 && cd $1/pr$2 && gh pr checkout $2 --force
+        mkcd $PR_CHECKOUT_DIR && gh repo clone $1 $1/pr$2 && cd $1/pr$2 && gh pr checkout $2 --force
     }
 }
 # clone-pr timothycrosley/pdocs 25

@@ -1,5 +1,18 @@
 # General ZSH Configuration
 
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Ensure 256 Color
+export TERM=xterm-256color
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nano'
+else
+  export EDITOR='subl --add'
+fi
+
 # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
 export HISTCONTROL=ignoredups
 
@@ -16,8 +29,7 @@ bindkey "^P" history-beginning-search-backward
 alias ppj="pbaspate | jq"
 alias copy-l="fc -ln 0 | tail -n 1 | pbcopy"
 
-# Ensure 256 Color
-export TERM=xterm-256color
-
-# Set global editor
-export EDITOR=subl
+# Useful combination of mkdir and cd
+mkcd() {
+  mkdir -p $1 && cd $1
+}

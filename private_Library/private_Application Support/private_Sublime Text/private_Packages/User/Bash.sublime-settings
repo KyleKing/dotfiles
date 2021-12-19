@@ -7,5 +7,6 @@
 		"conf",
 		"private_dot_profile",
 		"private_dot_zlogin",
+		"lfrc",
 	],
 }
