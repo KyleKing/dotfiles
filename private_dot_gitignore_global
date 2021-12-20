@@ -1,4 +1,0 @@
-# Global Gitignore configured in .gitconfig
-# git config --global core.excludesfile ~/.gitignore_global
-
-.lazygit
