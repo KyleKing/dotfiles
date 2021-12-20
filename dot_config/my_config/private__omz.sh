@@ -53,6 +53,9 @@ export TIMER_PRECISION=2
 # Add wisely, as too many plugins slow down shell startup.
 # Which plugins would you like to load? (plugins can be found in $HOME/.oh-my-zsh/plugins/*)
 
+# Configure the navi widget for completions
+eval $(navi widget zsh)
+
 # Use `omz plugin info <name>` to learn more about each. Prints the README (`omz plugin info zsh-autosuggestions`)
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
@@ -207,7 +210,6 @@ export plugins=(
 #   themes
 
   # man
-  # history
   # thefuck
   # wd
 
@@ -215,55 +217,34 @@ export plugins=(
   # lein
   # zsh-nvm
 
-  # # From: https://www.howtogeek.com/362409/what-is-zsh-and-why-should-you-use-it-instead-of-bash/
-  # zsh-autosuggestions
-  # zsh-syntax-highlighting
-  # mouse
-
-  # > lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
-
-  # > homebrew. Use: brewp (pin to prevent upgrade), brewsp (list pinned), bubu (update, upgrade, cleanup), bcubc (cask)
+  # brew: homebrew. Use: brewp (pin to prevent upgrade), brewsp (list pinned), bubu (update, upgrade, cleanup), bcubc (cask)
+  # dash: Kapeli Dash. Use: `dash python:tuple`
+  # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
+  # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
+  # timer: Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
+  # vscode: Aliases for VSCode. Use: `vscd file file` (diff)
   brew
-  # > Kapeli Dash. Use: `dash python:tuple`
   dash
-  # > History. Use: h, hs <> (grep), hsi <> (grep -i)
   history
-  # > Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
   macos
-  # > navi completions
-  # FIXME: Might need to be installed with `eval $(navi widget zsh)`?
-  # > Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
   timer
-  # > Aliases for VSCode. Use: `vscd file file` (diff)
   vscode
-  # > Sublime plugin doesn't provide any benefit over `subl`
 
-  # Git checkouts
-  # TODO: Add as git submodules to be avialable everywhere!
-  # TODO: Compare against zsh-autosuggestions/zsh-completions & zsh-syntax-highlighting/fast-syntax-highlighting
-  #
-  # git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
-  #   ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-  # # See: https://github.com/zdharma-continuum/fast-syntax-highlighting#oh-my-zsh
-  # fast-syntax-highlighting
-  #
-  # git clone https://github.com/zsh-users/zsh-completions \
-  #   ${ZSH_CUSTOM:=$HOME/.oh-my-zsh/custom}/plugins/zsh-completions
-  # # See: https://github.com/zsh-users/zsh-completions
-  # zsh-completions
-  #
-  # # Install git-extra-commands
-  # # See: https://github.com/unixorn/git-extra-commands#oh-my-zsh
-  # git-extra-commands
+  # lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
+  # Sublime plugin doesn't provide any benefit over `subl`
 
-  # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
-  # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  # Chezmoi Git Submodules
+  # Docs: https://github.com/zsh-users/zsh-completions (Extra completions not yet in Zsh-proper)
+  zsh-completions
+  # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
+  git-extra-commands
+  # Docs: https://github.com/zsh-users/zsh-autosuggestions
   zsh-autosuggestions
-
-  # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-  # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  # > Must be last!
+  # Syntax Highlighters must be last. There are two where FSyH was a hostile fork of ZSyH
+  # https://github.com/zsh-users/zsh-syntax-highlighting
   zsh-syntax-highlighting
+  # https://github.com/zdharma-continuum/fast-syntax-highlighting/issues/8
+  # fast-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
