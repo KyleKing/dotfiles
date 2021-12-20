@@ -1,0 +1,10 @@
+{
+	"variables": {
+	},
+	"globals": {
+	    "line_highlight": "color(var(bg1) lightness(- 5%))",
+	    "selection": "color(var(bg1) lightness(30%))",
+	},
+	"rules": [
+	]
+}
