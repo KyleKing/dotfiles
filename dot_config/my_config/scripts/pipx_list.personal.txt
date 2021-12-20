@@ -30,3 +30,5 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - sqlfluff
    package tidypy 0.20.0, Python 3.8.3
     - tidypy
+   package ueberzug 18.1.9, Python 3.10.1
+    - ueberzug
