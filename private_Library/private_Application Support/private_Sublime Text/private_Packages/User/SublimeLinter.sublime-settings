@@ -14,12 +14,19 @@
                 "excludes": [],
                 "warnings": [
                     "@todo",
-                    "FYI",
-                    "NOTE",
-                    "README",
                     "TODO",
                     "WARN",
-                    "WIP",
+                    "WIP"
+                ],
+                "infos": [
+                    "DEBUG",
+                    "FYI",
+                    "HACK",
+                    "NOTE",
+                    "PLANNED",
+                    "REVIEW",
+                    "TBD",
+                    "README"
                 ]
             },
     	    "flake8": {
