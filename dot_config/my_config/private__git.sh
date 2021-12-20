@@ -1,16 +1,18 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 
-# # FYI: Causes unexpected behaviour when changing the top-level directory while working in a sub-directory
-# # Source: https://github.com/jesseduffield/lazygit#changing-directory-on-exit
-# lzg() {
-#     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+# Source: https://github.com/jesseduffield/lazygit#changing-directory-on-exit
+lzgcd() {
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
 
-#     lazygit "$@"
+    lazygit "$@"
 
-#     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-#             cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-#             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
-#     fi
-# }
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
 alias lzg='lazygit'
 
 export PR_CHECKOUT_DIR=~/developer/checkouts
