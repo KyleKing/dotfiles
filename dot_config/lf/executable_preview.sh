@@ -1,11 +1,11 @@
 #!/bin/bash
 #      ^----- get shellcheck hints based on bash
 # https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
-# preview script
+#
+# "lf" preview script
 # https://github.com/4volodin/dotfiles/blob/020e0bdb63709482277028b58db7055529af14be/.config/lf/preview
 # ---
 # exit with non-zero code to disable lf caching
-# shellcheck disable=SC1143
 
 FILE="${1}"
 WIDTH="${2}"
@@ -76,19 +76,13 @@ function view_binary() {
 
 # bat/pygmentize/highlight/cat
 function view_sourcecode() {
-	local input=""
-	input="$(if read -t 0; then echo ${FILE}; else echo '-'; fi)"
-	input="$(echo ${FILE};)"
-	echo $input
+	local input="$(if read -t 0; then echo ${FILE}; else echo '-'; fi)"
+	local input="$(echo ${FILE};)"
 
-  #highlight --out-format ansi "{input}" || \
-	highlight -t 2 -s rdark -O xterm256 --force "${input}" || \
-		bat "${input}" --theme=TwoDark --color=always \
-			--paging=never --tabs=2 --wrap=auto \
-			--style=full --decorations=always \
-			--terminal-width "${WIDTH}" --line-range :"${HEIGHT}" || \
-		cat "${input}"
-
+	bat "${input}" --theme=TwoDark --color=always \
+		--paging=never --tabs=2 --wrap=auto \
+		--style=full --decorations=always \
+		--terminal-width "${WIDTH}" --line-range :"${HEIGHT}"
 	return $?
 }
 
@@ -110,7 +104,6 @@ function view_pdf() {
 
 # image terminal view with chafa/timg/catimg/cam/imgcat
 function view_image() {
-	local code=1
 	#truecol || \
 	#printf "\033[31m red output" || \
 	#timg -g50x50  "${FILE}" ||  \

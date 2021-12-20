@@ -20,12 +20,9 @@ set shellopts '-eu'
 set ifs "\n"
 set filesep "\n"  # default already
 set sortby natural
-set ratios '1:2:3'
+set ratios '1:2:4'
 set icons
-set timefmt '2006-01-02 15:04:05 -0700'
-
-# leave some space at the top and the bottom of the screen
-set scrolloff 10
+# set timefmt '2006-01-02 15:04:05 -0700'
 
 # + show git in prompt
 # + search
@@ -47,14 +44,12 @@ set scrolloff 10
 # + gpg
 # + disk usage du, ncdu, broot
 
-
-set previewer ~/.config/lf/preview
+set previewer ~/.config/lf/preview.sh
 set preview true
 set hidden
 set ignorecase true
 
 set incsearch
-set scrolloff 10
 set tabstop 2
 set smartcase
 
