@@ -15,7 +15,7 @@ ch-sync() {
 
 ch-scripts() {
 	# Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
-	~/.config/my_config/scripts/generate_machine_snapshot.sh
+	$HOME/.config/my_config/scripts/generate_machine_snapshot.sh
 }
 
 ch-rad() {
@@ -26,17 +26,7 @@ ch-rad() {
 		ch-scripts
 		# Sync with files already tracked by chezmoi
 		chezmoi re-add --verbose
-		# Re-sync directories to catch any new files
-		alias ch-add-dir="chezmoi add --recursive --autotemplate --verbose"
-		ch-add-dir ~/.config/alacritty/
-		ch-add-dir ~/.config/chezmoi/
-		ch-add-dir ~/.config/gh/
-		ch-add-dir ~/.config/kitty/
-		ch-add-dir ~/.config/my_config/
-		ch-add-dir ~/.config/zellij/
-		ch-add-dir ~/.gnupg/
-		ch-add-dir ~/Library/Application\ Support/lazygit/
-		ch-add-dir ~/Library/Application\ Support/lazydocker/
+		# Previously attempted to sync with directories, but too much noise
 		# FIXME: Move VSCode to Symlinks:
 		# 	https://github.com/twpayne/chezmoi/blob/master/docs/HOWTO.md#handle-configuration-files-which-are-externally-modified
 		#
@@ -47,9 +37,6 @@ ch-rad() {
 		# mv /Users/kyleking/Library/Application\ Support/Sublime\ Text/Packages/User/ ./User
 		# cd ~/Library/Application\ Support/Sublime\ Text/Packages/
 		# ln -s /Users/kyleking/.local/share/chezmoi/private_Library/private_Application\ Support/private_Sublime\ Text/private_Packages/User
-
-		ch-add-dir ~/Library/Application\ Support/prs/
-		ch-add-dir ~/Library/Application\ Support/pypoetry/
 	else
 		RED='\033[0;31m'
 		NC='\033[0m'

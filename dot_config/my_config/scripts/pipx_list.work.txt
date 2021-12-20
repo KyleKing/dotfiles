@@ -1,0 +1,37 @@
+venvs are in /Users/kyleking/.local/pipx/venvs
+apps are exposed on your $PATH at /Users/kyleking/.local/bin
+   package absolufy-imports 0.3.0, Python 3.10.1
+    - absolufy-imports
+   package aws-shell 0.2.2, Python 3.9.7
+    - aws-shell
+    - aws-shell-mkindex
+   package awscli 1.21.9, Python 3.10.0
+    - aws
+    - aws.cmd
+    - aws_bash_completer
+    - aws_completer
+    - aws_zsh_completer.sh
+   package black 21.10b0, Python 3.9.7
+    - black
+    - black-primer
+    - blackd
+   package cookiecutter 1.7.3, Python 3.9.7
+    - cookiecutter
+   package flake8 4.0.1, Python 3.10.1
+    - flake8
+   package isort 5.9.3, Python 3.9.7
+    - isort
+    - isort-identify-imports
+   package numpydoctor 1.1, Python 3.9.7
+    - numpydoctor
+   package pylint 2.11.1, Python 3.9.7
+    - epylint
+    - pylint
+    - pyreverse
+    - symilar
+   package Pyment 0.4.0.dev0, Python 3.9.7
+    - pyment
+   package sourcery-cli 0.9.7, Python 3.10.1
+    - sourcery
+   package velin 0.0.11, Python 3.9.7
+    - velin

@@ -1,0 +1,5 @@
+gh label	heaths/gh-label	
+gh notify	meiji163/gh-notify	Upgrade available
+gh poi	seachicken/gh-poi	
+gh prs	dlvhdr/gh-prs	
+gh user-stars	korosuke613/gh-user-stars	

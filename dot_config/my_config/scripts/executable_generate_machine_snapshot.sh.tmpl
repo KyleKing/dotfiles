@@ -4,7 +4,7 @@
 # Could be modified to install from Brewfile, but prefer to capture machine state:
 #	https://www.chezmoi.io/docs/how-to/#use-brew-bundle-to-manage-your-brews-and-casks
 
-SCRIPT_DIR=~/.config/my_config/scripts/
+SCRIPT_DIR=$HOME/.config/my_config/scripts/
 
 # Note: no trailing -}} on this line:
 brew bundle dump --file=- > $SCRIPT_DIR/Brewfile.{{- .computer_name }}
