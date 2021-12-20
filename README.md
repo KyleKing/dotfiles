@@ -1,6 +1,6 @@
 # README
 
-## Installation Insctructions
+## Installation Instructions
 
 ```sh
 brew install chezmoi
