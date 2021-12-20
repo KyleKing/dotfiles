@@ -1,11 +1,15 @@
 # Dot File Syncing Scripts
 
-export CHEZMOI_DIR=$(chezmoi source-path)
+ch-app() {
+	# Apply any changes to local files
+	eval $(op signin)
+	chezmoi apply --verbose
+}
 
 ch-sync() {
 	# Pull latest version and apply to local files
 	eval $(op signin)
-	cd $CHEZMOI_DIR
+	cd "$(chezmoi source-path)"
 	chezmoi update --verbose
 }
 
@@ -17,7 +21,7 @@ ch-scripts() {
 ch-rad() {
 	eval $(op signin)
 	# Prevent overwriting chezmoi edits by checking for staged or unstaged changes
-	cd $CHEZMOI_DIR
+	cd "$(chezmoi source-path)"
 	if output=$(git status --porcelain) && [ -z "$output" ]; then
 		ch-scripts
 		# Sync with files already tracked by chezmoi
