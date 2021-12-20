@@ -3,7 +3,6 @@
 
 [data]
 email = "{{ .email }}"
-home = "{{ .home }}"
 computer_name = "{{ .computer_name }}"
 
 [data.github]
@@ -12,9 +11,7 @@ signing_key = "{{ .github.signing_key }}"
 gpg_program = "{{ .github.gpg_program }}"
 
 [data.poetry]
-repositories = '''
-{{- .poetry.repositories -}}
-'''
+repositories = '''{{ .poetry.repositories }}'''
 
 [edit]
 command = "subl"
