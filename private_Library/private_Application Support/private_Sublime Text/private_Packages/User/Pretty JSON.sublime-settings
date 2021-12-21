@@ -1,0 +1,7 @@
+{
+    "brace_newline": false,
+    "bracket_newline": false,
+    "jq_binary": "gojq",
+    "jq_errors": true,
+    "keep_arrays_single_line": true
+}

@@ -1002,11 +1002,9 @@
     ],
     "ignored_packages":
     [
-        "Color Highlight",
-        "DocBlockr 2021 (DoxyDoxygen powered)",
         "Focus File on Sidebar",
         "Formatter",
-        "Git blame",
+        "SublimeLinter-contrib-dockerfilelint",
         "SublimeLinter-contrib-SpellCheckLinter",
         "Vintage",
     ],
@@ -1036,7 +1034,6 @@
         "*.min.*"
     ],
     "bold_folder_labels": true,
-    "caret_style": "wide",
     "close_windows_when_empty": true,
     "color_scheme": "gruvbox (Dark) (Hard).sublime-color-scheme",
     "draw_minimap_border": true,
@@ -1086,7 +1083,7 @@
         "doxyfiles",
         ".vscode",
         ".venv",
-        "__pycache__",
+        "__pycache__"
     ],
     "font_face": "Hack Nerd Font",
     "font_size": 13,
@@ -1112,4 +1109,5 @@
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
     "word_wrap": true,
+    "update_check": true,
 }
