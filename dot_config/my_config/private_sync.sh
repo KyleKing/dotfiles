@@ -15,11 +15,11 @@ ch-sync() {
 
 ch-scripts() {
 	# Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
+	gh extension upgrade --all
 	$HOME/.config/my_config/scripts/generate_machine_snapshot.sh
 }
 
 ch-rad() {
-	eval $(op signin)
 	# Prevent overwriting chezmoi edits by checking for staged or unstaged changes
 	cd "$(chezmoi source-path)"
 	if output=$(git status --porcelain) && [ -z "$output" ]; then
