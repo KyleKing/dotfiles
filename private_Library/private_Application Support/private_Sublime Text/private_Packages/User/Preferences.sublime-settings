@@ -324,7 +324,6 @@
         "grpcio",
         "guids",
         "GZFA",
-        "h kalm",
         "h",
         "h3",
         "h4",
@@ -507,7 +506,6 @@
         "Model1300",
         "Model1350",
         "modifiability",
-        "montréal",
         "moto",
         "mpatches",
         "mrkvdashbrd",
@@ -1006,7 +1004,7 @@
         "Formatter",
         "SublimeLinter-contrib-dockerfilelint",
         "SublimeLinter-contrib-SpellCheckLinter",
-        "Vintage",
+        "Vintage"
     ],
     "always_show_minimap_viewport": true,
     "auto_complete": true,
@@ -1109,5 +1107,5 @@
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
     "word_wrap": true,
-    "update_check": true,
+    "update_check": true
 }
