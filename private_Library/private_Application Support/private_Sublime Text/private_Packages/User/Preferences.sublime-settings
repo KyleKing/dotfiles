@@ -1,6 +1,10 @@
 {
     "added_words":
     [
+        "Authenticator",
+        "Kinesis",
+        "kinesis",
+        "S3",
         "5V",
         "abcdefgh",
         "abcdefghijklmnop",
@@ -1100,6 +1104,7 @@
         88,
         120
     ],
+    "show_rel_path": true,
     "shift_tab_unindent": true,
     "show_sidebar_button": false,
     "spell_check": true,
