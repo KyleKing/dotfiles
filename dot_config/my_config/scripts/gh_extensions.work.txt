@@ -1,5 +1,13 @@
+gh clean-branches	davidraviv/gh-clean-branches	
+gh fzrepo	sheepla/gh-fzrepo	
 gh label	heaths/gh-label	
-gh notify	meiji163/gh-notify	Upgrade available
+gh lspr	kentaro-m/gh-lspr	
+gh notify	meiji163/gh-notify	
 gh poi	seachicken/gh-poi	
+gh pr-draft	kyanny/gh-pr-draft	
 gh prs	dlvhdr/gh-prs	
+gh repo-explore	samcoe/gh-repo-explore	
+gh repo-fzf	kavinvalli/gh-repo-fzf	
+gh tidy	HaywardMorihara/gh-tidy	
 gh user-stars	korosuke613/gh-user-stars	
+gh userfetch	sheepla/gh-userfetch	
