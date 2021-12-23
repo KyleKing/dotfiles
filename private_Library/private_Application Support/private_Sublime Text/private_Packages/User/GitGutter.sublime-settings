@@ -1,0 +1,13 @@
+{
+    "show_in_minimap": -1,
+    "diff_popup_default_mode": "diff",
+    "show_line_annotation": true,
+    "status_bar_text": [
+        "{% if repo and branch %}",
+            "{% if not st_git_status %}",
+                "{{repo}}/{{branch}}",
+                "{% if added_files + deleted_files + modified_files > 0 %}*{% endif %}, ",
+            "{% endif %}",
+        "{% endif %}"
+    ]
+}

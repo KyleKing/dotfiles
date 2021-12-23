@@ -1,6 +1,5 @@
 {
-    "added_words":
-    [
+    "added_words": [
         "Authenticator",
         "Kinesis",
         "kinesis",
@@ -1002,21 +1001,12 @@
         "zaza",
         "zsplit"
     ],
-    "ignored_packages":
-    [
-        "Focus File on Sidebar",
-        "Formatter",
-        "SublimeLinter-contrib-dockerfilelint",
-        "SublimeLinter-contrib-SpellCheckLinter",
-        "Vintage"
-    ],
     "always_show_minimap_viewport": true,
     "auto_complete": true,
     "auto_complete_commit_on_tab": true,
     "auto_complete_trailing_symbols": true,
     "auto_complete_with_fields": true,
-    "binary_file_patterns":
-    [
+    "binary_file_patterns": [
         "*.jpg",
         "*.jpeg",
         "*.png",
@@ -1041,8 +1031,7 @@
     "draw_minimap_border": true,
     "ensure_newline_at_eof_on_save": true,
     "fade_fold_buttons": false,
-    "file_exclude_patterns":
-    [
+    "file_exclude_patterns": [
         "*.pyc",
         "*.pyo",
         "*.exe",
@@ -1068,8 +1057,7 @@
         "*.min.*",
         "*doxy"
     ],
-    "folder_exclude_patterns":
-    [
+    "folder_exclude_patterns": [
         ".svn",
         ".git",
         ".hg",
@@ -1091,26 +1079,29 @@
     "font_size": 13,
     "highlight_line": true,
     "highlight_modified_tabs": true,
-    "indent_guide_options":
-    [
-        "draw_normal",
-        "draw_active"
+    "show_git_status": false,
+    "show_git_status_in_status_bar": false,
+    "ignored_packages": [
+        "Color Highlight",
+        "Focus File on Sidebar",
+        "Formatter",
+        "SublimeLinter-contrib-dockerfilelint",
+        "SublimeLinter-contrib-SpellCheckLinter",
+        "Vintage",
     ],
+    "mini_diff": false,
+    "indent_guide_options": ["draw_normal","draw_active"],
     "open_files_in_new_window": "never",
     "preview_on_click": "only_left",
-    "rulers":
-    [
-        80,
-        88,
-        120
-    ],
-    "show_rel_path": true,
+    "rulers": [80,88,120],
     "shift_tab_unindent": true,
+    "show_rel_path": true,
     "show_sidebar_button": false,
     "spell_check": true,
+    "sublime_merge_path": null,
     "theme": "ayu-mirage.sublime-theme",
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
+    "update_check": true,
     "word_wrap": true,
-    "update_check": true
 }
