@@ -1027,7 +1027,7 @@
     ],
     "bold_folder_labels": true,
     "close_windows_when_empty": true,
-    "color_scheme": "gruvbox (Dark) (Hard).sublime-color-scheme",
+    "color_scheme": "Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
     "draw_minimap_border": true,
     "ensure_newline_at_eof_on_save": true,
     "fade_fold_buttons": false,
@@ -1082,7 +1082,6 @@
     "show_git_status": false,
     "show_git_status_in_status_bar": false,
     "ignored_packages": [
-        "Color Highlight",
         "Focus File on Sidebar",
         "Formatter",
         "SublimeLinter-contrib-dockerfilelint",

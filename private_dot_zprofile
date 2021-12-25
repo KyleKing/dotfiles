@@ -6,6 +6,9 @@ export PATH="/usr/local/sbin:$PATH"
 # Created by `pipx`
 export PATH="$PATH:/Users/kyleking/.local/bin"
 
+# Added from rustup-init (rust installer)
+source "$HOME/.cargo/env"
+
 # # Export Preview Gitkrakken CLI
 # export _GK_DIR=/Applications/GitKraken.app/Contents/Resources/app.asar.unpacked/resources/cli/unix
 # export PATH="$_GK_DIR:$PATH"
