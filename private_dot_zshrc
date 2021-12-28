@@ -25,3 +25,6 @@ source $MY_CONFIG/_java.sh
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
+
+# Make login faster by suppressing login messages
+mkdir -p "$HOME/.hushlogin"

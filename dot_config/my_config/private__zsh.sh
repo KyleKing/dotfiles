@@ -1,3 +1,8 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+# Oh My ZSH (OMZ) Configuration
+
 # General ZSH Configuration
 
 # You may need to manually set your language environment
@@ -16,9 +21,10 @@ fi
 # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
 export HISTCONTROL=ignoredups
 
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+# Variable descriptions: https://stackoverflow.com/a/19454838/3219667
+HISTFILE="$HOME/.histfile"
+export HISTSIZE=1000 # number of lines or commands that are stored in memory in a history list while your bash session is ongoing.
+export SAVEHIST=1000 # is the number of lines or commands that (a) are allowed in the history file at startup time of a session, and (b) are stored in the history file at the end of your bash session for use in future sessions
 bindkey -e
 
 # Based on: https://github.com/zsh-users/zsh-autosuggestions/issues/609#issuecomment-904204583
@@ -31,5 +37,5 @@ alias copy-l="fc -ln 0 | tail -n 1 | pbcopy"
 
 # Useful combination of mkdir and cd
 mkcd() {
-  mkdir -p $1 && cd $1
+  mkdir -p $1 && cd $1 || exit
 }
