@@ -1,0 +1,706 @@
+# Based on: https://github.com/4volodin/dotfiles/blob/020e0bdb63709482277028b58db7055529af14be/.config/lf/lfrc
+
+# interpreter for shell commands
+set shell zsh
+
+# set '-eu' options for shell commands
+# These options are used to have safer shell commands. Option '-e' is used to
+# exit on error and option '-u' is used to give error for unset variables.
+# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
+# $fx variables contain names with '*' or '?' characters. However, this option
+# is used selectively within individual commands as it can be limiting at
+# times.
+set shellopts '-eu'
+
+# set internal field separator (IFS) to "\n" for shell commands
+# This is useful to automatically split file names in $fs and $fx properly
+# since default file separator used in these variables (i.e. 'filesep' option)
+# is newline. You need to consider the values of these options and create your
+# commands accordingly.
+set ifs "\n"
+set filesep "\n"  # default already
+set sortby natural
+set ratios '1:2:4'
+set icons
+# set timefmt '2006-01-02 15:04:05 -0700'
+
+# + show git in prompt
+# + search
+# ! preview
+# + preview toggle
+# + open files
+# + open in Finder
+# +  archieve
+# + to trash
+# ! restore from trash
+# ! soft hard link
+# + sort
+# + movement
+# + fzf got to folder
+# - fzf  ripgrep
+# + bulkrename
+# + rename
+# + yank path basename
+# + gpg
+# + disk usage du, ncdu, broot
+
+set previewer ~/.config/lf/preview.sh
+set preview true
+set hidden
+set ignorecase true
+
+set incsearch
+set tabstop 2
+set smartcase
+
+# # Bindings
+# # Remove some defaults
+# map m
+# map o
+# map n
+# map "'"
+# map '"'
+# map d
+# map c
+# map e
+# map y
+# map r
+# map f
+# map v
+# map v :toggle; down
+
+# # Basic Functions
+# map . set hidden!
+# map DD delete
+# map x cut
+# map yy copy
+# map <enter> open
+# map bg setwallpaper
+# #map o open_config
+# map br $vimv $fx
+# map rr rename
+# map H top
+# map L bottom
+# map R reload
+# #map C clear
+# map U unselect
+
+# show documentation
+map g? $lf -doc | less
+
+
+# Command definitions {{{
+# the prefix shows what kind of command it is
+#   $: runs as shell command
+#   %: runs as piped shell command (stdout => statusline)
+#   !: runs as interactive shell command (puts lf in the bg)
+#   :: runs as lf command
+#
+# commands run in the shell, you can use $f, $fs, $fx vars.
+# you can also send remote commands.
+map <c-c> cmd-interrupt
+
+# map p
+# map pp paste
+# # paste as a symbolic link to original
+# cmd paste_link %{{
+#     for file in $(lf -remote 'load'); do
+#         if [ ! -n "${mode+1}" ]; then
+#             mode="$file"
+#             continue
+#         fi
+#         files+=("$file")
+#     done
+#     if [ -z "$files" ] || [ "${#files[@]}" -lt 1 ]; then
+#         lf -remote "send $id echo no files to link files: ${files}"
+#         exit 0
+#     fi
+#     ln -sr $files -t .
+# }}
+# map pl paste_link
+
+# leave some space at the top and the bottom of the screen
+set scrolloff 10
+
+# # execute current file (must be executable)
+# #map x $$f
+# #map X !$f
+
+# # dedicated keys for file opener actions
+# #map o &mimeopen $f
+# #map O $mimeopen --ask $f
+
+# cmd open-with %"$@" $fx
+# map ` push :open-with<space>
+
+# cmd open ${{
+#     case $(file --dereference --mime-type $f -b) in
+#         inode/x-empty) $EDITOR $fx ;;
+#         text/*) $EDITOR $fx;;
+#         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+#     esac
+# }}
+
+# # move selected files in NEW folder
+# cmd newfold ${{
+#     set -f
+#     read newd
+#     mkdir -- "$newd"
+#     mv -- $fx "$newd"
+# }}
+# map <c-n> newfold
+
+# cmd mkdir %mkdir -p "$@"
+# map ad push :mkdir<space>
+
+# cmd touch %touch  "$@"
+# map af push :touch<space>
+
+# # {{{ === Make files, dirs
+# cmd mkdir ${{
+#   printf "Directory Name: "
+#   read ans
+#   mkdir $ans
+# }}
+
+# cmd mkfile ${{
+#   printf "File Name: "
+#   read ans
+#   $EDITOR $ans
+# }}
+
+# cmd chmod ${{
+#   printf "Mode Bits: "
+#   read ans
+
+#   for file in "$fx"
+#   do
+#     chmod $ans $file
+#   done
+
+#   lf -remote 'send reload'
+# }}
+
+# cmd sudomkfile ${{
+#   printf "File Name: "
+#   read ans
+#   sudo $EDITOR $ans
+# }}
+
+# map mf mkfile
+# map md mkdir
+# map ch chmod
+# map mr sudomkfile
+# map ms $mkscript
+# # }}} === Make files, dirs
+
+cmd open_config  ${{
+  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
+}}
+# File Openers
+map ee $$EDITOR "$f"
+map es $sudo $EDITOR "$f"
+
+map cz $$EDITOR ~/.zshrc
+map cn $$EDITOR ~/.config/nvim/init.vim
+map cl $$EDITOR ~/.config/lf/lfrc
+
+#map u $view "$f"
+
+cmd change %{{
+    printf "Substitute: "
+    read -r sedcmd
+    mv "$f" "$(dirname "$f")/$(printf '%s' "$(basename "$f")" | sed "s$sedcmd")"
+}}
+map C change
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Search >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# map n search-next
+# map N search-prev
+# # Select based on glob filter
+# cmd filter %{{
+#     printf "Filter: "
+#     read -r filter_expr
+#     lf -remote "send $id unselect"
+#     lf -remote "send $id glob-select $filter_expr"
+# }}
+# map fi filter
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Search >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Archive >>>>>>>>>>>>>>>>>>>>>>>>>>>
+# # extract the current file with the right command
+# # (xkcd link: https://xkcd.com/1168/)
+# cmd extract ${{
+#     set -f
+#     case $f in
+#         *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+#         *.tar.gz|*.tgz) tar xzvf $f;;
+#         *.tar.xz|*.txz) tar xJvf $f;;
+#         *.zip) unzip $f;;
+#         *.rar) unrar x $f;;
+#         *.7z) p7zip x $f;;
+#       *) echo "Unsupported format" ;;
+#     esac
+# }}
+
+# # zip a directory/file
+# cmd zip ${{
+#     set -f
+#     mkdir $f-zip
+#     cp -r $fx $f-zip
+#     (cd $f-zip/ && zip -r $f.zip .)
+#     rm -rf $f-zip/
+# }}
+
+# cmd tar ${{
+#     set -f
+#     mkdir $f-tgz
+#     cp -r $fx $f-tgz
+#     (cd $f-tgz && tar cvzf $f.tar.gz .)
+#     rm -rf $f-tgz
+# }}
+# map tz zip
+# map tt tar
+# map tu extract
+
+# #cmd zip %zip -r "$f" "$f"
+# #cmd tar %tar cvf "$f.tar" "$f"
+# #cmd targz %tar cvzf "$f.tar.gz" "$f"
+# #cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+# # Archive Mappings
+# #map ag targz
+# #map ab targz
+# #map au unarchive
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Archive >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Trash <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# # Implement trash command
+# # trash command with confirmation
+# cmd trash %{{
+#     for f in $fx; do
+#         printf "Trash $f? [Y/n/a] "
+#         read -r ans
+#         case "$ans" in
+#             Y*|y*) trash "$f"; printf "Deleted $f.";;
+#             A*|a*) trash $fx; printf "Deleted all files."; break;;
+#             *) printf "Not deleting $f"; sleep 1;;
+#         esac
+#     done
+# }}
+# # Trash Mappings
+# map dd trash
+# cmd clear_trash %trash-empty
+# map tc clear_trash
+
+# # move current file or selected files to trash folder
+# # (also see 'man mv' for backup/overwrite options)
+# #cmd trash %set -f; mv $fx ~/.trash
+# # make sure trash folder exists
+# # %mkdir -p ~/.trash
+
+# # define a custom 'delete' command
+# # cmd delete ${{
+# #     set -f
+# #     printf "$fx\n"
+# #     printf "delete?[y/n]"
+# #     read ans
+# #     [ $ans = "y" ] && rm -rf $fx
+# # }}
+
+# # use '<delete>' key for either 'trash' or 'delete' command
+# # map <delete> trash
+# # map <delete> delete
+
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Trash >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Quick Preview <<<<<<<<<<<<<<<<<<<<<<<<<<
+# # preview the highlighted file with quicklook
+# cmd ql_preview &{{
+#     qlmanage -p $fx &> /dev/null;
+# }}
+# map i
+# map <space> ql_preview
+# #map I ql_preview
+# map i $LESS='-iWQMXR~' bat --paging=always --theme=TwoDark "$f"
+# map I $$PAGER "$f"
+
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Quick Preview >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Sort <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# map sn :{{ set sortby natural; set info size; set preview; set ratios 1:2:3; }}
+# map sa :{{ set sortby natural; set info size; set nopreview; set ratios 3:5; }}
+# map ss :{{ set sortby size; set info size; set preview; }}
+# map st :{{ set sortby time; set info time; set preview; }}
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Sort >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Movement <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# map oF ${{open .}}
+
+# map gtr cd ~/.Trash/
+
+# map gr cd /
+# map gy. cd ~/videos/youtube
+# map gc cd ~/code
+# map g. cd ~/.config
+# map gD  cd ~/Downloads
+# map gd cd ~/Documents
+# map gwd cd "/Volumes/wd (wdelements-1Tb)"
+# map gv cd /Volumes
+# map gfr cd "/Volumes/Courses Frontend (s3 Wd 531Gb)"
+# map gba cd "/Volumes/Courses Backend (s4 Seag 531Gb)"
+# map gdi cd "/Volumes/Distr (s1 Tosh 362Gb)"
+# map gme cd "/Volumes/Media (s1 Tosh 362Gb)"
+# # define a custom 'rename' command without prompt for overwrite
+# # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# # map r push :rename<space>
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Movement >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FZF <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# cmd fzf_jump ${{
+#   res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
+#   if [ -f "$res" ]; then
+#     cmd="select"
+#   elif [ -d "$res" ]; then
+#     cmd="cd"
+#   fi
+#   lf -remote "send $id $cmd \"$res\""
+# }}
+
+# cmd rg ${{
+#     res = "$(rg --color=never --no-heading  --ignore-case --no-ignore --hidden --follow --glob=\!{.git,.idea,node_modules,vendor,tags} --line-number '' . | fzf --no-multi --delimiter=: --preview 'bat --color=always --line-range {2}: {1}
+# ' )"
+#     cmd="select"
+#   lf -remote "send $id $cmd \"$res\""
+# }}
+# map <c-f> :fzf_jump
+# map <c-g> :rg
+
+# # Quickly locate a file with fzf and select it in lf
+# map gf $lf -remote "send $id select $(fzf)"
+# #map ff fzf_jump
+
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  FZF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<<< Rename <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# # Edit filename before the extension
+# map re ${{
+#     # get "basename" of the selection
+#     filename="${f##*/}"
+#     # quote it so we wont deal with quotes in the lf -remote command
+#     filename="$(printf '%q' "$filename")"
+#     filename="${filename// /<space>}"
+#     lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
+# }}
+
+# cmd bulkrename $vidir
+# map <f-2> bulkrename
+# map rb  $printf '%s\n' $fx | vidir -
+
+# # rename multiple files the way nnn does it
+# cmd batch_rename !{{
+#     contentsfile=$(mktemp)
+#     trap 'rm $contentsfile' INT TERM EXIT
+#     dircontents="$(command ls -1p)"
+#     printf "%s" "$dircontents" | nl -n ln > "$contentsfile";
+#     $EDITOR "$contentsfile"
+#     printf "%s" "$dircontents" | paste "$contentsfile" -d'\t' - \
+#         | while read -r line; do
+#         orig="$(printf "%s" "$line" | cut -f3 | sed 's!/$!!')"
+#         new="$(printf "%s" "$line" | cut -f2 | sed 's!/$!!')"
+#         if [ "$new" != "$orig" ]; then
+#             if [ -e "$new" ]; then
+#                 printf "%s already exists, not overwriting.\n" "$new"
+#             else
+#                 printf "./%s -> ./%s\n" "$orig" "$new"
+#                 command mv -i ./"$orig" ./"$new"
+#             fi
+#         fi
+#     done
+#     rm "$contentsfile"
+#     trap - INT TERM EXIT
+# }}
+# map rbb batch_rename
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>>> Rename >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ =========================== Yank paths ===========================
+
+# cmd yank-dirname $dirname -- "$f" | head -n 1 | pbcopy
+# cmd yank-path $printf '%s' "$fx" | pbcopy
+# cmd yank-basename $printf '%s' "$(basename -a -- $fx)" |  pbcopy
+# #cmd yank-basename $basename -a -- $fx | head -n 1 | pbcopy
+
+# cmd yank-basename-without-extension ${{
+#     echo "$fx" |
+#       xargs -r -d '\n' basename -a |
+#       awk -e '{
+#       for (i=length($0); i > 0; i--) {
+#         if (substr($0, i, 1) == ".") {
+#           if (i == 1)
+#               print $0
+#           else
+#               print substr($0, 0, i-1)
+#           break
+#         }
+#       }
+
+#       if (i == 0)
+#         print $0
+#       }' |
+#       if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
+#       pbcopy
+# }}
+# # copy the path of the highlighted file
+# cmd copy_path ${{
+#     set -f
+#     if command -v pbcopy > /dev/null 2> /dev/null; then
+#         echo "$f" | tr -d '\n' | pbcopy
+#     elif command -v xclip > /dev/null 2> /dev/null; then
+#         echo "$f" | tr -d '\n' | xclip -sel clip
+#     fi
+# }}
+# map y
+# #map yY copy_path
+# map yd yank-dirname
+# map yp yank-path
+# map yn yank-basename
+# map yN yank-basename-without-extension
+# # }}} =========================== Yank paths ===========================
+
+
+# # {{{ =========================== PGP ===========================
+# cmd pgp_encrypt_recipient %{{
+#     printf "Recipient: "
+#     read -r recipient
+#     case "$recipient" in
+#     "") printf "Cancelled.";;
+#     *) gpg --encrypt --sign --recipient "$recipient" $f;;
+#     esac
+# }}
+
+# cmd pgp_encrypt_pass ${{
+#     gpg --symmetric $f;
+# }}
+
+# cmd pgp_decrypt ${{
+#     gpg --output ${f%.gpg} --decrypt $f
+# }}
+
+# # Encode input into binary or ASCII-armored output with an integrated signature
+# cmd pgp_sign ${{
+#     gpg --sign $f
+# }}
+
+# # Wrap input in plaintext signature
+# cmd pgp_sign_clear ${{
+#     gpg --clearsign $f
+# }}
+
+# # Create binary or ASCII-armored detached signature from input
+# cmd pgp_sign_detach ${{
+#     gpg --detach-sign $f
+# }}
+# map te pgp_encrypt_recipient
+# map tp pgp_encrypt_pass
+# map td pgp_decrypt
+# map ts. pgp_sign
+# map tsc pgp_sign_clear
+# map tsd pgp_sign_detach
+
+# # }}} =========================== PGP ===========================
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<< Toggle Preview <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# cmd showpreview &{{
+#     lf -remote "send $id set preview"
+#     lf -remote "send $id set ratios 1:2:3"
+#     lf -remote "send $id map zp nopreview"
+# }}
+# cmd nopreview &{{
+#     lf -remote "send $id set nopreview"
+#     lf -remote "send $id ratios 1:3"
+#     lf -remote "send $id map zp showpreview"
+# }}
+# map zp nopreview
+# # }}} >>>>>>>>>>>>>>>>>>>>>>>>> Toggle Preview >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ <<<<<<<<<<<<<<<<<<<<<<<<< Disk Usage <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# #show disk usage
+# #map du !du -h -d 1
+# map dU !du -h -d 1 | sort -rh
+# #map du !du -hsx * | sort -rh | less
+# map du !ncdu
+# map di !stat $f; echo ; du -sh $f ; echo ; file -I -b -p $f
+
+# # Broot Mapping
+# cmd broot_jump ${{
+#   f=$(mktemp)
+#   res="$(broot --outcmd $f && cat $f | sed 's/cd //')"
+#   rm -f "$f"
+#   if [ -f "$res" ]; then
+#     cmd="select"
+#   elif [ -d "$res" ]; then
+#     cmd="cd"
+#   fi
+#   lf -remote "send $id $cmd \"$res\""
+# }}
+# #map F broot_jump
+# map F  $lf -remote "send $id select $(broot)"
+# # }}}} >>>>>>>>>>>>>>>>>>>>>>>> Disk Usage >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# # {{{ =========================== GIT ===========================
+# cmd git_branch ${{
+#     git branch | fzf | xargs git checkout
+#     pwd_shell=$(pwd)
+#     lf -remote "send $id updir"
+#     lf -remote "send $id cd \"$pwd_shell\""
+# }}
+# map gb :git_branch
+# #map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
+# map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
+# map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
+# # }}} =========================== GIT ===========================
+
+# cmd on-cd &{{
+#     printf "\033]0; $(pwd | sed "s|$HOME|~|") - lf\007" > /dev/tty
+#     # display git repository status in your prompt
+#     #source /usr/share/git/completion/git-prompt.sh
+#     source ~/.oh-my-zsh/plugins/gitfast/git-prompt.sh
+#     GIT_PS1_SHOWDIRTYSTATE=auto
+#     GIT_PS1_SHOWSTASHSTATE=auto
+#     GIT_PS1_SHOWUNTRACKEDFILES=auto
+#     GIT_PS1_SHOWUPSTREAM=auto
+#     GIT_PS1_COMPRESSSPARSESTATE=auto
+#     git=$(__git_ps1 " [GIT BRANCH:> %s]") || true
+#     fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%w\033[0m\033[33;1m$git\033[0m"
+#     lf -remote "send $id set promptfmt \"$fmt\""
+# }}
+# # also run at startup
+# on-cd
+
+
+
+
+
+
+
+
+
+
+
+
+# Original config with lf-defaults
+
+# # use enter for shell commands
+# map <enter> shell
+
+# # execute current file (must be executable)
+# map x $$f
+# map X !$f
+
+# # dedicated keys for file opener actions
+# map o &mimeopen $f
+# map O $mimeopen --ask $f
+
+# # define a custom 'open' command
+# # This command is called when current file is not a directory. You may want to
+# # use either file extensions and/or mime types here. Below uses an editor for
+# # text files and a file opener for the rest.
+# cmd open ${{
+#     test -L $f && f=$(readlink -f $f)
+#     case $(file --mime-type $f -b) in
+#         text/*) $EDITOR $fx;;
+#         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+#     esac
+# }}
+
+# # define a custom 'rename' command without prompt for overwrite
+# # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# # map r push :rename<space>
+
+# # make sure trash folder exists
+# # %mkdir -p ~/.trash
+
+# # move current file or selected files to trash folder
+# # (also see 'man mv' for backup/overwrite options)
+# cmd trash %set -f; mv $fx ~/.trash
+
+# # define a custom 'delete' command
+# # cmd delete ${{
+# #     set -f
+# #     printf "$fx\n"
+# #     printf "delete?[y/n]"
+# #     read ans
+# #     [ $ans = "y" ] && rm -rf $fx
+# # }}
+
+# # use '<delete>' key for either 'trash' or 'delete' command
+# # map <delete> trash
+# # map <delete> delete
+
+# # extract the current file with the right command
+# # (xkcd link: https://xkcd.com/1168/)
+# cmd extract ${{
+#     set -f
+#     case $f in
+#         *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+#         *.tar.gz|*.tgz) tar xzvf $f;;
+#         *.tar.xz|*.txz) tar xJvf $f;;
+#         *.zip) unzip $f;;
+#         *.rar) unrar x $f;;
+#         *.7z) 7z x $f;;
+#     esac
+# }}
+
+# # compress current file or selected files with tar and gunzip
+# cmd tar ${{
+#     set -f
+#     mkdir $1
+#     cp -r $fx $1
+#     tar czf $1.tar.gz $1
+#     rm -rf $1
+# }}
+
+# # compress current file or selected files with zip
+# cmd zip ${{
+#     set -f
+#     mkdir $1
+#     cp -r $fx $1
+#     zip -r $1.zip $1
+#     rm -rf $1
+# }}
+
+
+# # Source: https://github.com/gokcehan/lf/wiki/Integrations#fzf
+# # You can bind keys in lf to your usual fzf commands:
+# map f $vi $(fzf)
+# # It is also possible to define commands with arguments to use with fzf:
+# cmd fzf $vi $(find . -name "$1" | fzf)
+# map f push :fzf<space>
+# # If you want to jump to a file or directory in lf using fuzzy matching, you can utilize fzf for this purpose:
+# cmd fzf_jump ${{
+#     res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+#     if [ -d "$res" ]; then
+#         cmd="cd"
+#     else
+#         cmd="select"
+#     fi
+#     lf -remote "send $id $cmd \"$res\""
+# }}
+# # I believe this is `Ctrl+f`
+# map <c-f> :fzf_jump
+
+# # Setup stpv (Requires manual install) for previews of images, pdf, and code!
+# # See: https://github.com/Naheel-Azawy/stpv
+# set previewer stpv
+# set cleaner stpvimgclr
+# &stpvimg --listen $id
