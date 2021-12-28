@@ -16,7 +16,7 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-[".oh-my-zsh/custom/plugins/zsh-notify"]
+[".oh-my-zsh/custom/plugins/notify"]
     type = "archive"
     url = "https://github.com/luismayta/zsh-notify/archive/develop.tar.gz"
     exact = true
