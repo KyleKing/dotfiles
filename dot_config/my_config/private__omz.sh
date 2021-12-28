@@ -54,7 +54,7 @@ export TIMER_PRECISION=2
 # Which plugins would you like to load? (plugins can be found in $HOME/.oh-my-zsh/plugins/*)
 
 # Configure the navi widget for completions
-eval $(navi widget zsh)
+eval "$(navi widget zsh)"
 
 # Use `omz plugin info <name>` to learn more about each. Prints the README (`omz plugin info zsh-autosuggestions`)
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
@@ -234,10 +234,16 @@ export plugins=(
   # Sublime plugin doesn't provide any benefit over `subl`
 
   # Chezmoi Git Submodules
-  # Docs: https://github.com/zsh-users/zsh-completions (Extra completions not yet in Zsh-proper)
-  zsh-completions
+  # Docs: https://github.com/MichaelAquilina/zsh-auto-notify
+  auto-notify
+  # Docs: https://github.com/MichaelAquilina/zsh-you-should-use
+  you-should-use
   # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
   git-extra-commands
+  # Docs (Requires "brew install terminal-notifier"): https://github.com/marzocchi/zsh-notify
+  notify
+  # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
+  zsh-completions
   # Docs: https://github.com/zsh-users/zsh-autosuggestions
   zsh-autosuggestions
   # Syntax Highlighters must be last. There are two where FSyH was a hostile fork of ZSyH

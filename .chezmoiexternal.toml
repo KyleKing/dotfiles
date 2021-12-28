@@ -4,7 +4,19 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-[".oh-my-zsh/custom/plugins/zsh-notify"]
+[".oh-my-zsh/custom/plugins/auto-notify"]
+    type = "archive"
+    url = "https://github.com/MichaelAquilina/zsh-auto-notify/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".oh-my-zsh/custom/plugins/you-should-use"]
+    type = "archive"
+    url = "https://github.com/MichaelAquilina/zsh-you-should-use/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".oh-my-zsh/custom/plugins/notify"]
     type = "archive"
     url = "https://github.com/luismayta/zsh-notify/archive/develop.tar.gz"
     exact = true
@@ -12,7 +24,7 @@
     refreshPeriod = "168h"
 [".oh-my-zsh/custom/plugins/git-extra-commands"]
     type = "archive"
-    url = "https://github.com/unixorn/git-extra-commands/archive/master.tar.gz"
+    url = "https://github.com/unixorn/git-extra-commands/archive/main.tar.gz"
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
