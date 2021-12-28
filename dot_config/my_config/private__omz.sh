@@ -238,12 +238,14 @@ export plugins=(
   you-should-use
   # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
   git-extra-commands
-  # Required pre-requisites for zsh-notify
-  # Docs: https://github.com/hadenlabs/zsh-core
-  zsh-core
-  # Docs (Possibly requires "brew install terminal-notifier"): https://github.com/luismayta/zsh-notify
-  # Note: there appears to be an unattributed clone: https://github.com/marzocchi/zsh-notify
-  zsh-notify
+  # FIXME: These two plugins are not found?
+  # # Required pre-requisites for zsh-notify
+  # # Docs: https://github.com/hadenlabs/zsh-core
+  # zsh-core
+  # # Docs (Possibly requires "brew install terminal-notifier"): https://github.com/luismayta/zsh-notify
+  # # Note: there appears to be an unattributed clone: https://github.com/marzocchi/zsh-notify
+  # zsh-notify
+
   # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
   zsh-completions
   # Docs: https://github.com/zsh-users/zsh-autosuggestions
@@ -290,7 +292,5 @@ bindkey '^ ' autosuggest-accept
 export AUTO_NOTIFY_THRESHOLD=15
 # Set notification expiry to 1 seconds
 export AUTO_NOTIFY_EXPIRE_TIME=1000
-# Create list of ignored commands
-export AUTO_NOTIFY_IGNORE=("lzg" "lazygit" "docker" "glances" "ctop" "stern" "k9s" "lazydocker" "lzd" "vim" "nvim" "less" "more" "bat" "man" "tig" "watch" "git" "commit" "top" "htop" "ssh" "nano")
-# PLANNED: Consider create an allowlist for auto-notification?
-# export AUTO_NOTIFY_WHITELIST=("brew")
+# Create an allowlist for auto-notifications
+export AUTO_NOTIFY_WHITELIST=("brew" "poetry install")
