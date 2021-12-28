@@ -241,7 +241,7 @@ export plugins=(
   # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
   git-extra-commands
   # Docs (Requires "brew install terminal-notifier"): https://github.com/marzocchi/zsh-notify
-  notify
+  zsh-notify
   # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
   zsh-completions
   # Docs: https://github.com/zsh-users/zsh-autosuggestions
