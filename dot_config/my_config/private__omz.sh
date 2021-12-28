@@ -90,7 +90,6 @@ export plugins=(
 #   # fd
 #   # firewalld
 #   # frontend-search
-#   # fzf
 #   # gas
 #   # gb
 #   # git-flow
@@ -144,7 +143,6 @@ export plugins=(
 #   # rand-quote
 #   # react-native
 #   # repo
-#   # ripgrep
 #   # rsync
 #   # safe-paste
 #   # salt
@@ -240,8 +238,12 @@ export plugins=(
   you-should-use
   # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
   git-extra-commands
-  # Docs (Requires "brew install terminal-notifier"): https://github.com/marzocchi/zsh-notify
-  notify
+  # Required pre-requisites for zsh-notify
+  # Docs: https://github.com/hadenlabs/zsh-core
+  zsh-core
+  # Docs (Possibly requires "brew install terminal-notifier"): https://github.com/luismayta/zsh-notify
+  # Note: there appears to be an unattributed clone: https://github.com/marzocchi/zsh-notify
+  zsh-notify
   # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
   zsh-completions
   # Docs: https://github.com/zsh-users/zsh-autosuggestions
@@ -282,3 +284,13 @@ bindkey '^ ' autosuggest-accept
 
 # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+
+# Customize zsh-auto-notify (https://github.com/MichaelAquilina/zsh-auto-notify#configuration)
+# Set threshold to 15 seconds
+export AUTO_NOTIFY_THRESHOLD=15
+# Set notification expiry to 1 seconds
+export AUTO_NOTIFY_EXPIRE_TIME=1000
+# Create list of ignored commands
+export AUTO_NOTIFY_IGNORE=("lzg" "lazygit" "docker" "glances" "ctop" "stern" "k9s" "lazydocker" "lzd" "vim" "nvim" "less" "more" "bat" "man" "tig" "watch" "git" "commit" "top" "htop" "ssh" "nano")
+# PLANNED: Consider create an allowlist for auto-notification?
+# export AUTO_NOTIFY_WHITELIST=("brew")
