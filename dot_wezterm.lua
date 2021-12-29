@@ -43,11 +43,7 @@ return {
 
   -- Colors: https://wezfurlong.org/wezterm/config/appearance.html
   -- Note that "color_scheme" overrides "colors"
-  -- color_scheme = "Andromeda",
-  color_scheme = "Tomorrow Night Eighties",
-  -- color_scheme = "Solarized Dark Higher Contrast",
-  -- color_scheme = "SpaceGray Eighties",
-  -- color_scheme = "synthwave",
+  color_scheme = "Firewatch",
 
   -- Stylize the Window
   window_decorations = "RESIZE",
