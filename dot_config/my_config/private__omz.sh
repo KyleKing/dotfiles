@@ -64,30 +64,19 @@ export plugins=(
 #   # autopep8
 #   # branch
 #   # bundler
-#   # cask
-#   # catimg
-#   # celery
-#   # chucknorris
-#   # codeclimate
-#   # coffee
 #   # composer
 #   # copybuffer
 #   # cpanm
 #   # dirpersist
 #   # dnf
 #   # dnote
-#   # docker
 #   # doctl
 #   # dotenv
 #   # droplr
-#   # emoji
-#   # emoji-clock
-#   # emotty
 #   # extract
 #   # fancy-ctrl-z
 #   # fasd
 #   # fbterm
-#   # fd
 #   # firewalld
 #   # frontend-search
 #   # gas
@@ -108,7 +97,6 @@ export plugins=(
 #   # keychain
 #   # kitchen
 #   # knife
-#   # last-working-dir - may interfere with VS Code
 #   # lighthouse
 #   # macports
 #   # magic-enter
@@ -130,25 +118,17 @@ export plugins=(
 #   # percol
 #   # perms
 #   # phing
-#   # pip
-#   # pj
-#   # please
-#   # pod
-#   # pow
-#   # powder
 #   # powify
 #   # profiles
 #   # pyenv
 #   # python
 #   # rand-quote
 #   # react-native
-#   # repo
 #   # rsync
 #   # safe-paste
 #   # salt
 #   # sbt
 #   # scd
-#   # screen
 #   # scw
 #   # sdk
 #   # sfdx
@@ -165,13 +145,9 @@ export plugins=(
 #   # symfony2
 #   # systemadmin
 #   # systemd
-#   # taskwarrior
-#   # terminitor
-#   # terraform
 #   # tig
 #   # transfer
 #   # tugboat
-#   # ubuntu
 #   # ufw
 #   # urltools
 #   # vault
@@ -180,53 +156,70 @@ export plugins=(
 #   # web-search
 #   # wp-cli
 #   # xcode
-#   # yarn
-#   # yum
 #   # zeus
 #   # zsh-navigation-tools
 
 #   colored-man-pages
 #   colorize
-#   command-not-found
-#   common-aliases
 #   compleat
 #   copydir
 #   copyfile
 #   cp
 #   dircycle
 #   dirhistory
-#   docker
 #   encode64
 #   git
 #   git-auto-fetch
 #   git-extras
 #   gitfast
 #   gitignore
-#   jsontools
 #   nmap
-#   sudo
-#   themes
 
   # man
-  # thefuck
   # wd
-
-  # From Colin
-  # lein
-  # zsh-nvm
 
   # brew: homebrew. Use: brewp (pin to prevent upgrade), brewsp (list pinned), bubu (update, upgrade, cleanup), bcubc (cask)
   # dash: Kapeli Dash. Use: `dash python:tuple`
   # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
   # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
+  # rust: Supports cargo and rustup
   # timer: Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
   # vscode: Aliases for VSCode. Use: `vscd file file` (diff)
   brew
   dash
   history
   macos
+  rust
   timer
   vscode
+  # fd
+  # docker
+  # command-not-found
+  # common-aliases
+  # themes
+  # sudo
+  # jsontools
+  # thefuck
+  # lein
+  # zsh-nvm
+  # terraform
+  # cask
+  # catimg
+  # celery
+  # chucknorris
+  # codeclimate
+  # emoji
+  # emoji-clock
+  # emotty
+  # pip
+  # pj
+  # please
+  # pod
+  # pow
+  # powder
+  # repo
+  # ripgrep
+  # terminitor
 
   # lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
   # Sublime plugin doesn't provide any benefit over `subl`
