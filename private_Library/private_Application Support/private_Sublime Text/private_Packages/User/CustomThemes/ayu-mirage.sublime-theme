@@ -60,7 +60,7 @@
         {
             "class": "vcs_status_badge",
             "parents": [{"class": "tree_row", "attributes": ["expandable"]}, {"class": "file_system_entry", "attributes": ["staged"]}],
-            "layer0.tint": "color(var(--yellowish) blend(rgb(0, 0, 0) 90%)",
+            "layer0.tint": "color(var(--yellowish) blend(rgb(0, 0, 0) 90%)"
         },
         {
             "class": "sidebar_label",
@@ -78,7 +78,7 @@
         {
             "class": "vcs_status_badge",
             "parents": [{"class": "tree_row", "attributes": ["expandable"]}, {"class": "file_system_entry", "attributes": ["modified"]}],
-            "layer0.tint": "color(var(--yellowish) blend(rgb(0, 0, 0) 90%)",
+            "layer0.tint": "color(var(--yellowish) blend(rgb(0, 0, 0) 90%)"
         },
         {
             "class": "sidebar_label",
@@ -105,7 +105,7 @@
         {
             "class": "vcs_status_badge",
             "parents": [{"class": "tree_row", "attributes": ["expandable"]}],
-            "layer0.texture": "Theme - Default/common/status_modified.png",
+            "layer0.texture": "Theme - Default/common/status_modified.png"
         },
         // Except unmerged status
         {
@@ -114,7 +114,7 @@
                 {"class": "tree_row", "attributes": ["expandable"]},
                 {"class": "file_system_entry", "attributes": ["unmerged"]}
             ],
-            "layer0.texture": "Theme - Default/common/status_unmerged.png",
-        },
+            "layer0.texture": "Theme - Default/common/status_unmerged.png"
+        }
     ]
 }
