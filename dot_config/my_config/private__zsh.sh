@@ -39,3 +39,6 @@ alias copy-l="fc -ln 0 | tail -n 1 | pbcopy"
 mkcd() {
   mkdir -p $1 && cd $1 || exit
 }
+
+# See local weather. Full docs: https://github.com/chubin/wttr.in
+alias wttr="curl v2d.wttr.in"

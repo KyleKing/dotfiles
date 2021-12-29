@@ -11,6 +11,9 @@ ch-sync() {
 	eval $(op signin)
 	cd "$(chezmoi source-path)"
 	chezmoi update --verbose
+
+	# Ensure other packages are up to date:
+	tldr --update
 }
 
 ch-scripts() {
