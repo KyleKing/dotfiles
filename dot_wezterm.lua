@@ -29,6 +29,10 @@ return {
       action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
     {key="|", mods="CTRL|SHIFT|ALT",
       action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
+    -- Map jumping between words to Mac-Standard keys
+    -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
+    {key="LeftArrow", mods="ALT", action=wezterm.action{SendString="\x1bb"}},
+    {key="RightArrow", mods="ALT", action=wezterm.action{SendString="\x1bf"}}
   },
 
   -- PLANNED: Consider logic for layouts where new panes are different size
@@ -38,7 +42,13 @@ return {
   font = wezterm.font("Hack Nerd Font Mono"),
 
   -- Colors: https://wezfurlong.org/wezterm/config/appearance.html
-  color_scheme = "Andromeda",
+  -- Note that "color_scheme" overrides "colors"
+  -- color_scheme = "Andromeda",
+  color_scheme = "Tomorrow Night Eighties",
+  -- color_scheme = "Solarized Dark Higher Contrast",
+  -- color_scheme = "SpaceGray Eighties",
+  -- color_scheme = "synthwave",
+
   -- Stylize the Window
   window_decorations = "RESIZE",
   hide_tab_bar_if_only_one_tab = true,
