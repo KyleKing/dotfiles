@@ -1073,7 +1073,9 @@
         "doxyfiles",
         ".vscode",
         ".venv",
-        "__pycache__"
+        "__pycache__",
+        "mypy_html",
+        "cover"
     ],
     "font_face": "Hack Nerd Font",
     "font_size": 13,
