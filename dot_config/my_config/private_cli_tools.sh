@@ -1,7 +1,16 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+# Oh My ZSH (OMZ) Configuration
+
 # Configure CLI Tools
 
 # Set an alias for thefuck installed with brew: https://github.com/nvbn/thefuck
 eval "$(thefuck --alias oop)"
+
+# Configure direnv installed with brew: https://github.com/direnv/direnv
+# Will load and unload any .env files
+eval "$(direnv hook zsh)"
 
 # Map exa to ls with some default options
 alias ls='exa --icons'
@@ -14,8 +23,6 @@ alias lst='lsl -TL 2'
 fzf-bat () {
   fzf --preview 'bat --color=always --style=numbers --line-range=:40 {}'
 }
-# FYI: fzfp will use stpv for image previews as well
-#   https://github.com/Naheel-Azawy/stpv
 
 # Tail a file with syntax highlighting. Infers from extension or can be set manually
 # > btail ~/.zprofile zsh

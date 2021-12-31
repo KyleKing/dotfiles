@@ -33,6 +33,7 @@ return {
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
     {key="LeftArrow", mods="ALT", action=wezterm.action{SendString="\x1bb"}},
     {key="RightArrow", mods="ALT", action=wezterm.action{SendString="\x1bf"}}
+    -- TODO: What are the shortcuts when in the Python terminal or lazygit commit?
   },
 
   -- PLANNED: Consider logic for layouts where new panes are different size
@@ -82,5 +83,6 @@ return {
   window_decorations = "RESIZE",
   hide_tab_bar_if_only_one_tab = true,
 
-  window_close_confirmation="NeverPrompt",
+  -- Turn of Y/N on quit, but best to keep it on as it clears all open sessions
+  -- window_close_confirmation="NeverPrompt",
 }

@@ -1,0 +1,4 @@
+# Global Gitignore configured in .gitconfig with chezmoi
+# git config --global core.excludesfile ~/.gitignore_global
+
+pyrightconfig.json

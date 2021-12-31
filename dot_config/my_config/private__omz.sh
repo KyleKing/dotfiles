@@ -56,170 +56,52 @@ export TIMER_PRECISION=2
 # Configure the navi widget for completions
 eval "$(navi widget zsh)"
 
-# Use `omz plugin info <name>` to learn more about each. Prints the README (`omz plugin info zsh-autosuggestions`)
+# Use `omz plugin info <name>  | glow -` to learn more about each. Prints the README
+#   omz plugin info zsh-autosuggestions | glow -
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
 export plugins=(
-#   # autopep8
-#   # branch
-#   # bundler
-#   # composer
-#   # copybuffer
-#   # cpanm
-#   # dirpersist
-#   # dnf
-#   # dnote
-#   # doctl
-#   # dotenv
-#   # droplr
-#   # extract
-#   # fancy-ctrl-z
-#   # fasd
-#   # fbterm
-#   # firewalld
-#   # frontend-search
-#   # gas
-#   # gb
-#   # git-flow
-#   # git-hubflow
-#   # git-prompt
-#   # git-remote-branch
-#   # github
-#   # glassfish
-#   # globalias
-#   # gnu-utils
-#   # hanami
-#   # history-substring-search
-#   # homestead
-#   # httpie
-#   # kate
-#   # keychain
-#   # kitchen
-#   # knife
-#   # lighthouse
-#   # macports
-#   # magic-enter
-#   # marked2
-#   # mix
-#   # mix-fast
-#   # mosh
-#   # nanoc
-#   # ng
-#   # node
-#   # nomad
-#   # npm
-#   # npx
-#   # nvm
-#   # oc
-#   # otp
-#   # pep
-#   # per-directory-history
-#   # percol
-#   # perms
-#   # phing
-#   # powify
-#   # profiles
-#   # pyenv
-#   # python
-#   # rand-quote
-#   # react-native
-#   # rsync
-#   # safe-paste
-#   # salt
-#   # sbt
-#   # scd
-#   # scw
-#   # sdk
-#   # sfdx
-#   # sfffe
-#   # shrink-path
-#   # siftpm
-#   # singlechar
-#   # spring
-#   # sprunge
-#   # ssh-agent
-#   # stack
-#   # supervisor
-#   # svcat
-#   # symfony2
-#   # systemadmin
-#   # systemd
-#   # tig
-#   # transfer
-#   # tugboat
-#   # ufw
-#   # urltools
-#   # vault
-#   # vundle
-#   # wakeonlan
-#   # web-search
-#   # wp-cli
-#   # xcode
-#   # zeus
-#   # zsh-navigation-tools
-
-#   colored-man-pages
-#   colorize
-#   compleat
-#   copydir
-#   copyfile
-#   cp
-#   dircycle
-#   dirhistory
-#   encode64
-#   git
-#   git-auto-fetch
-#   git-extras
-#   gitfast
-#   gitignore
-#   nmap
-
-  # man
-  # wd
-
   # brew: homebrew. Use: brewp (pin to prevent upgrade), brewsp (list pinned), bubu (update, upgrade, cleanup), bcubc (cask)
+  # catimg: use the shell script to display images in terminal
+  # command-not-found: looks up the possible missing homebrew package
+  # copybuffer: Ctrl+O to copy typed command
+  # copydir: Copies the path of your current folder to the system clipboard.
+  # copyfile: Copies the content of a file to the system clipboard.
   # dash: Kapeli Dash. Use: `dash python:tuple`
+  # docker:
+  # encode64: e64/d64: encodes or decode given data to/from base64 (e64 "a-b" or echo "a-b" | e64)
+  # git: a TON of aliases. See: https://github.com/davidde/git
   # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
   # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
+  # nvm: automatically sources nvm and adds completions
+  # perms: recursively set permissions (fixperms, set755, set644)
+  # python: useful aliases (`pyfind` recursively find .py / `pyclean` Delete byte and cache)
   # rust: Supports cargo and rustup
+  # thefuck: press ESC twice to correct last command (alternatively, sudo uses ESC twice to prepend sudo)
   # timer: Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
+  # urltools: urlencode/urldecode (urldecode 'https%3A%2F%2Fgithub.com%2Fohmyzsh%2Fohmyzsh%2Fsearch%3Fq%3Durltools%26type%3DCode')
   # vscode: Aliases for VSCode. Use: `vscd file file` (diff)
   brew
+  catimg
+  command-not-found
+  copybuffer
+  copydir
+  copyfile
   dash
+  docker
+  encode64
+  git
   history
   macos
+  nvm
+  perms
+  python
   rust
+  thefuck
   timer
+  urltools
   vscode
-  # fd
-  # docker
-  # command-not-found
-  # common-aliases
-  # themes
-  # sudo
-  # jsontools
-  # thefuck
-  # lein
-  # zsh-nvm
-  # terraform
-  # cask
-  # catimg
-  # celery
-  # chucknorris
-  # codeclimate
-  # emoji
-  # emoji-clock
-  # emotty
-  # pip
-  # pj
-  # please
-  # pod
-  # pow
-  # powder
-  # repo
-  # ripgrep
-  # terminitor
 
   # lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
   # Sublime plugin doesn't provide any benefit over `subl`
