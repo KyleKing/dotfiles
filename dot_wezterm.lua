@@ -33,7 +33,6 @@ return {
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
     {key="LeftArrow", mods="ALT", action=wezterm.action{SendString="\x1bb"}},
     {key="RightArrow", mods="ALT", action=wezterm.action{SendString="\x1bf"}}
-    -- TODO: What are the shortcuts when in the Python terminal or lazygit commit?
   },
 
   -- PLANNED: Consider logic for layouts where new panes are different size
@@ -75,8 +74,10 @@ return {
       -- TODO: The color of the split lines between panes
       split = "#444444",
 
-      ansi = {"#32344a", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#ad8ee6", "#449dab", "#9699a8"},
-      brights = {"#444b6a", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#acb0d0"},
+      -- ansi = {"#32344a", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#ad8ee6", "#449dab", "#9699a8"},
+      -- brights = {"#444b6a", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#acb0d0"},
+      ansi = {"#32344a", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#ad8ee6", "#449dab", "#e1e1e3"},
+      brights = {"#444b6a", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#f7f7f7"},
   },
 
   -- Stylize the Window
