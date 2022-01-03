@@ -84,21 +84,11 @@ wezterm.on("open-uri", function(window, pane, uri)
     -- you will need to restart wezterm for this to take effect,
     -- as there isn't a way for wezterm to "see into" your shell
     -- environment and capture it.
-    local editor = os.getenv("VISUAL") or os.getenv("EDITOR") or "bat"
+    -- FIXME: This isn't retrieving the VISUAL or EDITOR export...
+    local editor = os.getenv("VISUAL") or os.getenv("EDITOR") or "/usr/local/bin/subl"
 
-    -- To open a new window:
-    local action = wezterm.action{SpawnCommandInNewWindow={
-        args={editor, name}
-      }};
-
-    -- To open in a pane instead
-    --[[
-    local action = wezterm.action{SplitHorizontal={
-        args={editor, name}
-      }};
-    ]]
-
-    -- and spawn it!
+    -- Use "SpawnCommandInNewWindow" or "SplitHorizontal"
+    local action = wezterm.action{SplitHorizontal={args={editor, name}}};
     window:perform_action(action, pane);
 
     -- prevent the default action from opening in a browser

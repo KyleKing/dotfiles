@@ -25,6 +25,7 @@ brew "ddgr"
 brew "kubernetes-cli", link: false
 brew "devspace"
 brew "diff-so-fancy"
+brew "direnv"
 brew "docui"
 brew "envchain"
 brew "exa"
