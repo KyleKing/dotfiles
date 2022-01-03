@@ -16,6 +16,7 @@ if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else
   export EDITOR='subl --add'
+  export VISUAL='subl'
 fi
 
 # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
