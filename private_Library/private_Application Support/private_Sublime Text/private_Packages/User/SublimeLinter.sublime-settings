@@ -12,7 +12,7 @@
         "flake8": {
             "args": [
                 "--max-line-length=88",
-                "--ignore=E501,W503,E722,D100,D103,D205,D209,D400,D401",
+                "--ignore=B902,D100,D103,D205,D209,D400,D401,D403,E501,E722,W503",
                 "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
             ],
             "disable": false,
