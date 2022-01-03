@@ -1093,12 +1093,10 @@
     "font_size": 13,
     "highlight_line": true,
     "highlight_modified_tabs": true,
-    "show_git_status": false,
     "show_git_status_in_status_bar": false,
     "ignored_packages": [
         "Focus File on Sidebar",
         "Formatter",
-        "python-black",
         "SublimeLinter-contrib-dockerfilelint",
         "SublimeLinter-contrib-SpellCheckLinter",
         "Vintage"
