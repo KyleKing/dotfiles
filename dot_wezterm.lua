@@ -41,12 +41,17 @@ function editable(filename)
     local binary_extensions = {
       jpg = true,
       jpeg = true,
+      zip = true,
+      zg = true,
       -- and so on
     }
     if binary_extensions[extension] then
       -- can't edit binary files
       return false
     end
+
+    -- TODO: Check if file exists. Some files are on external systems and easy to accidentally click
+    --  FYI: Best to allow normal "click to highlight" logic to apply (could copy to clipboard if doesn't exist?)
   end
 
   -- if there is no, or an unknown, extension, then assume
@@ -123,7 +128,7 @@ return {
     -- Now add a new item at the bottom to match things that are probably filenames
 
     {
-      regex = "\\b\\S*\\b",
+      regex = "\\b\\S*/\\S*\\.[a-zA-Z]+\\b",
       format = "$EDITOR:$0"
     },
   },
