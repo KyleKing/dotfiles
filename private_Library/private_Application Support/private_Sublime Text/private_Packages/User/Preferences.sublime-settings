@@ -1030,7 +1030,7 @@
     ],
     "bold_folder_labels": true,
     "close_windows_when_empty": true,
-    "color_scheme": "Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
+    "color_scheme": "auto",
     "draw_minimap_border": true,
     "ensure_newline_at_eof_on_save": true,
     "fade_fold_buttons": false,
@@ -1099,7 +1099,7 @@
         "Formatter",
         "SublimeLinter-contrib-dockerfilelint",
         "SublimeLinter-contrib-SpellCheckLinter",
-        "Vintage"
+        "Vintage",
     ],
     "mini_diff": false,
     "indent_guide_options": ["draw_normal","draw_active"],
@@ -1111,9 +1111,11 @@
     "show_sidebar_button": false,
     "spell_check": true,
     "sublime_merge_path": null,
-    "theme": "ayu-mirage.sublime-theme",
+    "theme": "Adaptive.sublime-theme",
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
     "update_check": true,
-    "word_wrap": true
+    "word_wrap": true,
+    "dark_color_scheme": "Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
+    "light_color_scheme": "Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
 }
