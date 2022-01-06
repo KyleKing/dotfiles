@@ -65,6 +65,7 @@
 		"SublimeLinter-contrib-terraform",
 		"SublimeLinter-flake8",
 		"SublimeLinter-json",
+		"SublimeLinter-pylint",
 		"SyncedSideBar",
 		"SynthWave 84 - Color Scheme",
 		"Tabnine",

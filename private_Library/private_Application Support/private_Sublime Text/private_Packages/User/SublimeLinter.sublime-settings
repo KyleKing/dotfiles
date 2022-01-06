@@ -18,6 +18,14 @@
             "disable": false,
             "python": "$HOME/.pyenv/shims/python"
         },
+        "pylint": {
+            "args": [
+                "--disable=E0012,E0401,W0613,C0115,C0116,W1203",
+                "--rcfile=./reviewer-api/.pylintrc"
+            ],
+            "disable": false,
+            "python": "$HOME/.pyenv/shims/python"
+        },
         "markdownlint": {
             "args": ["-r","~MD013,~MD046,~MD033,~MD007"],
             "disable": false
