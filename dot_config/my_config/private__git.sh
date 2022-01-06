@@ -15,9 +15,22 @@ lzgcd() {
 }
 alias lzg='lazygit'
 
+
 export PR_CHECKOUT_DIR=~/developer/checkouts
 clone-pr() {
-    mkcd $PR_CHECKOUT_DIR && gh repo clone $1 $1/pr$2 && cd $1/pr$2 && gh pr checkout $2 --force
+    # Use with: "clone-pr timothycrosley/pdocs 25" or "clone-pr dash_charts 25"
+    mkcd $PR_CHECKOUT_DIR
+    gh repo clone $1 $1-pr$2
+    cd $1-pr$2
+    gh pr checkout $2 --force
+    subl . --new-window
+    z .
+
+    # FIXME: Make setup of pyright in a new repo easier. This file is specific to reviewer-api
+    cp ~/.config/my_config/pyrightconfig.json pyrightconfig.json
 }
-# clone-pr timothycrosley/pdocs 25
-# clone-pr dash_charts 25
+
+# TODO: need script to walk the PR_CHECKOUT_DIR for git directories, check if the branch was merged, then delete the folder
+# FYI: Make sure to check for a "git stash" and error on any that have one
+# These aliases could possibly be a gh plugin? Could fork "gh poi" or "gh tidy"?
+alias prune-clones="echo 'WIP'"
