@@ -140,10 +140,13 @@ return {
       action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
     {key="|", mods="CTRL|SHIFT|ALT",
       action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
-    -- Map jumping between words to Mac-Standard keys
+    -- Map jumping between words to Standard Mac keys
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
     {key="LeftArrow", mods="ALT", action=wezterm.action{SendString="\x1bb"}},
-    {key="RightArrow", mods="ALT", action=wezterm.action{SendString="\x1bf"}}
+    {key="RightArrow", mods="ALT", action=wezterm.action{SendString="\x1bf"}},
+    -- Map jumping between start and end of line to Standard Mac keys
+    {key="LeftArrow", mods="CMD", action=wezterm.action{SendString="\x01"}},
+    {key="RightArrow", mods="CMD", action=wezterm.action{SendString="\x05"}}
   },
 
   -- PLANNED: Consider logic for layouts where new panes are different size
