@@ -13,30 +13,34 @@
 [credential]
 	helper = osxkeychain
 [core]
+	attributesfile = {{ .chezmoi.homeDir }}/.gitattributes_global
 	autocrlf = input
 	editor = subl --wait --add
 	eol = lf
-	pager = delta
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+	pager = delta
 [delta]
 	navigate = true
 [diff]
 	# guitool = delta
     colorMoved = default
+[diff "image"]
+    textconv = catimg
+    command = $HOME/.local/bin/imgdiff.sh
 [difftool "kdiff3"]
 	path = /usr/local/bin/kdiff3
 [filter "hawser"]
 	clean = git hawser clean %f
-	smudge = git hawser smudge %f
 	required = true
+	smudge = git hawser smudge %f
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+	smudge = git-lfs smudge -- %f
 [filter "media"]
-	required = true
 	clean = git media clean %f
+	required = true
 	smudge = git media smudge %f
 [gpg]
 	program = {{ .github.gpg_program }}

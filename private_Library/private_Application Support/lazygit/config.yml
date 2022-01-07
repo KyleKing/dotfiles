@@ -37,11 +37,11 @@ customCommands:
         title: 'Annotated tag name:'
       - type: 'input'
         title: 'Annotated tag message:'
-  - key: '<c-r>'
+  - key: '<f2>'
     command: 'gh pr create --fill --web'
     context: 'global'
     loadingText: 'Creating pull request on GitHub'
-  - key: 'v' # couldn't think of a better keybinding
+  - key: '<f3>'
     prompts:
       - type: 'input'
         title: 'PR id:'
@@ -57,6 +57,6 @@ git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
     colorArg: always
-    pager: delta --dark --paging=never
+    pager: delta --paging=never
 
 # More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
