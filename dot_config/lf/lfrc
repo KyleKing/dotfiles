@@ -66,7 +66,7 @@ cmd open ${{
 
 # Utilize the "trash" utility installed with "brew install trash"
 cmd trash %set -f; trash $fx
-map <delete> trash
+map <backspace2> trash
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
