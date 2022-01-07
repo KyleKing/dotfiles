@@ -3,9 +3,27 @@
 
 	# Based on: https://stackoverflow.com/a/65746041/3219667
 	# Use: git publish-branch
-	publish-branch = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
+	publish-branch = push -u origin $(git rev-parse --abbrev-ref HEAD)
 	# Snippet from: https://github.com/roaminsight/matt-dotfiles/blob/master/.bash_prompt
     recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+
+    # Snippets from: https://github.com/ornicar/dotfiles/blob/7f0940aa42b7c79771ad1fe31be21cd49827f161/gitconfig#L55-L74
+	# Show list of contributors in descending order by number of commits
+	rank = shortlog -sn --no-merges
+	# Given any git object, try to show it briefly
+	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+	# Add modified files to previous commit
+	oups = !"git add -A -v && git commit --amend -C HEAD"
+	# Nice logs
+	l = log --decorate --graph --date=short --pretty=\"format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C()%s %C(black) [%an]%Creset\"
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	mini = log --pretty=format:\"%h\"
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	changelog = log --pretty=format:\" * %s\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+	# Recent Branches
+	recent-branches = branch --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+
 [color]
 	ui = true
 [commit]
