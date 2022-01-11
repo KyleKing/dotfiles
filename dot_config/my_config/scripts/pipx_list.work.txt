@@ -29,6 +29,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package isort 5.10.1, installed using Python 3.9.7
     - isort
     - isort-identify-imports
+   package licensecheck 2021.5.2, installed using Python 3.10.1
+    - licensecheck
    package numpydoctor 1.1, installed using Python 3.9.7
     - numpydoctor
    package pylint 2.12.2, installed using Python 3.9.7
