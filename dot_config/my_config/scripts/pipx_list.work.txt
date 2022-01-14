@@ -33,6 +33,16 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - licensecheck
    package numpydoctor 1.1, installed using Python 3.9.7
     - numpydoctor
+   package pip-check 2.7, installed using Python 3.10.1
+    - pip-check
+   package pip-chill 1.0.1, installed using Python 3.10.1
+    - pip-chill
+   package pip-date 1.0.3, installed using Python 3.10.1
+    - pip-date
+    - pip-describe
+    - pipbyday
+    - pyOSinfo
+    - pyfileinfo
    package pylint 2.12.2, installed using Python 3.9.7
     - epylint
     - pylint
