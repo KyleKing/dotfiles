@@ -15,7 +15,7 @@ export TERM=xterm-256color
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else
-  export EDITOR='subl --add'
+  export EDITOR='subl'
   export VISUAL='subl'
 fi
 

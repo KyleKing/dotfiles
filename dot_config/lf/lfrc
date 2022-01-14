@@ -37,8 +37,9 @@ set tabstop 2
 set previewer ~/.config/lf/preview.sh
 set preview true
 
-# use enter for shell commands
-map <enter> shell
+# FYI: Removed because too easy to hit enter accidentally
+# # use enter for shell commands
+# map <enter> shell
 
 # execute current file (must be executable)
 map x $$f
@@ -66,6 +67,7 @@ cmd open ${{
 
 # Utilize the "trash" utility installed with "brew install trash"
 cmd trash %set -f; trash $fx
+map <delete> trash
 map <backspace2> trash
 
 # extract the current file with the right command
@@ -100,9 +102,10 @@ cmd zip ${{
     rm -rf $1
 }}
 
-# File Openers
-map ee $$EDITOR "$f"
-map es $sudo $EDITOR "$f"
+# TODO: How do I get the nested e<> commands?
+# # File Openers
+# map ee $EDITOR "$f"
+# map es $sudo $EDITOR "$f"
 
 # Source: https://github.com/gokcehan/lf/wiki/Integrations#fzf
 # You can bind keys in lf to your usual fzf commands:
