@@ -23,5 +23,6 @@
     {"keys": ["alt+z"], "command": "theme_tweaker_undo", "context": [{"key": "theme_tweaker"}]},
     {"keys": ["alt+shift+z"], "command": "theme_tweaker_redo", "context": [{"key": "theme_tweaker"}]},
     {"keys": ["escape"], "command": "theme_tweaker_clear", "context": [{"key": "theme_tweaker"}]},
-    {"keys": ["super+t"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": false}}
+    {"keys": ["super+t"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": false}},
+    {"keys": ["ctrl+super+l"], "command": "black"}
 ]
