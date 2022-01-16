@@ -25,7 +25,6 @@
 		"FileIcons",
 		"FileSystem Autocompletion",
 		"FindCursor",
-		"Focus File on Sidebar",
 		"Formatter",
 		"Git",
 		"Git badges like VS Code",
@@ -43,7 +42,6 @@
 		"MarkdownEditing",
 		"MarkdownTOC",
 		"Oceanic Next Color Scheme",
-		"Open URL",
 		"OpenUri",
 		"Origami",
 		"Package Control",
@@ -79,7 +77,6 @@
 		"TOML",
 		"TrailingSpaces",
 		"Witch Hazel",
-		"Z",
 		"ZSH",
 	],
 }
