@@ -9,8 +9,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
-   package calcipy 2021.0.7.0, installed using Python 3.10.1
-    - calcipy
    package codecov 2.1.11, installed using Python 3.8.3
     - codecov
    package copier 5.1.0, installed using Python 3.8.3
@@ -35,7 +33,3 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - semgrep
    package sqlfluff 0.5.6, installed using Python 3.8.3
     - sqlfluff
-   package tidypy 0.20.0, installed using Python 3.8.3
-    - tidypy
-   package ueberzug 18.1.9, installed using Python 3.10.1
-    - ueberzug
