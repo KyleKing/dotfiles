@@ -1,11 +1,9 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package absolufy-imports 0.3.0, installed using Python 3.10.1
-    - absolufy-imports
    package aws-shell 0.2.2, installed using Python 3.9.7
     - aws-shell
     - aws-shell-mkindex
-   package awscli 1.22.26, installed using Python 3.10.0
+   package awscli 1.22.37, installed using Python 3.10.0
     - aws
     - aws.cmd
     - aws_bash_completer
@@ -15,13 +13,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - black
     - black-primer
     - blackd
-   package bpython 0.22.1, installed using Python 3.10.1
-    - bpdb
-    - bpython
-    - bpython-curses
-    - bpython-urwid
-   package calcipy 2021.0.7.0, installed using Python 3.10.1
-    - calcipy
    package cookiecutter 1.7.3, installed using Python 3.9.7
     - cookiecutter
    package flake8 4.0.1, installed using Python 3.10.1
@@ -29,20 +20,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package isort 5.10.1, installed using Python 3.9.7
     - isort
     - isort-identify-imports
-   package licensecheck 2021.5.2, installed using Python 3.10.1
-    - licensecheck
    package numpydoctor 1.1, installed using Python 3.9.7
     - numpydoctor
-   package pip-check 2.7, installed using Python 3.10.1
-    - pip-check
-   package pip-chill 1.0.1, installed using Python 3.10.1
-    - pip-chill
-   package pip-date 1.0.3, installed using Python 3.10.1
-    - pip-date
-    - pip-describe
-    - pipbyday
-    - pyOSinfo
-    - pyfileinfo
    package pylint 2.12.2, installed using Python 3.9.7
     - epylint
     - pylint
@@ -50,7 +29,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - symilar
    package Pyment 0.4.0.dev0, installed using Python 3.9.7
     - pyment
-   package sourcery-cli 0.9.8, installed using Python 3.10.1
+   package sourcery-cli 0.10.0, installed using Python 3.10.1
     - sourcery
    package velin 0.0.11, installed using Python 3.9.7
     - velin
