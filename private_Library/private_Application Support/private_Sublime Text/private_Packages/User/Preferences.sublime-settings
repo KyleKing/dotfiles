@@ -1094,7 +1094,11 @@
     "font_size": 13,
     "highlight_line": true,
     "highlight_modified_tabs": true,
-    "ignored_packages": ["ColorHelper","Formatter","SublimeLinter-contrib-dockerfilelint","SublimeLinter-contrib-SpellCheckLinter",
+    "ignored_packages": [
+        "ColorHelper",
+        "Formatter",
+        "SublimeLinter-contrib-dockerfilelint",
+        "SublimeLinter-contrib-SpellCheckLinter",
         "Vintage",
     ],
     "indent_guide_options": ["draw_normal","draw_active"],
