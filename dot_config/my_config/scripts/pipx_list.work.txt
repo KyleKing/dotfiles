@@ -13,6 +13,13 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - black
     - black-primer
     - blackd
+   package bpython 0.22.1, installed using Python 3.10.1
+    - bpdb
+    - bpython
+    - bpython-curses
+    - bpython-urwid
+   package calcipy 0.9.1, installed using Python 3.10.1
+    - calcipy
    package cookiecutter 1.7.3, installed using Python 3.9.7
     - cookiecutter
    package flake8 4.0.1, installed using Python 3.10.1

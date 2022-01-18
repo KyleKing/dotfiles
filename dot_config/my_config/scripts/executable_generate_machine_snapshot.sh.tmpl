@@ -6,6 +6,9 @@
 
 SCRIPT_DIR=$HOME/.config/my_config/scripts/
 
+# Store code tags
+calcipy collect-code-tags --filename=$SCRIPT_DIR/Chezmoi_Code_Tags.md -b=$HOME/.local/share/chezmoi
+
 # Note: no trailing -}} on this line:
 brew bundle dump --file=- > $SCRIPT_DIR/Brewfile.{{- .computer_name }}
 
