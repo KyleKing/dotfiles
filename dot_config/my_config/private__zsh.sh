@@ -34,7 +34,7 @@ bindkey "^P" history-beginning-search-backward
 
 # Useful aliases for working with history
 alias ppj="pbaspate | jq"
-alias copy-l="fc -ln 0 | tail -n 1 | pbcopy"
+alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
 # Useful combination of mkdir and cd
 mkcd() {
