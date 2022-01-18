@@ -11,7 +11,8 @@
         "keys": ["ctrl+shift+m"],
         "no_outside_adj": null
     },
-    {"keys": ["ctrl+super+l"], "command": "black"},
+    { "keys": ["ctrl+w"], "command": "delete_word", "args": {"forward": false, "sub_words": true} },
+    { "keys": ["ctrl+super+l"], "command": "black" },
     { "keys": ["super+e"], "command": "exact_quick_find_goto_next" },
     { "keys": ["super+shift+e"], "command": "exact_quick_find_goto_prev" },
     { "keys": ["super+d"], "command": "exact_quick_find_add_next" },
