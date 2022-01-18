@@ -11,14 +11,11 @@
         "keys": ["ctrl+shift+m"],
         "no_outside_adj": null
     },
-    {"keys": ["super+t"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": false}},
     {"keys": ["ctrl+super+l"], "command": "black"},
     { "keys": ["super+e"], "command": "exact_quick_find_goto_next" },
     { "keys": ["super+shift+e"], "command": "exact_quick_find_goto_prev" },
     { "keys": ["super+d"], "command": "exact_quick_find_add_next" },
     { "keys": ["super+option+d"], "command": "exact_quick_find_add_all" },
     { "keys": ["option+c"], "command": "exact_quick_find_toggle_case_sensitive" },
-    { "keys": ["option+w"], "command": "exact_quick_find_toggle_whole_word" },
-    { "keys": ["option+r"], "command": "exact_quick_find_toggle_wrap_scan" },
-    { "keys": ["option+f"], "command": "exact_quick_find_flip_find_flags" }
+    { "keys": ["option+w"], "command": "exact_quick_find_toggle_whole_word" }
 ]
