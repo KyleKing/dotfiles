@@ -3,6 +3,12 @@
 notARepository: 'skip'
 
 customCommands:
+  # Override push to be a subprocess
+  - key: 'P'
+    description: 'Git Push with Subprocess'
+    command: 'git push'
+    context: 'global'
+    subprocess: true
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: '<f8>'
     description: 'Add Staged Files to Last Commit'
@@ -16,7 +22,7 @@ customCommands:
     subprocess: true
     prompts:
       - type: 'input'
-        title: 'Commit Message:'
+        title: '(No Verify) Commit Message:'
         initialValue: ''
   - key: '<f11>'
     command: 'gh poi'

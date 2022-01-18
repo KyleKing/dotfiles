@@ -1094,7 +1094,8 @@
     "font_size": 13,
     "highlight_line": true,
     "highlight_modified_tabs": true,
-    "ignored_packages": ["Formatter","SublimeLinter-contrib-dockerfilelint","SublimeLinter-contrib-SpellCheckLinter","Vintage"],
+    "ignored_packages": ["Formatter","SublimeLinter-contrib-dockerfilelint","SublimeLinter-contrib-SpellCheckLinter","Vintage",
+    ],
     "indent_guide_options": ["draw_normal","draw_active"],
     "light_color_scheme": "Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
     "mde.auto_fold_link.enabled": false,
@@ -1114,5 +1115,5 @@
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
     "update_check": true,
-    "word_wrap": true
+    "word_wrap": true,
 }

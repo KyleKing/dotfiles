@@ -1,3 +1,6 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 # Python, pipx, and pyenv Configuration
 
 # Turn On Better Exceptions for Python
@@ -13,3 +16,7 @@ eval "$(pyenv init --path)"
 # autoload -U bashcompinit
 # bashcompinit
 eval "$(register-python-argcomplete pipx)"
+
+# Some useful aliases for calcipy-related projects
+alias prdr="poetry run doit run"
+alias prdc="poetry run doit --continue"
