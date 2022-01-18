@@ -9,6 +9,17 @@ customCommands:
     command: 'git push'
     context: 'global'
     subprocess: true
+  - key: '<f7>'
+    description: 'Git Push (force) with Subprocess'
+    command: 'git push --force'
+    context: 'global'
+    subprocess: true
+  # Use git-brws: https://github.com/rhysd/git-brws#usage
+  - key: '<f11>'
+    description: 'Open PR (or create new) with git-brws'
+    command: 'git brws --pr'
+    context: 'localBranches'
+    subprocess: true
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: '<f8>'
     description: 'Add Staged Files to Last Commit'
@@ -25,6 +36,7 @@ customCommands:
         title: '(No Verify) Commit Message:'
         initialValue: ''
   - key: '<f11>'
+    description: 'Delete merged PR branches with gh-poi'
     command: 'gh poi'
     context: 'localBranches'
     subprocess: true
@@ -34,6 +46,12 @@ customCommands:
     context: 'localBranches'
     loadingText: 'Publishing local branch...'
   # More from the wiki: https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
+  - key: "<f10>"
+    description: "Committing via Commitizen (git cz)"
+    command: "git cz"
+    context: "files"
+    loadingText: "Opening commitizen commit tool"
+    subprocess: true
   - key : 'N'
     description: 'create annotated tag'
     command: 'git tag -a {{index .PromptResponses 0}} -m "{{index .PromptResponses 1}}"'
@@ -59,6 +77,18 @@ customCommands:
     context: 'remotes'
     loadingText: 'Pruning...'
     description: 'prune deleted remote branches'
+  - key: '<c-f>'
+    description: 'Fetch a remote branch as a new local branch'
+    command: "git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index .PromptResponses 1}}"
+    context: 'remotes'
+    prompts:
+      - type: 'input'
+        title: 'Remote Branch Name'
+        initialValue: ''
+      - type: 'input'
+        title: 'New Local Branch Name'
+        initialValue: ''
+    loadingText: 'fetching branch'
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
