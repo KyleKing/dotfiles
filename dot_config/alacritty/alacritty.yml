@@ -141,7 +141,7 @@ key_bindings:
   - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
   # Use Alt instead of Option because MacOS inserts the unicode character when Option and a letter is pressed
-  # HACK: Map Mac Option to Alt: https://github.com/alacritty/alacritty/issues/93#issuecomment-429651216
+  # FYI: Map Mac Option to Alt: https://github.com/alacritty/alacritty/issues/93#issuecomment-429651216
   - { key: Key0,        mods: Alt,     chars: "\x1b0" }
   - { key: Key1,        mods: Alt,     chars: "\x1b1" }
   - { key: Key2,        mods: Alt,     chars: "\x1b2" }
@@ -183,7 +183,7 @@ key_bindings:
   - { key: Y,        mods: Alt,     chars: "\x1by" }
   - { key: Z,        mods: Alt,     chars: "\x1bz" }
 
-# # FIXME: Turn off zellij by default because scrolling in lazygit is not supported
+# # FYI: Turn off zellij by default because scrolling in lazygit is not supported
 # # Login shell with arguments
 # shell:
 #   program: /bin/zsh
