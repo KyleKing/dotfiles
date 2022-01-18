@@ -22,6 +22,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - calcipy
    package cookiecutter 1.7.3, installed using Python 3.9.7
     - cookiecutter
+   package cortex 0.37.0, installed using Python 3.10.1
+    - cortex
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
    package isort 5.10.1, installed using Python 3.9.7
