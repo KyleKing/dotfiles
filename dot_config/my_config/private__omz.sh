@@ -71,7 +71,7 @@ export plugins=(
   # copyfile: Copies the content of a file to the system clipboard.
   # dash: Kapeli Dash. Use: `dash python:tuple`
   # docker:
-  # encode64: e64/d64: encodes or decode given data to/from base64 (e64 "a-b" or echo "a-b" | e64)
+  # encode64: e64/d64: encodes or decode given data to/from base64 (`e64 '{"a": 1}'` // `pbpaste | d64 | gojq`)
   # git: a TON of aliases. See: https://github.com/davidde/git
   # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
   # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
