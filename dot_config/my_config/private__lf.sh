@@ -1,14 +1,19 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+#
 # lf file browser configuration
 
 # load lf, but use cd on exit
 # https://github.com/gokcehan/lf/wiki/Tutorial#working-directory
-source ~/.config/lf/lfcd.sh
+source $HOME/.config/lf/lfcd.sh
 
 # Note: Pistol requires a difficult manual install
 # # Use pistol for previewing matches from fd
 # alias fd-pr="$EDITOR $(fd --extension py | fzf --preview='pistol {}')"
-# # Chose stpv instead, which is installed as a submodule of chezmoi
-export PATH="$PATH:$(chezmoi source-path)/dot_config/stpv/stpv"
+# Chose stpv instead, which is installed as a submodule of chezmoi
+PATH_CHEZMOI="$(chezmoi source-path)"
+export PATH=$PATH:$PATH_CHEZMOI/dot_config/stpv/stpv
 
 # Icons from: https://github.com/gokcehan/lf/wiki/Icons
 export LF_ICONS="\

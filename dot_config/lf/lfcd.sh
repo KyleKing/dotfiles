@@ -1,3 +1,7 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+#
 # Change working dir in shell to last dir in lf on exit (adapted from ranger).
 #
 # You need to either copy the content of this file to your shell rc file
@@ -22,7 +26,7 @@ lfcd () {
         rm -f "$tmp"
         if [ -d "$dir" ]; then
             if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
+                cd "$dir" || exit
             fi
         fi
     fi

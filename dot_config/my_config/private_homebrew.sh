@@ -1,3 +1,7 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+#
 # Homebrew configuration
 
 # Source homebrew-installed completions

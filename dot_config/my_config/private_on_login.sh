@@ -1,3 +1,7 @@
+#!/bin/bash
+#      ^----- get shellcheck hints based on bash
+# https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+#
 # FYI: must be in .zprofile and .zshrc so that 'z' is available at login (zsh -lc 'z --help') for Z Sublime Package, chezmoi cd, etc.
 
 # zoxide (z): https://github.com/ajeetdsouza/zoxide
