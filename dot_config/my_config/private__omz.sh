@@ -53,9 +53,8 @@ export TIMER_PRECISION=2
 # Add wisely, as too many plugins slow down shell startup.
 # Which plugins would you like to load? (plugins can be found in $HOME/.oh-my-zsh/plugins/*)
 
-# FIXME: Cannot install rust on work Macbook until OS is updated...
-# # Configure the navi widget for completions
-# eval "$(navi widget zsh)"
+# Configure the navi widget for completions
+eval "$(navi widget zsh)"
 
 # Use `omz plugin info <name>  | glow -` to learn more about each. Prints the README
 #   omz plugin info zsh-autosuggestions | glow -

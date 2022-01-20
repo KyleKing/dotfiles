@@ -43,7 +43,6 @@ repos:
         stages: [push]
   - repo: local
     hooks:
-      # FIXME: Install shellcheck when new Mac is available
       - id: run-shellcheck
         name: Run shellcheck
         description: Run the shellcheck tool. Must be installed with brew
