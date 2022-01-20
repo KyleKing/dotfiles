@@ -19,7 +19,7 @@ lzgcd() {
     lazygit "$@"
 
     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-            cd "$(cat $LAZYGIT_NEW_DIR_FILE)" || exit
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)" || return
             rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
@@ -31,7 +31,7 @@ clone-pr() {
     # Use with: "clone-pr timothycrosley/pdocs 25" or "clone-pr dash_charts 25"
     mkcd $PR_CHECKOUT_DIR
     gh repo clone $1 $1-pr$2
-    cd $1-pr$2 || exit
+    cd $1-pr$2 || return
     gh pr checkout $2 --force
     subl . --new-window
     z .

@@ -13,7 +13,7 @@ ch-app() {
 ch-sync() {
 	# Pull latest version and apply to local files
 	eval "$(op signin)"
-	cd "$(chezmoi source-path)" || exit
+	cd "$(chezmoi source-path)" || return
 	chezmoi update --verbose
 
 	# Ensure other packages are up to date:
@@ -28,11 +28,11 @@ ch-scripts() {
 
 ch-rad() {
 	# Prevent overwriting chezmoi edits by checking for staged or unstaged changes
-	cd "$(chezmoi source-path)" || exit
+	cd "$(chezmoi source-path)" || return
 	if output=$(git status --porcelain) && [ -z "$output" ]; then
-		ch-scripts || exit
+		ch-scripts || return
 		# Sync with files already tracked by chezmoi
-		chezmoi re-add --verbose || exit
+		chezmoi re-add --verbose || return
 		# Previously attempted to sync with directories, but too much noise
 		# FIXME: Move VSCode to Symlinks:
 		# 	https://github.com/twpayne/chezmoi/blob/master/docs/HOWTO.md#handle-configuration-files-which-are-externally-modified

@@ -38,7 +38,7 @@ alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
 # Useful combination of mkdir and cd
 mkcd() {
-  mkdir -p $1 && cd $1 || exit
+  mkdir -p $1 && cd $1 || return
 }
 
 # See local weather. Full docs: https://github.com/chubin/wttr.in

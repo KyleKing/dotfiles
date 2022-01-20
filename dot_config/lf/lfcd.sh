@@ -26,7 +26,7 @@ lfcd () {
         rm -f "$tmp"
         if [ -d "$dir" ]; then
             if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir" || exit
+                cd "$dir" || return
             fi
         fi
     fi
