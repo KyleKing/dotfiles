@@ -30,6 +30,7 @@ ch-rad() {
 	# Prevent overwriting chezmoi edits by checking for staged or unstaged changes
 	cd "$(chezmoi source-path)" || return
 	if output=$(git status --porcelain) && [ -z "$output" ]; then
+		eval "$(op signin)"
 		ch-scripts || return
 		# Sync with files already tracked by chezmoi
 		chezmoi re-add --verbose || return
