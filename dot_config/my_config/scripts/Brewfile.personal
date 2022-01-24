@@ -198,6 +198,7 @@ cask "sublime-merge"
 cask "sublime-text"
 cask "tex-live-utility"
 cask "virtualbox"
+cask "virtualbox-extension-pack"
 cask "wezterm"
 mas "Be Focused", id: 973134470
 mas "Charmstone", id: 1563735522
