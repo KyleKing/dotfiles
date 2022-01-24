@@ -6,13 +6,13 @@
 
 ch-app() {
 	# Apply any changes to local files
-	eval "$(op signin)"
+	eval "$(op signin)" || return
 	chezmoi apply --verbose
 }
 
 ch-sync() {
 	# Pull latest version and apply to local files
-	eval "$(op signin)"
+	eval "$(op signin)" || return
 	cd "$(chezmoi source-path)" || return
 	chezmoi update --verbose
 
@@ -30,7 +30,7 @@ ch-rad() {
 	# Prevent overwriting chezmoi edits by checking for staged or unstaged changes
 	cd "$(chezmoi source-path)" || return
 	if output=$(git status --porcelain) && [ -z "$output" ]; then
-		eval "$(op signin)"
+		eval "$(op signin)" || return
 		ch-scripts || return
 		# Sync with files already tracked by chezmoi
 		chezmoi re-add --verbose || return

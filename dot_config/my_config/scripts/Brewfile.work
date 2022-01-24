@@ -68,7 +68,7 @@ brew "nyancat"
 brew "pgcli"
 brew "pinentry-mac"
 brew "pipx"
-brew "plantuml"
+brew "plantuml", link: false
 brew "pngcrush"
 brew "snappy"
 brew "podman"
