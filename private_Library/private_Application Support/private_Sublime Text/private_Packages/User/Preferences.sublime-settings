@@ -625,6 +625,7 @@
         "popt",
         "popts",
         "posix",
+        "Postgres",
         "PPLMS",
         "pptx",
         "precmd",
@@ -1095,7 +1096,6 @@
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "ignored_packages": [
-        "ColorHelper",
         "Formatter",
         "SublimeLinter-contrib-dockerfilelint",
         "SublimeLinter-contrib-SpellCheckLinter",

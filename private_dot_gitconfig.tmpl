@@ -66,12 +66,8 @@
 	diffFilter = delta --color-only
 [init]
 	defaultBranch = main
-# [mergetool "delta"]
-# 	path = /usr/local/bin/delta
-# [mergetool "kdiff3"]
-# 	path = /usr/local/bin/kdiff3
 [merge]
-	# tool = delta
+	tool = kdiff3
     conflictstyle = diff3
 [push]
 	default = simple
