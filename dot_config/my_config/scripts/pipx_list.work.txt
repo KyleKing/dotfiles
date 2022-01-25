@@ -3,12 +3,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package aws-shell 0.2.2, installed using Python 3.9.7
     - aws-shell
     - aws-shell-mkindex
-   package awscli 1.22.37, installed using Python 3.10.0
-    - aws
-    - aws.cmd
-    - aws_bash_completer
-    - aws_completer
-    - aws_zsh_completer.sh
    package black 21.12b0, installed using Python 3.9.7
     - black
     - black-primer
@@ -31,6 +25,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - isort-identify-imports
    package numpydoctor 1.1, installed using Python 3.9.7
     - numpydoctor
+   package podman-compose 1.0.3, installed using Python 3.10.1
+    - podman-compose
    package pylint 2.12.2, installed using Python 3.9.7
     - epylint
     - pylint

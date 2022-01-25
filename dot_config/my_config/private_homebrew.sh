@@ -16,4 +16,4 @@ fi
 
 # Fix Brew Doctor warning about" config scripts exist outside your system or Homebrew directories"
 # From: https://github.com/pyenv/pyenv
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+alias -g brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
