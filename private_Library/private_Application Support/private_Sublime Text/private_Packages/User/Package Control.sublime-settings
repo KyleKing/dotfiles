@@ -26,6 +26,8 @@
 		"FileSystem Autocompletion",
 		"FindCursor",
 		"Formatter",
+		"FuzzyFileNav",
+		"FuzzyFilePath",
 		"Git",
 		"Git badges like VS Code",
 		"GitGutter",
