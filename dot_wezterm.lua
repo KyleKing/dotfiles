@@ -135,6 +135,9 @@ return {
 
 
   keys = {
+    -- Map tab navigation
+    {key="LeftArrow", mods="CMD|ALT", action=wezterm.action{ActivateTabRelative=-1}},
+    {key="RightArrow", mods="CMD|ALT", action=wezterm.action{ActivateTabRelative=1}},
     -- Split and run default program with intuitive _ or |
     {key="_", mods="CTRL|SHIFT|ALT",
       action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
