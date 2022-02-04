@@ -133,7 +133,6 @@ return {
     },
   },
 
-
   keys = {
     -- Map tab navigation
     {key="LeftArrow", mods="CMD|ALT", action=wezterm.action{ActivateTabRelative=-1}},
