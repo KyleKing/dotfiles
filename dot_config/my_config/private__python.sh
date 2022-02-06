@@ -18,5 +18,6 @@ eval "$(pyenv init --path)"
 eval "$(register-python-argcomplete pipx)"
 
 # Some useful aliases for calcipy-related projects
-alias -g prdr="poetry run doit run"
-alias -g prdc="poetry run doit --continue"
+alias prdl="poetry run doit list"
+alias prdr="poetry run doit run"
+alias prdc="poetry run doit --continue"
