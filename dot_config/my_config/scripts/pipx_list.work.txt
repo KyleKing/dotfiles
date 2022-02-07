@@ -3,20 +3,22 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package aws-shell 0.2.2, installed using Python 3.9.7
     - aws-shell
     - aws-shell-mkindex
-   package black 21.12b0, installed using Python 3.9.7
+   package black 22.1.0, installed using Python 3.9.7
     - black
     - black-primer
     - blackd
+   package blacken-docs 1.12.1, installed using Python 3.10.1
+    - blacken-docs
    package bpython 0.22.1, installed using Python 3.10.1
     - bpdb
     - bpython
     - bpython-curses
     - bpython-urwid
-   package calcipy 0.9.1, installed using Python 3.10.1
+   package calcipy 0.10.0, installed using Python 3.10.1
     - calcipy
    package cookiecutter 1.7.3, installed using Python 3.9.7
     - cookiecutter
-   package cortex 0.37.0, installed using Python 3.10.1
+   package cortex 0.42.0, installed using Python 3.10.1
     - cortex
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
@@ -34,7 +36,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - symilar
    package Pyment 0.4.0.dev0, installed using Python 3.9.7
     - pyment
-   package sourcery-cli 0.10.0, installed using Python 3.10.1
+   package sourcery-cli 0.10.1, installed using Python 3.10.1
     - sourcery
    package velin 0.0.11, installed using Python 3.9.7
     - velin
