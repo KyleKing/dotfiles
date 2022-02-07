@@ -1,6 +1,6 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package black 21.12b0, installed using Python 3.10.1
+   package black 22.1.0, installed using Python 3.10.1
     - black
     - black-primer
     - blackd
@@ -9,27 +9,27 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
-   package codecov 2.1.11, installed using Python 3.8.3
+   package codecov 2.1.12, installed using Python 3.8.3
     - codecov
    package copier 5.1.0, installed using Python 3.8.3
     - copier
-   package detect-secrets 1.0.3, installed using Python 3.8.3
+   package detect-secrets 1.1.0, installed using Python 3.8.3
     - detect-secrets
     - detect-secrets-hook
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
    package poetry 1.1.12, installed using Python 3.8.3
     - poetry
-   package pyroma 3.1, installed using Python 3.8.3
+   package pyroma 3.2, installed using Python 3.8.3
     - pyroma
-   package pytype 2021.5.25, installed using Python 3.8.3
+   package pytype 2022.1.31, installed using Python 3.8.3
     - annotate-ast
     - merge-pyi
     - pytd
     - pytype
     - pytype-single
     - pyxref
-   package semgrep 0.54.0, installed using Python 3.8.3
+   package semgrep 0.81.0, installed using Python 3.8.3
     - semgrep
-   package sqlfluff 0.5.6, installed using Python 3.8.3
+   package sqlfluff 0.9.4, installed using Python 3.8.3
     - sqlfluff
