@@ -7,10 +7,10 @@
 export BETTER_EXCEPTIONS=1
 
 # Configure pyenv
-# https://github.com/pyenv/pyenv/issues/849#issuecomment-285229619
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+# Following: https://github.com/pyenv/pyenv#homebrew-in-macos
+# Path configuration is in .zshprofile
+# Note: https://github.com/pyenv/pyenv/issues/849#issuecomment-285229619
+eval "$(pyenv init -)"
 
 # > pipx completions require bashcompinit
 # autoload -U bashcompinit
