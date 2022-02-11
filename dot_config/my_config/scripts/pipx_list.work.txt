@@ -22,6 +22,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cortex
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
+   package identify 2.4.9, installed using Python 3.10.2
+    - identify-cli
    package isort 5.10.1, installed using Python 3.9.7
     - isort
     - isort-identify-imports
@@ -38,5 +40,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyment
    package sourcery-cli 0.10.1, installed using Python 3.10.1
     - sourcery
+   package twine 3.8.0, installed using Python 3.10.2
+    - twine
    package velin 0.0.11, installed using Python 3.9.7
     - velin
+   package yamlfix 0.8.0, installed using Python 3.10.2
+    - yamlfix
