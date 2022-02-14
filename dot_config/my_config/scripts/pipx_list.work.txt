@@ -38,11 +38,13 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - symilar
    package Pyment 0.4.0.dev0, installed using Python 3.9.7
     - pyment
-   package sourcery-cli 0.10.1, installed using Python 3.10.1
+   package sourcery-cli 0.10.2, installed using Python 3.10.1
     - sourcery
    package twine 3.8.0, installed using Python 3.10.2
     - twine
    package velin 0.0.11, installed using Python 3.9.7
     - velin
+   package vulture 2.3, installed using Python 3.10.2
+    - vulture
    package yamlfix 0.8.0, installed using Python 3.10.2
     - yamlfix
