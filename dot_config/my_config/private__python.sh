@@ -21,3 +21,5 @@ eval "$(register-python-argcomplete pipx)"
 alias prdl="poetry run doit list"
 alias prdr="poetry run doit run"
 alias prdc="poetry run doit --continue"
+# Based on the full command for deploying from DEVELOPER_GUIDE.md
+alias prpub="prdr cl_bump lock document deploy_docs publish cl_write document deploy_docs"
