@@ -25,6 +25,8 @@ lzgcd() {
 }
 alias lzg='lazygit'
 
+# Checkout by number: "gprc 12"
+alias gprc="gh pr checkout"
 
 export PR_CHECKOUT_DIR=~/developer/checkouts
 clone-pr() {
@@ -32,7 +34,7 @@ clone-pr() {
     mkcd $PR_CHECKOUT_DIR
     gh repo clone $1 $1-pr$2
     cd $1-pr$2 || return
-    gh pr checkout $2 --force
+    gprc $2 --force
     subl . --new-window
     z .
 

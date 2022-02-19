@@ -21,4 +21,5 @@ alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 # A few helpful snippets not included in the homebrew zsh plugin
 alias bs="brew search"
 alias bi="brew info"
+alias bl="brew install"
 alias bcbd="brew cleanup && brew doctor"
