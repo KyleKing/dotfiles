@@ -7,15 +7,17 @@
 
 source $MY_CONFIG/_omz.sh
 source $MY_CONFIG/_zsh.sh
-source $MY_CONFIG/_python.sh
-source $MY_CONFIG/_node.sh
 source $MY_CONFIG/_git.sh
 source $MY_CONFIG/_lf.sh
+source $MY_CONFIG/_mac.sh
+source $MY_CONFIG/_node.sh
+source $MY_CONFIG/_python.sh
+source $MY_CONFIG/_sublime.sh
 source $MY_CONFIG/cli_tools.sh
 source $MY_CONFIG/containers.sh
 source $MY_CONFIG/homebrew.sh
-source $MY_CONFIG/sync.sh
 source $MY_CONFIG/on_login.sh
+source $MY_CONFIG/sync.sh
 
 # Optional source files
 [ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
