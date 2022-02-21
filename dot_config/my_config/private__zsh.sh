@@ -13,10 +13,10 @@ export TERM=xterm-256color
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nano'
+    export EDITOR='nano'
 else
-  export EDITOR='subl'
-  export VISUAL='subl'
+    export EDITOR='subl'
+    export VISUAL='subl'
 fi
 
 # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
@@ -38,7 +38,7 @@ alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
 # Useful combination of mkdir and cd
 mkcd() {
-  mkdir -p $1 && cd $1 || return
+    mkdir -p $1 && cd $1 || return
 }
 
 # See local weather. Full docs: https://github.com/chubin/wttr.in

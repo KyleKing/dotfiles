@@ -21,13 +21,13 @@ alias lst='lsl -TL 2'
 # Preview fzf results with bat syntax highlighting
 # > cd ~/.config && fzf-bat
 fzf-bat () {
-  fzf --preview 'bat --color=always --style=numbers --line-range=:40 {}'
+    fzf --preview 'bat --color=always --style=numbers --line-range=:40 {}'
 }
 
 # Tail a file with syntax highlighting. Infers from extension or can be set manually
 # > btail ~/.zprofile zsh
 tail-bat() {
-  tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
+    tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
 }
 
 # HSTR configuration - add this to ~/.zshrc

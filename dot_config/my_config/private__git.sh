@@ -19,8 +19,8 @@ lzgcd() {
     lazygit "$@"
 
     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-            cd "$(cat $LAZYGIT_NEW_DIR_FILE)" || return
-            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+        cd "$(cat $LAZYGIT_NEW_DIR_FILE)" || return
+        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
 alias lzg='lazygit'

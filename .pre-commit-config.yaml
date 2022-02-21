@@ -38,6 +38,11 @@ repos:
       # - id: requirements-txt-fixer
       - id: trailing-whitespace
         exclude: gh_extensions.*
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: v6.2.1
+    hooks:
+      - id: beautysh
+        exclude: private_dot_p10k\.zsh
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v2.21.0
     hooks:
