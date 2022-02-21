@@ -28,13 +28,32 @@ alias lzg='lazygit'
 # Checkout by number: "gprc 12"
 alias gprc="gh pr checkout"
 
+local-pr-diff() {
+    # Use with: "local-pr-diff" when in a PR checkout directory
+    # Fallback, should support main, but less common
+    up_branch=master
+    dir_name=__only_for_dot_git
+    # Get the upstream branch .git directory
+    mv .git $dir_name/.git
+    mkdir -p $dir_name
+    cd $dir_name || exit
+    git reset --hard HEAD
+    git branch $up_branch
+    mv .git ../.git
+    cd ..
+    rm -rf $dir_name
+}
+
 export PR_CHECKOUT_DIR=~/developer/checkouts
 clone-pr() {
     # Use with: "clone-pr timothycrosley/pdocs 25" or "clone-pr dash_charts 25"
+    repo=$1
+    pr_num=$2
     mkcd $PR_CHECKOUT_DIR
-    gh repo clone $1 $1-pr$2
-    cd $1-pr$2 || return
-    gprc $2 --force
+    gh repo clone $repo $repo-pr$pr_num
+    cd $repo-pr$pr_num || return
+    gprc $pr_num --force
+    local-pr-diff
     subl . --new-window
     z .
 
