@@ -20,6 +20,10 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cookiecutter
    package cortex 0.42.0, installed using Python 3.10.1
     - cortex
+   package eradicate 2.0.0, installed using Python 3.10.2
+    - eradicate
+   package extract-msg 0.30.8, installed using Python 3.10.2
+    - extract_msg
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
    package identify 2.4.9, installed using Python 3.10.2
@@ -31,6 +35,10 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - numpydoctor
    package podman-compose 1.0.3, installed using Python 3.10.1
     - podman-compose
+   package pre-commit 2.17.0, installed using Python 3.10.2
+    - pre-commit
+    - pre-commit-validate-config
+    - pre-commit-validate-manifest
    package pylint 2.12.2, installed using Python 3.9.7
     - epylint
     - pylint
