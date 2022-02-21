@@ -34,14 +34,16 @@ local-pr-diff() {
     up_branch=master
     dir_name=__only_for_dot_git
     # Get the upstream branch .git directory
-    mv .git $dir_name/.git
+    echo "Starting 'local-pr-diff'"
     mkdir -p $dir_name
+    mv .git $dir_name
     cd $dir_name || exit
     git reset --hard HEAD
-    git branch $up_branch
+    git checkout origin/$up_branch
     mv .git ../.git
     cd ..
     rm -rf $dir_name
+    echo "Completed 'local-pr-diff'"
 }
 
 export PR_CHECKOUT_DIR=~/developer/checkouts
