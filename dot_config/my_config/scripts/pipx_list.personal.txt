@@ -18,6 +18,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - detect-secrets-hook
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
+   package mdformat-gfm 0.3.5, installed using Python 3.10.2
+    - markdown-it
+    - mdformat
    package poetry 1.1.13, installed using Python 3.8.3
     - poetry
    package pytype 2022.2.17, installed using Python 3.8.3
@@ -31,3 +34,5 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - semgrep
    package sqlfluff 0.10.1, installed using Python 3.8.3
     - sqlfluff
+   package yamlfix 0.8.0, installed using Python 3.10.2
+    - yamlfix
