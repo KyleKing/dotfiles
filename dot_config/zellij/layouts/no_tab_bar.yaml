@@ -10,4 +10,4 @@ template:
         Fixed: 2
       run:
         plugin:
-          location: "zellij:status-bar"
+          location: zellij:status-bar

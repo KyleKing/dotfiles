@@ -1,95 +1,99 @@
+---
 # Skip prompt to create a new repository if one not present
 # Allows for more seamlessly launching lazygit from anywhere and switching context with ctrl+r
-notARepository: 'skip'
+notARepository: skip
 
 customCommands:
   # Override push to be a subprocess
-  - key: 'P'
-    description: 'Git Push with Subprocess'
-    command: 'git push'
-    context: 'global'
+  - key: P
+    description: Git Push with Subprocess
+    command: git push
+    context: global
     subprocess: true
-  - key: '<f7>'
-    description: 'Git Push (force) with Subprocess'
-    command: 'git push --force'
-    context: 'global'
+  - key: <f7>
+    description: Git Push (force) with Subprocess
+    command: git push --force
+    context: global
     subprocess: true
   # Use git-brws: https://github.com/rhysd/git-brws#usage
-  - key: '<f11>'
-    description: 'Open PR (or create new) with git-brws'
-    command: 'git brws --pr'
-    context: 'localBranches'
+  - key: <f11>
+    description: Open PR (or create new) with git-brws
+    command: git brws --pr
+    context: localBranches
     subprocess: true
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
-  - key: '<f8>'
-    description: 'Add Staged Files to Last Commit'
-    command: 'export _MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 && git commit --message "$_MSG" --no-verify'
-    context: 'files'
+  - key: <f8>
+    description: Add Staged Files to Last Commit
+    command: export _MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 &&
+      git commit --message "$_MSG" --no-verify
+    context: files
     subprocess: true
-  - key : 'w'
-    description: 'Commit with `--no-verify`'
-    command: 'git commit --message "{{index .PromptResponses 0}}" --no-verify'
-    context: 'files'
+  - key: w
+    description: Commit with `--no-verify`
+    command: git commit --message "{{index .PromptResponses 0}}" --no-verify
+    context: files
     subprocess: true
     prompts:
-      - type: 'input'
+      - type: input
         title: '(No Verify) Commit Message:'
         initialValue: ''
-  - key: '<f11>'
-    description: 'Delete merged PR branches with gh-poi'
-    command: 'gh poi'
-    context: 'localBranches'
+  - key: <f11>
+    description: Delete merged PR branches with gh-poi
+    command: gh poi
+    context: localBranches
     subprocess: true
-  - key: '<f12>'
-    description: 'Publish local branch to origin'
-    command: 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
-    context: 'localBranches'
-    loadingText: 'Publishing local branch...'
+  - key: <f12>
+    description: Publish local branch to origin
+    command: git push -u origin $(git rev-parse --abbrev-ref HEAD)
+    context: localBranches
+    loadingText: Publishing local branch...
   # More from the wiki: https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
-  - key: "<f10>"
-    description: "Committing via Commitizen (git cz)"
-    command: "git cz"
-    context: "files"
-    loadingText: "Opening commitizen commit tool"
+  - key: <f10>
+    description: Committing via Commitizen (git cz)
+    command: git cz
+    context: files
+    loadingText: Opening commitizen commit tool
     subprocess: true
-  - key : 'N'
-    description: 'create annotated tag'
-    command: 'git tag -a {{index .PromptResponses 0}} -m "{{index .PromptResponses 1}}"'
-    context: 'tags'
+  - key: N
+    description: create annotated tag
+    command: git tag -a {{index .PromptResponses 0}} -m "{{index .PromptResponses
+      1}}"
+    context: tags
     prompts:
-      - type: 'input'
+      - type: input
         title: 'Annotated tag name:'
-      - type: 'input'
+      - type: input
         title: 'Annotated tag message:'
-  - key: 'o'
-    description: 'Create Pull Request with gh'
-    command: 'gh pr create --fill --web'
-    context: 'global'
-    loadingText: 'Creating pull request on GitHub'
-  - key: '<f3>'
+  - key: o
+    description: Create Pull Request with gh
+    command: gh pr create --fill --web
+    context: global
+    loadingText: Creating pull request on GitHub
+  - key: <f3>
     prompts:
-      - type: 'input'
+      - type: input
         title: 'PR id:'
-    command: 'hub pr checkout {{index .PromptResponses 0}}'
-    context: 'localBranches'
-    loadingText: 'checking out PR'
-  - key: '<c-p>'
-    description: 'prune deleted remote branches'
-    command: 'git remote prune {{.SelectedRemote.Name}}'
-    context: 'remotes'
-    loadingText: 'Pruning...'
-  - key: '<c-f>'
-    description: 'Fetch a remote branch as a new local branch'
-    command: "git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index .PromptResponses 1}}"
-    context: 'remotes'
+    command: hub pr checkout {{index .PromptResponses 0}}
+    context: localBranches
+    loadingText: checking out PR
+  - key: <c-p>
+    description: prune deleted remote branches
+    command: git remote prune {{.SelectedRemote.Name}}
+    context: remotes
+    loadingText: Pruning...
+  - key: <c-f>
+    description: Fetch a remote branch as a new local branch
+    command: git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index
+      .PromptResponses 1}}
+    context: remotes
     prompts:
-      - type: 'input'
-        title: 'Remote Branch Name'
+      - type: input
+        title: Remote Branch Name
         initialValue: ''
-      - type: 'input'
-        title: 'New Local Branch Name'
+      - type: input
+        title: New Local Branch Name
         initialValue: ''
-    loadingText: 'fetching branch'
+    loadingText: fetching branch
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:

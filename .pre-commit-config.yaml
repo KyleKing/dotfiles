@@ -24,7 +24,6 @@ repos:
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-private-key
-      - id: double-quote-string-fixer
       - id: end-of-file-fixer
       - id: fix-byte-order-marker
       - id: fix-encoding-pragma

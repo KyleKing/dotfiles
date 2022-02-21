@@ -7,22 +7,22 @@ tabs:
           Fixed: 1
         run:
           plugin:
-            location: "zellij:tab-bar"
+            location: zellij:tab-bar
         borderless: true
       - direction: Vertical
         parts:
-        - direction: Vertical
-          parts:
           - direction: Vertical
-            split_size:
-              Percent: 50
-            run:
-              command: {cmd: htop}
-          - direction: Vertical
-            split_size:
-              Percent: 50
-            run:
-              command: {cmd: htop, args: ["-C"]}
+            parts:
+              - direction: Vertical
+                split_size:
+                  Percent: 50
+                run:
+                  command: {cmd: htop}
+              - direction: Vertical
+                split_size:
+                  Percent: 50
+                run:
+                  command: {cmd: htop, args: [-C]}
       - direction: Vertical
         split_size:
           Fixed: 5
@@ -31,5 +31,5 @@ tabs:
           Fixed: 2
         run:
           plugin:
-            location: "zellij:status-bar"
+            location: zellij:status-bar
         borderless: true

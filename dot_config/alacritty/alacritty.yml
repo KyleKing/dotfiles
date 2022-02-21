@@ -29,24 +29,24 @@ colors:
     cursor: '0xffffff'
   # Normal colors
   normal:
-    black:   '0x1d1f21'
-    red:     '0xcc6666'
-    green:   '0xb5bd68'
-    yellow:  '0xe6c547'
-    blue:    '0x81a2be'
+    black: '0x1d1f21'
+    red: '0xcc6666'
+    green: '0xb5bd68'
+    yellow: '0xe6c547'
+    blue: '0x81a2be'
     magenta: '0xb294bb'
-    cyan:    '0x70c0ba'
-    white:   '0x373b41'
+    cyan: '0x70c0ba'
+    white: '0x373b41'
   # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xf0c674'
-    blue:    '0x81a2be'
+    black: '0x666666'
+    red: '0xff3334'
+    green: '0x9ec400'
+    yellow: '0xf0c674'
+    blue: '0x81a2be'
     magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0x282a2e'
+    cyan: '0x54ced6'
+    white: '0x282a2e'
 
 # FYI: Favorite theme, but now used for WezTerm
 # # Colors (Tokyo Night Storm variant)
@@ -95,93 +95,92 @@ font:
 
 # Docs: https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#macos
 key_bindings:
-  - { key: Comma,     mods: Command,      command:
-      {program: "sh", args: ["open", "~/.config/alacritty/alacritty.yml"]}     }
-  - { key: N,         mods: Command,      action: SpawnNewInstance       }
-  - { key: Space,     mods: Alt,          chars: " "                     }
-  - { key: Back, mods: Super, chars: "\x15" } # delete word/line
-  - { key: Left,     mods: Alt,     chars: "\x1bb"                       } # one word left
-  - { key: Right,    mods: Alt,     chars: "\x1bf"                       } # one word right
-  - { key: Left,     mods: Command, chars: "\x1bOH",   mode: AppCursor   } # Home
-  - { key: Right,    mods: Command, chars: "\x1bOF",   mode: AppCursor   } # End
+  - {key: Comma, mods: Command, command: {program: sh, args: [open, ~/.config/alacritty/alacritty.yml]}}
+  - {key: N, mods: Command, action: SpawnNewInstance}
+  - {key: Space, mods: Alt, chars: ' '}
+  - {key: Back, mods: Super, chars: "\x15"}    # delete word/line
+  - {key: Left, mods: Alt, chars: "\eb"}                                    # one word left
+  - {key: Right, mods: Alt, chars: "\ef"}                                   # one word right
+  - {key: Left, mods: Command, chars: "\eOH", mode: AppCursor}              # Home
+  - {key: Right, mods: Command, chars: "\eOF", mode: AppCursor}             # End
 
   # Search Mode
-  - { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
-  - { key: Escape,                mode: Search,     action: SearchCancel          }
-  - { key: C,      mods: Control, mode: Search,     action: SearchCancel          }
-  - { key: U,      mods: Control, mode: Search,     action: SearchClear           }
-  - { key: W,      mods: Control, mode: Search,     action: SearchDeleteWord      }
-  - { key: P,      mods: Control, mode: Search,     action: SearchHistoryPrevious }
-  - { key: N,      mods: Control, mode: Search,     action: SearchHistoryNext     }
-  - { key: Up,                    mode: Search,     action: SearchHistoryPrevious }
-  - { key: Down,                  mode: Search,     action: SearchHistoryNext     }
-  - { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
-  - { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
+  - {key: Return, mode: Search|Vi, action: SearchConfirm}
+  - {key: Escape, mode: Search, action: SearchCancel}
+  - {key: C, mods: Control, mode: Search, action: SearchCancel}
+  - {key: U, mods: Control, mode: Search, action: SearchClear}
+  - {key: W, mods: Control, mode: Search, action: SearchDeleteWord}
+  - {key: P, mods: Control, mode: Search, action: SearchHistoryPrevious}
+  - {key: N, mods: Control, mode: Search, action: SearchHistoryNext}
+  - {key: Up, mode: Search, action: SearchHistoryPrevious}
+  - {key: Down, mode: Search, action: SearchHistoryNext}
+  - {key: Return, mode: Search|~Vi, action: SearchFocusNext}
+  - {key: Return, mods: Shift, mode: Search|~Vi, action: SearchFocusPrevious}
 
   # (macOS only)
-  - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
-  - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
-  - { key: Key0,           mods: Command,                    action: ResetFontSize         }
-  - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
-  - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
-  - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
-  - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
-  - { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
-  - { key: V,              mods: Command,                    action: Paste                 }
-  - { key: C,              mods: Command,                    action: Copy                  }
-  - { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
-  - { key: H,              mods: Command,                    action: Hide                  }
-  - { key: H,              mods: Command|Alt,                action: HideOtherApplications }
-  - { key: M,              mods: Command,                    action: Minimize              }
-  - { key: Q,              mods: Command,                    action: Quit                  }
-  - { key: W,              mods: Command,                    action: Quit                  }
-  - { key: N,              mods: Command,                    action: SpawnNewInstance      }
-  - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
-  - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
-  - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
+  - {key: K, mods: Command, mode: ~Vi|~Search, chars: "\f"}
+  - {key: K, mods: Command, mode: ~Vi|~Search, action: ClearHistory}
+  - {key: Key0, mods: Command, action: ResetFontSize}
+  - {key: Equals, mods: Command, action: IncreaseFontSize}
+  - {key: Plus, mods: Command, action: IncreaseFontSize}
+  - {key: NumpadAdd, mods: Command, action: IncreaseFontSize}
+  - {key: Minus, mods: Command, action: DecreaseFontSize}
+  - {key: NumpadSubtract, mods: Command, action: DecreaseFontSize}
+  - {key: V, mods: Command, action: Paste}
+  - {key: C, mods: Command, action: Copy}
+  - {key: C, mods: Command, mode: Vi|~Search, action: ClearSelection}
+  - {key: H, mods: Command, action: Hide}
+  - {key: H, mods: Command|Alt, action: HideOtherApplications}
+  - {key: M, mods: Command, action: Minimize}
+  - {key: Q, mods: Command, action: Quit}
+  - {key: W, mods: Command, action: Quit}
+  - {key: N, mods: Command, action: SpawnNewInstance}
+  - {key: F, mods: Command|Control, action: ToggleFullscreen}
+  - {key: F, mods: Command, mode: ~Search, action: SearchForward}
+  - {key: B, mods: Command, mode: ~Search, action: SearchBackward}
 
   # Use Alt instead of Option because MacOS inserts the unicode character when Option and a letter is pressed
   # FYI: Map Mac Option to Alt: https://github.com/alacritty/alacritty/issues/93#issuecomment-429651216
-  - { key: Key0,        mods: Alt,     chars: "\x1b0" }
-  - { key: Key1,        mods: Alt,     chars: "\x1b1" }
-  - { key: Key2,        mods: Alt,     chars: "\x1b2" }
-  - { key: Key3,        mods: Alt,     chars: "\x1b3" }
-  - { key: Key4,        mods: Alt,     chars: "\x1b4" }
-  - { key: Key5,        mods: Alt,     chars: "\x1b5" }
-  - { key: Key6,        mods: Alt,     chars: "\x1b6" }
-  - { key: Key7,        mods: Alt,     chars: "\x1b7" }
-  - { key: Key8,        mods: Alt,     chars: "\x1b8" }
-  - { key: Key9,        mods: Alt,     chars: "\x1b9" }
-  - { key: LBracket,    mods: Alt,     chars: "\x1b[" }
-  - { key: RBracket,    mods: Alt,     chars: "\x1b]" }
-  - { key: Minus,       mods: Alt,     chars: "\x1b-" }
-  - { key: Equals,      mods: Alt,     chars: "\x1b+" }
-  - { key: A,        mods: Alt,     chars: "\x1ba" }
-  - { key: B,        mods: Alt,     chars: "\x1bb" }
-  - { key: C,        mods: Alt,     chars: "\x1bc" }
-  - { key: D,        mods: Alt,     chars: "\x1bd" }
-  - { key: E,        mods: Alt,     chars: "\x1be" }
-  - { key: F,        mods: Alt,     chars: "\x1bf" }
-  - { key: G,        mods: Alt,     chars: "\x1bg" }
-  - { key: H,        mods: Alt,     chars: "\x1bh" }
-  - { key: I,        mods: Alt,     chars: "\x1bi" }
-  - { key: J,        mods: Alt,     chars: "\x1bj" }
-  - { key: K,        mods: Alt,     chars: "\x1bk" }
-  - { key: L,        mods: Alt,     chars: "\x1bl" }
-  - { key: M,        mods: Alt,     chars: "\x1bm" }
-  - { key: N,        mods: Alt,     chars: "\x1bn" }
-  - { key: O,        mods: Alt,     chars: "\x1bo" }
-  - { key: P,        mods: Alt,     chars: "\x1bp" }
-  - { key: Q,        mods: Alt,     chars: "\x1bq" }
-  - { key: R,        mods: Alt,     chars: "\x1br" }
-  - { key: S,        mods: Alt,     chars: "\x1bs" }
-  - { key: T,        mods: Alt,     chars: "\x1bt" }
-  - { key: U,        mods: Alt,     chars: "\x1bu" }
-  - { key: V,        mods: Alt,     chars: "\x1bv" }
-  - { key: W,        mods: Alt,     chars: "\x1bw" }
-  - { key: X,        mods: Alt,     chars: "\x1bx" }
-  - { key: Y,        mods: Alt,     chars: "\x1by" }
-  - { key: Z,        mods: Alt,     chars: "\x1bz" }
+  - {key: Key0, mods: Alt, chars: "\e0"}
+  - {key: Key1, mods: Alt, chars: "\e1"}
+  - {key: Key2, mods: Alt, chars: "\e2"}
+  - {key: Key3, mods: Alt, chars: "\e3"}
+  - {key: Key4, mods: Alt, chars: "\e4"}
+  - {key: Key5, mods: Alt, chars: "\e5"}
+  - {key: Key6, mods: Alt, chars: "\e6"}
+  - {key: Key7, mods: Alt, chars: "\e7"}
+  - {key: Key8, mods: Alt, chars: "\e8"}
+  - {key: Key9, mods: Alt, chars: "\e9"}
+  - {key: LBracket, mods: Alt, chars: "\e["}
+  - {key: RBracket, mods: Alt, chars: "\e]"}
+  - {key: Minus, mods: Alt, chars: "\e-"}
+  - {key: Equals, mods: Alt, chars: "\e+"}
+  - {key: A, mods: Alt, chars: "\ea"}
+  - {key: B, mods: Alt, chars: "\eb"}
+  - {key: C, mods: Alt, chars: "\ec"}
+  - {key: D, mods: Alt, chars: "\ed"}
+  - {key: E, mods: Alt, chars: "\ee"}
+  - {key: F, mods: Alt, chars: "\ef"}
+  - {key: G, mods: Alt, chars: "\eg"}
+  - {key: H, mods: Alt, chars: "\eh"}
+  - {key: I, mods: Alt, chars: "\ei"}
+  - {key: J, mods: Alt, chars: "\ej"}
+  - {key: K, mods: Alt, chars: "\ek"}
+  - {key: L, mods: Alt, chars: "\el"}
+  - {key: M, mods: Alt, chars: "\em"}
+  - {key: N, mods: Alt, chars: "\en"}
+  - {key: O, mods: Alt, chars: "\eo"}
+  - {key: P, mods: Alt, chars: "\ep"}
+  - {key: Q, mods: Alt, chars: "\eq"}
+  - {key: R, mods: Alt, chars: "\er"}
+  - {key: S, mods: Alt, chars: "\es"}
+  - {key: T, mods: Alt, chars: "\et"}
+  - {key: U, mods: Alt, chars: "\eu"}
+  - {key: V, mods: Alt, chars: "\ev"}
+  - {key: W, mods: Alt, chars: "\ew"}
+  - {key: X, mods: Alt, chars: "\ex"}
+  - {key: Y, mods: Alt, chars: "\ey"}
+  - {key: Z, mods: Alt, chars: "\ez"}
 
 # # FYI: Turn off zellij by default because scrolling in lazygit is not supported
 # # Login shell with arguments
@@ -201,7 +200,5 @@ key_bindings:
 window:
   # Remove buttons
   decorations: none
-  # # Open in full screen
-  # startup_mode: SimpleFullscreen
   # Maximized preserves the Mac menu bar
   startup_mode: Maximized
