@@ -55,7 +55,7 @@ clone-pr() {
     gh repo clone $repo $repo-pr$pr_num
     cd $repo-pr$pr_num || return
     gprc $pr_num --force
-    local-pr-diff
+    local-pr-diff || exit
     subl . --new-window
     z .
 
@@ -65,5 +65,6 @@ clone-pr() {
 
 # TODO: need script to walk the PR_CHECKOUT_DIR for git directories, check if the branch was merged, then delete the folder
 # FYI: Make sure to check for a "git stash" and error on any that have one
+# FYI: Also check that there are no other branches
 # These aliases could possibly be a gh plugin? Could fork "gh poi" or "gh tidy"?
 alias prune-clones="echo 'WIP'"
