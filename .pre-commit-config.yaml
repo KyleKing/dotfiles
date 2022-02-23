@@ -79,6 +79,11 @@ repos:
         exclude: \.copier-answers\.yml
         types_or: []
         types: [file, yaml]
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.8.0.4
+    hooks:
+      - id: shellcheck
+        args: [--severity=warning]
   - repo: local
     hooks:
       - id: copier-forbidden-files
@@ -87,10 +92,3 @@ repos:
         entry: found copier update rejection files; review them and remove them (https://copier.readthedocs.io/en/stable/updating/)
         language: fail
         files: \.rej$
-      - id: run-shellcheck
-        name: Run shellcheck
-        description: Run the shellcheck tool. Must be installed with brew
-        language: system
-        # Only show actionable errors and warnings
-        entry: shellcheck --severity=warning
-        files: (.*\.sh|\.z.*)$
