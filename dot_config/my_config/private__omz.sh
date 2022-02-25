@@ -66,8 +66,7 @@ export plugins=(
     # catimg: use the shell script to display images in terminal
     # command-not-found: looks up the possible missing homebrew package
     # copybuffer: Ctrl+O to copy typed command
-    # copydir: Copies the path of your current folder to the system clipboard.
-    # copyfile: Copies the content of a file to the system clipboard.
+    # copypath: Copies current path or the path to the specified file
     # dash: Kapeli Dash. Use: `dash python:tuple`
     # docker:
     # encode64: e64/d64: encodes or decode given data to/from base64 (`e64 '{"a": 1}'` // `pbpaste | d64 | gojq`)
@@ -86,8 +85,7 @@ export plugins=(
     catimg
     command-not-found
     copybuffer
-    copydir
-    copyfile
+    copypath
     dash
     docker
     encode64
