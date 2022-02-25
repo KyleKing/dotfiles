@@ -23,16 +23,16 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - mdformat
    package poetry 1.1.13, installed using Python 3.8.3
     - poetry
-   package pytype 2022.2.17, installed using Python 3.8.3
+   package pytype 2022.2.23, installed using Python 3.8.3
     - annotate-ast
     - merge-pyi
     - pytd
     - pytype
     - pytype-single
     - pyxref
-   package semgrep 0.82.0, installed using Python 3.8.3
+   package semgrep 0.83.0, installed using Python 3.8.3
     - semgrep
    package sqlfluff 0.10.1, installed using Python 3.8.3
     - sqlfluff
-   package yamlfix 0.8.0, installed using Python 3.10.2
+   package yamlfix 0.8.1, installed using Python 3.10.2
     - yamlfix
