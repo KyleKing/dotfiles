@@ -6,4 +6,4 @@
 # General Mac Aliases
 
 # Open with Dropover!
-alias odo="open -a Dropdover"
+alias odo="open -a Dropover"
