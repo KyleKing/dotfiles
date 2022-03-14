@@ -14,7 +14,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
-   package calcipy 0.14.3, installed using Python 3.10.1
+   package calcipy 0.14.5, installed using Python 3.10.1
     - calcipy
    package cookiecutter 1.7.3, installed using Python 3.9.7
     - cookiecutter
@@ -39,6 +39,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pre-commit
     - pre-commit-validate-config
     - pre-commit-validate-manifest
+   package pycln 1.2.5, installed using Python 3.10.2
+    - pycln
    package pylint 2.12.2, installed using Python 3.9.7
     - epylint
     - pylint
@@ -46,11 +48,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - symilar
    package Pyment 0.4.0.dev0, installed using Python 3.9.7
     - pyment
-   package pytoil 0.27.0, installed using Python 3.10.2
+   package pytoil 0.28.0, installed using Python 3.10.2
     - pytoil
    package sourcery-cli 0.10.3, installed using Python 3.10.1
     - sourcery
-   package sqlfluff 0.10.1, installed using Python 3.10.2
+   package sqlfluff 0.11.0, installed using Python 3.10.2
     - sqlfluff
    package twine 3.8.0, installed using Python 3.10.2
     - twine
@@ -58,5 +60,5 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - velin
    package vulture 2.3, installed using Python 3.10.2
     - vulture
-   package yamlfix 0.8.1, installed using Python 3.10.2
+   package yamlfix 0.9.0, installed using Python 3.10.2
     - yamlfix
