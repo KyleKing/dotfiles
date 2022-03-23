@@ -14,7 +14,7 @@
         "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
       ],
       "initializationOptions": {
-        "token": "{{- (onepassword "Sourcery Token").details.password -}}",
+        "token": "{{ output "op" "item" "get" "Sourcery Token" "--field" "password" | trim }}"
         "extension_version": "sublime lsp",
         "editor_version": "sublime"
       },
