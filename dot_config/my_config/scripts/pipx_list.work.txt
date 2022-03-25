@@ -26,7 +26,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - extract_msg
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
-   package identify 2.4.11, installed using Python 3.10.2
+   package identify 2.4.12, installed using Python 3.10.2
     - identify-cli
    package isort 5.10.1, installed using Python 3.9.7
     - isort
@@ -41,7 +41,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pre-commit-validate-manifest
    package pycln 1.2.5, installed using Python 3.10.2
     - pycln
-   package pylint 2.12.2, installed using Python 3.9.7
+   package pylint 2.13.0, installed using Python 3.9.7
     - epylint
     - pylint
     - pyreverse
@@ -50,9 +50,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyment
    package pytoil 0.28.0, installed using Python 3.10.2
     - pytoil
-   package sourcery-cli 0.10.3, installed using Python 3.10.1
+   package sourcery-cli 0.11.1, installed using Python 3.10.1
     - sourcery
-   package sqlfluff 0.11.0, installed using Python 3.10.2
+   package sqlfluff 0.11.1, installed using Python 3.10.2
     - sqlfluff
    package twine 3.8.0, installed using Python 3.10.2
     - twine
