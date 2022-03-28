@@ -44,13 +44,13 @@ repos:
       - id: beautysh
         exclude: private_dot_p10k\.zsh
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.21.0
+    rev: v2.21.2
     hooks:
       - id: commitizen
         additional_dependencies: [cz_legacy]
         stages: [commit-msg]
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.13
+    rev: 0.7.14
     hooks:
       - id: mdformat
         additional_dependencies:
@@ -73,7 +73,7 @@ repos:
         exclude: poetry\.lock|.*/cassettes/.*\.yaml
         stages: [push]
   - repo: https://github.com/lyz-code/yamlfix/
-    rev: 0.8.0
+    rev: 0.9.0
     hooks:
       - id: yamlfix
         exclude: \.copier-answers\.yml
