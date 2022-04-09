@@ -5,7 +5,7 @@ gh lspr	kentaro-m/gh-lspr	59c856cf
 gh notify	meiji163/gh-notify	eef345c4	
 gh poi	seachicken/gh-poi	v0.4.0	
 gh pr-draft	kyanny/gh-pr-draft	ef06b94a	
-gh prs	dlvhdr/gh-prs	v2.1.1	
+gh prs	dlvhdr/gh-prs	v3.0.0	
 gh repo-explore	samcoe/gh-repo-explore	v0.0.6	
 gh repo-fzf	kavinvalli/gh-repo-fzf	eceb769e	
 gh tidy	HaywardMorihara/gh-tidy	abef3891	
