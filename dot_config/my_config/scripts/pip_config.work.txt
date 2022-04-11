@@ -1,3 +1,2 @@
 global.index='https://nexus.roaminsight.net/repository/pypi-all/pypi'
 global.index-url='https://nexus.roaminsight.net/repository/pypi-all/simple'
-global.trusted-host='nexus.roaminsight.net'

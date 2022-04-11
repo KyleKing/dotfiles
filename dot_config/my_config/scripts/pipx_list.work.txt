@@ -3,7 +3,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package aws-shell 0.2.2, installed using Python 3.9.7
     - aws-shell
     - aws-shell-mkindex
-   package black 22.1.0, installed using Python 3.9.7
+   package black 22.3.0, installed using Python 3.9.7
     - black
     - black-primer
     - blackd
@@ -20,9 +20,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cookiecutter
    package cortex 0.42.0, installed using Python 3.10.1
     - cortex
-   package eradicate 2.0.0, installed using Python 3.10.2
+   package eradicate 2.1.0, installed using Python 3.10.2
     - eradicate
-   package extract-msg 0.30.8, installed using Python 3.10.2
+   package extract-msg 0.30.9, installed using Python 3.10.2
     - extract_msg
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
@@ -35,28 +35,28 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - numpydoctor
    package podman-compose 1.0.3, installed using Python 3.10.1
     - podman-compose
-   package pre-commit 2.17.0, installed using Python 3.10.2
+   package pre-commit 2.18.1, installed using Python 3.10.2
     - pre-commit
     - pre-commit-validate-config
     - pre-commit-validate-manifest
    package pycln 1.2.5, installed using Python 3.10.2
     - pycln
-   package pylint 2.13.2, installed using Python 3.9.7
+   package pylint 2.13.5, installed using Python 3.9.7
     - epylint
     - pylint
     - pyreverse
     - symilar
    package Pyment 0.4.0.dev0, installed using Python 3.9.7
     - pyment
-   package pytoil 0.28.0, installed using Python 3.10.2
+   package pytoil 0.29.0, installed using Python 3.10.2
     - pytoil
-   package sourcery-cli 0.11.1, installed using Python 3.10.1
+   package sourcery-cli 0.11.2, installed using Python 3.10.1
     - sourcery
-   package sqlfluff 0.11.2, installed using Python 3.10.2
+   package sqlfluff 0.12.0, installed using Python 3.10.2
     - sqlfluff
    package textract 1.6.5, installed using Python 3.10.2
     - textract
-   package twine 3.8.0, installed using Python 3.10.2
+   package twine 4.0.0, installed using Python 3.10.2
     - twine
    package velin 0.0.11, installed using Python 3.9.7
     - velin
