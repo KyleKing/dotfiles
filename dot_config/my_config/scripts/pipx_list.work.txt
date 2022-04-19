@@ -16,13 +16,18 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython-urwid
    package calcipy 0.14.5, installed using Python 3.10.1
     - calcipy
+   package certbot-nginx 1.26.0, installed using Python 3.10.2
+    - certbot
+    - distro
+    - jws
+    - normalizer
    package cookiecutter 1.7.3, installed using Python 3.9.7
     - cookiecutter
    package cortex 0.42.0, installed using Python 3.10.1
     - cortex
    package eradicate 2.1.0, installed using Python 3.10.2
     - eradicate
-   package extract-msg 0.30.9, installed using Python 3.10.2
+   package extract-msg 0.30.10, installed using Python 3.10.2
     - extract_msg
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
@@ -39,7 +44,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pre-commit
     - pre-commit-validate-config
     - pre-commit-validate-manifest
-   package pycln 1.2.5, installed using Python 3.10.2
+   package pycln 1.3.1, installed using Python 3.10.2
     - pycln
    package pylint 2.13.5, installed using Python 3.9.7
     - epylint
