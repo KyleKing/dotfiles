@@ -16,9 +16,10 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython-urwid
    package calcipy 0.14.5, installed using Python 3.10.1
     - calcipy
-   package certbot-nginx 1.26.0, installed using Python 3.10.2
+   package certbot-dns-route53 1.26.0, installed using Python 3.10.2
     - certbot
     - distro
+    - jp.py
     - jws
     - normalizer
    package cookiecutter 1.7.3, installed using Python 3.9.7
@@ -67,5 +68,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - velin
    package vulture 2.3, installed using Python 3.10.2
     - vulture
+   package watchdog 2.1.7, installed using Python 3.10.2
+    - watchmedo
+   package watchfiles 0.13, installed using Python 3.10.2
+    - watchfiles
    package yamlfix 0.9.0, installed using Python 3.10.2
     - yamlfix
