@@ -3,6 +3,10 @@
 # Allows for more seamlessly launching lazygit from anywhere and switching context with ctrl+r
 notARepository: skip
 
+# Without Enter, I don't see the result of the process and still have the key input error
+# https://github.com/jesseduffield/lazygit/issues/1576
+# promptToReturnFromSubprocess: false
+
 customCommands:
   # Override push to be a subprocess
   - key: P
