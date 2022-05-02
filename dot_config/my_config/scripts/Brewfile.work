@@ -61,6 +61,7 @@ brew "jq"
 brew "k9s"
 brew "kompose"
 brew "krew"
+brew "kubectx", link: false
 brew "kubie"
 brew "lazydocker"
 brew "lf"
