@@ -30,3 +30,7 @@ zstyle :compinstall filename '~/.zshrc'
 
 # Make login faster by suppressing login messages
 mkdir -p "$HOME/.hushlogin"
+
+# Activate McFly for terminal history
+#   https://github.com/cantino/mcfly
+eval "$(mcfly init zsh)"
