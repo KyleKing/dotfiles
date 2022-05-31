@@ -1,38 +1,43 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package black 22.3.0, installed using Python 3.10.1
+   package black 22.3.0, installed using Python 3.10.4
     - black
     - black-primer
     - blackd
-   package bpython 0.22.1, installed using Python 3.10.1
+   package bpython 0.22.1, installed using Python 3.10.4
     - bpdb
     - bpython
     - bpython-curses
     - bpython-urwid
-   package codecov 2.1.12, installed using Python 3.8.3
+   package codecov 2.1.12, installed using Python 3.10.4
     - codecov
-   package copier 6.0.0, installed using Python 3.8.3
+   package copier 6.0.0, installed using Python 3.10.4
     - copier
-   package detect-secrets 1.2.0, installed using Python 3.8.3
+   package detect-secrets 1.2.0, installed using Python 3.10.4
     - detect-secrets
     - detect-secrets-hook
-   package flake8 4.0.1, installed using Python 3.10.1
+   package flake8 4.0.1, installed using Python 3.10.4
     - flake8
-   package mdformat-gfm 0.3.5, installed using Python 3.10.2
+   package isort 5.10.1, installed using Python 3.10.4
+    - isort
+    - isort-identify-imports
+   package mdformat-gfm 0.3.5, installed using Python 3.10.4
     - markdown-it
     - mdformat
-   package poetry 1.1.13, installed using Python 3.8.3
+   package poetry 1.1.13, installed using Python 3.10.4
     - poetry
-   package pytype 2022.5.10, installed using Python 3.8.3
+   package pytype 2022.5.19, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
     - pytype
     - pytype-single
     - pyxref
-   package semgrep 0.93.0, installed using Python 3.8.3
+   package semgrep 0.94.0, installed using Python 3.10.4
     - semgrep
-   package sqlfluff 0.13.1, installed using Python 3.8.3
+   package sqlfluff 0.13.2, installed using Python 3.10.4
     - sqlfluff
-   package yamlfix 0.9.0, installed using Python 3.10.2
+   package wily 1.21.0, installed using Python 3.10.4
+    - wily
+   package yamlfix 0.9.0, installed using Python 3.10.4
     - yamlfix
