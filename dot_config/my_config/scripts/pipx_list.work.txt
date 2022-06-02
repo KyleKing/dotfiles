@@ -28,7 +28,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cortex
    package eradicate 2.1.0, installed using Python 3.10.2
     - eradicate
-   package extract-msg 0.30.12, installed using Python 3.10.2
+   package extract-msg 0.30.12, installed using Python 3.10.4
     - extract_msg
    package flake8 4.0.1, installed using Python 3.10.1
     - flake8
