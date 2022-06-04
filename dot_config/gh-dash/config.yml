@@ -1,0 +1,35 @@
+---
+prSections:
+  - title: Needs My Review
+    filters: archived:false is:pr is:open review-requested:@me
+  - title: My Created PRs
+    filters: archived:false is:pr is:open author:@me
+  - title: My Submitted PRs
+    filters: archived:false is:pr is:open author:@me -org:KyleKing
+  - title: Mentions Me
+    filters: archived:false is:pr is:open mentions:@me
+  - title: Reviewer
+    filters: archived:false is:pr is:open repo:roaminsight/reviewer
+issuesSections:
+  - title: Assigned
+    filters: archived:false is:issue is:open assignee:@me
+  - title: My Submitted Issues
+    filters: archived:false is:issue is:open author:@me -org:KyleKing
+  - title: Mentions Me
+    filters: archived:false is:issue is:open mentions:@me
+  - title: My Projects
+    filters: archived:false is:issue is:open org:KyleKing
+  - title: Reviewer
+    filters: archived:false is:issue is:open repo:roaminsight/reviewer
+  - title: My Issues
+    filters: archived:false is:open author:@me
+defaults:
+  preview:
+    open: true
+    width: 90
+  prsLimit: 50
+  issuesLimit: 50
+  view: prs
+keybindings:
+  prs: []
+repoPaths: {}
