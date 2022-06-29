@@ -35,5 +35,12 @@ mkdir -p "$HOME/.hushlogin"
 #   https://github.com/cantino/mcfly
 eval "$(mcfly init zsh)"
 
-# Use the patched cortex for async APIs (https://github.com/roaminsight/serve/pull/377#issuecomment-1162398406)
+# --------------------------------------------------------------------------------------
+# Work
+
+# For the shared configuration synced with yadm
+[ -f ~/.config/ai_labs/main.sh ] && source ~/.config/ai_labs/main.sh
+
+# Use the patched cortex for async APIs
+# https://github.com/roaminsight/serve/pull/377#issuecomment-1162398406
 export CORTEX_CLI_PATH="/usr/local/bin/cortex"
