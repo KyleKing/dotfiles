@@ -10,9 +10,6 @@ email = "{{ .github.email }}"
 signing_key = "{{ .github.signing_key }}"
 gpg_program = "{{ .github.gpg_program }}"
 
-[data.poetry]
-repositories = '''{{ .poetry.repositories }}'''
-
 [edit]
 command = "subl"
 args = ["--wait", "--add"]

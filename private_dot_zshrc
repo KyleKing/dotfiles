@@ -19,8 +19,8 @@ source $MY_CONFIG/homebrew.sh
 source $MY_CONFIG/on_login.sh
 source $MY_CONFIG/sync.sh
 
-# Optional source files
-[ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
+# # Optional source files (Moved to ~/.config/ai_labs/main.sh!)
+# [ -f $MY_CONFIG/pal.sh ] && source $MY_CONFIG/pal.sh
 
 # Must be near the end
 source $MY_CONFIG/_java.sh

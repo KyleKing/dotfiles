@@ -1,0 +1,37 @@
+# Global Gitignore configured in .gitconfig with chezmoi
+# git config --global core.excludesfile ~/.gitignore_global
+
+# MacOS Ignore Patterns
+# https://github.com/github/gitignore/blob/e5323759e387ba347a9d50f8b0ddd16502eb71d4/Global/macOS.gitignore
+*~
+.DS_Store
+*.*ca-bundle
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Code Editor Ignore Patterns
+# https://github.com/github/gitignore/tree/e5323759e387ba347a9d50f8b0ddd16502eb71d4/Global
+*.sublime-project
+*.sublime-workspace
+.idea/*
+.vscode/*
+
+# Virtualenv
+# https://github.com/github/gitignore/blob/e5323759e387ba347a9d50f8b0ddd16502eb71d4/Global/VirtualEnv.gitignore
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+# Python
+*.pyc

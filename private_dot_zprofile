@@ -23,3 +23,9 @@ export PAGER=bat
 eval "$(pyenv init --path)"
 
 source $MY_CONFIG/on_login.sh
+
+# yadm configuration variables
+# Set AWS Roles per environment. See available options when logging into AWS from Okta
+export SAML2AWS_ROLE_DEV=Backend_API_Engineer_Analytics
+export SAML2AWS_ROLE_STAGE=Principal_Software_Engineer
+export SAML2AWS_ROLE_PROD=Backend_API_Engineer_Analytics

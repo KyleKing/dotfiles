@@ -11,7 +11,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython-urwid
    package codecov 2.1.12, installed using Python 3.10.4
     - codecov
-   package copier 6.1.0, installed using Python 3.10.4
+   package copier 6.0.0, installed using Python 3.10.4
     - copier
    package detect-secrets 1.2.0, installed using Python 3.10.4
     - detect-secrets
@@ -26,18 +26,16 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - mdformat
    package poetry 1.1.13, installed using Python 3.10.4
     - poetry
-   package pygments 2.12.0, installed using Python 3.10.4
-    - pygmentize
-   package pytype 2022.6.23, installed using Python 3.10.4
+   package pytype 2022.5.19, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
     - pytype
     - pytype-single
     - pyxref
-   package semgrep 0.100.0, installed using Python 3.10.4
+   package semgrep 0.94.0, installed using Python 3.10.4
     - semgrep
-   package sqlfluff 1.0.0, installed using Python 3.10.4
+   package sqlfluff 0.13.2, installed using Python 3.10.4
     - sqlfluff
    package wily 1.21.0, installed using Python 3.10.4
     - wily
