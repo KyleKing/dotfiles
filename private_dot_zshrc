@@ -35,6 +35,9 @@ mkdir -p "$HOME/.hushlogin"
 #   https://github.com/cantino/mcfly
 eval "$(mcfly init zsh)"
 
+# Configure asdf for managing tool versions
+. /usr/local/opt/asdf/libexec/asdf.sh
+
 # --------------------------------------------------------------------------------------
 # Work
 

@@ -19,13 +19,13 @@ export MY_CONFIG=$HOME/.config/my_config
 # Set bat as default Pager (instead of less)
 export PAGER=bat
 
-# Load pyenv PATH configuration
-eval "$(pyenv init --path)"
+# # Load pyenv PATH configuration
+# eval "$(pyenv init --path)"
 
 source $MY_CONFIG/on_login.sh
 
 # yadm configuration variables
-# Set AWS Roles per environment. See available options when logging into AWS from Okta
-export SAML2AWS_ROLE_DEV=Backend_API_Engineer_Analytics
-export SAML2AWS_ROLE_STAGE=Principal_Software_Engineer
-export SAML2AWS_ROLE_PROD=Backend_API_Engineer_Analytics
+# Optional AWS Roles per environment. See available options when logging into AWS from Okta
+export SAML2AWS_ROLE_ARN_DEV=arn:aws:iam::423403385625:role/Backend_API_Engineer_Analytics
+export SAML2AWS_ROLE_ARN_STAGE=arn:aws:iam::315624606307:role/Backend_API_Engineer_Analytics
+export SAML2AWS_ROLE_ARN_PROD=arn:aws:iam::076242776244:role/Backend_API_Engineer_Analytics

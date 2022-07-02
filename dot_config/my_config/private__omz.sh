@@ -73,7 +73,7 @@ export plugins=(
     # git: a TON of aliases. See: https://github.com/davidde/git
     # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
     # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
-    # nvm: automatically sources nvm and adds completions
+    # # nvm: automatically sources nvm and adds completions
     # perms: recursively set permissions (fixperms, set755, set644)
     # python: useful aliases (`pyfind` recursively find .py / `pyclean` Delete byte and cache)
     # rust: Supports cargo and rustup
@@ -92,7 +92,7 @@ export plugins=(
     git
     history
     macos
-    nvm
+    # nvm
     perms
     python
     rust
