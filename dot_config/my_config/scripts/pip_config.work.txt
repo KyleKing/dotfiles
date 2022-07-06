@@ -1,2 +1,6 @@
+For variant 'global', will try loading '/Library/Application Support/pip/pip.conf'
+For variant 'user', will try loading '/Users/kyleking/.pip/pip.conf'
+For variant 'user', will try loading '/Users/kyleking/.config/pip/pip.conf'
+For variant 'site', will try loading '/Users/kyleking/.asdf/installs/python/3.9.11/pip.conf'
 global.index='https://nexus.roaminsight.net/repository/pypi-all/pypi'
 global.index-url='https://nexus.roaminsight.net/repository/pypi-all/simple'
