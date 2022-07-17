@@ -8,6 +8,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+tap "jandedobbeleer/oh-my-posh"
 tap "mopidy/mopidy"
 tap "pebble/pebble-sdk"
 tap "rhysd/git-brws", "https://github.com/rhysd/git-brws"
@@ -147,7 +148,7 @@ brew "pngcrush"
 brew "postgresql"
 brew "prettier"
 brew "py3cairo"
-brew "pyenv"
+brew "pyenv", link: false
 brew "pygobject3"
 brew "qt"
 brew "pyqt"
@@ -190,9 +191,11 @@ brew "beeftornado/rmtree/brew-rmtree"
 brew "eth-p/software/bat-extras"
 brew "gautamkrishnar/socli/socli"
 brew "hacker1024/hacker1024/coretemp"
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 brew "rhysd/git-brws/git-brws"
 brew "romkatv/powerlevel10k/powerlevel10k"
 cask "1password-cli"
+cask "alfred"
 cask "anki"
 cask "appcleaner"
 cask "bartender"
@@ -203,7 +206,6 @@ cask "cozy-drive"
 cask "daisydisk"
 cask "devtoys"
 cask "docker"
-cask "extraterm"
 cask "font-hack-nerd-font"
 cask "hammerspoon"
 cask "hiddenbar"
@@ -242,6 +244,7 @@ mas "Ecosia - The search engine that plants trees", id: 1463400445
 mas "Encrypto", id: 935235287
 mas "Fenêtre Lite", id: 1288451627
 mas "GIF Brewery 3", id: 1081413713
+mas "GIPHY CAPTURE", id: 668208984
 mas "KeyLimePie", id: 1575163350
 mas "Keynote", id: 409183694
 mas "Noizio", id: 928871589
@@ -252,6 +255,7 @@ mas "Shareful", id: 1522267256
 mas "Slack", id: 803453959
 mas "Spark", id: 1176895641
 mas "Speedtest", id: 1153157709
+mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
 mas "Trello", id: 1278508951
 mas "Unsplash Wallpapers", id: 1284863847
