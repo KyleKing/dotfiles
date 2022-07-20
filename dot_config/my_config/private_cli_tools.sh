@@ -35,3 +35,14 @@ alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor       # get more colors
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+
+# rpg-cli: a filesystem dungeon
+# https://github.com/facundoolano/rpg-cli#shell-integration
+rpg () {
+    rpg-cli cd "$@"
+    cd "$(rpg-cli pwd)" || return
+}
+rpz () {
+    z "$@"
+    rpg-cli cd "$PWD"
+}
