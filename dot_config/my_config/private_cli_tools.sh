@@ -8,10 +8,6 @@
 # Set an alias for thefuck installed with brew: https://github.com/nvbn/thefuck
 eval "$(thefuck --alias oop)"
 
-# Configure direnv installed with brew: https://github.com/direnv/direnv
-# Will load and unload any .env files
-eval "$(direnv hook zsh)"
-
 # Map exa to ls with some default options
 alias ls='exa --icons'
 alias lsa='ls --all'
@@ -52,3 +48,6 @@ rph () {
     rpg "~"
     rpg "$_last"
 }
+
+# gojq (go-based jq replacement)
+alias jq='gojq'
