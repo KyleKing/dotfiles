@@ -46,3 +46,9 @@ rpz () {
     z "$@"
     rpg-cli cd "$PWD"
 }
+rph () {
+    # Heal
+    _last="$PWD"
+    rpg "~"
+    rpg "$_last"
+}

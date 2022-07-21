@@ -22,5 +22,7 @@ fi
 alias bs="brew search"
 alias bn="brew info"
 alias bi="brew install"
+alias bu="brew rmtree"
 alias bo="brew outdated"
 alias bcbd="brew cleanup && brew doctor"
+# Other useful commands: "brew uninstall <cask>" and "brew uses <...>"
