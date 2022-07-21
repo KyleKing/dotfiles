@@ -19,9 +19,6 @@ export MY_CONFIG=$HOME/.config/my_config
 # Set bat as default Pager (instead of less)
 export PAGER=bat
 
-# # Load pyenv PATH configuration
-# eval "$(pyenv init --path)"
-
 source $MY_CONFIG/on_login.sh
 
 # yadm configuration variables

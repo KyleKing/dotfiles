@@ -16,7 +16,7 @@
                 "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
             ],
             "disable": false,
-            "python": "$HOME/.pyenv/shims/python"
+            "python": "$HOME/.asdf/shims/python"
         },
         "pylint": {
             "args": [
@@ -24,7 +24,7 @@
                 "--rcfile=./reviewer-api/.pylintrc"
             ],
             "disable": false,
-            "python": "$HOME/.pyenv/shims/python"
+            "python": "$HOME/.asdf/shims/python"
         },
         "markdownlint": {
             "args": ["-r","~MD013,~MD046,~MD033,~MD007"],
