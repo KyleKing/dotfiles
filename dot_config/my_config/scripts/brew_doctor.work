@@ -1,0 +1,57 @@
+[1mPlease note that these warnings are just used to help the Homebrew maintainers
+with debugging if you file an issue. If everything you use Homebrew for is
+working fine: please don't worry or file an issue; just ignore this. Thanks![0m
+
+Warning: A newer Command Line Tools release is available.
+Update them from Software Update in System Preferences or run:
+  softwareupdate --all --install --force
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  [4mhttps://developer.apple.com/download/all/[24m.
+You should download the Command Line Tools for Xcode 11.3.1.
+
+
+Warning: Some installed formulae are deprecated or disabled.
+You should find replacements for the following formulae:
+  go@1.16
+
+Warning: "config" scripts exist outside your system or Homebrew directories.
+`./configure` scripts often look for *-config scripts to determine if
+software packages are installed, and which additional flags to use when
+compiling and linking.
+
+Having additional scripts in your path can confuse software installed via
+Homebrew if the config script overrides a system or Homebrew-provided
+script of the same name. We found the following "config" scripts:
+  /Users/kyleking/.asdf/shims/python3.7-config
+  /Users/kyleking/.asdf/shims/python3.7m-config
+  /Users/kyleking/.asdf/shims/python3.9-config
+  /Users/kyleking/.asdf/shims/python-config
+  /Users/kyleking/.asdf/shims/python3-config
+  /Users/kyleking/.local/bin/pylint-config
+  /Users/kyleking/.local/bin/pre-commit-validate-config
+
+Warning: Found Ruby file outside caarlos0/tap tap formula directory.
+(/usr/local/Homebrew/Library/Taps/caarlos0/homebrew-tap/Formula):
+  /usr/local/Homebrew/Library/Taps/caarlos0/homebrew-tap/foo.rb
+
+Warning: You have unlinked kegs in your Cellar.
+Leaving kegs unlinked can lead to build-trouble and cause formulae that depend on
+those kegs to fail to run properly once built. Run `brew link` on these:
+  tfswitch
+  rust
+  awscli
+  kubectx
+
+Warning: You are using macOS 10.14.
+We (and Apple) do not provide support for this old version.
+You will encounter build failures with some formulae.
+Please create pull requests instead of asking for help on Homebrew's GitHub,
+Twitter or any other official channels. You are responsible for resolving
+any issues you experience while you are running this
+old version.
+

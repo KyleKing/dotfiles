@@ -11,6 +11,7 @@ calcipy collect-code-tags --filename=$SCRIPT_DIR/Chezmoi_Code_Tags.md -b=$HOME/.
 
 # Note: no trailing -}} on these lines:
 brew bundle dump --file=- > "$SCRIPT_DIR/Brewfile.{{- .computer_name }}"
+brew list --versions > "$SCRIPT_DIR/brew_versions.{{- .computer_name }}"
 brew doctor 2> "$SCRIPT_DIR/brew_doctor.{{- .computer_name }}"
 
 gh extension list > "$SCRIPT_DIR/gh_extensions.{{- .computer_name -}}.txt"
