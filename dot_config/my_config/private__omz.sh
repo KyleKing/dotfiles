@@ -165,7 +165,7 @@ bindkey '^ ' autosuggest-accept
 # # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
 # [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 # Use oh-my-posh instead of p10k
-eval "$(oh-my-posh init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/.config.omp.json)"
 
 # Customize zsh-auto-notify (https://github.com/MichaelAquilina/zsh-auto-notify#configuration)
 # Set threshold to 15 seconds
