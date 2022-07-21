@@ -17,6 +17,22 @@ Alternatively, manually download them from:
 You should download the Command Line Tools for Xcode 12.4.
 
 
+Warning: "config" scripts exist outside your system or Homebrew directories.
+`./configure` scripts often look for *-config scripts to determine if
+software packages are installed, and which additional flags to use when
+compiling and linking.
+
+Having additional scripts in your path can confuse software installed via
+Homebrew if the config script overrides a system or Homebrew-provided
+script of the same name. We found the following "config" scripts:
+  /Users/kyleking/.asdf/shims/python3.7-config
+  /Users/kyleking/.asdf/shims/python3.10-config
+  /Users/kyleking/.asdf/shims/python3.7m-config
+  /Users/kyleking/.asdf/shims/python3.9-config
+  /Users/kyleking/.asdf/shims/python-config
+  /Users/kyleking/.asdf/shims/python3-config
+  /Users/kyleking/.asdf/shims/python3.8-config
+
 Warning: Unbrewed dylibs were found in /usr/local/lib.
 If you didn't put them there on purpose they could cause problems when
 building Homebrew formulae, and may need to be deleted.
