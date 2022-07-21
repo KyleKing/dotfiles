@@ -16,11 +16,11 @@ bottom 0.6.8
 brew-rmtree 2.2.6_1
 brotli 1.0.9
 c-ares 1.18.1_1
-ca-certificates 2022-07-19
+ca-certificates 2022-07-19_1
 cabal-install 3.6.2.0
 cairo 1.16.0_5
 chezmoi 2.19.0
-cloc 1.92
+cloc 1.94
 cmake 3.23.2
 cmatrix 2.0
 coreutils 9.1
@@ -32,7 +32,6 @@ dark-mode 3.0.2
 ddgr 2.0
 devdash 0.5.0
 devspace 5.18.5
-direnv 2.32.1
 docbook 5.1_1
 docbook-xsl 1.79.2_1
 doxygen 1.9.4
@@ -56,7 +55,7 @@ ghc 8.10.7_1
 ghostscript 9.56.1
 giflib 5.2.1
 gifsicle 1.93
-git 2.37.0
+git 2.37.1
 git-brws 0.11.12
 git-cliff 0.7.0
 git-crypt 0.7.0
@@ -83,7 +82,7 @@ grype 0.40.1
 gts 0.7.6_2
 guile 3.0.8
 harfbuzz 4.0.1
-howdoi 2.0.19_4
+howdoi 2.0.19_5
 hstr 2.5
 htop 3.2.1
 http-prompt 2.1.0_1
@@ -101,12 +100,10 @@ jemalloc 5.2.1_1
 jpeg 9e
 jpeg-xl 0.6.1
 jpegoptim 1.4.7
-jq 1.6
 k9s 0.26.0
 kompose 1.26.1
 krb5 1.20
 krew 0.4.3
-kubectx 0.9.4
 kubernetes-cli 1.24.2
 kubie 0.17.0
 lazydocker 0.18.1
@@ -190,10 +187,8 @@ ninja 1.11.0
 nmap 7.92
 node 17.7.1
 npth 1.6
-nushell 0.64.0
 nyancat 1.5.2
-oh-my-posh 8.11.1
-oniguruma 6.9.7.1
+oh-my-posh 8.21.0
 openexr 3.1.5
 openjdk 17
 openjpeg 2.5.0
@@ -218,7 +213,6 @@ popeye 0.9.8
 postgresql 14.2_1
 postgresql@13 13.7
 powerlevel10k 1.16.1
-pyenv 2.3.1
 python-tabulate 0.8.9_1
 python@3.10 3.10.5
 python@3.9 3.9.13_1
@@ -250,7 +244,6 @@ swig 4.0.2
 terminal-notifier 2.0.0
 tesseract 5.1.0
 tfsec 1.26.0
-tfswitch 0.13.1275
 thefuck 3.32
 timer 1.1.0
 tldr 1.5.0
@@ -312,7 +305,6 @@ kdiff3 1.9.4
 keepingyouawake 1.6.1
 keyboard-cleaner 1.2
 knockknock 2.3.0
-lastpass 4.79.0,1191
 libreoffice 7.3.4
 macdown 0.7.2
 microsoft-auto-update 4.38.21080801
@@ -339,11 +331,9 @@ reikey 1.4.2
 rocket 1.8.2,79
 skim 1.6.6,136
 slack 4.20.0
-spotifree 1.6.5
 spotify 1.1.81.604,ccacfc8c,16
 sublime-text 4.113
 tablecruncher 1.6.0.1
-typora 0.11.5
 visual-studio-code 1.60.0
 vlc 3.0.16
 webpquicklook 1.0
