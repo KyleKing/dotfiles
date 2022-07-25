@@ -24,8 +24,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package mdformat-gfm 0.3.5, installed using Python 3.10.4
     - markdown-it
     - mdformat
-   package poetry 1.1.14, installed using Python 3.10.4
-    - poetry
    package pygments 2.12.0, installed using Python 3.10.4
     - pygmentize
    package pytype 2022.6.30, installed using Python 3.10.4
@@ -35,10 +33,16 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pytype
     - pytype-single
     - pyxref
+   package rich-cli 1.8.0, installed using Python 3.10.5
+    - rich
+   package safety 2.1.1, installed using Python 3.10.5
+    - safety
    package semgrep 0.104.0, installed using Python 3.10.4
     - semgrep
    package sqlfluff 1.2.1, installed using Python 3.10.4
     - sqlfluff
+   package watchfiles 0.16.0, installed using Python 3.10.5
+    - watchfiles
    package wily 1.22.0, installed using Python 3.10.4
     - wily
    package yamlfix 0.10.0, installed using Python 3.10.4
