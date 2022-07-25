@@ -128,7 +128,7 @@ return {
     -- Now add a new item at the bottom to match things that are probably filenames
 
     {
-      regex = "\\b\\S*/\\S*\\.[a-zA-Z]+\\b:?\\d*",
+      regex = "/?\\b\\S*/\\S*\\.[a-zA-Z]+\\b:?\\d*",
       format = "$EDITOR:$0"
     },
   },
