@@ -98,10 +98,30 @@ customCommands:
         title: New Local Branch Name
         initialValue: ''
     loadingText: fetching branch
+keybinding:
+  branches:
+    # Flipped to match rename of commit
+    rebaseBranch: R
+    renameBranch: r
+gui:
+  expandFocusedSidePanel: true
+  howBottomLine: false  # for hiding the bottom information line (unless it has important information to tell you)
+  theme:
+    selectedLineBgColor:
+      - '#3A4267'  # set to `default` to have no background colour
+    selectedRangeBgColor:
+      - '#3A4267'  # Based on: https://coolors.co/242940
+    cherryPickedCommitBgColor:
+      - reverse
+    cherryPickedCommitFgColor:
+      - reverse
+  showIcons: true
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
     colorArg: always
     pager: delta --paging=never
+  log:
+    showWholeGitGraph: true
 
 # More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
