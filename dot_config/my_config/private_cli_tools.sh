@@ -14,6 +14,12 @@ alias lsa='ls --all'
 alias lsl='ls --long --header --created --git'
 alias lst='lsl -TL 2'
 
+# UI folder navigation from the terminal
+cdt() {
+    local result=$(tere "$@")
+    [ -n "$result" ] && cd -- "$result" || return
+}
+
 # Preview fzf results with bat syntax highlighting
 # > cd ~/.config && fzf-bat
 fzf-bat () {
@@ -34,19 +40,36 @@ bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode che
 
 # rpg-cli: a filesystem dungeon
 # https://github.com/facundoolano/rpg-cli#shell-integration
-rpg () {
+alias rpg=rpg-cli
+rcd () {
+    rpg-cli ls
     rpg-cli cd "$@"
     cd "$(rpg-cli pwd)" || return
 }
 rpz () {
     z "$@"
-    rpg-cli cd "$PWD"
+    rpg-cli ls
+    rpg-cli cd "$PWD" || return
 }
 rph () {
     # Heal
-    _last="$PWD"
-    rpg "~"
-    rpg "$_last"
+    local _last="$PWD"
+    rpg-cli cd "~" || return
+    rpg-cli cd "$_last" || return
+}
+rpl () {
+    rpg-cli ls
+    lsl
+}
+rpin () {
+    rcd ~
+    rpg-cli ls
+    echo "~~ Stats ~~"
+    rpg-cli stat
+    echo "\n~~ Shop ~~"
+    rpg-cli buy
+    echo "\n~~ Quests ~~"
+    rpg-cli todo
 }
 
 # gojq (go-based jq replacement)
