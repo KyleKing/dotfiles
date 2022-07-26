@@ -1,0 +1,35 @@
+{
+  "config_version": "1.0",
+  "hours12": false,
+  "live": false,
+  "stretch": false,
+  "style": {
+    "colorize": true,
+    "day_segments": {
+      "day": 9,
+      "evening": 17,
+      "morning": 8,
+      "night": 19
+    },
+    "symbols": "rectangles"
+  },
+  "tics": false,
+  "timezones": [
+    {
+      "Name": "Home",
+      "TZ": "America/New_York"
+    },
+    {
+      "Name": "SF",
+      "TZ": "America/Santa_Isabel"
+    },
+    {
+      "Name": "IST",
+      "TZ": "Asia/Calcutta"
+    },
+    {
+      "Name": "France",
+      "TZ": "Arctic/Longyearbyen"
+    }
+  ]
+}
