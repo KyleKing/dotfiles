@@ -107,7 +107,7 @@ krew 0.4.3
 kubernetes-cli 1.24.2
 kubie 0.17.0
 lazydocker 0.18.1
-lazygit 0.34
+lazygit 0.35
 leptonica 1.82.0
 lf 27
 libarchive 3.6.0
@@ -168,6 +168,7 @@ lzo 2.10
 m4 1.4.19
 mani 0.21.0
 markdownlint-cli 0.31.1
+mas 1.8.6
 mcfly v0.6.0
 mesa 22.0.5_1
 meson 0.62.2
@@ -237,8 +238,9 @@ socli 7.1
 speedtest-cli 2.1.3_1
 sphinx-doc 4.4.0
 spotify-tui 0.25.0
-sqlite 3.39.1
+sqlite 3.39.2 3.39.1
 stern 1.21.0
+stow 2.3.1
 subversion 1.14.2
 swig 4.0.2
 terminal-notifier 2.0.0
@@ -273,7 +275,7 @@ zoxide 0.8.2
 zsh 5.9
 zstd 1.5.2
 1password 7.8.7
-1password-cli 2.5.1
+1password-cli 2.6.0
 alfred 5.0,2057
 another-redis-desktop-manager 1.5.6
 appcleaner 3.6.0,4070
