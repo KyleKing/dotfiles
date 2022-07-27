@@ -16,10 +16,6 @@
   "tics": false,
   "timezones": [
     {
-      "Name": "Home",
-      "TZ": "America/New_York"
-    },
-    {
       "Name": "SF",
       "TZ": "America/Santa_Isabel"
     },
