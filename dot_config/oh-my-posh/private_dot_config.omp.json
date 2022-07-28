@@ -5,7 +5,7 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "p:grey",
+          "foreground": "p:white",
           "properties": {
             "command": "((pwd | grep -q \"$HOME/\") && (dirname \"$PWD\" | sed -E \"s-^$HOME($|(/.*))-~\\2-\")) || true",
             "shell": "sh"
@@ -111,7 +111,7 @@
   "final_space": true,
   "palette": {
     "black": "#2A2F3E",
-    "blue": "#009FAD",
+    "blue": "#02bcce",
     "green": "#8FD15A",
     "grey": "#A8B0D9",
     "orange": "#E8AE5A",
