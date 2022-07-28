@@ -16,7 +16,7 @@ alias lst='lsl -TL 2'
 
 # UI folder navigation from the terminal
 cdt() {
-    local result=$(tere "$@")
+    result=$(tere "$@")
     [ -n "$result" ] && cd -- "$result" || return
 }
 
@@ -53,8 +53,12 @@ rpz () {
 }
 rph () {
     # Heal
-    local _last="$PWD"
-    rpg-cli cd "~" || return
+    _last="$PWD"
+    # TODO: Should be a for loop until home
+    # # Shellcheck doesn't understand zsh syntax:
+    # repeat 10 '{ echo '---' && rpg cd "~" }'
+    for _ in {1..10}; do rpg cd "~"; done
+    # TODO: Should be a for loop to return to _last until battle (then stop and print _last)
     rpg-cli cd "$_last" || return
 }
 rpl () {
