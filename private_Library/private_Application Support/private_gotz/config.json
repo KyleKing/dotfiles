@@ -1,9 +1,23 @@
 {
   "config_version": "1.0",
   "hours12": false,
+  "inline": true,
   "live": false,
   "stretch": false,
   "style": {
+    "coloring": {
+      "DynamicColorBackground": "",
+      "DynamicColorDay": "",
+      "DynamicColorEvening": "",
+      "DynamicColorForeground": "",
+      "DynamicColorMorning": "",
+      "DynamicColorNight": "",
+      "StaticColorDay": "",
+      "StaticColorEvening": "",
+      "StaticColorForeground": "",
+      "StaticColorMorning": "",
+      "StaticColorNight": ""
+    },
     "colorize": true,
     "day_segments": {
       "day": 9,
