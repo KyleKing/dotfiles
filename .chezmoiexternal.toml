@@ -4,6 +4,12 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+[".config/nvim"]
+    type = "archive"
+    url = "https://github.com/NvChad/NvChad/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
 [".oh-my-zsh/custom/plugins/auto-notify"]
     type = "archive"
     url = "https://github.com/MichaelAquilina/zsh-auto-notify/archive/master.tar.gz"
