@@ -26,6 +26,23 @@
       "description": "NoMedium",
       "disabled": false,
       "error": null,
+      "exampleResult": "https://scribe.rip/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
+      "exampleUrl": "https://blog.devgenius.io/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://*devgenius.io/*",
+      "patternDesc": "",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://scribe.rip/$2"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "NoMedium",
+      "disabled": false,
+      "error": null,
       "exampleResult": "https://scribe.rip/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
       "exampleUrl": "https://betterprogramming.pub/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
       "excludePattern": "",
