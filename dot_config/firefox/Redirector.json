@@ -125,40 +125,6 @@
       "appliesTo": [
         "main_frame"
       ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/start-using-env-for-your-flask-project-and-stop-using-environment-variables-for-development-247dc12468be",
-      "exampleUrl": "https://itnext.io/start-using-env-for-your-flask-project-and-stop-using-environment-variables-for-development-247dc12468be",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*itnext.io/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
-      "exampleUrl": "https://hogantorah.medium.com/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://([^l].*)medium\\.com/([^@][^k][^y][^l].*)",
-      "patternDesc": "Ignores my reading lists and the medium homepage (and \"link.medium.com/<>\")",
-      "patternType": "R",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
       "description": "Redirect Annoying Awesome Open Source to Github",
       "disabled": false,
       "error": null,
