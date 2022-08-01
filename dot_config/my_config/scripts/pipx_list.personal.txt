@@ -13,7 +13,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - codecov
    package copier 6.1.0, installed using Python 3.10.4
     - copier
-   package detect-secrets 1.2.0, installed using Python 3.10.4
+   package detect-secrets 1.3.0, installed using Python 3.10.4
     - detect-secrets
     - detect-secrets-hook
    package flake8 4.0.1, installed using Python 3.10.4
@@ -26,7 +26,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - mdformat
    package pygments 2.12.0, installed using Python 3.10.4
     - pygmentize
-   package pytype 2022.6.30, installed using Python 3.10.4
+   package pytype 2022.7.26, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
@@ -37,13 +37,15 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - rich
    package safety 2.1.1, installed using Python 3.10.5
     - safety
-   package semgrep 0.104.0, installed using Python 3.10.4
+   package semgrep 0.107.0, installed using Python 3.10.4
     - semgrep
    package sqlfluff 1.2.1, installed using Python 3.10.4
     - sqlfluff
-   package watchfiles 0.16.0, installed using Python 3.10.5
+   package watchfiles 0.16.1, installed using Python 3.10.5
     - watchfiles
    package wily 1.22.0, installed using Python 3.10.4
     - wily
+   package wordcloud 1.8.2.2, installed using Python 3.10.5
+    - wordcloud_cli
    package yamlfix 0.10.0, installed using Python 3.10.4
     - yamlfix
