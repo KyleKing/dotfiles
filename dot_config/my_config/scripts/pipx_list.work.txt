@@ -3,7 +3,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package aws-shell 0.2.2, installed using Python 3.9.7
     - aws-shell
     - aws-shell-mkindex
-   package black 22.3.0, installed using Python 3.10.5
+   package black 22.6.0, installed using Python 3.10.5
     - black
     - black-primer
     - blackd
@@ -16,7 +16,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython-urwid
    package calcipy 0.14.5, installed using Python 3.10.5
     - calcipy
-   package certbot-dns-route53 1.28.0, installed using Python 3.10.5
+   package certbot-dns-route53 1.29.0, installed using Python 3.10.5
     - certbot
     - distro
     - jp.py
@@ -26,11 +26,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cookiecutter
    package eradicate 2.1.0, installed using Python 3.10.5
     - eradicate
-   package extract-msg 0.31.1, installed using Python 3.10.5
-    - extract_msg
-   package flake8 4.0.1, installed using Python 3.10.1
+   package flake8 5.0.2, installed using Python 3.10.1
     - flake8
-   package identify 2.5.1, installed using Python 3.10.5
+   package identify 2.5.2, installed using Python 3.10.5
     - identify-cli
    package isort 5.10.1, installed using Python 3.9.7
     - isort
@@ -39,13 +37,13 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - numpydoctor
    package podman-compose 1.0.3, installed using Python 3.10.5
     - podman-compose
-   package pre-commit 2.19.0, installed using Python 3.10.5
+   package pre-commit 2.20.0, installed using Python 3.10.5
     - pre-commit
     - pre-commit-validate-config
     - pre-commit-validate-manifest
-   package pycln 1.3.5, installed using Python 3.10.5
+   package pycln 2.1.1, installed using Python 3.10.5
     - pycln
-   package pylint 2.14.1, installed using Python 3.9.7
+   package pylint 2.14.5, installed using Python 3.9.7
     - epylint
     - pylint
     - pylint-config
@@ -53,21 +51,19 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - symilar
    package Pyment 0.4.0.dev0, installed using Python 3.9.7
     - pyment
-   package pytoil 0.33.0, installed using Python 3.10.5
+   package pytoil 0.34.0, installed using Python 3.10.5
     - pytoil
-   package sqlfluff 1.0.0, installed using Python 3.10.5
+   package sqlfluff 1.2.1, installed using Python 3.10.5
     - sqlfluff
-   package textract 1.6.5, installed using Python 3.10.5
-    - textract
    package twine 4.0.1, installed using Python 3.10.5
     - twine
    package velin 0.0.11, installed using Python 3.9.7
     - velin
-   package vulture 2.4, installed using Python 3.10.5
+   package vulture 2.5, installed using Python 3.10.5
     - vulture
    package watchdog 2.1.9, installed using Python 3.10.5
     - watchmedo
-   package watchfiles 0.15.0, installed using Python 3.10.5
+   package watchfiles 0.16.1, installed using Python 3.10.5
     - watchfiles
-   package yamlfix 0.9.0, installed using Python 3.10.5
+   package yamlfix 0.10.1, installed using Python 3.10.5
     - yamlfix

@@ -15,10 +15,6 @@ Alternatively, manually download them from:
 You should download the Command Line Tools for Xcode 11.3.1.
 
 
-Warning: Some installed formulae are deprecated or disabled.
-You should find replacements for the following formulae:
-  go@1.16
-
 Warning: "config" scripts exist outside your system or Homebrew directories.
 `./configure` scripts often look for *-config scripts to determine if
 software packages are installed, and which additional flags to use when
@@ -46,4 +42,3 @@ Please create pull requests instead of asking for help on Homebrew's GitHub,
 Twitter or any other official channels. You are responsible for resolving
 any issues you experience while you are running this
 old version.
-

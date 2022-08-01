@@ -19,7 +19,7 @@ c-ares 1.18.1_1
 ca-certificates 2022-07-19_1
 cabal-install 3.6.2.0
 cairo 1.16.0_5
-chezmoi 2.19.0
+chezmoi 2.20.0
 cloc 1.94
 cmake 3.23.2
 cmatrix 2.0
@@ -50,7 +50,7 @@ gd 2.3.3_1
 gdbm 1.23
 gdk-pixbuf 2.42.6
 gettext 0.21
-gh 2.14.2
+gh 2.14.3
 ghc 8.10.7_1
 ghostscript 9.56.1
 giflib 5.2.1
@@ -60,7 +60,7 @@ git-brws 0.11.12
 git-cliff 0.7.0
 git-crypt 0.7.0
 git-delta 0.13.0
-glances 3.2.6.4
+glances 3.2.7
 glib 2.72.2
 glow 1.4.1
 gmp 6.2.1_1
@@ -104,7 +104,7 @@ k9s 0.26.0
 kompose 1.26.1
 krb5 1.20
 krew 0.4.3
-kubernetes-cli 1.24.2
+kubernetes-cli 1.24.3
 kubie 0.17.0
 lazydocker 0.18.1
 lazygit 0.35
@@ -189,7 +189,7 @@ nmap 7.92
 node 17.7.1
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 8.21.0
+oh-my-posh 8.25.0
 openexr 3.1.5
 openjdk 17
 openjpeg 2.5.0
@@ -225,7 +225,7 @@ rtmpdump 2.4+20151223_1
 ruby 3.1.2
 rust 1.61.0
 rustup-init 1.24.3
-saml2aws 2.35.0
+saml2aws 2.36.0
 scons 4.3.0
 screenresolution 1.6
 shared-mime-info 2.2
@@ -250,7 +250,7 @@ thefuck 3.32
 timer 1.1.0
 tldr 1.5.0
 tokyo-cabinet 1.4.48
-transcrypt 2.1.0
+transcrypt 2.2.0
 trash 0.9.2
 tre-command 0.4.0
 tt 1.9.4
