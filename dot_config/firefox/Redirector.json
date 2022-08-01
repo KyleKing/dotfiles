@@ -171,6 +171,57 @@
       "patternType": "W",
       "processMatches": "noProcessing",
       "redirectUrl": "https://github.com/$1/$2"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "NoMedium",
+      "disabled": true,
+      "error": null,
+      "exampleResult": "https://scribe.rip/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
+      "exampleUrl": "https://hogantorah.medium.com/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://([^l].*)medium\\.com/([^@][^k][^y][^l].*)",
+      "patternDesc": "Ignores my reading lists and the medium homepage (and \"link.medium.com/<>\")",
+      "patternType": "R",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://scribe.rip/$2"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "NoMedium",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://scribe.rip/asdfasdf",
+      "exampleUrl": "https://medium.com/asdfasdf",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://*medium.com/*",
+      "patternDesc": "Medium - if need to access medium.com proper, turn off redirector temporarily",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://scribe.rip/$2"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "S3 redirect",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://s3.console.aws.amazon.com/s3/object/roam-reviewer-import-export-stage?region=us-west-2&prefix=e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
+      "exampleUrl": "s3://roam-reviewer-import-export-stage/e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "s3://*/*",
+      "patternDesc": "WIP: Make s3 auto-redirect!",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://s3.console.aws.amazon.com/s3/object/$1?region=us-west-2&prefix=$2"
     }
   ]
 }

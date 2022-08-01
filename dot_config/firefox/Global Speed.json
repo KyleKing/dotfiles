@@ -161,7 +161,7 @@
         }
       ]
     },
-    "enabled": false,
+    "enabled": true,
     "enabledLatestViaPopup": true,
     "lastSpeed": 1,
     "speed": 1.25
