@@ -92,6 +92,7 @@ brew "snappy"
 brew "podman"
 brew "poetry"
 brew "postgresql@13", link: true
+brew "pre-commit"
 brew "redis"
 brew "ripgrep"
 brew "rustup-init"

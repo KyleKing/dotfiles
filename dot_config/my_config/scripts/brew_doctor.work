@@ -29,7 +29,6 @@ script of the same name. We found the following "config" scripts:
   /Users/kyleking/.asdf/shims/python-config
   /Users/kyleking/.asdf/shims/python3-config
   /Users/kyleking/.local/bin/pylint-config
-  /Users/kyleking/.local/bin/pre-commit-validate-config
 
 Warning: Found Ruby file outside caarlos0/tap tap formula directory.
 (/usr/local/Homebrew/Library/Taps/caarlos0/homebrew-tap/Formula):

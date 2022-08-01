@@ -37,10 +37,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - numpydoctor
    package podman-compose 1.0.3, installed using Python 3.10.5
     - podman-compose
-   package pre-commit 2.20.0, installed using Python 3.10.5
-    - pre-commit
-    - pre-commit-validate-config
-    - pre-commit-validate-manifest
    package pycln 2.1.1, installed using Python 3.10.5
     - pycln
    package pylint 2.14.5, installed using Python 3.9.7
