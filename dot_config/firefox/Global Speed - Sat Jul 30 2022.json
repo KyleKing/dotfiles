@@ -1,0 +1,323 @@
+{
+  "common": {
+    "audioFx": {
+      "delay": 0,
+      "eq": {
+        "enabled": false,
+        "factor": 1,
+        "values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "pitch": 0,
+      "volume": 1
+    },
+    "backdropFx": {
+      "filters": [
+        {
+          "name": "sepia",
+          "value": 0
+        },
+        {
+          "name": "hueRotate",
+          "value": 0
+        },
+        {
+          "name": "grayscale",
+          "value": 0
+        },
+        {
+          "name": "contrast",
+          "value": 1
+        },
+        {
+          "name": "brightness",
+          "value": 1
+        },
+        {
+          "name": "saturate",
+          "value": 1
+        },
+        {
+          "name": "invert",
+          "value": 0
+        },
+        {
+          "name": "blur",
+          "value": 0
+        },
+        {
+          "name": "opacity",
+          "value": 1
+        }
+      ],
+      "transforms": [
+        {
+          "name": "scaleX",
+          "value": 1
+        },
+        {
+          "name": "scaleY",
+          "value": 1
+        },
+        {
+          "name": "translateX",
+          "value": 0
+        },
+        {
+          "name": "translateY",
+          "value": 0
+        },
+        {
+          "name": "rotateX",
+          "value": 0
+        },
+        {
+          "name": "rotateY",
+          "value": 0
+        },
+        {
+          "name": "rotateZ",
+          "value": 0
+        }
+      ]
+    },
+    "elementFx": {
+      "filters": [
+        {
+          "name": "sepia",
+          "value": 0
+        },
+        {
+          "name": "hueRotate",
+          "value": 0
+        },
+        {
+          "name": "grayscale",
+          "value": 0
+        },
+        {
+          "name": "contrast",
+          "value": 1
+        },
+        {
+          "name": "brightness",
+          "value": 1
+        },
+        {
+          "name": "saturate",
+          "value": 1
+        },
+        {
+          "name": "invert",
+          "value": 0
+        },
+        {
+          "name": "blur",
+          "value": 0
+        },
+        {
+          "name": "opacity",
+          "value": 1
+        }
+      ],
+      "transforms": [
+        {
+          "name": "scaleX",
+          "value": 1
+        },
+        {
+          "name": "scaleY",
+          "value": 1
+        },
+        {
+          "name": "translateX",
+          "value": 0
+        },
+        {
+          "name": "translateY",
+          "value": 0
+        },
+        {
+          "name": "rotateX",
+          "value": 0
+        },
+        {
+          "name": "rotateY",
+          "value": 0
+        },
+        {
+          "name": "rotateZ",
+          "value": 0
+        }
+      ]
+    },
+    "enabled": false,
+    "enabledLatestViaPopup": true,
+    "lastSpeed": 1,
+    "speed": 1.25
+  },
+  "firstUse": 1658360901015,
+  "hideMediaView": null,
+  "keybinds": [
+    {
+      "adjustMode": 2,
+      "command": "adjustSpeed",
+      "enabled": true,
+      "greedy": true,
+      "id": "202878352",
+      "key": "KeyA",
+      "valueNumberAlt": -0.1
+    },
+    {
+      "adjustMode": 1,
+      "command": "adjustSpeed",
+      "enabled": true,
+      "greedy": true,
+      "id": "4611826114",
+      "key": "KeyS",
+      "valueNumber": 1
+    },
+    {
+      "adjustMode": 2,
+      "command": "adjustSpeed",
+      "enabled": true,
+      "greedy": true,
+      "id": "7235112375",
+      "key": "KeyD",
+      "spacing": 1,
+      "valueNumberAlt": 0.1
+    },
+    {
+      "command": "setPin",
+      "enabled": true,
+      "greedy": true,
+      "id": "6441644237",
+      "key": "KeyQ",
+      "valueState": "toggle"
+    },
+    {
+      "command": "setState",
+      "enabled": true,
+      "greedy": true,
+      "id": "5251543680",
+      "key": {
+        "code": "KeyQ",
+        "shiftKey": true
+      },
+      "spacing": 2,
+      "valueState": "toggle"
+    },
+    {
+      "command": "seek",
+      "enabled": true,
+      "greedy": true,
+      "id": "457851370",
+      "key": "KeyZ",
+      "valueNumber": -5
+    },
+    {
+      "command": "seek",
+      "enabled": true,
+      "greedy": true,
+      "id": "6356833638",
+      "key": "KeyX",
+      "spacing": 1,
+      "valueNumber": 10
+    },
+    {
+      "command": "seek",
+      "enabled": true,
+      "greedy": true,
+      "id": "9070383148",
+      "key": {
+        "code": "KeyZ",
+        "shiftKey": true
+      },
+      "valueBool3": true,
+      "valueNumber": -0.041
+    },
+    {
+      "command": "seek",
+      "enabled": true,
+      "greedy": true,
+      "id": "5386727362",
+      "key": {
+        "code": "KeyX",
+        "shiftKey": true
+      },
+      "spacing": 1,
+      "valueBool3": true,
+      "valueNumber": 0.041
+    },
+    {
+      "command": "fullscreen",
+      "enabled": true,
+      "greedy": true,
+      "id": "4547860137",
+      "key": {
+        "code": "KeyF",
+        "shiftKey": true
+      },
+      "spacing": 2,
+      "valueBool": true
+    },
+    {
+      "command": "setMark",
+      "enabled": true,
+      "greedy": true,
+      "id": "4756984369",
+      "key": {
+        "code": "KeyW",
+        "shiftKey": true
+      },
+      "valueString": "mark1"
+    },
+    {
+      "command": "seekMark",
+      "enabled": true,
+      "greedy": true,
+      "id": "3691993071",
+      "key": "KeyW",
+      "valueString": "mark1"
+    },
+    {
+      "command": "toggleLoop",
+      "enabled": false,
+      "greedy": true,
+      "id": "1200348074",
+      "key": "KeyR",
+      "spacing": 2,
+      "valueString": "mark1"
+    }
+  ],
+  "rules": [
+    {
+      "condition": {
+        "parts": [
+          {
+            "id": "8059833635",
+            "type": "CONTAINS",
+            "value": "youtube.com"
+          }
+        ]
+      },
+      "enabled": true,
+      "id": "5183155778",
+      "overrideEnabled": false,
+      "overrideSpeed": 1,
+      "strict": true,
+      "type": "STATE"
+    }
+  ],
+  "version": 10
+}
