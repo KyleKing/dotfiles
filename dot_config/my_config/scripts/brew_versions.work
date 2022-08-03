@@ -3,6 +3,7 @@ ansible 5.8.0
 aom 3.4.0
 apr 1.7.0_2
 apr-util 1.6.1_4
+as-tree 0.12.0
 asciidoctor 2.0.17
 asdf 0.10.2
 autoconf 2.71
@@ -29,7 +30,6 @@ curl 7.84.0
 curlie 1.6.9
 dagger 0.2.20
 dark-mode 3.0.2
-ddgr 2.0
 devdash 0.5.0
 devspace 5.18.5
 docbook 5.1_1

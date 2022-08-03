@@ -20,9 +20,3 @@ export MY_CONFIG=$HOME/.config/my_config
 export PAGER=bat
 
 source $MY_CONFIG/on_login.sh
-
-# yadm configuration variables
-# Optional AWS Roles per environment. See available options when logging into AWS from Okta
-export SAML2AWS_ROLE_ARN_DEV=arn:aws:iam::423403385625:role/Backend_API_Engineer_Analytics
-export SAML2AWS_ROLE_ARN_STAGE=arn:aws:iam::315624606307:role/Principal_Software_Engineer
-export SAML2AWS_ROLE_ARN_PROD=arn:aws:iam::076242776244:role/Principal_Software_Engineer
