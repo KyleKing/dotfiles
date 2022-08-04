@@ -1104,7 +1104,7 @@
         "Formatter",
         "SublimeLinter-contrib-dockerfilelint",
         "SublimeLinter-contrib-SpellCheckLinter",
-        "Vintage"
+        "Vintage",
     ],
     "indent_guide_options": ["draw_normal","draw_active"],
     "light_color_scheme": "Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme",
@@ -1128,5 +1128,5 @@
     "trim_only_modified_white_space": false,
     "trim_trailing_white_space_on_save": "all",
     "update_check": true,
-    "word_wrap": true
+    "word_wrap": true,
 }
