@@ -28,6 +28,9 @@ alias lzg='lazygit'
 # Checkout by number: "gprc 12"
 alias gprc="gh pr checkout"
 
+# Get current PR number
+alias whichpr='gh pr view --json "number" | jq ".number"'
+
 local-pr-diff() {
     # Use with: "local-pr-diff" when in a PR checkout directory
     # Fallback, should support main, but less common
