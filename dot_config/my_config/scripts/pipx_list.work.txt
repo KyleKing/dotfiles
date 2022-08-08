@@ -7,8 +7,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - black
     - black-primer
     - blackd
-   package blacken-docs 1.12.1, installed using Python 3.10.5
-    - blacken-docs
    package bpython 0.22.1, installed using Python 3.10.5
     - bpdb
     - bpython
@@ -22,8 +20,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - jp.py
     - jws
     - normalizer
-   package cookiecutter 2.1.1, installed using Python 3.9.7
-    - cookiecutter
    package envtpl 0.7.2, installed using Python 3.10.5
     - envtpl
    package eradicate 2.1.0, installed using Python 3.10.5
@@ -37,22 +33,19 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - isort-identify-imports
    package mdformat 0.7.14, installed using Python 3.10.5
     - mdformat
-   package numpydoctor 1.1, installed using Python 3.9.7
-    - numpydoctor
    package podman-compose 1.0.3, installed using Python 3.10.5
     - podman-compose
-   package pycln 2.1.1, installed using Python 3.10.5
-    - pycln
    package pylint 2.14.5, installed using Python 3.9.7
     - epylint
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package Pyment 0.4.0.dev0, installed using Python 3.9.7
-    - pyment
    package pytoil 0.34.0, installed using Python 3.10.5
     - pytoil
+   package schemathesis 3.16.3, installed using Python 3.10.5
+    - schemathesis
+    - st
    package sqlfluff 1.2.1, installed using Python 3.10.5
     - sqlfluff
    package twine 4.0.1, installed using Python 3.10.5
@@ -61,8 +54,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - velin
    package vulture 2.5, installed using Python 3.10.5
     - vulture
-   package watchdog 2.1.9, installed using Python 3.10.5
-    - watchmedo
    package watchfiles 0.16.1, installed using Python 3.10.5
     - watchfiles
    package yamlfix 0.10.1, installed using Python 3.10.5
