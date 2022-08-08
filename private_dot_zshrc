@@ -48,3 +48,8 @@ eval "$(mcfly init zsh)"
 # Use the patched cortex for async APIs
 # https://github.com/roaminsight/serve/pull/377#issuecomment-1162398406
 export CORTEX_CLI_PATH="/usr/local/bin/cortex"
+
+# --------------------------------------------------------------------------------------
+# Overrides
+
+export PMAN_DOC_PATH=~/MyDocuments/Obsidian-Vaults/obsidian-kyleking-vault/General/Tech/pman
