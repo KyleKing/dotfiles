@@ -112,6 +112,10 @@ return {
       regex = "\\b\\w+://(?:[\\w.-]+)\\.[a-z]{2,15}\\S*\\b",
       format = "$0",
     },
+    {
+      regex = "\\b\\w+://(?:localhost)?(?:[\\d.]+)?(?::\\d+)\\S*\\b",
+      format = "$0",
+    },
 
     -- implicit mailto link
     {
