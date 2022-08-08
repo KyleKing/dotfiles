@@ -31,6 +31,9 @@ alias gprc="gh pr checkout"
 # Get current PR number
 alias whichpr='gh pr view --json "number" | jq ".number"'
 
+# Commit with no pre-commit
+alias gcnv='git commit --no-verify --message'
+
 local-pr-diff() {
     # Use with: "local-pr-diff" when in a PR checkout directory
     # Fallback, should support main, but less common
