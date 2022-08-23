@@ -7,18 +7,11 @@
         {
           "foreground": "p:white",
           "properties": {
-            "command": "((pwd | grep -q \"$HOME/\") && (dirname \"$PWD\" | sed -E \"s-^$HOME($|(/.*))-~\\2-\")) || true",
-            "shell": "sh"
+            "style": "folder"
           },
           "style": "plain",
-          "template": "{{ .Output }}/",
-          "type": "command"
-        },
-        {
-          "foreground": "p:blue",
-          "style": "plain",
-          "template": "{{ .Folder }} ",
-          "type": "text"
+          "template": "{{ .Parent }}<p:blue>{{ .Path }}</> ",
+          "type": "path"
         },
         {
           "foreground": "p:green",
