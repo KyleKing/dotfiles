@@ -39,6 +39,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - safety
    package semgrep 0.107.0, installed using Python 3.10.4
     - semgrep
+   package skedulord 2.0.0, installed using Python 3.10.5
+    - skedulord
    package sqlfluff 1.2.1, installed using Python 3.10.4
     - sqlfluff
    package watchfiles 0.16.1, installed using Python 3.10.5

@@ -109,11 +109,10 @@ Unexpected static libraries:
   /usr/local/lib/libtclstub8.6.a
   /usr/local/lib/libtkstub8.6.a
 
-Warning: Found Ruby file outside caarlos0/tap tap formula directory.
-(/usr/local/Homebrew/Library/Taps/caarlos0/homebrew-tap/Formula):
-  /usr/local/Homebrew/Library/Taps/caarlos0/homebrew-tap/foo.rb
-
 Warning: You have unlinked kegs in your Cellar.
 Leaving kegs unlinked can lead to build-trouble and cause formulae that depend on
 those kegs to fail to run properly once built. Run `brew link` on these:
   libaec
+  python@3.10
+  python@3.8
+  jpeg-turbo
