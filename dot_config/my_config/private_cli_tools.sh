@@ -66,6 +66,7 @@ rpl () {
     lsl
 }
 rpin () {
+    echo "$(rpg-cli pwd)"
     rcd ~
     rpg-cli ls
     echo "~~ Stats ~~"

@@ -1,8 +1,6 @@
 act 0.2.29
 ansible 5.8.0
 aom 3.4.0
-apr 1.7.0_2
-apr-util 1.6.1_4
 as-tree 0.12.0
 asciidoctor 2.0.17
 asdf 0.10.2
@@ -12,7 +10,6 @@ awscli 2.7.25
 bash 5.1.16
 bat 0.21.0
 bdw-gc 8.0.6
-bison 3.8.2
 bottom 0.6.8
 brew-rmtree 2.2.6_1
 brotli 1.0.9
@@ -178,7 +175,6 @@ micro 2.0.10
 minikube 1.26.0
 mpdecimal 2.5.1
 mpfr 4.1.0
-mupdf 1.20.0
 nasm 2.15.05
 navi 2.20.1
 ncurses 6.3
@@ -191,6 +187,7 @@ nmap 7.92
 node 17.7.1
 npth 1.6
 nyancat 1.5.2
+octant 0.25.1
 oh-my-posh 8.33.0
 openexr 3.1.5
 openjdk 17
@@ -224,6 +221,7 @@ qemu 7.0.0_1
 readline 8.1.2
 redis 7.0.0
 ripgrep 13.0.0
+rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
 ruby 3.1.2
 rust 1.63.0
@@ -244,7 +242,6 @@ spotify-tui 0.25.0
 sqlite 3.39.2
 stern 1.21.0
 stow 2.3.1
-subversion 1.14.2
 swig 4.0.2
 terminal-notifier 2.0.0
 tesseract 5.1.0
@@ -260,7 +257,6 @@ tt 1.9.4
 unbound 1.16.0
 unixodbc 2.3.11
 unrtf 0.21.10
-utf8proc 2.7.0
 util-macros 1.19.3
 vde 2.3.2_1
 watch 3.3.17
@@ -302,7 +298,6 @@ gifcapture 1.1.0
 github 2.9.3-2c86f4d1
 gitkraken 7.7.2
 google-chrome 93.0.4577.63
-headlamp 0.11.0
 hiddenbar 1.9
 imageoptim 1.8.8
 insomnia 2021.5.2
@@ -327,7 +322,6 @@ paletro 1.6.0
 pgadmin4 6.10
 pixel-picker 1.6.1
 postman 9.13.0
-qlcolorcode 4.1.0
 qlstephen 1.5.1
 quicklook-json 2,1.0
 raycast 1.25.1
