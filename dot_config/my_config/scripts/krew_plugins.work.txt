@@ -1,2 +1,12 @@
+deprecations
+doctor
+flame
+graph
 iexec
+images
+kurt
+lineage
 neat
+resource-capacity
+status
+trace
