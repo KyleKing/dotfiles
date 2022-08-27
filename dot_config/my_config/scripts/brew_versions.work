@@ -187,7 +187,6 @@ nmap 7.92
 node 17.7.1
 npth 1.6
 nyancat 1.5.2
-octant 0.25.1
 oh-my-posh 8.33.0
 openexr 3.1.5
 openjdk 17
@@ -210,8 +209,8 @@ pngcrush 1.8.13
 podman 4.1.1
 poetry 1.1.15
 popeye 0.9.8
-postgresql 14.2_1
 postgresql@13 13.7
+postgresql@14 14.2_1
 powerlevel10k 1.16.1
 pre-commit 2.20.0
 python-tabulate 0.8.9_1
