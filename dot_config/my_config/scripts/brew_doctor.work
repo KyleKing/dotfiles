@@ -2,6 +2,10 @@
 with debugging if you file an issue. If everything you use Homebrew for is
 working fine: please don't worry or file an issue; just ignore this. Thanks![0m
 
+Warning: Some installed formulae are deprecated or disabled.
+You should find replacements for the following formulae:
+  go@1.16
+
 Warning: "config" scripts exist outside your system or Homebrew directories.
 `./configure` scripts often look for *-config scripts to determine if
 software packages are installed, and which additional flags to use when
