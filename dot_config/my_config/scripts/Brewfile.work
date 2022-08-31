@@ -202,3 +202,13 @@ cask "webpquicklook"
 cask "wezterm-nightly"
 cask "xbar"
 cask "zoom"
+mas "Charmstone", id: 1563735522
+mas "Downlink", id: 1454269192
+mas "Dropover", id: 1355679052
+mas "GIPHY CAPTURE", id: 668208984
+mas "Install macOS Catalina", id: 0
+mas "KeyLimePie", id: 1575163350
+mas "Letter Opener", id: 411897373
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Noizio", id: 928871589
+mas "Spotica Menu", id: 570549457
