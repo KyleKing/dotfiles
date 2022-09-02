@@ -1,210 +1,210 @@
 {
-  "createdAt": "2022-09-02T16:41:57.517Z",
-  "createdBy": "Redirector v3.5.3",
-  "redirects": [
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/5-new-git-commands-and-1-tip-youll-use-every-day-3c28e97c9321",
-      "exampleUrl": "https://blog.argoproj.io/5-new-git-commands-and-1-tip-youll-use-every-day-3c28e97c9321",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*argoproj.io/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
-      "exampleUrl": "https://blog.devgenius.io/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*devgenius.io/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
-      "exampleUrl": "https://betterprogramming.pub/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*betterprogramming.pub/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/a-step-by-step-guide-to-scheduling-tasks-for-your-data-science-project-d7df4531fc41",
-      "exampleUrl": "https://towardsdatascience.com/a-step-by-step-guide-to-scheduling-tasks-for-your-data-science-project-d7df4531fc41",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*towardsdatascience.com/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/brace-yourself-omicrons-going-to-be-worse-than-you-probably-think-f69d6f7f18aa",
-      "exampleUrl": "https://eand.co/brace-yourself-omicrons-going-to-be-worse-than-you-probably-think-f69d6f7f18aa",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*eand.co/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/the-truth-about-log4j-zero-day-exploit-b206741534f7",
-      "exampleUrl": "https://aws.plainenglish.io/the-truth-about-log4j-zero-day-exploit-b206741534f7",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*plainenglish.io/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/read-vaults-secrets-from-jenkin-s-declarative-pipeline-50a690659d6",
-      "exampleUrl": "https://codeburst.io/read-vaults-secrets-from-jenkin-s-declarative-pipeline-50a690659d6",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*codeburst.io/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/start-using-env-for-your-flask-project-and-stop-using-environment-variables-for-development-247dc12468be",
-      "exampleUrl": "https://itnext.io/start-using-env-for-your-flask-project-and-stop-using-environment-variables-for-development-247dc12468be",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*itnext.io/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": true,
-      "error": null,
-      "exampleResult": "https://scribe.rip/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
-      "exampleUrl": "https://hogantorah.medium.com/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://([^l].*)medium\\.com/([^@][^k][^y][^l].*)",
-      "patternDesc": "Ignores my reading lists and the medium homepage (and \"link.medium.com/<>\")",
-      "patternType": "R",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "NoMedium",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://scribe.rip/asdfasdf",
-      "exampleUrl": "https://medium.com/asdfasdf",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://*medium.com/*",
-      "patternDesc": "Medium - if need to access medium.com proper, turn off redirector temporarily",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://scribe.rip/$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "S3 redirect",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://s3.console.aws.amazon.com/s3/object/roam-reviewer-import-export-stage?region=us-west-2&prefix=e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
-      "exampleUrl": "s3://roam-reviewer-import-export-stage/e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "s3://*/*",
-      "patternDesc": "WIP: Make s3 auto-redirect!",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://s3.console.aws.amazon.com/s3/object/$1?region=us-west-2&prefix=$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
-      "description": "Redirect Annoying Awesome Open Source to Github",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://github.com/xnuinside/omymodels",
-      "exampleUrl": "https://awesomeopensource.com/project/xnuinside/omymodels",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "https://awesomeopensource.com/project/*/*",
-      "patternDesc": "",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://github.com/$1/$2"
-    }
-  ]
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2022-09-02T16:56:50.700Z",
+    "redirects": [
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://blog.argoproj.io/5-new-git-commands-and-1-tip-youll-use-every-day-3c28e97c9321",
+            "exampleResult": "https://scribe.rip/5-new-git-commands-and-1-tip-youll-use-every-day-3c28e97c9321",
+            "error": null,
+            "includePattern": "https://(.+\\.)?argoproj.io/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://blog.devgenius.io/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
+            "exampleResult": "https://scribe.rip/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
+            "error": null,
+            "includePattern": "https://(.+\\.)?devgenius.io/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://betterprogramming.pub/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
+            "exampleResult": "https://scribe.rip/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
+            "error": null,
+            "includePattern": "https://(.+\\.)?betterprogramming.pub/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://towardsdatascience.com/a-step-by-step-guide-to-scheduling-tasks-for-your-data-science-project-d7df4531fc41",
+            "exampleResult": "https://scribe.rip/a-step-by-step-guide-to-scheduling-tasks-for-your-data-science-project-d7df4531fc41",
+            "error": null,
+            "includePattern": "https://(.+\\.)?towardsdatascience.com/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://eand.co/brace-yourself-omicrons-going-to-be-worse-than-you-probably-think-f69d6f7f18aa",
+            "exampleResult": "https://scribe.rip/brace-yourself-omicrons-going-to-be-worse-than-you-probably-think-f69d6f7f18aa",
+            "error": null,
+            "includePattern": "https://(.+\\.)?eand.co/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://aws.plainenglish.io/the-truth-about-log4j-zero-day-exploit-b206741534f7",
+            "exampleResult": "https://scribe.rip/the-truth-about-log4j-zero-day-exploit-b206741534f7",
+            "error": null,
+            "includePattern": "https://(.+\\.)?plainenglish.io/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://codeburst.io/read-vaults-secrets-from-jenkin-s-declarative-pipeline-50a690659d6",
+            "exampleResult": "https://scribe.rip/read-vaults-secrets-from-jenkin-s-declarative-pipeline-50a690659d6",
+            "error": null,
+            "includePattern": "https://(.+\\.)?codeburst.io/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://itnext.io/start-using-env-for-your-flask-project-and-stop-using-environment-variables-for-development-247dc12468be",
+            "exampleResult": "https://scribe.rip/start-using-env-for-your-flask-project-and-stop-using-environment-variables-for-development-247dc12468be",
+            "error": null,
+            "includePattern": "https://(.+\\.)?itnext.io/(.+)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://hogantorah.medium.com/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
+            "exampleResult": "https://scribe.rip/gary-larson-whiffed-hard-when-he-published-cow-tools-9637536c0b22",
+            "error": null,
+            "includePattern": "https://([^l].*)medium\\.com/([^@][^k][^y][^l].*)",
+            "excludePattern": "",
+            "patternDesc": "Ignores my reading lists and the medium homepage (and \"link.medium.com/<>\")",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": true,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "NoMedium",
+            "exampleUrl": "https://medium.com/asdfasdf",
+            "exampleResult": "https://scribe.rip/asdfasdf",
+            "error": null,
+            "includePattern": "https://(.+\\.)?medium.com/(.+)",
+            "excludePattern": "",
+            "patternDesc": "Medium - if need to access medium.com proper, turn off redirector temporarily",
+            "redirectUrl": "https://scribe.rip/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "S3 redirect",
+            "exampleUrl": "s3://roam-reviewer-import-export-stage/e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
+            "exampleResult": "https://s3.console.aws.amazon.com/s3/object/roam-reviewer-import-export-stage?region=us-west-2&prefix=e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
+            "error": null,
+            "includePattern": "s3://*/*",
+            "excludePattern": "",
+            "patternDesc": "WIP: Make s3 auto-redirect!",
+            "redirectUrl": "https://s3.console.aws.amazon.com/s3/object/$1?region=us-west-2&prefix=$2",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Redirect Annoying Awesome Open Source to Github",
+            "exampleUrl": "https://awesomeopensource.com/project/xnuinside/omymodels",
+            "exampleResult": "https://github.com/xnuinside/omymodels",
+            "error": null,
+            "includePattern": "https://awesomeopensource.com/project/*/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://github.com/$1/$2",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
 }
