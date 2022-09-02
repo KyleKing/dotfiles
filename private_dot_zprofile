@@ -1,17 +1,10 @@
 # Sourced once before ~/.zshrc - https://unix.stackexchange.com/a/487889
 
-# Add sbin from homebrew
-export PATH="/usr/local/sbin:$PATH"
+# Add sbin and bin from homebrew
+export PATH="/usr/local/sbin:/opt/homebrew/bin:$PATH"
 
 # Created by `pipx`
 export PATH="$PATH:/Users/kyleking/.local/bin"
-
-# Added from rustup-init (rust installer)
-source "$HOME/.cargo/env"
-
-# # Export Preview Gitkrakken CLI
-# export _GK_DIR=/Applications/GitKraken.app/Contents/Resources/app.asar.unpacked/resources/cli/unix
-# export PATH="$_GK_DIR:$PATH"
 
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config

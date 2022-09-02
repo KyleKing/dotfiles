@@ -15,12 +15,14 @@ ch-sync() {
     eval "$(op signin)" || return
     cd "$(chezmoi source-path)" || return
     chezmoi update --verbose
+
+    # Ensure other packages are up to date:
+    tldr --update
 }
 
 ch-scripts() {
     # Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
     gh extension upgrade --all
-    tldr --update
     $HOME/.config/my_config/scripts/generate_machine_snapshot.sh
 }
 
