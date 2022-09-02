@@ -3,6 +3,9 @@
 ## Installation Instructions
 
 ```sh
+# Install oh-my-zsh from: https://ohmyz.sh/#install
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 brew install chezmoi
 chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
