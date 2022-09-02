@@ -4,7 +4,7 @@
 
 ```sh
 brew install chezmoi
-chezmoi init https://github.com/KyleKing/dotfiles --verbose
+chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
 # Note if symlinks are reported as broken, see where they should point to with `ls -l <>`
 mkdir ~/.config/chezmoi-dual-linked/Sublime-Packages-User/Projects
