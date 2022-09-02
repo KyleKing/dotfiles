@@ -2,9 +2,6 @@
 #      ^----- get shellcheck hints based on bash
 # https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 
-# Fix no-tty for gpg/pinentry (https://stackoverflow.com/a/42265848)
-export GPG_TTY=$(tty)
-
 # Set the upstream branch and push
 # From: https://github.com/ornicar/dotfiles/blob/7f0940aa42b7c79771ad1fe31be21cd49827f161/zsh/git-functions.zsh#L35-L40
 git-set-upstream() {
