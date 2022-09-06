@@ -159,7 +159,10 @@ return {
   -- https://github.com/wez/wezterm/issues/1124#issue-991315823
 
   -- Ensure supported font
-  font = wezterm.font("Hack Nerd Font Mono"),
+  font = wezterm.font_with_fallback{
+    "Hack Nerd Font Mono",
+    "Fira Code",
+  },
 
   -- Colors: https://wezfurlong.org/wezterm/config/appearance.html
   -- Note that "color_scheme" overrides "colors"
