@@ -38,8 +38,12 @@
       "TZ": "Asia/Calcutta"
     },
     {
-      "Name": "France",
-      "TZ": "Arctic/Longyearbyen"
+      "Name": "Turkey",
+      "TZ": "Turkey"
+    },
+    {
+      "Name": "London",
+      "TZ": "Europe/Belfast"
     }
   ]
 }
