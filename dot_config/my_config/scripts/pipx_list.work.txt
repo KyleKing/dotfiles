@@ -4,3 +4,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - calcipy
    package envtpl 0.7.2, installed using Python 3.10.6
     - envtpl
+   package poetry 1.1.15, installed using Python 3.10.6
+    - poetry
+   package sourcery-cli 0.12.7, installed using Python 3.10.6
+    - sourcery
+   package yamlfix 1.0.1, installed using Python 3.10.6
+    - yamlfix
