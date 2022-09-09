@@ -51,8 +51,7 @@ brew "htop"
 brew "http-prompt"
 brew "httpstat"
 brew "hyperfine"
-brew "imagemagick", link: false
-brew "imagemagick@6", link: true
+brew "imagemagick"
 brew "jpeg"
 brew "jpegoptim"
 brew "k9s"
@@ -162,6 +161,7 @@ cask "webpquicklook"
 cask "wezterm"
 cask "xbar"
 mas "Charmstone", id: 1563735522
+mas "ColorSlurp", id: 1287239339
 mas "Downlink", id: 1454269192
 mas "Dropover", id: 1355679052
 mas "GIPHY CAPTURE", id: 668208984
@@ -172,5 +172,6 @@ mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Spotica Menu", id: 570549457
