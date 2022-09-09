@@ -1103,8 +1103,7 @@
     "highlight_modified_tabs": true,
     "ignored_packages": [
         "Formatter",
-        "SublimeLinter-contrib-dockerfilelint",
-        "SublimeLinter-contrib-SpellCheckLinter",
+        "Markdown",
         "Vintage",
     ],
     "indent_guide_options": ["draw_normal","draw_active"],

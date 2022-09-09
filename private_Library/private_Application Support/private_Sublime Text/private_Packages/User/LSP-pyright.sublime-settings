@@ -1,8 +1,8 @@
 {
 	"settings": {
 		"pyright.dev_environment": "sublime_text_38",
-		"python.analysis.extraPaths": [".venv"],
 		"pyright.disableOrganizeImports": true,
-		"python.venvPath": "."
+		"python.analysis.extraPaths": [".venv"],
+		"python.venvPath": "./reviewer-api"
 	}
 }

@@ -11,12 +11,17 @@
         },
         "flake8": {
             "args": [
+                "--config=./reviewer-api/.flake8",
+                "--ignore=I005"
+            ],
+            "args-old": [
                 "--max-line-length=88",
                 "--ignore=B902,D100,D103,D205,D209,D400,D401,D403,E203,E501,E722,W503",
                 "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
             ],
             "disable": false,
-            "python": "$HOME/.asdf/shims/python"
+            "python": "$HOME/Developer/apps/reviewer-main/reviewer-api/.venv/bin/python",
+            "python-old": "$HOME/.asdf/shims/python"
         },
         "pylint": {
             "args": [
