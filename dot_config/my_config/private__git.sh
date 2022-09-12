@@ -2,9 +2,11 @@
 #      ^----- get shellcheck hints based on bash
 # https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 
-# Toggled to restore persistence of GPG password
-# # Fix no-tty for gpg/pinentry (https://stackoverflow.com/a/42265848)
-# export GPG_TTY=$(tty)
+# Work with no-tty for gpg & pinentry (https://stackoverflow.com/a/42265848)
+GPG_TTY=$(tty)
+export GPG_TTY
+# helper for debugging GPG issues and git. From: https://stackoverflow.com/a/41054093/3219667
+alias test-gpg='echo "test" | gpg --clearsign'
 
 # Set the upstream branch and push
 # From: https://github.com/ornicar/dotfiles/blob/7f0940aa42b7c79771ad1fe31be21cd49827f161/zsh/git-functions.zsh#L35-L40
