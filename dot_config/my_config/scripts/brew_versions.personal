@@ -1,4 +1,4 @@
-ack 3.5.0
+ack 3.6.0
 act 0.2.29
 adns 1.6.0
 aom 3.4.0
@@ -8,7 +8,7 @@ assimp 5.2.4
 autoconf 2.71
 automake 1.16.5
 bandwhich 0.20.0
-bat 0.21.0
+bat 0.22.0
 bat-extras 2021.04.06
 bat-extras-batdiff 2021.04.06
 bat-extras-batgrep 2021.04.06
@@ -16,11 +16,11 @@ bat-extras-batman 2021.04.06
 bat-extras-batpipe 2021.04.06
 bat-extras-batwatch 2021.04.06
 bat-extras-prettybat 2021.04.06
-bdw-gc 8.0.6
+bdw-gc 8.0.6 8.2.2
 bison 3.8.2
 bluetoothconnector 2.0.0
 blueutil 2.9.0
-boost 1.79.0_1
+boost 1.79.0_2
 bpytop 1.0.68
 brew-rmtree 2.2.6_1
 brotli 1.0.9
@@ -39,7 +39,7 @@ cmocka 1.1.5
 coretemp 1.1.1
 coreutils 9.1
 ctags 5.8_2
-curl 7.84.0
+curl 7.85.0
 curlie 1.6.9
 czmq 4.2.1
 dark-mode 3.0.2
@@ -49,7 +49,7 @@ ddgr 2.0
 diskus 0.7.0
 docbook 5.1_1
 docbook-xsl 1.79.2_1
-double-conversion 3.2.0
+double-conversion 3.2.1 3.2.0
 dtc 1.6.1
 eigen 3.4.0_1
 enscript 1.6.6_1
@@ -58,7 +58,7 @@ exa 0.10.1
 exiftool 12.42_1
 fd 8.4.0
 fff 2.2
-ffmpeg 5.1
+ffmpeg 5.1.1
 ffmpeg@4 4.4.2_3
 flac 1.3.4
 flow 0.183.0
@@ -69,11 +69,11 @@ frei0r 1.8.0
 fribidi 1.0.12
 fswatch 1.17.1
 fx 24.0.0
-fzf 0.31.0
-gcc 11.3.0_2
-gd 2.3.3_2
+fzf 0.33.0
+gcc 12.2.0 11.3.0_2
+gd 2.3.3_2 2.3.3_3
 gdbm 1.23
-gdk-pixbuf 2.42.8
+gdk-pixbuf 2.42.9
 gettext 0.21
 gflags 2.2.2
 gh 2.14.3
@@ -87,44 +87,44 @@ git-lfs 3.2.0
 gl2ps 1.4.2
 glances 3.2.7
 glew 2.2.0_1
-glib 2.72.3
+glib 2.72.3_1 2.72.3
 glog 0.6.0
 glow 1.4.1
 gmp 6.2.1_1
-gnu-getopt 2.38
+gnu-getopt 2.38.1 2.38
 gnu-sed 4.8
 gnupg 2.3.7_1
 gnutls 3.7.7
-go 1.18.5 1.18.4
+go 1.19.1 1.18.5 1.18.4
 go@1.18 1.18.5
-gobject-introspection 1.72.0
-gojq 0.12.8
+gobject-introspection 1.72.0_2
+gojq 0.12.9
 graphicsmagick 1.3.38
 graphite2 1.3.14
-graphviz 5.0.0
+graphviz 5.0.1
 grc 1.13_1
 gstreamer 1.20.3
 gtop 1.1.3
 gts 0.7.6_2
-guile 3.0.8
-gum 0.4.0
-harfbuzz 5.0.1
-hdf5 1.12.2
+guile 3.0.8 3.0.8_2
+gum 0.6.0
+harfbuzz 5.0.1 5.1.0_1
+hdf5 1.12.2_1 1.12.2
 howdoi 2.0.19_5
 hstr 2.5
 htop 3.2.1
 httpie 3.2.1
 httpstat 1.3.1_1
-hunspell 1.7.0_2
-icu4c 70.1
-imagemagick 7.1.0-44_1
+hunspell 1.7.1 1.7.0_2
+icu4c 71.1 70.1
+imagemagick 7.1.0-47
 imath 3.1.5
 isl 0.25
 jasper 3.0.6_2
 jbig2dec 0.19
 jemalloc 5.3.0
 jpeg 9e
-jpeg-turbo 2.1.3
+jpeg-turbo 2.1.3 2.1.4
 jpeg-xl 0.6.1_1
 jpegoptim 1.4.7
 jsoncpp 1.9.5
@@ -142,9 +142,9 @@ libaec 1.0.6
 libarchive 3.6.1
 libass 0.16.0
 libassuan 2.5.5
-libavif 0.10.1
+libavif 0.10.1_1 0.10.1
 libb2 0.98.1
-libbluray 1.3.1
+libbluray 1.3.1 1.3.2
 libde265 1.0.8
 libdeflate 1.12
 libev 4.33
@@ -152,16 +152,16 @@ libevent 2.1.12
 libffi 3.4.2
 libgcrypt 1.10.1
 libgpg-error 1.45
-libheif 1.12.0_2
+libheif 1.12.0_2 1.13.0
 libidn 1.41
 libidn2 2.3.3
 libksba 1.6.0
 liblqr 0.4.2_1
 libmetalink 0.1.3
-libmng 2.0.3
+libmng 2.0.3_1 2.0.3
 libmodplug 0.8.9.0
 libmpc 1.2.1
-libnghttp2 1.48.0
+libnghttp2 1.48.0 1.49.0
 libogg 1.3.5
 libomp 14.0.6
 libpng 1.6.37
@@ -169,7 +169,7 @@ libproxy 0.4.17_1
 libpthread-stubs 0.4
 libraw 0.20.2_3
 librist 0.2.7_1
-librsvg 2.54.4
+librsvg 2.54.5
 libsamplerate 0.1.9_1
 libslirp 4.7.0
 libsndfile 1.1.0
@@ -177,9 +177,9 @@ libsodium 1.0.18_1
 libsoxr 0.1.3
 libspiro 20200505
 libspotify 12.1.51
-libssh 0.9.6
+libssh 0.9.6 0.10.4
 libssh2 1.10.0
-libtasn1 4.18.0
+libtasn1 4.19.0 4.18.0
 libtermkey 0.22
 libtiff 4.4.0_1
 libtool 2.4.7
@@ -192,7 +192,7 @@ libvmaf 2.3.1
 libvorbis 1.3.7
 libvpx 1.12.0
 libx11 1.8.1
-libxau 1.0.9
+libxau 1.0.10 1.0.9
 libxcb 1.15
 libxcursor 1.2.1
 libxdmcp 1.1.3
@@ -212,11 +212,11 @@ llvm 14.0.6_1
 lolcat 100.0.1
 luajit 2.1.0-beta3-20220712.6
 luv 1.44.2-0_1
-lz4 1.9.3
+lz4 1.9.4 1.9.3
 lzo 2.10
 m4 1.4.19
-mackup 0.8.34
-markdownlint-cli 0.32.0
+mackup 0.8.35
+markdownlint-cli 0.32.2
 mas 1.8.6
 mbedtls 3.2.1
 mcfly 0.6.1
@@ -233,34 +233,35 @@ ncurses 6.3
 neofetch 7.1.0
 neovim 0.7.2_1
 netcat 0.7.1
-netcdf 4.8.1_2
-netpbm 10.86.33
+netcdf 4.8.1_3 4.8.1_2
+netpbm 10.86.33 10.86.34
 nettle 3.8.1
-nghttp2 1.48.0
+nghttp2 1.49.0
 nmap 7.92
 nnn 4.6
-node 18.6.0
+node 18.9.0
 notcurses 3.0.8
 npth 1.6
-numpy 1.23.1
+numpy 1.23.1 1.23.2
 nyancat 1.5.2
 ocaml 4.12.0
-oh-my-posh 8.33.1
+oh-my-posh 9.0.0
 onefetch 2.12.0
-openblas 0.3.20
-opencore-amr 0.1.5
-opencv 4.5.5_3
+openblas 0.3.20 0.3.21
+opencore-amr 0.1.5 0.1.6
+opencv 4.6.0
 openexr 3.1.5
-openjdk 18.0.2
+openjdk 18.0.2.1 18.0.2
+openjdk@11 11.0.16.1
 openjpeg 2.5.0
 openldap 2.6.3
 openssl@1.1 1.1.1q
 opus 1.3.1
 ossp-uuid 1.6.2_2
 osx-cpu-temp 1.1.0
-p11-kit 0.24.1
+p11-kit 0.24.1 0.24.1_1
 pandoc 2.18
-pango 1.50.8
+pango 1.50.9
 pastel 0.9.0
 pcre 8.45
 pcre2 10.40
@@ -269,34 +270,34 @@ pinentry-mac 1.1.1.1
 pipx 1.1.0
 pixman 0.40.0
 pkg-config 0.29.2_3
-plantuml 1.2022.6
+plantuml 1.2022.7
 pngcrush 1.8.13
-podman 4.1.1
-poetry 1.1.14
+podman 4.2.1
+poetry 1.2.0
 popt 1.18
-postgresql@14 14.4
+postgresql@14 14.5_3
 powerlevel10k 1.16.1
 prettier 2.7.1
-protobuf 21.2
+protobuf 21.2 21.5
 pugixml 1.12.1_1
 py3cairo 1.21.0_1
-pygobject3 3.42.2
+pygobject3 3.42.2_1
 pyqt 6.3.1
 pyqt@5 5.15.7_1
-python@3.10 3.10.5
-python@3.8 3.8.13_1
-python@3.9 3.9.13_1
-qemu 7.0.0_1
-qt 6.3.1_1
-qt@5 5.15.5_1
-r 4.2.1
+python@3.10 3.10.6_2
+python@3.8 3.8.14
+python@3.9 3.9.14
+qemu 7.1.0
+qt 6.3.1_3
+qt@5 5.15.5_2
+r 4.2.1_3
 rav1e 0.5.1
 rbenv 1.2.0
 readline 8.1.2
 redis 7.0.3
 ripgrep 13.0.0
 rpg-cli 1.0.1
-rsync 3.2.4_1
+rsync 3.2.6
 rtmpdump 2.4+20151223_1
 rubberband 3.0.0
 ruby 3.1.2
@@ -304,10 +305,10 @@ ruby-build 20220713
 rustup-init 1.25.1
 s-lang 2.3.2
 screenresolution 1.6
-sdl2 2.0.22
+sdl2 2.0.22 2.24.0
 sdl2_image 2.6.0
 sdl2_mixer 2.6.0
-sdl2_ttf 2.20.0
+sdl2_ttf 2.20.1
 sevenzip 22.01
 shared-mime-info 2.2
 shellcheck 0.8.0
@@ -318,15 +319,16 @@ six 1.16.0_2
 sk 0.9.4
 snappy 1.1.9
 socli 7.1
+sonar-scanner 4.7.0.2747
 spark 1.0.1
 speedtest-cli 2.1.3_1
 speex 1.2.1
 sphinx-doc 5.1.1
 spotify-tui 0.25.0
-sqlite 3.39.2
+sqlite 3.39.3 3.39.2
 srt 1.5.0
 stow 2.3.1
-suite-sparse 5.12.0
+suite-sparse 5.13.0 5.12.0
 tbb 2021.5.0_2
 tcl-tk 8.6.12_1
 tere 1.1.0
@@ -344,26 +346,26 @@ tre 0.8.0
 tree-sitter 0.20.6_1
 tt 1.9.4
 tty-clock 2.3
-unbound 1.16.1
+unbound 1.16.2
 uncrustify 0.75.1
 unibilium 2.1.1
 unixodbc 2.3.11
 unzip 6.0_7
 utf8cpp 3.2.1
 vde 2.3.2_1
-vtk 9.1.0_4
+vtk 9.1.0_6
 watch 4.0.0
-webp 1.2.3 1.2.3_1
+webp 1.2.3 1.2.4 1.2.3_1
 wget 1.21.3
 x264 r3095
 x265 3.5
 xh 0.16.1
 xmlto 0.0.28
-xorgproto 2022.1
+xorgproto 2022.2 2022.1
 xplr 0.19.0
 xvid 1.3.7
 xxhash 0.8.1
-xz 5.2.5_1
+xz 5.2.5_1 5.2.6
 yadm 3.2.1
 yasm 1.3.0_2
 youtube-dl 2021.12.17
@@ -385,7 +387,7 @@ cozy-drive 3.36.0
 daisydisk latest
 docker 4.5.0,74594
 font-fontawesome 6.1.2
-font-hack-nerd-font 2.1.0
+font-hack-nerd-font 2.2.2
 hammerspoon 0.9.86
 hiddenbar 1.9
 integrity 12.3.15
@@ -411,6 +413,6 @@ suspicious-package 4.2.1,932
 tex-live-utility 1.36
 virtualbox 6.1.36,152435
 virtualbox-extension-pack 6.1.36
-wezterm 20220903-194523,3bb1ed61
+wezterm 20220905-102802,7d4b8249
 wireshark 3.6.3
 xbar 2.1.7-beta
