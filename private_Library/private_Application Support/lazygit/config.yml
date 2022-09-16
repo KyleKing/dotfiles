@@ -120,7 +120,8 @@ git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
     colorArg: always
-    pager: delta --paging=never
+    # FIXME: LazyGit is crashing with delta. Switch back to default for now
+    # pager: delta --paging=never
   log:
     showWholeGitGraph: true
 
