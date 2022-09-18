@@ -2,7 +2,7 @@
 with debugging if you file an issue. If everything you use Homebrew for is
 working fine: please don't worry or file an issue; just ignore this. Thanks![0m
 
-Warning: Unknown support status
+Warning: No Cask quarantine support available: unknown reason.
 
 Warning: A newer Command Line Tools release is available.
 Update them from Software Update in System Preferences or run:
