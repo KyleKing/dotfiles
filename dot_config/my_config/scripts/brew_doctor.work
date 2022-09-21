@@ -15,3 +15,4 @@ script of the same name. We found the following "config" scripts:
   /Users/kyleking/.asdf/shims/python3.9-config
   /Users/kyleking/.asdf/shims/python-config
   /Users/kyleking/.asdf/shims/python3-config
+  /Users/kyleking/.local/bin/pylint-config
