@@ -1,24 +1,24 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package black 22.6.0, installed using Python 3.10.4
+   package black 22.8.0, installed using Python 3.10.4
     - black
     - black-primer
     - blackd
-   package bpython 0.22.1, installed using Python 3.10.4
+   package bpython 0.23, installed using Python 3.10.4
     - bpdb
     - bpython
     - bpython-curses
     - bpython-urwid
    package codecov 2.1.12, installed using Python 3.10.4
     - codecov
-   package copier 6.1.0, installed using Python 3.10.4
+   package copier 6.2.0, installed using Python 3.10.4
     - copier
    package detect-secrets 1.3.0, installed using Python 3.10.4
     - detect-secrets
     - detect-secrets-hook
    package docformatter 1.5.0, installed using Python 3.10.6
     - docformatter
-   package flake8 4.0.1, installed using Python 3.10.4
+   package flake8 5.0.4, installed using Python 3.10.4
     - flake8
    package isort 5.10.1, installed using Python 3.10.4
     - isort
@@ -26,9 +26,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package mdformat-gfm 0.3.5, installed using Python 3.10.4
     - markdown-it
     - mdformat
-   package pygments 2.12.0, installed using Python 3.10.4
+   package pygments 2.13.0, installed using Python 3.10.4
     - pygmentize
-   package pytype 2022.7.26, installed using Python 3.10.4
+   package pytype 2022.9.19, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
@@ -37,19 +37,22 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyxref
    package rich-cli 1.8.0, installed using Python 3.10.5
     - rich
-   package semgrep 0.107.0, installed using Python 3.10.4
+   package semgrep 0.114.0, installed using Python 3.10.4
     - semgrep
    package skedulord 2.0.0, installed using Python 3.10.5
     - skedulord
    package sourcery-cli 0.12.8, installed using Python 3.10.6
     - sourcery
-   package sqlfluff 1.2.1, installed using Python 3.10.4
+   package sqlfluff 1.3.1, installed using Python 3.10.4
     - sqlfluff
-   package watchfiles 0.16.1, installed using Python 3.10.5
+   package watchfiles 0.17.0, installed using Python 3.10.5
     - watchfiles
-   package wily 1.22.0, installed using Python 3.10.4
+   package wily 1.23.0, installed using Python 3.10.4
     - wily
    package wordcloud 1.8.2.2, installed using Python 3.10.5
     - wordcloud_cli
-   package yamlfix 0.10.0, installed using Python 3.10.4
+   package yamlfix 1.1.0, installed using Python 3.10.4
     - yamlfix
+   package yapf 0.32.0, installed using Python 3.10.6
+    - yapf
+    - yapf-diff
