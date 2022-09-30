@@ -26,6 +26,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyupgrade
    package sourcery-cli 0.12.8, installed using Python 3.10.6
     - sourcery
+   package uncurl 0.0.11, installed using Python 3.10.6
+    - uncurl
    package unimport 0.11.3, installed using Python 3.10.6
     - unimport
    package yamlfix 1.1.0, installed using Python 3.10.6

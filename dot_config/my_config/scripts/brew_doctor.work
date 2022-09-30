@@ -11,6 +11,7 @@ Having additional scripts in your path can confuse software installed via
 Homebrew if the config script overrides a system or Homebrew-provided
 script of the same name. We found the following "config" scripts:
   /Users/kyleking/.asdf/shims/python3.7-config
+  /Users/kyleking/.asdf/shims/python3.10-config
   /Users/kyleking/.asdf/shims/python3.7m-config
   /Users/kyleking/.asdf/shims/python3.9-config
   /Users/kyleking/.asdf/shims/python-config
