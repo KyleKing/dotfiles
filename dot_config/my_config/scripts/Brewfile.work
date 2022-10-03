@@ -77,7 +77,6 @@ brew "pandoc"
 brew "pipx"
 brew "plantuml"
 brew "pngcrush"
-brew "postgresql@13", link: true
 brew "pre-commit"
 brew "ripgrep"
 brew "rpg-cli"

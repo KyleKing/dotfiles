@@ -171,7 +171,6 @@ pixman 0.40.0
 pkg-config 0.29.2_3
 plantuml 1.2022.8
 pngcrush 1.8.13
-postgresql@13 13.8_2
 pre-commit 2.20.0
 python@3.10 3.10.6_2
 pyyaml 6.0
