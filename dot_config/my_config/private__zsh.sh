@@ -33,8 +33,14 @@ bindkey "^N" history-beginning-search-forward
 bindkey "^P" history-beginning-search-backward
 
 # Useful aliases for working with history
+# > View JSON in CLI
 alias ppj="pbaspate | jq"
+# > Copy Last Line
 alias cll="fc -ln 0 | tail -n 1 | pbcopy"
+
+# Configuration for McFly for menu-based history search
+export MCFLY_RESULTS=50
+export MCFLY_FUZZY=2
 
 # Useful combination of mkdir and cd
 mkcd() {
