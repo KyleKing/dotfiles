@@ -13,9 +13,9 @@ prSections:
 issuesSections:
   - title: Assigned
     filters: archived:false is:issue is:open assignee:@me
-  - title: My Internal PRs
+  - title: My Internal Issues
     filters: archived:false is:issue is:open author:@me org:KyleKing
-  - title: My External PRs
+  - title: My External Issues
     filters: archived:false is:issue is:open author:@me -org:KyleKing
   - title: Mentions Me
     filters: archived:false is:issue is:open mentions:@me
