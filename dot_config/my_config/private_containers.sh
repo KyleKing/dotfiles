@@ -14,3 +14,29 @@ alias lzd='lazydocker'
 
 # Configure the Krew plugin manager for kubectl
 export PATH="${PATH}:${HOME}/.krew/bin"
+
+# Helpers for quickly reviewing what is deployed to the specified environment
+first-pod() {
+    # Use with: first-pod reviewer
+    _search=$1
+    if [[ -z "$_search" ]]; then
+        echo "The search strings must be specified. Expected: 'first-pod ...'"
+    else
+        _match=$(kubectl get pods -o json | jq ".items[].metadata.name" | grep --max-count=1 "$_search")
+        if [[ -z "$_match" ]]; then
+            kubectl get pods
+            echo "Failed to find a match. Ensure that you set a namespace"
+            return 1
+        else
+            echo $_match
+        fi
+    fi
+}
+desc-first-pod() {
+    # Use with: desc-first-pod reviewer
+    first-pod $1 | xargs kubectl describe pods
+}
+current-img() {
+    # Use with: desc-first-pod reviewer
+    desc-first-pod $1 | grep "Image:" | awk -F '  +' '{print $3}'
+}
