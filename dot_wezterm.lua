@@ -6,19 +6,14 @@
 -- Added custom shortcuts specified below for splitting, but kept the defaults for:
 --  navigation (CTRL+SHIFT and arrow key)
 --  resize (CTRL+SHIFT+ALT and arrow key)
--- There is a nice feature if wanted for leader keys to behave like tmux
+-- There is a nice feature if wanted for leader keys to behave like tmux or Sublime origami (i.e. CMD K)
+-- https://github.com/zhaohongxuan/dotfiles/blob/3ac55a1c31b9f706b366fb79b2b4328581c9fd91/dot_config/wezterm/wezterm.lua#L26-L38
 
 local wezterm = require 'wezterm';
 
 -- PLANNED: Add the below shortcuts
 -- # clear the terminal screen
 -- map cmd+k combine : clear_terminal scrollback active : send_text normal,application \x0c
--- # jump to beginning and end of word
--- map alt+left send_text all \x1b\x62
--- map alt+right send_text all \x1b\x66
--- # jump to beginning and end of line
--- map cmd+left send_text all \x01
--- map cmd+right send_text all \x05
 
 -- Source: https://github.com/wez/wezterm/discussions/529#discussioncomment-463888
 -- Hyperlinks: https://github.com/wez/wezterm/blob/7deb215303ce1a8e64d48f65ef3e0a1d24fc2fbc/docs/hyperlinks.md#L17
