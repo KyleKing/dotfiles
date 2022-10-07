@@ -2,8 +2,6 @@
 
 | Type    | Comment                                                                                 | Last Edit   | Source File                                                                                                                                                                       |
 |---------|-----------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PLANNED | Execute git-cliff to generate the initial changelog file here                           | 2022-01-19  | [dot_config/git-cliff/add_jira_links.py:47](https://github.com/KyleKing/dotfiles/blame/f1a796bac4ed86d35a3861cf5c1357fc53caaae5/dot_config/git-cliff/add_jira_links.py#L47)       |
-| PLANNED | Could retrieve the JIRA title, but too much effort. See notes above                     | 2022-01-19  | [dot_config/git-cliff/add_jira_links.py:56](https://github.com/KyleKing/dotfiles/blame/f1a796bac4ed86d35a3861cf5c1357fc53caaae5/dot_config/git-cliff/add_jira_links.py#L56)       |
 | TODO    | How do I get the nested e<> commands?                                                   | 2022-01-14  | [dot_config/lf/lfrc:105](https://github.com/KyleKing/dotfiles/blame/89abe435dc8a4b8517ace743251854aad207197b/dot_config/lf/lfrc#L105)                                             |
 | FIXME   | These two plugins are not found?                                                        | 2022-02-21  | [dot_config/my_config/private__omz.sh:119](https://github.com/KyleKing/dotfiles/blame/0e93abff0289608b84c03589bf43698d6a344d45/dot_config/my_config/private__omz.sh#L116)         |
 | FIXME   | Create new project file per project with path to the .venv Python                       | 2022-02-19  | [dot_config/my_config/private__sublime.sh:5](https://github.com/KyleKing/dotfiles/blame/5d311fd72496f901056c4924d3d0c6ec7115d427/dot_config/my_config/private__sublime.sh#L5)     |
@@ -23,6 +21,6 @@
 | TODO    | The color of the split lines between panes                                              | 2021-12-29  | [dot_wezterm.lua:197](https://github.com/KyleKing/dotfiles/blame/e08c076f6fb85776a15331427dc8394d076ec6f8/dot_wezterm.lua#L74)                                                    |
 | FIXME   | LazyGit is crashing with delta. Switch back to default for now                          | N/A         | private_Library/private_Application Support/lazygit/config.yml:123                                                                                                                |
 
-Found code tags for FIXME (5), TODO (11), PLANNED (4)
+Found code tags for FIXME (5), TODO (11), PLANNED (2)
 
 <!-- calcipy:skip_tags -->
