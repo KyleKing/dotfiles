@@ -206,7 +206,4 @@ return {
   -- Stylize the Window
   window_decorations = "RESIZE",
   hide_tab_bar_if_only_one_tab = true,
-
-  -- Turn of Y/N on quit, but best to keep it on as it clears all open sessions
-  -- window_close_confirmation="NeverPrompt",
 }

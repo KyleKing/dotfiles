@@ -11,21 +11,17 @@
 # Ensure 256 Color
 export TERM=xterm-256color
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='nano'
-else
-    export EDITOR='subl'
-    export VISUAL='subl'
-fi
+# Preferred editors
+export EDITOR='subl'
+export VISUAL='subl'
 
 # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
 export HISTCONTROL=ignoredups
 
 # Variable descriptions: https://stackoverflow.com/a/19454838/3219667
 HISTFILE="$HOME/.histfile"
-export HISTSIZE=10000 # number of lines or commands that are stored in memory in a history list while your bash session is ongoing.
-export SAVEHIST=10000 # is the number of lines or commands that (a) are allowed in the history file at startup time of a session, and (b) are stored in the history file at the end of your bash session for use in future sessions
+export HISTSIZE=25000 # number of lines or commands that are stored in memory in a history list while your bash session is ongoing.
+export SAVEHIST=25000 # is the number of lines or commands that (a) are allowed in the history file at startup time of a session, and (b) are stored in the history file at the end of your bash session for use in future sessions
 bindkey -e
 
 # Based on: https://github.com/zsh-users/zsh-autosuggestions/issues/609#issuecomment-904204583
