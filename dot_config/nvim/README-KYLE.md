@@ -19,7 +19,7 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 - `<>` indicates that the inner keys need to be typed. `C-` is `ctrl` and `M-` is for meta (`cmd`).
 - `<:wq>` is save and quit vs. `<:q!>` quit and discard changes. Press `<ENTER>` to apply
 - `<ESC>` normal mode
-- Clicking does move the curosr in WezTerm
+- Clicking does move the cursor in WezTerm
 - Individual Keys (only works in normal mode)
     - `h (left) j (down has '_') k (up) l (right)
     - `i` insert
@@ -29,17 +29,17 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
     - `x` delete char under cursor
     - `u` undo and `U` undo all changes on the same line
     - `<C-r>` (`Ctrl r`) to redo
-    - `p` put (paste) after/below cursor or `P` before/above curser
-    - `<C-g>` display curosr position
+    - `p` put (paste) after/below cursor or `P` before/above cursor
+    - `<C-g>` display cursor position
     - `G` to go end of file and `gg` to go to top or `#G` for go to line
 - "operator": leader character
     - `d`: delete
 - "count": repeats the prior (or subsequent) "operator" and/or "motion"
-    - `#+` (1-∞): reptitions
+    - `#+` (1-∞): repetitions
     - `0` move to start of line
     - Example: `2dd` delete the next two lines
 - "motion": key after an "operator" and/or "count" that specifies the operation (i.e. `3e` or `dw`)
-    - `w`: from cursort to start of next word
+    - `w`: from cursor to start of next word
     - `e`: from cursor to end of word
     - `$`: from cursor to end of line
 - Snippets
@@ -49,5 +49,5 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 Left off around line 500 on `<:Tutor>`
 
 - Is `:` the `leader` key?
-- How do I display and/or remove trailing whitespace from the file?
+- How do I display and/or remove trailing white space from the file?
 - How do I get the rainbow indent guides?

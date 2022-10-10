@@ -1,6 +1,5 @@
 # Sourced on every command - https://unix.stackexchange.com/a/487889
 
 # Preferred editors (set here for Wezterm)
-export BREW_PREFIX=$(brew --prefix)
-export EDITOR=$BREW_PREFIX/bin/subl
-export VISUAL=$BREW_PREFIX/bin/subl
+export EDITOR={{- .homebrew_prefix -}}/bin/subl
+export VISUAL={{- .homebrew_prefix -}}/bin/subl
