@@ -34,8 +34,6 @@ function editable(filename)
     extension = extension:sub(2)
     wezterm.log_info(string.format("extension is [%s]", extension))
     local binary_extensions = {
-      jpg = true,
-      jpeg = true,
       zip = true,
       zg = true,
       -- and so on
@@ -56,7 +54,7 @@ function editable(filename)
 end
 
 function extract_filename(uri)
-  local start, match_end = uri:find("$EDITOR:");
+  local start, match_end = uri:find("EDITOR:");
   if start == 1 then
     -- skip past the colon
     return uri:sub(match_end+1)
@@ -84,8 +82,8 @@ wezterm.on("open-uri", function(window, pane, uri)
     -- you will need to restart wezterm for this to take effect,
     -- as there isn't a way for wezterm to "see into" your shell
     -- environment and capture it.
-    -- FIXME: This isn't retrieving the VISUAL or EDITOR export...
-    local editor = os.getenv("VISUAL") or os.getenv("EDITOR") or "/usr/local/bin/subl"
+
+    local editor = os.getenv("VISUAL") or os.getenv("EDITOR") or "nano"
 
     -- Use "SpawnCommandInNewWindow" or "SplitHorizontal"
     local action = wezterm.action{SplitHorizontal={args={editor, name}}};
@@ -97,38 +95,63 @@ wezterm.on("open-uri", function(window, pane, uri)
 end)
 
 return {
+  -- Override Defaults: https://wezfurlong.org/wezterm/hyperlinks.html
   hyperlink_rules = {
-    -- These are the default rules, but you currently need to repeat
-    -- them here when you define your own rules, as your rules override
-    -- the defaults
-
-    -- URL with a protocol
+    -- Linkify things that look like URLs and the host has a TLD name.
+    -- Override default with a modified version of the Perfect URL Regex (https://urlregex.com/)"
     {
-      regex = "\\b\\w+://(?:[\\w.-]+)\\.[a-z]{2,15}\\S*\\b",
+      regex = [[\b\w+://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\b]],
       format = "$0",
     },
+    -- -- Linkify things that look like URLs with numeric addresses as hosts.
+    -- -- E.g. http://127.0.0.1:8000 for a local development server,
+    -- -- or http://192.168.1.1 for the web interface of many routers.
+    -- {
+    --   regex = [[\b\w+://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
+    --   format = '$0',
+    -- },
+    -- -- And local host?
+    -- {
+    --   regex = "\\b\\w+://(?:localhost)?(?:[\\d.]+)?(?::\\d+)\\S*\\b",
+    --   format = "$0",
+    -- },
+
+    -- linkify email addresses
+    -- Compiled-in default. Used if you don't specify any hyperlink_rules.
     {
-      regex = "\\b\\w+://(?:localhost)?(?:[\\d.]+)?(?::\\d+)\\S*\\b",
-      format = "$0",
+      regex = [[\b\w+@[\w-]+(\.[\w-]+)+\b]],
+      format = 'mailto:$0',
     },
 
-    -- implicit mailto link
+    -- file:// URI
+    -- Compiled-in default. Used if you don't specify any hyperlink_rules.
     {
-        regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
-        format = "mailto:$0",
+      regex = [[\bfile://\S*\b]],
+      format = '$0',
     },
 
-    -- new in nightly builds; automatically highly file:// URIs.
+    -- -- Make username/project paths clickable. This implies paths like the following are for GitHub.
+    -- -- ( "nvim-treesitter/nvim-treesitter" | wbthomason/packer.nvim | wez/wezterm | "wez/wezterm.git" )
+    -- -- As long as a full URL hyperlink regex exists above this it should not match a full URL to
+    -- -- GitHub or GitLab / BitBucket (i.e. https://gitlab.com/user/project.git is still a whole clickable URL)
+    -- {
+    --   regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
+    --   format = 'https://www.github.com/$1/$3',
+    -- },
+
+    -- Link JIRA tickets
     {
-        regex = "\\bfile://\\S*\\b",
-        format = "$0"
+      regex = "\\[([A-Z]{2,4}-\\d{2,4})\\]",
+      format = 'https://issues.roaminsight.net/browse/$0',
     },
 
     -- Now add a new item at the bottom to match things that are probably filenames
-
     {
-      regex = "/?\\b\\S*/\\S*\\.[a-zA-Z]+\\b:?\\d*",
-      format = "$EDITOR:$0"
+      -- regex = [[/?\b\S*/\S*\.[a-zA-Z]+\b:?\d*]],
+      -- PLANNED: attempted to also catch escaped whitespace in filenames
+      -- But doesn't get paths when a folder has a "."
+      regex = [[/?\b(?:[^ !$`&*()+]|(\\[ !$`&*()+]))+\.[a-zA-Z\-_]+(?::\d+)?\b]],
+      format = "EDITOR:$0"
     },
   },
 

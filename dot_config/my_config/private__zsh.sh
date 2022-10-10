@@ -11,10 +11,6 @@
 # Ensure 256 Color
 export TERM=xterm-256color
 
-# Preferred editors
-export EDITOR='subl'
-export VISUAL='subl'
-
 # Don't put duplicate lines in the history: https://www.eriwen.com/bash/effective-shorthand/
 export HISTCONTROL=ignoredups
 
