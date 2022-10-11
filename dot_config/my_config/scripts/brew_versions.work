@@ -35,7 +35,7 @@ fontconfig 2.14.0
 freetype 2.12.1
 fribidi 1.0.12
 fzf 0.34.0
-gawk 5.1.1
+gawk 5.2.0
 gcc 12.2.0
 gd 2.3.3_3
 gdbm 1.23
@@ -72,7 +72,7 @@ http-prompt 2.1.0_1
 httpstat 1.3.1_2
 hyperfine 1.15.0
 icu4c 71.1
-imagemagick 7.1.0-49_1
+imagemagick 7.1.0-50
 imath 3.1.5
 isl 0.25
 jasper 3.0.6_2
@@ -94,11 +94,11 @@ libavif 0.10.1_2
 libde265 1.0.8
 libevent 2.1.12
 libgcrypt 1.10.1
-libgpg-error 1.45
+libgpg-error 1.46
 libheif 1.13.0_1
 libidn 1.41
 libidn2 2.3.3
-libksba 1.6.1
+libksba 1.6.2
 liblqr 0.4.2_1
 libmpc 1.2.1
 libnghttp2 1.50.0
@@ -127,7 +127,7 @@ libyaml 0.2.5
 libzip 1.9.2
 little-cms2 2.13.1_1
 lolcat 100.0.1
-luajit 2.1.0-beta3-20220815.3
+luajit 2.1.0-beta3-20221004.1
 luv 1.44.2-1
 lz4 1.9.4
 lzo 2.10
@@ -153,7 +153,7 @@ nettle 3.8.1
 node 18.10.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.0.1
+oh-my-posh 12.1.0
 openblas 0.3.21
 openexr 3.1.5
 openjdk 19
@@ -175,7 +175,7 @@ pngcrush 1.8.13
 pre-commit 2.20.0
 python@3.10 3.10.7
 pyyaml 6.0
-readline 8.1.2
+readline 8.2.1
 ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
@@ -223,7 +223,7 @@ cheatsheet 1.6.3
 customshortcuts 1.1,102
 daisydisk 4.23.1
 dash 6.3.1,1000
-dbeaver-community 22.2.1
+dbeaver-community 22.2.2
 dhs 1.4.1
 docker 4.12.0,85629
 drawio 20.3.0
@@ -239,6 +239,7 @@ github 3.0.7-38727e62
 gitkraken 8.8.0
 google-chrome 104.0.5112.101
 imageoptim 1.8.8
+inso 3.6.0
 insomnia 2022.5.1
 iterm2 3.4.16
 keepingyouawake 1.6.2
@@ -264,7 +265,6 @@ skim 1.6.12,142
 slack 4.28.171
 spotify 1.1.92.647,a4397eb7,7
 sublime-text 4126
-swiftdefaultappsprefpane 2.0.1
 topnotch 1.3.1
 visual-studio-code 1.71.0
 vlc 3.0.17.3
