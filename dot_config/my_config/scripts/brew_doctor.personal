@@ -113,3 +113,7 @@ Warning: You have unlinked kegs in your Cellar.
 Leaving kegs unlinked can lead to build-trouble and cause formulae that depend on
 those kegs to fail to run properly once built. Run `brew link` on these:
   libaec
+
+Warning: Broken symlinks were found. Remove them with `brew cleanup`:
+  /usr/local/share/man/man5/package-locks.5
+  /usr/local/share/man/man5/shrinkwrap-json.5
