@@ -21,6 +21,7 @@ first-pod() {
     _search=$1
     if [[ -z "$_search" ]]; then
         echo "The search strings must be specified. Expected: 'first-pod ...'"
+        return 1
     else
         _match=$(kubectl get pods -o json | jq ".items[].metadata.name" | grep --max-count=1 "$_search")
         if [[ -z "$_match" ]]; then
