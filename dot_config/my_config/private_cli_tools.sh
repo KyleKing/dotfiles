@@ -8,6 +8,12 @@
 # Set an alias for thefuck installed with brew: https://github.com/nvbn/thefuck
 eval "$(thefuck --alias oop)"
 
+# Alias common ripgrep (rg) searches
+alias rgh='rg --hidden'
+alias rgp='rg --type py'
+alias rgf='rg --fixed-strings --'
+# FYI: Add -A/-B/-C for context before/after the match
+
 # Map exa to ls with some default options
 alias ls='exa --icons'
 alias lsa='ls --all'
@@ -28,7 +34,7 @@ fzf-bat () {
 
 # Tail a file with syntax highlighting. Infers from extension or can be set manually
 # > btail ~/.zprofile zsh
-tail-bat() {
+btail() {
     tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
 }
 
