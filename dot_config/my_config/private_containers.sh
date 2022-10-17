@@ -29,15 +29,15 @@ first-pod() {
             echo "Failed to find a match. Ensure that you set a namespace"
             return 1
         else
-            echo $_match
+            echo "$_match"
         fi
     fi
 }
 desc-first-pod() {
     # Use with: desc-first-pod reviewer
-    first-pod $1 | xargs kubectl describe pods
+    first-pod "$1" | xargs kubectl describe pods
 }
 current-img() {
     # Use with: desc-first-pod reviewer
-    desc-first-pod $1 | grep "Image:" | awk -F '  +' '{print $3}'
+    desc-first-pod "$1" | grep "Image:" | awk -F '  +' '{print $3}'
 }

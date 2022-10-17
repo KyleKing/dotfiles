@@ -1,7 +1,9 @@
 # Sourced once before ~/.zshrc - https://unix.stackexchange.com/a/487889
 
 # Add sbin and bin from homebrew
-export PATH="/usr/local/sbin:/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/bin:$PATH"
+# And support new M1 '$(brew --prefix)'
+export PATH="/opt/homebrew/bin:/opt/homebrew/bin:$PATH"
 
 # Created by `pipx`
 export PATH="$PATH:/Users/kyleking/.local/bin"

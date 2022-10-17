@@ -2,6 +2,7 @@
 
 | Type    | Comment                                                                                 | Last Edit   | Source File                                                                                                                                                                       |
 |---------|-----------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| FIXME   | Should be turned off? (http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/)   | 2022-10-17  | [dot_config/astronvim/lua/user/init.lua:199](https://github.com/KyleKing/dotfiles/blame/ab1dba10948abb1ca5cf86e1443d1b13834ee101/dot_config/astronvim/lua/user/init.lua#L199)     |
 | TODO    | How do I get the nested e<> commands?                                                   | 2022-01-14  | [dot_config/lf/lfrc:105](https://github.com/KyleKing/dotfiles/blame/89abe435dc8a4b8517ace743251854aad207197b/dot_config/lf/lfrc#L105)                                             |
 | FIXME   | These two plugins are not found?                                                        | 2022-02-21  | [dot_config/my_config/private__omz.sh:119](https://github.com/KyleKing/dotfiles/blame/0e93abff0289608b84c03589bf43698d6a344d45/dot_config/my_config/private__omz.sh#L116)         |
 | FIXME   | Create new project file per project with path to the .venv Python                       | 2022-02-19  | [dot_config/my_config/private__sublime.sh:5](https://github.com/KyleKing/dotfiles/blame/5d311fd72496f901056c4924d3d0c6ec7115d427/dot_config/my_config/private__sublime.sh#L5)     |
@@ -21,6 +22,6 @@
 | TODO    | The color of the split lines between panes                                              | 2021-12-29  | [dot_wezterm.lua:215](https://github.com/KyleKing/dotfiles/blame/e08c076f6fb85776a15331427dc8394d076ec6f8/dot_wezterm.lua#L74)                                                    |
 | FIXME   | LazyGit is crashing with delta. Switch back to default for now                          | N/A         | private_Library/private_Application Support/lazygit/config.yml:123                                                                                                                |
 
-Found code tags for FIXME (4), TODO (11), PLANNED (3)
+Found code tags for FIXME (5), TODO (11), PLANNED (3)
 
 <!-- calcipy:skip_tags -->

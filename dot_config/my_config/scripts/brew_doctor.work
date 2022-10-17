@@ -22,3 +22,8 @@ script of the same name. We found the following "config" scripts:
   /Users/kyleking/.asdf/shims/python3-config
   /Users/kyleking/.asdf/shims/pylint-config
   /Users/kyleking/.local/bin/pylint-config
+
+Warning: Homebrew's "sbin" was not found in your PATH but you have installed
+formulae that put executables in /opt/homebrew/sbin.
+Consider setting your PATH for example like so:
+  echo 'export PATH="/opt/homebrew/sbin:$PATH"' >> ~/.zshrc
