@@ -3,6 +3,7 @@ ansible 6.5.0
 aom 3.5.0_1
 as-tree 0.12.0
 asdf 0.10.2
+atk 2.38.0
 autoconf 2.71
 automake 1.16.5
 awscli 2.8.3
@@ -37,7 +38,7 @@ fribidi 1.0.12
 fzf 0.34.0
 gawk 5.2.0
 gcc 12.2.0
-gd 2.3.3_3
+gd 2.3.3_4
 gdbm 1.23
 gdk-pixbuf 2.42.9
 gettext 0.21.1
@@ -47,7 +48,6 @@ giflib 5.2.1
 git 2.38.0
 git-brws 0.11.12
 git-delta 0.14.0
-glances 3.2.7
 glib 2.74.0
 glow 1.4.1
 gmp 6.2.1_1
@@ -55,15 +55,20 @@ gnu-getopt 2.38.1
 gnupg 2.3.8
 gnutls 3.7.8
 go 1.19.2
+gobject-introspection 1.74.0
 gojq 0.12.9
 graphite2 1.3.14
 graphviz 6.0.2
+gsettings-desktop-schemas 43.0
 gsl 2.7.1
+gtk+3 3.24.34
 gts 0.7.6_2
 guile 3.0.8_2
+gum 0.8.0
 gumbo-parser 0.10.1
 harfbuzz 5.3.0
 helm 3.10.1
+hicolor-icon-theme 0.17
 highway 1.0.1
 howdoi 2.0.20
 hstr 2.5
@@ -72,7 +77,7 @@ http-prompt 2.1.0_1
 httpstat 1.3.2
 hyperfine 1.15.0
 icu4c 71.1
-imagemagick 7.1.0-50
+imagemagick 7.1.0-51
 imath 3.1.5
 isl 0.25
 jasper 3.0.6_2
@@ -91,8 +96,9 @@ lazydocker 0.19.0
 lazygit 0.35
 lf 27
 libassuan 2.5.5
-libavif 0.10.1_2
+libavif 0.11.0
 libde265 1.0.8
+libepoxy 1.5.10
 libevent 2.1.12
 libgcrypt 1.10.1
 libgpg-error 1.46
@@ -156,7 +162,7 @@ nettle 3.8.1
 node 18.11.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.2.2
+oh-my-posh 12.3.2
 openblas 0.3.21
 openexr 3.1.5
 openjdk 19
@@ -195,7 +201,7 @@ speedtest-cli 2.1.3_1
 sqlite 3.39.4
 stern 1.22.0
 swig 4.0.2
-tere 1.2.0
+tere 1.3.0
 thefuck 3.32
 tldr 1.5.0
 transcrypt 2.2.0
@@ -214,7 +220,7 @@ xorgproto 2022.2
 xz 5.2.7
 yadm 3.2.1
 yq 4.28.1
-zlib 1.2.12_1
+zlib 1.2.13
 zoxide 0.8.3
 zsh 5.9
 zstd 1.5.2

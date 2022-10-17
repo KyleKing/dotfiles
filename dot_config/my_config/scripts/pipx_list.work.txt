@@ -11,6 +11,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - docformatter
    package envtpl 0.7.2, installed using Python 3.10.6
     - envtpl
+   package glances 3.3.0, installed using Python 3.10.8
+    - glances
    package isort 5.10.1, installed using Python 3.10.6
     - isort
     - isort-identify-imports
@@ -28,5 +30,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - uncurl
    package unimport 0.12.1, installed using Python 3.10.6
     - unimport
+   package xdot 1.2, installed using Python 3.10.8
+    - xdot
    package yamlfix 1.1.0, installed using Python 3.10.6
     - yamlfix
