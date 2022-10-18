@@ -42,10 +42,10 @@ gd 2.3.3_4
 gdbm 1.23
 gdk-pixbuf 2.42.9
 gettext 0.21.1
-gh 2.17.0
+gh 2.18.0
 ghostscript 10.0.0
 giflib 5.2.1
-git 2.38.0
+git 2.38.1
 git-brws 0.11.12
 git-delta 0.14.0
 glib 2.74.0
@@ -86,7 +86,6 @@ jpeg 9e
 jpeg-turbo 2.1.4
 jpeg-xl 0.7.0_1
 jpegoptim 1.5.0
-jsonschema 4.16.0
 k9s 0.26.6
 krb5 1.20
 krew 0.4.3
@@ -162,7 +161,7 @@ nettle 3.8.1
 node 18.11.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.3.2
+oh-my-posh 12.5.0
 openblas 0.3.21
 openexr 3.1.5
 openjdk 19
@@ -181,7 +180,6 @@ pixman 0.40.0
 pkg-config 0.29.2_3
 plantuml 1.2022.8
 pngcrush 1.8.13
-poetry 1.2.2
 pre-commit 2.20.0
 python@3.10 3.10.8
 pyyaml 6.0
@@ -257,6 +255,7 @@ keepingyouawake 1.6.2
 keyboard-cleaner 1.2
 knockknock 2.3.0
 lulu 2.4.2
+lunacy 8.7.2
 microsoft-auto-update 4.50.22081401
 microsoft-edge 105.0.1343.25
 microsoft-office 16.64.22081401
