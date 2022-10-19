@@ -11,12 +11,12 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - docformatter
    package envtpl 0.7.2, installed using Python 3.10.6
     - envtpl
-   package glances 3.3.0, installed using Python 3.10.8
+   package glances 3.3.0.1, installed using Python 3.10.8
     - glances
    package isort 5.10.1, installed using Python 3.10.6
     - isort
     - isort-identify-imports
-   package poetry 1.2.1, installed using Python 3.10.8
+   package poetry 1.2.2, installed using Python 3.10.8
     - poetry
    package pylint 2.15.4, installed using Python 3.10.6
     - epylint

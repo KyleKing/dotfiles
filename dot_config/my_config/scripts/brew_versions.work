@@ -86,7 +86,7 @@ jpeg 9e
 jpeg-turbo 2.1.4
 jpeg-xl 0.7.0_1
 jpegoptim 1.5.0
-k9s 0.26.6
+k9s 0.26.7
 krb5 1.20
 krew 0.4.3
 kubernetes-cli 1.25.3
@@ -161,7 +161,7 @@ nettle 3.8.1
 node 18.11.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.5.0
+oh-my-posh 12.6.1
 openblas 0.3.21
 openexr 3.1.5
 openjdk 19
@@ -217,7 +217,7 @@ xmlto 0.0.28
 xorgproto 2022.2
 xz 5.2.7
 yadm 3.2.1
-yq 4.28.1
+yq 4.28.2
 zlib 1.2.13
 zoxide 0.8.3
 zsh 5.9
