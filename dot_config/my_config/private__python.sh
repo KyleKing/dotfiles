@@ -7,9 +7,6 @@
 # https://github.com/pre-commit/pre-commit/blob/354b900f15e88a06ce8493e0316c288c44777017/pre_commit/color.py#L105
 export PRE_COMMIT_COLOR=always
 
-# Use the rich pbd on 'breakpoint()' from https://pypi.org/project/pdbr/
-export PYTHONBREAKPOINT="pdbr.set_trace"
-
 # Turn On Better Exceptions for Python
 export BETTER_EXCEPTIONS=1
 
