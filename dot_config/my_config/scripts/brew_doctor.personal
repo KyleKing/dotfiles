@@ -115,11 +115,20 @@ those kegs to fail to run properly once built. Run `brew link` on these:
   pygments
   libaec
 
+Warning: You are using macOS 10.15.
+We (and Apple) do not provide support for this old version.
+It is expected behaviour that some formulae will fail to build in this old version.
+It is expected behaviour that Homebrew will be buggy and slow.
+Do not create any issues about this on Homebrew's GitHub repositories.
+Do not create any issues even if you think this message is unrelated.
+Any opened issues will be immediately closed without response.
+Do not ask for help from MacHomebrew on Twitter.
+You may ask for help in Homebrew's discussions but are unlikely to receive a response.
+Try to figure out the problem yourself and submit a fix as a pull request.
+We will review it but may or may not accept it.
+
+
 Warning: Homebrew's "sbin" was not found in your PATH but you have installed
 formulae that put executables in /usr/local/sbin.
 Consider setting your PATH for example like so:
   echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
-
-Warning: Broken symlinks were found. Remove them with `brew cleanup`:
-  /usr/local/share/man/man5/package-locks.5
-  /usr/local/share/man/man5/shrinkwrap-json.5
