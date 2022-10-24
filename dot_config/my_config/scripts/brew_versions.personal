@@ -27,6 +27,7 @@ brotli 1.0.9
 c-ares 1.18.1_1
 ca-certificates 2022-10-11
 cairo 1.16.0_5
+capstone 4.0.2
 catimg 2.7.0
 ceres-solver 2.1.0_1
 chafa 1.12.3_1
@@ -45,7 +46,7 @@ czmq 4.2.1
 dark-mode 3.0.2
 dav1d 1.0.0
 dbus 1.14.0
-ddgr 2.0
+ddgr 2.1
 diskus 0.7.0
 docbook 5.1_1
 docbook-xsl 1.79.2_1
@@ -62,7 +63,7 @@ fff 2.2
 ffmpeg 5.1.2
 ffmpeg@4 4.4.3
 flac 1.4.1
-flow 0.190.0
+flow 0.190.1
 fontconfig 2.14.0
 freerdp 2.8.1
 freetype 2.12.1
@@ -77,7 +78,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.9
 gettext 0.21.1
 gflags 2.2.2
-gh 2.18.0
+gh 2.18.1
 ghcup 0.1.18.0
 ghostscript 10.0.0
 gibo 2.2.8
@@ -110,7 +111,7 @@ gtop 1.1.3
 gts 0.7.6_2
 guile 3.0.8_2
 gum 0.8.0
-harfbuzz 5.3.0
+harfbuzz 5.3.1
 haskell-stack 2.9.1
 hdf5 1.12.2_2
 highway 1.0.1
@@ -146,10 +147,10 @@ libaec 1.0.6
 libarchive 3.6.1
 libass 0.16.0
 libassuan 2.5.5
-libavif 0.11.0
+libavif 0.11.1
 libb2 0.98.1
 libbluray 1.3.3
-libde265 1.0.8
+libde265 1.0.9
 libdeflate 1.14
 libev 4.33
 libevent 2.1.12
@@ -168,7 +169,7 @@ libmodplug 0.8.9.0
 libmpc 1.2.1
 libnghttp2 1.50.0
 libogg 1.3.5
-libomp 15.0.2
+libomp 15.0.3
 libpng 1.6.38
 libproxy 0.4.17_1
 libpthread-stubs 0.4
@@ -188,7 +189,7 @@ libtasn1 4.19.0
 libtermkey 0.22
 libtiff 4.4.0_1
 libtool 2.4.7
-libuninameslist 20211114
+libuninameslist 20221022
 libunistring 1.0
 libusb 1.0.26
 libuv 1.44.2
@@ -214,7 +215,7 @@ libxv 1.0.11
 libyaml 0.2.5
 libzip 1.9.2
 little-cms2 2.13.1_1
-llvm 15.0.2
+llvm 15.0.3
 lolcat 100.0.1
 lua@5.3 5.3.6
 luajit 2.1.0-beta3-20221004.1
@@ -228,7 +229,7 @@ mas 1.8.6
 mbedtls 3.2.1
 mcfly 0.6.1
 md4c 0.4.8
-metabase 0.44.4
+metabase 0.44.5
 metis 5.1.0
 mpdecimal 2.5.1
 mpfr 4.1.0-p13
@@ -252,7 +253,7 @@ npth 1.6
 numpy 1.23.4
 nyancat 1.5.2
 ocaml 4.14.0
-oh-my-posh 12.5.0
+oh-my-posh 12.6.8
 onefetch 2.12.0
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -278,15 +279,15 @@ pinentry-mac 1.1.1.1
 pipx 1.1.0
 pixman 0.40.0
 pkg-config 0.29.2_3
-plantuml 1.2022.8
+plantuml 1.2022.10
 pngcrush 1.8.13
-podman 4.2.1
+podman 4.3.0
 poetry 1.2.2
 popt 1.19
 postgresql@14 14.5_5
 powerlevel10k 1.16.1
 prettier 2.7.1
-protobuf 21.7
+protobuf 21.8
 pugixml 1.12.1_1
 py3cairo 1.21.0_1
 pygments 2.13.0
@@ -306,7 +307,7 @@ readline 8.2.1
 redis 7.0.5
 ripgrep 13.0.0
 rpg-cli 1.0.1
-rsync 3.2.6
+rsync 3.2.7
 rtmpdump 2.4+20151223_1
 rubberband 3.1.0
 ruby 3.1.2_1
@@ -338,7 +339,7 @@ sqlite 3.39.4
 srt 1.5.1
 stow 2.3.1
 suite-sparse 5.13.0
-tbb 2021.6.0
+tbb 2021.7.0
 tcl-tk 8.6.12_1
 tere 1.3.0
 terminal-notifier 2.0.0
@@ -385,7 +386,7 @@ zoxide 0.8.3
 zsh 5.9
 zstd 1.5.2
 1password 8.8.0
-1password-cli 2.7.1
+1password-cli 2.7.2
 alfred 5.0,2057
 anki 2.1.54
 appcleaner 3.2.1
@@ -393,10 +394,10 @@ bartender 3.1.25,31125
 basictex 2022.0314
 chromedriver 106.0.5249.61
 codeql 2.11.1
-cozy-drive 3.36.0
+cozy-drive 3.36.1
 daisydisk latest
 docker 4.5.0,74594
-font-fontawesome 6.1.2
+font-fontawesome 6.2.0
 font-hack-nerd-font 2.2.2
 hammerspoon 0.9.86
 hiddenbar 1.9
@@ -423,11 +424,9 @@ spotifree 1.6.5
 steam latest
 sublime-merge 2063
 sublime-text 4.121
-suspicious-package 4.2.1,932
+suspicious-package 4.3,996
 tex-live-utility 1.36
 tiled 1.9.2
-virtualbox 7.0.0,153978
-virtualbox-extension-pack 7.0.0
 wezterm 20220905-102802,7d4b8249
 wireshark 3.6.3
 xbar 2.1.7-beta
