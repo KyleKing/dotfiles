@@ -2,7 +2,7 @@ venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package autoflake 1.7.6, installed using Python 3.10.6
     - autoflake
-   package calcipy 0.20.0, installed using Python 3.10.6
+   package calcipy 0.20.1, installed using Python 3.10.6
     - calcipy
    package cloudiscovery 2.4.4, installed using Python 3.10.6
     - cloudiscovery
