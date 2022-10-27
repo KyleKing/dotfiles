@@ -1,6 +1,6 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package autoflake 1.7.6, installed using Python 3.10.6
+   package autoflake 1.7.7, installed using Python 3.10.6
     - autoflake
    package calcipy 0.20.1, installed using Python 3.10.6
     - calcipy
@@ -18,7 +18,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - isort-identify-imports
    package poetry 1.2.2, installed using Python 3.10.8
     - poetry
-   package pylint 2.15.4, installed using Python 3.10.6
+   package pylint 2.15.5, installed using Python 3.10.6
     - epylint
     - pylint
     - pylint-config
@@ -26,7 +26,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - symilar
    package pyupgrade 3.1.0, installed using Python 3.10.6
     - pyupgrade
-   package sourcery-cli 0.12.11, installed using Python 3.10.6
+   package sourcery-cli 0.12.12, installed using Python 3.10.6
     - sourcery
    package uncurl 0.0.11, installed using Python 3.10.6
     - uncurl
