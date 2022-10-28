@@ -19,10 +19,11 @@ fi
 # alias brew='env PATH="${PATH//\/.asdf\/shims:/}" brew'
 
 # A few helpful snippets not included in the homebrew zsh plugin
-alias bs="brew search"
-alias bn="brew info"
-alias bi="brew install"
-alias bu="brew rmtree"
+alias bsh="brew search"
+alias bio="brew info"
+alias bil="brew install"
+alias brm="brew rmtree"
+alias buc="brew uninstall --cask"
 alias bo="brew update && brew outdated"
 alias bcbd="brew cleanup && brew doctor"
 # Other useful commands: "brew uninstall <cask>" and "brew uses <...>"
