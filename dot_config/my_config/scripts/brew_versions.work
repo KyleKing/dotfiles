@@ -6,7 +6,7 @@ asdf 0.10.2
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.8.5
+awscli 2.8.6
 bat 0.22.1
 bdw-gc 8.2.2
 bottom 0.6.8
@@ -21,7 +21,7 @@ cmake 3.24.2
 cmatrix 2.0
 coreutils 9.1
 ctop 0.7.7
-curl 7.85.0
+curl 7.86.0
 curlie 1.6.9
 dark-mode 3.0.2
 devdash 0.5.0
@@ -87,6 +87,7 @@ jpeg 9e
 jpeg-turbo 2.1.4
 jpeg-xl 0.7.0_1
 jpegoptim 1.5.0
+jsonschema 4.16.0
 k9s 0.26.7
 krb5 1.20
 krew 0.4.3
@@ -146,7 +147,6 @@ mani 0.22.0
 markdownlint-cli 0.32.2
 mas 1.8.6
 mcfly v0.6.1
-mermaid-cli 8.11.0
 mpdecimal 2.5.1
 mpfr 4.1.0-p13
 msgpack 4.0.0
@@ -162,7 +162,7 @@ nettle 3.8.1
 node 18.11.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.8.0
+oh-my-posh 12.9.1
 openblas 0.3.21
 openexr 3.1.5
 openjdk 19
@@ -181,6 +181,7 @@ pixman 0.40.0
 pkg-config 0.29.2_3
 plantuml 1.2022.12
 pngcrush 1.8.13
+poetry 1.2.2
 pre-commit 2.20.0
 pygments 2.13.0
 python@3.10 3.10.8
@@ -189,6 +190,7 @@ readline 8.2.1
 ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
+rust 1.64.0
 saml2aws 2.36.1
 screenresolution 1.6
 shared-mime-info 2.2
