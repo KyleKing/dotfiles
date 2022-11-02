@@ -180,6 +180,7 @@ brew "speedtest-cli"
 brew "sphinx-doc"
 brew "spotify-tui"
 brew "stow"
+brew "t-rec"
 brew "tere"
 brew "terminal-notifier"
 brew "textidote"
@@ -233,6 +234,7 @@ cask "macdown"
 cask "meld"
 cask "miniconda"
 cask "neovide"
+cask "obs"
 cask "obsidian"
 cask "opencore-patcher"
 cask "orca"
@@ -264,6 +266,7 @@ mas "Encrypto", id: 935235287
 mas "Fenêtre Lite", id: 1288451627
 mas "GIF Brewery 3", id: 1081413713
 mas "GIPHY CAPTURE", id: 668208984
+mas "Hand Mirror", id: 1502839586
 mas "KeyLimePie", id: 1575163350
 mas "Keynote", id: 409183694
 mas "Mactracker", id: 430255202
@@ -271,6 +274,7 @@ mas "Noizio", id: 928871589
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Plash", id: 1494023538
+mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Slack", id: 803453959
 mas "Spark", id: 1176895641
