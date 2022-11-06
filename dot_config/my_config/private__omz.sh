@@ -173,4 +173,4 @@ export AUTO_NOTIFY_THRESHOLD=15
 # Set notification expiry to 1 seconds
 export AUTO_NOTIFY_EXPIRE_TIME=1000
 # Create an allowlist for auto-notifications
-export AUTO_NOTIFY_WHITELIST=("brew" "poetry install" "make install")
+export AUTO_NOTIFY_WHITELIST=("brew" "poetry install" "make install" "gh run" "gh workflow")
