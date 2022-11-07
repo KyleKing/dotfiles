@@ -18,6 +18,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package isort 5.10.1, installed using Python 3.10.6
     - isort
     - isort-identify-imports
+   package pipdeptree 2.3.3, installed using Python 3.10.8
+    - pipdeptree
    package pylint 2.15.5, installed using Python 3.10.6
     - epylint
     - pylint

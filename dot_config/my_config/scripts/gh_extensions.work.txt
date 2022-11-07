@@ -1,5 +1,5 @@
 gh dash	dlvhdr/gh-dash	v3.4.2
-gh notify	meiji163/gh-notify	f5d8eb98
+gh notify	meiji163/gh-notify	6347de24
 gh poi	seachicken/gh-poi	v0.7.0
 gh pr-draft	kyanny/gh-pr-draft	6003412b
 gh repo-fzf	kavinvalli/gh-repo-fzf	eceb769e
