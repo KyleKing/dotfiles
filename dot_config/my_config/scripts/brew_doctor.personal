@@ -125,9 +125,3 @@ Do not ask for help from MacHomebrew on Twitter.
 You may ask for help in Homebrew's discussions but are unlikely to receive a response.
 Try to figure out the problem yourself and submit a fix as a pull request.
 We will review it but may or may not accept it.
-
-
-Warning: Homebrew's "sbin" was not found in your PATH but you have installed
-formulae that put executables in /usr/local/sbin.
-Consider setting your PATH for example like so:
-  echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc

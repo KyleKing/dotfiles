@@ -31,7 +31,7 @@ capstone 4.0.2
 catimg 2.7.0
 ceres-solver 2.1.0_1
 chafa 1.12.3_1
-chezmoi 2.25.0
+chezmoi 2.26.0
 cjson 1.7.15
 cloc 1.94
 cmake 3.24.2
@@ -58,7 +58,7 @@ enscript 1.6.6_1
 entr 5.2
 exa 0.10.1
 exiftool 12.42_1
-fd 8.4.0
+fd 8.5.2
 fff 2.2
 ffmpeg 5.1.2
 ffmpeg@4 4.4.3
@@ -78,7 +78,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.9
 gettext 0.21.1
 gflags 2.2.2
-gh 2.18.1
+gh 2.19.0
 ghcup 0.1.18.0
 ghostscript 10.0.0
 gibo 2.2.8
@@ -98,7 +98,7 @@ gnu-getopt 2.38.1
 gnu-sed 4.8
 gnupg 2.3.8
 gnutls 3.7.8
-go 1.19.2
+go 1.19.2 1.19.3
 go@1.18 1.18.7
 gobject-introspection 1.74.0
 gojq 0.12.9
@@ -253,7 +253,7 @@ npth 1.6
 numpy 1.23.4
 nyancat 1.5.2
 ocaml 4.14.0
-oh-my-posh 12.10.0
+oh-my-posh 12.11.0
 onefetch 2.13.2
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -387,7 +387,7 @@ zoxide 0.8.3
 zsh 5.9
 zstd 1.5.2
 1password 8.8.0
-1password-cli 2.7.2
+1password-cli 2.7.3
 alfred 5.0,2057
 anki 2.1.54
 appcleaner 3.2.1
