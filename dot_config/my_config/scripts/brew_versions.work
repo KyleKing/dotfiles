@@ -1,5 +1,5 @@
 act 0.2.33
-ansible 6.5.0
+ansible 6.6.0
 aom 3.5.0_1
 apr 1.7.0_3
 apr-util 1.6.1_4
@@ -10,7 +10,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.8.9
+awscli 2.8.10
 bat 0.22.1
 bdw-gc 8.2.2
 bottom 0.6.8
@@ -22,7 +22,7 @@ cairo 1.16.0_5
 checkov 2.2.15
 chezmoi 2.26.0
 cloc 1.94
-cmake 3.24.2
+cmake 3.24.3
 cmatrix 2.0
 coreutils 9.1
 ctop 0.7.7
@@ -254,6 +254,7 @@ zstd 1.5.2
 alfred 5.0.2,2073
 appcleaner 3.6.4,4270
 beekeeper-studio 3.6.2
+blockblock 2.1.4
 cheatsheet 1.6.3
 customshortcuts 1.1,102
 daisydisk 4.23.1
