@@ -9,10 +9,18 @@
 eval "$(thefuck --alias oop)"
 
 # Alias common ripgrep (rg) searches
-alias rgh='rg --hidden'
-alias rgp='rg --type py'
-alias rgf='rg --fixed-strings --'
 # FYI: Add -A/-B/-C for context before/after the match
+alias rgh='rg --hidden'
+alias rgfs='rgh --fixed-strings --'
+rgso() {
+    _search=$1
+    if [[ -z "$_search" ]]; then
+        echo "The search strings must be specified. Expected: 'rgso ...'"
+        return 1
+    else
+        rgfs --files-with-matches $_search | xargs -I {} $EDITOR "{}"
+    fi
+}
 
 # Map exa to ls with some default options
 alias ls='exa --icons'
