@@ -2,7 +2,7 @@ venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package autoflake 1.7.7, installed using Python 3.10.6
     - autoflake
-   package calcipy 0.21.1, installed using Python 3.10.6
+   package calcipy 0.21.3, installed using Python 3.10.6
     - calcipy
    package cloudiscovery 2.4.4, installed using Python 3.10.6
     - cloudiscovery
@@ -18,6 +18,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package isort 5.10.1, installed using Python 3.10.6
     - isort
     - isort-identify-imports
+   package personal-man 1.1.0, installed using Python 3.10.8
+    - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
    package pylint 2.15.5, installed using Python 3.10.6
