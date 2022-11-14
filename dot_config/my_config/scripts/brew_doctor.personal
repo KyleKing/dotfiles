@@ -31,6 +31,7 @@ script of the same name. We found the following "config" scripts:
   /Users/kyleking/.asdf/shims/python-config
   /Users/kyleking/.asdf/shims/python3-config
   /Users/kyleking/.asdf/shims/python3.8-config
+  /Users/kyleking/.asdf/shims/python3.11-config
 
 Warning: Unbrewed dylibs were found in /usr/local/lib.
 If you didn't put them there on purpose they could cause problems when

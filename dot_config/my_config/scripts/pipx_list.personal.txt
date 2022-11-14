@@ -16,7 +16,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package detect-secrets 1.4.0, installed using Python 3.10.4
     - detect-secrets
     - detect-secrets-hook
-   package djlint 1.19.3, installed using Python 3.10.6
+   package djlint 1.19.7, installed using Python 3.10.6
     - djlint
    package docformatter 1.5.0, installed using Python 3.10.6
     - docformatter
@@ -28,11 +28,15 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package mdformat-gfm 0.3.5, installed using Python 3.10.4
     - markdown-it
     - mdformat
+   package personal-man 1.0.0, installed using Python 3.10.8
+    - pman
+   package pipdeptree 2.3.3, installed using Python 3.10.8
+    - pipdeptree
    package pygments 2.13.0, installed using Python 3.10.4
     - pygmentize
    package pyproject-fmt 0.3.5, installed using Python 3.10.8
     - pyproject-fmt
-   package pytype 2022.10.26, installed using Python 3.10.4
+   package pytype 2022.11.10, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
@@ -41,15 +45,15 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyxref
    package rich-cli 1.8.0, installed using Python 3.10.5
     - rich
-   package semgrep 0.118.0, installed using Python 3.10.4
+   package semgrep 0.121.2, installed using Python 3.10.4
     - semgrep
    package skedulord 2.0.0, installed using Python 3.10.5
     - skedulord
-   package sourcery-cli 0.12.12, installed using Python 3.10.6
+   package sourcery-cli 0.13.0, installed using Python 3.10.6
     - sourcery
    package sqlfluff 1.4.1, installed using Python 3.10.4
     - sqlfluff
-   package watchfiles 0.18.0, installed using Python 3.10.5
+   package watchfiles 0.18.1, installed using Python 3.10.5
     - watchfiles
    package wily 1.24.0, installed using Python 3.10.4
     - wily
