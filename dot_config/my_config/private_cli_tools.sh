@@ -35,6 +35,10 @@ cdt() {
     [ -n "$result" ] && cd -- "$result" || return
 }
 
+# Use fd to filter files based on gitignore rules
+# From: https://github.com/junegunn/fzf/tree/d01ae551090bb2f7c7ad6a9013937b65e08921cc#respecting-gitignore
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Preview fzf results with bat syntax highlighting
 # > cd ~/.config && fzf-bat
 fzf-bat () {
