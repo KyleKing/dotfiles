@@ -26,6 +26,7 @@
 .Python
 pyvenv.cfg
 .venv
+venv
 pip-selfcheck.json
 
 # Python
