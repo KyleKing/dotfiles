@@ -9,6 +9,7 @@
 eval "$(thefuck --alias oop)"
 
 # Alias common ripgrep (rg) searches
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/.ripgreprc
 # FYI: Add -A/-B/-C for context before/after the match
 alias rgh='rg --hidden'
 alias rgfs='rgh --fixed-strings --'

@@ -1,0 +1,20 @@
+# Adapted from: https://github.com/BurntSushi/ripgrep/blob/7f23cd63a51d45415bb3df28d053562844194767/GUIDE.md#configuration-file
+
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=150
+--max-columns-preview
+
+# Add my 'web' type and 'yams' types
+--type-add=web:*.{html,css,scss,sass,js,jsx,ts,coffee}*
+--type-add=yams:*.{yaml,yml}*
+
+# Using glob patterns to include/exclude files or folders
+--glob="\!*/.git/*"
+--glob="\!*.git/*"
+
+# Set the colors.
+--colors=line:none
+--colors=line:style:bold
+
+# Because who cares about case!?
+--smart-case
