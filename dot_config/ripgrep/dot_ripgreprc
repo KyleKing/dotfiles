@@ -9,8 +9,8 @@
 --type-add=yams:*.{yaml,yml}*
 
 # Using glob patterns to include/exclude files or folders
---glob="\!*/.git/*"
---glob="\!*.git/*"
+# --glob="\!*/.git/*"
+# # --glob="\!*.git/*"
 
 # Set the colors.
 --colors=line:none
