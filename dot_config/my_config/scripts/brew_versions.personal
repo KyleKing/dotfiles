@@ -31,7 +31,7 @@ capstone 4.0.2
 catimg 2.7.0
 ceres-solver 2.1.0_1
 chafa 1.12.3_1
-chezmoi 2.27.0
+chezmoi 2.27.1
 cjson 1.7.15
 cloc 1.94
 cmake 3.24.3
@@ -58,12 +58,12 @@ enscript 1.6.6_1
 entr 5.2
 exa 0.10.1
 exiftool 12.50
-fd 8.5.2
+fd 8.5.3
 fff 2.2
 ffmpeg 5.1.2
 ffmpeg@4 4.4.3
 flac 1.4.2
-flow 0.192.0
+flow 0.193.0
 fontconfig 2.14.1
 freerdp 2.8.1
 freetype 2.12.1
@@ -83,12 +83,13 @@ ghcup 0.1.18.0
 ghostscript 10.0.0
 gibo 2.2.8
 giflib 5.2.1
+gifski 1.8.0
 git 2.38.1
 git-brws 0.11.12
 git-delta 0.14.0
 git-lfs 3.2.0
 gl2ps 1.4.2
-glances 3.3.0.2
+glances 3.3.0.4
 glew 2.2.0_1
 glib 2.74.0
 glog 0.6.0
@@ -104,7 +105,7 @@ gobject-introspection 1.74.0
 gojq 0.12.9
 graphicsmagick 1.3.38_1
 graphite2 1.3.14
-graphviz 7.0.0
+graphviz 7.0.1
 grc 1.13_1
 gstreamer 1.20.4
 gtop 1.1.3
@@ -139,8 +140,8 @@ krb5 1.20
 krew 0.4.3
 kubernetes-cli 1.25.4
 lame 3.100
-lazydocker 0.19.0
-lazygit 0.35
+lazydocker 0.20.0
+lazygit 0.36.0
 legit 1.2.0.post0_3
 leptonica 1.82.0_1
 lf 27
@@ -200,7 +201,7 @@ libvorbis 1.3.7
 libvpx 1.12.0
 libvterm 0.3
 libwebsockets 4.3.2
-libx11 1.8.1
+libx11 1.8.2 1.8.1
 libxau 1.0.10
 libxcb 1.15
 libxcursor 1.2.1
@@ -209,7 +210,7 @@ libxext 1.3.5
 libxfixes 6.0.0
 libxi 1.8
 libxinerama 1.1.5
-libxml2 2.10.3
+libxml2 2.10.3_1
 libxrandr 1.5.2
 libxrender 0.9.10
 libxslt 1.1.37_1
@@ -217,7 +218,7 @@ libxv 1.0.11
 libyaml 0.2.5
 libzip 1.9.2
 little-cms2 2.14
-llvm 15.0.3
+llvm 15.0.4
 lolcat 100.0.1
 lua@5.3 5.3.6
 luajit 2.1.0-beta3-20221004.1
@@ -241,7 +242,7 @@ navi 2.20.1
 ncdu 2.2.1
 ncurses 6.3
 neofetch 7.1.0
-neovim 0.8.0
+neovim 0.8.1
 netcat 0.7.1
 netcdf 4.9.0
 netpbm 10.86.35
@@ -255,7 +256,7 @@ npth 1.6
 numpy 1.23.4_1
 nyancat 1.5.2
 ocaml 4.14.0
-oh-my-posh 12.13.2
+oh-my-posh 12.13.3
 onefetch 2.13.2
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -283,10 +284,10 @@ pixman 0.40.0
 pkg-config 0.29.2_3
 plantuml 1.2022.12
 pngcrush 1.8.13
-podman 4.3.0
+podman 4.3.1
 poetry 1.2.2
 popt 1.19
-postgresql@14 14.5_5
+postgresql@14 14.6
 powerlevel10k 1.16.1
 prettier 2.7.1
 protobuf 21.9_1
@@ -297,6 +298,7 @@ pygobject3 3.42.2_2
 pyqt 6.3.1
 pyqt@5 5.15.7_1
 python@3.10 3.10.8
+python@3.11 3.11.0
 python@3.8 3.8.15
 python@3.9 3.9.15
 qemu 7.1.0
@@ -398,7 +400,7 @@ appcleaner 3.2.1
 bartender 3.1.25,31125
 basictex 2022.0314
 chromedriver 107.0.5304.62
-codeql 2.11.2
+codeql 2.11.3
 cozy-drive 3.36.1
 daisydisk latest
 docker 4.5.0,74594
@@ -406,7 +408,7 @@ font-fontawesome 6.2.0
 font-hack-nerd-font 2.2.2
 hammerspoon 0.9.86
 hiddenbar 1.9
-integrity 12.5.0
+integrity 12.5.2
 kdiff3 1.9.4
 keycastr 0.9.12
 keycombiner 0.8.0
@@ -414,6 +416,7 @@ lunacy 8.7.2
 macdown 0.7.2
 meld 3.21.0-r3,19
 miniconda py38_4.8.3
+monitorcontrol 4.1.0
 neovide 0.10.3
 obs 28.0.3
 obsidian 1.0.0
