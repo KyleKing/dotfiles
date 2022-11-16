@@ -9,6 +9,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
+   package calcipy 0.21.3, installed using Python 3.10.8
+    - calcipy
    package codecov 2.1.12, installed using Python 3.10.4
     - codecov
    package copier 7.0.1, installed using Python 3.10.4
@@ -51,7 +53,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - skedulord
    package sourcery-cli 0.13.0, installed using Python 3.10.6
     - sourcery
-   package sqlfluff 1.4.1, installed using Python 3.10.4
+   package sqlfluff 1.4.2, installed using Python 3.10.4
     - sqlfluff
    package watchfiles 0.18.1, installed using Python 3.10.5
     - watchfiles
