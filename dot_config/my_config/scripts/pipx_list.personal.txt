@@ -15,6 +15,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - codecov
    package copier 7.0.1, installed using Python 3.10.4
     - copier
+   package copier-template-tester 0.0.1, installed using Python 3.10.8
+    - ctt
    package detect-secrets 1.4.0, installed using Python 3.10.4
     - detect-secrets
     - detect-secrets-hook
