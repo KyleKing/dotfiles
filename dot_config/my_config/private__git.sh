@@ -43,3 +43,7 @@ alias gpoi='gh poi && gf --prune origin'
 
 # Commit with no pre-commit
 alias gcnv='git commit --no-verify --message'
+
+# Add aliases for interactive selection of the ref branch
+alias pick-branch='echo $(gh pr list -L100 | fzf | cut -f3)'
+alias gh-run-pick='gh workflow run --ref=$(gh pr list -L100 | fzf | cut -f3)'
