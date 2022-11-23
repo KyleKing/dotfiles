@@ -117,7 +117,7 @@ libidn2 2.3.4
 libksba 1.6.2
 liblqr 0.4.2_1
 libmpc 1.2.1
-libnghttp2 1.50.0
+libnghttp2 1.51.0
 libomp 15.0.5
 libpng 1.6.38
 libpq 15.1
@@ -173,7 +173,7 @@ nettle 3.8.1
 node 19.1.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.17.0
+oh-my-posh 12.18.1
 oniguruma 6.9.8
 openblas 0.3.21
 openexr 3.1.5
@@ -195,8 +195,8 @@ pixman 0.40.0
 pkg-config 0.29.2_3
 plantuml 1.2022.13
 pngcrush 1.8.13
-poetry 1.2.2
-pre-commit 2.20.0
+poetry 1.2.2_1
+pre-commit 2.20.0_1
 psutils p17
 pygments 2.13.0_1
 python-typing-extensions 4.4.0_1
@@ -239,6 +239,7 @@ unbound 1.17.0
 unibilium 2.1.1
 unixodbc 2.3.11
 unrtf 0.21.10
+virtualenv 20.16.7_1
 webp 1.2.4
 x265 3.5
 xh 0.17.0
