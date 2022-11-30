@@ -10,7 +10,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.9.0
+awscli 2.9.2
 bat 0.22.1
 bdw-gc 8.2.2
 bottom 0.6.8
@@ -19,8 +19,8 @@ brotli 1.0.9
 c-ares 1.18.1_1
 ca-certificates 2022-10-11
 cairo 1.16.0_5
-checkov 2.2.75
-chezmoi 2.27.1
+checkov 2.2.105
+chezmoi 2.27.2
 cloc 1.94
 cmake 3.25.0
 cmatrix 2.0
@@ -34,15 +34,16 @@ dive 0.10.0
 docbook 5.1_1
 docbook-xsl 1.79.2_1
 docker-credential-helper-ecr 0.6.0
+docutils 0.19
 envchain 1.0.1
 exa 0.10.1
 fd 8.5.3
 fontconfig 2.14.1
-freetds 1.3.14
+freetds 1.3.15
 freetype 2.12.1
 fribidi 1.0.12
 fzf 0.35.1
-gawk 5.2.0
+gawk 5.2.1
 gcc 12.2.0
 gd 2.3.3_4
 gdbm 1.23
@@ -64,7 +65,7 @@ go 1.19.3
 gobject-introspection 1.74.0
 gojq 0.12.9
 graphite2 1.3.14
-graphviz 7.0.1
+graphviz 7.0.2
 groff 1.22.4_1
 gsettings-desktop-schemas 43.0
 gsl 2.7.1
@@ -97,7 +98,7 @@ jpeg-xl 0.7.0_1
 jpegoptim 1.5.0
 jsonschema 4.17.0
 k9s 0.26.7
-krb5 1.20
+krb5 1.20.1
 krew 0.4.3
 kubernetes-cli 1.25.4
 kubie 0.19.1
@@ -119,10 +120,9 @@ liblqr 0.4.2_1
 libmpc 1.2.1
 libnghttp2 1.51.0
 libomp 15.0.5
-libpng 1.6.38
+libpng 1.6.39
 libpq 15.1
 libpthread-stubs 0.4
-libpython-tabulate 0.8.10_1
 libraw 0.20.2_3
 librsvg 2.55.1
 libsodium 1.0.18_1
@@ -147,7 +147,7 @@ libzip 1.9.2
 little-cms2 2.14
 lolcat 100.0.1
 lua 5.4.4_1
-luajit 2.1.0-beta3-20221004.1
+luajit 2.1.0-beta3-20221122.1
 luarocks 3.9.1
 luv 1.44.2-1
 lz4 1.9.4
@@ -173,7 +173,7 @@ nettle 3.8.1
 node 19.1.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.18.1
+oh-my-posh 12.22.0
 oniguruma 6.9.8
 openblas 0.3.21
 openexr 3.1.5
@@ -188,7 +188,7 @@ pandoc 2.19.2
 pango 1.50.12
 pcre 8.45
 pcre2 10.40
-php 8.1.12
+php 8.1.13
 pinentry 1.2.1
 pipx 1.1.0
 pixman 0.40.0
@@ -199,6 +199,7 @@ poetry 1.2.2_1
 pre-commit 2.20.0_1
 psutils p17
 pygments 2.13.0_1
+python-tabulate 0.9.0
 python-typing-extensions 4.4.0_1
 python@3.10 3.10.8
 python@3.11 3.11.0
@@ -207,8 +208,8 @@ readline 8.2.1
 ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
-rust 1.64.0
-saml2aws 2.36.1
+rust 1.65.0
+saml2aws 2.36.2
 screenresolution 1.6
 shared-mime-info 2.2
 shellcheck 0.8.0
@@ -217,7 +218,7 @@ six 1.16.0_3
 snappy 1.1.9
 socli 7.2
 speedtest-cli 2.1.3_1
-sqlite 3.39.4
+sqlite 3.40.0
 stern 1.22.0
 swig 4.1.0
 tere 1.3.0
@@ -239,7 +240,7 @@ unbound 1.17.0
 unibilium 2.1.1
 unixodbc 2.3.11
 unrtf 0.21.10
-virtualenv 20.16.7_1
+virtualenv 20.17.0
 webp 1.2.4
 x265 3.5
 xh 0.17.0
@@ -247,7 +248,7 @@ xmlto 0.0.28
 xorgproto 2022.2
 xz 5.2.7
 yadm 3.2.1
-yq 4.30.4
+yq 4.30.5
 zlib 1.2.13
 zoxide 0.8.3
 zsh 5.9
@@ -295,7 +296,7 @@ microsoft-teams 1.5.00.22362
 monitorcontrol 4.1.0
 netiquette 2.1.1
 obsidian 1.0.0
-oversight 2.1.0
+oversight 2.1.1
 paletro 1.6.5
 pomatez 1.1.0
 qlstephen 1.5.1
