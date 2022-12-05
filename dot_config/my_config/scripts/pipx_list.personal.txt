@@ -9,13 +9,13 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
-   package calcipy 0.21.3, installed using Python 3.10.8
+   package calcipy 0.21.4, installed using Python 3.10.8
     - calcipy
    package codecov 2.1.12, installed using Python 3.10.4
     - codecov
    package copier 7.0.1, installed using Python 3.10.4
     - copier
-   package copier-template-tester 0.0.1, installed using Python 3.10.8
+   package copier-template-tester 1.0.2, installed using Python 3.10.8
     - ctt
    package detect-secrets 1.4.0, installed using Python 3.10.4
     - detect-secrets
@@ -40,7 +40,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pygmentize
    package pyproject-fmt 0.3.5, installed using Python 3.10.8
     - pyproject-fmt
-   package pytype 2022.11.10, installed using Python 3.10.4
+   package pytype 2022.11.18, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
@@ -49,7 +49,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyxref
    package rich-cli 1.8.0, installed using Python 3.10.5
     - rich
-   package semgrep 0.121.2, installed using Python 3.10.4
+   package semgrep 0.122.0, installed using Python 3.10.4
     - semgrep
    package skedulord 2.0.0, installed using Python 3.10.5
     - skedulord
@@ -57,6 +57,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - sourcery
    package sqlfluff 1.4.2, installed using Python 3.10.4
     - sqlfluff
+   package tox 3.27.1, installed using Python 3.10.8
+    - tox
+    - tox-quickstart
    package watchfiles 0.18.1, installed using Python 3.10.5
     - watchfiles
    package wily 1.24.0, installed using Python 3.10.4
