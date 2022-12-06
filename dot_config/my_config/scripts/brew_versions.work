@@ -55,7 +55,7 @@ giflib 5.2.1
 git 2.38.1
 git-brws 0.11.12
 git-delta 0.15.1
-glib 2.74.0
+glib 2.74.3
 glow 1.4.1
 gmp 6.2.1_1
 gnu-getopt 2.38.1
@@ -65,7 +65,7 @@ go 1.19.3
 gobject-introspection 1.74.0
 gojq 0.12.10
 graphite2 1.3.14
-graphviz 7.0.2
+graphviz 7.0.4
 groff 1.22.4_1
 gsettings-desktop-schemas 43.0
 gsl 2.7.1
@@ -89,7 +89,7 @@ icu4c 71.1
 imagemagick 7.1.0-53
 imath 3.1.6
 isl 0.25
-jasper 3.0.6_2
+jasper 4.0.0
 jbig2dec 0.19
 jc 1.22.2
 jpeg 9e
@@ -101,6 +101,7 @@ k9s 0.26.7
 krb5 1.20.1
 krew 0.4.3
 kubernetes-cli 1.25.4
+kubevious 1.0.29
 kubie 0.19.1
 lazydocker 0.20.0
 lazygit 0.36.0
@@ -123,7 +124,7 @@ libomp 15.0.6
 libpng 1.6.39
 libpq 15.1
 libpthread-stubs 0.4
-libraw 0.20.2_3
+libraw 0.20.2_4
 librsvg 2.55.1
 libsodium 1.0.18_1
 libssh2 1.10.0
@@ -154,6 +155,7 @@ lz4 1.9.4
 lzo 2.10
 m4 1.4.19
 mackup 0.8.36
+macos-term-size 1.0.0
 mani 0.22.0
 markdownlint-cli 0.32.2
 mas 1.8.6
@@ -168,9 +170,10 @@ ncurses 6.3
 neofetch 7.1.0
 neovim 0.8.1
 nethack 3.6.6
-netpbm 10.86.35
+netpbm 10.86.35_1
 nettle 3.8.1
 node 19.2.0
+node@14 14.21.1
 npth 1.6
 nyancat 1.5.2
 oh-my-posh 12.25.0
@@ -240,7 +243,7 @@ unbound 1.17.0
 unibilium 2.1.1
 unixodbc 2.3.11
 unrtf 0.21.10
-virtualenv 20.17.0
+virtualenv 20.17.1
 webp 1.2.4
 x265 3.5
 xh 0.17.0
@@ -254,7 +257,7 @@ zoxide 0.8.3
 zsh 5.9
 zstd 1.5.2
 1password 8.8.0
-1password-cli 2.7.3
+1password-cli 2.8.0
 alfred 5.0.2,2073
 appcleaner 3.6.4,4270
 beekeeper-studio 3.6.2
