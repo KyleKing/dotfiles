@@ -40,7 +40,7 @@
             "always_enabled": true
           },
           "style": "plain",
-          "template": " {{ if gt .Code 0 }}\uf00d{{ else }}>{{ end }}",
+          "template": " {{ if gt .Code 0 }}({{ .Code }}) \uf00d{{ else }}>{{ end }}",
           "type": "exit"
         }
       ],
@@ -50,44 +50,49 @@
       "segments": [
         {
           "background": "transparent",
-          "foreground": "p:green",
+          "foreground": "p:blue",
           "properties": {
+            "display_error": true
+          },
+          "style": "plain",
+          "template": "\ufd31 {{.Context}}{{if .Namespace}}::{{.Namespace}}{{end}} ",
+          "type": "kubectl"
+        },
+        {
+          "background": "transparent",
+          "foreground": "p:red",
+          "properties": {
+            "display_error": true,
             "display_mode": "files",
             "fetch_package_manager": false,
             "home_enabled": false
           },
           "style": "plain",
-          "template": "\uf898 ",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}\uf898 {{ .Full }} {{ end }}",
           "type": "node"
-        },
-        {
-          "background": "transparent",
-          "foreground": "p:blue",
-          "properties": {
-            "fetch_version": false
-          },
-          "style": "powerline",
-          "template": "\ufcd1 ",
-          "type": "go"
         },
         {
           "background": "transparent",
           "foreground": "p:yellow",
           "properties": {
+            "display_error": true,
             "display_mode": "files",
             "fetch_version": true,
             "fetch_virtual_env": false
           },
           "style": "plain",
-          "template": "\ue235 ",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}\ue235 {{ .Full }} {{ end }}",
           "type": "python"
         },
         {
           "background": "transparent",
           "foreground": "p:white",
+          "properties": {
+            "display_error": true
+          },
           "style": "plain",
-          "template": "in <p:blue><b>{{ .Name }}</b></> ",
-          "type": "shell"
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}in {{ .Name }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>){{ end }}{{ end }} {{ end }}",
+          "type": "project"
         },
         {
           "background": "transparent",
@@ -112,34 +117,5 @@
     "white": "#E0DEF4",
     "yellow": "#FEAC00"
   },
-  "tooltips": [
-    {
-      "background": "p:orange",
-      "foreground": "p:white",
-      "leading_diamond": "\ue0b6",
-      "properties": {
-        "display_default": true
-      },
-      "style": "diamond",
-      "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
-      "tips": [
-        "aws"
-      ],
-      "trailing_diamond": "\ue0b4",
-      "type": "aws"
-    },
-    {
-      "background": "p:blue",
-      "foreground": "p:white",
-      "leading_diamond": "\ue0b6",
-      "style": "diamond",
-      "template": " \ufd03 {{ .Name }} ",
-      "tips": [
-        "az"
-      ],
-      "trailing_diamond": "\ue0b4",
-      "type": "az"
-    }
-  ],
   "version": 2
 }
