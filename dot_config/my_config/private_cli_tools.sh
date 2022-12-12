@@ -15,19 +15,25 @@ alias rgh='rg --hidden'
 alias rgfs='rgh --fixed-strings --'
 rgso() {
     _search=$1
+    echo "Searching with: '$_search'"
     if [[ -z "$_search" ]]; then
         echo "The search strings must be specified. Expected: 'rgso ...'"
         return 1
     else
-        rgfs --files-with-matches $_search | xargs -I {} $EDITOR "{}"
+        paths=$(rgh --fixed-strings --files-with-matches -- $_search)
+        echo "Found: '$paths'"
+        # for path in $paths;
+        #     do $EDITOR "$path";
+        # done
+        echo "^ FIXME: These paths aren't absolute and raise other errors..."
     fi
 }
 
-# Map exa to ls with some default options
-alias ls='exa --icons'
-alias lsa='ls --all'
-alias lsl='ls --long --header --created --git'
-alias lst='lsl -TL 2'
+# Map exa to ll (quicker ls) with some default options
+alias ll='exa --icons'
+alias lla='ll --all'
+alias lll='ll --long --header --created --git'
+alias llt='lll -TL 2'
 
 # UI folder navigation from the terminal
 cdt() {
