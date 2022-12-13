@@ -6,3 +6,6 @@ Warning: You have unlinked kegs in your Cellar.
 Leaving kegs unlinked can lead to build-trouble and cause formulae that depend on
 those kegs to fail to run properly once built. Run `brew link` on these:
   jira-cli
+
+Warning: Broken symlinks were found. Remove them with `brew cleanup`:
+  /opt/homebrew/opt/kubectl@1.25
