@@ -25,6 +25,15 @@ issuesSections:
     filters: archived:false is:issue is:open repo:roaminsight/reviewer
   - title: My Projects
     filters: archived:false is:issue is:open org:KyleKing
+  - title: 'Milestone: Current'
+    filters: archived:false is:issue is:open assignee:@me milestone:"current tasks"
+  - title: 'Milestone: Next'
+    filters: archived:false is:issue is:open assignee:@me milestone:"next tasks"
+  - title: 'Milestone: Blue Sky'
+    filters: archived:false is:issue is:open assignee:@me milestone:"blue sky"
+  - title: 'Milestone: None'
+    filters: archived:false is:issue is:open assignee:@me no:milestone
+
 defaults:
   preview:
     open: true
