@@ -52,7 +52,7 @@
           "background": "transparent",
           "foreground": "p:blue",
           "properties": {
-            "display_error": true
+            "display_error": false
           },
           "style": "plain",
           "template": "\ufd31 {{.Context}}{{if .Namespace}}::{{.Namespace}}{{end}} ",
