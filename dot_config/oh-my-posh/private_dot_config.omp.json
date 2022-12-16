@@ -68,7 +68,7 @@
             "home_enabled": false
           },
           "style": "plain",
-          "template": "\uf898 {{ .Full }} {{ end }}",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}\uf898 {{ .Full }} {{ end }}",
           "type": "node"
         },
         {
@@ -81,7 +81,7 @@
             "fetch_virtual_env": false
           },
           "style": "plain",
-          "template": "\ue235 {{ .Full }} ",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}\ue235 {{ .Full }} {{ end }}",
           "type": "python"
         },
         {
@@ -91,7 +91,7 @@
             "display_error": true
           },
           "style": "plain",
-          "template": "{{ if .Name }}in {{ .Name }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>) {{ end }}",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}in {{ .Name }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>){{ end }}{{ end }} {{ end }}",
           "type": "project"
         },
         {
