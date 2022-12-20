@@ -34,3 +34,6 @@ pip-selfcheck.json
 
 # ripgrep
 .git/*
+
+# nvim
+.null-ls*

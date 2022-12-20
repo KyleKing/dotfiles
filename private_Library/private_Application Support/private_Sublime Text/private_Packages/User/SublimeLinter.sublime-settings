@@ -25,6 +25,9 @@
         "markdownlint": {
             "args": ["-r","~MD013,~MD046,~MD033,~MD007"],
             "disable": false
+        },
+        "SpellCheckLinter": {
+            "disable": true
         }
     },
     "no_column_highlights_line": true,
