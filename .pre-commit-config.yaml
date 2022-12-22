@@ -73,7 +73,7 @@ repos:
         exclude: poetry\.lock|.*/cassettes/.*\.yaml
         stages: [push]
   - repo: https://github.com/lyz-code/yamlfix/
-    rev: 1.1.1
+    rev: 1.2.0
     hooks:
       - id: yamlfix
         exclude: \.copier-answers\.yml
@@ -84,6 +84,10 @@ repos:
     hooks:
       - id: shellcheck
         args: [--severity=warning]
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v0.15.3
+    hooks:
+      - id: stylua-system
   - repo: https://github.com/Calinou/pre-commit-luacheck
     rev: v1.0.0
     hooks:
