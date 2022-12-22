@@ -16,8 +16,8 @@ local config = {
     pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
     skip_prompts = false, -- skip prompts about breaking changes
     show_changelog = true, -- show the changelog after performing an update
-    auto_reload = false, -- automatically reload and sync packer after a successful update
-    auto_quit = false, -- automatically quit the current session after a successful update
+    auto_reload = true, -- automatically reload and sync packer after a successful update
+    auto_quit = true, -- automatically quit the current session after a successful update
     -- remotes = { -- easily add new remotes to track
     --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
     --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
@@ -46,7 +46,7 @@ local config = {
       number = true, -- sets vim.opt.number
       spell = false, -- sets vim.opt.spell
       signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-      wrap = false, -- sets vim.opt.wrap
+      wrap = true, -- sets vim.opt.wrap
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -207,11 +207,16 @@ local config = {
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+      -- FYI: Habit breaking http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+      ["<Up>"] = false,
+      ["<Down>"] = false,
+      ["<Left>"] = false,
+      ["<Right>"] = false,
     },
     t = {
       -- setting a mapping to false will disable it
       -- ["<esc>"] = false,
-      -- FIXME: Should be turned off? (http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/)
+      -- FYI: Habit breaking http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
       ["<Up>"] = false,
       ["<Down>"] = false,
       ["<Left>"] = false,
