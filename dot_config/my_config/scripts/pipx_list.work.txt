@@ -1,8 +1,8 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package autoflake 1.7.7, installed using Python 3.10.6
+   package autoflake 2.0.0, installed using Python 3.10.6
     - autoflake
-   package calcipy 0.21.4, installed using Python 3.10.6
+   package calcipy 0.21.5, installed using Python 3.10.6
     - calcipy
    package cloudiscovery 2.4.4, installed using Python 3.10.6
     - cloudiscovery
@@ -13,34 +13,34 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - copier
    package cortex 0.42.1, installed using Python 3.10.8
     - cortex
-   package docformatter 1.5.0, installed using Python 3.10.6
+   package docformatter 1.5.1, installed using Python 3.10.6
     - docformatter
    package envtpl 0.7.2, installed using Python 3.10.6
     - envtpl
    package glances 3.3.0.4, installed using Python 3.10.8
     - glances
-   package isort 5.10.1, installed using Python 3.10.6
+   package isort 5.11.3, installed using Python 3.10.6
     - isort
     - isort-identify-imports
    package personal-man 1.1.0, installed using Python 3.10.8
     - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
-   package pylint 2.15.6, installed using Python 3.10.6
+   package pylint 2.15.9, installed using Python 3.10.6
     - epylint
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyupgrade 3.2.2, installed using Python 3.10.6
+   package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
-   package sourcery-cli 0.13.0, installed using Python 3.10.6
+   package sourcery-cli 1.0.2, installed using Python 3.10.6
     - sourcery
    package uncurl 0.0.11, installed using Python 3.10.6
     - uncurl
-   package unimport 0.12.2, installed using Python 3.10.6
+   package unimport 0.12.3, installed using Python 3.10.6
     - unimport
    package xdot 1.2, installed using Python 3.10.8
     - xdot
-   package yamlfix 1.1.0, installed using Python 3.10.6
+   package yamlfix 1.2.0, installed using Python 3.10.6
     - yamlfix

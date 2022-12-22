@@ -11,7 +11,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.9.8
+awscli 2.9.9
 bat 0.22.1
 bdw-gc 8.2.2
 bottom 0.6.8
@@ -20,14 +20,14 @@ brotli 1.0.9
 c-ares 1.18.1_1
 ca-certificates 2022-10-11
 cairo 1.16.0_5
-checkov 2.2.150
+checkov 2.2.195
 chezmoi 2.28.0
 cloc 1.96
 cmake 3.25.1
 cmatrix 2.0
 coreutils 9.1
 ctop 0.7.7
-curl 7.86.0
+curl 7.87.0
 curlie 1.6.9
 dark-mode 3.0.2
 devdash 0.5.0
@@ -49,6 +49,7 @@ gcc 12.2.0
 gd 2.3.3_4
 gdbm 1.23
 gdk-pixbuf 2.42.10
+gdu 5.20.0
 gettext 0.21.1
 gh 2.20.2
 ghostscript 10.0.0
@@ -105,7 +106,7 @@ k9s 0.26.7
 krb5 1.20.1
 krew 0.4.3
 kubernetes-cli 1.26.0
-kubevious 1.0.39
+kubevious 1.0.43
 kubie 0.19.1
 lazydocker 0.20.0
 lazygit 0.36.0
@@ -120,7 +121,7 @@ libgpg-error 1.46
 libheif 1.14.0
 libidn 1.41
 libidn2 2.3.4
-libksba 1.6.2
+libksba 1.6.3
 liblqr 0.4.2_1
 libmpc 1.3.1
 libnghttp2 1.51.0
@@ -128,7 +129,7 @@ libomp 15.0.6
 libpng 1.6.39
 libpq 15.1
 libpthread-stubs 0.4
-libraw 0.20.2_4 0.21.0
+libraw 0.21.0
 librsvg 2.55.1
 libsodium 1.0.18_1
 libssh2 1.10.0
@@ -152,7 +153,7 @@ libzip 1.9.2
 little-cms2 2.14
 lolcat 100.0.1
 lua 5.4.4_1
-luacheck 1.0.0
+luacheck 1.1.0
 luajit 2.1.0-beta3-20221208.2
 luarocks 3.9.1
 luv 1.44.2-1
@@ -181,7 +182,7 @@ node 19.3.0
 node@14 14.21.2
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 12.28.0
+oh-my-posh 12.28.1
 oniguruma 6.9.8
 openblas 0.3.21
 openexr 3.1.5
@@ -228,6 +229,7 @@ socli 7.2
 speedtest-cli 2.1.3_1
 sqlite 3.40.0
 stern 1.22.0
+stylua 0.15.3
 swig 4.1.1
 tere 1.3.1
 terraform-docs 0.16.0
@@ -250,11 +252,12 @@ unixodbc 2.3.11
 unrtf 0.21.10
 virtualenv 20.17.1
 webp 1.2.4
+wget 1.21.3
 x265 3.5
 xh 0.17.0
 xmlto 0.0.28
 xorgproto 2022.2
-xz 5.2.9
+xz 5.4.0 5.2.9
 yadm 3.2.1
 yq 4.30.6
 zlib 1.2.13
@@ -262,7 +265,7 @@ zoxide 0.8.3
 zsh 5.9
 zstd 1.5.2
 1password 8.8.0
-1password-cli 2.11.0
+1password-cli 2.12.0
 alfred 5.0.2,2073
 appcleaner 3.6.4,4270
 beekeeper-studio 3.6.2
@@ -304,9 +307,9 @@ microsoft-teams 1.5.00.22362
 monitorcontrol 4.1.0
 netiquette 2.1.1
 obsidian 1.0.0
-oversight 2.1.4
+oversight 2.1.5
 paletro 1.6.5
-pomatez 1.1.0
+pomatez 1.2.2
 postman 10.6.0
 postman-cli 1.0.8
 qlstephen 1.5.1
@@ -325,3 +328,4 @@ webcatalog 43.4.1
 webpquicklook 1.0
 wezterm 20221119-145034,49b9839f
 xbar 2.1.7-beta
+zoom 5.13.0.13815
