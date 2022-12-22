@@ -20,19 +20,23 @@ repos:
       - id: check-toml
       - id: check-vcs-permalinks
       - id: check-yaml
-        args: [--unsafe]
+        args:
+          - --unsafe
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: fix-byte-order-marker
       - id: fix-encoding-pragma
-        args: [--remove]
+        args:
+          - --remove
       - id: forbid-new-submodules
       - id: mixed-line-ending
-        args: [--fix=auto]
+        args:
+          - --fix=auto
       - id: pretty-format-json
-        args: [--autofix]
+        args:
+          - --autofix
         exclude: private_keybindings.json
       # Conflicts with ordering by poetry
       # - id: requirements-txt-fixer
@@ -47,8 +51,10 @@ repos:
     rev: v2.38.0
     hooks:
       - id: commitizen
-        additional_dependencies: [cz_legacy]
-        stages: [commit-msg]
+        additional_dependencies:
+          - cz_legacy
+        stages:
+          - commit-msg
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.16
     hooks:
@@ -71,19 +77,23 @@ repos:
       - id: detect-secrets
         # args: ["--baseline", ".secrets.baseline"]
         exclude: poetry\.lock|.*/cassettes/.*\.yaml
-        stages: [push]
+        stages:
+          - push
   - repo: https://github.com/lyz-code/yamlfix/
     rev: 1.2.0
     hooks:
       - id: yamlfix
         exclude: \.copier-answers\.yml
         types_or: []
-        types: [file, yaml]
+        types:
+          - file
+          - yaml
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.9.0.2
     hooks:
       - id: shellcheck
-        args: [--severity=warning]
+        args:
+          - --severity=warning
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.15.3
     hooks:

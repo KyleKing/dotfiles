@@ -28,8 +28,7 @@ customCommands:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <f8>
     description: Add Staged Files to Last Commit
-    command: export _MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 &&
-      git commit --message "$_MSG" --no-verify
+    command: export _MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 && git commit --message "$_MSG" --no-verify
     context: files
     subprocess: true
   - key: w
@@ -60,8 +59,7 @@ customCommands:
     subprocess: true
   - key: N
     description: create annotated tag
-    command: git tag -a {{index .PromptResponses 0}} -m "{{index .PromptResponses
-      1}}"
+    command: git tag -a {{index .PromptResponses 0}} -m "{{index .PromptResponses 1}}"
     context: tags
     prompts:
       - type: input
@@ -87,8 +85,7 @@ customCommands:
     loadingText: Pruning...
   - key: <c-f>
     description: Fetch a remote branch as a new local branch
-    command: git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index
-      .PromptResponses 1}}
+    command: git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index .PromptResponses 1}}
     context: remotes
     prompts:
       - type: input

@@ -183,8 +183,7 @@ Bundler/OrderedGems:
 #################### Gemspec  ###############################
 
 Gemspec/DuplicatedAssignment:
-  Description: An attribute assignment method calls should be listed only once in
-    a gemspec.
+  Description: An attribute assignment method calls should be listed only once in a gemspec.
   Enabled: true
   VersionAdded: '0.52'
   Include:
@@ -200,8 +199,7 @@ Gemspec/OrderedDependencies:
     - '**/*.gemspec'
 
 Gemspec/RequiredRubyVersion:
-  Description: Checks that `required_ruby_version` of gemspec and `TargetRubyVersion`
-    of .rubocop.yml are equal.
+  Description: Checks that `required_ruby_version` of gemspec and `TargetRubyVersion` of .rubocop.yml are equal.
   Enabled: true
   VersionAdded: '0.52'
   Include:
@@ -1179,8 +1177,7 @@ Lint/BooleanSymbol:
   VersionAdded: '0.50'
 
 Lint/CircularArgumentReference:
-  Description: Default values in optional keyword arguments and optional ordinal arguments
-    should not refer back to the name of the argument.
+  Description: Default values in optional keyword arguments and optional ordinal arguments should not refer back to the name of the argument.
   Enabled: true
   VersionAdded: '0.33'
 
@@ -1372,8 +1369,7 @@ Lint/NumberConversion:
   VersionAdded: '0.53'
 
 Lint/OrderedMagicComments:
-  Description: Checks the proper ordering of magic comments and whether a magic comment
-    is not placed before a shebang.
+  Description: Checks the proper ordering of magic comments and whether a magic comment is not placed before a shebang.
   Enabled: true
   VersionAdded: '0.53'
 
@@ -2137,8 +2133,7 @@ Performance/Size:
   VersionAdded: '0.30'
 
 Performance/StartWith:
-  Description: Use `start_with?` instead of a regex match anchored to the beginning
-    of a string.
+  Description: Use `start_with?` instead of a regex match anchored to the beginning of a string.
   Reference: https://github.com/JuanitoFatas/fast-ruby#stringmatch-vs-stringstart_withstringend_with-code-start-code-end
   # This will change to a new method call which isn't guaranteed to be on the
   # object. Switching these methods has to be done with knowledge of the types
@@ -2374,8 +2369,7 @@ Rails/HasManyOrHasOneDependent:
     - app/models/**/*.rb
 
 Rails/HttpPositionalArguments:
-  Description: Use keyword arguments instead of positional arguments in http method
-    calls.
+  Description: Use keyword arguments instead of positional arguments in http method calls.
   Enabled: true
   VersionAdded: '0.44'
   Include:
@@ -2399,8 +2393,7 @@ Rails/InverseOf:
     - app/models/**/*.rb
 
 Rails/LexicallyScopedActionFilter:
-  Description: Checks that methods specified in the filter's `only` or `except` options
-    are explicitly defined in the controller.
+  Description: Checks that methods specified in the filter's `only` or `except` options are explicitly defined in the controller.
   StyleGuide: https://github.com/rubocop-hq/rails-style-guide#lexically-scoped-action-filter
   Enabled: true
   VersionAdded: '0.52'
@@ -2408,8 +2401,7 @@ Rails/LexicallyScopedActionFilter:
     - app/controllers/**/*.rb
 
 Rails/LinkToBlank:
-  Description: 'Checks that `link_to` with a `target: "_blank"` have a `rel: "noopener"`
-    option passed to them.'
+  Description: 'Checks that `link_to` with a `target: "_blank"` have a `rel: "noopener"` option passed to them.'
   Reference: https://mathiasbynens.github.io/rel-noopener/
   Enabled: true
   VersionAdded: '0.62'
@@ -2443,8 +2435,7 @@ Rails/PluralizationGrammar:
   VersionAdded: '0.35'
 
 Rails/Presence:
-  Description: Checks code that can be written more easily using `Object#presence`
-    defined by Active Support.
+  Description: Checks code that can be written more easily using `Object#presence` defined by Active Support.
   Enabled: true
   VersionAdded: '0.52'
 
@@ -2518,8 +2509,7 @@ Rails/SafeNavigation:
   ConvertTry: false
 
 Rails/SaveBang:
-  Description: Identifies possible cases where Active Record save! or related should
-    be used.
+  Description: Identifies possible cases where Active Record save! or related should be used.
   StyleGuide: https://github.com/rubocop-hq/rails-style-guide#save-bang
   Enabled: false
   VersionAdded: '0.42'
@@ -2699,8 +2689,7 @@ Style/Attr:
   VersionChanged: '0.12'
 
 Style/AutoResourceCleanup:
-  Description: Suggests the usage of an auto resource cleanup version of a method
-    (if available).
+  Description: Suggests the usage of an auto resource cleanup version of a method (if available).
   Enabled: false
   VersionAdded: '0.30'
 
@@ -3124,8 +3113,7 @@ Style/EndBlock:
   VersionAdded: '0.9'
 
 Style/EvalWithLocation:
-  Description: Pass `__FILE__` and `__LINE__` to `eval` method, as they are used by
-    backtraces.
+  Description: Pass `__FILE__` and `__LINE__` to `eval` method, as they are used by backtraces.
   Enabled: true
   VersionAdded: '0.52'
 
@@ -3940,8 +3928,7 @@ Style/Semicolon:
   AllowAsExpressionSeparator: false
 
 Style/Send:
-  Description: Prefer `Object#__send__` or `Object#public_send` to `send`, as `send`
-    may overlap with existing methods.
+  Description: Prefer `Object#__send__` or `Object#public_send` to `send`, as `send` may overlap with existing methods.
   StyleGuide: '#prefer-public-send'
   Enabled: false
   VersionAdded: '0.33'
