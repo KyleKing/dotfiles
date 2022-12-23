@@ -249,6 +249,14 @@ local config = {
 			-- },
 		},
 		-- All other entries override the require("<key>").setup({...}) call for default plugins
+		["neo-tree"] = {
+			filesystem = {
+				filtered_items = {
+					hide_gitignored = true,
+					hide_dotfiles = false,
+				},
+			},
+		},
 		["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
 			-- config variable is the default configuration table for the setup function call
 			local null_ls = require("null-ls")
