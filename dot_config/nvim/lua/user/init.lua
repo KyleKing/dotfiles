@@ -260,7 +260,7 @@ local config = {
 		["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
 			-- config variable is the default configuration table for the setup function call
 			local null_ls = require("null-ls")
-
+			null_ls.setup({ debug = true })
 			-- Check supported formatters and linters
 			-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 			-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
@@ -283,15 +283,16 @@ local config = {
 				-- null_ls.builtins.diagnostics.eslint.with({
 				--     prefer_local = "node_modules/.bin",
 				-- }),
-				-- null_ls.builtins.diagnostics.flake8.with({
-				--     only_local = true
+				-- FIXME: How are project configuration files recognized?
+				null_ls.builtins.diagnostics.flake8.with({
+					only_local = true,
+				}),
+				-- null_ls.builtins.diagnostics.pylint.with({
+				-- 	only_local = true,
 				-- }),
-				null_ls.builtins.diagnostics.pylint.with({
-					only_local = true,
-				}),
-				null_ls.builtins.diagnostics.mypy.with({
-					only_local = true,
-				}),
+				-- null_ls.builtins.diagnostics.mypy.with({
+				-- 	only_local = true,
+				-- }),
 				-- null_ls.builtins.diagnostics.shellcheck,
 				-- null_ls.builtins.diagnostics.hadolint,
 				--
