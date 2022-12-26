@@ -1,6 +1,6 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package black 22.10.0, installed using Python 3.10.4
+   package black 22.12.0, installed using Python 3.10.4
     - black
     - black-primer
     - blackd
@@ -9,7 +9,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
-   package calcipy 0.21.4, installed using Python 3.10.8
+   package calcipy 0.21.5, installed using Python 3.10.8
     - calcipy
    package codecov 2.1.12, installed using Python 3.10.4
     - codecov
@@ -20,27 +20,48 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package detect-secrets 1.4.0, installed using Python 3.10.4
     - detect-secrets
     - detect-secrets-hook
-   package djlint 1.19.7, installed using Python 3.10.6
+   package djlint 1.19.10, installed using Python 3.10.6
     - djlint
-   package docformatter 1.5.0, installed using Python 3.10.6
+   package docformatter 1.5.1, installed using Python 3.10.6
     - docformatter
-   package flake8 5.0.4, installed using Python 3.10.4
+   package flake8 6.0.0, installed using Python 3.10.4
     - flake8
-   package isort 5.10.1, installed using Python 3.10.4
+   package flit 3.8.0, installed using Python 3.10.8
+    - flit
+   package isort 5.11.4, installed using Python 3.10.4
     - isort
     - isort-identify-imports
    package mdformat-gfm 0.3.5, installed using Python 3.10.4
     - markdown-it
     - mdformat
+    Injected Packages:
+      - mdformat-admon 0.0.1
+      - mdformat-beautysh 0.1.1
+      - mdformat-black 0.1.1
+      - mdformat-config 0.1.3
+      - mdformat-frontmatter 0.4.1
+      - mdformat-mkdocs 0.0.1
+      - mdformat-tables 0.4.1
+      - mdformat-toc 0.3.0
+      - mdformat-web 0.1.0
    package personal-man 1.0.0, installed using Python 3.10.8
     - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
    package pygments 2.13.0, installed using Python 3.10.4
     - pygmentize
-   package pyproject-fmt 0.3.5, installed using Python 3.10.8
+   package pyproject-fmt 0.4.1, installed using Python 3.10.8
     - pyproject-fmt
-   package pytype 2022.11.18, installed using Python 3.10.4
+   package python-lsp-server 1.6.0, installed using Python 3.10.9
+    - pylsp
+    Injected Packages:
+      - pyls-isort 0.2.2
+      - pyls-mypy 0.1.8
+      - pylsp-mypy 0.6.4
+      - pylsp-rope 0.1.10
+      - python-lsp-black 1.2.1
+      - python-lsp-ruff 1.0.3
+   package pytype 2022.12.15, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
     - pytd
@@ -49,15 +70,17 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyxref
    package rich-cli 1.8.0, installed using Python 3.10.5
     - rich
-   package semgrep 0.122.0, installed using Python 3.10.4
+   package ruff 0.0.194, installed using Python 3.10.9
+    - ruff
+   package semgrep 1.2.1, installed using Python 3.10.4
     - semgrep
    package skedulord 2.0.0, installed using Python 3.10.5
     - skedulord
-   package sourcery-cli 0.13.0, installed using Python 3.10.6
+   package sourcery-cli 1.0.2, installed using Python 3.10.6
     - sourcery
-   package sqlfluff 1.4.2, installed using Python 3.10.4
+   package sqlfluff 1.4.5, installed using Python 3.10.4
     - sqlfluff
-   package tox 3.27.1, installed using Python 3.10.8
+   package tox 4.0.18, installed using Python 3.10.8
     - tox
     - tox-quickstart
    package watchfiles 0.18.1, installed using Python 3.10.5
@@ -66,7 +89,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - wily
    package wordcloud 1.8.2.2, installed using Python 3.10.5
     - wordcloud_cli
-   package yamlfix 1.1.0, installed using Python 3.10.4
+   package yamlfix 1.2.0, installed using Python 3.10.4
     - yamlfix
    package yapf 0.32.0, installed using Python 3.10.6
     - yapf
