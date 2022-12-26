@@ -42,6 +42,7 @@ local config = {
 	options = {
 		opt = {
 			-- set to true or false etc.
+			colorcolumn = "80,120",
 			relativenumber = true, -- sets vim.opt.relativenumber
 			number = true, -- sets vim.opt.number
 			spell = false, -- sets vim.opt.spell
@@ -50,7 +51,7 @@ local config = {
 		},
 		g = {
 			mapleader = " ", -- sets vim.g.mapleader
-			autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+			autoformat_enabled = false, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
 			cmp_enabled = true, -- enable completion at start
 			autopairs_enabled = true, -- enable autopairs at start
 			diagnostics_enabled = true, -- enable diagnostics at start
@@ -182,6 +183,31 @@ local config = {
 			--     },
 			--   },
 			-- },
+			python_lsp_server = {
+				settings = {
+					configurationSources = { "flake8" },
+					-- formatCommand = { "black" },
+					pylsp = {
+						plugins = {
+							autopep8 = { enabled = false },
+							black = { enabled = true },
+							flake8 = { enabled = true, ignore = { "E501" } },
+							isort = { enabled = true }, -- FYI: Use isort from Packer instead
+							mccabe = { enabled = false },
+							pycodestyle = { enabled = false },
+							pydocstyle = { enabled = false },
+							pyflakes = { enabled = false },
+							pylint = { enabled = true },
+							pyls_flake8 = { enabled = false },
+							pyls_mypy = { enabled = true },
+							rope_autoimport = { enabled = true },
+							rope_completion = { enabled = true },
+							ruff = { enabled = false },
+							yapf = { enabled = false },
+						},
+					},
+				},
+			},
 		},
 	},
 
@@ -256,18 +282,28 @@ local config = {
 			-- ["sonph/onehalf"] = {}, -- onehalfdark
 
 			-- Additional plugins
+			["kylechui/nvim-surround"] = {},
+			["sheerun/vim-polyglot"] = {},
 			["folke/todo-comments.nvim"] = {
 				requires = "nvim-lua/plenary.nvim",
 				config = function()
 					require("todo-comments").setup({})
 				end,
 			},
-
-			-- We also support a key value style plugin definition similar to NvChad:
-			["ray-x/lsp_signature.nvim"] = {
-				event = "BufRead",
+			-- ["ray-x/lsp_signature.nvim"] = {
+			-- 	event = "BufRead",
+			-- 	config = function()
+			-- 		require("lsp_signature").setup()
+			-- 	end,
+			-- },
+			["codota/tabnine-nvim"] = {
 				config = function()
-					require("lsp_signature").setup()
+					require("tabnine").setup({
+						disable_auto_comment = true,
+						accept_keymap = "<Tab>",
+						debounce_ms = 300,
+						suggestion_color = { gui = "#808080", cterm = 244 },
+					})
 				end,
 			},
 		},
@@ -290,7 +326,7 @@ local config = {
 			config.sources = {
 				null_ls.builtins.formatting.stylua,
 				-- FIXME: Can this use calcipy, black, or flake8 based on project?
-				null_ls.builtins.formatting.black,
+				-- null_ls.builtins.formatting.black,
 				-- null_ls.builtins.formatting.prettier.with({
 				--     prefer_local = "node_modules/.bin",
 				-- }),
@@ -302,7 +338,7 @@ local config = {
 				null_ls.builtins.formatting.trim_newlines,
 				null_ls.builtins.formatting.trim_whitespace,
 				-- null_ls.builtins.formatting.uncrustify,
-				--
+				-- Diagnostics
 				-- null_ls.builtins.diagnostics.eslint.with({
 				--     prefer_local = "node_modules/.bin",
 				-- }),
@@ -328,14 +364,21 @@ local config = {
 		end,
 		treesitter = { -- overrides `require("treesitter").setup(...)`
 			-- ensure_installed = { "lua" },
+			ensure_installed = { "lua", "python", "javascript", "html", "css", "json", "toml" },
 		},
+		-- PLANNED: consider heirline customization
+		-- 	https://github.com/julianschuler/dotfiles/blob/6d7fa0c4a1317c242858f8eb24d8f7474756f9ce/astronvim/lua/user/init.lua#L133-L156
+		--
 		-- use mason-lspconfig to configure LSP installations
 		["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
 			-- ensure_installed = { "sumneko_lua" },
+			-- "awk-language-server", "bash-language-server", "codeql", "dockerfile-language-server", "eslint-lsp", "lua-language-server", "pyright", "python-lsp-server", "sourcery:, "taplo", "terraform-ls", "tflint", "yaml-language-server"
 		},
 		-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
 		["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
 			-- ensure_installed = { "prettier", "stylua" },
+			-- "actionlint", "codespell", "flake8", "jsonlint", "luacheck", "markdownlint", "proselint", "shellcheck", "sqlfluff", "tflint", "yamllint"
+			-- "autopep8", "beautysh", "black", "isort", "markdownlint", "shfmt", "stylua"
 		},
 		["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
 			-- ensure_installed = { "python" },

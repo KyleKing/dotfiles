@@ -16,6 +16,6 @@ brew doctor 2> "$SCRIPT_DIR/brew_doctor.{{- .computer_name }}"
 
 gh extension list > "$SCRIPT_DIR/gh_extensions.{{- .computer_name -}}.txt"
 kubectl krew list > "$SCRIPT_DIR/krew_plugins.{{- .computer_name -}}.txt"
-pipx list > "$SCRIPT_DIR/pipx_list.{{- .computer_name -}}.txt"
+pipx list --include-injected > "$SCRIPT_DIR/pipx_list.{{- .computer_name -}}.txt"
 pip config list --verbose > "$SCRIPT_DIR/pip_config.{{- .computer_name -}}.txt"
 {{ end -}}
