@@ -63,6 +63,9 @@ return {
 	-- Note that "color_scheme" overrides "colors"
 	-- color_scheme = "Firewatch",
 	--
+	-- FYI: Consider Evergreen
+	-- 	https://git.sr.ht/~maksim/wezterm-everforest/tree/master/item/everforest.toml
+	--
 	-- Based on "Tokyo Night Storm variant": https://github.com/enkia/tokyo-night-vscode-theme#other-portings
 	-- For Wez: https://github.com/wez/wezterm/blob/main/assets/colors/3024%20Day.toml
 	colors = {

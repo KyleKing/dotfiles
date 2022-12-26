@@ -25,7 +25,8 @@ local config = {
 	},
 
 	-- Set colorscheme to use
-	colorscheme = "default_theme",
+	-- colorscheme = "default_theme",
+	colorscheme = "nightfox",
 
 	-- Add highlight groups in any theme
 	highlights = {
@@ -70,12 +71,12 @@ local config = {
 
 	-- Set dashboard header
 	header = {
-		" █████  ███████ ████████ ██████   ██████",
-		"██   ██ ██         ██    ██   ██ ██    ██",
-		"███████ ███████    ██    ██████  ██    ██",
-		"██   ██      ██    ██    ██   ██ ██    ██",
-		"██   ██ ███████    ██    ██   ██  ██████",
-		" ",
+		-- " █████  ███████ ████████ ██████   ██████",
+		-- "██   ██ ██         ██    ██   ██ ██    ██",
+		-- "███████ ███████    ██    ██████  ██    ██",
+		-- "██   ██      ██    ██    ██   ██ ██    ██",
+		-- "██   ██ ███████    ██    ██   ██  ██████",
+		-- " ",
 		"    ███    ██ ██    ██ ██ ███    ███",
 		"    ████   ██ ██    ██ ██ ████  ████",
 		"    ██ ██  ██ ██    ██ ██ ██ ████ ██",
@@ -206,20 +207,10 @@ local config = {
 			},
 			-- quick save
 			-- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-			-- FYI: Habit breaking http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-			["<Up>"] = false,
-			["<Down>"] = false,
-			["<Left>"] = false,
-			["<Right>"] = false,
 		},
 		t = {
 			-- setting a mapping to false will disable it
 			-- ["<esc>"] = false,
-			-- FYI: Habit breaking http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-			["<Up>"] = false,
-			["<Down>"] = false,
-			["<Left>"] = false,
-			["<Right>"] = false,
 		},
 	},
 
@@ -240,13 +231,45 @@ local config = {
 			--   end,
 			-- },
 
+			-- Themes
+			-- ["dracula/vim"] = {},  -- dracula
+			["EdenEast/nightfox.nvim"] = {}, -- nightfox, duskfox
+			-- ["folke/tokyonight.nvim"] = {},  -- tokyonight-storm
+			-- ["joshdick/onedark.vim"] = {},  -- onedark
+			-- ["rebelot/kanagawa.nvim"] = {}, -- kanagawa
+			-- ["roflolilolmao/oceanic-next.nvim"] = {},  -- OceanicNext
+			["sainnhe/everforest"] = { -- everforest
+				-- PLANNED: Need to figure out how configuration works
+				-- config = function()
+				-- 	set background=dark
+				-- 	let g:everforest_background = 'soft'
+				-- end,
+				-- 	background = "dark",
+				-- 	everforest_background = "hard",
+				-- 	everforest_enable_italic = 1,
+				-- 	everforest_dim_inactive_windows = 1,
+				-- 	everforest_sign_column_background = "grey",
+				-- 	everforest_ui_contrast = "high",
+				-- better_performance = 1,
+			},
+			-- ["sickill/vim-monokai"] = {}, -- monokai
+			-- ["sonph/onehalf"] = {}, -- onehalfdark
+
+			-- Additional plugins
+			["folke/todo-comments.nvim"] = {
+				requires = "nvim-lua/plenary.nvim",
+				config = function()
+					require("todo-comments").setup({})
+				end,
+			},
+
 			-- We also support a key value style plugin definition similar to NvChad:
-			-- ["ray-x/lsp_signature.nvim"] = {
-			--   event = "BufRead",
-			--   config = function()
-			--     require("lsp_signature").setup()
-			--   end,
-			-- },
+			["ray-x/lsp_signature.nvim"] = {
+				event = "BufRead",
+				config = function()
+					require("lsp_signature").setup()
+				end,
+			},
 		},
 		-- All other entries override the require("<key>").setup({...}) call for default plugins
 		["neo-tree"] = {
