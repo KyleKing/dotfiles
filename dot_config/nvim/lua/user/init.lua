@@ -17,11 +17,6 @@ local config = {
 		show_changelog = true, -- show the changelog after performing an update
 		auto_reload = true, -- automatically reload and sync packer after a successful update
 		auto_quit = true, -- automatically quit the current session after a successful update
-		-- remotes = { -- easily add new remotes to track
-		--   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
-		--   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
-		--   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
-		-- },
 	},
 
 	-- Set colorscheme to use
@@ -41,7 +36,6 @@ local config = {
 	-- set vim options here (vim.<first_key>.<second_key> = value)
 	options = {
 		opt = {
-			-- set to true or false etc.
 			colorcolumn = "80,120",
 			relativenumber = true, -- sets vim.opt.relativenumber
 			number = true, -- sets vim.opt.number
@@ -191,15 +185,15 @@ local config = {
 						plugins = {
 							autopep8 = { enabled = false },
 							black = { enabled = true },
-							flake8 = { enabled = true, ignore = { "E501" } },
-							isort = { enabled = true }, -- FYI: Use isort from Packer instead
+							flake8 = { enabled = false, ignore = { "E501" } },
+							isort = { enabled = false }, -- FYI: Use isort from Packer instead
 							mccabe = { enabled = false },
 							pycodestyle = { enabled = false },
 							pydocstyle = { enabled = false },
 							pyflakes = { enabled = false },
-							pylint = { enabled = true },
+							pylint = { enabled = false },
 							pyls_flake8 = { enabled = false },
-							pyls_mypy = { enabled = true },
+							pyls_mypy = { enabled = false },
 							rope_autoimport = { enabled = true },
 							rope_completion = { enabled = true },
 							ruff = { enabled = false },
@@ -259,13 +253,27 @@ local config = {
 
 			-- Themes
 			-- ["dracula/vim"] = {},  -- dracula
-			["EdenEast/nightfox.nvim"] = {}, -- nightfox, duskfox
+			["EdenEast/nightfox.nvim"] = { -- nightfox, duskfox
+				-- PLANNED: These settings weren't being recognized?
+				dim_inactive = true,
+				options = {
+					dim_inactive = true,
+				},
+				-- options = {
+				-- 	dim_inactive = true,
+				-- 	styles = {
+				-- 		comments = "italic",
+				-- 		keywords = "bold",
+				-- 		types = "italic,bold",
+				-- 	},
+				-- },
+			},
 			-- ["folke/tokyonight.nvim"] = {},  -- tokyonight-storm
 			-- ["joshdick/onedark.vim"] = {},  -- onedark
 			-- ["rebelot/kanagawa.nvim"] = {}, -- kanagawa
 			-- ["roflolilolmao/oceanic-next.nvim"] = {},  -- OceanicNext
 			["sainnhe/everforest"] = { -- everforest
-				-- PLANNED: Need to figure out how configuration works
+				-- PLANNED: Need to figure out how configuration works. No lua examples
 				-- config = function()
 				-- 	set background=dark
 				-- 	let g:everforest_background = 'soft'
@@ -324,24 +332,24 @@ local config = {
 			-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 			-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 			config.sources = {
+				--
+				-- Formatting
 				null_ls.builtins.formatting.stylua,
-				-- FIXME: Can this use calcipy, black, or flake8 based on project?
-				-- null_ls.builtins.formatting.black,
 				-- null_ls.builtins.formatting.prettier.with({
 				--     prefer_local = "node_modules/.bin",
 				-- }),
 				-- null_ls.builtins.formatting.eslint.with({
 				--     prefer_local = "node_modules/.bin",
 				-- }),
-				-- null_ls.builtins.formatting.taplo,
-				-- null_ls.builtins.formatting.terraform_fmt,
+				null_ls.builtins.formatting.taplo,
+				null_ls.builtins.formatting.terraform_fmt,
 				null_ls.builtins.formatting.trim_newlines,
 				null_ls.builtins.formatting.trim_whitespace,
-				-- null_ls.builtins.formatting.uncrustify,
+				--
 				-- Diagnostics
-				-- null_ls.builtins.diagnostics.eslint.with({
-				--     prefer_local = "node_modules/.bin",
-				-- }),
+				null_ls.builtins.diagnostics.eslint.with({
+					prefer_local = "node_modules/.bin",
+				}),
 				-- FIXME: How are project configuration files recognized?
 				null_ls.builtins.diagnostics.flake8.with({
 					only_local = true,
@@ -352,15 +360,13 @@ local config = {
 				-- null_ls.builtins.diagnostics.mypy.with({
 				-- 	only_local = true,
 				-- }),
-				-- null_ls.builtins.diagnostics.shellcheck,
-				-- null_ls.builtins.diagnostics.hadolint,
+				null_ls.builtins.diagnostics.shellcheck,
+				null_ls.builtins.diagnostics.hadolint,
 				--
-				-- null_ls.builtins.code_actions.eslint.with({
-				--     only_local = true
-				-- }),
-				-- null_ls.builtins.code_actions.gitsigns,
+				-- Code Actions
+				null_ls.builtins.code_actions.gitsigns,
 			}
-			return config -- return final config table
+			return config
 		end,
 		treesitter = { -- overrides `require("treesitter").setup(...)`
 			-- ensure_installed = { "lua" },
@@ -371,14 +377,50 @@ local config = {
 		--
 		-- use mason-lspconfig to configure LSP installations
 		["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
-			-- ensure_installed = { "sumneko_lua" },
-			-- "awk-language-server", "bash-language-server", "codeql", "dockerfile-language-server", "eslint-lsp", "lua-language-server", "pyright", "python-lsp-server", "sourcery:, "taplo", "terraform-ls", "tflint", "yaml-language-server"
+			ensure_installed = {
+				-- LSP
+				"awk_ls",
+				"bashls",
+				-- "codeqlls",
+				"dockerls",
+				"eslint",
+				"sumneko_lua",
+				-- "pyright", -- Too much noise
+				"pylsp",
+				"sourcery",
+				"taplo",
+				"terraformls",
+				"tflint",
+				"yamlls",
+			},
 		},
 		-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
 		["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
-			-- ensure_installed = { "prettier", "stylua" },
-			-- "actionlint", "codespell", "flake8", "jsonlint", "luacheck", "markdownlint", "proselint", "shellcheck", "sqlfluff", "tflint", "yamllint"
-			-- "autopep8", "beautysh", "black", "isort", "markdownlint", "shfmt", "stylua"
+			ensure_installed = {
+				-- Examples: "prettier", "stylua",
+				-- Diagnostics
+				"actionlint",
+				"codespell",
+				"flake8",
+				"jsonlint",
+				"luacheck",
+				"markdownlint",
+				"proselint",
+				"shellcheck",
+				"sqlfluff",
+				"tflint",
+				"yamllint",
+				--
+				-- Formatters
+				-- These should be installed manually if needed
+				-- "autopep8",
+				-- "black",
+				"beautysh",
+				"isort",
+				"markdownlint",
+				"shfmt",
+				"stylua",
+			},
 		},
 		["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
 			-- ensure_installed = { "python" },
@@ -399,11 +441,11 @@ local config = {
 	},
 
 	-- CMP Source Priorities
-	-- modify here the priorities of default cmp sources
-	-- higher value == higher priority
-	-- The value can also be set to a boolean for disabling default sources:
-	-- false == disabled
-	-- true == 1000
+	--   modify here the priorities of default cmp sources
+	--   higher value == higher priority
+	--   The value can also be set to a boolean for disabling default sources:
+	--   false == disabled
+	--   true == 1000
 	cmp = {
 		source_priority = {
 			nvim_lsp = 1000,
@@ -430,8 +472,8 @@ local config = {
 	},
 
 	-- This function is run last and is a good place to configuring
-	-- augroups/autocommands and custom filetypes also this just pure lua so
-	-- anything that doesn't fit in the normal config locations above can go here
+	--   augroups/autocommands and custom filetypes also this just pure lua so
+	--   anything that doesn't fit in the normal config locations above can go here
 	polish = function()
 		-- Set up custom filetypes
 		-- vim.filetype.add {
