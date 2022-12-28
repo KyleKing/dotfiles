@@ -7,6 +7,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package cloudiscovery 2.4.4, installed using Python 3.10.6
     - cloudiscovery
     - cloudiscovery.cmd
+    Injected Packages:
+      - markupsafe 2.0.1
    package code2flow 2.5.0, installed using Python 3.10.8
     - code2flow
    package copier 7.0.1, installed using Python 3.10.8
@@ -42,5 +44,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - unimport
    package xdot 1.2, installed using Python 3.10.8
     - xdot
+    Injected Packages:
+      - numpy 1.23.4
+      - pygobject 3.42.2
    package yamlfix 1.2.0, installed using Python 3.10.6
     - yamlfix
