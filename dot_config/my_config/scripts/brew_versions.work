@@ -90,7 +90,7 @@ http-prompt 2.1.0_1
 httpstat 1.3.2
 hyperfine 1.15.0
 icu4c 71.1
-imagemagick 7.1.0-55
+imagemagick 7.1.0-56
 imath 3.1.6
 isl 0.25
 jasper 4.0.0
@@ -296,6 +296,7 @@ insomnia 2022.5.1
 iterm2 3.4.16
 keepingyouawake 1.6.2
 keyboard-cleaner 1.2
+keycastr 0.9.13
 knockknock 2.3.0
 lulu 2.4.2
 lunacy 8.7.2

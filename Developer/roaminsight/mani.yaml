@@ -60,6 +60,13 @@ projects:
       - Roam
       - Auth
 
+  aws-org:
+    url: git@github.com:roaminsight/aws-org.git
+    desc: General Roam Project
+    tags:
+      - Roam
+      - Active
+
   babylon:
     url: git@github.com:roaminsight/babylon.git
     desc: Backend Pipelines and Moana Replacement
