@@ -34,6 +34,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylint-config
     - pyreverse
     - symilar
+   package python-lsp-server 1.7.0, installed using Python 3.10.9
+    - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
    package sourcery-cli 1.0.2, installed using Python 3.10.6
