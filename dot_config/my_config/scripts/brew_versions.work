@@ -22,6 +22,7 @@ c-ares 1.18.1_1
 ca-certificates 2022-10-11
 cairo 1.16.0_5
 capstone 4.0.2
+cheat 4.4.0
 checkov 2.2.225
 chezmoi 2.29.1
 cjson 1.7.15

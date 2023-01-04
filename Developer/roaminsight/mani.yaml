@@ -75,6 +75,30 @@ projects:
       - Active
       - Apps
 
+  babylon-next:
+    url: git@github.com:roaminsight/babylon-next.git
+    desc: Split from Babylon
+    tags:
+      - Roam
+      - Active
+      - Apps
+
+  zathras:
+    url: git@github.com:roaminsight/zathras.git
+    desc: Split from Babylon
+    tags:
+      - Roam
+      - Active
+      - Apps
+
+  cellar:
+    url: git@github.com:roaminsight/cellar.git
+    desc: Split from Babylon
+    tags:
+      - Roam
+      - Active
+      - Apps
+
   babylon-notebooks:
     url: git@github.com:roaminsight/babylon-notebooks.git
     desc: General Roam Project
