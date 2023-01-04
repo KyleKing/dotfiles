@@ -39,5 +39,14 @@ mkcd() {
     mkdir -p $1 && cd $1 || return
 }
 
+# Support fzf for completion from https://github.com/cheat/cheat#autocompletion
+#   Note that brew install the cheat.zsh script
+export CHEAT_USE_FZF=true
+# The cheat.zsh file isn't working as expected, so use this snippet instead
+#   From: https://github.com/cheat/cheat/issues/594#issuecomment-1228307435
+fch() {
+    cheat -l | tail -n +2 | fzf | awk '{{ print $1 }}' | xargs -I {} cheat {}
+}
+
 # See local weather. Full docs: https://github.com/chubin/wttr.in
 alias wttr="curl v2d.wttr.in"
