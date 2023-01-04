@@ -30,10 +30,10 @@ rgso() {
 }
 
 # Map exa to ll (quicker ls) with some default options
-alias ll='exa --icons'
-alias lla='ll --all'
-alias lll='ll --long --header --created --git'
-alias llt='lll -TL 2'
+alias ls='exa --icons'
+alias lsa='ls --all'
+alias lsl='ls --long --header --created --git'
+alias lst='lsl -TL 2'
 
 # UI folder navigation from the terminal
 cdt() {
