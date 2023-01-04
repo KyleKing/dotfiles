@@ -9,6 +9,10 @@ SCRIPT_DIR=$HOME/.config/my_config/scripts
 # Store code tags
 calcipy collect-code-tags --filename=$SCRIPT_DIR/Chezmoi_Code_Tags.md -b=$HOME/.local/share/chezmoi
 
+# Sync the community cheat sheets. Initialize with:
+#   gh repo clon cheat/cheatsheets ~/.config/cheat/cheatsheets/community
+cd ~/.config/cheat/cheatsheets/community && git pull
+
 # Note: no trailing '-}}' for below commands:
 brew bundle dump --file=- > "$SCRIPT_DIR/Brewfile.{{- .computer_name }}"
 brew list --versions > "$SCRIPT_DIR/brew_versions.{{- .computer_name }}"
