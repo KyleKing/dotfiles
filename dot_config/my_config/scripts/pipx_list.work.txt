@@ -36,6 +36,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylint-config
     - pyreverse
     - symilar
+   package pyright 1.1.287, installed using Python 3.10.9
+    - pyright
+    - pyright-langserver
+    - pyright-python
+    - pyright-python-langserver
    package python-lsp-server 1.7.0, installed using Python 3.10.9
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
