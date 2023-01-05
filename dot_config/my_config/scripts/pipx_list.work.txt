@@ -19,6 +19,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - docformatter
    package envtpl 0.7.2, installed using Python 3.10.6
     - envtpl
+   package flake8-to-ruff 0.0.210.dev0, installed using Python 3.10.9
+    - flake8-to-ruff
    package glances 3.3.0.4, installed using Python 3.10.8
     - glances
    package isort 5.11.4, installed using Python 3.10.6
@@ -38,6 +40,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
+   package ruff 0.0.211, installed using Python 3.10.9
+    - ruff
    package sourcery-cli 1.0.2, installed using Python 3.10.6
     - sourcery
    package uncurl 0.0.11, installed using Python 3.10.6

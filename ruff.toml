@@ -1,0 +1,31 @@
+# Docs: https://github.com/charliermarsh/ruff
+
+select = ["ALL"]
+ignore = [
+    'ANN003', # Missing type annotation for `**kwargs'
+    'ANN101',  # Missing type annotation for `self`
+    'ANN401',  # Dynamically typed expressions (typing.Any) are disallowed
+    'BLE001', # Do not catch blind exception: `Exception`
+    'D203', # OneBlankLineBeforeClass (Conflicts with D211)
+    'E501',  # Line Length
+    'EM101', # Exception must not use a string literal, assign to variable first
+    'EM102', # Exception must not use an f-string literal, assign to variable first
+    'RUF100', # Unused `noqa` directive (unknown: `G201`, `G202`)
+    'TID252', # Relative imports from parent modules are banned
+    'UP006', # ^3.10: Use `list` instead of `List` for type annotations
+    'UP007', # ^3.10: Use `X | Y` for type annotations
+]
+unfixable = [
+    "ERA001",  # Found commented-out code
+]
+
+[isort]
+known-first-party = ["roam_python_logging"]
+known-third-party = ["alembic"]
+
+[per-file-ignores]
+"*/tests/*.py" = [
+    'ANN201',  # Missing return type annotation for public function
+    'PT004',   #  flake8-pytest-style: fixture does not return
+    'S101',    # Matches 'assert'
+]
