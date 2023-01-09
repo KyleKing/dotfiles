@@ -1,0 +1,3 @@
+# Configuration for ttyper from: https://github.com/max-niederman/ttyper
+
+default_language = "python"

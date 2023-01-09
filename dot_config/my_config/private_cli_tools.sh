@@ -104,3 +104,9 @@ rpin () {
 
 # gojq (go-based jq replacement)
 alias jq='gojq'
+
+# ttyper TUI to learn Touch Typing from: https://github.com/max-niederman/ttyper
+export PATH=$PATH:~/.cargo/bin
+
+# Tip: check current path with (thanks to ChatGPT!):
+# echo $PATH | awk '{gsub(/:/, "\n"); print}'
