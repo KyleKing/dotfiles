@@ -1,5 +1,7 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
+   package absolufy-imports 0.3.1, installed using Python 3.10.9
+    - absolufy-imports
    package black 22.12.0, installed using Python 3.10.4
     - black
     - black-primer
@@ -26,6 +28,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - docformatter
    package flake8 6.0.0, installed using Python 3.10.4
     - flake8
+   package flake8-to-ruff 0.0.210.dev0, installed using Python 3.10.9
+    - flake8-to-ruff
    package flit 3.8.0, installed using Python 3.10.8
     - flit
    package isort 5.11.4, installed using Python 3.10.4
@@ -44,23 +48,23 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
       - mdformat-tables 0.4.1
       - mdformat-toc 0.3.0
       - mdformat-web 0.1.0
-   package personal-man 1.0.0, installed using Python 3.10.8
-    - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
    package pygments 2.13.0, installed using Python 3.10.4
     - pygmentize
+   package pylint 2.15.9, installed using Python 3.10.9
+    - epylint
+    - pylint
+    - pylint-config
+    - pyreverse
+    - symilar
    package pyproject-fmt 0.4.1, installed using Python 3.10.8
     - pyproject-fmt
-   package python-lsp-server 1.6.0, installed using Python 3.10.9
-    - pylsp
-    Injected Packages:
-      - pyls-isort 0.2.2
-      - pyls-mypy 0.1.8
-      - pylsp-mypy 0.6.4
-      - pylsp-rope 0.1.10
-      - python-lsp-black 1.2.1
-      - python-lsp-ruff 1.0.3
+   package pyright 1.1.287, installed using Python 3.10.9
+    - pyright
+    - pyright-langserver
+    - pyright-python
+    - pyright-python-langserver
    package pytype 2022.12.15, installed using Python 3.10.4
     - annotate-ast
     - merge-pyi
@@ -70,7 +74,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyxref
    package rich-cli 1.8.0, installed using Python 3.10.5
     - rich
-   package ruff 0.0.194, installed using Python 3.10.9
+   package ruff 0.0.210, installed using Python 3.10.9
     - ruff
    package semgrep 1.2.1, installed using Python 3.10.4
     - semgrep
@@ -78,6 +82,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - skedulord
    package sourcery-cli 1.0.2, installed using Python 3.10.6
     - sourcery
+   package sourcery-rules-generator 0.4.0, installed using Python 3.10.9
+    - sourcery-rules
    package sqlfluff 1.4.5, installed using Python 3.10.4
     - sqlfluff
    package tox 4.0.18, installed using Python 3.10.8
@@ -94,3 +100,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package yapf 0.32.0, installed using Python 3.10.6
     - yapf
     - yapf-diff
+   package youtyper 0.1.0, installed using Python 3.10.9
+    - youtyper
+    Injected Packages:
+      - numpy 1.24.1
