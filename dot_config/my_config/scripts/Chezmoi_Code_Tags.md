@@ -13,7 +13,8 @@
 | PLANNED | Need to figure out how configuration works. No lua examples                      | 2022-12-27  | [dot_config/nvim/lua/user/init.lua:276](https://github.com/KyleKing/dotfiles/blame/88a113c5dd678736126e0bd131accc320a2225b4/dot_config/nvim/lua/user/init.lua#L276)               |
 | FIXME   | How are project configuration files recognized?                                  | 2022-12-23  | [dot_config/nvim/lua/user/init.lua:353](https://github.com/KyleKing/dotfiles/blame/4483009b1f4c3fda080997c40efed32faf97efce/dot_config/nvim/lua/user/init.lua#L286)               |
 | PLANNED | consider heirline customization                                                  | 2022-12-26  | [dot_config/nvim/lua/user/init.lua:375](https://github.com/KyleKing/dotfiles/blame/9837f404a129c280bf3ed7ba7d60e620e6dbb9d4/dot_config/nvim/lua/user/init.lua#L369)               |
+| TODO    | Consider merging:                                                                | 2023-01-09  | [ruff.toml:6](https://github.com/KyleKing/dotfiles/blame/609b53c40a54d4a160f596d0203f37647c81613d/ruff.toml#L6)                                                                   |
 
-Found code tags for FIXME (5), TODO (3), PLANNED (3)
+Found code tags for FIXME (5), TODO (4), PLANNED (3)
 
 <!-- calcipy:skip_tags -->

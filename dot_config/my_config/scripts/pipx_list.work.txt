@@ -19,6 +19,10 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - docformatter
    package envtpl 0.7.2, installed using Python 3.10.6
     - envtpl
+   package flake8 6.0.0, installed using Python 3.10.9
+    - flake8
+    Injected Packages:
+      - roam-packages-flake8 0.0.1
    package flake8-to-ruff 0.0.210.dev0, installed using Python 3.10.9
     - flake8-to-ruff
    package glances 3.3.0.4, installed using Python 3.10.8
@@ -30,6 +34,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
+   package pygments 2.14.0, installed using Python 3.10.9
+    - pygmentize
    package pylint 2.15.9, installed using Python 3.10.6
     - epylint
     - pylint
@@ -45,7 +51,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
-   package ruff 0.0.211, installed using Python 3.10.9
+   package ruff 0.0.215, installed using Python 3.10.9
     - ruff
    package sourcery-cli 1.0.2, installed using Python 3.10.6
     - sourcery
