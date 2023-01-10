@@ -30,6 +30,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package isort 5.11.4, installed using Python 3.10.6
     - isort
     - isort-identify-imports
+   package mypy-silent 0.4.0, installed using Python 3.10.9
+    - mypy-silent
    package personal-man 1.1.0, installed using Python 3.10.8
     - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
