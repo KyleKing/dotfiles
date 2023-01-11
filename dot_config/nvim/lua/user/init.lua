@@ -250,27 +250,25 @@ local config = {
 		-- },
 
 		-- Themes
-		-- ["dracula/vim"] = {},  -- dracula
-		["EdenEast/nightfox.nvim"] = { -- nightfox, duskfox
+		-- "dracula/vim",  -- dracula
+		{
+			"EdenEast/nightfox.nvim", -- nightfox, duskfox
 			-- PLANNED: These settings weren't being recognized?
-			dim_inactive = true,
 			options = {
 				dim_inactive = true,
+				styles = {
+					comments = "italic",
+					keywords = "bold",
+					types = "italic,bold",
+				},
 			},
-			-- options = {
-			-- 	dim_inactive = true,
-			-- 	styles = {
-			-- 		comments = "italic",
-			-- 		keywords = "bold",
-			-- 		types = "italic,bold",
-			-- 	},
-			-- },
 		},
-		-- ["folke/tokyonight.nvim"] = {},  -- tokyonight-storm
-		-- ["joshdick/onedark.vim"] = {},  -- onedark
-		-- ["rebelot/kanagawa.nvim"] = {}, -- kanagawa
-		-- ["roflolilolmao/oceanic-next.nvim"] = {},  -- OceanicNext
-		["sainnhe/everforest"] = { -- everforest
+		-- "folke/tokyonight.nvim",  -- tokyonight-storm
+		-- "joshdick/onedark.vim",  -- onedark
+		-- "rebelot/kanagawa.nvim",  -- kanagawa
+		-- "roflolilolmao/oceanic-next.nvim",  -- OceanicNext
+		{
+			"sainnhe/everforest", -- everforest
 			-- PLANNED: Need to figure out how configuration works. No lua examples
 			-- config = function()
 			-- 	set background=dark
@@ -284,25 +282,31 @@ local config = {
 			-- 	everforest_ui_contrast = "high",
 			-- better_performance = 1,
 		},
-		-- ["sickill/vim-monokai"] = {}, -- monokai
-		-- ["sonph/onehalf"] = {}, -- onehalfdark
+		-- "sickill/vim-monokai", -- monokai
+		-- "sonph/onehalf", -- onehalfdark
 
 		-- Additional plugins
-		["kylechui/nvim-surround"] = {},
-		["sheerun/vim-polyglot"] = {},
-		["folke/todo-comments.nvim"] = {
+		"kylechui/nvim-surround",
+		{
+			-- FIXME: Not being loaded?
+			"sheerun/vim-polyglot",
+		},
+		{
+			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
 			config = function()
 				require("todo-comments").setup({})
 			end,
 		},
-		-- ["ray-x/lsp_signature.nvim"] = {
+		-- {
+		-- 	"ray-x/lsp_signature.nvim",
 		-- 	event = "BufRead",
 		-- 	config = function()
 		-- 		require("lsp_signature").setup()
 		-- 	end,
 		-- },
-		["codota/tabnine-nvim"] = {
+		{
+			"codota/tabnine-nvim",
 			config = function()
 				require("tabnine").setup({
 					disable_auto_comment = true,
