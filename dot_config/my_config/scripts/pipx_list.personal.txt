@@ -48,6 +48,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
       - mdformat-tables 0.4.1
       - mdformat-toc 0.3.0
       - mdformat-web 0.1.0
+   package mypy-silent 0.4.0, installed using Python 3.10.9
+    - mypy-silent
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
    package pygments 2.13.0, installed using Python 3.10.4
@@ -58,6 +60,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylint-config
     - pyreverse
     - symilar
+   package pylint-silent 1.2.0, installed using Python 3.10.9
+    - pylint-silent
    package pyproject-fmt 0.4.1, installed using Python 3.10.8
     - pyproject-fmt
    package pyright 1.1.287, installed using Python 3.10.9
@@ -86,9 +90,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - sourcery-rules
    package sqlfluff 1.4.5, installed using Python 3.10.4
     - sqlfluff
-   package tox 4.0.18, installed using Python 3.10.8
+   package tox 3.28.0, installed using Python 3.10.9
     - tox
     - tox-quickstart
+    Injected Packages:
+      - tox-asdf 0.1.0
    package watchfiles 0.18.1, installed using Python 3.10.5
     - watchfiles
    package wily 1.24.0, installed using Python 3.10.4
@@ -100,7 +106,3 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package yapf 0.32.0, installed using Python 3.10.6
     - yapf
     - yapf-diff
-   package youtyper 0.1.0, installed using Python 3.10.9
-    - youtyper
-    Injected Packages:
-      - numpy 1.24.1
