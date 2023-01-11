@@ -2,6 +2,9 @@ venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package autoflake 2.0.0, installed using Python 3.10.6
     - autoflake
+   package black 22.12.0, installed using Python 3.10.9
+    - black
+    - blackd
    package calcipy 0.21.5, installed using Python 3.10.6
     - calcipy
    package cloudiscovery 2.4.4, installed using Python 3.10.6
@@ -9,7 +12,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cloudiscovery.cmd
     Injected Packages:
       - markupsafe 2.0.1
-   package code2flow 2.5.0, installed using Python 3.10.8
+   package code2flow 2.5.1, installed using Python 3.10.8
     - code2flow
    package copier 7.0.1, installed using Python 3.10.8
     - copier
@@ -23,7 +26,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - flake8
     Injected Packages:
       - roam-packages-flake8 0.0.1
-   package flake8-to-ruff 0.0.210.dev0, installed using Python 3.10.9
+   package flake8-to-ruff 0.0.216.dev0, installed using Python 3.10.9
     - flake8-to-ruff
    package glances 3.3.0.4, installed using Python 3.10.8
     - glances
@@ -32,19 +35,17 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - isort-identify-imports
    package mypy-silent 0.4.0, installed using Python 3.10.9
     - mypy-silent
-   package personal-man 1.1.0, installed using Python 3.10.8
-    - pman
    package pipdeptree 2.3.3, installed using Python 3.10.8
     - pipdeptree
    package pygments 2.14.0, installed using Python 3.10.9
     - pygmentize
-   package pylint 2.15.9, installed using Python 3.10.6
+   package pylint 2.15.10, installed using Python 3.10.6
     - epylint
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.287, installed using Python 3.10.9
+   package pyright 1.1.288, installed using Python 3.10.9
     - pyright
     - pyright-langserver
     - pyright-python
@@ -53,9 +54,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
-   package ruff 0.0.215, installed using Python 3.10.9
+   package ruff 0.0.217, installed using Python 3.10.9
     - ruff
-   package sourcery-cli 1.0.2, installed using Python 3.10.6
+   package sourcery-cli 1.0.3, installed using Python 3.10.6
     - sourcery
    package uncurl 0.0.11, installed using Python 3.10.6
     - uncurl
