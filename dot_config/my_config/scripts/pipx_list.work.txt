@@ -5,6 +5,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 22.12.0, installed using Python 3.10.9
     - black
     - blackd
+   package bpython 0.23, installed using Python 3.10.9
+    - bpdb
+    - bpython
+    - bpython-curses
+    - bpython-urwid
    package calcipy 0.21.5, installed using Python 3.10.6
     - calcipy
    package cloudiscovery 2.4.4, installed using Python 3.10.6
@@ -54,7 +59,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
-   package ruff 0.0.217, installed using Python 3.10.9
+   package ruff 0.0.219, installed using Python 3.10.9
     - ruff
    package sourcery-cli 1.0.3, installed using Python 3.10.6
     - sourcery
