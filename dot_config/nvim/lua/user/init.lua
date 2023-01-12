@@ -11,7 +11,7 @@ local config = {
 		channel = "nightly", -- "stable" or "nightly"
 		version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
 		branch = "v3", -- branch name (NIGHTLY ONLY)
-		commit = "9ceda1080dd14f9d597041aa6918c15a1ee5b86e", -- commit hash (NIGHTLY ONLY)
+		commit = nil, -- commit hash (NIGHTLY ONLY)
 		pin_plugins = false, -- nil, true, false (nil will pin plugins on stable only)
 		skip_prompts = false, -- skip prompts about breaking changes
 		show_changelog = true, -- show the changelog after performing an update
@@ -254,7 +254,7 @@ local config = {
 		{
 			"EdenEast/nightfox.nvim", -- nightfox, duskfox
 			-- PLANNED: These settings weren't being recognized?
-			options = {
+			opts = {
 				dim_inactive = true,
 				styles = {
 					comments = "italic",
@@ -286,27 +286,32 @@ local config = {
 		-- "sonph/onehalf", -- onehalfdark
 
 		-- Additional plugins
-		"kylechui/nvim-surround",
 		{
-			-- FIXME: Not being loaded?
+			"kylechui/nvim-surround",
+			event = "UIEnter",
+		},
+		{
 			"sheerun/vim-polyglot",
+			event = "UIEnter",
 		},
 		{
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
+			event = "BufReadPre",
 			config = function()
 				require("todo-comments").setup({})
 			end,
 		},
-		-- {
-		-- 	"ray-x/lsp_signature.nvim",
-		-- 	event = "BufRead",
-		-- 	config = function()
-		-- 		require("lsp_signature").setup()
-		-- 	end,
-		-- },
+		{
+			"ray-x/lsp_signature.nvim",
+			event = "BufRead",
+			config = function()
+				require("lsp_signature").setup()
+			end,
+		},
 		{
 			"codota/tabnine-nvim",
+			event = "BufReadPre",
 			config = function()
 				require("tabnine").setup({
 					disable_auto_comment = true,
