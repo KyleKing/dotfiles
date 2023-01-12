@@ -10,17 +10,16 @@
             "warnings": ["TODO","@todo","XXX","WIP","WARNING","WARN"]
         },
         "flake8": {
-            "args": ["--config=./.flake8"],
+            "args": ["--config=$HOME/Developer/apps/reviewer-main/reviewer-api/.flake8"],
             "disable": false,
-            "python": "$HOME/.asdf/shims/python",
+            "python": "$HOME/Developer/apps/reviewer-main/reviewer-api/.venv/bin/python",
         },
         "pylint": {
             "args": [
-                "--disable=E0012,E0401,W0613,C0115,C0116,W1203",
-                "--rcfile=./.pylintrc"
+                "--rcfile=$HOME/Developer/apps/reviewer-main/reviewer-api/.pylintrc"
             ],
             "disable": false,
-            "python": "$HOME/.asdf/shims/python"
+            "python": "$HOME/Developer/apps/reviewer-main/reviewer-api/.venv/bin/python"
         },
         "markdownlint": {
             "args": ["-r","~MD013,~MD046,~MD033,~MD007"],
