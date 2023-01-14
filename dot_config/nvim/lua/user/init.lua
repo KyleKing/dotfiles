@@ -1,5 +1,6 @@
---              AstroNvim Configuration Table
+-- AstroNvim Configuration Table
 -- All configuration changes should go inside of the table below
+
 -- You can think of a Lua "table" as a dictionary like data structure the
 -- normal format is "key = value". These also handle array like data structures
 -- where a value with no key simply has an implicit numeric key
@@ -12,15 +13,19 @@ local config = {
 		version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
 		branch = "v3", -- branch name (NIGHTLY ONLY)
 		commit = nil, -- commit hash (NIGHTLY ONLY)
-		pin_plugins = false, -- nil, true, false (nil will pin plugins on stable only)
+		pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
 		skip_prompts = false, -- skip prompts about breaking changes
 		show_changelog = true, -- show the changelog after performing an update
-		auto_reload = true, -- automatically reload and sync packer after a successful update
 		auto_quit = true, -- automatically quit the current session after a successful update
+		-- remotes = { -- easily add new remotes to track
+		--   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
+		--   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
+		--   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
+		-- },
 	},
 
 	-- Set colorscheme to use
-	-- colorscheme = "default_theme",
+	-- colorscheme = "astronvim",
 	colorscheme = "nightfox",
 
 	-- Add highlight groups in any theme
@@ -36,12 +41,12 @@ local config = {
 	-- set vim options here (vim.<first_key>.<second_key> = value)
 	options = {
 		opt = {
-			colorcolumn = "80,120",
 			relativenumber = true, -- sets vim.opt.relativenumber
 			number = true, -- sets vim.opt.number
 			spell = false, -- sets vim.opt.spell
 			signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-			wrap = true, -- sets vim.opt.wrap
+			wrap = false, -- sets vim.opt.wrap
+			colorcolumn = "80,120",
 		},
 		g = {
 			mapleader = " ", -- sets vim.g.mapleader
@@ -64,29 +69,15 @@ local config = {
 	--   return local_vim
 	-- end,
 
-	-- FIXME: This is now configured in plugins! https://github.com/AstroNvim/AstroNvim/blob/9ceda1080dd14f9d597041aa6918c15a1ee5b86e/lua/user_example/init.lua#L32
-
-	-- Set dashboard header
-	header = {
-		-- " █████  ███████ ████████ ██████   ██████",
-		-- "██   ██ ██         ██    ██   ██ ██    ██",
-		-- "███████ ███████    ██    ██████  ██    ██",
-		-- "██   ██      ██    ██    ██   ██ ██    ██",
-		-- "██   ██ ███████    ██    ██   ██  ██████",
-		-- " ",
-		"    ███    ██ ██    ██ ██ ███    ███",
-		"    ████   ██ ██    ██ ██ ████  ████",
-		"    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-		"    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-		"    ██   ████   ████   ██ ██      ██",
-	},
-
-	-- Default theme configuration
-	default_theme = {
+	-- AstroNvim theme configuration
+	astronvim_theme = {
 		-- Modify the color palette for the default theme
-		colors = { fg = "#abb2bf", bg = "#1e222a" },
+		colors = {
+			fg = "#abb2bf",
+			bg = "#1e222a",
+		},
 		highlights = function(hl) -- or a function that returns a new table of colors to set
-			local C = require("default_theme.colors")
+			local C = require("astronvim_theme.colors")
 
 			hl.Normal = { fg = C.fg, bg = C.bg }
 
@@ -123,7 +114,10 @@ local config = {
 	},
 
 	-- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
-	diagnostics = { virtual_text = true, underline = true },
+	diagnostics = {
+		virtual_text = true,
+		underline = true,
+	},
 
 	-- Extend LSP configuration
 	lsp = {
@@ -160,13 +154,19 @@ local config = {
 		-- on_attach = function(client, bufnr)
 		-- end,
 
-		-- override the mason server-registration function
-		-- server_registration = function(server, opts)
-		--   require("lspconfig")[server].setup(opts)
-		-- end,
+		-- override the LSP setup handler function based on server name
+		-- setup_handlers = {
+		--   -- first function changes the default setup handler
+		--   function(server, opts) require("lspconfig")[server].setup(opts) end,
+		--   -- keys for a specific server name will be used for that LSP
+		--   sumneko_lua = function(server, opts)
+		--     -- custom sumneko_lua setup handler
+		--     require("lspconfig")["sumneko_lua"].setup(opts)
+		--   end,
+		-- },
 
 		-- Add overrides for LSP server settings, the keys are the name of the server
-		["server-settings"] = {
+		config = {
 			-- example for addings schemas to yamlls
 			-- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
 			--   settings = {
@@ -233,10 +233,81 @@ local config = {
 		},
 	},
 
+	-- Configure require("lazy").setup() options
+	lazy = {
+		defaults = { lazy = true },
+		performance = {
+			rtp = {
+				-- customize default disabled vim plugins
+				disabled_plugins = {
+					"tohtml",
+					"gzip",
+					"matchit",
+					"zipPlugin",
+					"netrwPlugin",
+					"tarPlugin",
+					"matchparen",
+				},
+			},
+		},
+	},
+
 	-- Configure plugins
 	plugins = {
 		-- You can disable default plugins as follows:
-		-- { "goolord/alpha-nvim", enabled = false },
+		-- { "max397574/better-escape.nvim", enabled = false },
+		--
+		-- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
+		-- {
+		--   "L3MON4D3/LuaSnip",
+		--   config = function(plugin, opts)
+		--     plugin.default_config(opts) -- include the default astronvim config that calls the setup call
+		--     -- add more custom luasnip configuration such as filetype extend or custom snippets
+		--     local luasnip = require "luasnip"
+		--     luasnip.filetype_extend("javascript", { "javascriptreact" })
+		--   end,
+		-- },
+		-- {
+		--   "windwp/nvim-autopairs",
+		--   config = function(plugin, opts)
+		--     plugin.default_config(opts) -- include the default astronvim config that calls the setup call
+		--     -- add more custom autopairs configuration such as custom rules
+		--     local npairs = require "nvim-autopairs"
+		--     local Rule = require "nvim-autopairs.rule"
+		--     local cond = require "nvim-autopairs.conds"
+		--     npairs.add_rules(
+		--       {
+		--         Rule("$", "$", { "tex", "latex" })
+		--           -- don't add a pair if the next character is %
+		--           :with_pair(cond.not_after_regex "%%")
+		--           -- don't add a pair if  the previous character is xxx
+		--           :with_pair(
+		--             cond.not_before_regex("xxx", 3)
+		--           )
+		--           -- don't move right when repeat character
+		--           :with_move(cond.none())
+		--           -- don't delete if the next character is xx
+		--           :with_del(cond.not_after_regex "xx")
+		--           -- disable adding a newline when you press <cr>
+		--           :with_cr(cond.none()),
+		--       },
+		--       -- disable for .vim files, but it work for another filetypes
+		--       Rule("a", "a", "-vim")
+		--     )
+		--   end,
+		-- },
+		-- By adding to the which-key config and using our helper function you can add more which-key registered bindings
+		-- {
+		--   "folke/which-key.nvim",
+		--   config = function(plugin, opts)
+		--     plugin.default_config(opts)
+		--     -- Add bindings which show up as group name
+		--     local wk = require "which-key"
+		--     wk.register({
+		--       b = { name = "Buffer" },
+		--     }, { mode = "n", prefix = "<leader>" })
+		--   end,
+		-- },
 
 		-- You can also add new plugins here as well:
 		-- Add plugins, the lazy syntax
@@ -288,7 +359,7 @@ local config = {
 		-- Additional plugins
 		{
 			"kylechui/nvim-surround",
-			event = "UIEnter",
+			event = "BufRead",
 		},
 		{
 			"sheerun/vim-polyglot",
@@ -311,7 +382,7 @@ local config = {
 		},
 		{
 			"codota/tabnine-nvim",
-			event = "BufReadPre",
+			-- event = "BufRead",
 			config = function()
 				require("tabnine").setup({
 					disable_auto_comment = true,
@@ -321,160 +392,189 @@ local config = {
 				})
 			end,
 		},
-	},
-	-- All other entries override the require("<key>").setup({...}) call for default plugins
-	["neo-tree"] = {
-		filesystem = {
-			filtered_items = {
-				hide_gitignored = true,
-				hide_dotfiles = false,
-			},
-		},
-	},
-	["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
-		-- config variable is the default configuration table for the setup function call
-		local null_ls = require("null-ls")
-		null_ls.setup({ debug = true })
-		-- Check supported formatters and linters
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-		config.sources = {
-			--
-			-- Formatting
-			null_ls.builtins.formatting.stylua,
-			-- null_ls.builtins.formatting.prettier.with({
-			--     prefer_local = "node_modules/.bin",
-			-- }),
-			-- null_ls.builtins.formatting.eslint.with({
-			--     prefer_local = "node_modules/.bin",
-			-- }),
-			null_ls.builtins.formatting.taplo,
-			null_ls.builtins.formatting.terraform_fmt,
-			null_ls.builtins.formatting.trim_newlines,
-			null_ls.builtins.formatting.trim_whitespace,
-			--
-			-- Diagnostics
-			null_ls.builtins.diagnostics.eslint.with({
-				prefer_local = "node_modules/.bin",
-			}),
-			-- FIXME: How are project configuration files recognized?
-			null_ls.builtins.diagnostics.flake8.with({
-				only_local = true,
-			}),
-			-- null_ls.builtins.diagnostics.pylint.with({
-			-- 	only_local = true,
-			-- }),
-			-- null_ls.builtins.diagnostics.mypy.with({
-			-- 	only_local = true,
-			-- }),
-			null_ls.builtins.diagnostics.shellcheck,
-			null_ls.builtins.diagnostics.hadolint,
-			--
-			-- Code Actions
-			null_ls.builtins.code_actions.gitsigns,
-		}
-		return config
-	end,
-	treesitter = { -- overrides `require("treesitter").setup(...)`
-		-- ensure_installed = { "lua" },
-		ensure_installed = { "lua", "python", "javascript", "html", "css", "json", "toml" },
-	},
-	-- PLANNED: consider heirline customization
-	-- 	https://github.com/julianschuler/dotfiles/blob/6d7fa0c4a1317c242858f8eb24d8f7474756f9ce/astronvim/lua/user/init.lua#L133-L156
-	--
-	-- use mason-lspconfig to configure LSP installations
-	["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
-		ensure_installed = {
-			-- LSP
-			"awk_ls",
-			"bashls",
-			-- "codeqlls",
-			"dockerls",
-			"eslint",
-			"sumneko_lua",
-			-- "pyright", -- Too much noise
-			"pylsp",
-			"sourcery",
-			"taplo",
-			"terraformls",
-			"tflint",
-			"yamlls",
-		},
-	},
-	-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-	["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
-		ensure_installed = {
-			-- Examples: "prettier", "stylua",
-			-- Diagnostics
-			"actionlint",
-			"codespell",
-			"flake8",
-			"jsonlint",
-			"luacheck",
-			"markdownlint",
-			"proselint",
-			"shellcheck",
-			"sqlfluff",
-			"tflint",
-			"yamllint",
-			--
-			-- Formatters
-			-- These should be installed manually if needed
-			-- "autopep8",
-			-- "black",
-			"beautysh",
-			"isort",
-			"markdownlint",
-			"shfmt",
-			"stylua",
-		},
-	},
-	["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
-		-- ensure_installed = { "python" },
-	},
 
-	-- LuaSnip Options
-	luasnip = {
-		-- Extend filetypes
-		filetype_extend = {
-			-- javascript = { "javascriptreact" },
+		-- Plugin entries can also be used to override the default options for plugins as well
+		{
+			"goolord/alpha-nvim",
+			opts = function(_, opts)
+				-- customize the dashboard header
+				opts.section.header.val = {
+					-- " █████  ███████ ████████ ██████   ██████",
+					-- "██   ██ ██         ██    ██   ██ ██    ██",
+					-- "███████ ███████    ██    ██████  ██    ██",
+					-- "██   ██      ██    ██    ██   ██ ██    ██",
+					-- "██   ██ ███████    ██    ██   ██  ██████",
+					" ",
+					" ███    ██ ██    ██ ██ ███    ███",
+					" ████   ██ ██    ██ ██ ████  ████",
+					" ██ ██  ██ ██    ██ ██ ██ ████ ██",
+					" ██  ██ ██  ██  ██  ██ ██  ██  ██",
+					" ██   ████   ████   ██ ██      ██",
+				}
+				return opts
+			end,
 		},
-		-- Configure luasnip loaders (vscode, lua, and/or snipmate)
-		vscode = {
-			-- Add paths for including more VS Code style snippets in luasnip
-			paths = {},
-		},
-	},
-
-	-- CMP Source Priorities
-	--   modify here the priorities of default cmp sources
-	--   higher value == higher priority
-	--   The value can also be set to a boolean for disabling default sources:
-	--   false == disabled
-	--   true == 1000
-	cmp = {
-		source_priority = {
-			nvim_lsp = 1000,
-			luasnip = 750,
-			buffer = 500,
-			path = 250,
-		},
-	},
-
-	-- Modify which-key registration (Use this with mappings table in the above.)
-	["which-key"] = {
-		-- Add bindings which show up as group name
-		register = {
-			-- first key is the mode, n == normal mode
-			n = {
-				-- second key is the prefix, <leader> prefixes
-				["<leader>"] = {
-					-- third key is the key to bring up next level and its displayed
-					-- group name in which-key top level menu
-					["b"] = { name = "Buffer" },
+		{
+			"nvim-neo-tree/neo-tree.nvim",
+			opts = {
+				filesystem = {
+					filtered_items = {
+						hide_gitignored = true,
+						hide_dotfiles = false,
+					},
 				},
 			},
 		},
+		{
+			"jose-elias-alvarez/null-ls.nvim",
+			opts = function(_, config)
+				-- config variable is the default configuration table for the setup function call
+				local null_ls = require("null-ls")
+				null_ls.setup({ debug = true })
+
+				-- Check supported formatters and linters
+				-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+				-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+				config.sources = {
+					--
+					-- Formatting
+					null_ls.builtins.formatting.stylua,
+					-- null_ls.builtins.formatting.prettier.with({
+					--     prefer_local = "node_modules/.bin",
+					-- }),
+					-- null_ls.builtins.formatting.eslint.with({
+					--     prefer_local = "node_modules/.bin",
+					-- }),
+					null_ls.builtins.formatting.taplo,
+					null_ls.builtins.formatting.terraform_fmt,
+					null_ls.builtins.formatting.trim_newlines,
+					null_ls.builtins.formatting.trim_whitespace,
+					--
+					-- Diagnostics
+					null_ls.builtins.diagnostics.eslint.with({
+						prefer_local = "node_modules/.bin",
+					}),
+					-- FIXME: How are project configuration files recognized?
+					null_ls.builtins.diagnostics.flake8.with({
+						only_local = true,
+					}),
+					-- null_ls.builtins.diagnostics.pylint.with({
+					-- 	only_local = true,
+					-- }),
+					-- null_ls.builtins.diagnostics.mypy.with({
+					-- 	only_local = true,
+					-- }),
+					null_ls.builtins.diagnostics.shellcheck,
+					null_ls.builtins.diagnostics.hadolint,
+					--
+					-- Code Actions
+					null_ls.builtins.code_actions.gitsigns,
+				}
+				return config -- return final config table
+			end,
+		},
+		{
+			"nvim-treesitter/nvim-treesitter",
+			opts = {
+				-- ensure_installed = { "lua" },
+				ensure_installed = { "lua", "python", "javascript", "html", "css", "json", "toml" },
+			},
+		},
+		-- use mason-lspconfig to configure LSP installations
+		{
+			"williamboman/mason-lspconfig.nvim",
+			-- overrides `require("mason-lspconfig").setup(...)`
+			opts = {
+				-- ensure_installed = { "sumneko_lua" },
+				ensure_installed = {
+					-- LSP
+					"awk_ls",
+					"bashls",
+					-- "codeqlls",
+					"dockerls",
+					"eslint",
+					"sumneko_lua",
+					-- "pyright", -- Too much noise
+					"pylsp",
+					"sourcery",
+					"taplo",
+					"terraformls",
+					"tflint",
+					-- "yamlls",  -- Use prettier instead
+				},
+			},
+		},
+		-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
+		{
+			"jay-babu/mason-null-ls.nvim",
+			-- overrides `require("mason-null-ls").setup(...)`
+			opts = {
+				-- ensure_installed = { "prettier", "stylua" },
+				ensure_installed = {
+					-- Examples: "prettier", "stylua",
+					-- Diagnostics
+					"actionlint",
+					"codespell",
+					"flake8",
+					"jsonlint",
+					"luacheck",
+					"markdownlint",
+					"proselint",
+					"shellcheck",
+					"sqlfluff",
+					"tflint",
+					"yamllint",
+					--
+					-- Formatters
+					-- These should be installed manually if needed
+					-- "autopep8",
+					-- "black",
+					"beautysh",
+					"isort",
+					"markdownlint",
+					"shfmt",
+					"stylua",
+				},
+			},
+		},
+		{
+			"jay-babu/mason-nvim-dap.nvim",
+			-- overrides `require("mason-nvim-dap").setup(...)`
+			opts = {
+				-- ensure_installed = { "python" },
+			},
+		},
+	},
+
+	-- PLANNED: consider heirline customization
+	-- 	https://github.com/julianschuler/dotfiles/blob/6d7fa0c4a1317c242858f8eb24d8f7474756f9ce/astronvim/lua/user/init.lua#L133-L156
+
+	-- Customize Heirline options
+	heirline = {
+		-- -- Customize different separators between sections
+		-- separators = {
+		--   breadcrumbs = " > ",
+		--   tab = { "", "" },
+		-- },
+		-- -- Customize colors for each element each element has a `_fg` and a `_bg`
+		-- colors = function(colors)
+		--   colors.git_branch_fg = astronvim.get_hlgroup "Conditional"
+		--   return colors
+		-- end,
+		-- -- Customize attributes of highlighting in Heirline components
+		-- attributes = {
+		--   -- styling choices for each heirline element, check possible attributes with `:h attr-list`
+		--   git_branch = { bold = true }, -- bold the git branch statusline component
+		-- },
+		-- -- Customize if icons should be highlighted
+		-- icon_highlights = {
+		--   breadcrumbs = false, -- LSP symbols in the breadcrumbs
+		--   file_icon = {
+		--     winbar = false, -- Filetype icon in the winbar inactive windows
+		--     statusline = true, -- Filetype icon in the statusline
+		--     tabline = true, -- Filetype icon in the tabline
+		--   },
+		-- },
 	},
 
 	-- This function is run last and is a good place to configuring
