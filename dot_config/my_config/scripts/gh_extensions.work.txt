@@ -1,4 +1,4 @@
-gh dash	dlvhdr/gh-dash	v3.5.1
+gh dash	dlvhdr/gh-dash	v3.6.0
 gh notify	meiji163/gh-notify	3dcfb04a
 gh poi	seachicken/gh-poi	v0.8.2
 gh pr-draft	kyanny/gh-pr-draft	6003412b
