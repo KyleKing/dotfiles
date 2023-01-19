@@ -5,7 +5,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 22.12.0, installed using Python 3.10.9
     - black
     - blackd
-   package bpython 0.23, installed using Python 3.10.9
+   package bpython 0.24, installed using Python 3.10.9
     - bpdb
     - bpython
     - bpython-curses
@@ -50,16 +50,16 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.289, installed using Python 3.10.9
+   package pyright 1.1.290, installed using Python 3.10.9
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package python-lsp-server 1.7.0, installed using Python 3.10.9
+   package python-lsp-server 1.7.1, installed using Python 3.10.9
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
-   package ruff 0.0.224, installed using Python 3.10.9
+   package ruff 0.0.225, installed using Python 3.10.9
     - ruff
    package sourcery-cli 1.0.3, installed using Python 3.10.6
     - sourcery
