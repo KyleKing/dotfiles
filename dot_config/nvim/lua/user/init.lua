@@ -215,6 +215,7 @@ local config = {
 	mappings = {
 		-- first key is the mode
 		n = {
+			-- FIXME: Add mappings for H/L to start and end of line (^$)
 			-- second key is the lefthand side of the map
 			-- mappings seen under group name "Buffer"
 			["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
