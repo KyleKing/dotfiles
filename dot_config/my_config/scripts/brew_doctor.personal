@@ -16,6 +16,10 @@ Alternatively, manually download them from:
 You should download the Command Line Tools for Xcode 12.4.
 
 
+Warning: Some installed formulae are deprecated or disabled.
+You should find replacements for the following formulae:
+  jsonschema
+
 Warning: Unbrewed dylibs were found in /usr/local/lib.
 If you didn't put them there on purpose they could cause problems when
 building Homebrew formulae, and may need to be deleted.
