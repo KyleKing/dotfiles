@@ -61,6 +61,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyupgrade
    package ruff 0.0.225, installed using Python 3.10.9
     - ruff
+   package runlike 1.4.4, installed using Python 3.10.9
+    - runlike
    package sourcery-cli 1.0.3, installed using Python 3.10.6
     - sourcery
    package uncurl 0.0.11, installed using Python 3.10.6
