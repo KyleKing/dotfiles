@@ -23,7 +23,7 @@ first-pod() {
         echo "The search strings must be specified. Expected: 'first-pod ...'"
         return 1
     else
-        _match=$(kubectl get pods -o json | jq ".items[].metadata.name" | grep --max-count=1 "$_search")
+        _match=$(kubectl get pods -o json | jq ".items[].metadata.name" | grep "$_search" | head -n 1)
         if [[ -z "$_match" ]]; then
             kubectl get pods
             echo "Failed to find a match. Ensure that you set a namespace"
