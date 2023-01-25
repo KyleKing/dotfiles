@@ -9,6 +9,9 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 brew install chezmoi
 chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
+brew install --cask 1password 1password-cli
+# In 1Password, turn on 1password-cli
+
 # Note if symlinks are reported as broken, see where they should point to with `ls -l <>`
 mkdir -p ~/.config/chezmoi-dual-linked/Sublime-Packages-User/Projects
 
@@ -20,6 +23,12 @@ touch "~/.config/chezmoi-dual-linked/Sublime-Packages-User/Terminus.hidden-color
 
 # Sign in with 1Password-cli
 eval "$(op signin)"
+
+# Configure the local configuration file based on dot_config/chezmoi/chezmoi.toml.tmpl
+# https://github.com/KyleKing/dotfiles/blob/main/dot_config/chezmoi/chezmoi.toml.tmpl
+touch ~/.config/chezmoi/chezmoi.toml
+open ~/.config/chezmoi/chezmoi.toml
+# These values need to be close enough, but don't need to be perfect and can be fixed later
 
 # Apply synced files from Chezmoi
 chezmoi apply --verbose
