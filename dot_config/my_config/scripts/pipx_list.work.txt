@@ -65,6 +65,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - runlike
    package sourcery-cli 1.0.3, installed using Python 3.10.6
     - sourcery
+   package toml-sort 0.22.3, installed using Python 3.10.9
+    - toml-sort
    package uncurl 0.0.11, installed using Python 3.10.6
     - uncurl
    package unimport 0.12.3, installed using Python 3.10.6
