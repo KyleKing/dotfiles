@@ -32,4 +32,7 @@ open ~/.config/chezmoi/chezmoi.toml
 
 # Apply synced files from Chezmoi
 chezmoi apply --verbose
+
+# Install all packages managed by brew
+brew bundle --file ~/.Brewfile-personal
 ```
