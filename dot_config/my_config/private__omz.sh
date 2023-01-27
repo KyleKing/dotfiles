@@ -62,13 +62,6 @@ export plugins=(
     you-should-use
     # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
     git-extra-commands
-    # FIXME: These two plugins are not found?
-    # # Required pre-requisites for zsh-notify
-    # # Docs: https://github.com/hadenlabs/zsh-core
-    # zsh-core
-    # # Docs (Possibly requires "brew install terminal-notifier"): https://github.com/luismayta/zsh-notify
-    # # Note: there appears to be an unattributed clone: https://github.com/marzocchi/zsh-notify
-    # zsh-notify
 
     # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
     zsh-completions
