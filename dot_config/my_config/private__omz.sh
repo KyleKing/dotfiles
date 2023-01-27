@@ -7,57 +7,6 @@
 export ZSH="/Users/kyleking/.oh-my-zsh"
 # export ZSH_CUSTOM=$ZSH  # Set in `$ZSH/oh-my-zsh.sh`
 
-# Turn off p10k and use oh-my-posh instead. See additional snippets at bottom as well
-if false; then
-    # > Look in $HOME/.oh-my-zsh/themes/
-    # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-    # https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
-    # ZSH_THEME="powerlevel10k/powerlevel10k"
-    # Others: agnoster, oxide, Bullet train, lambda-mod, Spaceship ZSH, Halil
-    # > Note: installed with brew and not oh-my-zsh
-    source "$(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme"
-    # Create a new configuration file `p10k configure` or modify an existing one at $HOME/.p10k.zsh
-
-    # Uncomment the following line to use hyphen-insensitive completion.
-    # Case-sensitive completion must be off. _ and - will be interchangeable.
-    export HYPHEN_INSENSITIVE="true"
-
-    # Uncomment the following line to automatically update without prompting.
-    # export DISABLE_UPDATE_PROMPT="true"
-
-    # Uncomment the following line if pasting URLs and other text is messed up.
-    # export DISABLE_MAGIC_FUNCTIONS="true"
-
-    # Uncomment the following line to enable command auto-correction.
-    # export ENABLE_CORRECTION="true"
-
-    # Uncomment the following line to display red dots whilst waiting for completion.
-    # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-    # See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-    export COMPLETION_WAITING_DOTS="true"
-
-    # Uncomment the following line if you want to disable marking untracked files
-    # under VCS as dirty. This makes repository status check for large repositories
-    # much, much faster.
-    # export DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-    # Would you like to use another custom folder than $ZSH/custom?
-    # export ZSH_CUSTOM=/path/to/new-custom-folder
-
-    # Improve OMZ Timer (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
-    export TIMER_FORMAT='[%d]'
-    export TIMER_PRECISION=2
-
-    # Which plugins would you like to load?
-    # Standard plugins can be found in $ZSH/plugins/
-    # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-    # Example format: plugins=(rails git textmate ruby lighthouse)
-    # Add wisely, as too many plugins slow down shell startup.
-    # Which plugins would you like to load? (plugins can be found in $HOME/.oh-my-zsh/plugins/*)
-else
-    export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-fi
-
 # Configure the navi widget for completions
 eval "$(navi widget zsh)"
 
@@ -96,7 +45,6 @@ export plugins=(
     git
     history
     macos
-    # nvm
     perms
     python
     rust
@@ -160,9 +108,6 @@ export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 # (ctrl space, ctrl shit n, ctrl shift p)
 bindkey '^ ' autosuggest-accept
 
-# # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
-# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
-# Use oh-my-posh instead of p10k
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/.config.omp.json)"
 
 # Customize zsh-auto-notify (https://github.com/MichaelAquilina/zsh-auto-notify#configuration)
