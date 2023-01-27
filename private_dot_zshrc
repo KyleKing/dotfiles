@@ -35,8 +35,10 @@ zstyle :compinstall filename '~/.zshrc'
 #   https://github.com/cantino/mcfly
 eval "$(mcfly init zsh)"
 
-# Configure asdf for managing tool versions
-. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+# # Configure asdf for managing tool versions
+# . $(brew --prefix)/opt/asdf/libexec/asdf.sh
+# Experimenting with rtx: https://github.com/jdxcode/rtx
+eval "$(rtx activate -s zsh)"
 
 # --------------------------------------------------------------------------------------
 # Work
