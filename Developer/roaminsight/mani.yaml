@@ -510,6 +510,14 @@ projects:
     tags:
       - Roam
 
+  textract-roam-fork:
+    url: git@github.com:roaminsight/textract-roam-fork.git
+    desc: Fork of textract with Python 3 patches. Used by reviewer and import-parser
+    tags:
+      - Roam
+      - Active
+      - Apps
+
   transfer:
     url: git@github.com:roaminsight/transfer.git
     desc: General Roam Project
@@ -534,6 +542,10 @@ tasks:
   git-pull:
     desc: pull remote updates. Exit 0 on error
     cmd: git pull || true
+
+  gpoi:
+    desc: Run GH poi to remove closed branches (slow)
+    cmd: gh poi
 
   git-prune:
     desc: remove local branches which have been deleted on remote

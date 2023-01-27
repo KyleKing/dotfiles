@@ -5,6 +5,7 @@
 # 	To uninstall! $(brew --prefix)/opt/fzf/uninstall
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# ... hyperfine "zsh -c 'source ~/.config/my_config/_homebrew.sh'"
 source $MY_CONFIG/_homebrew.sh
 source $MY_CONFIG/_omz.sh
 source $MY_CONFIG/_zsh.sh
