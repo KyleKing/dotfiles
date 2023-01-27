@@ -42,4 +42,4 @@ eval "$(mcfly init zsh)"
 # Work
 
 # For the shared configuration synced with yadm
-([ -f ~/.config/ai_labs ] && source ~/.config/ai_labs/main.sh) || true
+source ~/.config/ai_labs/main.sh || true
