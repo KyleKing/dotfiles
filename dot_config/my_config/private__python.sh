@@ -10,6 +10,9 @@ export PRE_COMMIT_COLOR=always
 # Turn On Better Exceptions for Python
 export BETTER_EXCEPTIONS=1
 
+# Ensure that poetry creates a .venv
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
 # > pipx completions require bashcompinit
 # autoload -U bashcompinit
 # bashcompinit

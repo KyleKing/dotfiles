@@ -35,4 +35,11 @@ chezmoi apply --verbose
 
 # Install all packages managed by brew
 brew bundle --file ~/.Brewfile-personal
+
+# Install Rosetta for Mac Silicon
+/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+
+# Run the fzf post-install steps. Accept all prompts
+# https://github.com/junegunn/fzf#using-homebrew
+$(brew --prefix)/opt/fzf/install
 ```

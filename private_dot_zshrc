@@ -44,6 +44,3 @@ eval "$(mcfly init zsh)"
 
 # For the shared configuration synced with yadm
 [ -f ~/.config/ai_labs/main.sh ] && source ~/.config/ai_labs/main.sh
-
-# # tea.xyz package manager ("brew2")
-# add-zsh-hook -Uz chpwd(){ source <(tea -Eds) }
