@@ -8,7 +8,7 @@ tap "lencx/chatgpt", "https://github.com/lencx/ChatGPT.git"
 tap "mas-cli/tap"
 tap "rhysd/git-brws", "https://github.com/rhysd/git-brws"
 brew "actionlint"
-brew "asdf"
+brew "asdf", link: false
 brew "bat"
 brew "beeftornado/rmtree/brew-rmtree"
 brew "bottom"
@@ -95,7 +95,6 @@ cask "obsidian"
 cask "oversight"
 cask "paletro"
 cask "qlmarkdown"
-cask "qlstephen"
 cask "quicklook-json"
 cask "rectangle-pro"
 cask "reikey"
@@ -116,7 +115,6 @@ mas "Ecosia - The search engine that plants trees", id: 1463400445
 mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "HotKey", id: 975890633
-mas "KeyLimePie", id: 1575163350
 mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Slack", id: 803453959
@@ -124,3 +122,15 @@ mas "Spark", id: 1176895641
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
+cask "keybase"
+cask "kindle"
+cask "send-to-kindle"
+cask "mactracker"
+cask "whatsyoursign"
+cask "taskexplorer"
+cask "microsoft-teams"
+cask "pomatez"
+cask "discord"
+cask "texifier" 
+cask "mactex-no-gui" 
+cask "monodraw" 

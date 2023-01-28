@@ -40,6 +40,7 @@ eval "$(mcfly init zsh)"
 # . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 # Experimenting with rtx: https://github.com/jdxcode/rtx
 eval "$(rtx activate -s zsh)"
+alias asdf=rtx
 
 # --------------------------------------------------------------------------------------
 # Work
