@@ -3,7 +3,7 @@
 # fzf installer for useful key bindings and fuzzy completion: https://github.com/junegunn/fzf
 # 	Run once! $(brew --prefix)/opt/fzf/install
 # 	To uninstall! $(brew --prefix)/opt/fzf/uninstall
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.fzf.zsh
 
 # ... hyperfine "zsh -c 'source ~/.config/my_config/_homebrew.sh'"
 source $MY_CONFIG/_homebrew.sh
@@ -46,4 +46,4 @@ alias asdf=rtx
 # Work
 
 # For the shared configuration synced with yadm
-source ~/.config/ai_labs/main.sh || true
+([ -f ~/.config/ai_labs/main.sh ] && source ~/.config/ai_labs/main.sh) || true
