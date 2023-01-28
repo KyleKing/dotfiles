@@ -1,0 +1,6 @@
+venvs are in /Users/kyleking/.local/pipx/venvs
+apps are exposed on your $PATH at /Users/kyleking/.local/bin
+   package calcipy 0.21.5, installed using Python 3.11.1
+    - calcipy
+   package toml-sort 0.22.3, installed using Python 3.11.1
+    - toml-sort
