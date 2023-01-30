@@ -20,6 +20,7 @@ tap "minamijoyo/hcledit"
 tap "rhysd/git-brws", "https://github.com/rhysd/git-brws"
 brew "act"
 brew "actionlint"
+brew "angle-grinder"
 brew "ansible"
 brew "as-tree"
 brew "openssl@3"
@@ -61,6 +62,7 @@ brew "pinentry"
 brew "gnupg"
 brew "go"
 brew "go-jira"
+brew "goaccess"
 brew "gobject-introspection"
 brew "gojq"
 brew "graphviz"
@@ -234,7 +236,6 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "Hidden Bar", id: 1452453066
 mas "HotKey", id: 975890633
-mas "KeyLimePie", id: 1575163350
 mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
