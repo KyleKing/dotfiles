@@ -1,0 +1,15 @@
+OS:
+Darwin Kyles-MacBook-Pro.local 22.3.0 Darwin Kernel Version 22.3.0: Thu Jan  5 20:50:36 PST 2023; root:xnu-8792.81.2~2/RELEASE_ARM64_T6020 arm64
+
+SHELL:
+zsh 5.8.1 (x86_64-apple-darwin22.0)
+
+ASDF VERSION:
+v0.11.1
+
+ASDF ENVIRONMENT VARIABLES:
+ASDF_DIR=/opt/homebrew/opt/asdf/libexec
+
+ASDF INSTALLED PLUGINS:
+nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master c9e5df4
+python                       https://github.com/danhper/asdf-python.git master 8505457

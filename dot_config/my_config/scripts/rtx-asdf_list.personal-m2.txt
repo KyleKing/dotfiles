@@ -1,3 +1,0 @@
-nodejs
-python
-textract-py3

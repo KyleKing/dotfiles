@@ -36,21 +36,19 @@ zstyle :compinstall filename '~/.zshrc'
 #   https://github.com/cantino/mcfly
 eval "$(mcfly init zsh)"
 
-# Configure rtx for managing tool versions
-#   Docs: https://github.com/jdxcode/rtx
-eval "$(rtx activate -s zsh)"
-asdf () {
-  if [[ "$1" == which ]]; then
-    $*
-    return 0
-  fi
-  rtx $*
-}
+# Configure asdf for managing tool-versions
+#   Docs: https://github.com/asdf-vm/asdf
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
 # --------------------------------------------------------------------------------------
 # Work
 
 # For the shared configuration synced with yadm
-source ~/.config/ai_labs/main.sh || true
+if [[ -f ~/.config/ai_labs/main.sh ]]; then
+  source ~/.config/ai_labs/main.sh
+fi
 
-# source ~/.docker/init-zsh.sh || true # Added by Docker Desktop
+# Added by Docker Desktop
+if [[ -f ~/.docker/init-zsh.sh ]]; then
+  source ~/.docker/init-zsh.sh
+fi
