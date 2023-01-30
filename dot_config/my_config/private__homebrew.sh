@@ -14,10 +14,6 @@ then
     compinit
 fi
 
-# # Fix Brew Doctor warning about" config scripts exist outside your system or Homebrew directories"
-# # From: https://github.com/pyenv/pyenv
-# alias brew='env PATH="${PATH//\/.asdf\/shims:/}" brew'
-
 # A few helpful snippets not included in the homebrew zsh plugin
 alias bsh="brew search"
 alias bio="brew info"

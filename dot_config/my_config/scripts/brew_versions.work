@@ -11,14 +11,14 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.9.18
+awscli 2.9.19
 bat 0.22.1
 bat-extras 2022.07.27
 bdw-gc 8.2.2
 bottom 0.8.0
 brew-rmtree 2.2.6_1
 brotli 1.0.9
-c-ares 1.18.1_1
+c-ares 1.19.0
 ca-certificates 2023-01-10
 cairo 1.16.0_5
 capstone 4.0.2
@@ -49,7 +49,7 @@ exa 0.10.1
 fd 8.6.0
 ffmpeg@4 4.4.3_2
 flac 1.4.2
-fontconfig 2.14.1
+fontconfig 2.14.2
 freetds 1.3.17
 freetype 2.12.1
 frei0r 1.8.0
@@ -71,7 +71,7 @@ git-brws 0.11.12
 git-delta 0.15.1
 glances 3.3.1.1
 glib 2.74.5
-glow 1.4.1
+glow 1.5.0
 gmp 6.2.1_1
 gnu-getopt 2.38.1
 gnupg 2.4.0
@@ -105,7 +105,7 @@ httpstat 1.3.2
 humanlog 0.7.5
 hyperfine 1.15.0
 icu4c 72.1
-imagemagick 7.1.0-58_1
+imagemagick 7.1.0-60
 imath 3.1.6
 isl 0.25
 jasper 4.0.0
@@ -122,7 +122,7 @@ krew 0.4.3
 kubeconform 0.5.0
 kubernetes-cli 1.26.1
 kubevious 1.0.52
-kubie 0.19.1
+kubie 0.19.2
 lame 3.100
 lazydocker 0.20.0
 leptonica 1.82.0_1
@@ -134,7 +134,7 @@ libassuan 2.5.5
 libavif 0.11.1
 libb2 0.98.1
 libbluray 1.3.4
-libde265 1.0.9
+libde265 1.0.10
 libepoxy 1.5.10
 libevent 2.1.12
 libgcrypt 1.10.1
@@ -216,7 +216,7 @@ node 19.5.0
 node@14 14.21.2_1
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 13.8.0
+oh-my-posh 14.0.0
 oniguruma 6.9.8
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -242,7 +242,7 @@ plantuml 1.2023.0
 pngcrush 1.8.13
 podman 4.3.1
 poetry 1.3.2
-pre-commit 3.0.1
+pre-commit 3.0.2
 prettier 2.8.3
 psutils p17
 pygments 2.14.0
@@ -258,9 +258,9 @@ redis 7.0.8
 ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
-rtx 1.0.1
+rtx 1.2.6
 rubberband 3.1.2
-rust 1.66.1
+rust 1.67.0
 saml2aws 2.36.2
 screenresolution 1.6
 sdl2 2.26.2
@@ -277,7 +277,7 @@ speedtest-cli 2.1.3_1
 speex 1.2.1
 sqlite 3.40.1
 srt 1.5.1
-stern 1.22.0
+stern 1.23.0
 stylua 0.16.0
 swig 4.1.1
 tere 1.4.0
@@ -329,7 +329,6 @@ blockblock 2.1.5
 brave-browser 1.47.186.0,147.186
 chatgpt 0.6.10
 cheatsheet 1.6.3
-cozy-drive 3.36.1
 customshortcuts 1.1,102
 daisydisk 4.23.1
 dash 6.4.0,1006
@@ -349,7 +348,7 @@ font-hack-nerd-font 2.3.3
 github 3.0.7-38727e62
 gitkraken 8.8.0
 google-chrome 104.0.5112.101
-httpie 2023.1.1
+httpie 2023.1.2
 imageoptim 1.8.8
 inso 3.12.0
 insomnia 2022.5.1
@@ -376,7 +375,6 @@ pomatez 1.2.2
 postman 10.6.0
 postman-cli 1.0.8
 qlmarkdown 1.0.15
-qlstephen 1.5.1
 quicklook-json 2,1.0
 rectangle-pro 2.4.7,118
 reikey 1.4.2
@@ -387,7 +385,6 @@ spotify 1.1.92.647,a4397eb7,7
 sublime-text 4126
 superproductivity 7.12.1
 suspicious-package 4.3.1,999
-topnotch 1.3.1
 visual-studio-code 1.71.0
 vlc 3.0.17.3
 webcatalog 43.4.1
