@@ -51,7 +51,7 @@ git-brws 0.11.12
 git-delta 0.15.1
 glances 3.3.1.1
 glib 2.74.5
-glow 1.4.1
+glow 1.5.0
 gmp 6.2.1_1
 gnupg 2.4.0
 gnutls 3.7.8_1
@@ -125,7 +125,7 @@ netpbm 10.86.37
 nettle 3.8.1
 node 19.5.0
 npth 1.6
-oh-my-posh 13.9.0
+oh-my-posh 14.0.0
 oniguruma 6.9.8
 openexr 3.1.5
 openjdk 19.0.2
@@ -144,7 +144,7 @@ pixman 0.42.2
 pkg-config 0.29.2_3
 plantuml 1.2023.0
 poetry 1.3.2
-pre-commit 3.0.1
+pre-commit 3.0.2
 prettier 2.8.3
 pygments 2.14.0
 python@3.10 3.10.9
@@ -154,7 +154,7 @@ readline 8.2.1
 ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
-rtx 1.2.1
+rtx 1.2.6
 sevenzip 22.01
 shellcheck 0.9.0
 shfmt 3.6.0
@@ -183,7 +183,6 @@ blockblock 2.1.5
 brave-browser 1.47.171.0,147.171
 chatgpt 0.6.10
 cheatsheet 1.6.4
-cozy-drive 3.36.1
 customshortcuts 1.1,102
 daisydisk 4.24
 dash 6.4.0,1006
@@ -203,6 +202,7 @@ imageoptim 1.8.8
 keepingyouawake 1.6.4
 keybase 6.0.4,20230113195947,6e1343b357
 keyboard-cleaner 1.2
+keycastr 0.9.13
 kindle 1.39.65301
 knockknock 2.3.0
 lulu 2.4.2
