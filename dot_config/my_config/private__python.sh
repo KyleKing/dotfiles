@@ -25,3 +25,5 @@ alias prdc="poetry run doit --continue"
 alias prpc="poetry run pre-commit run --hook-stage commit --all-files"
 # Based on the full command for deploying from DEVELOPER_GUIDE.md
 alias prpub="prdr cl_bump lock document deploy_docs publish cl_write document deploy_docs"
+# Wrap useful plugins
+alias prsl="poetry relax && poetry sort && poetry lock --no-update"
