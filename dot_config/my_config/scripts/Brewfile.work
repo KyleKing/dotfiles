@@ -150,7 +150,6 @@ brew "cantino/mcfly/mcfly"
 brew "gautamkrishnar/socli/socli"
 brew "humanlogio/tap/humanlog"
 brew "jandedobbeleer/oh-my-posh/oh-my-posh"
-brew "jdxcode/tap/rtx"
 brew "mas-cli/tap/mas"
 brew "minamijoyo/hcledit/hcledit"
 brew "rhysd/git-brws/git-brws"
@@ -243,7 +242,6 @@ mas "Pages", id: 409201541
 mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Slack", id: 803453959
-mas "Spark", id: 1176895641
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353

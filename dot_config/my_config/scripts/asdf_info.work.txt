@@ -1,0 +1,20 @@
+OS:
+Darwin MBP-kyle-king-Z15G001WC-YJ33Q5PXGD 22.3.0 Darwin Kernel Version 22.3.0: Thu Jan  5 20:48:54 PST 2023; root:xnu-8792.81.2~2/RELEASE_ARM64_T6000 arm64
+
+SHELL:
+zsh 5.9 (arm-apple-darwin21.3.0)
+
+ASDF VERSION:
+v0.11.1
+
+ASDF ENVIRONMENT VARIABLES:
+ASDF_DIR=/opt/homebrew/opt/asdf/libexec
+
+ASDF INSTALLED PLUGINS:
+extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
+nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 65441d3
+postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master b44003f
+python                       https://github.com/danhper/asdf-python.git master 8505457
+terraform                    https://github.com/asdf-community/asdf-hashicorp.git master bc4dec6
+textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
+
