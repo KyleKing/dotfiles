@@ -16,5 +16,5 @@ nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 6
 postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master b44003f
 python                       https://github.com/danhper/asdf-python.git master 8505457
 terraform                    https://github.com/asdf-community/asdf-hashicorp.git master bc4dec6
+textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
 textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
-
