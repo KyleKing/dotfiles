@@ -50,3 +50,9 @@ fch() {
 
 # See local weather. Full docs: https://github.com/chubin/wttr.in
 alias wttr="curl v2d.wttr.in"
+
+# Configure llama (https://github.com/antonmedv/llama?ref=console.dev#usage)
+# Note that ll conflicts with exa's mapping to ll
+function lla {
+    cd "$(llama "$@")" || return 1
+}
