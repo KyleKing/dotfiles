@@ -5,6 +5,18 @@
 
 # Configure CLI Tools
 
+# See local weather. Full docs: https://github.com/chubin/wttr.in
+alias wttr="curl v2d.wttr.in"
+
+# Support fzf for completion from https://github.com/cheat/cheat#autocompletion
+#   Note that brew install the cheat.zsh script
+export CHEAT_USE_FZF=true
+# The cheat.zsh file isn't working as expected, so use this snippet instead
+#   From: https://github.com/cheat/cheat/issues/594#issuecomment-1228307435
+fch() {
+    cheat -l | tail -n +2 | fzf | awk '{{ print $1 }}' | xargs -I {} cheat {}
+}
+
 # Alias common ripgrep (rg) searches
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/.ripgreprc
 # FYI: Add -A/-B/-C for context before/after the match
@@ -32,6 +44,12 @@ alias lsa='ls --all'
 alias lsl='ls --long --header --created --git'
 alias lst='lsl -TL 2'
 
+# Configure llama (https://github.com/antonmedv/llama?ref=console.dev#usage)
+# Note that ll conflicts with exa's mapping to ll
+function lla {
+    cd "$(llama "$@")" || return 1
+}
+
 # UI folder navigation from the terminal
 cdt() {
     result=$(tere "$@")
@@ -53,6 +71,10 @@ fzf-bat () {
 btail() {
     tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
 }
+
+# Configuration for McFly for menu-based history search
+export MCFLY_RESULTS=50
+export MCFLY_FUZZY=2
 
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr

@@ -30,29 +30,7 @@ alias ppj="pbaspate | jq"
 # > Copy Last Line
 alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
-# Configuration for McFly for menu-based history search
-export MCFLY_RESULTS=50
-export MCFLY_FUZZY=2
-
 # Useful combination of mkdir and cd
 mkcd() {
     mkdir -p $1 && cd $1 || return
-}
-
-# Support fzf for completion from https://github.com/cheat/cheat#autocompletion
-#   Note that brew install the cheat.zsh script
-export CHEAT_USE_FZF=true
-# The cheat.zsh file isn't working as expected, so use this snippet instead
-#   From: https://github.com/cheat/cheat/issues/594#issuecomment-1228307435
-fch() {
-    cheat -l | tail -n +2 | fzf | awk '{{ print $1 }}' | xargs -I {} cheat {}
-}
-
-# See local weather. Full docs: https://github.com/chubin/wttr.in
-alias wttr="curl v2d.wttr.in"
-
-# Configure llama (https://github.com/antonmedv/llama?ref=console.dev#usage)
-# Note that ll conflicts with exa's mapping to ll
-function lla {
-    cd "$(llama "$@")" || return 1
 }
