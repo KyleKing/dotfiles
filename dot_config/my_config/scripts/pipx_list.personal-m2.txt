@@ -1,6 +1,6 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package black 22.12.0, installed using Python 3.11.1
+   package black 23.1.0, installed using Python 3.11.1
     - black
     - blackd
    package calcipy 0.21.5, installed using Python 3.11.1
@@ -19,12 +19,12 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pipdeptree
    package pygments 2.14.0, installed using Python 3.11.1
     - pygmentize
-   package pyright 1.1.291, installed using Python 3.11.1
+   package pyright 1.1.292, installed using Python 3.11.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.0.238, installed using Python 3.11.1
+   package ruff 0.0.240, installed using Python 3.11.1
     - ruff
    package sourcery-cli 1.0.3, installed using Python 3.11.1
     - sourcery
@@ -32,8 +32,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tail-jsonl
    package toml-sort 0.22.3, installed using Python 3.11.1
     - toml-sort
-   package tox 4.4.4, installed using Python 3.11.1
+   package tox 3.28.0, installed using Python 3.11.1
     - tox
+    - tox-quickstart
     Injected Packages:
       - tox-asdf 0.1.0
    package typer-cli 0.0.12, installed using Python 3.11.1
