@@ -9,6 +9,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - copier
    package copier-template-tester 1.0.2, installed using Python 3.11.1
     - ctt
+   package flit 3.8.0, installed using Python 3.11.1
+    - flit
    package mdformat 0.7.16, installed using Python 3.11.1
     - mdformat
     Injected Packages:
