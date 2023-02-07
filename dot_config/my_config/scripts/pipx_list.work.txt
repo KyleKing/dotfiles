@@ -1,8 +1,8 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package autoflake 2.0.0, installed using Python 3.10.6
+   package autoflake 2.0.1, installed using Python 3.10.6
     - autoflake
-   package black 22.12.0, installed using Python 3.10.9
+   package black 23.1.0, installed using Python 3.10.9
     - black
     - blackd
    package bpython 0.24, installed using Python 3.10.9
@@ -31,11 +31,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - flake8
     Injected Packages:
       - roam-packages-flake8 0.0.1
-   package flake8-to-ruff 0.0.216.dev0, installed using Python 3.10.9
+   package flake8-to-ruff 0.0.233, installed using Python 3.10.9
     - flake8-to-ruff
    package glances 3.3.1.1, installed using Python 3.10.8
     - glances
-   package isort 5.11.4, installed using Python 3.10.6
+   package isort 5.12.0, installed using Python 3.10.6
     - isort
     - isort-identify-imports
    package mypy-silent 0.4.0, installed using Python 3.10.9
@@ -44,13 +44,13 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pipdeptree
    package pygments 2.14.0, installed using Python 3.10.9
     - pygmentize
-   package pylint 2.15.10, installed using Python 3.10.6
+   package pylint 2.16.1, installed using Python 3.10.6
     - epylint
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.290, installed using Python 3.10.9
+   package pyright 1.1.292, installed using Python 3.10.9
     - pyright
     - pyright-langserver
     - pyright-python
@@ -59,11 +59,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.3.1, installed using Python 3.10.6
     - pyupgrade
-   package ruff 0.0.225, installed using Python 3.10.9
+   package ruff 0.0.241, installed using Python 3.10.9
     - ruff
    package runlike 1.4.4, installed using Python 3.10.9
     - runlike
-   package sourcery-cli 1.0.3, installed using Python 3.10.6
+   package sourcery-cli 1.0.4, installed using Python 3.10.6
     - sourcery
    package tail-jsonl 1.0.0, installed using Python 3.10.9
     - tail-jsonl
@@ -71,12 +71,12 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - toml-sort
    package uncurl 0.0.11, installed using Python 3.10.6
     - uncurl
-   package unimport 0.12.3, installed using Python 3.10.6
+   package unimport 0.14.1, installed using Python 3.10.6
     - unimport
    package xdot 1.2, installed using Python 3.10.8
     - xdot
     Injected Packages:
       - numpy 1.23.4
       - pygobject 3.42.2
-   package yamlfix 1.5.0, installed using Python 3.10.6
+   package yamlfix 1.8.0, installed using Python 3.10.6
     - yamlfix
