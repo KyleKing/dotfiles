@@ -64,7 +64,6 @@
 		"SortBy",
 		"SublimeLinter",
 		"SublimeLinter-annotations",
-		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-SpellCheckLinter",
 		"SublimeLinter-contrib-terraform",
