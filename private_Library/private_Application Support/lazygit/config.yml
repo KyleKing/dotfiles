@@ -102,16 +102,16 @@ keybinding:
     renameBranch: r
 gui:
   expandFocusedSidePanel: true
-  howBottomLine: false  # for hiding the bottom information line (unless it has important information to tell you)
+  showBottomLine: false  # for hiding the bottom information line (unless it has important information to tell you)
   theme:
     selectedLineBgColor:
-      - '#3A4267'  # set to `default` to have no background colour
+      - default  # Bold with no background
     selectedRangeBgColor:
-      - '#3A4267'  # Based on: https://coolors.co/242940
+      - default  # Bold with no background
     cherryPickedCommitBgColor:
-      - reverse
+      - reverse  # High Contrast
     cherryPickedCommitFgColor:
-      - reverse
+      - reverse  # High Contrast
   showIcons: true
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
