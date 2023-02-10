@@ -2,7 +2,7 @@ act 0.2.42
 actionlint 1.6.23
 angle-grinder 0.18.0
 ansible 7.2.0
-aom 3.5.0_2
+aom 3.6.0
 apr 1.7.1 1.7.2
 apr-util 1.6.2 1.6.3
 argon2 20190702_1
@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.9.21
+awscli 2.9.22
 bat 0.22.1
 bat-extras 2022.07.27
 bdw-gc 8.2.2
@@ -24,9 +24,9 @@ ca-certificates 2023-01-10
 cairo 1.16.0_5
 capstone 4.0.2
 cheat 4.4.0
-checkov 2.2.330
+checkov 2.3.0
 chezmoi 2.30.0
-circumflex 2.8
+circumflex 2.8.1
 cjson 1.7.15
 cloc 1.96
 cmake 3.25.2
@@ -43,7 +43,7 @@ dive 0.10.0
 docbook 5.1_1
 docbook-xsl 1.79.2_1
 docker-credential-helper-ecr 0.6.0
-docutils 0.19
+docutils 0.19_1 0.19
 dotenv-linter 3.3.0
 dust 0.8.4
 envchain 1.0.1
@@ -64,7 +64,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.10
 gdu 5.22.0
 gettext 0.21.1
-gh 2.22.1
+gh 2.23.0
 ghostscript 10.0.0
 giflib 5.2.1
 gifski 1.10.0
@@ -97,7 +97,7 @@ gumbo-parser 0.10.1
 hadolint 2.12.0
 harfbuzz 6.0.0_1
 hcledit 0.2.6
-helm 3.11.0
+helm 3.11.1
 hicolor-icon-theme 0.17
 highway 1.0.3
 howdoi 2.0.20
@@ -116,7 +116,7 @@ jbig2dec 0.19
 jc 1.22.5
 jira-cli 1.3.0
 jpeg 9e
-jpeg-turbo 2.1.5 2.1.4
+jpeg-turbo 2.1.5.1
 jpeg-xl 0.8.0 0.8.1
 jpegoptim 1.5.1
 k9s 0.27.2
@@ -128,6 +128,7 @@ kubevious 1.0.52
 kubie 0.19.3
 lame 3.100
 lazydocker 0.20.0
+lefthook 1.2.8
 leptonica 1.82.0_1
 less 608
 lf 28
@@ -153,7 +154,7 @@ libnghttp2 1.51.0
 libogg 1.3.5
 libomp 15.0.7
 libpng 1.6.39
-libpq 15.1
+libpq 15.2
 libpthread-stubs 0.4
 libraw 0.21.1
 librist 0.2.7_2
@@ -221,20 +222,20 @@ node 19.6.0
 node@14 14.21.2_1
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 14.2.2
+oh-my-posh 14.2.6
 oniguruma 6.9.8
 openblas 0.3.21
 opencore-amr 0.1.6
 openexr 3.1.5
 openjdk 19.0.2
 openjpeg 2.5.0
-openldap 2.6.3
+openldap 2.6.4
 openssl@1.1 1.1.1s 1.1.1t
 openssl@3 3.0.8
 opus 1.3.1
 ossp-uuid 1.6.2_2
 p11-kit 0.24.1_1
-pandoc 3.0.1
+pandoc 3.1
 pango 1.50.12
 pcre 8.45
 pcre2 10.42
@@ -245,7 +246,7 @@ pixman 0.42.2
 pkg-config 0.29.2_3
 plantuml 1.2023.1
 pngcrush 1.8.13
-podman 4.4.0
+podman 4.4.1
 poetry 1.3.2
 pre-commit 3.0.4
 prettier 2.8.4
@@ -253,7 +254,7 @@ psutils p17
 pygments 2.14.0
 python-tabulate 0.9.0
 python-typing-extensions 4.4.0_1
-python@3.10 3.10.9
+python@3.10 3.10.10
 python@3.11 3.11.1
 pyyaml 6.0_1
 qemu 7.2.0
@@ -267,7 +268,7 @@ rubberband 3.1.2
 rust 1.67.0
 saml2aws 2.36.2
 screenresolution 1.6
-sdl2 2.26.2
+sdl2 2.26.3
 sevenzip 22.01
 shared-mime-info 2.2
 shellcheck 0.9.0
@@ -306,7 +307,7 @@ unibilium 2.1.1
 unixodbc 2.3.11
 unrtf 0.21.10
 vde 2.3.3
-virtualenv 20.18.0
+virtualenv 20.19.0
 webp 1.3.0
 wget 1.21.3_1
 x264 r3095
@@ -332,7 +333,7 @@ appcleaner 3.6.4,4270
 beekeeper-studio 3.6.2
 blockblock 2.1.5
 brave-browser 1.47.186.0,147.186
-chatgpt 0.6.10
+chatgpt 0.10.3
 cheatsheet 1.6.3
 cloudflare-warp 2022.12.593.0,20230118.6
 customshortcuts 1.1,102
