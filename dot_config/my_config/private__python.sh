@@ -18,11 +18,14 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 # bashcompinit
 eval "$(register-python-argcomplete pipx)"
 
+# Run Pre-commit
+alias pc-c="pre-commit run --hook-stage commit --all-files"
+alias pc-p="pre-commit run --hook-stage push --all-files"
+
 # Some useful aliases for calcipy-related projects
 alias prdl="poetry run doit list"
 alias prdr="poetry run doit run"
 alias prdc="poetry run doit --continue"
-alias prpc="poetry run pre-commit run --hook-stage commit --all-files"
 # Based on the full command for deploying from DEVELOPER_GUIDE.md
 alias prpub="prdr cl_bump lock document deploy_docs publish cl_write document deploy_docs"
 # Wrap useful plugins
