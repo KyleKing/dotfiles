@@ -50,6 +50,7 @@ customCommands:
     command: git push -u origin $(git rev-parse --abbrev-ref HEAD)
     context: localBranches
     loadingText: Publishing local branch...
+    subprocess: true
   # More from the wiki: https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
   - key: <f10>
     description: Committing via Commitizen (git cz)
