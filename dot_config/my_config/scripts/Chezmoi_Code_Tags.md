@@ -3,6 +3,7 @@
 | Type    | Comment                                                                          | Last Edit   | Source File                                                                                                                                                                        |
 |---------|----------------------------------------------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | TODO    | How do I get the nested e<> commands?                                            | 2022-01-14  | [dot_config/lf/lfrc:105](https://github.com/KyleKing/dotfiles/blame/89abe435dc8a4b8517ace743251854aad207197b/dot_config/lf/lfrc#L105)                                              |
+| TODO    | Add a "publish" step that runs all of these as prerequesites:                    | 2023-02-12  | [dot_config/my_config/private__python.sh:34](https://github.com/KyleKing/dotfiles/blame/b03297f80913f4ca5fef11144761fedbd931bfc8/dot_config/my_config/private__python.sh#L34)      |
 | FIXME   | Create new project file per project with path to the .venv Python                | 2022-02-19  | [dot_config/my_config/private__sublime.sh:5](https://github.com/KyleKing/dotfiles/blame/5d311fd72496f901056c4924d3d0c6ec7115d427/dot_config/my_config/private__sublime.sh#L5)      |
 | FIXME   | These paths aren't absolute and raise other errors..."                           | 2022-12-12  | [dot_config/my_config/private_cli_tools.sh:37](https://github.com/KyleKing/dotfiles/blame/c84074aed23f598a42083cf42bab5fe78acf8c15/dot_config/my_config/private_cli_tools.sh#L28)  |
 | TODO    | Should be a for loop until home                                                  | 2022-07-28  | [dot_config/my_config/private_cli_tools.sh:101](https://github.com/KyleKing/dotfiles/blame/b8605e0e56543fe52ff2224ed0f670ef4bfe90ea/dot_config/my_config/private_cli_tools.sh#L57) |
@@ -16,6 +17,6 @@
 | TODO    | Consider reinstalling sdkman when needed again                                   | 2023-01-27  | [private_dot_zshrc:24](https://github.com/KyleKing/dotfiles/blame/196d5902a1eba4a4bc40e08727fe18d0d5016323/private_dot_zshrc#L23)                                                  |
 | TODO    | Consider merging:                                                                | 2023-01-09  | [ruff.toml:6](https://github.com/KyleKing/dotfiles/blame/609b53c40a54d4a160f596d0203f37647c81613d/ruff.toml#L6)                                                                    |
 
-Found code tags for FIXME (5), TODO (5), PLANNED (3)
+Found code tags for FIXME (5), TODO (6), PLANNED (3)
 
 <!-- calcipy:skip_tags -->

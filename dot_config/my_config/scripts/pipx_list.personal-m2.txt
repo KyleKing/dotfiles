@@ -21,12 +21,12 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pipdeptree
    package pygments 2.14.0, installed using Python 3.11.1
     - pygmentize
-   package pyright 1.1.292, installed using Python 3.11.1
+   package pyright 1.1.293, installed using Python 3.11.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.0.243, installed using Python 3.11.1
+   package ruff 0.0.245, installed using Python 3.11.1
     - ruff
    package sourcery-cli 1.0.4, installed using Python 3.11.1
     - sourcery
@@ -34,7 +34,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tail-jsonl
    package toml-sort 0.22.3, installed using Python 3.11.1
     - toml-sort
-   package tox 3.28.0, installed using Python 3.11.1
+   package tox 4.4.5, installed using Python 3.11.1
     - tox
     - tox-quickstart
     Injected Packages:

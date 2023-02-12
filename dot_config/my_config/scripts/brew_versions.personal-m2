@@ -1,5 +1,5 @@
 actionlint 1.6.23
-aom 3.5.0_2 3.5.0_1
+aom 3.6.0
 apr 1.7.2
 apr-util 1.6.3
 argon2 20190702_1
@@ -24,7 +24,7 @@ c-ares 1.19.0
 ca-certificates 2023-01-10
 cairo 1.16.0_5
 cheat 4.4.0
-chezmoi 2.29.4
+chezmoi 2.30.1
 cjson 1.7.15
 cloc 1.96
 cmocka 1.1.5
@@ -42,7 +42,7 @@ ffmpeg 5.1.2_4
 flac 1.4.2
 fontconfig 2.14.1 2.14.2
 freetds 1.3.17
-freetype 2.12.1
+freetype 2.13.0
 frei0r 1.8.0
 fribidi 1.0.12
 fzf 0.37.0
@@ -51,7 +51,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.10
 gdu 5.22.0
 gettext 0.21.1
-gh 2.22.1
+gh 2.23.0
 ghostscript 10.0.0
 giflib 5.2.1
 git 2.39.1
@@ -80,7 +80,7 @@ imagemagick 7.1.0-61
 imath 3.1.6
 jasper 4.0.0
 jbig2dec 0.19
-jpeg-turbo 2.1.5
+jpeg-turbo 2.1.5.1
 jpeg-xl 0.8.1
 json-c 0.16
 krb5 1.20.1
@@ -105,7 +105,7 @@ libnghttp2 1.51.0
 libogg 1.3.5
 libomp 15.0.7
 libpng 1.6.39
-libpq 15.1
+libpq 15.2
 libraw 0.21.1
 librist 0.2.7_2
 librsvg 2.55.1
@@ -159,15 +159,15 @@ netpbm 10.86.37
 nettle 3.8.1
 node 19.6.0
 npth 1.6
-oh-my-posh 14.2.1
+oh-my-posh 14.2.7
 oniguruma 6.9.8
 opencore-amr 0.1.6
 openexr 3.1.5
 openjdk 19.0.2
 openjpeg 2.5.0
-openldap 2.6.3
-openssl@1.1 1.1.1s
-openssl@3 3.0.7
+openldap 2.6.4
+openssl@1.1 1.1.1t
+openssl@3 3.0.8
 opus 1.3.1
 p11-kit 0.24.1_1
 pango 1.50.12
@@ -181,9 +181,9 @@ pkg-config 0.29.2_3
 plantuml 1.2023.1
 poetry 1.3.2
 pre-commit 3.0.4
-prettier 2.8.3
+prettier 2.8.4
 pygments 2.14.0
-python@3.10 3.10.9
+python@3.10 3.10.10
 python@3.11 3.11.1
 pyyaml 6.0_1
 rav1e 0.6.3
@@ -192,7 +192,7 @@ ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
 rubberband 3.1.2
-sdl2 2.26.2
+sdl2 2.26.3
 sevenzip 22.01
 shared-mime-info 2.2
 shellcheck 0.9.0
@@ -203,6 +203,7 @@ socli 7.3
 speex 1.2.1
 sqlite 3.40.1
 srt 1.5.1
+stylua 0.16.1
 svt-av1 1.4.1
 tesseract 5.3.0_1
 theora 1.1.1
@@ -215,7 +216,7 @@ unbound 1.17.1
 unibilium 2.1.1
 unixodbc 2.3.11
 vhs 0.2.0
-virtualenv 20.17.1
+virtualenv 20.19.0
 webp 1.3.0
 x264 r3095
 x265 3.5
@@ -227,14 +228,14 @@ zeromq 4.3.4
 zimg 3.0.4
 zoxide 0.9.0
 zsh 5.9
-zstd 1.5.2
+zstd 1.5.4
 1password 8.9.13
 1password-cli 2.13.1
 alfred 5.0.6,2110
 appcleaner 3.6.7,4301
 blockblock 2.1.5
 brave-browser 1.47.171.0,147.171
-chatgpt 0.6.10
+chatgpt 0.10.3
 cheatsheet 1.6.4
 cloudflare-warp 2022.12.593.0,20230118.6
 customshortcuts 1.1,102
@@ -271,6 +272,7 @@ netiquette 2.1.1
 obsidian 1.1.9
 oversight 2.1.5
 paletro 1.7.0
+pika 0.0.14
 pomatez 1.2.2
 qlmarkdown 1.0.15
 quicklook-json 2,1.0
