@@ -127,6 +127,7 @@ cask "vlc"
 cask "webpquicklook"
 cask "wezterm"
 cask "whatsyoursign"
+cask "zoom"
 mas "Charmstone", id: 1563735522
 mas "ColorSlurp", id: 1287239339
 mas "Downlink", id: 1454269192

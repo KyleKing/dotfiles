@@ -28,5 +28,11 @@ alias prdr="poetry run doit run"
 alias prdc="poetry run doit --continue"
 # Based on the full command for deploying from DEVELOPER_GUIDE.md
 alias prpub="prdr cl_bump lock document deploy_docs publish cl_write document deploy_docs"
+
+# Some useful aliases for calcipy/invoke-related projects
+alias prc="poetry run calcipy"
+# > TODO: Add a "publish" step that runs all of these as prerequesites:
+# alias prcpub="prc cl_bump lock document deploy_docs publish cl_write document deploy_docs"
+
 # Wrap useful plugins
 alias prsl="poetry relax && poetry lock --no-update"
