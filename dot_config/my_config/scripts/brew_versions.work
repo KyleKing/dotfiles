@@ -3,8 +3,8 @@ actionlint 1.6.23
 angle-grinder 0.18.0
 ansible 7.2.0
 aom 3.6.0
-apr 1.7.1 1.7.2
-apr-util 1.6.2 1.6.3
+apr 1.7.2
+apr-util 1.6.3
 argon2 20190702_1
 as-tree 0.12.0
 asdf 0.11.1
@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.9.22
+awscli 2.10.0
 bat 0.22.1
 bat-extras 2022.07.27
 bdw-gc 8.2.2
@@ -24,8 +24,8 @@ ca-certificates 2023-01-10
 cairo 1.16.0_5
 capstone 4.0.2
 cheat 4.4.0
-checkov 2.3.0
-chezmoi 2.30.0
+checkov 2.3.15
+chezmoi 2.30.1
 circumflex 2.8.1
 cjson 1.7.15
 cloc 1.96
@@ -34,16 +34,16 @@ cmatrix 2.0
 cmocka 1.1.5
 coreutils 9.1
 ctop 0.7.7
-curl 7.87.0
+curl 7.88.0
 curlie 1.6.9
 dark-mode 3.0.2
-dav1d 1.0.0
+dav1d 1.1.0
 ddgr 2.1
 dive 0.10.0
 docbook 5.1_1
 docbook-xsl 1.79.2_1
 docker-credential-helper-ecr 0.6.0
-docutils 0.19_1 0.19
+docutils 0.19_1
 dotenv-linter 3.3.0
 dust 0.8.4
 envchain 1.0.1
@@ -53,10 +53,10 @@ ffmpeg@4 4.4.3_2
 flac 1.4.2
 fontconfig 2.14.2
 freetds 1.3.17
-freetype 2.12.1
+freetype 2.13.0
 frei0r 1.8.0
 fribidi 1.0.12
-fzf 0.37.0
+fzf 0.38.0
 gawk 5.2.1_1
 gcc 12.2.0
 gd 2.3.3_4
@@ -68,7 +68,7 @@ gh 2.23.0
 ghostscript 10.0.0
 giflib 5.2.1
 gifski 1.10.0
-git 2.39.1
+git 2.39.2
 git-brws 0.11.12
 git-delta 0.15.1
 glances 3.3.1.1
@@ -77,8 +77,8 @@ glow 1.5.0
 gmp 6.2.1_1
 gnu-getopt 2.38.1
 gnupg 2.4.0
-gnutls 3.7.8_1
-go 1.19.5
+gnutls 3.8.0
+go 1.19.6
 go-jira 1.0.27
 goaccess 1.7
 gobject-introspection 1.74.0
@@ -95,7 +95,7 @@ guile 3.0.9
 gum 0.9.0
 gumbo-parser 0.10.1
 hadolint 2.12.0
-harfbuzz 6.0.0_1
+harfbuzz 7.0.0
 hcledit 0.2.6
 helm 3.11.1
 hicolor-icon-theme 0.17
@@ -108,7 +108,7 @@ httpstat 1.3.2
 humanlog 0.7.5
 hyperfine 1.15.0
 icu4c 72.1
-imagemagick 7.1.0-61
+imagemagick 7.1.0-62
 imath 3.1.6
 isl 0.25
 jasper 4.0.0
@@ -117,9 +117,9 @@ jc 1.22.5
 jira-cli 1.3.0
 jpeg 9e
 jpeg-turbo 2.1.5.1
-jpeg-xl 0.8.0 0.8.1
-jpegoptim 1.5.1
-k9s 0.27.2
+jpeg-xl 0.8.1
+jpegoptim 1.5.2
+k9s 0.27.3
 krb5 1.20.1
 krew 0.4.3
 kubeconform 0.5.0
@@ -128,7 +128,6 @@ kubevious 1.0.52
 kubie 0.19.3
 lame 3.100
 lazydocker 0.20.0
-lefthook 1.2.8
 leptonica 1.82.0_1
 less 608
 lf 28
@@ -138,7 +137,7 @@ libassuan 2.5.5
 libavif 0.11.1
 libb2 0.98.1
 libbluray 1.3.4
-libde265 1.0.10 1.0.11
+libde265 1.0.11
 libepoxy 1.5.10
 libevent 2.1.12
 libgcrypt 1.10.1
@@ -150,7 +149,7 @@ libksba 1.6.3
 liblqr 0.4.2_1
 libmaxminddb 1.7.1
 libmpc 1.3.1
-libnghttp2 1.51.0
+libnghttp2 1.52.0
 libogg 1.3.5
 libomp 15.0.7
 libpng 1.6.39
@@ -181,7 +180,7 @@ libvpx 1.12.0
 libvterm 0.3.1
 libx11 1.8.4
 libxau 1.0.11
-libxcb 1.15
+libxcb 1.15_1
 libxdmcp 1.1.4
 libxext 1.3.5
 libxrender 0.9.11
@@ -222,7 +221,7 @@ node 19.6.0
 node@14 14.21.2_1
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 14.2.6
+oh-my-posh 14.3.0
 oniguruma 6.9.8
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -230,7 +229,7 @@ openexr 3.1.5
 openjdk 19.0.2
 openjpeg 2.5.0
 openldap 2.6.4
-openssl@1.1 1.1.1s 1.1.1t
+openssl@1.1 1.1.1t
 openssl@3 3.0.8
 opus 1.3.1
 ossp-uuid 1.6.2_2
@@ -253,9 +252,9 @@ prettier 2.8.4
 psutils p17
 pygments 2.14.0
 python-tabulate 0.9.0
-python-typing-extensions 4.4.0_1
+python-typing-extensions 4.5.0
 python@3.10 3.10.10
-python@3.11 3.11.1
+python@3.11 3.11.2
 pyyaml 6.0_1
 qemu 7.2.0
 rav1e 0.6.3
@@ -265,7 +264,7 @@ ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
 rubberband 3.1.2
-rust 1.67.0
+rust 1.67.1
 saml2aws 2.36.2
 screenresolution 1.6
 sdl2 2.26.3
@@ -283,20 +282,20 @@ speex 1.2.1
 sqlite 3.40.1
 srt 1.5.1
 stern 1.23.0
-stylua 0.16.0
+stylua 0.16.1
 swig 4.1.1
 tere 1.4.0
 terraform-docs 0.16.0
 terrascan 1.18.0
 tesseract 5.3.0_1
-tflint 0.44.1
+tflint 0.45.0
 tfsec 1.28.1
 tfupdate 0.6.7
 theora 1.1.1
 tidy-html5 5.8.0
 tldr 1.5.0
 tokyo-cabinet 1.4.48
-transcrypt 2.2.0
+transcrypt 2.2.1
 trash 0.9.2
 tre-command 0.4.0
 tree 2.1.0
@@ -324,7 +323,7 @@ zimg 3.0.4
 zlib 1.2.13
 zoxide 0.9.0
 zsh 5.9
-zstd 1.5.2
+zstd 1.5.4
 1password 8.8.0
 1password-cli 2.13.1
 alfred 5.0.2,2073
@@ -349,7 +348,7 @@ firefox 104.0.1
 firefox-developer-edition latest
 flux 42.1
 font-fira-code 6.2
-font-fontawesome 6.2.1
+font-fontawesome 6.3.0
 font-hack-nerd-font 2.3.3
 github 3.0.7-38727e62
 gitkraken 8.8.0
@@ -376,7 +375,7 @@ netiquette 2.1.1
 obsidian 1.0.0
 oversight 2.1.5
 paletro 1.6.5
-podman-desktop 0.11.0
+podman-desktop 0.12.0
 pomatez 1.2.2
 postman 10.6.0
 postman-cli 1.0.8
@@ -389,7 +388,7 @@ skim 1.6.12,142
 slack 4.28.171
 spotify 1.1.92.647,a4397eb7,7
 sublime-text 4126
-superproductivity 7.12.1
+superproductivity 7.12.2
 suspicious-package 4.3.1,999
 visual-studio-code 1.71.0
 vlc 3.0.17.3

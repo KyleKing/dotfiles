@@ -63,9 +63,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ruff
    package runlike 1.4.4, installed using Python 3.10.9
     - runlike
-   package sourcery-cli 1.0.4, installed using Python 3.10.6
+   package sourcery-cli 1.0.5, installed using Python 3.10.6
     - sourcery
-   package tail-jsonl 1.0.0, installed using Python 3.10.9
+   package tail-jsonl 1.1.1, installed using Python 3.10.9
     - tail-jsonl
    package toml-sort 0.22.3, installed using Python 3.10.9
     - toml-sort
