@@ -3,4 +3,5 @@
 .DS_Store
 
 # Repo-only files
+README.md
 .pre-commit-config.yaml

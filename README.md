@@ -12,15 +12,6 @@ chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 brew install --cask 1password 1password-cli
 # In 1Password, turn on 1password-cli
 
-# Note if symlinks are reported as broken, see where they should point to with `ls -l <>`
-mkdir -p ~/.config/chezmoi-dual-linked/Sublime-Packages-User/Projects
-
-# The "create_" rules didn't seem to working, so you may need to manually create these files initially
-mkdir -p "~/.config/chezmoi-dual-linked/Sublime-Packages-User/CodeMap"
-touch "~/.config/chezmoi-dual-linked/Sublime-Packages-User/CodeMap/Code - Map"
-touch "~/.config/chezmoi-dual-linked/Sublime-Packages-User/CodeMap/Code - Map.source"
-touch "~/.config/chezmoi-dual-linked/Sublime-Packages-User/Terminus.hidden-color-scheme"
-
 # Sign in with 1Password-cli
 eval "$(op signin)"
 
@@ -42,4 +33,14 @@ brew bundle --file ~/.Brewfile-personal
 # Run the fzf post-install steps. Accept all prompts
 # https://github.com/junegunn/fzf#using-homebrew
 $(brew --prefix)/opt/fzf/install
+```
+
+## Sublime
+
+Sublime is synced through Dropbox
+
+```sh
+cd ~/Library/Application\ Support/Sublime\ Text/Packages
+mv User User-Backup
+ln -s ~/Library/CloudStorage/Dropbox/Apps/Sublime/User
 ```
