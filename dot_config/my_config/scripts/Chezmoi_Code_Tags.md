@@ -2,7 +2,6 @@
 
 | Type    | Comment                                                                          | Last Edit   | Source File                                                                                                                                                                        |
 |---------|----------------------------------------------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| TODO    | How do I get the nested e<> commands?                                            | 2022-01-14  | [dot_config/lf/lfrc:105](https://github.com/KyleKing/dotfiles/blame/89abe435dc8a4b8517ace743251854aad207197b/dot_config/lf/lfrc#L105)                                              |
 | TODO    | Add a "publish" step that runs all of these as prerequesites:                    | 2023-02-12  | [dot_config/my_config/private__python.sh:34](https://github.com/KyleKing/dotfiles/blame/b03297f80913f4ca5fef11144761fedbd931bfc8/dot_config/my_config/private__python.sh#L34)      |
 | FIXME   | Create new project file per project with path to the .venv Python                | 2022-02-19  | [dot_config/my_config/private__sublime.sh:5](https://github.com/KyleKing/dotfiles/blame/5d311fd72496f901056c4924d3d0c6ec7115d427/dot_config/my_config/private__sublime.sh#L5)      |
 | FIXME   | These paths aren't absolute and raise other errors..."                           | 2022-12-12  | [dot_config/my_config/private_cli_tools.sh:37](https://github.com/KyleKing/dotfiles/blame/c84074aed23f598a42083cf42bab5fe78acf8c15/dot_config/my_config/private_cli_tools.sh#L28)  |
@@ -13,10 +12,10 @@
 | PLANNED | These settings weren't being recognized?                                         | 2023-01-10  | [dot_config/nvim/lua/user/init.lua:286](https://github.com/KyleKing/dotfiles/blame/64fd05accb316d7d6e113f20eee63abb6ca4c0d9/dot_config/nvim/lua/user/init.lua#L255)                |
 | PLANNED | Need to figure out how configuration works. No lua examples                      | 2023-01-10  | [dot_config/nvim/lua/user/init.lua:302](https://github.com/KyleKing/dotfiles/blame/64fd05accb316d7d6e113f20eee63abb6ca4c0d9/dot_config/nvim/lua/user/init.lua#L274)                |
 | FIXME   | How are project configuration files recognized?                                  | 2023-01-14  | [dot_config/nvim/lua/user/init.lua:416](https://github.com/KyleKing/dotfiles/blame/5ff650bc1314d2f5a69e899a0f1b6ead104a4f66/dot_config/nvim/lua/user/init.lua#L457)                |
+| FIXME   | Not recognized?                                                                  | 2023-02-17  | [dot_config/nvim/lua/user/init.lua:455](https://github.com/KyleKing/dotfiles/blame/bd22bf8c4f2d47e8e8e20038a1ea5a0e039e7da4/dot_config/nvim/lua/user/init.lua#L455)                |
 | PLANNED | consider heirline customization                                                  | 2023-01-14  | [dot_config/nvim/lua/user/init.lua:508](https://github.com/KyleKing/dotfiles/blame/5ff650bc1314d2f5a69e899a0f1b6ead104a4f66/dot_config/nvim/lua/user/init.lua#L549)                |
 | TODO    | Consider reinstalling sdkman when needed again                                   | 2023-01-27  | [private_dot_zshrc:24](https://github.com/KyleKing/dotfiles/blame/196d5902a1eba4a4bc40e08727fe18d0d5016323/private_dot_zshrc#L23)                                                  |
-| TODO    | Consider merging:                                                                | 2023-01-09  | [ruff.toml:6](https://github.com/KyleKing/dotfiles/blame/609b53c40a54d4a160f596d0203f37647c81613d/ruff.toml#L6)                                                                    |
 
-Found code tags for FIXME (5), TODO (6), PLANNED (3)
+Found code tags for FIXME (6), TODO (4), PLANNED (3)
 
 <!-- calcipy:skip_tags -->

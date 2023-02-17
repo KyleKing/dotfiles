@@ -25,7 +25,7 @@ cairo 1.16.0_5
 capstone 4.0.2
 cheat 4.4.0
 checkov 2.3.15
-chezmoi 2.30.1
+chezmoi 2.31.0
 circumflex 2.8.1
 cjson 1.7.15
 cloc 1.96
@@ -130,7 +130,6 @@ lame 3.100
 lazydocker 0.20.0
 leptonica 1.82.0_1
 less 608
-lf 28
 libarchive 3.6.2
 libass 0.17.0
 libassuan 2.5.5
@@ -193,7 +192,7 @@ lolcat 100.0.1
 lua 5.4.4_1
 luacheck 1.1.0
 luajit 2.1.0-beta3-20230104.2
-luarocks 3.9.1
+luarocks 3.9.2
 luv 1.44.2-1
 lz4 1.9.4
 lzo 2.10
@@ -217,11 +216,11 @@ neofetch 7.1.0
 neovim 0.8.3
 netpbm 10.86.37
 nettle 3.8.1
-node 19.6.0
-node@14 14.21.2_1
+node 19.6.1
+node@14 14.21.3
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 14.3.0
+oh-my-posh 14.5.0
 oniguruma 6.9.8
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -238,7 +237,7 @@ pandoc 3.1
 pango 1.50.12
 pcre 8.45
 pcre2 10.42
-php 8.2.2
+php 8.2.3
 pinentry 1.2.1
 pipx 1.1.0
 pixman 0.42.2
@@ -265,7 +264,7 @@ rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
 rubberband 3.1.2
 rust 1.67.1
-saml2aws 2.36.2
+saml2aws 2.36.3
 screenresolution 1.6
 sdl2 2.26.3
 sevenzip 22.01
@@ -274,7 +273,7 @@ shellcheck 0.9.0
 shfmt 3.6.0
 shpotify 2.1
 six 1.16.0_3
-skopeo 1.11.0
+skopeo 1.11.1
 snappy 1.1.9
 socli 7.3
 speedtest-cli 2.1.3_1
@@ -325,14 +324,14 @@ zoxide 0.9.0
 zsh 5.9
 zstd 1.5.4
 1password 8.8.0
-1password-cli 2.13.1
+1password-cli 2.14.0
 alfred 5.0.2,2073
 another-redis-desktop-manager 1.5.9
 appcleaner 3.6.4,4270
 beekeeper-studio 3.6.2
 blockblock 2.1.5
 brave-browser 1.47.186.0,147.186
-chatgpt 0.10.3
+chatgpt 0.11.0
 cheatsheet 1.6.3
 cloudflare-warp 2022.12.593.0,20230118.6
 customshortcuts 1.1,102
