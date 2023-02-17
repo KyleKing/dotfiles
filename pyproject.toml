@@ -1,5 +1,0 @@
-# yamlfix automatically searches for "pyproject.toml" for configuration
-#   See https://lyz-code.github.io/yamlfix/#configuration
-[tool.yamlfix]
-line_length = 9999
-flow_style_sequence=false

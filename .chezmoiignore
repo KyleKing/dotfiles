@@ -4,4 +4,3 @@
 
 # Repo-only files
 .pre-commit-config.yaml
-pyproject.toml
