@@ -37,10 +37,12 @@ $(brew --prefix)/opt/fzf/install
 
 ## Sublime
 
-Sublime is synced through Dropbox
+[Sublime is synced through Dropbox](https://packagecontrol.io/docs/syncing#dropbox-osx)
 
 ```sh
 cd ~/Library/Application\ Support/Sublime\ Text/Packages
+# On 1st computer: mv User ~/Library/CloudStorage/Dropbox/Apps/Sublime
+# On n+1 computers:
 mv User User-Backup
 ln -s ~/Library/CloudStorage/Dropbox/Apps/Sublime/User
 ```
