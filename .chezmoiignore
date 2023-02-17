@@ -2,9 +2,6 @@
 *~
 .DS_Store
 
-# These files are computer specific and change too frequently to store in a VCS
-**/Sublime\ Text/Packages/
-
 # Repo-only files
 .pre-commit-config.yaml
 pyproject.toml
