@@ -452,7 +452,7 @@ local config = {
 					-- "codeqlls",
 					"dockerls",
 					"eslint",
-					"sumneko_lua",
+					-- "sumneko_lua",  -- FIXME: Not recognized?
 					-- "pyright", -- Too much noise
 					"pylsp",
 					"sourcery",
