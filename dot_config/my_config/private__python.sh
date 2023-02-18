@@ -36,4 +36,4 @@ alias prcv="poetry run calcipy -vvv"
 # alias prcpub="prc cl_bump lock document deploy_docs publish cl_write document deploy_docs"
 
 # Wrap useful plugins
-alias prsl="poetry relax && poetry lock --no-update"
+alias prsl="toml-sort pyproject.toml --in-place --all --trailing-comma-inline-array && poetry relax && poetry lock --no-update"
