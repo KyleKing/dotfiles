@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 # Source: https://til.hashrocket.com/posts/n44hnf0z99-show-better-image-diff-on-git
 
 if [[ -f "$1" ]] && [[ -f "$2" ]]; then

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 #      ^----- get shellcheck hints based on bash
 # https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 # Python and pipx Configuration
@@ -31,6 +31,7 @@ alias prpub="prdr cl_bump lock document deploy_docs publish cl_write document de
 
 # Some useful aliases for calcipy/invoke-related projects
 alias prc="poetry run calcipy"
+alias prcv="poetry run calcipy -vvv"
 # > TODO: Add a "publish" step that runs all of these as prerequesites:
 # alias prcpub="prc cl_bump lock document deploy_docs publish cl_write document deploy_docs"
 
