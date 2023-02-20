@@ -1,45 +1,45 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package black 23.1.0, installed using Python 3.11.1
+   package black 23.1.0, installed using Python 3.11.2
     - black
     - blackd
-   package calcipy 0.21.5, installed using Python 3.11.1
+   package calcipy 0.21.5, installed using Python 3.11.2
     - calcipy
-   package copier 7.0.1, installed using Python 3.11.1
+   package copier 7.0.1, installed using Python 3.11.2
     - copier
-   package copier-template-tester 1.0.2, installed using Python 3.11.1
+   package copier-template-tester 1.0.2, installed using Python 3.11.2
     - ctt
-   package flit 3.8.0, installed using Python 3.11.1
+   package flit 3.8.0, installed using Python 3.11.2
     - flit
-   package licensecheck 2023.0.1, installed using Python 3.11.1
+   package licensecheck 2023.0.1, installed using Python 3.11.2
     - licensecheck
-   package mdformat 0.7.16, installed using Python 3.11.1
+   package mdformat 0.7.16, installed using Python 3.11.2
     - mdformat
     Injected Packages:
-      - mdformat-admon 1.0.0
-   package mypy-silent 0.4.0, installed using Python 3.11.1
+      - mdformat-admon 1.0.1
+   package mypy-silent 0.4.0, installed using Python 3.11.2
     - mypy-silent
-   package pipdeptree 2.3.3, installed using Python 3.11.1
+   package pipdeptree 2.5.0, installed using Python 3.11.2
     - pipdeptree
-   package pygments 2.14.0, installed using Python 3.11.1
+   package pygments 2.14.0, installed using Python 3.11.2
     - pygmentize
-   package pyright 1.1.294, installed using Python 3.11.1
+   package pyright 1.1.294, installed using Python 3.11.2
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.0.245, installed using Python 3.11.1
+   package ruff 0.0.247, installed using Python 3.11.2
     - ruff
-   package sourcery-cli 1.0.4, installed using Python 3.11.1
+   package sourcery-cli 1.0.5, installed using Python 3.11.2
     - sourcery
-   package tail-jsonl 1.1.1, installed using Python 3.11.1
+   package tail-jsonl 1.1.2, installed using Python 3.11.2
     - tail-jsonl
-   package toml-sort 0.22.3, installed using Python 3.11.1
+   package toml-sort 0.22.3, installed using Python 3.11.2
     - toml-sort
-   package tox 4.4.5, installed using Python 3.11.1
+   package tox 3.28.0, installed using Python 3.11.2
     - tox
     - tox-quickstart
     Injected Packages:
       - tox-asdf 0.1.0
-   package typer-cli 0.0.12, installed using Python 3.11.1
+   package typer-cli 0.0.13, installed using Python 3.11.2
     - typer
