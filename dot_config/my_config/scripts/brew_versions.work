@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.10.0
+awscli 2.10.1
 bat 0.22.1
 bat-extras 2022.07.27
 bdw-gc 8.2.2
@@ -31,10 +31,10 @@ cjson 1.7.15
 cloc 1.96
 cmake 3.25.2
 cmatrix 2.0
-cmocka 1.1.5
+cmocka 1.1.6
 coreutils 9.1
 ctop 0.7.7
-curl 7.88.0
+curl 7.88.1
 curlie 1.6.9
 dark-mode 3.0.2
 dav1d 1.1.0
@@ -49,7 +49,7 @@ dust 0.8.4
 envchain 1.0.1
 exa 0.10.1
 fd 8.6.0
-ffmpeg@4 4.4.3_2
+ffmpeg@4 4.4.3_3
 flac 1.4.2
 fontconfig 2.14.2
 freetds 1.3.17
@@ -141,7 +141,7 @@ libepoxy 1.5.10
 libevent 2.1.12
 libgcrypt 1.10.1
 libgpg-error 1.46
-libheif 1.14.2_1
+libheif 1.15.1
 libidn 1.41
 libidn2 2.3.4_1
 libksba 1.6.3
@@ -175,7 +175,7 @@ libuv 1.44.2
 libvidstab 1.1.0
 libvmaf 2.3.1
 libvorbis 1.3.7
-libvpx 1.12.0
+libvpx 1.13.0
 libvterm 0.3.1
 libx11 1.8.4
 libxau 1.0.11
@@ -220,7 +220,7 @@ node 19.6.1
 node@14 14.21.3
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 14.5.0
+oh-my-posh 14.8.0
 oniguruma 6.9.8
 openblas 0.3.21
 opencore-amr 0.1.6
@@ -252,8 +252,8 @@ psutils p17
 pygments 2.14.0
 python-tabulate 0.9.0
 python-typing-extensions 4.5.0
-python@3.10 3.10.10
-python@3.11 3.11.2
+python@3.10 3.10.10_1
+python@3.11 3.11.2_1
 pyyaml 6.0_1
 qemu 7.2.0
 rav1e 0.6.3
@@ -316,7 +316,7 @@ xorgproto 2022.2
 xvid 1.3.7
 xz 5.4.1
 yadm 3.2.2
-yq 4.30.8
+yq 4.31.1
 zeromq 4.3.4
 zimg 3.0.4
 zlib 1.2.13
@@ -349,7 +349,7 @@ flux 42.1
 font-fira-code 6.2
 font-fontawesome 6.3.0
 font-hack-nerd-font 2.3.3
-github 3.0.7-38727e62
+github 3.1.7-97eef004
 gitkraken 8.8.0
 google-chrome 104.0.5112.101
 httpie 2023.1.2
