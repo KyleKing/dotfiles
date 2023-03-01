@@ -10,8 +10,11 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - bpython
     - bpython-curses
     - bpython-urwid
-   package calcipy 0.21.5, installed using Python 3.10.10
+   package calcipy 1.0.0, installed using Python 3.10.10
     - calcipy
+    - calcipy_lint
+    - calcipy_tags
+    - calcipy_types
    package cloudiscovery 2.4.4, installed using Python 3.10.10
     - cloudiscovery
     - cloudiscovery.cmd
@@ -71,6 +74,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tail-jsonl
    package toml-sort 0.22.3, installed using Python 3.10.10
     - toml-sort
+   package trcli 1.4.3, installed using Python 3.10.10
+    - trcli
    package uncurl 0.0.11, installed using Python 3.10.10
     - uncurl
    package unimport 0.14.1, installed using Python 3.10.10
