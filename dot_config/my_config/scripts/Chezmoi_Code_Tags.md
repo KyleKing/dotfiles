@@ -18,4 +18,4 @@
 
 Found code tags for FIXME (6), TODO (4), PLANNED (3)
 
-<!-- calcipy:skip_tags -->
+<!-- calcipy_skip_tags -->
