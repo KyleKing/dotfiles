@@ -70,6 +70,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - runlike
    package sourcery-cli 1.0.6, installed using Python 3.10.10
     - sourcery
+   package sqlfluff 1.4.5, installed using Python 3.10.10
+    - sqlfluff
    package tail-jsonl 1.2.2, installed using Python 3.10.10
     - tail-jsonl
    package toml-sort 0.22.4, installed using Python 3.10.10
