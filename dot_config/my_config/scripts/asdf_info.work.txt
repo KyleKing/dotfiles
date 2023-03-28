@@ -5,7 +5,7 @@ SHELL:
 zsh 5.9 (arm-apple-darwin21.3.0)
 
 ASDF VERSION:
-v0.11.2
+v0.11.3
 
 ASDF ENVIRONMENT VARIABLES:
 ASDF_DIR=/opt/homebrew/opt/asdf/libexec

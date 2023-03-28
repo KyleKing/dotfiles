@@ -53,7 +53,7 @@ brew "snappy"
 brew "ffmpeg@4"
 brew "fzf"
 brew "gawk"
-brew "gdu"
+brew "gdu", link: false
 brew "gh"
 brew "gifski"
 brew "git"
