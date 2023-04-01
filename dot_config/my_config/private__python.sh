@@ -27,4 +27,4 @@ alias prc="poetry run calcipy"
 alias prcv="poetry run calcipy -vvv"
 
 # Wrap useful plugins
-alias prsl="toml-sort pyproject.toml --in-place --all --trailing-comma-inline-array && poetry relax && poetry lock --no-update"
+alias prsl="toml-sort pyproject.toml --in-place --all --trailing-comma-inline-array && poetry relax && poetry relax --group=dev && poetry lock --no-update"
