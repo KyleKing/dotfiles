@@ -1,6 +1,6 @@
 gh dash	dlvhdr/gh-dash	v3.7.6
 gh notify	meiji163/gh-notify	4f6ca16b
-gh poi	seachicken/gh-poi	v0.9.0
+gh poi	seachicken/gh-poi	v0.9.1
 gh pr-draft	kyanny/gh-pr-draft	6003412b
 gh repo-fzf	kavinvalli/gh-repo-fzf	eceb769e
 gh user-stars	korosuke613/gh-user-stars	1829ccdb

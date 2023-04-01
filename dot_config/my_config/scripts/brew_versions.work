@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.11.6
+awscli 2.11.7
 bat 0.23.0
 bat-extras 2023.03.21
 bdw-gc 8.2.2
@@ -222,7 +222,7 @@ node 19.8.1
 node@14 14.21.3
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 14.19.5
+oh-my-posh 14.23.1
 oniguruma 6.9.8
 openblas 0.3.22
 opencore-amr 0.1.6
@@ -267,7 +267,7 @@ rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
 rubberband 3.1.2
 rust 1.68.1
-saml2aws 2.36.5
+saml2aws 2.36.6
 screenresolution 1.6
 sdl2 2.26.4
 sevenzip 22.01
@@ -375,6 +375,7 @@ microsoft-remote-desktop 10.7.9
 monitorcontrol 4.1.0
 netiquette 2.1.1
 obsidian 1.0.0
+orbstack 0.5.2_1012
 oversight 2.1.5
 paletro 1.6.5
 podman-desktop 0.12.0
