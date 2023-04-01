@@ -16,6 +16,8 @@ cd ~/.config/nvim/lua/user && git pull && cd
 #   gh repo clone cheat/cheatsheets ~/.config/cheat/cheatsheets/community
 cd ~/.config/cheat/cheatsheets/community && git pull && cd
 
+gh extension upgrade --all
+
 # Note: no trailing '-}}' for below commands:
 brew bundle dump --file=- > "$SCRIPT_DIR/Brewfile.{{- .computer_name }}"
 brew list --versions > "$SCRIPT_DIR/brew_versions.{{- .computer_name }}"

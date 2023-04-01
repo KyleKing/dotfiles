@@ -22,8 +22,7 @@ ch-sync() {
 
 ch-scripts() {
     # Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
-    gh extension upgrade --all
-    $HOME/.config/my_config/scripts/generate_machine_snapshot.sh
+    $HOME/.config/my_config/generate_machine_snapshot.sh
 }
 
 ch-rad() {
