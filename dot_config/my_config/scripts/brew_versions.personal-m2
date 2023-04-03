@@ -27,6 +27,7 @@ cheat 4.4.0
 chezmoi 2.33.0
 cjson 1.7.15
 cloc 1.96
+cmake 3.26.2
 cmocka 1.1.7
 coreutils 9.2
 curl 8.0.1
