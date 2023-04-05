@@ -298,6 +298,13 @@ projects:
       - Roam
       - DevOps
 
+  parexel-chat:
+    url: git@github.com:roaminsight/parexel-chat.git
+    desc: General Roam Project
+    tags:
+      - Roam
+      - Active
+
   pdfcore:
     url: git@github.com:roaminsight/pdfcore.git
     desc: Low-Level PDF Tooling
@@ -466,6 +473,13 @@ projects:
 
   shared-dotfiles:
     url: git@github.com:roaminsight/shared-dotfiles.git
+    desc: General Roam Project
+    tags:
+      - Roam
+      - Active
+
+  solve-pv:
+    url: git@github.com:roaminsight/solve-pv.git
     desc: General Roam Project
     tags:
       - Roam
