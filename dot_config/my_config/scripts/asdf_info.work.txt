@@ -1,5 +1,5 @@
 OS:
-Darwin MBP-kyle-king-Z15G001WC-YJ33Q5PXGD 22.3.0 Darwin Kernel Version 22.3.0: Mon Jan 30 20:38:37 PST 2023; root:xnu-8792.81.3~2/RELEASE_ARM64_T6000 arm64
+Darwin MBP-kyle-king-Z15G001WC-YJ33Q5PXGD 22.4.0 Darwin Kernel Version 22.4.0: Mon Mar  6 20:59:28 PST 2023; root:xnu-8796.101.5~3/RELEASE_ARM64_T6000 arm64
 
 SHELL:
 zsh 5.9 (arm-apple-darwin21.3.0)

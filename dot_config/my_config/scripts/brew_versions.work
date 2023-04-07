@@ -46,6 +46,7 @@ docbook-xsl 1.79.2_1
 docker-credential-helper-ecr 0.6.0
 docutils 0.19_1
 dotenv-linter 3.3.0
+duckdb 0.7.1
 dust 0.8.5
 envchain 1.0.1
 exa 0.10.1_1
@@ -143,7 +144,7 @@ libepoxy 1.5.10
 libevent 2.1.12
 libgcrypt 1.10.1
 libgit2 1.6.3
-libgpg-error 1.46
+libgpg-error 1.47
 libheif 1.15.2
 libidn 1.41
 libidn2 2.3.4_1
@@ -223,7 +224,7 @@ node 19.8.1
 node@14 14.21.3
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 14.26.0
+oh-my-posh 14.27.0
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -266,7 +267,7 @@ redis 7.0.10
 ripgrep 13.0.0
 rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
-rubberband 3.2.0
+rubberband 3.2.1
 rust 1.68.2
 saml2aws 2.36.6
 screenresolution 1.6
@@ -367,7 +368,7 @@ keyboard-cleaner 1.2
 keycastr 0.9.13
 knockknock 2.3.0
 lulu 2.4.2
-lunacy 9.0.8
+lunacy 9.0.9
 metabase 0.41.6
 microsoft-auto-update 4.50.22081401
 microsoft-edge 105.0.1343.25
