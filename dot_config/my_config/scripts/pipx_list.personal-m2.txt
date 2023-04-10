@@ -3,14 +3,14 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 23.3.0, installed using Python 3.11.2
     - black
     - blackd
-   package calcipy 1.0.1, installed using Python 3.11.2
+   package calcipy 1.2.1, installed using Python 3.11.2
     - calcipy
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
    package code2flow 2.5.1, installed using Python 3.11.2
     - code2flow
-   package copier 7.0.1, installed using Python 3.11.2
+   package copier 7.1.0, installed using Python 3.11.2
     - copier
    package copier-template-tester 1.0.2, installed using Python 3.11.2
     - ctt
@@ -18,10 +18,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - flit
    package licensecheck 2023.1.1, installed using Python 3.11.2
     - licensecheck
-   package mdformat 0.7.16, installed using Python 3.11.2
+   package mdformat_mkdocs 1.0.0, installed using Python 3.11.2
+    - markdown-it
     - mdformat
-    Injected Packages:
-      - mdformat-admon 1.0.1
    package mypy-silent 0.4.0, installed using Python 3.11.2
     - mypy-silent
    package nox 2022.11.21, installed using Python 3.11.2
@@ -33,12 +32,12 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pycg
    package pygments 2.14.0, installed using Python 3.11.2
     - pygmentize
-   package pyright 1.1.301, installed using Python 3.11.2
+   package pyright 1.1.302, installed using Python 3.11.2
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.0.260, installed using Python 3.11.2
+   package ruff 0.0.261, installed using Python 3.11.2
     - ruff
    package sourcery-cli 1.1.0, installed using Python 3.11.2
     - sourcery
