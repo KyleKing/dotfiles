@@ -5,6 +5,5 @@ working fine: please don't worry or file an issue; just ignore this. Thanks![0m
 Warning: You have unlinked kegs in your Cellar.
 Leaving kegs unlinked can lead to build-trouble and cause formulae that depend on
 those kegs to fail to run properly once built. Run `brew link` on these:
-  gdu
-  python@3.11
+  coreutils
   jira-cli
