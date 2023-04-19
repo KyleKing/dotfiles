@@ -25,6 +25,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - docformatter
    package envtpl 0.7.2, installed using Python 3.11.3
     - envtpl
+   package fawltydeps 0.8.0, installed using Python 3.11.3
+    - fawltydeps
    package flake8 6.0.0, installed using Python 3.11.3
     - flake8
     Injected Packages:

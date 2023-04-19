@@ -1,5 +1,5 @@
 {
-  "createdAt": "2022-08-01T22:48:59.569Z",
+  "createdAt": "2023-04-19T14:50:39.222Z",
   "createdBy": "Redirector v3.5.3",
   "redirects": [
     {
@@ -13,9 +13,9 @@
       "exampleUrl": "https://blog.argoproj.io/5-new-git-commands-and-1-tip-youll-use-every-day-3c28e97c9321",
       "excludePattern": "",
       "grouped": false,
-      "includePattern": "https://*argoproj.io/*",
+      "includePattern": "https://(.+\\.)?argoproj.io/(.+)",
       "patternDesc": "",
-      "patternType": "W",
+      "patternType": "R",
       "processMatches": "noProcessing",
       "redirectUrl": "https://scribe.rip/$2"
     },
@@ -30,9 +30,9 @@
       "exampleUrl": "https://blog.devgenius.io/nude-pictures-on-early-retro-pcs-was-it-possible-3434b5c0447e",
       "excludePattern": "",
       "grouped": false,
-      "includePattern": "https://*devgenius.io/*",
+      "includePattern": "https://(.+\\.)?devgenius.io/(.+)",
       "patternDesc": "",
-      "patternType": "W",
+      "patternType": "R",
       "processMatches": "noProcessing",
       "redirectUrl": "https://scribe.rip/$2"
     },
@@ -47,9 +47,9 @@
       "exampleUrl": "https://betterprogramming.pub/how-to-execute-a-cron-job-on-mac-with-crontab-b2decf2968eb",
       "excludePattern": "",
       "grouped": false,
-      "includePattern": "https://*betterprogramming.pub/*",
+      "includePattern": "https://(.+\\.)?betterprogramming.pub/(.+)",
       "patternDesc": "",
-      "patternType": "W",
+      "patternType": "R",
       "processMatches": "noProcessing",
       "redirectUrl": "https://scribe.rip/$2"
     },
@@ -176,23 +176,6 @@
       "appliesTo": [
         "main_frame"
       ],
-      "description": "S3 redirect",
-      "disabled": false,
-      "error": null,
-      "exampleResult": "https://s3.console.aws.amazon.com/s3/object/roam-reviewer-import-export-stage?region=us-west-2&prefix=e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
-      "exampleUrl": "s3://roam-reviewer-import-export-stage/e0f008f6-cae9-41ec-be99-21e2f00c497e/imports/msg/unicode-EMBASE_EMAIL_ALERT_-1-d98f_copy_2-bcaf.msg",
-      "excludePattern": "",
-      "grouped": false,
-      "includePattern": "s3://*/*",
-      "patternDesc": "WIP: Make s3 auto-redirect!",
-      "patternType": "W",
-      "processMatches": "noProcessing",
-      "redirectUrl": "https://s3.console.aws.amazon.com/s3/object/$1?region=us-west-2&prefix=$2"
-    },
-    {
-      "appliesTo": [
-        "main_frame"
-      ],
       "description": "Redirect Annoying Awesome Open Source to Github",
       "disabled": false,
       "error": null,
@@ -205,6 +188,91 @@
       "patternType": "W",
       "processMatches": "noProcessing",
       "redirectUrl": "https://github.com/$1/$2"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "Redirect to Atlassian Cloud (issues / JIRA)",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://parexelailabs.atlassian.net/browse/PPLMS-1923",
+      "exampleUrl": "https://issues.roaminsight.net/browse/PPLMS-1923",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://issues.roaminsight.net/*",
+      "patternDesc": "",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://parexelailabs.atlassian.net/$1"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "(Redirects to Search) Redirect to JIRA Cloud (wiki / Confluence) (1/2)",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://parexelailabs.atlassian.net/wiki/search?text=ENGINEERING/Installing+asdf",
+      "exampleUrl": "https://wiki.roaminsight.net/display/ENGINEERING/Installing+asdf",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://wiki.roaminsight.net/display/*",
+      "patternDesc": "Hack to convert the names path from hosted JIRA to a search in Cloud JIRA. The Cloud JIRA links include a unique ID that can't be extracted from the Hosted URL, so Search is the best we can do",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://parexelailabs.atlassian.net/wiki/search?text=$1"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "(Redirects to Search) Redirect to JIRA Cloud (wiki / Confluence) (2/2)",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://parexelailabs.atlassian.net/wiki/search?text=ENGINEERING Reviewer+Load+Testing ",
+      "exampleUrl": "https://wiki.roaminsight.net/pages/viewpage.action?spaceKey=ENGINEERING&title=Reviewer+Load+Testing",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://wiki.roaminsight.net/pages/viewpage.action?(?:[^=]+=([^&]+))?&?(?:[^=]+=([^&]+))?&?(?:[^=]+=([^&]+))?",
+      "patternDesc": "Regex to convert pages/viewpage.action to the best possible hosted search",
+      "patternType": "R",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://parexelailabs.atlassian.net/wiki/search?text=$1 $2 $3"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "Redirect JIRA Login",
+      "disabled": true,
+      "error": null,
+      "exampleResult": "https://myapps.microsoft.com/signin/174275d7-d196-4d7d-b3df-e255089af786?tenantId=83d59944-34a0-4eb5-8cb0-80a49540e944&continue=https%3A%2F%2Fid.atlassian.com%2Fjoin%2Fuser-access%3Fresource%3Dari%253Acloud%253Ajira%253A%253Asite%252F332be14c-da5e-4c3c-b491-c50f40fcaaf3%26continue%3Dhttps%253A%252F%252Fparexelailabs.atlassian.net%252Fjira%252Fsoftware%252Fc%252Fprojects%252FPPLMS%252Fboards%252F26&application=jira",
+      "exampleUrl": "https://id.atlassian.com/login?continue=https%3A%2F%2Fid.atlassian.com%2Fjoin%2Fuser-access%3Fresource%3Dari%253Acloud%253Ajira%253A%253Asite%252F332be14c-da5e-4c3c-b491-c50f40fcaaf3%26continue%3Dhttps%253A%252F%252Fparexelailabs.atlassian.net%252Fjira%252Fsoftware%252Fc%252Fprojects%252FPPLMS%252Fboards%252F26&application=jira",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://id.atlassian.com/login?*",
+      "patternDesc": "",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://myapps.microsoft.com/signin/174275d7-d196-4d7d-b3df-e255089af786?tenantId=83d59944-34a0-4eb5-8cb0-80a49540e944&$1"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "Redirect Github Actions Docs to Enterprise",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://docs.github.com/en/enterprise-cloud@latest/actions/using-workflows/workflow-commands-for-github-actions#using-workflow-commands-to-access-toolkit-functions",
+      "exampleUrl": "https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#using-workflow-commands-to-access-toolkit-functions",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://docs.github.com/en/actions/*",
+      "patternDesc": "",
+      "patternType": "W",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://docs.github.com/en/enterprise-cloud@latest/actions/$1"
     }
   ]
 }
