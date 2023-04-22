@@ -198,6 +198,7 @@ sdl2 2.26.5
 sevenzip 22.01
 shared-mime-info 2.2
 shellcheck 0.9.0
+shellharden 4.3.0
 shfmt 3.6.0
 six 1.16.0_3
 snappy 1.1.10
@@ -217,6 +218,7 @@ ttyd 1.7.3
 unbound 1.17.1
 unibilium 2.1.1
 unixodbc 2.3.11
+vale 2.24.4
 vhs 0.4.0
 virtualenv 20.22.0
 webp 1.3.0

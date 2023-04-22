@@ -1,5 +1,7 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
+   package bashate 2.1.1, installed using Python 3.11.3
+    - bashate
    package black 23.3.0, installed using Python 3.11.3
     - black
     - blackd
@@ -12,8 +14,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - code2flow
    package copier 7.1.0, installed using Python 3.11.3
     - copier
-   package copier-template-tester 1.0.2, installed using Python 3.11.3
-    - ctt
    package flit 3.8.0, installed using Python 3.11.3
     - flit
    package licensecheck 2023.1.1, installed using Python 3.11.3
