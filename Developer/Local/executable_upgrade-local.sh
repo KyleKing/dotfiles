@@ -1,9 +1,4 @@
 #!/bin/bash -e
 
-cd gotz
-git pull && go install .
-cd ..
-
-cd lazygit
-git pull && go install .
-cd ..
+original_dir=$PWD
+for pth in gotz lazygit "sh/cmd/shfmt"; do echo "Upgrading $pth" && cd "$pth" && git pull && go install . && cd "$original_dir"; done

@@ -78,14 +78,14 @@ return {
 		-- cursor and the cursor style is set to Block
 		cursor_bg = "#52ad70",
 		-- Overrides the text color when the current cell is occupied by the cursor
-		cursor_fg = "black",
+		cursor_fg = "#1E212F",
 		-- Specifies the border color of the cursor when the cursor style is set to Block,
 		-- or the color of the vertical or horizontal bar when the cursor style is set to
 		-- Bar or Underline.
 		cursor_border = "#52ad70",
 
 		-- the foreground color of selected text
-		selection_fg = "black",
+		selection_fg = "#1E212F",
 		-- the background color of selected text
 		selection_bg = "#fffacd",
 
@@ -96,7 +96,7 @@ return {
 		split = "#444444",
 
 		ansi = { "#32344a", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#ad8ee6", "#449dab", "#e1e1e3" },
-		brights = { "#444b6a", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#f7f7f7" },
+		brights = { "#7E86AF", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#f7f7f7" },
 	},
 
 	-- Stylize the Window
