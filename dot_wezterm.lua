@@ -16,10 +16,17 @@
 --   Ctrl|Shift|C to copy to clipboard
 --   etc.
 
+-- Examples
+-- https://github.com/wez/wezterm/discussions/628
+
 local wezterm = require("wezterm")
 local act = wezterm.action
 
 return {
+	bold_brightens_ansi_colors = true,
+	initial_cols = 200,
+	initial_rows = 60,
+
 	keys = {
 		-- Clears the scrollback and viewport, and then sends CTRL-L to ask the shell to redraw its prompt
 		{
@@ -96,7 +103,7 @@ return {
 		split = "#444444",
 
 		ansi = { "#32344a", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#ad8ee6", "#449dab", "#e1e1e3" },
-		brights = { "#7E86AF", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#f7f7f7" },
+		brights = { "#757DA1", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#f7f7f7" },
 	},
 
 	-- Stylize the Window
