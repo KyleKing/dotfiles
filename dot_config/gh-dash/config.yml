@@ -10,6 +10,8 @@ prSections:
     filters: archived:false is:pr is:open mentions:@me
   - title: Reviewer
     filters: archived:false is:pr is:open repo:roaminsight/reviewer
+  - title: Review Request (Ata)
+    filters: archived:false is:pr is:open sort:updated-desc review-requested:atayardimci
   - title: Roam PRs with Review Required (KB's View)
     filters: archived:false is:pr is:open user:roaminsight draft:false -review:approved
 issuesSections:
