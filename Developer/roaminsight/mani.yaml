@@ -524,14 +524,6 @@ projects:
     tags:
       - Roam
 
-  textract-roam-fork:
-    url: git@github.com:roaminsight/textract-roam-fork.git
-    desc: Fork of textract with Python 3 patches. Used by reviewer and import-parser
-    tags:
-      - Roam
-      - Active
-      - Apps
-
   transfer:
     url: git@github.com:roaminsight/transfer.git
     desc: General Roam Project
