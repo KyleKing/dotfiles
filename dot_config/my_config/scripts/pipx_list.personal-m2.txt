@@ -30,7 +30,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pipdeptree
    package pycg 0.0.6, installed using Python 3.11.3
     - pycg
-   package pygments 2.15.0, installed using Python 3.11.3
+   package pygments 2.15.1, installed using Python 3.11.3
     - pygmentize
    package pyright 1.1.303, installed using Python 3.11.3
     - pyright
