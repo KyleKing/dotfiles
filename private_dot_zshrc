@@ -40,6 +40,9 @@ eval "$(mcfly init zsh)"
 #   Docs: https://github.com/asdf-vm/asdf
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
 
+# KICS: https://github.com/Checkmarx/kics
+export KICS_QUERIES_PATH=/opt/homebrew/opt/kics/share/kics/assets/queries
+
 # --------------------------------------------------------------------------------------
 # Work
 
