@@ -24,8 +24,6 @@ c-ares 1.19.0
 ca-certificates 2023-01-10
 cairo 1.16.0_5
 cheat 4.4.0
-checkmake 0.2.2
-checkov 2.3.225
 chezmoi 2.33.4
 cjson 1.7.15
 cloc 1.96
@@ -86,7 +84,6 @@ jbig2dec 0.19
 jpeg-turbo 2.1.5.1
 jpeg-xl 0.8.1_2
 json-c 0.16
-kics 1.7.1
 krb5 1.20.1
 lame 3.100
 leptonica 1.82.0_2
@@ -188,8 +185,6 @@ poetry 1.4.2
 pre-commit 3.3.1
 prettier 2.8.8
 pygments 2.15.1
-python-tabulate 0.9.0
-python-typing-extensions 4.5.0
 python@3.10 3.10.11
 python@3.11 3.11.3
 pyyaml 6.0_1
@@ -213,7 +208,6 @@ sqlite 3.41.2
 srt 1.5.1
 stylua 0.17.1
 svt-av1 1.5.0
-terrascan 1.18.1
 tesseract 5.3.1
 theora 1.1.1
 tidy-html5 5.8.0
