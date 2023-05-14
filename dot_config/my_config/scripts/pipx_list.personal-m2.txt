@@ -14,6 +14,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - code2flow
    package copier 7.1.0, installed using Python 3.11.3
     - copier
+   package copier-template-tester 1.2.1, installed using Python 3.11.3
+    - ctt
    package flit 3.8.0, installed using Python 3.11.3
     - flit
    package licensecheck 2023.1.1, installed using Python 3.11.3
@@ -52,6 +54,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
       - tox-asdf 0.1.0
    package typer-cli 0.0.13, installed using Python 3.11.3
     - typer
+   package watchgha 1.0.0, installed using Python 3.11.3
+    - watch_gha_runs
    package xdot 1.2, installed using Python 3.11.3
     - xdot
     Injected Packages:
