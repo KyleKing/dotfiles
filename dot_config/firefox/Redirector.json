@@ -1,5 +1,5 @@
 {
-  "createdAt": "2023-04-19T14:50:39.222Z",
+  "createdAt": "2023-05-13T12:21:14.753Z",
   "createdBy": "Redirector v3.5.3",
   "redirects": [
     {
@@ -273,6 +273,40 @@
       "patternType": "W",
       "processMatches": "noProcessing",
       "redirectUrl": "https://docs.github.com/en/enterprise-cloud@latest/actions/$1"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "Redirect from mcas",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://parexelailabs.atlassian.net/wiki/spaces/AIENGINEERING/pages/9699590/How+will+we+collect+the+source+data+necessary+to+calculate+Business+Metrics",
+      "exampleUrl": "https://parexelailabs.atlassian.net.mcas.ms/wiki/spaces/AIENGINEERING/pages/9699590/How+will+we+collect+the+source+data+necessary+to+calculate+Business+Metrics",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https://(?!mcas-proxyweb)(.*)\\.mcas\\.ms/(.+)",
+      "patternDesc": "",
+      "patternType": "R",
+      "processMatches": "noProcessing",
+      "redirectUrl": "https://$1/$2"
+    },
+    {
+      "appliesTo": [
+        "main_frame"
+      ],
+      "description": "Skip MS Teams Redirect",
+      "disabled": false,
+      "error": null,
+      "exampleResult": "https://parexelailabs.atlassian.net/wiki/spaces/AIENGINEERING/pages/70778951/2023-05-08+Daily+Stand+Ups?src=mail&src.mail.timestamp=1683561759599&src.mail.notification=com.atlassian.confluence.plugins.confluence-content-notifications-plugin%3Apage-created-notification&src.mail.recipient=63e140b7010d35637973f5b1&atlOrigin=eyJpIjoiN2UzMGUwM2Q5MjE1NGFhMjlkYzdjOWUxZjQ3YTE3NzMiLCJwIjoiYyJ9&src.mail.action=view&McasTsid=20893",
+      "exampleUrl": "https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fparexelailabs.atlassian.net.mcas.ms%2Fwiki%2Fspaces%2FAIENGINEERING%2Fpages%2F70778951%2F2023-05-08%2BDaily%2BStand%2BUps%3Fsrc%3Dmail%26src.mail.timestamp%3D1683561759599%26src.mail.notification%3Dcom.atlassian.confluence.plugins.confluence-content-notifications-plugin%253Apage-created-notification%26src.mail.recipient%3D63e140b7010d35637973f5b1%26atlOrigin%3DeyJpIjoiN2UzMGUwM2Q5MjE1NGFhMjlkYzdjOWUxZjQ3YTE3NzMiLCJwIjoiYyJ9%26src.mail.action%3Dview%26McasTsid%3D20893&McasCSRF=f20c7c889cf813b65f7f8e269502cf4be8ca9fe41785dbe20a76f9d321031277",
+      "excludePattern": "",
+      "grouped": false,
+      "includePattern": "https:\\/\\/mcas-proxyweb\\.mcas\\.ms\\/certificate-checker\\?.*originalUrl=(https%3A%2F%2F.*)\\.mcas\\.ms(%2F[^&]*)",
+      "patternDesc": "",
+      "patternType": "R",
+      "processMatches": "urlDecode",
+      "redirectUrl": "$1$2"
     }
   ]
 }
