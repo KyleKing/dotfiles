@@ -56,6 +56,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - typer
    package watchgha 1.0.0, installed using Python 3.11.3
     - watch_gha_runs
+   package workedon 0.7.0, installed using Python 3.11.3
+    - workedon
    package xdot 1.2, installed using Python 3.11.3
     - xdot
     Injected Packages:
