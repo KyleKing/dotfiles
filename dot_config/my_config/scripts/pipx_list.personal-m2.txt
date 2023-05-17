@@ -5,18 +5,18 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 23.3.0, installed using Python 3.11.3
     - black
     - blackd
-   package calcipy 1.2.3, installed using Python 3.11.3
+   package calcipy 1.2.4, installed using Python 3.11.3
     - calcipy
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
    package code2flow 2.5.1, installed using Python 3.11.3
     - code2flow
-   package copier 7.1.0, installed using Python 3.11.3
+   package copier 7.2.0, installed using Python 3.11.3
     - copier
-   package copier-template-tester 1.2.1, installed using Python 3.11.3
+   package copier-template-tester 1.2.3, installed using Python 3.11.3
     - ctt
-   package flit 3.8.0, installed using Python 3.11.3
+   package flit 3.9.0, installed using Python 3.11.3
     - flit
    package licensecheck 2023.1.1, installed using Python 3.11.3
     - licensecheck
@@ -25,27 +25,27 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - mdformat
    package mypy-silent 0.4.0, installed using Python 3.11.3
     - mypy-silent
-   package nox 2022.11.21, installed using Python 3.11.3
+   package nox 2023.4.22, installed using Python 3.11.3
     - nox
     - tox-to-nox
-   package pipdeptree 2.7.0, installed using Python 3.11.3
+   package pipdeptree 2.7.1, installed using Python 3.11.3
     - pipdeptree
    package pycg 0.0.6, installed using Python 3.11.3
     - pycg
    package pygments 2.15.1, installed using Python 3.11.3
     - pygmentize
-   package pyright 1.1.303, installed using Python 3.11.3
+   package pyright 1.1.308, installed using Python 3.11.3
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.0.261, installed using Python 3.11.3
+   package ruff 0.0.267, installed using Python 3.11.3
     - ruff
-   package sourcery-cli 1.2.0, installed using Python 3.11.3
+   package sourcery-cli 1.3.0, installed using Python 3.11.3
     - sourcery
    package tail-jsonl 1.2.3, installed using Python 3.11.3
     - tail-jsonl
-   package toml-sort 0.23.0, installed using Python 3.11.3
+   package toml-sort 0.23.1, installed using Python 3.11.3
     - toml-sort
    package tox 3.28.0, installed using Python 3.11.3
     - tox
