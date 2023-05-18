@@ -308,6 +308,11 @@
             "id": "8059833635",
             "type": "CONTAINS",
             "value": "youtube.com"
+          },
+          {
+            "id": "8059253829",
+            "type": "CONTAINS",
+            "value": "amazon.com"
           }
         ]
       },

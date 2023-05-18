@@ -305,6 +305,13 @@ projects:
       - Roam
       - Active
 
+  parexel-chat-nlp:
+    url: git@github.com:roaminsight/parexel-chat-nlp.git
+    desc: General Roam Project
+    tags:
+      - Roam
+      - Active
+
   pdfcore:
     url: git@github.com:roaminsight/pdfcore.git
     desc: Low-Level PDF Tooling
