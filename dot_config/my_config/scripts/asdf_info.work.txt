@@ -12,9 +12,9 @@ ASDF_DIR=/opt/homebrew/opt/asdf/libexec
 
 ASDF INSTALLED PLUGINS:
 extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
-nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 65441d3
-postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master b44003f
+nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 644ada3
+postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master 58c6808
 python                       https://github.com/danhper/asdf-python.git master 8505457
-terraform                    https://github.com/asdf-community/asdf-hashicorp.git master bc4dec6
+terraform                    https://github.com/asdf-community/asdf-hashicorp.git master c44c314
 textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
 textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
