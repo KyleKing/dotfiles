@@ -1219,7 +1219,10 @@
     "python.linting.pydocstyleEnabled": false,
     "python.linting.pylintEnabled": false,
     "python.formatting.provider": "black",
-    "python.sortImports.args": ["--profile", "black"],
+    "python.sortImports.args": [
+        "--profile",
+        "black"
+    ],
     "python.pythonPath": ".venv/bin/python3",
     "python.pythonPath|pinned-asdf": "~/.asdf/shims/python",
     "python.venvPath": "./.venv/bin/python",
@@ -1263,39 +1266,39 @@
     "todo-tree.highlights.customHighlight": {
         "DEBUG": {
             "icon": "bug",
-            "iconColour": "magenta"
+            "iconColour": "#ff00ff"
         },
         "FIXME": {
             "icon": "flame",
-            "iconColour": "red"
+            "iconColour": "#ff0000"
         },
         "FYI": {
             "icon": "megaphone",
-            "iconColour": "cyan"
+            "iconColour": "#00ffff"
         },
         "HACK": {
             "icon": "squirrel",
-            "iconColour": "magenta"
+            "iconColour": "#ff00ff"
         },
         "NOTE": {
             "icon": "broadcast",
-            "iconColour": "grey"
+            "iconColour": "#808080"
         },
         "PLANNED": {
             "icon": "milestone",
-            "iconColour": "white"
+            "iconColour": "#FFFFFF"
         },
         "REVIEW": {
             "icon": "comment-discussion",
-            "iconColour": "magenta"
+            "iconColour": "#ff00ff"
         },
         "TBD": {
             "icon": "git-branch",
-            "iconColour": "grey"
+            "iconColour": "#808080"
         },
         "TODO": {
-            "icon": "clippy",
-            "iconColour": "yellow"
+            "icon": "paperclip",
+            "iconColour": "#ffff00"
         }
     },
     "todo-tree.regex.regex": "((\\s|\\()($TAGS)(:[^\\r\\n]))",
@@ -1452,7 +1455,13 @@
         },
         "MD025": true,
         "MD033": {
-            "allowed_elements": ["detail", "img", "span", "pre", "kbd"]
+            "allowed_elements": [
+                "detail",
+                "img",
+                "span",
+                "pre",
+                "kbd"
+            ]
         },
         "MD041": true,
         "MD046": {
@@ -1506,5 +1515,11 @@
         "vscode-kubernetes.minikube-path.mac": "/Users/kyleking/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
     "diffEditor.renderSideBySide": false,
-    "diffEditor.ignoreTrimWhitespace": false
+    "diffEditor.ignoreTrimWhitespace": false,
+    "GitLive.Special branches": "main|master|trunk|dev|develop|qa|test|release[-/].*",
+    "git.openRepositoryInParentFolders": "always",
+    "githubPullRequests.pullBranch": "never",
+    "projectManager.git.baseFolders": [
+        "~/Developer"
+    ]
 }
