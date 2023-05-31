@@ -424,6 +424,13 @@ projects:
       - Active
       - Apps
 
+  roam-nexus:
+    url: git@github.com:roaminsight/roam-nexus.git
+    desc: General Roam Project
+    tags:
+      - Roam
+      - DevOps
+
   roam-packer:
     url: git@github.com:roaminsight/roam-packer.git
     desc: General Roam Project
