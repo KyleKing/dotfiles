@@ -1,17 +1,11 @@
 ---
 projects:
-  AstroNvim-User:
-    url: git@github.com:kyleking/AstroNvim-User.git
   calcipy:
     url: git@github.com:kyleking/calcipy.git
     tags:
       - calcipy
   calcipy_template:
     url: git@github.com:kyleking/calcipy_template.git
-  commitizen:
-    url: git@github.com:kyleking/commitizen.git
-    tags:
-      - calcipy
   copier-template-tester:
     url: git@github.com:kyleking/copier-template-tester.git
     tags:
@@ -26,10 +20,6 @@ projects:
       - calcipy
   extract_finances:
     url: git@github.com:kyleking/extract_finances.git
-    tags:
-      - archived
-  Goodreads_Library_Availability:
-    url: git@github.com:kyleking/Goodreads_Library_Availability.git
     tags:
       - archived
   mdformat-admon:
@@ -50,8 +40,6 @@ projects:
       - archived
   # private-snippets:
   #   url: git@github.com:kyleking/private-snippets.git
-  py-puml-tools:
-    url: git@github.com:kyleking/py-puml-tools.git
   pytest_cache_assert:
     url: git@github.com:kyleking/pytest_cache_assert.git
     tags:
@@ -70,8 +58,6 @@ projects:
       - calcipy
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
-  user_example:
-    url: git@github.com:kyleking/user_example.git
 
 tasks:
   git-status:
