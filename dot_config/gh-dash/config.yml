@@ -2,8 +2,8 @@
 prSections:
   - title: Needs My Review
     filters: archived:false is:pr is:open review-requested:@me
-  - title: My Internal PRs
-    filters: archived:false is:pr is:open author:@me org:KyleKing
+  - title: Internal PRs
+    filters: archived:false is:pr is:open org:KyleKing
   - title: My External PRs
     filters: archived:false is:pr is:open author:@me -org:KyleKing
   - title: Mentions Me
