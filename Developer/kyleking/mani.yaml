@@ -1,0 +1,120 @@
+---
+projects:
+  AstroNvim-User:
+    url: git@github.com:kyleking/AstroNvim-User.git
+  calcipy:
+    url: git@github.com:kyleking/calcipy.git
+    tags:
+      - calcipy
+  calcipy_template:
+    url: git@github.com:kyleking/calcipy_template.git
+  commitizen:
+    url: git@github.com:kyleking/commitizen.git
+    tags:
+      - calcipy
+  copier-template-tester:
+    url: git@github.com:kyleking/copier-template-tester.git
+    tags:
+      - calcipy
+  corallium:
+    url: git@github.com:kyleking/corallium.git
+    tags:
+      - calcipy
+  cz_legacy:
+    url: git@github.com:kyleking/cz_legacy.git
+    tags:
+      - calcipy
+  extract_finances:
+    url: git@github.com:kyleking/extract_finances.git
+    tags:
+      - archived
+  Goodreads_Library_Availability:
+    url: git@github.com:kyleking/Goodreads_Library_Availability.git
+    tags:
+      - archived
+  mdformat-admon:
+    url: git@github.com:kyleking/mdformat-admon.git
+    tags:
+      - calcipy
+  mdformat-mkdocs:
+    url: git@github.com:kyleking/mdformat-mkdocs.git
+    tags:
+      - calcipy
+  # My-Programming-Sketchbook:
+  #   url: git@github.com:kyleking/My-Programming-Sketchbook.git
+  # personal-man:
+  #   url: git@github.com:kyleking/personal-man.git
+  PersonalFinanceExplorer:
+    url: git@github.com:kyleking/PersonalFinanceExplorer.git
+    tags:
+      - archived
+  # private-snippets:
+  #   url: git@github.com:kyleking/private-snippets.git
+  py-puml-tools:
+    url: git@github.com:kyleking/py-puml-tools.git
+  pytest_cache_assert:
+    url: git@github.com:kyleking/pytest_cache_assert.git
+    tags:
+      - calcipy
+  recipes:
+    url: git@github.com:kyleking/recipes.git
+    tags:
+      - calcipy
+  shoal:
+    url: git@github.com:kyleking/shoal.git
+    tags:
+      - calcipy
+  tail-jsonl:
+    url: git@github.com:kyleking/tail-jsonl.git
+    tags:
+      - calcipy
+  textract-py3:
+    url: git@github.com:kyleking/textract-py3.git
+  user_example:
+    url: git@github.com:kyleking/user_example.git
+
+tasks:
+  git-status:
+    desc: show working tree status
+    output: table
+    parallel: true
+    cmd: git status
+
+  git-pull:
+    desc: pull remote updates. Exit 0 on error
+    cmd: git pull || true
+
+  gpoi:
+    desc: Run GH poi to remove closed branches
+    cmd: |
+      COUNT=$(git branch --format='%(HEAD) %(refname:short) -> %(upstream:short)' | wc -l)
+      if (("$COUNT" > 1)); then gh poi; else echo "No checked are checked out"; fi
+
+  git-prune:
+    desc: remove local branches which have been deleted on remote
+    env:
+      remote: origin
+    cmd: git fetch --prune origin
+
+  git-daily:
+    desc: show branch, local and remote diffs, last commit and date
+    commands:
+      - name: branch
+        cmd: git rev-parse --abbrev-ref HEAD
+
+      - name: status
+        cmd: git status
+
+      - name: local diff
+        cmd: git diff --name-only | wc -l
+
+      - name: remote diff
+        cmd: |
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
+          git diff "$current_branch" "origin/$current_branch" --name-only 2> /dev/null | wc -l
+
+      - name: last commit
+        cmd: git log -1 --pretty=%B
+
+      - name: commit date
+        cmd: git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" | sed 's/ //'
