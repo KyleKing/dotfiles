@@ -69,8 +69,8 @@ customCommands:
         title: 'Annotated tag message:'
   - key: o
     description: Create Pull Request with gh
-    command: gh pr create --assignee "@me" --fill --web
-    context: global
+    command: gh pr create --assignee=@me --fill --web
+    context: localBranches
     loadingText: Creating pull request on GitHub
   - key: <f3>
     prompts:
