@@ -21,7 +21,7 @@ gh extension upgrade --all
 # Note: no trailing '-}}' for below commands:
 brew bundle dump --file=- > "$SCRIPT_DIR/Brewfile.{{- .computer_name }}"
 brew list --versions > "$SCRIPT_DIR/brew_versions.{{- .computer_name }}"
-brew doctor 2> "$SCRIPT_DIR/brew_doctor.{{- .computer_name }}"
+(brew doctor 2> "$SCRIPT_DIR/brew_doctor.{{- .computer_name }}") || true
 
 # Keep local checkouts up-to-date
 cd ~/Developer/Local
