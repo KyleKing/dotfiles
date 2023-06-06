@@ -32,6 +32,7 @@ cjson 1.7.15
 cloc 1.96
 cmake 3.26.4
 cmatrix 2.0
+cmctl 1.12.1
 cmocka 1.1.7
 coreutils 9.3
 ctop 0.7.7
