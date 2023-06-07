@@ -30,4 +30,5 @@ alias prcv="poetry run calcipy -vvv"
 alias prsl="toml-sort pyproject.toml --in-place --all --trailing-comma-inline-array --sort-first=python && poetry relax && poetry relax --group=dev && poetry lock --no-update"
 
 # Automate accepting copier commands by sending 'Enter' via STDIN
-alias copier-auto-update="copier update --UNSAFE --defaults"
+alias copier-update="copier update --UNSAFE --conflict=rej"
+alias copier-auto-update="copier-update --defaults"
