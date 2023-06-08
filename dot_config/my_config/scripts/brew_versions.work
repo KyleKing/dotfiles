@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.11.25
+awscli 2.11.26
 bat 0.23.0
 bat-extras 2023.03.21
 bdw-gc 8.2.4
@@ -80,7 +80,7 @@ gmp 6.2.1_1
 gnu-getopt 2.39
 gnupg 2.4.2
 gnutls 3.8.0
-go 1.20.4
+go 1.20.5 1.20.4
 go-jira 1.0.27
 go@1.19 1.19.9
 goaccess 1.7.2
@@ -204,7 +204,7 @@ lzo 2.10
 m4 1.4.19
 mackup 0.8.37
 macos-term-size 1.0.0
-mani 0.24.0
+mani 0.25.0
 markdownlint-cli 0.34.0
 mas 1.8.6
 mbedtls 3.4.0
@@ -226,7 +226,7 @@ node@14 14.21.3
 node@18 18.16.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 16.9.1
+oh-my-posh 17.0.0
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
