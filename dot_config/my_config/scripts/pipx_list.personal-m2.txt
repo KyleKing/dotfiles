@@ -18,6 +18,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ctt
    package flit 3.9.0, installed using Python 3.11.3
     - flit
+   package frogmouth 0.6.0, installed using Python 3.11.3
+    - frogmouth
    package licensecheck 2023.1.1, installed using Python 3.11.3
     - licensecheck
    package mdformat_mkdocs 1.0.0, installed using Python 3.11.3
@@ -39,6 +41,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
+   package radian 0.6.6, installed using Python 3.11.3
+    - radian
    package ruff 0.0.270, installed using Python 3.11.3
     - ruff
    package sourcery-cli 1.3.0, installed using Python 3.11.3

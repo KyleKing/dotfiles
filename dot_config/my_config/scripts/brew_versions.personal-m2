@@ -25,7 +25,7 @@ ca-certificates 2023-05-30
 cairo 1.16.0_5
 cffi 1.15.1
 cheat 4.4.0
-chezmoi 2.33.6
+chezmoi 2.34.0
 cjson 1.7.15
 cloc 1.96
 cmake 3.26.4
@@ -58,14 +58,14 @@ ghostscript 10.01.1_1
 giflib 5.2.1
 git 2.41.0
 git-brws 0.11.12
-git-delta 0.15.1
+git-delta 0.16.5
 glances 3.4.0.3
 glib 2.76.3
 glow 1.5.1
 gmp 6.2.1_1
 gnupg 2.4.2
 gnutls 3.8.0
-go 1.20.4
+go 1.20.5
 go@1.19 1.19.9
 gojq 0.12.12
 graphite2 1.3.14
@@ -77,7 +77,7 @@ hadolint 2.12.0
 harfbuzz 7.3.0
 highway 1.0.4
 howdoi 2.0.20
-hyperfine 1.16.1
+hyperfine 1.17.0
 icu4c 72.1
 imagemagick 7.1.1-10
 imath 3.1.7
@@ -154,11 +154,11 @@ luv 1.44.2-1
 lz4 1.9.4
 lzo 2.10
 m4 1.4.19
-mani 0.24.0
+mani 0.25.0
 markdownlint-cli 0.34.0
 mas 1.8.6
 mbedtls 3.4.0
-mcfly 0.8.0
+mcfly 0.8.1
 mpdecimal 2.5.1
 mpfr 4.2.0-p9
 mpg123 1.31.3
@@ -170,7 +170,7 @@ netpbm 10.86.38_1
 nettle 3.9
 node 20.2.0
 npth 1.6
-oh-my-posh 16.9.1
+oh-my-posh 17.0.0
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
