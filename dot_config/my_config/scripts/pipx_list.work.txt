@@ -1,85 +1,87 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package autoflake 2.1.1, installed using Python 3.11.3
+   package autoflake 2.1.1, installed using Python 3.11.4
     - autoflake
-   package black 23.3.0, installed using Python 3.11.3
+   package black 23.3.0, installed using Python 3.11.4
     - black
     - blackd
-   package calcipy 1.2.5, installed using Python 3.11.3
+   package calcipy 1.2.5, installed using Python 3.11.4
     - calcipy
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
-   package cloudiscovery 2.4.4, installed using Python 3.11.3
+   package cloudiscovery 2.4.4, installed using Python 3.11.4
     - cloudiscovery
     - cloudiscovery.cmd
     Injected Packages:
       - markupsafe 2.0.1
-   package code2flow 2.5.1, installed using Python 3.11.3
+   package code2flow 2.5.1, installed using Python 3.11.4
     - code2flow
-   package copier 8.0.0, installed using Python 3.11.3
+   package copier 8.0.0, installed using Python 3.11.4
     - copier
-   package cortex 0.42.1, installed using Python 3.11.3
+   package cortex 0.42.1, installed using Python 3.11.4
     - cortex
-   package docformatter 1.7.1, installed using Python 3.11.3
+   package docformatter 1.7.2, installed using Python 3.11.4
     - docformatter
-   package envtpl 0.7.2, installed using Python 3.11.3
+   package envtpl 0.7.2, installed using Python 3.11.4
     - envtpl
-   package fawltydeps 0.11.0, installed using Python 3.11.3
+   package fawltydeps 0.11.0, installed using Python 3.11.4
     - fawltydeps
-   package flake8 6.0.0, installed using Python 3.11.3
+   package flake8 6.0.0, installed using Python 3.11.4
     - flake8
     Injected Packages:
       - roam-packages-flake8 0.0.1
-   package flake8-to-ruff 0.0.233, installed using Python 3.11.3
+   package flake8-to-ruff 0.0.233, installed using Python 3.11.4
     - flake8-to-ruff
-   package glances 3.4.0.3, installed using Python 3.11.3
+   package glances 3.4.0.3, installed using Python 3.11.4
     - glances
-   package isort 5.12.0, installed using Python 3.11.3
+   package har2locust 0.8.4, installed using Python 3.11.4
+    - har2locust
+   package isort 5.12.0, installed using Python 3.11.4
     - isort
     - isort-identify-imports
-   package mypy-silent 0.4.0, installed using Python 3.11.3
+   package mypy-silent 0.4.0, installed using Python 3.11.4
     - mypy-silent
-   package pipdeptree 2.8.0, installed using Python 3.11.3
+   package pipdeptree 2.9.1, installed using Python 3.11.4
     - pipdeptree
-   package pydeps 1.12.8, installed using Python 3.11.3
+   package pydeps 1.12.8, installed using Python 3.11.4
     - pydeps
-   package pygments 2.15.1, installed using Python 3.11.3
+   package pygments 2.15.1, installed using Python 3.11.4
     - pygmentize
-   package pylint 2.17.4, installed using Python 3.11.3
+   package pylint 2.17.4, installed using Python 3.11.4
     - epylint
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.311, installed using Python 3.11.3
+   package pyright 1.1.314, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package python-lsp-server 1.7.3, installed using Python 3.11.3
+   package python-lsp-server 1.7.3, installed using Python 3.11.4
     - pylsp
-   package pyupgrade 3.4.0, installed using Python 3.11.3
+   package pyupgrade 3.6.0, installed using Python 3.11.4
     - pyupgrade
-   package ruff 0.0.270, installed using Python 3.11.3
+   package ruff 0.0.272, installed using Python 3.11.4
     - ruff
-   package sourcery-cli 1.3.0, installed using Python 3.11.3
+   package sourcery-cli 1.3.0, installed using Python 3.11.4
     - sourcery
-   package tail-jsonl 1.2.3, installed using Python 3.11.3
+   package tail-jsonl 1.2.3, installed using Python 3.11.4
     - tail-jsonl
-   package toml-sort 0.23.1, installed using Python 3.11.3
+   package toml-sort 0.23.1, installed using Python 3.11.4
     - toml-sort
-   package trcli 1.5.0, installed using Python 3.11.3
+   package trcli 1.5.0, installed using Python 3.11.4
     - trcli
-   package uncurl 0.0.11, installed using Python 3.11.3
+   package uncurl 0.0.11, installed using Python 3.11.4
     - uncurl
-   package unimport 0.16.0, installed using Python 3.11.3
+   package unimport 0.16.0, installed using Python 3.11.4
     - unimport
-   package watchgha 1.0.0, installed using Python 3.11.3
+   package watchgha 1.0.0, installed using Python 3.11.4
     - watch_gha_runs
-   package workedon 0.7.0, installed using Python 3.11.3
+   package workedon 0.7.0, installed using Python 3.11.4
     - workedon
-   package xdot 1.2, installed using Python 3.11.3
+   package xdot 1.2, installed using Python 3.11.4
     - xdot
     Injected Packages:
       - numpy 1.23.4

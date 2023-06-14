@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.11.26
+awscli 2.11.27
 bat 0.23.0
 bat-extras 2023.03.21
 bdw-gc 8.2.4
@@ -26,7 +26,7 @@ capstone 4.0.2
 cffi 1.15.1
 cheat 4.4.0
 checkov 2.3.240
-chezmoi 2.34.0
+chezmoi 2.34.1
 circumflex 2.9.1
 cjson 1.7.15
 cloc 1.96
@@ -80,7 +80,7 @@ gmp 6.2.1_1
 gnu-getopt 2.39
 gnupg 2.4.2
 gnutls 3.8.0
-go 1.20.5 1.20.4
+go 1.20.5
 go-jira 1.0.27
 go@1.19 1.19.9
 goaccess 1.7.2
@@ -226,7 +226,7 @@ node@14 14.21.3
 node@18 18.16.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 17.0.0
+oh-my-posh 17.2.0
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -252,7 +252,7 @@ plantuml 1.2023.8
 pngcrush 1.8.13
 podman 4.5.1
 poetry 1.5.1
-pre-commit 3.3.2
+pre-commit 3.3.3
 prettier 2.8.8
 psutils 3.0
 pycparser 2.21
@@ -260,7 +260,7 @@ pygments 2.15.1
 python-tabulate 0.9.0
 python-typing-extensions 4.6.2
 python@3.10 3.10.11
-python@3.11 3.11.3
+python@3.11 3.11.4
 pyyaml 6.0_1
 qemu 8.0.0
 rav1e 0.6.6
@@ -271,7 +271,7 @@ rpg-cli 1.0.1
 rtmpdump 2.4+20151223_1
 rubberband 3.2.1
 rust 1.69.0
-saml2aws 2.36.8
+saml2aws 2.36.9
 screenresolution 1.6
 sdl2 2.26.5
 sevenzip 22.01
@@ -297,7 +297,7 @@ terrascan 1.18.1
 tesseract 5.3.1
 tflint 0.46.1
 tfsec 1.28.1
-tfupdate 0.6.7
+tfupdate 0.6.8
 theora 1.1.1
 tidy-html5 5.8.0
 tldr 1.6.0
