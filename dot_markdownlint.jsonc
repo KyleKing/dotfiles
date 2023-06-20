@@ -1,9 +1,0 @@
-// Documentation: https://github.com/DavidAnson/markdownlint/blob/main/README.md#optionsconfig
-{
-    // MD007/ul-indent Unordered list indentation [Expected: 2; Actual: 4]
-    "MD007": {
-        "indent": 4
-    },
-    // MD013/line-length - Line length
-    "MD013": false
-}
