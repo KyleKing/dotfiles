@@ -1,5 +1,7 @@
 # Sourced once before ~/.zshrc - https://unix.stackexchange.com/a/487889
 
+export XDG_CONFIG_HOME="~/.config"
+
 # Add sbin and bin from homebrew
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 # And support new M1 '$(brew --prefix)'
@@ -15,6 +17,3 @@ export MY_CONFIG=$HOME/.config/my_config
 export PAGER=bat
 
 source $MY_CONFIG/on_login.sh
-
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
