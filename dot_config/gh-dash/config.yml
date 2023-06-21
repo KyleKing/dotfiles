@@ -1,40 +1,33 @@
 ---
+# PLANNED: Was `archived:false` necessary?
 prSections:
   - title: Needs My Review
-    filters: archived:false is:pr is:open review-requested:@me
-  - title: Internal PRs
-    filters: archived:false is:pr is:open org:KyleKing
+    filters: is:pr is:open sort:updated-desc review-requested:@me
+  - title: Any Internal PRs
+    filters: is:pr is:open sort:updated-desc org:KyleKing
   - title: My External PRs
-    filters: archived:false is:pr is:open author:@me -org:KyleKing
+    filters: is:pr is:open sort:updated-desc -org:KyleKing author:@me
   - title: Mentions Me
-    filters: archived:false is:pr is:open mentions:@me
+    filters: is:pr is:open sort:updated-desc mentions:@me
   - title: Reviewer
-    filters: archived:false is:pr is:open repo:roaminsight/reviewer
-  - title: Review Request (Ata)
-    filters: archived:false is:pr is:open sort:updated-desc review-requested:atayardimci
+    filters: is:pr is:open sort:updated-desc repo:roaminsight/reviewer
+  - title: Parexel-chat
+    filters: is:pr is:open sort:updated-desc repo:roaminsight/parexel-chat
+  - title: Review Requested (Ata)
+    filters: is:pr is:open sort:updated-desc review-requested:atayardimci
   - title: Roam PRs with Review Required (KB's View)
-    filters: archived:false is:pr is:open user:roaminsight draft:false -review:approved
+    filters: is:pr is:open sort:updated-desc org:roaminsight draft:false -review:approved -created:<=2023-01-01
 issuesSections:
   - title: Assigned
-    filters: archived:false is:issue is:open assignee:@me
-  - title: My Internal Issues
-    filters: archived:false is:issue is:open author:@me org:KyleKing
+    filters: is:issue is:open sort:updated-desc assignee:@me
+  - title: Any Internal Issues
+    filters: is:issue is:open sort:updated-desc org:KyleKing
   - title: My External Issues
-    filters: archived:false is:issue is:open author:@me -org:KyleKing
+    filters: is:issue is:open sort:updated-desc -org:KyleKing author:@me
   - title: Mentions Me
-    filters: archived:false is:issue is:open mentions:@me
-  - title: Reviewer
-    filters: archived:false is:issue is:open repo:roaminsight/reviewer
-  - title: My Projects
-    filters: archived:false is:issue is:open org:KyleKing
-  - title: 'Milestone: Current'
-    filters: archived:false is:issue is:open assignee:@me milestone:"current tasks"
-  - title: 'Milestone: Next'
-    filters: archived:false is:issue is:open assignee:@me milestone:"next tasks"
-  - title: 'Milestone: Blue Sky'
-    filters: archived:false is:issue is:open assignee:@me milestone:"blue sky"
-  - title: 'Milestone: None'
-    filters: archived:false is:issue is:open assignee:@me no:milestone
+    filters: is:issue is:open sort:updated-desc mentions:@me
+  - title: Roaminsight
+    filters: is:issue is:open sort:updated-desc org:roaminsight
 
 defaults:
   preview:
