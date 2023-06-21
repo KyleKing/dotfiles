@@ -3,18 +3,20 @@
 prSections:
   - title: Needs My Review
     filters: is:pr is:open sort:updated-desc review-requested:@me
+  - title: Merge Ready
+    filters: is:pr is:open sort:updated-desc review:approved author:@me
   - title: Any Internal PRs
     filters: is:pr is:open sort:updated-desc org:KyleKing
   - title: My External PRs
     filters: is:pr is:open sort:updated-desc -org:KyleKing author:@me
   - title: Mentions Me
     filters: is:pr is:open sort:updated-desc mentions:@me
+  - title: Review Requested (Ata)
+    filters: is:pr is:open sort:updated-desc review-requested:atayardimci
   - title: Reviewer
     filters: is:pr is:open sort:updated-desc repo:roaminsight/reviewer
   - title: Parexel-chat
     filters: is:pr is:open sort:updated-desc repo:roaminsight/parexel-chat
-  - title: Review Requested (Ata)
-    filters: is:pr is:open sort:updated-desc review-requested:atayardimci
   - title: Roam PRs with Review Required (KB's View)
     filters: is:pr is:open sort:updated-desc org:roaminsight draft:false -review:approved -created:<=2023-01-01
 issuesSections:
