@@ -5,8 +5,3 @@ working fine: please don't worry or file an issue; just ignore this. Thanks![0m
 Warning: Some installed formulae are deprecated or disabled.
 You should find replacements for the following formulae:
   node@14
-
-Warning: You have unlinked kegs in your Cellar.
-Leaving kegs unlinked can lead to build-trouble and cause formulae that depend on
-those kegs to fail to run properly once built. Run `brew link` on these:
-  jira-cli
