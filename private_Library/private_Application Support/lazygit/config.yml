@@ -29,6 +29,16 @@ customCommands:
     context: "files"
     command: "subl {{.SelectedFile.Name | quote}}"
     description: "Open file with Sublime"
+  - key: "o"
+    context: "files"
+    command: "open {{.SelectedFile.Name | quote}} -a {{.Form.App | quote}}"
+    description: "Choose application to open with"
+    prompts:
+      - type: "input"
+        title: "Which application?"
+        key: "App"
+        suggestions:
+          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio'"
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <f8>
     description: Add Staged Files to Last Commit
@@ -37,12 +47,13 @@ customCommands:
     subprocess: true
   - key: w
     description: Commit with `--no-verify`
-    command: git commit --message "{{index .PromptResponses 0}}" --no-verify
+    command: git commit --message {{.Form.Message | quote}} --no-verify
     context: files
     subprocess: true
     prompts:
       - type: input
         title: "(No Verify) Commit Message:"
+        key: "Message"
         initialValue: ""
   - key: <f11>
     description: Delete merged PR branches with gh-poi
