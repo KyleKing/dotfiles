@@ -8,3 +8,5 @@ rules:
     line-length: disable
     octal-values: enable
     # quoted-strings: enable
+    comments:
+        min-spaces-from-content: 1
