@@ -62,7 +62,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Preview fzf results with bat syntax highlighting
 # > cd ~/.config && fzf-bat
-fzf-bat () {
+fzf-bat() {
     fzf --preview 'bat --color=always --style=numbers --line-range=:40 {}'
 }
 
@@ -77,25 +77,25 @@ export MCFLY_RESULTS=50
 export MCFLY_FUZZY=2
 
 # HSTR configuration - add this to ~/.zshrc
-alias hh=hstr                    # hh to be alias for hstr
-setopt histignorespace           # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor       # get more colors
-bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+alias hh=hstr                         # hh to be alias for hstr
+setopt histignorespace                # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor            # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j" # bind hstr to Ctrl-r (for Vi mode check doc)
 
 # rpg-cli: a filesystem dungeon
 # https://github.com/facundoolano/rpg-cli#shell-integration
 alias rpg=rpg-cli
-rcd () {
+rcd() {
     rpg-cli ls
     rpg-cli cd "$@"
     cd "$(rpg-cli pwd)" || return
 }
-rpz () {
+rpz() {
     z "$@"
     rpg-cli ls
     rpg-cli cd "$PWD" || return
 }
-rph () {
+rph() {
     # Heal
     _last="$PWD"
     # TODO: Should be a for loop until home
@@ -105,11 +105,11 @@ rph () {
     # TODO: Should be a for loop to return to _last until battle (then stop and print _last)
     rpg-cli cd "$_last" || return
 }
-rpl () {
+rpl() {
     rpg-cli ls
     lsl
 }
-rpin () {
+rpin() {
     echo "$(rpg-cli pwd)"
     rcd ~
     rpg-cli ls

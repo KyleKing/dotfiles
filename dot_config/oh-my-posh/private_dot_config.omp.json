@@ -33,9 +33,7 @@
         },
         {
           "foreground": "p:blue",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}p:red{{ end }}"
-          ],
+          "foreground_templates": ["{{ if gt .Code 0 }}p:red{{ end }}"],
           "properties": {
             "always_enabled": true
           },

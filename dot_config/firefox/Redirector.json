@@ -3,9 +3,7 @@
   "createdBy": "Redirector v3.5.3",
   "redirects": [
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -20,9 +18,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -37,9 +33,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -54,9 +48,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -71,9 +63,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -88,9 +78,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -105,9 +93,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -122,9 +108,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -139,9 +123,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": true,
       "error": null,
@@ -156,9 +138,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "NoMedium",
       "disabled": false,
       "error": null,
@@ -173,9 +153,7 @@
       "redirectUrl": "https://scribe.rip/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "Redirect Annoying Awesome Open Source to Github",
       "disabled": false,
       "error": null,
@@ -190,9 +168,7 @@
       "redirectUrl": "https://github.com/$1/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "Redirect to Atlassian Cloud (issues / JIRA)",
       "disabled": false,
       "error": null,
@@ -207,9 +183,7 @@
       "redirectUrl": "https://parexelailabs.atlassian.net/$1"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "(Redirects to Search) Redirect to JIRA Cloud (wiki / Confluence) (1/2)",
       "disabled": false,
       "error": null,
@@ -224,9 +198,7 @@
       "redirectUrl": "https://parexelailabs.atlassian.net/wiki/search?text=$1"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "(Redirects to Search) Redirect to JIRA Cloud (wiki / Confluence) (2/2)",
       "disabled": false,
       "error": null,
@@ -241,9 +213,7 @@
       "redirectUrl": "https://parexelailabs.atlassian.net/wiki/search?text=$1 $2 $3"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "Redirect JIRA Login",
       "disabled": true,
       "error": null,
@@ -258,9 +228,7 @@
       "redirectUrl": "https://myapps.microsoft.com/signin/174275d7-d196-4d7d-b3df-e255089af786?tenantId=83d59944-34a0-4eb5-8cb0-80a49540e944&$1"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "Redirect Github Actions Docs to Enterprise",
       "disabled": false,
       "error": null,
@@ -275,9 +243,7 @@
       "redirectUrl": "https://docs.github.com/en/enterprise-cloud@latest/actions/$1"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "Redirect from mcas",
       "disabled": false,
       "error": null,
@@ -292,9 +258,7 @@
       "redirectUrl": "https://$1/$2"
     },
     {
-      "appliesTo": [
-        "main_frame"
-      ],
+      "appliesTo": ["main_frame"],
       "description": "Skip MS Teams Redirect",
       "disabled": false,
       "error": null,

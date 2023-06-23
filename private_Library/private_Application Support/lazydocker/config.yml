@@ -2,6 +2,6 @@
 gui:
   returnImmediately: true
   wrapMainPanel: true
-reporting: 'on'
+reporting: "on"
 commandTemplates:
   dockerCompose: docker compose

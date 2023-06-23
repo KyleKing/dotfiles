@@ -20,12 +20,7 @@
       "centered": true,
       "position": "absolute"
     },
-    "controls": [
-      "speed-minus",
-      "speed",
-      "speed-plus",
-      "options"
-    ],
+    "controls": ["speed-minus", "speed", "speed-plus", "options"],
     "controlspeed": true,
     "controlspeedmousebutton": false,
     "controlsvisible": false,

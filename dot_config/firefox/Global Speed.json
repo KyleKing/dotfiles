@@ -5,18 +5,7 @@
       "eq": {
         "enabled": false,
         "factor": 1,
-        "values": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ]
+        "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       },
       "pitch": 0,
       "volume": 1
