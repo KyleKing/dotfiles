@@ -18,6 +18,10 @@ projects:
     url: git@github.com:kyleking/cz_legacy.git
     tags:
       - calcipy
+  dev-boards:
+    url: git@github.com:kyleking/dev-boards.git
+    tags:
+      - calcipy
   extract_finances:
     url: git@github.com:kyleking/extract_finances.git
     tags:

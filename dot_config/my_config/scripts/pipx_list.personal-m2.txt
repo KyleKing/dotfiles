@@ -18,8 +18,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ctt
    package flit 3.9.0, installed using Python 3.11.4
     - flit
-   package frogmouth 0.6.0, installed using Python 3.11.4
-    - frogmouth
    package licensecheck 2023.1.1, installed using Python 3.11.4
     - licensecheck
    package mdformat-mkdocs 1.0.1, installed using Python 3.11.4
@@ -36,7 +34,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pycg
    package pygments 2.15.1, installed using Python 3.11.4
     - pygmentize
-   package pyright 1.1.314, installed using Python 3.11.4
+   package pyright 1.1.315, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
@@ -45,7 +43,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - radian
    package ruff 0.0.272, installed using Python 3.11.4
     - ruff
-   package sourcery-cli 1.3.0, installed using Python 3.11.4
+   package sourcery-cli 1.4.0, installed using Python 3.11.4
     - sourcery
    package tail-jsonl 1.2.4, installed using Python 3.11.4
     - tail-jsonl
