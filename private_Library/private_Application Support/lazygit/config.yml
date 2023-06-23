@@ -25,10 +25,10 @@ customCommands:
     command: git brws --pr
     context: localBranches
     subprocess: true
-  - key: 'O'
-    context: 'files'
+  - key: "O"
+    context: "files"
     command: "subl {{.SelectedFile.Name | quote}}"
-    description: 'Open file with Sublime'
+    description: "Open file with Sublime"
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <f8>
     description: Add Staged Files to Last Commit
@@ -42,8 +42,8 @@ customCommands:
     subprocess: true
     prompts:
       - type: input
-        title: '(No Verify) Commit Message:'
-        initialValue: ''
+        title: "(No Verify) Commit Message:"
+        initialValue: ""
   - key: <f11>
     description: Delete merged PR branches with gh-poi
     command: gh poi
@@ -68,9 +68,9 @@ customCommands:
     context: tags
     prompts:
       - type: input
-        title: 'Annotated tag name:'
+        title: "Annotated tag name:"
       - type: input
-        title: 'Annotated tag message:'
+        title: "Annotated tag message:"
   - key: o
     description: Create Pull Request with gh
     command: gh pr create --assignee=@me --fill --web
@@ -79,7 +79,7 @@ customCommands:
   - key: <f3>
     prompts:
       - type: input
-        title: 'PR id:'
+        title: "PR id:"
     command: hub pr checkout {{index .PromptResponses 0}}
     context: localBranches
     loadingText: checking out PR
@@ -95,10 +95,10 @@ customCommands:
     prompts:
       - type: input
         title: Remote Branch Name
-        initialValue: ''
+        initialValue: ""
       - type: input
         title: New Local Branch Name
-        initialValue: ''
+        initialValue: ""
     loadingText: fetching branch
 keybinding:
   branches:
@@ -107,16 +107,16 @@ keybinding:
     renameBranch: r
 gui:
   expandFocusedSidePanel: true
-  showBottomLine: false  # for hiding the bottom information line (unless it has important information to tell you)
+  showBottomLine: false # for hiding the bottom information line (unless it has important information to tell you)
   theme:
     selectedLineBgColor:
-      - default  # Bold with no background
+      - default # Bold with no background
     selectedRangeBgColor:
-      - default  # Bold with no background
+      - default # Bold with no background
     cherryPickedCommitBgColor:
-      - reverse  # High Contrast
+      - reverse # High Contrast
     cherryPickedCommitFgColor:
-      - reverse  # High Contrast
+      - reverse # High Contrast
   showIcons: true
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
@@ -125,5 +125,4 @@ git:
     pager: delta --paging=never --true-color=never
   log:
     showWholeGitGraph: true
-
 # More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
