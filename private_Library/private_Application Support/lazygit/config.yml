@@ -8,7 +8,7 @@ notARepository: skip
 # promptToReturnFromSubprocess: false
 
 customCommands:
-  # Override push to be a subprocess
+  # Override push to be a subprocess to see pre-commit output
   - key: P
     description: Git Push with Subprocess
     command: git push
@@ -25,6 +25,10 @@ customCommands:
     command: git brws --pr
     context: localBranches
     subprocess: true
+  - key: 'O'
+    context: 'files'
+    command: "subl {{.SelectedFile.Name | quote}}"
+    description: 'Open file with Sublime'
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <f8>
     description: Add Staged Files to Last Commit
