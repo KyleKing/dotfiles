@@ -26,11 +26,11 @@ customCommands:
     context: localBranches
     subprocess: true
   - key: "O"
-    context: "files"
+    context: "global"
     command: "subl {{.SelectedFile.Name | quote}}"
     description: "Open file with Sublime"
   - key: "o"
-    context: "files"
+    context: "global"
     command: "open {{.SelectedFile.Name | quote}} -a {{.Form.App | quote}}"
     description: "Choose application to open with"
     prompts:
@@ -40,7 +40,7 @@ customCommands:
         suggestions:
           command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio'"
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
-  - key: <f8>
+  - key: <c-a>
     description: Add Staged Files to Last Commit
     command: export _MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 && git commit --message "$_MSG" --no-verify
     context: files
@@ -116,6 +116,8 @@ keybinding:
     # Flipped to match rename of commit
     rebaseBranch: R
     renameBranch: r
+  universal:
+    openFile: "e" # null should work, but wasn't. So assign to e to overlap with edit
 gui:
   expandFocusedSidePanel: true
   showBottomLine: false # for hiding the bottom information line (unless it has important information to tell you)
