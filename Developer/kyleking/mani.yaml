@@ -56,6 +56,10 @@ projects:
     url: git@github.com:kyleking/tail-jsonl.git
     tags:
       - calcipy
+  tui-typer-tutor:
+    url: git@github.com:kyleking/tui-typer-tutor.git
+    tags:
+      - calcipy
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
 
