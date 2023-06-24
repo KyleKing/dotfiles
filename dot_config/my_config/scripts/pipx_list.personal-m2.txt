@@ -18,8 +18,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ctt
    package flit 3.9.0, installed using Python 3.11.4
     - flit
-   package licensecheck 2023.1.1, installed using Python 3.11.4
-    - licensecheck
    package mdformat-mkdocs 1.0.1, installed using Python 3.11.4
     - markdown-it
     - mdformat
@@ -47,8 +45,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - sourcery
    package tail-jsonl 1.2.4, installed using Python 3.11.4
     - tail-jsonl
-   package terminal-typing-tutor 0.5.0, installed using Python 3.11.4
-    - ttt
    package textual-astview 0.7.1, installed using Python 3.11.4
     - astare
    package toml-sort 0.23.1, installed using Python 3.11.4
@@ -62,8 +58,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - typer
    package watchgha 1.0.0, installed using Python 3.11.4
     - watch_gha_runs
-   package workedon 0.7.0, installed using Python 3.11.4
-    - workedon
+   package whatsonpypi 0.3.7, installed using Python 3.11.4
+    - whatsonpypi
    package xdot 1.2, installed using Python 3.11.4
     - xdot
     Injected Packages:

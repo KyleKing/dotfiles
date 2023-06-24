@@ -12,147 +12,51 @@
     },
     "backdropFx": {
       "filters": [
-        {
-          "name": "sepia",
-          "value": 0
-        },
-        {
-          "name": "hueRotate",
-          "value": 0
-        },
-        {
-          "name": "grayscale",
-          "value": 0
-        },
-        {
-          "name": "contrast",
-          "value": 1
-        },
-        {
-          "name": "brightness",
-          "value": 1
-        },
-        {
-          "name": "saturate",
-          "value": 1
-        },
-        {
-          "name": "invert",
-          "value": 0
-        },
-        {
-          "name": "blur",
-          "value": 0
-        },
-        {
-          "name": "opacity",
-          "value": 1
-        }
+        { "name": "sepia", "value": 0 },
+        { "name": "hueRotate", "value": 0 },
+        { "name": "grayscale", "value": 0 },
+        { "name": "contrast", "value": 1 },
+        { "name": "brightness", "value": 1 },
+        { "name": "saturate", "value": 1 },
+        { "name": "invert", "value": 0 },
+        { "name": "blur", "value": 0 },
+        { "name": "opacity", "value": 1 }
       ],
       "transforms": [
-        {
-          "name": "scaleX",
-          "value": 1
-        },
-        {
-          "name": "scaleY",
-          "value": 1
-        },
-        {
-          "name": "translateX",
-          "value": 0
-        },
-        {
-          "name": "translateY",
-          "value": 0
-        },
-        {
-          "name": "rotateX",
-          "value": 0
-        },
-        {
-          "name": "rotateY",
-          "value": 0
-        },
-        {
-          "name": "rotateZ",
-          "value": 0
-        }
+        { "name": "scaleX", "value": 1 },
+        { "name": "scaleY", "value": 1 },
+        { "name": "translateX", "value": 0 },
+        { "name": "translateY", "value": 0 },
+        { "name": "rotateX", "value": 0 },
+        { "name": "rotateY", "value": 0 },
+        { "name": "rotateZ", "value": 0 }
       ]
     },
     "elementFx": {
       "filters": [
-        {
-          "name": "sepia",
-          "value": 0
-        },
-        {
-          "name": "hueRotate",
-          "value": 0
-        },
-        {
-          "name": "grayscale",
-          "value": 0
-        },
-        {
-          "name": "contrast",
-          "value": 1
-        },
-        {
-          "name": "brightness",
-          "value": 1
-        },
-        {
-          "name": "saturate",
-          "value": 1
-        },
-        {
-          "name": "invert",
-          "value": 0
-        },
-        {
-          "name": "blur",
-          "value": 0
-        },
-        {
-          "name": "opacity",
-          "value": 1
-        }
+        { "name": "sepia", "value": 0 },
+        { "name": "hueRotate", "value": 0 },
+        { "name": "grayscale", "value": 0 },
+        { "name": "contrast", "value": 1 },
+        { "name": "brightness", "value": 1 },
+        { "name": "saturate", "value": 1 },
+        { "name": "invert", "value": 0 },
+        { "name": "blur", "value": 0 },
+        { "name": "opacity", "value": 1 }
       ],
       "transforms": [
-        {
-          "name": "scaleX",
-          "value": 1
-        },
-        {
-          "name": "scaleY",
-          "value": 1
-        },
-        {
-          "name": "translateX",
-          "value": 0
-        },
-        {
-          "name": "translateY",
-          "value": 0
-        },
-        {
-          "name": "rotateX",
-          "value": 0
-        },
-        {
-          "name": "rotateY",
-          "value": 0
-        },
-        {
-          "name": "rotateZ",
-          "value": 0
-        }
+        { "name": "scaleX", "value": 1 },
+        { "name": "scaleY", "value": 1 },
+        { "name": "translateX", "value": 0 },
+        { "name": "translateY", "value": 0 },
+        { "name": "rotateX", "value": 0 },
+        { "name": "rotateY", "value": 0 },
+        { "name": "rotateZ", "value": 0 }
       ]
     },
     "enabled": true,
     "enabledLatestViaPopup": true,
-    "lastSpeed": 1,
+    "lastSpeed": 2.5,
     "speed": 1.25
   },
   "firstUse": 1658360901015,
@@ -199,10 +103,7 @@
       "enabled": true,
       "greedy": true,
       "id": "5251543680",
-      "key": {
-        "code": "KeyQ",
-        "shiftKey": true
-      },
+      "key": { "code": "KeyQ", "shiftKey": true },
       "spacing": 2,
       "valueState": "toggle"
     },
@@ -228,10 +129,7 @@
       "enabled": true,
       "greedy": true,
       "id": "9070383148",
-      "key": {
-        "code": "KeyZ",
-        "shiftKey": true
-      },
+      "key": { "code": "KeyZ", "shiftKey": true },
       "valueBool3": true,
       "valueNumber": -0.041
     },
@@ -240,10 +138,7 @@
       "enabled": true,
       "greedy": true,
       "id": "5386727362",
-      "key": {
-        "code": "KeyX",
-        "shiftKey": true
-      },
+      "key": { "code": "KeyX", "shiftKey": true },
       "spacing": 1,
       "valueBool3": true,
       "valueNumber": 0.041
@@ -253,10 +148,7 @@
       "enabled": true,
       "greedy": true,
       "id": "4547860137",
-      "key": {
-        "code": "KeyF",
-        "shiftKey": true
-      },
+      "key": { "code": "KeyF", "shiftKey": true },
       "spacing": 2,
       "valueBool": true
     },
@@ -265,10 +157,7 @@
       "enabled": true,
       "greedy": true,
       "id": "4756984369",
-      "key": {
-        "code": "KeyW",
-        "shiftKey": true
-      },
+      "key": { "code": "KeyW", "shiftKey": true },
       "valueString": "mark1"
     },
     {
@@ -293,19 +182,10 @@
     {
       "condition": {
         "parts": [
-          {
-            "id": "8059833635",
-            "type": "CONTAINS",
-            "value": "youtube.com"
-          },
-          {
-            "id": "8059253829",
-            "type": "CONTAINS",
-            "value": "amazon.com"
-          }
+          { "id": "8059833635", "type": "CONTAINS", "value": "youtube.com" }
         ]
       },
-      "enabled": true,
+      "enabled": false,
       "id": "5183155778",
       "overrideEnabled": false,
       "overrideSpeed": 1,
