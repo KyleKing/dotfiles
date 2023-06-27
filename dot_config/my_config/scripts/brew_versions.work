@@ -53,6 +53,7 @@ envchain 1.0.1
 exa 0.10.1_1
 fd 8.7.0
 ffmpeg@4 4.4.4
+fjira 0.9.1
 flac 1.4.2
 fontconfig 2.14.2
 freetds 1.3.18
@@ -66,7 +67,7 @@ gd 2.3.3_5
 gdbm 1.23
 gdk-pixbuf 2.42.10_1
 gettext 0.21.1
-gh 2.30.0
+gh 2.31.0
 ghostscript 10.01.1_1
 giflib 5.2.1
 gifski 1.10.3

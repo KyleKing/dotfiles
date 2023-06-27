@@ -1,12 +1,14 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package autoflake 2.1.1, installed using Python 3.11.4
-    - autoflake
    package black 23.3.0, installed using Python 3.11.4
     - black
     - blackd
-   package calcipy 1.3.0, installed using Python 3.11.4
+   package calcipy 1.4.0, installed using Python 3.11.4
     - calcipy
+    - calcipy-lint
+    - calcipy-pack
+    - calcipy-tags
+    - calcipy-types
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
@@ -21,10 +23,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - copier
    package cortex 0.42.1, installed using Python 3.11.4
     - cortex
-   package docformatter 1.7.2, installed using Python 3.11.4
+   package docformatter 1.7.3, installed using Python 3.11.4
     - docformatter
-   package dooit 1.0.1, installed using Python 3.11.4
-    - dooit
    package envtpl 0.7.2, installed using Python 3.11.4
     - envtpl
    package fawltydeps 0.11.0, installed using Python 3.11.4
@@ -56,7 +56,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.315, installed using Python 3.11.4
+   package pyright 1.1.316, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
@@ -81,6 +81,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - unimport
    package watchgha 1.0.0, installed using Python 3.11.4
     - watch_gha_runs
+   package whatsonpypi 0.3.7, installed using Python 3.11.4
+    - whatsonpypi
    package workedon 0.7.0, installed using Python 3.11.4
     - workedon
    package xdot 1.2, installed using Python 3.11.4
