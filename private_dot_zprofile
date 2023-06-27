@@ -13,5 +13,7 @@ export MY_CONFIG=$HOME/.config/my_config
 
 # Set bat as default Pager (instead of less)
 export PAGER=bat
+# jira-cli requires less. Use this override (https://github.com/ankitpokhrel/jira-cli/discussions/569)
+export JIRA_PAGER=less
 
 source $MY_CONFIG/on_login.sh
