@@ -567,7 +567,7 @@ tasks:
     desc: Run GH poi to remove closed branches
     cmd: |
       COUNT=$(git branch --format='%(HEAD) %(refname:short) -> %(upstream:short)' | wc -l)
-      if (("$COUNT" > 1)); then gh poi; else echo "No checked are checked out"; fi
+      if (("$COUNT" > 1)); then gh poi && git pull; else echo "No checked are checked out"; fi
 
   git-prune:
     desc: remove local branches which have been deleted on remote
