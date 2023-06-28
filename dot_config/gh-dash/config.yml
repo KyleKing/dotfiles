@@ -1,21 +1,19 @@
 ---
 prSections:
+  - title: Work PRs Pending Review (KB's View)
+    filters: is:pr is:open sort:updated-desc org:roaminsight draft:false -review:approved -author:app/dependabot -created:<=2023-01-01 -repo:roaminsight/surge -repo:roaminsight/opsbot -repo:roaminsight/microsoft-word-add-in -repo:roaminsight/parexel-chat-nlp -repo:roaminsight/roam-k8s -repo:roaminsight/roam-infra -repo:roaminsight/serve -repo:roaminsight/solve-pv
   - title: Needs My Review
     filters: is:pr is:open sort:updated-desc review-requested:@me
-  - title: WIP
-    filters: is:pr is:open sort:updated-desc -review:approved author:@me
-  - title: Merge Ready
-    filters: is:pr is:open sort:updated-desc review:approved author:@me
-  - title: Any Internal PRs
+  - title: My Work
+    filters: is:pr is:open sort:updated-desc author:@me org:roaminsight
+  - title: My Non-Work
+    filters: is:pr is:open sort:updated-desc author:@me -org:roaminsight
+  - title: Any in KyleKing
     filters: is:pr is:open sort:updated-desc org:KyleKing
-  - title: My External PRs
-    filters: is:pr is:open sort:updated-desc -org:KyleKing author:@me
   - title: Reviewer
     filters: is:pr is:open sort:updated-desc repo:roaminsight/reviewer
   - title: Parexel-chat
     filters: is:pr is:open sort:updated-desc repo:roaminsight/parexel-chat
-  - title: Work PRs Pending Review (KB's View)
-    filters: is:pr is:open sort:updated-desc org:roaminsight draft:false -review:approved -created:<=2023-01-01
 issuesSections:
   - title: Assigned
     filters: is:issue is:open sort:updated-desc assignee:@me
