@@ -597,10 +597,10 @@ tasks:
 
       TITLE="[PPLMS-2723] Migrate to pyproject.toml source to 'priority'"
       git branch PPLMS-2723-MigrateSourePriority
-      git push -u origin $(git rev-parse --abbrev-ref HEAD)
+      git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
       git add .
-      git commit --message=$TITLE
-      gh pr create --reviewer="atayardimci" --assignee="@me" --title=$TITLE --web
+      git commit --message="$TITLE"
+      gh pr create --reviewer="atayardimci" --assignee="@me" --title="$TITLE" --web
 
   git-daily:
     desc: show branch, local and remote diffs, last commit and date
