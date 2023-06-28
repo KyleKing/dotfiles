@@ -34,6 +34,7 @@ cmake 3.26.4
 cmatrix 2.0
 cmctl 1.12.2
 cmocka 1.1.7
+container-diff 0.17.0
 coreutils 9.3
 ctop 0.7.7
 curl 8.1.2_1

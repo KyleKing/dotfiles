@@ -37,13 +37,13 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - flake8-to-ruff
    package glances 3.4.0.3, installed using Python 3.11.4
     - glances
+   package gpt-engineer 0.0.7, installed using Python 3.11.4
+    - gpt-engineer
    package har2locust 0.8.4, installed using Python 3.11.4
     - har2locust
    package isort 5.12.0, installed using Python 3.11.4
     - isort
     - isort-identify-imports
-   package mammoth 1.6.0, installed using Python 3.11.4
-    - mammoth
    package mdformat 0.7.16, installed using Python 3.11.4
     - mdformat
     Injected Packages:
@@ -81,6 +81,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - toml-sort
    package trcli 1.5.0, installed using Python 3.11.4
     - trcli
+   package tui-typer-tutor 1.0.1, installed using Python 3.11.4
+    - ttt
+    - tui-typer-tutor
    package uncurl 0.0.11, installed using Python 3.11.4
     - uncurl
    package unimport 0.16.0, installed using Python 3.11.4
