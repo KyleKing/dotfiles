@@ -5,8 +5,12 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 23.3.0, installed using Python 3.11.4
     - black
     - blackd
-   package calcipy 1.2.6, installed using Python 3.11.4
+   package calcipy 1.4.0, installed using Python 3.11.4
     - calcipy
+    - calcipy-lint
+    - calcipy-pack
+    - calcipy-tags
+    - calcipy-types
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
@@ -18,6 +22,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ctt
    package flit 3.9.0, installed using Python 3.11.4
     - flit
+   package licensecheck 2023.1.2, installed using Python 3.11.4
+    - licensecheck
    package mdformat-mkdocs 1.0.1, installed using Python 3.11.4
     - markdown-it
     - mdformat
@@ -54,6 +60,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tox-quickstart
     Injected Packages:
       - tox-asdf 0.1.0
+   package tui-typer-tutor 1.0.1, installed using Python 3.11.4
+    - ttt
+    - tui-typer-tutor
    package typer-cli 0.0.13, installed using Python 3.11.4
     - typer
    package watchgha 1.0.0, installed using Python 3.11.4
