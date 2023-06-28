@@ -86,14 +86,16 @@ bindkey -s "\C-r" "\C-a hstr -- \C-j" # bind hstr to Ctrl-r (for Vi mode check d
 # https://github.com/facundoolano/rpg-cli#shell-integration
 alias rpg=rpg-cli
 rcd() {
-    rpg-cli ls
-    rpg-cli cd "$@"
-    cd "$(rpg-cli pwd)" || return
+    rpg-cli cd "$@" || return 1
+    cd "$(rpg-cli pwd)" || return 1
+    rpg-cli ls || return 1
+    echo "$(rpg-cli pwd)"
 }
 rpz() {
-    z "$@"
-    rpg-cli ls
-    rpg-cli cd "$PWD" || return
+    z "$@" || return 1
+    rpg-cli cd "$PWD" || return 1
+    rpg-cli ls || return 1
+    echo "$(rpg-cli pwd)"
 }
 rph() {
     # Heal
@@ -101,24 +103,21 @@ rph() {
     # TODO: Should be a for loop until home
     # # Shellcheck doesn't understand zsh syntax:
     # repeat 10 '{ echo '---' && rpg cd "~" }'
-    for _ in {1..10}; do rpg cd "~"; done
+    for _ in {1..10}; do rpg cd "~"; done || return 1
     # TODO: Should be a for loop to return to _last until battle (then stop and print _last)
-    rpg-cli cd "$_last" || return
+    rpg-cli cd "$_last" || return 1
 }
-rpl() {
-    rpg-cli ls
-    lsl
-}
+alias rpl="rpg-cli ls"
 rpin() {
-    echo "$(rpg-cli pwd)"
-    rcd ~
-    rpg-cli ls
+    echo "$(rpg-cli pwd)" || return 1
+    rcd ~ || return 1
+    rpg-cli ls || return 1
     echo "~~ Stats ~~"
-    rpg-cli stat
+    rpg-cli stat || return 1
     echo "\n~~ Shop ~~"
-    rpg-cli buy
+    rpg-cli buy || return 1
     echo "\n~~ Quests ~~"
-    rpg-cli todo
+    rpg-cli todo || return 1
 }
 
 # gojq (go-based jq replacement)
