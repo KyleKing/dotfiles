@@ -52,3 +52,6 @@ fi
 if [[ -f ~/.docker/init-zsh.sh ]]; then
   source ~/.docker/init-zsh.sh
 fi
+
+# # Added with 'op plugin init openai'
+# source ~/.config/op/plugins.sh

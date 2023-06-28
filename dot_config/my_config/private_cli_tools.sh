@@ -123,8 +123,19 @@ rpin() {
 # gojq (go-based jq replacement)
 alias jq='gojq'
 
-# ttyper TUI to learn Touch Typing from: https://github.com/max-niederman/ttyper
-export PATH=$PATH:~/.cargo/bin
-
 # Tip: check current path with (thanks to ChatGPT!):
 # echo $PATH | awk '{gsub(/:/, "\n"); print}'
+
+# Added by gpt-engineer
+if [[ -f ~/.docker/init-zsh.sh ]]; then
+    autoload -Uz compinit
+    zstyle ':completion:*' menu select
+    fpath+=~/.zfunc
+fi
+
+# Jira Dashboards
+# wraps jira-cli: https://github.com/ankitpokhrel/jira-cli
+r-jira() {
+    export $(envchain JIRA env | grep JIRA_API_TOKEN=) || return 1
+    jira ${@} || return 1
+}
