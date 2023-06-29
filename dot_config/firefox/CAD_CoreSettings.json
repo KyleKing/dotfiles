@@ -99,6 +99,10 @@
       "value": true
     },
     {
+      "name": "siteDataEmptyOnEnable",
+      "value": true
+    },
+    {
       "name": "sizePopup",
       "value": 16
     },
@@ -114,10 +118,6 @@
       "id": "DEPRECATED - use default expressions",
       "name": "whiteCleanLocalstorage",
       "value": false
-    },
-    {
-      "name": "siteDataEmptyOnEnable",
-      "value": true
     }
   ]
 }

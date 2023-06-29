@@ -266,7 +266,7 @@
     "bookmarks_folder_empty_fg": null,
     "bookmarks_open_bookmark_fg": null
   },
-  "sidebarCSS": "/* Improve visibility of pinned tabs */\n.PinnedDock {\n    background-color: #aaaaaa;\n}\n.PinnedTab {\n    background-color: #353535;\n}\n",
+  "sidebarCSS": "/* Improve visibility of pinned tabs */\n.PinnedDock {\n    background-color: #7896C5;\n}\n.PinnedTab {\n    background-color: #3e4d65;\n}\n",
   "groupCSS": "",
   "snapshots_v4": [],
   "ver": "4.10.2"
