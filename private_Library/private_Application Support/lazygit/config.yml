@@ -20,7 +20,7 @@ customCommands:
     context: global
     subprocess: true
   # Use git-brws: https://github.com/rhysd/git-brws#usage
-  - key: <f11>
+  - key: <c-o>
     description: Open PR (or create new) with git-brws
     command: git brws --pr
     context: localBranches
@@ -38,7 +38,7 @@ customCommands:
         title: "Which application?"
         key: "App"
         suggestions:
-          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio'"
+          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio\nSublime'"
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <c-a>
     description: Add Staged Files to Last Commit
