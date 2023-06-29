@@ -23,13 +23,6 @@
 	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
 	# Recent Branches
 	recent-branches = branch --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-	# Requires watchgha https://github.com/nedbat/watchgha
-	# 	Use with a GitHub token: `GITHUB_TOKEN=$(gh auth token) git runs`
-    runs = "!f() { \
-        watch_gha_runs $@ \
-            \"$(git remote get-url origin)\" \
-            \"$(git rev-parse --abbrev-ref HEAD)\"; \
-    }; f"
 
 [color]
 	ui = true
