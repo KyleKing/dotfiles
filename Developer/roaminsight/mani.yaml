@@ -327,14 +327,6 @@ projects:
       - Roam
       - Auth
 
-  python-logging:
-    url: git@github.com:roaminsight/python-logging.git
-    desc: Ian's prototype OTEL Logging Library
-    tags:
-      - Roam
-      - Active
-      - Apps
-
   redux-kit:
     url: git@github.com:roaminsight/redux-kit.git
     desc: General Roam Project
