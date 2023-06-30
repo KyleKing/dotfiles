@@ -27,6 +27,7 @@ customCommands:
     subprocess: true
   - key: "O"
     context: "global"
+    # FIXME: This doesn't open files from commit history
     command: "subl {{.SelectedFile.Name | quote}}"
     description: "Open file with Sublime"
   - key: "o"
