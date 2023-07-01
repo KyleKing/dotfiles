@@ -52,5 +52,5 @@ alias gh-run-pick='gh workflow run --ref=$(gh pr list -L100 | fzf | cut -f3)'
 g-runs() {
     GITHUB_TOKEN="$(gh auth token)"
     export GITHUB_TOKEN
-    watch_gha_runs
+    watch_gha_runs --wait-for-start
 }
