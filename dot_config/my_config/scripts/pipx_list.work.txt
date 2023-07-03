@@ -88,7 +88,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - uncurl
    package unimport 0.16.0, installed using Python 3.11.4
     - unimport
-   package watchgha 1.0.0, installed using Python 3.11.4
+   package watchgha 2.0.0, installed using Python 3.11.4
     - watch_gha_runs
    package whatsonpypi 0.3.7, installed using Python 3.11.4
     - whatsonpypi

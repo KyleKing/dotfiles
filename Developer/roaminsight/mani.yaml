@@ -3,546 +3,328 @@ projects:
   active-learning-pipelines:
     url: git@github.com:roaminsight/active-learning-pipelines.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   alp-client:
     url: git@github.com:roaminsight/alp-client.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   analysis_notebooks:
     url: git@github.com:roaminsight/analysis_notebooks.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   analysisbox:
     url: git@github.com:roaminsight/analysisbox.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   annotation-db:
     url: git@github.com:roaminsight/annotation-db.git
     desc: Shared RDS Terraform for AM, Boots, Reviewer, etc.
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   annotation-manager:
     url: git@github.com:roaminsight/annotation-manager.git
     desc: AM Application
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   auth-sidecar:
     url: git@github.com:roaminsight/auth-sidecar.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   authenticator:
     url: git@github.com:roaminsight/authenticator.git
     desc: Legacy Authenticator Application
-    tags:
-      - Roam
-      - Auth
 
   authenticator-express:
     url: git@github.com:roaminsight/authenticator-express.git
     desc: Legacy Authenticator Application
-    tags:
-      - Roam
-      - Auth
 
   aws-org:
     url: git@github.com:roaminsight/aws-org.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   babylon:
     url: git@github.com:roaminsight/babylon.git
     desc: Backend Pipelines and Moana Replacement
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   babylon-next:
     url: git@github.com:roaminsight/babylon-next.git
     desc: Split from Babylon
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   zathras:
     url: git@github.com:roaminsight/zathras.git
     desc: Split from Babylon
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   cellar:
     url: git@github.com:roaminsight/cellar.git
     desc: Split from Babylon
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   babylon-notebooks:
     url: git@github.com:roaminsight/babylon-notebooks.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   boots:
     url: git@github.com:roaminsight/boots.git
     desc: Explorer Application
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   catnip:
     url: git@github.com:roaminsight/catnip.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   client-onboarding:
     url: git@github.com:roaminsight/client-onboarding.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   cloudwatch-log-collector:
     url: git@github.com:roaminsight/cloudwatch-log-collector.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   config-express:
     url: git@github.com:roaminsight/config-express.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   config-service:
     url: git@github.com:roaminsight/config-service.git
     desc: Overengineered links between applications
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   data-classification:
     url: git@github.com:roaminsight/data-classification.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   drugparse:
     url: git@github.com:roaminsight/drugparse.git
     desc: General Roam Project
-    tags:
-      - Roam
 
-  roaminsight/ecr-repos:
+  ecr-repos:
     url: git@github.com:roaminsight/ecr-repos.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - DevOps
 
   email-task:
     url: git@github.com:roaminsight/email-task.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   email-utils:
     url: git@github.com:roaminsight/email-utils.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   github-actions:
     url: git@github.com:roaminsight/github-actions.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   github-config:
     url: git@github.com:roaminsight/github-config.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   graft:
     url: git@github.com:roaminsight/graft.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   home-tests:
     url: git@github.com:roaminsight/home-tests.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   icsr-research-project:
     url: git@github.com:roaminsight/icsr-research-project.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   import-parser:
     url: git@github.com:roaminsight/import-parser.git
     desc: Email Parser Backend for Reviewer
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   janus:
     url: git@github.com:roaminsight/janus.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   jupyter-react-widgets:
     url: git@github.com:roaminsight/jupyter-react-widgets.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   knowledge-service:
     url: git@github.com:roaminsight/knowledge-service.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   kubewatch:
     url: git@github.com:roaminsight/kubewatch.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   logging-utils:
     url: git@github.com:roaminsight/logging-utils.git
     desc: General Roam Project
-    tags:
-      - Roam
+
+  microsoft-word-add-in:
+    url: git@github.com:roaminsight/microsoft-word-add-in.git
+    desc: General Roam Project
 
   mittens:
     url: git@github.com:roaminsight/mittens.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   mobius-notebooks:
     url: git@github.com:roaminsight/mobius-notebooks.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   mobiuscore:
     url: git@github.com:roaminsight/mobiuscore.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   model-utils:
     url: git@github.com:roaminsight/model-utils.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   object-permissions:
     url: git@github.com:roaminsight/object-permissions.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Auth
 
   ocr-pipelines:
     url: git@github.com:roaminsight/ocr-pipelines.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   opsbot:
     url: git@github.com:roaminsight/opsbot.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - DevOps
 
   parexel-chat:
     url: git@github.com:roaminsight/parexel-chat.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   parexel-chat-nlp:
     url: git@github.com:roaminsight/parexel-chat-nlp.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   pdfcore:
     url: git@github.com:roaminsight/pdfcore.git
     desc: Low-Level PDF Tooling
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   permission:
     url: git@github.com:roaminsight/permission.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Auth
 
   redux-kit:
     url: git@github.com:roaminsight/redux-kit.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   repository:
     url: git@github.com:roaminsight/repository.git
     desc: General Roam Project
     tags:
-      - Roam
       - Archived
 
   repository-template:
     url: git@github.com:roaminsight/repository-template.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   reviewer:
     url: git@github.com:roaminsight/reviewer.git
     desc: Reviewer
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   roam-confluence:
     url: git@github.com:roaminsight/roam-confluence.git
     desc: Self-hosted Confluence Instance
-    tags:
-      - Roam
 
   roam-engage:
     url: git@github.com:roaminsight/roam-engage.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   roam-expectedness:
     url: git@github.com:roaminsight/roam-expectedness.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   roam-hound:
     url: git@github.com:roaminsight/roam-hound.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   roam-infra:
     url: git@github.com:roaminsight/roam-infra.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - DevOps
 
   roam-jenkins:
     url: git@github.com:roaminsight/roam-jenkins.git
     desc: Self-hosted Jenkins instance
-    tags:
-      - Roam
-      - DevOps
 
   roam-jira:
     url: git@github.com:roaminsight/roam-jira.git
     desc: Self-hosted JIRA Instance
-    tags:
-      - Roam
-      - DevOps
 
   roam-k8s:
     url: git@github.com:roaminsight/roam-k8s.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - DevOps
 
   roam-knowledge-base:
     url: git@github.com:roaminsight/roam-knowledge-base.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   roam-nexus:
     url: git@github.com:roaminsight/roam-nexus.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - DevOps
 
   roam-packer:
     url: git@github.com:roaminsight/roam-packer.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   roam-topics:
     url: git@github.com:roaminsight/roam-topics.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   roam-utils:
     url: git@github.com:roaminsight/roam-utils.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   roamkg:
     url: git@github.com:roaminsight/roamkg.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   sanitize-html:
     url: git@github.com:roaminsight/sanitize-html.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   semantic-search:
     url: git@github.com:roaminsight/semantic-search.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   serve:
     url: git@github.com:roaminsight/serve.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   serve-client:
     url: git@github.com:roaminsight/serve-client.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   shared-dotfiles:
     url: git@github.com:roaminsight/shared-dotfiles.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   solve-pv:
     url: git@github.com:roaminsight/solve-pv.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   spandoc:
     url: git@github.com:roaminsight/spandoc.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   spellcheck:
     url: git@github.com:roaminsight/spellcheck.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   spinnaker:
     url: git@github.com:roaminsight/spinnaker.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   surge:
     url: git@github.com:roaminsight/surge.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
   terraform-modules:
     url: git@github.com:roaminsight/terraform-modules.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
 
   test-utils:
     url: git@github.com:roaminsight/test-utils.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   transfer:
     url: git@github.com:roaminsight/transfer.git
     desc: General Roam Project
-    tags:
-      - Roam
 
   ui-core:
     url: git@github.com:roaminsight/ui-core.git
     desc: General Roam Project
-    tags:
-      - Roam
-      - Active
-      - Apps
 
 tasks:
   git-status:
