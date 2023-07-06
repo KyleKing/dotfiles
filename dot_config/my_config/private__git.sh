@@ -49,7 +49,7 @@ alias pick-branch='echo $(gh pr list -L100 | fzf | cut -f3)'
 alias gh-run-pick='gh workflow run --ref=$(gh pr list -L100 | fzf | cut -f3)'
 
 # Add shorthand alias for watchgha/watch_gha_runs (https://github.com/nedbat/watchgha)
-g-runs() {
+gh-runs() {
     GITHUB_TOKEN="$(gh auth token)"
     export GITHUB_TOKEN
     watch_gha_runs --wait-for-start

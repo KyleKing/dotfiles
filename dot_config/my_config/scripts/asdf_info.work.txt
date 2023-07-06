@@ -17,6 +17,7 @@ ASDF_DIR=/opt/homebrew/opt/asdf/libexec
 ASDF_CONFIG_FILE=/Users/kyleking/.asdfrc
 
 ASDF INSTALLED PLUGINS:
+deno                         https://github.com/asdf-community/asdf-deno.git master 87442fe
 extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
 nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 644ada3
 postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master 58c6808
