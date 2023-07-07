@@ -54,3 +54,78 @@ gh-runs() {
     export GITHUB_TOKEN
     watch_gha_runs --wait-for-start
 }
+
+# stern CLI helper
+sternly() {
+    # Usage: 'sternly' or 'sternly --include="error"'
+    NA="null"
+
+    pods=("chat-.*" "reviewer-.*" "boots-.*" "fluentd-sumologic-.*")
+    # shellcheck disable=SC2128
+    pod=$(gum choose $pods) || return 1
+    echo "selected pod: $pod"
+
+    containers=("$NA" "nginx" "chat-server" "celery-worker" "python-api")
+    # shellcheck disable=SC2128
+    container=$(gum choose $containers) || return 1
+    if [[ "$container" == "$NA" ]]; then
+        container=""
+    else
+        container="--container=$container"
+    fi
+    echo "selected container: $container"
+
+    since_arg="--since=$(gum choose '5m' '30m' '90m' '1440m' --selected='30m')" || return 1
+    echo "selected since: $since_arg"
+
+    # Note: all inner spaces must be escaped
+    excludes=("/readyz" "/metrics" "/healthz" "/livez" "GET\ /\ HTTP/1.1" "DarkMagic" "Health\ check")
+    selected_excludes=$(printf "--selected=%s " "${excludes[@]}")
+    # shellcheck disable=SC2128
+    chosen_excludes=$(eval "gum choose $excludes --no-limit $selected_excludes") || return 1
+    exclude_args=""
+    if [[ -n "$chosen_excludes" ]]; then
+        exclude_args=$(echo $chosen_excludes | xargs -I_ echo "--exclude=_" | tr '\n' ' ')
+    fi
+    echo "selected exclude: $exclude_args"
+
+    echo "\nRunning: "
+    echo "stern $pod $container $since_arg $exclude_args ${*} --output=raw | tail-jsonl"
+    # shellcheck disable=SC2068
+    stern $pod $container $since_arg $exclude_args ${@} --output=raw | tail-jsonl || return 1
+}
+
+# gh workflow CLI helpers
+function find_workflow_name {
+    local basenames=("$@")
+
+    local workflow_dir=""
+    workflow_dir="$(git rev-parse --show-toplevel)/.github/workflows"
+    local checked=""
+    for basename in "${basenames[@]}"; do
+        for suffix in ".yaml" ".yml"; do
+            local workflow_path="$workflow_dir/$basename$suffix"
+            if [[ -e "$workflow_path" ]]; then
+                echo "$basename$suffix"
+                return 0
+            fi
+            checked="$checked\n$workflow_path"
+        done
+    done
+
+    echo "No matching workflows were found:$checked" >&2
+    return 1
+}
+
+deploy-branch() {
+    # Usage: 'deploy-branch stage'
+    aws_env="$1"
+    if [[ -z "$aws_env" ]]; then
+        aws_env="dev"
+    fi
+
+    workflow_name=$(find_workflow_name "deploy-application" "terraform-apply")
+
+    echo "Running: gh workflow run $workflow_name -f=\"aws-env=$aws_env\" --ref=\$(git rev-parse --abbrev-ref HEAD)"
+    gh workflow run $workflow_name -f="aws-env=$aws_env" --ref="$(git rev-parse --abbrev-ref HEAD)" || return 1
+}
