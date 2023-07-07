@@ -60,7 +60,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tox-quickstart
     Injected Packages:
       - tox-asdf 0.1.0
-   package tui-typer-tutor 1.0.1, installed using Python 3.11.4
+   package tui-typer-tutor 1.1.0, installed using Python 3.11.4
     - ttt
     - tui-typer-tutor
    package typer-cli 0.0.13, installed using Python 3.11.4
