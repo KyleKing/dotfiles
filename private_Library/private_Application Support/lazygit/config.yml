@@ -39,7 +39,7 @@ customCommands:
         title: "Which application?"
         key: "App"
         suggestions:
-          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio\nSublime'"
+          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio\nSublime\ Text\nObsidian'"
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <c-a>
     description: Add Staged Files to Last Commit
