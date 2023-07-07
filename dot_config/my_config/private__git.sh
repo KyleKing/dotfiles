@@ -65,7 +65,7 @@ sternly() {
     pod=$(gum choose $pods) || return 1
     echo "selected pod: $pod"
 
-    containers=("$NA" "nginx" "chat-server" "celery-worker" "python-api")
+    containers=("$NA" "nginx" "chat-server" "celery-worker" "python-api" "boots-api")
     # shellcheck disable=SC2128
     container=$(gum choose $containers) || return 1
     if [[ "$container" == "$NA" ]]; then
