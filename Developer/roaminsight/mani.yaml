@@ -104,6 +104,10 @@ projects:
     url: git@github.com:roaminsight/email-utils.git
     desc: General Roam Project
 
+  gists:
+    url: git@github.com:roaminsight/gists.git
+    desc: General Roam Project
+
   github-actions:
     url: git@github.com:roaminsight/github-actions.git
     desc: General Roam Project
@@ -276,6 +280,10 @@ projects:
 
   semantic-search:
     url: git@github.com:roaminsight/semantic-search.git
+    desc: General Roam Project
+
+  semantic-search-lite:
+    url: git@github.com:roaminsight/semantic-search-lite.git
     desc: General Roam Project
 
   serve:
