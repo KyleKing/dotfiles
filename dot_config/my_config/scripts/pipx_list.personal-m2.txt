@@ -2,10 +2,10 @@ venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package bashate 2.1.1, installed using Python 3.11.4
     - bashate
-   package black 23.3.0, installed using Python 3.11.4
+   package black 23.7.0, installed using Python 3.11.4
     - black
     - blackd
-   package calcipy 1.4.0, installed using Python 3.11.4
+   package calcipy 1.4.1, installed using Python 3.11.4
     - calcipy
     - calcipy-lint
     - calcipy-pack
@@ -16,15 +16,15 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - calcipy_types
    package code2flow 2.5.1, installed using Python 3.11.4
     - code2flow
-   package copier 8.0.0, installed using Python 3.11.4
+   package copier 8.1.0, installed using Python 3.11.4
     - copier
    package copier-template-tester 1.2.6, installed using Python 3.11.4
     - ctt
    package flit 3.9.0, installed using Python 3.11.4
     - flit
-   package licensecheck 2023.1.2, installed using Python 3.11.4
+   package licensecheck 2023.1.4, installed using Python 3.11.4
     - licensecheck
-   package mdformat-mkdocs 1.0.1, installed using Python 3.11.4
+   package mdformat-mkdocs 1.0.2, installed using Python 3.11.4
     - markdown-it
     - mdformat
    package mypy-silent 0.4.0, installed using Python 3.11.4
@@ -32,22 +32,22 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package nox 2023.4.22, installed using Python 3.11.4
     - nox
     - tox-to-nox
-   package pipdeptree 2.9.3, installed using Python 3.11.4
+   package pipdeptree 2.10.0, installed using Python 3.11.4
     - pipdeptree
    package pycg 0.0.7, installed using Python 3.11.4
     - pycg
    package pygments 2.15.1, installed using Python 3.11.4
     - pygmentize
-   package pyright 1.1.315, installed using Python 3.11.4
+   package pyright 1.1.317, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
    package radian 0.6.6, installed using Python 3.11.4
     - radian
-   package ruff 0.0.272, installed using Python 3.11.4
+   package ruff 0.0.278, installed using Python 3.11.4
     - ruff
-   package sourcery-cli 1.4.0, installed using Python 3.11.4
+   package sourcery-cli 1.6.0, installed using Python 3.11.4
     - sourcery
    package tail-jsonl 1.2.4, installed using Python 3.11.4
     - tail-jsonl
@@ -65,7 +65,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tui-typer-tutor
    package typer-cli 0.0.13, installed using Python 3.11.4
     - typer
-   package watchgha 1.0.0, installed using Python 3.11.4
+   package watchgha 2.1.1, installed using Python 3.11.4
     - watch_gha_runs
    package whatsonpypi 0.3.7, installed using Python 3.11.4
     - whatsonpypi
