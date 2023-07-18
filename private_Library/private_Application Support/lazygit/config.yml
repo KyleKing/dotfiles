@@ -19,15 +19,14 @@ customCommands:
     command: git push --force
     context: global
     subprocess: true
-  # Use git-brws: https://github.com/rhysd/git-brws#usage
   - key: <c-o>
-    description: Open PR (or create new) with git-brws
-    command: git brws --pr
+    description: View the GitHub PR
+    command: gh pr view --web
     context: localBranches
     subprocess: true
   - key: "O"
     context: "global"
-    # FIXME: This doesn't open files from commit history
+    # FIXME: These don't open files from commit history
     command: "subl {{.SelectedFile.Name | quote}}"
     description: "Open file with Sublime"
   - key: "o"
