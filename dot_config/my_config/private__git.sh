@@ -117,6 +117,14 @@ function find_workflow_name {
     return 1
 }
 
+deploy-list() {
+    # Usage: 'deploy-list'
+    workflow_name=$(find_workflow_name "deploy-application" "terraform-apply")
+
+    echo "Running: gh run list --workflow=$workflow_name"
+    gh run list --workflow=$workflow_name || return 1
+}
+
 deploy-branch() {
     # Usage: 'deploy-branch stage'
     aws_env="$1"
