@@ -3,6 +3,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 23.3.0, installed using Python 3.11.4
     - black
     - blackd
+   package bump-pydantic 0.6.0, installed using Python 3.11.4
+    - bump-pydantic
    package calcipy 1.4.0, installed using Python 3.11.4
     - calcipy
     - calcipy-lint

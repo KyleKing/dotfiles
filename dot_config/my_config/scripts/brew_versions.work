@@ -199,7 +199,7 @@ lnav 0.11.2
 lolcat 100.0.1
 lua 5.4.6
 luacheck 1.1.1
-luajit 2.1.0-beta3-20230709.3
+luajit 2.1.0-beta3-20230712.2
 luarocks 3.9.2
 luv 1.45.0-0
 lz4 1.9.4
@@ -262,7 +262,7 @@ python-tabulate 0.9.0
 python-typing-extensions 4.7.1
 python@3.10 3.10.12_1
 python@3.11 3.11.4_1
-pyyaml 6.0_1
+pyyaml 6.0.1
 qemu 8.0.3
 rav1e 0.6.6
 readline 8.2.1
