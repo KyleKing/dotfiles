@@ -7,7 +7,7 @@
 | TODO   | Should be a for loop until home                                                  | 2022-07-28  | [dot_config/my_config/private_cli_tools.sh:103](https://github.com/KyleKing/dotfiles/blame/b8605e0e56543fe52ff2224ed0f670ef4bfe90ea/dot_config/my_config/private_cli_tools.sh#L57) |
 | TODO   | Should be a for loop to return to _last until battle (then stop and print _last) | 2022-07-28  | [dot_config/my_config/private_cli_tools.sh:107](https://github.com/KyleKing/dotfiles/blame/b8605e0e56543fe52ff2224ed0f670ef4bfe90ea/dot_config/my_config/private_cli_tools.sh#L61) |
 | FIXME  | Move VSCode to Symlinks:                                                         | 2022-02-21  | [dot_config/my_config/private_sync.sh:37](https://github.com/KyleKing/dotfiles/blame/0e93abff0289608b84c03589bf43698d6a344d45/dot_config/my_config/private_sync.sh#L38)            |
-| FIXME  | This doesn't open files from commit history                                      | N/A         | private_Library/private_Application Support/lazygit/config.yml:30                                                                                                                  |
+| FIXME  | These don't open files from commit history                                       | N/A         | private_Library/private_Application Support/lazygit/config.yml:29                                                                                                                  |
 | TODO   | Consider reinstalling sdkman when needed again                                   | 2023-01-27  | [private_dot_zshrc:24](https://github.com/KyleKing/dotfiles/blame/196d5902a1eba4a4bc40e08727fe18d0d5016323/private_dot_zshrc#L23)                                                  |
 
 Found code tags for FIXME (4), TODO (3)
