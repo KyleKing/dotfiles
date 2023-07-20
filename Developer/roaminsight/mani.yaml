@@ -282,10 +282,6 @@ projects:
     url: git@github.com:roaminsight/semantic-search.git
     desc: General Roam Project
 
-  semantic-search-lite:
-    url: git@github.com:roaminsight/semantic-search-lite.git
-    desc: General Roam Project
-
   serve:
     url: git@github.com:roaminsight/serve.git
     desc: General Roam Project
