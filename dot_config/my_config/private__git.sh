@@ -34,12 +34,17 @@ alias lzg='lazygit'
 # Checkout by number: "gprc 12"
 alias gprc="gh pr checkout"
 # Open PR in default browser
-alias gprw="gh pr view --web"
+alias openpr="gh pr view --web"
 # Get current PR number
 alias whichpr='gh pr view --json "number" | jq ".number"'
 
 # Prune closed PRs and branches
 alias gpoi='gh poi && gf --prune origin'
+
+# And squash from the CLI
+squash-me() {
+    gh pr merge "$(whichpr)" --body='' --squash && gco master && gpoi && gl
+}
 
 # Commit with no pre-commit
 alias gcnv='git commit --no-verify --message'
