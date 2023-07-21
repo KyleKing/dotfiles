@@ -13,7 +13,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.13.1
+awscli 2.13.2
 bat 0.23.0
 bat-extras 2023.06.15
 bdw-gc 8.2.4
@@ -27,7 +27,7 @@ capstone 4.0.2
 cffi 1.15.1
 cheat 4.4.0
 checkov 2.3.315
-chezmoi 2.35.0
+chezmoi 2.35.2
 circumflex 3.2
 cjson 1.7.16
 cloc 1.96
@@ -129,7 +129,7 @@ k9s 0.27.4
 krb5 1.21.1
 krew 0.4.4
 kubeconform 0.6.3
-kubernetes-cli 1.27.3
+kubernetes-cli 1.27.4
 kubevious 1.0.58
 kubie 0.20.1
 lame 3.100
@@ -227,7 +227,7 @@ node 20.4.0
 node@18 18.16.1_1
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 17.11.2
+oh-my-posh 17.11.3
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -310,6 +310,7 @@ trash 0.9.2
 tre-command 0.4.0
 tree 2.1.1
 tree-sitter 0.20.8
+tzdiff 1.2
 uchardet 0.0.8
 unbound 1.17.1_1
 unibilium 2.1.1
