@@ -25,7 +25,7 @@ ca-certificates 2023-05-30
 cairo 1.16.0_5
 cffi 1.15.1
 cheat 4.4.0
-chezmoi 2.34.3
+chezmoi 2.35.2
 cjson 1.7.16
 cloc 1.96
 cmake 3.26.4
@@ -38,6 +38,7 @@ dav1d 1.2.1
 ddgr 2.1
 dotenv-linter 3.3.0
 entr 5.3
+envchain 1.0.1
 exa 0.10.1_1
 fd 8.7.0
 ffmpeg 6.0
@@ -72,14 +73,14 @@ graphite2 1.3.14
 graphviz 8.1.0
 gts 0.7.6_2
 guile 3.0.9
-gum 0.10.0
+gum 0.11.0
 hadolint 2.12.0
 harfbuzz 8.0.1
-highway 1.0.4
+highway 1.0.5
 howdoi 2.0.20_2
 hyperfine 1.17.0
 icu4c 73.2
-imagemagick 7.1.1-12
+imagemagick 7.1.1-13
 imath 3.1.9
 isl 0.26
 jasper 4.0.0
@@ -170,7 +171,7 @@ netpbm 10.86.38_1
 nettle 3.9.1
 node 20.4.0
 npth 1.6
-oh-my-posh 17.11.2
+oh-my-posh 17.12.0
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -233,7 +234,7 @@ unbound 1.17.1_1
 unibilium 2.1.1
 unixodbc 2.3.11
 vale 2.28.0
-vhs 0.5.0
+vhs 0.6.0
 virtualenv 20.24.0
 webp 1.3.1
 wego 2.2
@@ -295,6 +296,7 @@ oversight 2.1.6
 paletro 1.7.0
 pika 0.0.15
 pomatez 1.2.3
+privileges 1.5.3
 qlmarkdown 1.0.15
 quicklook-json 2,1.0
 rectangle-pro 2.7.5,131

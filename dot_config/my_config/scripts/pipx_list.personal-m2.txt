@@ -7,7 +7,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - blackd
    package bump-pydantic 0.6.0, installed using Python 3.11.4
     - bump-pydantic
-   package calcipy 1.4.1, installed using Python 3.11.4
+   package calcipy 1.6.0, installed using Python 3.11.4
     - calcipy
     - calcipy-lint
     - calcipy-pack
@@ -26,32 +26,35 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - flit
    package licensecheck 2023.1.4, installed using Python 3.11.4
     - licensecheck
-   package mdformat-mkdocs 1.0.3, installed using Python 3.11.4
-    - markdown-it
+   package mdformat 0.7.16, installed using Python 3.11.4
     - mdformat
+    Injected Packages:
+      - mdformat-gfm 0.3.5
+      - mdformat-mkdocs 1.0.3
+      - mdformat-tables 0.4.1
    package mypy-silent 0.4.0, installed using Python 3.11.4
     - mypy-silent
    package nox 2023.4.22, installed using Python 3.11.4
     - nox
     - tox-to-nox
-   package pipdeptree 2.10.0, installed using Python 3.11.4
+   package pipdeptree 2.11.0, installed using Python 3.11.4
     - pipdeptree
    package pycg 0.0.7, installed using Python 3.11.4
     - pycg
    package pygments 2.15.1, installed using Python 3.11.4
     - pygmentize
-   package pyright 1.1.317, installed using Python 3.11.4
+   package pyright 1.1.318, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
    package radian 0.6.6, installed using Python 3.11.4
     - radian
-   package ruff 0.0.278, installed using Python 3.11.4
+   package ruff 0.0.280, installed using Python 3.11.4
     - ruff
    package sourcery-cli 1.6.0, installed using Python 3.11.4
     - sourcery
-   package tail-jsonl 1.2.4, installed using Python 3.11.4
+   package tail-jsonl 1.2.5, installed using Python 3.11.4
     - tail-jsonl
    package textual-astview 0.7.1, installed using Python 3.11.4
     - astare
@@ -62,7 +65,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - tox-quickstart
     Injected Packages:
       - tox-asdf 0.1.0
-   package tui-typer-tutor 1.1.0, installed using Python 3.11.4
+   package tui-typer-tutor 1.1.2, installed using Python 3.11.4
     - ttt
     - tui-typer-tutor
    package typer-cli 0.0.13, installed using Python 3.11.4
@@ -74,4 +77,4 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package xdot 1.2, installed using Python 3.11.4
     - xdot
     Injected Packages:
-      - numpy 1.23.4
+      - numpy 1.25.1
