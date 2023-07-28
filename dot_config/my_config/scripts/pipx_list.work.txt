@@ -3,7 +3,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 23.7.0, installed using Python 3.11.4
     - black
     - blackd
-   package bump-pydantic 0.6.0, installed using Python 3.11.4
+   package bump-pydantic 0.6.1, installed using Python 3.11.4
     - bump-pydantic
    package calcipy 1.6.0, installed using Python 3.11.4
     - calcipy
@@ -18,7 +18,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - cloudiscovery
     - cloudiscovery.cmd
     Injected Packages:
-      - markupsafe 2.0.1
+      - markupsafe 2.1.3
    package code2flow 2.5.1, installed using Python 3.11.4
     - code2flow
    package copier 8.1.0, installed using Python 3.11.4
@@ -49,7 +49,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package mdformat 0.7.16, installed using Python 3.11.4
     - mdformat
     Injected Packages:
-      - mdformat-mkdocs 1.0.2rc2
+      - mdformat-mkdocs 1.0.3
    package mypy-silent 0.4.0, installed using Python 3.11.4
     - mypy-silent
    package pipdeptree 2.11.0, installed using Python 3.11.4
@@ -58,7 +58,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pydeps
    package pygments 2.15.1, installed using Python 3.11.4
     - pygmentize
-   package pylint 2.17.4, installed using Python 3.11.4
+   package pylint 2.17.5, installed using Python 3.11.4
     - epylint
     - pylint
     - pylint-config
@@ -99,5 +99,5 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package xdot 1.2, installed using Python 3.11.4
     - xdot
     Injected Packages:
-      - numpy 1.23.4
-      - pygobject 3.42.2
+      - numpy 1.25.1
+      - pygobject 3.44.1
