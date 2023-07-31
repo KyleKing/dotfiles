@@ -35,9 +35,17 @@ first-pod() {
 }
 desc-first-pod() {
     # Use with: desc-first-pod reviewer
-    first-pod "$1" | xargs kubectl describe pods
+    match=$(first-pod "$1") || return 1
+    echo "$match" | xargs kubectl describe pods
+}
+desc-deployment() {
+    # Use with: desc-deployment
+    kubectl describe deployment "$1"
 }
 current-img() {
     # Use with: desc-first-pod reviewer
-    desc-first-pod "$1" | grep "Image:" | awk -F '  +' '{print $3}'
+    kubectl get deployment "$1" -o=json | jq '.spec.template.spec.containers[].image'
+    # Alternatively:
+    # match=$(desc-first-pod "$1") || return 1
+    # echo "$match" | grep "Image:" | awk -F '  +' '{print $3}'
 }
