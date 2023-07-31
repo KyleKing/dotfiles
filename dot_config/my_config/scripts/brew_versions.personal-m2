@@ -166,7 +166,6 @@ mpg123 1.31.3
 msgpack 6.0.0
 navi 2.22.1
 ncurses 6.4
-neofetch 7.1.0
 neovim 0.9.1
 netpbm 10.86.38_1
 nettle 3.9.1
@@ -184,7 +183,6 @@ openssl@1.1 1.1.1u
 openssl@3 3.1.1_1
 opus 1.4
 p11-kit 0.25.0
-pandoc 3.1.6
 pango 1.50.14
 pcre 8.45
 pcre2 10.42
@@ -210,7 +208,6 @@ rpg-cli 1.0.1
 rtmpdump 2.4+20151223_2
 rubberband 3.3.0
 sad 0.4.23
-screenresolution 1.6
 sdl2 2.28.1
 sevenzip 23.01
 shared-mime-info 2.2

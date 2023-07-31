@@ -22,6 +22,8 @@ projects:
     url: git@github.com:kyleking/extract_finances.git
     tags:
       - archived
+  KyleKing.github.io:
+    url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
     url: git@github.com:kyleking/mdformat-admon.git
     tags:
