@@ -13,7 +13,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.13.3
+awscli 2.13.5
 bat 0.23.0
 bat-extras 2023.06.15
 bdw-gc 8.2.4
@@ -27,7 +27,7 @@ capstone 4.0.2
 cffi 1.15.1
 cheat 4.4.0
 checkov 2.3.330_1
-chezmoi 2.35.2
+chezmoi 2.36.1
 circumflex 3.2
 cjson 1.7.16
 cloc 1.96
@@ -106,7 +106,7 @@ hcledit 0.2.9
 helm 3.12.2
 hicolor-icon-theme 0.17
 highway 1.0.5
-howdoi 2.0.20_2
+howdoi 2.0.20_3
 hstr 3.1
 htop 3.2.2
 http-prompt 2.1.0_1
@@ -131,7 +131,7 @@ krew 0.4.4
 kubeconform 0.6.3
 kubernetes-cli 1.27.4
 kubevious 1.0.58
-kubie 0.20.1
+kubie 0.21.0
 lame 3.100
 lazydocker 0.21.0
 leptonica 1.82.0_2
@@ -227,7 +227,7 @@ node 20.5.0
 node@18 18.17.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 18.0.1
+oh-my-posh 18.2.0
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -252,7 +252,7 @@ pkg-config 0.29.2_3
 plantuml 1.2023.10
 pngcrush 1.8.13
 podman 4.6.0
-poetry 1.5.1
+poetry 1.5.1_1
 pre-commit 3.3.3
 prettier 3.0.0
 psutils 3.0.8

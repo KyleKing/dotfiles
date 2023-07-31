@@ -19,9 +19,9 @@ ASDF_CONFIG_FILE=/Users/kyleking/.asdfrc
 ASDF INSTALLED PLUGINS:
 deno                         https://github.com/asdf-community/asdf-deno.git master 87442fe
 extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
-nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 644ada3
-postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master 58c6808
+nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 4f8aa3d
+postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master f8cf805
 python                       https://github.com/danhper/asdf-python.git master 8505457
-terraform                    https://github.com/asdf-community/asdf-hashicorp.git master c44c314
+terraform                    https://github.com/asdf-community/asdf-hashicorp.git master c048526
 textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
 textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
