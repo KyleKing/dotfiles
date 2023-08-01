@@ -98,6 +98,7 @@ brew "kubeconform"
 brew "kubevious"
 brew "kubie"
 brew "lazydocker"
+brew "lazygit", link: false
 brew "llama"
 brew "lnav"
 brew "lolcat"
