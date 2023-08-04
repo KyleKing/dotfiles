@@ -1,7 +1,7 @@
 act 0.2.49
 actionlint 1.6.25
 angle-grinder 0.19.2
-ansible 8.2.0_1
+ansible 8.2.0_2
 aom 3.6.1
 apr 1.7.4
 apr-util 1.6.3_1
@@ -13,7 +13,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.13.5
+awscli 2.13.6
 bat 0.23.0
 bat-extras 2023.06.15
 bdw-gc 8.2.4
@@ -30,7 +30,7 @@ checkov 2.3.345
 chezmoi 2.36.1
 circumflex 3.2
 cjson 1.7.16
-cloc 1.96
+cloc 1.96.1
 cmake 3.27.1
 cmatrix 2.0
 cmctl 1.12.3
@@ -84,8 +84,8 @@ gmp 6.2.1_1
 gnu-getopt 2.39.1
 gnupg 2.4.3
 gnutls 3.8.0
-go 1.20.6
-go@1.19 1.19.11
+go 1.20.7
+go@1.19 1.19.12
 goaccess 1.7.2
 gobject-introspection 1.76.1
 gojq 0.12.13
@@ -106,7 +106,7 @@ hcledit 0.2.9
 helm 3.12.2
 hicolor-icon-theme 0.17
 highway 1.0.5
-howdoi 2.0.20_3
+howdoi 2.0.20_4
 hstr 3.1
 htop 3.2.2
 http-prompt 2.1.0_2
@@ -121,6 +121,7 @@ jasper 4.0.0
 jbig2dec 0.19
 jc 1.23.4
 jira-cli 1.4.0
+jj 0.8.0
 jpeg 9e
 jpeg-turbo 3.0.0
 jpeg-xl 0.8.2
@@ -131,9 +132,9 @@ krew 0.4.4
 kubeconform 0.6.3
 kubernetes-cli 1.27.4
 kubevious 1.0.58
-kubie 0.21.0
+kubie 0.21.1
 lame 3.100
-lazydocker 0.21.0
+lazydocker 0.21.1
 lazygit 0.39.4
 leptonica 1.82.0_2
 less 633
@@ -235,9 +236,9 @@ opencore-amr 0.1.6
 openexr 3.1.9
 openjdk 20.0.1
 openjpeg 2.5.0_1
-openldap 2.6.5
-openssl@1.1 1.1.1u
-openssl@3 3.1.1_1
+openldap 2.6.6
+openssl@1.1 1.1.1v
+openssl@3 3.1.2
 opus 1.4
 ossp-uuid 1.6.2_2
 p11-kit 0.25.0
@@ -255,7 +256,7 @@ pngcrush 1.8.13
 podman 4.6.0
 poetry 1.5.1_1
 pre-commit 3.3.3
-prettier 3.0.0
+prettier 3.0.1
 psutils 3.0.8
 pycparser 2.21
 pygments 2.15.1_1
@@ -277,7 +278,7 @@ rust 1.71.0
 sad 0.4.23
 saml2aws 2.36.10
 screenresolution 1.6
-sdl2 2.28.1
+sdl2 2.28.2
 sevenzip 23.01
 shared-mime-info 2.2
 shellcheck 0.9.0
