@@ -1198,10 +1198,8 @@
         "comments": true,
         "strings": true
     },
-    "python.condaPath": "/usr/local/Caskroom/miniconda/base/bin/conda",
     "python.diagnostics.sourceMapsEnabled": false,
     "python.languageServer": "Pylance",
-    "python.linting.enabled": true,
     "python.linting.flake8Args|use-local-.flake8-instead": [
         "--annoy",
         "--assertive-snakecase",
@@ -1215,13 +1213,6 @@
         "--max-parameters-amount=6",
         "--per-file-ignores=test_*.py:S101,DAR101,E800",
         "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
-    ],
-    "python.linting.pydocstyleEnabled": false,
-    "python.linting.pylintEnabled": false,
-    "python.formatting.provider": "black",
-    "python.sortImports.args": [
-        "--profile",
-        "black"
     ],
     "python.pythonPath": ".venv/bin/python3",
     "python.pythonPath|pinned-asdf": "~/.asdf/shims/python",
@@ -1490,7 +1481,7 @@
     "markdown.preview.fontSize": 13,
     "sourcery.token": "{{ output "op" "item" "get" "Sourcery Token {Education}" "--field" "password" | trim }}",
     "git.enableSmartCommit": true,
-    "workbench.colorTheme": "SynthWave '84",
+    "workbench.colorTheme": "Base16 Eighties Dark",
     "workbench.editor.untitled.hint": "hidden",
     "redhat.telemetry.enabled": true,
     "terminal.integrated.tabs.enabled": false,
@@ -1524,5 +1515,33 @@
     ],
     "editor.fontSize": 13,
     "tabnine.experimentalAutoImports": true,
-    "checkov.token": "{{ output "op" "item" "get" "Checkov CI Token" "--field" "password" | trim }}"
+    "checkov.token": "{{ output "op" "item" "get" "Checkov CI Token" "--field" "password" | trim }}",
+    "totalTypeScript.hideAllTips": false,
+    "totalTypeScript.hideBasicTips": false,
+    "totalTypeScript.hiddenTips": [
+        "ts-object-type",
+        "basic-types",
+        "passing-generics-to-types",
+        "type-alias-declaration",
+        "record-utility-type",
+        "interface-declaration",
+        "variable-type-annotation",
+        "omit-utility-type",
+        "typing-function-parameters",
+        "function-return-type",
+        "array-type",
+        "optional-object-property",
+        "partial-utility-type",
+        "pick-utility-type",
+        "union-type",
+        "literal-type"
+    ],
+    "typescript.preferGoToSourceDefinition": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true,
+        "source.sortMembers": true
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "search.mode": "reuseEditor"
 }
