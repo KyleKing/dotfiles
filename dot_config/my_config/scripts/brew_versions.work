@@ -135,7 +135,6 @@ kubevious 1.0.58
 kubie 0.21.1
 lame 3.100
 lazydocker 0.21.1
-lazygit 0.39.4
 leptonica 1.82.0_2
 less 633
 libarchive 3.6.2_1
@@ -229,7 +228,7 @@ node 20.5.0
 node@18 18.17.0
 npth 1.6
 nyancat 1.5.2
-oh-my-posh 18.3.1
+oh-my-posh 18.3.3
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -328,7 +327,6 @@ wget 1.21.4
 x264 r3095
 x265 3.5
 xc 0.4.1
-xeol 0.4.10
 xh 0.18.0
 xmlto 0.0.28
 xorgproto 2023.2
