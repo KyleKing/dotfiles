@@ -87,8 +87,9 @@ repos:
     rev: 1.3.0
     hooks:
       - id: copier-forbidden-files
-      - id: lint-fix
-      - id: flake8
+      # PLANNED: There is not pyproject.toml file
+      # - id: lint-fix
+      # - id: flake8
       - id: tags
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.4.0
