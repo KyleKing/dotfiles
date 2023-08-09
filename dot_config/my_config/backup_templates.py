@@ -35,11 +35,11 @@ def back_sync_vscode_settings_to_template() -> None:
     for key in replacement_lookup:
         vscode_settings[key] = f'{key}-{SUFFIX}'
 
-    new_settings = json.dumps(vscode_settings, indent=4, sort_keys=not True)
+    new_settings = json.dumps(vscode_settings, indent=4, sort_keys=True)
     for key, value in replacement_lookup.items():
         new_settings = new_settings.replace(f'{key}-{SUFFIX}', value)
 
-    path_dest.write_text(new_settings)
+    path_dest.write_text(new_settings + '\n')
 
 
 if __name__ == '__main__':
