@@ -5,9 +5,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package black 23.7.0, installed using Python 3.11.4
     - black
     - blackd
-   package bump-pydantic 0.6.0, installed using Python 3.11.4
+   package bump-pydantic 0.6.1, installed using Python 3.11.4
     - bump-pydantic
-   package calcipy 1.6.0, installed using Python 3.11.4
+   package calcipy 1.6.3, installed using Python 3.11.4
     - calcipy
     - calcipy-lint
     - calcipy-pack
@@ -24,7 +24,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ctt
    package flit 3.9.0, installed using Python 3.11.4
     - flit
-   package licensecheck 2023.1.4, installed using Python 3.11.4
+   package licensecheck 2023.3, installed using Python 3.11.4
     - licensecheck
    package mdformat 0.7.16, installed using Python 3.11.4
     - mdformat
@@ -37,22 +37,22 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package nox 2023.4.22, installed using Python 3.11.4
     - nox
     - tox-to-nox
-   package pipdeptree 2.11.0, installed using Python 3.11.4
+   package pipdeptree 2.13.0, installed using Python 3.11.4
     - pipdeptree
    package pycg 0.0.7, installed using Python 3.11.4
     - pycg
-   package pygments 2.15.1, installed using Python 3.11.4
+   package pygments 2.16.1, installed using Python 3.11.4
     - pygmentize
-   package pyright 1.1.318, installed using Python 3.11.4
+   package pyright 1.1.322, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
    package radian 0.6.6, installed using Python 3.11.4
     - radian
-   package ruff 0.0.280, installed using Python 3.11.4
+   package ruff 0.0.284, installed using Python 3.11.4
     - ruff
-   package sourcery-cli 1.6.0, installed using Python 3.11.4
+   package sourcery-cli 1.7.0, installed using Python 3.11.4
     - sourcery
    package tail-jsonl 1.2.5, installed using Python 3.11.4
     - tail-jsonl

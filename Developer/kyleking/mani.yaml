@@ -3,35 +3,33 @@ projects:
   calcipy:
     url: git@github.com:kyleking/calcipy.git
     tags:
-      - calcipy
+      - calcipy-template
   calcipy_template:
     url: git@github.com:kyleking/calcipy_template.git
   copier-template-tester:
     url: git@github.com:kyleking/copier-template-tester.git
     tags:
-      - calcipy
+      - calcipy-template
   corallium:
     url: git@github.com:kyleking/corallium.git
     tags:
-      - calcipy
+      - calcipy-template
   cz_legacy:
     url: git@github.com:kyleking/cz_legacy.git
     tags:
-      - calcipy
+      - calcipy-template
   extract_finances:
     url: git@github.com:kyleking/extract_finances.git
     tags:
       - archived
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
+    tags:
+      - calcipy-template
   mdformat-admon:
     url: git@github.com:kyleking/mdformat-admon.git
-    tags:
-      - calcipy
   mdformat-mkdocs:
     url: git@github.com:kyleking/mdformat-mkdocs.git
-    tags:
-      - calcipy
   # My-Programming-Sketchbook:
   #   url: git@github.com:kyleking/My-Programming-Sketchbook.git
   # personal-man:
@@ -45,23 +43,23 @@ projects:
   pytest_cache_assert:
     url: git@github.com:kyleking/pytest_cache_assert.git
     tags:
-      - calcipy
+      - calcipy-template
   recipes:
     url: git@github.com:kyleking/recipes.git
     tags:
-      - calcipy
+      - calcipy-template
   shoal:
     url: git@github.com:kyleking/shoal.git
     tags:
-      - calcipy
+      - calcipy-template
   tail-jsonl:
     url: git@github.com:kyleking/tail-jsonl.git
     tags:
-      - calcipy
+      - calcipy-template
   tui-typer-tutor:
     url: git@github.com:kyleking/tui-typer-tutor.git
     tags:
-      - calcipy
+      - calcipy-template
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
 
@@ -110,3 +108,10 @@ tasks:
 
       - name: commit date
         cmd: git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" | sed 's/ //'
+
+  copier-auto-update:
+    desc: "Run `copier-auto-update`. Run with: `mani run copier-auto-update --tags=calcipy-template`"
+    cmd: |
+      copier update --UNSAFE --conflict=rej --defaults
+      git status
+    shell: zsh
