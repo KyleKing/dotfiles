@@ -1,11 +1,14 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
+   package awscli-local 0.21, installed using Python 3.11.4
+    - awslocal
+    - awslocal.bat
    package black 23.7.0, installed using Python 3.11.4
     - black
     - blackd
    package bump-pydantic 0.6.1, installed using Python 3.11.4
     - bump-pydantic
-   package calcipy 1.6.0, installed using Python 3.11.4
+   package calcipy 1.6.3, installed using Python 3.11.4
     - calcipy
     - calcipy-lint
     - calcipy-pack
@@ -35,7 +38,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
       - roam-packages-flake8 0.0.1
    package glances 3.4.0.3, installed using Python 3.11.4
     - glances
-   package gpt-engineer 0.0.7, installed using Python 3.11.4
+   package gpt-engineer 0.0.8, installed using Python 3.11.4
+    - ge
     - gpt-engineer
    package har2locust 0.8.4, installed using Python 3.11.4
     - har2locust
@@ -48,9 +52,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
       - mdformat-mkdocs 1.0.4
    package mypy-silent 0.4.0, installed using Python 3.11.4
     - mypy-silent
-   package pipdeptree 2.12.0, installed using Python 3.11.4
+   package pipdeptree 2.13.0, installed using Python 3.11.4
     - pipdeptree
-   package pydeps 1.12.13, installed using Python 3.11.4
+   package pydeps 1.12.17, installed using Python 3.11.4
     - pydeps
    package pygments 2.16.1, installed using Python 3.11.4
     - pygmentize
@@ -60,7 +64,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.320, installed using Python 3.11.4
+   package pyright 1.1.323, installed using Python 3.11.4
     - pyright
     - pyright-langserver
     - pyright-python
@@ -69,9 +73,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.10.1, installed using Python 3.11.4
     - pyupgrade
-   package ruff 0.0.282, installed using Python 3.11.4
+   package ruff 0.0.285, installed using Python 3.11.4
     - ruff
-   package sourcery-cli 1.6.0, installed using Python 3.11.4
+   package sourcery-cli 1.8.0, installed using Python 3.11.4
     - sourcery
    package tail-jsonl 1.2.5, installed using Python 3.11.4
     - tail-jsonl
