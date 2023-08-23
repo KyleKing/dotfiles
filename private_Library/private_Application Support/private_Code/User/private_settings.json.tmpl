@@ -1,14 +1,8 @@
 {
-    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
-    "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
-    "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
-    "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
-    "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
-    "C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
     "GitLive.Issue tracker integration": "Disabled",
     "GitLive.Special branches": "main|master|trunk|dev|develop|qa|test|release[-/].*|stage|prod",
-    "[c]|old": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
@@ -26,6 +20,9 @@
         "editor.insertSpaces": true,
         "editor.semanticHighlighting.enabled": true,
         "editor.tabSize": 4
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "breadcrumbs.enabled": true,
     "cSpell.enableFiletypes": [
@@ -1062,7 +1059,6 @@
     "editor.accessibilitySupport": "off",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
-        "source.organizeImports": true,
         "source.sortMembers": true
     },
     "editor.detectIndentation": true,
@@ -1185,6 +1181,7 @@
         "Colors: https://github.com/pgaspar/base16-eighties-dark/blob/master/base16-eighties-dark.tmTheme",
         "Other Dark Themes: https://vscodethemes.com/dark"
     ],
+    "eslint.codeActionsOnSave.rules": null,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.decorations.badges": false,
@@ -1447,7 +1444,8 @@
         "literal-type",
         "null-keyword",
         "as-assertion",
-        "typeof"
+        "typeof",
+        "any-type"
     ],
     "totalTypeScript.hideAllTips": false,
     "totalTypeScript.hideBasicTips": false,
