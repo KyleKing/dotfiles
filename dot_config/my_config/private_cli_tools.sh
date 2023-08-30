@@ -13,7 +13,7 @@ alias wttr="curl v2d.wttr.in"
 export CHEAT_USE_FZF=true
 # The cheat.zsh file isn't working as expected, so use this snippet instead
 #   From: https://github.com/cheat/cheat/issues/594#issuecomment-1228307435
-fch() {
+cheatz() {
     cheat -l | tail -n +2 | fzf | awk '{{ print $1 }}' | xargs -I {} cheat {}
 }
 
@@ -136,6 +136,8 @@ fi
 # Jira Dashboards
 # wraps jira-cli: https://github.com/ankitpokhrel/jira-cli
 r-jira() {
+    # shellcheck disable=SC2046
     export $(envchain JIRA env | grep JIRA_API_TOKEN=) || return 1
+    # shellcheck disable=SC2068
     jira ${@} || return 1
 }
