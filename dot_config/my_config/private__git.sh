@@ -131,11 +131,10 @@ deploy-list() {
 }
 
 deploy-branch() {
-    # Usage: 'deploy-branch stage'
-    aws_env="$1"
-    if [[ -z "$aws_env" ]]; then
-        aws_env="dev"
-    fi
+    # Usage: 'deploy-branch'
+    environs=("dev" "stage" "prod")
+    # shellcheck disable=SC2128
+    aws_env=$(gum choose $environs) || return 1
 
     workflow_name=$(find_workflow_name "deploy-application" "terraform-apply")
 
