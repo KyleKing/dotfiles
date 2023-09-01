@@ -310,6 +310,10 @@ projects:
     url: git@github.com:roaminsight/spinnaker.git
     desc: General Roam Project
 
+  sumo-logic:
+    url: git@github.com:roaminsight/sumo-logic.git
+    desc: General Roam Project
+
   surge:
     url: git@github.com:roaminsight/surge.git
     desc: General Roam Project
@@ -320,6 +324,10 @@ projects:
 
   test-utils:
     url: git@github.com:roaminsight/test-utils.git
+    desc: General Roam Project
+
+  textract-cli:
+    url: git@github.com:roaminsight/textract-cli.git
     desc: General Roam Project
 
   transfer:

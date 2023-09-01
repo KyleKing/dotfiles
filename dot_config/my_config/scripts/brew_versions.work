@@ -13,7 +13,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.13.13
+awscli 2.13.14
 bat 0.23.0
 bat-extras 2023.06.15
 bdw-gc 8.2.4
@@ -232,7 +232,7 @@ npth 1.6
 nspr 4.35
 nss 3.92
 nyancat 1.5.2
-oh-my-posh 18.5.0
+oh-my-posh 18.6.1
 oniguruma 6.9.8
 openblas 0.3.23
 opencore-amr 0.1.6
@@ -259,7 +259,7 @@ pngcrush 1.8.13
 podman 4.6.1
 poppler 23.08.0
 pre-commit 3.3.3
-prettier 3.0.2
+prettier 3.0.3
 psutils 3.1.1
 pycparser 2.21
 pygments 2.16.1
