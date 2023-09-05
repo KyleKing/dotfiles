@@ -1,2 +1,2 @@
 gotz v0.1.9
-lazygit commit=d99e983236dc2126da583b118448bd17ee692ddb, build date=2023-08-12T07:32:15Z, build source=unknown, version=d99e9832, os=darwin, arch=arm64, git version=2.41.0
+lazygit commit=e895052437d3da7e263a64ad7e7332513af3d7cc, build date=2023-09-04T14:58:07Z, build source=unknown, version=e8950524, os=darwin, arch=arm64, git version=2.42.0
