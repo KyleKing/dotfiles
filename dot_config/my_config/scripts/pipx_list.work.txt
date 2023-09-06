@@ -75,7 +75,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pylsp
    package pyupgrade 3.10.1, installed using Python 3.11.5
     - pyupgrade
-   package ruff 0.0.286, installed using Python 3.11.5
+   package ruff 0.0.287, installed using Python 3.11.5
     - ruff
    package sourcery-cli 1.8.0, installed using Python 3.11.5
     - sourcery
