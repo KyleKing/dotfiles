@@ -25,7 +25,7 @@ ca-certificates 2023-08-22
 cairo 1.16.0_5
 cffi 1.15.1
 cheat 4.4.0
-chezmoi 2.39.0
+chezmoi 2.39.1
 cjson 1.7.16
 cloc 1.98
 cmake 3.27.4
@@ -39,7 +39,7 @@ ddgr 2.1
 dotenv-linter 3.3.0
 entr 5.4
 envchain 1.0.1
-exa 0.10.1_2
+eza 0.11.0
 fd 8.7.0
 ffmpeg 6.0_1
 flac 1.4.3
@@ -54,7 +54,7 @@ gd 2.3.3_6
 gdbm 1.23
 gdk-pixbuf 2.42.10_1
 gettext 0.21.1
-gh 2.33.0
+gh 2.34.0
 ghostscript 10.01.2
 giflib 5.2.1
 git 2.42.0
@@ -66,9 +66,9 @@ glow 1.5.1
 gmp 6.2.1_1
 gnupg 2.4.3
 gnutls 3.8.1
-go 1.21.0
-go@1.19 1.19.12
-go@1.20 1.20.7
+go 1.21.1
+go@1.19 1.19.13
+go@1.20 1.20.8
 gojq 0.12.13
 graphite2 1.3.14
 graphviz 8.1.0
@@ -140,7 +140,7 @@ libvterm 0.3.2
 libwebsockets 4.3.2_1
 libx11 1.8.6
 libxau 1.0.11
-libxcb 1.15_1
+libxcb 1.16
 libxdmcp 1.1.4
 libxext 1.3.5
 libxrender 0.9.11
@@ -148,7 +148,6 @@ libxt 1.3.0
 libyaml 0.2.5
 libzip 1.10.1
 little-cms2 2.15
-llama 1.4.0
 lua 5.4.6
 luacheck 1.1.1
 luajit 2.1.0-beta3-20230813.2
@@ -170,14 +169,14 @@ ncurses 6.4
 neovim 0.9.1
 netpbm 11.02.03
 nettle 3.9.1
-node 20.5.1
+node 20.6.0
 npth 1.6
-oh-my-posh 18.6.3
+oh-my-posh 18.7.0_1
 oniguruma 6.9.8
-openblas 0.3.23
+openblas 0.3.24
 opencore-amr 0.1.6
 openexr 3.2.0
-openjdk 20.0.1
+openjdk 20.0.2
 openjpeg 2.5.0_1
 openldap 2.6.6
 openssl@1.1 1.1.1v
@@ -193,7 +192,7 @@ pipx 1.2.0
 pixman 0.42.2
 pkg-config 0.29.2_3
 plantuml 1.2023.10
-pnpm 8.7.1
+pnpm 8.7.4
 poetry 1.6.1
 pre-commit 3.4.0
 prettier 3.0.3
@@ -209,7 +208,7 @@ rav1e 0.6.6
 readline 8.2.1
 ripgrep 13.0.0
 rpg-cli 1.0.1
-rtmpdump 2.4+20151223_2
+rtmpdump 2.4-20151223_3
 rubberband 3.3.0
 sad 0.4.23
 sdl2 2.28.2
@@ -226,7 +225,7 @@ sqlite 3.43.0_1
 srt 1.5.2
 stylua 0.18.1
 svt-av1 1.7.0
-tcl-tk 8.6.13_4
+tcl-tk 8.6.13_5
 tesseract 5.3.2_1
 theora 1.1.1
 tidy-html5 5.8.0
@@ -240,6 +239,7 @@ unixodbc 2.3.12
 vale 2.28.2
 vhs 0.6.0
 virtualenv 20.24.4
+walk 1.6.2
 webp 1.3.1
 wego 2.2
 x264 r3095
@@ -255,7 +255,7 @@ zoxide 0.9.2
 zsh 5.9
 zstd 1.5.5
 1password 8.9.13
-1password-cli 2.20.0
+1password-cli 2.21.0
 alfred 5.0.6,2110
 appcleaner 3.6.7,4301
 blockblock 2.1.5

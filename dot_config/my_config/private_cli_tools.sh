@@ -38,17 +38,11 @@ rgso() {
     fi
 }
 
-# Map exa to ll (quicker ls) with some default options
-alias ls='exa --icons'
+# Map eza to ll (quicker ls) with some default options
+alias ls='eza --icons'
 alias lsa='ls --all'
 alias lsl='ls --long --header --created --git'
 alias lst='lsl -TL 2'
-
-# Configure llama (https://github.com/antonmedv/llama?ref=console.dev#usage)
-# Note that ll conflicts with exa's mapping to ll
-function lla {
-    cd "$(llama "$@")" || return 1
-}
 
 # UI folder navigation from the terminal
 cdt() {
