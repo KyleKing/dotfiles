@@ -16,7 +16,6 @@ bat-extras-batman 2023.03.21
 bat-extras-batpipe 2023.03.21
 bat-extras-batwatch 2023.03.21
 bat-extras-prettybat 2023.03.21
-bdw-gc 8.2.4
 bottom 0.9.6
 brew-rmtree 2.2.6_1
 brotli 1.1.0
@@ -29,7 +28,6 @@ chezmoi 2.39.1
 cjson 1.7.16
 cloc 1.98
 cmake 3.27.4
-cmocka 1.1.7
 coreutils 9.4
 curl 8.2.1
 curlie 1.7.1
@@ -67,13 +65,10 @@ gmp 6.2.1_1
 gnupg 2.4.3
 gnutls 3.8.1
 go 1.21.1
-go@1.19 1.19.13
-go@1.20 1.20.8
 gojq 0.12.13
 graphite2 1.3.14
 graphviz 8.1.0
 gts 0.7.6_3
-guile 3.0.9
 gum 0.11.0
 hadolint 2.12.0
 harfbuzz 8.1.1
@@ -171,7 +166,7 @@ netpbm 11.02.03
 nettle 3.9.1
 node 20.6.0
 npth 1.6
-oh-my-posh 18.7.0_1
+oh-my-posh 18.8.1
 oniguruma 6.9.8
 openblas 0.3.24
 opencore-amr 0.1.6
@@ -190,7 +185,6 @@ php 8.2.10
 pinentry 1.2.1
 pipx 1.2.0
 pixman 0.42.2
-pkg-config 0.29.2_3
 plantuml 1.2023.10
 pnpm 8.7.4
 poetry 1.6.1

@@ -38,13 +38,13 @@ rgso() {
     fi
 }
 
-# Map eza to ll (quicker ls) with some default options
+# Replace ls with eza
 alias ls='eza --icons'
 alias lsa='ls --all'
 alias lsl='ls --long --header --created --git'
 alias lst='lsl -TL 2'
 
-# UI folder navigation from the terminal
+# UI folder navigation from the terminal using tere (alternative is walk)
 cdt() {
     result=$(tere "$@")
     [ -n "$result" ] && cd -- "$result" || return
