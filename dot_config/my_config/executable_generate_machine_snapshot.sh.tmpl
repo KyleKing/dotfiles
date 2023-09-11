@@ -27,9 +27,9 @@ brew list --versions > "$SCRIPT_DIR/brew_versions.{{- .computer_name }}"
 (brew doctor 2> "$SCRIPT_DIR/brew_doctor.{{- .computer_name }}") || true
 
 # Keep local checkouts up-to-date
-cd ~/Developer/Local
-./upgrade-local.sh
-./dump-version.sh > "$SCRIPT_DIR/local.{{- .computer_name -}}.txt"
+cd ~/Developer/nightly-packages
+./upgrade-nightly-packages.sh
+./dump-version.sh > "$SCRIPT_DIR/nightly-packages.{{- .computer_name -}}.txt"
 cd
 
 gh extension list > "$SCRIPT_DIR/gh_extensions.{{- .computer_name -}}.txt"
