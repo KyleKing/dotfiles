@@ -1,7 +1,0 @@
-[1mPlease note that these warnings are just used to help the Homebrew maintainers
-with debugging if you file an issue. If everything you use Homebrew for is
-working fine: please don't worry or file an issue; just ignore this. Thanks![0m
-
-Warning: Some installed formulae are deprecated or disabled.
-You should find replacements for the following formulae:
-  go@1.19
