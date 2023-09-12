@@ -339,6 +339,13 @@ projects:
     desc: General Roam Project
 
 tasks:
+  remove-force-pushed-tags:
+    desc: See https://github.com/roaminsight/github-actions/pull/121
+    cmd: |
+      for env in dev stage prod; do
+          git push --delete origin tags/$env
+      done
+
   git-status:
     desc: show working tree status
     output: table
@@ -356,10 +363,10 @@ tasks:
       if (("$COUNT" > 1)); then gh poi && git pull; else echo "No checked are checked out"; fi
 
   git-prune:
-    desc: remove local branches which have been deleted on remote
+    desc: remove local branches and tags which have been deleted on remote
     env:
       remote: origin
-    cmd: git fetch --prune origin
+    cmd: git fetch --prune --prune-tags
 
   migrate-poetry:
     desc: Migrate deprecated poetry 'default=true' source to 'priority=default'
