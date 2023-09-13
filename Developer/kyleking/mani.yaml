@@ -24,8 +24,6 @@ projects:
       - archived
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
-    tags:
-      - calcipy-template
   mdformat-admon:
     url: git@github.com:kyleking/mdformat-admon.git
   mdformat-mkdocs:
@@ -43,7 +41,7 @@ projects:
   pytest_cache_assert:
     url: git@github.com:kyleking/pytest_cache_assert.git
     tags:
-      - calcipy-template
+      - archived
   recipes:
     url: git@github.com:kyleking/recipes.git
     tags:
@@ -81,10 +79,10 @@ tasks:
       if (("$COUNT" > 1)); then gh poi && git pull; else echo "No checked are checked out"; fi
 
   git-prune:
-    desc: remove local branches which have been deleted on remote
+    desc: remove local branches and tags which have been deleted on remote
     env:
       remote: origin
-    cmd: git fetch --prune origin
+    cmd: git fetch --prune --prune-tags
 
   git-daily:
     desc: show branch, local and remote diffs, last commit and date
@@ -108,6 +106,23 @@ tasks:
 
       - name: commit date
         cmd: git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" | sed 's/ //'
+
+  poetry-update:
+    desc: "Run `poetry update`. Run with: `mani run poetry-update --tags=calcipy-template`"
+    cmd: |
+      poetry update
+      ./run pack.install-extras
+      ./run main --keep-going
+
+      git branch poetry-update
+      git checkout poetry-update
+      git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
+      git add .
+      git commit --message="ci: poetry update"
+      git push
+      gh pr create --assignee="@me" --title="Poetry Update" --web
+      git status
+    shell: zsh
 
   copier-auto-update:
     desc: "Run `copier-auto-update`. Run with: `mani run copier-auto-update --tags=calcipy-template`"

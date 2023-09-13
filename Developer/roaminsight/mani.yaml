@@ -390,6 +390,7 @@ tasks:
 
       TITLE="[PPLMS-2723] Migrate to pyproject.toml source to 'priority'"
       git branch PPLMS-2723-MigrateSourePriority
+      git checkout PPLMS-2723-MigrateSourePriority
       git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
       git add .
       git commit --message="$TITLE"
