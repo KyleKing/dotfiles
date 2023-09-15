@@ -79,6 +79,8 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - ruff
    package sourcery-cli 1.8.0, installed using Python 3.11.5
     - sourcery
+   package sqlfluff 2.3.2, installed using Python 3.11.5
+    - sqlfluff
    package tail-jsonl 1.2.5, installed using Python 3.11.5
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.11.5
