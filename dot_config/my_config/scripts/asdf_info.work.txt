@@ -8,7 +8,7 @@ BASH VERSION:
 3.2.57(1)-release
 
 ASDF VERSION:
-v0.13.0
+v0.13.1
 
 ASDF INTERNAL VARIABLES:
 ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=.tool-versions
@@ -26,3 +26,4 @@ python                       https://github.com/danhper/asdf-python.git master 8
 terraform                    https://github.com/asdf-community/asdf-hashicorp.git master c048526
 textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
 textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
+yarn                         https://github.com/twuni/asdf-yarn.git main 376c540
