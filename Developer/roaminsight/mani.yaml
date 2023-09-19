@@ -342,9 +342,12 @@ tasks:
   remove-force-pushed-tags:
     desc: See https://github.com/roaminsight/github-actions/pull/121
     cmd: |
+      git pull --tags
       for env in dev stage prod; do
-          git push --delete origin tags/$env
+          # git push --delete origin tags/$env
+          git tag --list --sort=-creatordate "$env-*" | xargs -I{} git push --delete origin "{}"
       done
+      git fetch --prune --prune-tags
 
   git-status:
     desc: show working tree status
