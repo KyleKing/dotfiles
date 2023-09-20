@@ -120,6 +120,7 @@ keybinding:
     openFile: "e" # null should work, but wasn't. So assign to e to overlap with edit
 gui:
   expandFocusedSidePanel: true
+  scrollHeight: 15
   showBottomLine: false # for hiding the bottom information line (unless it has important information to tell you)
   theme:
     selectedLineBgColor:
@@ -130,7 +131,7 @@ gui:
       - reverse # High Contrast
     cherryPickedCommitFgColor:
       - reverse # High Contrast
-  showIcons: true
+  nerdFontsVersion: "3"
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
