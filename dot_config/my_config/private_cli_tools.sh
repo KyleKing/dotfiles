@@ -83,13 +83,13 @@ rcd() {
     rpg-cli cd "$@" || return 1
     cd "$(rpg-cli pwd)" || return 1
     rpg-cli ls || return 1
-    echo "$(rpg-cli pwd)"
+    rpg-cli pwd
 }
 rpz() {
     z "$@" || return 1
     rpg-cli cd "$PWD" || return 1
     rpg-cli ls || return 1
-    echo "$(rpg-cli pwd)"
+    rpg-cli pwd
 }
 rph() {
     # Heal
@@ -103,14 +103,14 @@ rph() {
 }
 alias rpl="rpg-cli ls"
 rpin() {
-    echo "$(rpg-cli pwd)" || return 1
+    rpg-cli pwd || return 1
     rcd ~ || return 1
     rpg-cli ls || return 1
     echo "~~ Stats ~~"
     rpg-cli stat || return 1
-    echo "\n~~ Shop ~~"
+    printf "\n~~ Shop ~~"
     rpg-cli buy || return 1
-    echo "\n~~ Quests ~~"
+    printf "\n~~ Quests ~~"
     rpg-cli todo || return 1
 }
 
@@ -119,13 +119,6 @@ alias jq='gojq'
 
 # Tip: check current path with (thanks to ChatGPT!):
 # echo $PATH | awk '{gsub(/:/, "\n"); print}'
-
-# Added by gpt-engineer
-if [[ -f ~/.docker/init-zsh.sh ]]; then
-    autoload -Uz compinit
-    zstyle ':completion:*' menu select
-    fpath+=~/.zfunc
-fi
 
 # Jira Dashboards
 # wraps jira-cli: https://github.com/ankitpokhrel/jira-cli
