@@ -2,7 +2,13 @@
 
 # If adding any new packages, make sure to also update dump-version.sh
 original_dir=$PWD
-for pth in cs gotz lazygit "sh/cmd/shfmt"; do echo "Upgrading $pth" && cd "$pth" && git pull && go install . && cd "$original_dir"; done
+for pth in cs gotz lazygit "sh/cmd/shfmt"; do
+    echo "Upgrading $pth" && cd "$pth" && git pull && go install . && cd "$original_dir"
+done
+
+for pth in "catppuccin-lazygit"; do
+    echo "Upgrading $pth" && cd "$pth" && git pull && cd "$original_dir"
+done
 
 pth="firefox-vertical-tabs"
 echo "Upgrading $pth" && cd "$pth" && git pull && cd "$original_dir"
