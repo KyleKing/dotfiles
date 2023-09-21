@@ -6,10 +6,6 @@ for pth in cs gotz lazygit "sh/cmd/shfmt"; do
     echo "Upgrading $pth" && cd "$pth" && git pull && go install . && cd "$original_dir"
 done
 
-for pth in "catppuccin-lazygit"; do
-    echo "Upgrading $pth" && cd "$pth" && git pull && cd "$original_dir"
-done
-
 pth="firefox-vertical-tabs"
 echo "Upgrading $pth" && cd "$pth" && git pull && cd "$original_dir"
 # # Note: symlink this project into the Firefox profiles (id's might differ per system)

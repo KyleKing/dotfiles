@@ -18,10 +18,6 @@ git-set-upstream() {
     git push "$repo" "$branch" --set-upstream
 }
 
-# Use the catppuccin theme synced from the nightly-packages directory
-LG_CONFIG_DIR=$(lazygit --print-config-dir)
-NIGHTLY_PKG_DIR="$HOME/Developer/nightly-packages"
-export LG_CONFIG_FILE="$LG_CONFIG_DIR/config.yml,$NIGHTLY_PKG_DIR/catppuccin-lazygit/themes/mocha/rosewater.yml"
 alias lzg='lazygit'
 
 # Navigate to top-level git directory (from: https://github.com/kakulukia/dotfiles/blob/eb4fd73d876727a6325362b21fad45dc7bd18913/.alias#L25C1-L25C115)

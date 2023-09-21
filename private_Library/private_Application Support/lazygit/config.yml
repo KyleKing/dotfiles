@@ -123,14 +123,35 @@ gui:
   scrollHeight: 15
   showBottomLine: false # for hiding the bottom information line (unless it has important information to tell you)
   theme:
+    # selectedLineBgColor:
+    #   - default # Bold with no background
+    # selectedRangeBgColor:
+    #   - default # Bold with no background
+    # cherryPickedCommitBgColor:
+    #   - reverse # High Contrast
+    # cherryPickedCommitFgColor:
+    #   - reverse # High Contrast
+    activeBorderColor:
+      - "#f5e0dc"
+      - bold
+    inactiveBorderColor:
+      - "#a6adc8"
+    optionsTextColor:
+      - "#89b4fa"
     selectedLineBgColor:
-      - default # Bold with no background
+      - "#313244"
     selectedRangeBgColor:
-      - default # Bold with no background
+      - "#313244"
     cherryPickedCommitBgColor:
-      - reverse # High Contrast
+      - "#45475a"
     cherryPickedCommitFgColor:
-      - reverse # High Contrast
+      - "#f5e0dc"
+    unstagedChangesColor:
+      - "#f38ba8"
+    defaultFgColor:
+      - "#cdd6f4"
+    searchingActiveBorderColor:
+      - "#f9e2af"
   nerdFontsVersion: "3"
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md

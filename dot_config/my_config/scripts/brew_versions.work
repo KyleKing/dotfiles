@@ -245,6 +245,7 @@ pandoc 3.1.7
 pango 1.50.14
 pcre 8.45
 pcre2 10.42
+pet 0.5.0
 php 8.2.10
 pinentry 1.2.1
 pipx 1.2.0
