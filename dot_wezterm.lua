@@ -41,17 +41,19 @@ return {
         -- Map tab navigation
         { key = "LeftArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
         { key = "RightArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
-        -- Split and run default program with intuitive _ or |
-        {
-            key = "_",
-            mods = "CTRL|SHIFT|ALT",
-            action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
-        },
-        {
-            key = "|",
-            mods = "CTRL|SHIFT|ALT",
-            action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
-        },
+
+        -- -- Split and run default program with intuitive _ or |
+        -- {
+        --     key = "_",
+        --     mods = "CTRL|SHIFT|ALT",
+        --     action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
+        -- },
+        -- {
+        --     key = "|",
+        --     mods = "CTRL|SHIFT|ALT",
+        --     action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
+        -- },
+
         -- Map jumping between words to Standard Mac keys
         -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
         { key = "LeftArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bb" }) },
