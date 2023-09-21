@@ -17,6 +17,5 @@ ASDF_DIR=/opt/homebrew/opt/asdf/libexec
 ASDF_CONFIG_FILE=/Users/kyleking/.asdfrc
 
 ASDF INSTALLED PLUGINS:
-bun                          https://github.com/cometkim/asdf-bun.git main 51d18b3
 nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 4f8aa3d
 python                       https://github.com/danhper/asdf-python.git master 8505457

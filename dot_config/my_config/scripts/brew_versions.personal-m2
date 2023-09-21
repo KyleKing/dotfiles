@@ -84,6 +84,7 @@ jbig2dec 0.20
 jpeg-turbo 3.0.0
 jpeg-xl 0.8.2_1
 json-c 0.17
+json5 2.2.3
 krb5 1.21.2
 lame 3.100
 leptonica 1.83.1

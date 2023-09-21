@@ -25,6 +25,7 @@ export plugins=(
     # perms: recursively set permissions (fixperms, set755, set644)
     # python: useful aliases (`pyfind` recursively find .py / `pyclean` Delete byte and cache)
     # timer: Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
+    # tmux: auto-start in tmux session, tmuxconf to edit config, tl to list, ta to attach, etc.
     # urltools: urlencode/urldecode (urldecode 'https%3A%2F%2Fgithub.com%2Fohmyzsh%2Fohmyzsh%2Fsearch%3Fq%3Durltools%26type%3DCode')
     copybuffer
     copypath
@@ -35,6 +36,7 @@ export plugins=(
     # perms
     # python
     timer
+    tmux
     # urltools
 
     # lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
