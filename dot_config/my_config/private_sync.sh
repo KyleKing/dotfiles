@@ -52,3 +52,10 @@ ch-rad() {
     # open LazyGit to review changes
     lazygit
 }
+
+# Obsidian Syncing Snippets
+# FYI: `man strftime` provides the same information as Python and that website
+alias mvl="cd / && z obsidian-kyleking-vault && git pull"
+mvb() {
+    cd / && z obsidian-kyleking-vault && git add . && gcmsg "Manual vault backup - $(date -u "+%b %d, %Y %H:%M") Sep 21, 2023 06:51" && lzg
+}

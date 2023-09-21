@@ -30,7 +30,7 @@ export plugins=(
     copybuffer
     copypath
     # encode64
-    # git
+    git
     # history
     # macos
     # perms
