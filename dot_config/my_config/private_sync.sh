@@ -6,14 +6,14 @@
 
 ch-app() {
     # Apply any changes to local files
-    eval "$(op signin)" || return
+    eval "$(op signin)" || return 1
     PAGER="" chezmoi apply --verbose
 }
 
 ch-sync() {
     # Pull latest version and apply to local files
-    eval "$(op signin)" || return
-    cd "$(chezmoi source-path)" || return
+    eval "$(op signin)" || return 1
+    cd "$(chezmoi source-path)" || return 1
     PAGER="" chezmoi update --verbose
 
     # Ensure other packages are up to date:
@@ -27,23 +27,12 @@ ch-scripts() {
 
 ch-rad() {
     # Prevent overwriting chezmoi edits by checking for staged or unstaged changes
-    cd "$(chezmoi source-path)" || return
+    cd "$(chezmoi source-path)" || return 1
     if output=$(git status --porcelain) && [ -z "$output" ]; then
-        eval "$(op signin)" || return
-        ch-scripts || return
+        eval "$(op signin)" || return 1
+        ch-scripts || return 1
         # Sync with files already tracked by chezmoi
-        PAGER="" chezmoi re-add --verbose || return
-        # Previously attempted to sync with directories, but too much noise
-        # FIXME: Move VSCode to Symlinks:
-        # 	https://github.com/twpayne/chezmoi/blob/master/docs/HOWTO.md#handle-configuration-files-which-are-externally-modified
-        #
-        # ch-add-dir ~/Library/Application\ Support/Code/User/
-        # chezmoi cd
-        # cd private_Library/private_Application\ Support/private_Sublime\ Text
-        # rm -rf User
-        # mv /Users/kyleking/Library/Application\ Support/Sublime\ Text/Packages/User/ ./User
-        # cd ~/Library/Application\ Support/Sublime\ Text/Packages/
-        # ln -s /Users/kyleking/.local/share/chezmoi/private_Library/private_Application\ Support/private_Sublime\ Text/private_Packages/User
+        PAGER="" chezmoi re-add --verbose || return 1
     else
         RED='\033[0;31m'
         NC='\033[0m'
@@ -57,5 +46,7 @@ ch-rad() {
 # FYI: `man strftime` provides the same information as Python and that website
 alias mvl="cd / && z obsidian-kyleking-vault && git pull"
 mvb() {
-    cd / && z obsidian-kyleking-vault && git add . && gcmsg "Manual vault backup - $(date -u "+%b %d, %Y %H:%M") Sep 21, 2023 06:51" && lzg
+    MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
+    printf "Creating commit for: '%s'\n" "$MSG"
+    cd / && z obsidian-kyleking-vault && git add . && gcmsg "$MSG" && lzg
 }
