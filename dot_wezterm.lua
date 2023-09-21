@@ -20,23 +20,24 @@
 -- https://github.com/wez/wezterm/discussions/628
 
 local wezterm = require("wezterm")
-local act = wezterm.action
+-- local act = wezterm.action
 
 return {
     bold_brightens_ansi_colors = true,
     initial_cols = 200,
     initial_rows = 60,
+    scrollback_lines = 7500,
 
     keys = {
-        -- Clears the scrollback and viewport, and then sends CTRL-L to ask the shell to redraw its prompt
-        {
-            key = "K",
-            mods = "CTRL|SHIFT",
-            action = act.Multiple({
-                act.ClearScrollback("ScrollbackAndViewport"),
-                act.SendKey({ key = "L", mods = "CTRL" }),
-            }),
-        },
+        -- -- Clears the scrollback and viewport, and then sends CTRL-L to ask the shell to redraw its prompt
+        -- {
+        --     key = "K",
+        --     mods = "CTRL|SHIFT",
+        --     action = act.Multiple({
+        --         act.ClearScrollback("ScrollbackAndViewport"),
+        --         act.SendKey({ key = "L", mods = "CTRL" }),
+        --     }),
+        -- },
         -- Map tab navigation
         { key = "LeftArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
         { key = "RightArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },

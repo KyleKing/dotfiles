@@ -21,8 +21,12 @@ export SAVEHIST=25000 # is the number of lines or commands that (a) are allowed 
 bindkey -e
 
 # Based on: https://github.com/zsh-users/zsh-autosuggestions/issues/609#issuecomment-904204583
-bindkey "^N" history-beginning-search-forward
-bindkey "^P" history-beginning-search-backward
+# from showkey, these are up/down
+# bindkey "^N" history-beginning-search-forward
+# bindkey "^P" history-beginning-search-backward
+# Other options: https://www.gnu.org/software/bash/manual/html_node/Commands-For-History.html
+bindkey "\C-j" history-beginning-search-forward
+bindkey "\C-k" history-beginning-search-backward
 
 # Useful aliases for working with history
 # > View JSON in CLI
@@ -35,7 +39,7 @@ alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
 # Useful combination of mkdir and cd
 mkcd() {
-    mkdir -p $1 && cd $1 || return
+    mkdir -p "$1" && cd "$1" || return
 }
 
 # From: https://github.com/kakulukia/dotfiles/blob/eb4fd73d876727a6325362b21fad45dc7bd18913/.alias#L92C1-L130C24
