@@ -20,13 +20,11 @@ export HISTSIZE=25000 # number of lines or commands that are stored in memory in
 export SAVEHIST=25000 # is the number of lines or commands that (a) are allowed in the history file at startup time of a session, and (b) are stored in the history file at the end of your bash session for use in future sessions
 bindkey -e
 
-# Based on: https://github.com/zsh-users/zsh-autosuggestions/issues/609#issuecomment-904204583
-# from showkey, these are up/down
-# bindkey "^N" history-beginning-search-forward
-# bindkey "^P" history-beginning-search-backward
-# Other options: https://www.gnu.org/software/bash/manual/html_node/Commands-For-History.html
-bindkey "\C-j" history-beginning-search-forward
-bindkey "\C-k" history-beginning-search-backward
+# Bash History Commands: https://www.gnu.org/software/bash/manual/html_node/Commands-For-History.html
+#   end-of-history (M->)
+#   FYI: `M-` is the meta key, which is either ESC (<C-[>) then the key or sometimes Alt + key
+bindkey "\C-n" history-beginning-search-forward
+bindkey "\C-p" history-beginning-search-backward
 
 # Sort and Format JSON
 alias sfj="json5 | jq"

@@ -67,8 +67,11 @@ btail() {
 }
 
 # Configuration for McFly for menu-based history search
-export MCFLY_RESULTS=50
+# All keybindings: https://github.com/copy/mcfly/blob/7a952c68c4910bcdeebaae2ab8b2cc82c60e4677/src/interface.rs#L541-L676
+#   tab to paste without run
+export MCFLY_DISABLE_MENU=TRUE
 export MCFLY_FUZZY=2
+export MCFLY_RESULTS=50
 
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                         # hh to be alias for hstr

@@ -72,7 +72,7 @@ source $ZSH/oh-my-zsh.sh
 # Plugin configuration
 
 # Configuration for zsh-autosuggestions
-export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # Keyword shortcuts for different acceptance strategies
 # Tab: List of Suggestions for next word. Auto-accepts if only one option
 #   Tab (again): to scroll through list
