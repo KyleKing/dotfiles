@@ -4,6 +4,7 @@
 #
 # Add global go modules to PATH
 
-export PATH="$PATH:$(go env GOPATH)/bin"
+GOPATH="$(go env GOPATH)"
+export PATH="$PATH:$GOPATH/bin"
 
 # Install gotz with: go install github.com/merschformann/gotz@latest
