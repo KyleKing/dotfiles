@@ -5,13 +5,6 @@ stripComponents = 1
 type = "archive"
 url = "https://github.com/MichaelAquilina/zsh-auto-notify/archive/master.tar.gz"
 
-[".oh-my-zsh/custom/plugins/git-extra-commands"]
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
-type = "archive"
-url = "https://github.com/unixorn/git-extra-commands/archive/main.tar.gz"
-
 [".oh-my-zsh/custom/plugins/you-should-use"]
 exact = true
 refreshPeriod = "168h"
@@ -32,13 +25,6 @@ refreshPeriod = "168h"
 stripComponents = 1
 type = "archive"
 url = "https://github.com/zsh-users/zsh-completions/archive/master.tar.gz"
-
-[".oh-my-zsh/custom/plugins/zsh-core"]
-exact = true
-refreshPeriod = "168h"
-stripComponents = 1
-type = "archive"
-url = "https://github.com/hadenlabs/zsh-core/archive/develop.tar.gz"
 
 [".oh-my-zsh/custom/plugins/zsh-notify"]
 exact = true

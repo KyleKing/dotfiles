@@ -21,16 +21,8 @@ source $MY_CONFIG/containers.sh
 source $MY_CONFIG/on_login.sh
 source $MY_CONFIG/sync.sh
 
-# TODO: Consider reinstalling sdkman when needed again
-# # Must be near the end
-# source $MY_CONFIG/_java.sh
-
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
-
-# # Make login faster by suppressing login messages
-# mkdir -p "$HOME/.hushlogin"
-# Now tracked with a .keep file in Chezmoi
 
 # Activate McFly for terminal history
 #   https://github.com/cantino/mcfly

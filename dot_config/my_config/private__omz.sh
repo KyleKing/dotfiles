@@ -16,62 +16,41 @@ eval "$(navi widget zsh)"
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
 export plugins=(
-    # brew: homebrew. Use: brewp (pin to prevent upgrade), brewsp (list pinned), bubu (update, upgrade, cleanup), bcubc (cask)
-    # catimg: use the shell script to display images in terminal
-    # command-not-found: looks up the possible missing homebrew package
     # copybuffer: Ctrl+O to copy typed command
     # copypath: Copies current path or the path to the specified file
-    # dash: Kapeli Dash. Use: `dash python:tuple`
-    # docker:
     # encode64: e64/d64: encodes or decode given data to/from base64 (`e64 '{"a": 1}'` // `pbpaste | d64 | gojq`)
-    # git: a TON of aliases. See: https://github.com/davidde/git
+    # git: a TON of aliases. See: https://github.com/davidde/git and the alternative https://github.com/unixorn/git-extra-commands
     # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
     # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
-    # # nvm: automatically sources nvm and adds completions
     # perms: recursively set permissions (fixperms, set755, set644)
     # python: useful aliases (`pyfind` recursively find .py / `pyclean` Delete byte and cache)
-    # rust: Supports cargo and rustup
     # timer: Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
     # urltools: urlencode/urldecode (urldecode 'https%3A%2F%2Fgithub.com%2Fohmyzsh%2Fohmyzsh%2Fsearch%3Fq%3Durltools%26type%3DCode')
-    # vscode: Aliases for VSCode. Use: `vscd file file` (diff)
-    brew
-    catimg
-    command-not-found
     copybuffer
     copypath
-    dash
-    docker
-    encode64
-    git
-    history
-    macos
-    perms
-    python
-    rust
+    # encode64
+    # git
+    # history
+    # macos
+    # perms
+    # python
     timer
-    urltools
-    vscode
+    # urltools
 
     # lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
-    # Sublime plugin doesn't provide any benefit over `subl`
 
     # Chezmoi Git Submodules
+    #
     # Docs: https://github.com/MichaelAquilina/zsh-auto-notify
     auto-notify
     # Docs: https://github.com/MichaelAquilina/zsh-you-should-use
     you-should-use
-    # Docs: https://github.com/unixorn/git-extra-commands#included-scripts
-    git-extra-commands
-
     # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
     zsh-completions
-    # Docs: https://github.com/zsh-users/zsh-autosuggestions
+    # Docs: https://github.com/zsh-users/zsh-autosuggestions (Configuration below)
     zsh-autosuggestions
-    # Syntax Highlighters must be last. There are two where FSyH was a hostile fork of ZSyH
-    # https://github.com/zsh-users/zsh-syntax-highlighting
+    # Syntax Highlighters must be last
     zsh-syntax-highlighting
-    # https://github.com/zdharma-continuum/fast-syntax-highlighting/issues/8
-    # fast-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,7 +77,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 # Tab: List of Suggestions for next word. Auto-accepts if only one option
 #   Tab (again): to scroll through list
 #
-# (ctrl space, ctrl shit n, ctrl shift p)
+# (ctrl space, ctrl n, ctrl p)
 bindkey '^ ' autosuggest-accept
 
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/.config.omp.json)"
