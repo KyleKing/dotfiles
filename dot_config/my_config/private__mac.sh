@@ -7,3 +7,6 @@
 
 # Open with Dropover!
 alias odo="open -a Dropover"
+
+# Open in finder
+alias o="open ."

@@ -27,6 +27,9 @@ bindkey "^P" history-beginning-search-backward
 # Useful aliases for working with history
 # > View JSON in CLI
 alias ppj="pbaspate | jq"
+alias ppjc="ppj | pbcopy"
+# PLANNED: Support parsing non-JSON to json (this won't handle trailing commas...)
+alias tojson="python -c 'import json; import sys; print(json.dumps(json.loads(sys.stdin.read())))'"
 # > Copy Last Line
 alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
@@ -34,3 +37,46 @@ alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 mkcd() {
     mkdir -p $1 && cd $1 || return
 }
+
+# From: https://github.com/kakulukia/dotfiles/blob/eb4fd73d876727a6325362b21fad45dc7bd18913/.alias#L92C1-L130C24
+function mvf() {
+    # Move without repeating the filename
+    if [[ "$#" -ne 1 ]] || [[ ! -f "$1" ]]; then
+        command mv -iv "$@"
+        return
+    fi
+
+    new_filename="$1"
+    vared new_filename
+    command mv -iv -- "$1" "$new_filename"
+}
+witch() {
+    # Better which
+    local format="${2:-path}" # Default to path output
+    if [[ "$1" = "--full" ]]; then
+        format="full"
+        shift 1
+    fi
+    IFS=$'\n'
+    set -f
+    found=false
+    for LINE in $(type -a "$1"); do
+        COMMAND=$(echo "$LINE" | cut -d ' ' -f 3)
+        if [[ $COMMAND = /* ]]; then
+            version=$("$COMMAND" --version 2> /dev/null)
+            [[ -n $version ]] && version="($version)"
+            found=true
+            if [[ $format == 'full' ]]; then
+                echo "$1 is $COMMAND $version"
+                ll "$COMMAND"
+            else
+                echo "$COMMAND"
+                break
+            fi
+        fi
+    done
+    if [[ $found = false ]]; then
+        return 1
+    fi
+}
+# alias wi="which --full"
