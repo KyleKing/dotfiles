@@ -28,13 +28,11 @@ bindkey -e
 bindkey "\C-j" history-beginning-search-forward
 bindkey "\C-k" history-beginning-search-backward
 
-# Useful aliases for working with history
-# > View JSON in CLI
-alias ppj="pbaspate | jq"
-alias ppjc="ppj | pbcopy"
-# PLANNED: Support parsing non-JSON to json (this won't handle trailing commas...)
-alias tojson="python -c 'import json; import sys; print(json.dumps(json.loads(sys.stdin.read())))'"
-# > Copy Last Line
+# Sort and Format JSON
+alias sfj="json5 | jq"
+alias clip-sfj="pbpaste | sfj | pbcopy"
+
+# Copy Last Line (FYI: omz plugin <C-o> will copy current line)
 alias cll="fc -ln 0 | tail -n 1 | pbcopy"
 
 # Useful combination of mkdir and cd
