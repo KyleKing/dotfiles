@@ -30,6 +30,11 @@ return {
     scrollback_lines = 7500,
 
     keys = {
+        {
+            key = "w",
+            mods = "CMD",
+            action = wezterm.action.CloseCurrentTab({ confirm = true }),
+        },
         -- Map tab navigation
         { key = "LeftArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
         { key = "RightArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
