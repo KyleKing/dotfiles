@@ -46,3 +46,29 @@ cd ~/Library/Application\ Support/Sublime\ Text/Packages
 mv User User-Backup
 ln -s ~/Library/CloudStorage/Dropbox/Apps/Sublime/User
 ```
+
+## Custom Colorschems
+
+### K9s
+
+<https://github.com/catppuccin/k9s>
+
+```sh
+K9S_CONFIG_PATH="${XDG_CONFIG_HOME:-$HOME/Library/Application Support}/k9s"
+gh repo clone catppuccin/k9s "${K9S_CONFIG_PATH}/skins/catppuccin" -- --depth 1
+cp "${K9S_CONFIG_PATH}/skins/catppuccin/dist/mocha.yml" "${K9S_CONFIG_PATH}/skin.yml"
+```
+
+### bat
+
+<https://github.com/catppuccin/bat>
+
+```sh
+CAT_BAT_DIR="$HOME/Developer/nightly-packages/catppuccin-bat"
+gh repo clone catppuccin/bat "$CAT_BAT_DIR" -- --depth 1
+BAT_CONFIG_DIR="$(bat --config-dir)"
+chdir "$CAT_BAT_DIR"
+mkdir "$BAT_CONFIG_DIR/themes" || return true
+cp *.tmTheme "$BAT_CONFIG_DIR/themes"
+bat cache --build
+```
