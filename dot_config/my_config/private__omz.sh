@@ -80,7 +80,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 #   Tab (again): to scroll through list
 #
 # (ctrl space, ctrl n, ctrl p)
-bindkey '^ ' autosuggest-accept
+bindkey '^]' autosuggest-accept
 
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/.config.omp.json)"
 
