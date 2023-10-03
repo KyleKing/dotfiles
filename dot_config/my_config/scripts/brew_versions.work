@@ -77,7 +77,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.10_1
 gettext 0.22.2
 gflags 2.2.2
-gh 2.35.0
+gh 2.36.0
 ghostscript 10.02.0
 giflib 5.2.1
 gifski 1.12.2
@@ -238,7 +238,7 @@ npth 1.6
 nspr 4.35
 nss 3.93
 nyancat 1.5.2
-oh-my-posh 18.10.3
+oh-my-posh 18.11.0
 oniguruma 6.9.8
 openblas 0.3.24
 opencore-amr 0.1.6
