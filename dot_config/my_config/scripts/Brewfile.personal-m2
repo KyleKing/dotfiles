@@ -139,7 +139,6 @@ cask "quicklook-json"
 cask "rectangle-pro"
 cask "reikey"
 cask "rocket"
-cask "rstudio"
 cask "send-to-kindle"
 cask "skim"
 cask "spotify"
@@ -162,6 +161,7 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "HotKey", id: 975890633
 mas "Keynote", id: 409183694
+mas "Kindle", id: 302584613
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Qmenu", id: 1567442612
