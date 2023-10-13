@@ -48,14 +48,6 @@ projects:
     url: git@github.com:roaminsight/babylon-next.git
     desc: Split from Babylon
 
-  zathras:
-    url: git@github.com:roaminsight/zathras.git
-    desc: Split from Babylon
-
-  cellar:
-    url: git@github.com:roaminsight/cellar.git
-    desc: Split from Babylon
-
   babylon-notebooks:
     url: git@github.com:roaminsight/babylon-notebooks.git
     desc: General Roam Project
@@ -67,6 +59,10 @@ projects:
   catnip:
     url: git@github.com:roaminsight/catnip.git
     desc: General Roam Project
+
+  cellar:
+    url: git@github.com:roaminsight/cellar.git
+    desc: Split from Babylon
 
   client-onboarding:
     url: git@github.com:roaminsight/client-onboarding.git
@@ -102,6 +98,10 @@ projects:
 
   email-utils:
     url: git@github.com:roaminsight/email-utils.git
+    desc: General Roam Project
+
+  e2b-service:
+    url: git@github.com:roaminsight/e2b-service.git
     desc: General Roam Project
 
   gists:
@@ -190,6 +190,10 @@ projects:
 
   parexel-chat-nlp:
     url: git@github.com:roaminsight/parexel-chat-nlp.git
+    desc: General Roam Project
+
+  parexel-chat-services:
+    url: git@github.com:roaminsight/parexel-chat-services.git
     desc: General Roam Project
 
   pdfcore:
@@ -337,6 +341,10 @@ projects:
   ui-core:
     url: git@github.com:roaminsight/ui-core.git
     desc: General Roam Project
+
+  zathras:
+    url: git@github.com:roaminsight/zathras.git
+    desc: Split from Babylon
 
 tasks:
   remove-force-pushed-tags:
