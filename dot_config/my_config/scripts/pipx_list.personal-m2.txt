@@ -20,7 +20,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - code2flow
    package copier 8.3.0, installed using Python 3.11.6
     - copier
-   package copier-template-tester 1.2.6, installed using Python 3.11.6
+   package copier-template-tester 2.0.0, installed using Python 3.11.6
     - ctt
    package flit 3.9.0, installed using Python 3.11.6
     - flit
@@ -63,7 +63,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - astare
    package toml-sort 0.23.1, installed using Python 3.11.6
     - toml-sort
-   package tox 3.28.0, installed using Python 3.11.6
+   package tox 4.11.3, installed using Python 3.11.6
     - tox
     - tox-quickstart
     Injected Packages:
