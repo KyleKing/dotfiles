@@ -22,6 +22,7 @@ extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5
 nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 4f8aa3d
 postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master f8cf805
 python                       https://github.com/danhper/asdf-python.git master 8505457
+terraform-local              https://github.com/amrox/asdf-pyapp.git master 41f5275
 terraform                    https://github.com/asdf-community/asdf-hashicorp.git master c048526
 textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
 textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
