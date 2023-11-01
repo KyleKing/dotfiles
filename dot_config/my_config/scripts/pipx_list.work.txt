@@ -43,8 +43,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package gpt-engineer 0.0.9, installed using Python 3.11.6
     - ge
     - gpt-engineer
-   package har2locust 0.8.4, installed using Python 3.11.6
-    - har2locust
    package isort 5.12.0, installed using Python 3.11.6
     - isort
     - isort-identify-imports

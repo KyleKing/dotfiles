@@ -5,6 +5,7 @@ flame
 graph
 iexec
 images
+ktop
 kurt
 lineage
 neat
