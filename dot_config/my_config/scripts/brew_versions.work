@@ -12,7 +12,7 @@ aspell 0.60.8
 atk 2.38.0
 autoconf 2.71
 automake 1.16.5
-awscli 2.13.30
+awscli 2.13.31
 bat 0.24.0
 bat-extras 2023.09.19
 boost 1.83.0
@@ -74,7 +74,7 @@ gdbm 1.23
 gdk-pixbuf 2.42.10_1
 gettext 0.22.3
 gflags 2.2.2
-gh 2.37.0
+gh 2.38.0
 ghostscript 10.02.0
 giflib 5.2.1
 gifski 1.13.0
@@ -233,7 +233,7 @@ nspr 4.35
 nss 3.94
 numpy 1.26.1
 nyancat 1.5.2
-oh-my-posh 18.21.1
+oh-my-posh 18.22.0
 oniguruma 6.9.9
 openblas 0.3.24
 opencore-amr 0.1.6
@@ -260,7 +260,7 @@ plantuml 1.2023.12
 pngcrush 1.8.13
 podman 4.7.1
 poppler 23.10.0
-pre-commit 3.5.0
+pre-commit 3.5.0_1
 prettier 3.0.3
 pycparser 2.21_1
 pygments 2.16.1_1
@@ -338,7 +338,7 @@ unrtf 0.21.10
 utf8proc 2.9.0
 vale 2.29.6
 vde 2.3.3
-virtualenv 20.24.6
+virtualenv 20.24.6_1
 walk 1.6.2
 wangle 2023.10.30.00
 watchman 2023.10.30.00
