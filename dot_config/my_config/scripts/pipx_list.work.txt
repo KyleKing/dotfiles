@@ -1,14 +1,12 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package awscli-local 0.21, installed using Python 3.11.6
+   package awscli-local 0.21, installed using Python 3.12.0
     - awslocal
     - awslocal.bat
-   package black 23.9.1, installed using Python 3.11.6
+   package black 23.10.1, installed using Python 3.12.0
     - black
     - blackd
-   package bump-pydantic 0.7.0, installed using Python 3.11.6
-    - bump-pydantic
-   package calcipy 2.0.1, installed using Python 3.11.6
+   package calcipy 2.0.1, installed using Python 3.12.0
     - calcipy
     - calcipy-docs
     - calcipy-lint
@@ -19,81 +17,59 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
-   package cloudiscovery 2.4.4, installed using Python 3.11.6
-    - cloudiscovery
-    - cloudiscovery.cmd
-    Injected Packages:
-      - markupsafe 2.1.3
-   package copier 8.3.0, installed using Python 3.11.6
+   package copier 9.0.1, installed using Python 3.12.0
     - copier
-   package cortex 0.42.1, installed using Python 3.11.6
+   package cortex 0.42.1, installed using Python 3.12.0
     - cortex
-   package docformatter 1.7.5, installed using Python 3.11.6
-    - docformatter
-   package envtpl 0.7.2, installed using Python 3.11.6
+   package envtpl 0.7.2, installed using Python 3.12.0
     - envtpl
-   package fawltydeps 0.13.1, installed using Python 3.11.6
-    - fawltydeps
-   package flake8 6.1.0, installed using Python 3.11.6
+   package flake8 6.1.0, installed using Python 3.12.0
     - flake8
     Injected Packages:
       - roam-packages-flake8 0.0.1
-   package glances 3.4.0.3, installed using Python 3.11.6
+   package glances 3.4.0.3, installed using Python 3.12.0
     - glances
-   package gpt-engineer 0.0.9, installed using Python 3.11.6
-    - ge
-    - gpt-engineer
-   package isort 5.12.0, installed using Python 3.11.6
+   package isort 5.12.0, installed using Python 3.12.0
     - isort
     - isort-identify-imports
-   package mdformat 0.7.17, installed using Python 3.11.6
+   package mdformat 0.7.17, installed using Python 3.12.0
     - mdformat
     Injected Packages:
       - mdformat-mkdocs 1.0.4
-   package mypy-silent 0.4.0, installed using Python 3.11.6
+   package mypy-silent 0.4.0, installed using Python 3.12.0
     - mypy-silent
-   package pipdeptree 2.13.0, installed using Python 3.11.6
+   package pipdeptree 2.13.0, installed using Python 3.12.0
     - pipdeptree
-   package poetry 1.6.1, installed using Python 3.11.6
+   package poetry 1.6.1, installed using Python 3.12.0
     - poetry
-   package pydeps 1.12.17, installed using Python 3.11.6
-    - pydeps
-   package pygments 2.16.1, installed using Python 3.11.6
+   package pygments 2.16.1, installed using Python 3.12.0
     - pygmentize
-   package pylint 3.0.1, installed using Python 3.11.6
+   package pylint 3.0.2, installed using Python 3.12.0
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.330.post0, installed using Python 3.11.6
+   package pyright 1.1.334, installed using Python 3.12.0
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package python-lsp-server 1.8.2, installed using Python 3.11.6
+   package python-lsp-server 1.8.2, installed using Python 3.12.0
     - pylsp
-   package pyupgrade 3.15.0, installed using Python 3.11.6
-    - pyupgrade
-   package ruff 0.0.292, installed using Python 3.11.6
+   package ruff 0.1.3, installed using Python 3.12.0
     - ruff
-   package sourcery-cli 1.10.1, installed using Python 3.11.6
+   package sourcery-cli 1.12.0, installed using Python 3.12.0
     - sourcery
-   package sqlfluff 2.3.2, installed using Python 3.11.6
-    - sqlfluff
-   package tail-jsonl 1.2.5, installed using Python 3.11.6
+   package tail-jsonl 1.2.5, installed using Python 3.12.0
     - tail-jsonl
-   package toml-sort 0.23.1, installed using Python 3.11.6
+   package toml-sort 0.23.1, installed using Python 3.12.0
     - toml-sort
-   package trcli 1.6.1, installed using Python 3.11.6
+   package trcli 1.6.2, installed using Python 3.12.0
     - trcli
-   package tui-typer-tutor 1.1.2, installed using Python 3.11.6
+   package tui-typer-tutor 1.1.2, installed using Python 3.12.0
     - ttt
     - tui-typer-tutor
-   package uncurl 0.0.11, installed using Python 3.11.6
-    - uncurl
-   package unimport 1.0.0, installed using Python 3.11.6
-    - unimport
-   package watchgha 2.1.1, installed using Python 3.11.6
+   package watchgha 2.1.1, installed using Python 3.12.0
     - watch_gha_runs
-   package whatsonpypi 0.3.7, installed using Python 3.11.6
+   package whatsonpypi 0.3.7, installed using Python 3.12.0
     - whatsonpypi
