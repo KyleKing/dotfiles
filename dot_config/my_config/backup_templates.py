@@ -21,7 +21,7 @@ def back_sync_vscode_settings_to_template() -> None:
     path_dest = (
         Path.home()
         / '.local/share/chezmoi'
-        / 'private_Library/private_Application Support/private_Code/User/private_settings.json.tmpl'
+        / 'private_Library/private_Application Support/private_Code/User/settings.json.tmpl'
     )
 
     # YAML is superset of JSON and will handle trailing commas
