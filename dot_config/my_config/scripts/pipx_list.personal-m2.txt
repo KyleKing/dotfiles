@@ -1,11 +1,11 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
-   package bashate 2.1.1, installed using Python 3.11.6
+   package bashate 2.1.1, installed using Python 3.12.0
     - bashate
-   package black 23.9.1, installed using Python 3.11.6
+   package black 23.10.1, installed using Python 3.12.0
     - black
     - blackd
-   package calcipy 2.0.1, installed using Python 3.11.6
+   package calcipy 2.0.1, installed using Python 3.12.0
     - calcipy
     - calcipy-docs
     - calcipy-lint
@@ -16,64 +16,56 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
-   package code2flow 2.5.1, installed using Python 3.11.6
+   package code2flow 2.5.1, installed using Python 3.12.0
     - code2flow
-   package copier 8.3.0, installed using Python 3.11.6
+   package copier 9.0.1, installed using Python 3.12.0
     - copier
-   package copier-template-tester 2.0.0, installed using Python 3.11.6
+   package copier-template-tester 2.0.0, installed using Python 3.12.0
     - ctt
-   package flit 3.9.0, installed using Python 3.11.6
+   package flit 3.9.0, installed using Python 3.12.0
     - flit
-   package licensecheck 2023.5.1, installed using Python 3.11.6
+   package licensecheck 2023.5.1, installed using Python 3.12.0
     - licensecheck
-   package mdformat 0.7.17, installed using Python 3.11.6
+   package mdformat 0.7.17, installed using Python 3.12.0
     - mdformat
     Injected Packages:
       - mdformat-gfm 0.3.5
-      - mdformat-mkdocs 1.0.4
+      - mdformat-mkdocs 1.0.5
       - mdformat-tables 0.4.1
-   package mypy-silent 0.4.0, installed using Python 3.11.6
+   package mypy-silent 0.4.0, installed using Python 3.12.0
     - mypy-silent
-   package nox 2023.4.22, installed using Python 3.11.6
+   package nox 2023.4.22, installed using Python 3.12.0
     - nox
     - tox-to-nox
-   package pipdeptree 2.13.0, installed using Python 3.11.6
-    - pipdeptree
-   package pycg 0.0.7, installed using Python 3.11.6
+   package pycg 0.0.7, installed using Python 3.12.0
     - pycg
-   package pygments 2.16.1, installed using Python 3.11.6
+   package pygments 2.16.1, installed using Python 3.12.0
     - pygmentize
-   package pyright 1.1.331, installed using Python 3.11.6
+   package pyright 1.1.335, installed using Python 3.12.0
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package radian 0.6.7, installed using Python 3.11.6
-    - radian
-   package ruff 0.0.292, installed using Python 3.11.6
+   package ruff 0.1.4, installed using Python 3.12.0
     - ruff
-   package semgrep 1.44.0, installed using Python 3.11.6
+   package semgrep 1.46.0, installed using Python 3.12.0
     - pysemgrep
     - semgrep
-   package sourcery-cli 1.10.1, installed using Python 3.11.6
+   package sourcery-cli 1.13.0, installed using Python 3.12.0
     - sourcery
-   package tail-jsonl 1.2.5, installed using Python 3.11.6
+   package tail-jsonl 1.2.5, installed using Python 3.12.0
     - tail-jsonl
-   package textual-astview 0.8.0, installed using Python 3.11.6
-    - astare
-   package toml-sort 0.23.1, installed using Python 3.11.6
+   package toml-sort 0.23.1, installed using Python 3.12.0
     - toml-sort
-   package tox 4.11.3, installed using Python 3.11.6
+   package tox 4.11.3, installed using Python 3.12.0
     - tox
     - tox-quickstart
     Injected Packages:
       - tox-asdf 0.1.0
-   package tui-typer-tutor 1.1.2, installed using Python 3.11.6
+   package tui-typer-tutor 1.1.2, installed using Python 3.12.0
     - ttt
     - tui-typer-tutor
-   package typer-cli 0.0.13, installed using Python 3.11.6
-    - typer
-   package watchgha 2.1.1, installed using Python 3.11.6
+   package watchgha 2.1.1, installed using Python 3.12.0
     - watch_gha_runs
-   package whatsonpypi 0.3.7, installed using Python 3.11.6
+   package whatsonpypi 0.3.7, installed using Python 3.12.0
     - whatsonpypi
