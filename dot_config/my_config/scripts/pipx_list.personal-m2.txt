@@ -20,7 +20,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - code2flow
    package copier 9.0.1, installed using Python 3.12.0
     - copier
-   package copier-template-tester 2.0.0, installed using Python 3.12.0
+   package copier_template_tester 2.0.1, installed using Python 3.12.0
     - ctt
    package flit 3.9.0, installed using Python 3.12.0
     - flit
@@ -46,6 +46,9 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
+   package pytest-watcher 0.3.4, installed using Python 3.12.0
+    - ptw
+    - pytest-watcher
    package ruff 0.1.4, installed using Python 3.12.0
     - ruff
    package semgrep 1.46.0, installed using Python 3.12.0
@@ -60,8 +63,6 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
    package tox 4.11.3, installed using Python 3.12.0
     - tox
     - tox-quickstart
-    Injected Packages:
-      - tox-asdf 0.1.0
    package tui-typer-tutor 1.1.2, installed using Python 3.12.0
     - ttt
     - tui-typer-tutor
