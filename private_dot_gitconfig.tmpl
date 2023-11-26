@@ -24,6 +24,15 @@
 	# Recent Branches
 	recent-branches = branch --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
+	# From old Alfred Snippets
+	pretty-1 = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	pretty-2 = log --remotes --tags --oneline --decorate --stat --abbrev-commit --date=relative --branches --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n'
+
+	# `gdiff`
+	# > git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r
+	# `comp`
+	# > https://github.com/<org>/<repo>/compare/@<tag>..master@cursor?expand=1
+
 [color]
 	ui = true
 [commit]
