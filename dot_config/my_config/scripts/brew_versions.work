@@ -259,6 +259,7 @@ pkg-config 0.29.2_3
 plantuml 1.2023.12
 pngcrush 1.8.13
 poppler 23.10.0
+postgresql@15 15.5_1
 pre-commit 3.5.0_2
 prettier 3.1.0
 pycparser 2.21_1
