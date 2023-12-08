@@ -27,6 +27,8 @@ manual pages are exposed at /Users/kyleking/.local/share/man
       - roam-packages-flake8 0.0.1
    package glances 3.4.0.3, installed using Python 3.12.0
     - glances
+   package identify 2.5.33, installed using Python 3.12.0
+    - identify-cli
    package isort 5.12.0, installed using Python 3.12.0
     - isort
     - isort-identify-imports
