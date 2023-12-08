@@ -8,3 +8,6 @@
 *.sublime-workspace
 **/User/Projects/recent.json
 **/User/CodeMap/Code - Map
+
+# Prettier Cache
+node_modules/.cache/prettier/.prettier-caches

@@ -41,10 +41,10 @@ $(brew --prefix)/opt/fzf/install
 
 ```sh
 cd ~/Library/Application\ Support/Sublime\ Text/Packages
-# On 1st computer: mv User ~/Library/CloudStorage/Dropbox/Apps/Sublime
+# On 1st computer: mv User $HOMR/Library/CloudStorage/Dropbox/Apps/Sublime
 # On n+1 computers:
 mv User User-Backup
-ln -s ~/Library/CloudStorage/Dropbox/Apps/Sublime/User
+ln -s "$HOME/Library/CloudStorage/Dropbox/Apps/Sublime/User"
 ```
 
 ## Custom Colorschems
