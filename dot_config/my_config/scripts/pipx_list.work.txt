@@ -1,10 +1,10 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
-   package black 23.11.0, installed using Python 3.12.0
+   package black 23.12.0, installed using Python 3.12.1
     - black
     - blackd
-   package calcipy 2.0.3, installed using Python 3.12.0
+   package calcipy 2.0.3, installed using Python 3.12.1
     - calcipy
     - calcipy-docs
     - calcipy-lint
@@ -15,61 +15,60 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
-   package copier 9.0.1, installed using Python 3.12.0
+   package copier 9.1.0, installed using Python 3.12.1
     - copier
-   package cortex 0.42.1, installed using Python 3.12.0
+   package cortex 0.42.1, installed using Python 3.12.1
     - cortex
-   package envtpl 0.7.2, installed using Python 3.12.0
+   package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
-   package flake8 6.1.0, installed using Python 3.12.0
+   package flake8 6.1.0, installed using Python 3.12.1
     - flake8
     Injected Packages:
       - roam-packages-flake8 0.0.1
-   package glances 3.4.0.3, installed using Python 3.12.0
+   package glances 3.4.0.3, installed using Python 3.12.1
     - glances
-   package identify 2.5.33, installed using Python 3.12.0
-    - identify-cli
-   package isort 5.12.0, installed using Python 3.12.0
+    - man1/glances.1
+   package isort 5.13.1, installed using Python 3.12.1
     - isort
     - isort-identify-imports
-   package mdformat 0.7.17, installed using Python 3.12.0
+   package mdformat 0.7.17, installed using Python 3.12.1
     - mdformat
     Injected Packages:
-      - mdformat-mkdocs 1.0.4
-   package mypy-silent 0.4.0, installed using Python 3.12.0
+      - mdformat-mkdocs 1.1.0
+   package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package pipdeptree 2.13.1, installed using Python 3.12.0
+   package pipdeptree 2.13.1, installed using Python 3.12.1
     - pipdeptree
-   package poetry 1.7.1, installed using Python 3.12.0
+   package poetry 1.7.1, installed using Python 3.12.1
     - poetry
-   package pygments 2.17.2, installed using Python 3.12.0
+   package pygments 2.17.2, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.0.2, installed using Python 3.12.0
+   package pylint 3.0.3, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.337, installed using Python 3.12.0
+   package pyright 1.1.339, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package python-lsp-server 1.9.0, installed using Python 3.12.0
+   package python-lsp-server 1.9.0, installed using Python 3.12.1
     - pylsp
-   package ruff 0.1.6, installed using Python 3.12.0
+   package ruff 0.1.7, installed using Python 3.12.1
     - ruff
-   package sourcery-cli 1.14.0, installed using Python 3.12.0
+   package sourcery-cli 1.14.0, installed using Python 3.12.1
     - sourcery
-   package tail-jsonl 1.2.5, installed using Python 3.12.0
+   package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl
-   package toml-sort 0.23.1, installed using Python 3.12.0
+   package toml-sort 0.23.1, installed using Python 3.12.1
     - toml-sort
-   package trcli 1.6.2, installed using Python 3.12.0
+   package trcli 1.7.0, installed using Python 3.12.1
     - trcli
-   package tui-typer-tutor 1.1.2, installed using Python 3.12.0
+   package tui-typer-tutor 1.1.2, installed using Python 3.12.1
     - ttt
     - tui-typer-tutor
-   package watchgha 2.1.1, installed using Python 3.12.0
+   package watchgha 2.1.1, installed using Python 3.12.1
     - watch_gha_runs
-   package whatsonpypi 0.3.7, installed using Python 3.12.0
+   package whatsonpypi 0.3.7, installed using Python 3.12.1
     - whatsonpypi
