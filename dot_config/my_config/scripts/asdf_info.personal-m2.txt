@@ -1,5 +1,5 @@
 OS:
-Darwin Kyles-MacBook-Pro.local 23.1.0 Darwin Kernel Version 23.1.0: Mon Oct  9 21:28:45 PDT 2023; root:xnu-10002.41.9~6/RELEASE_ARM64_T6020 arm64
+Darwin Kyles-MacBook-Pro.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:55:06 PST 2023; root:xnu-10002.61.3~2/RELEASE_ARM64_T6020 arm64
 
 SHELL:
 zsh 5.9 (x86_64-apple-darwin23.0)

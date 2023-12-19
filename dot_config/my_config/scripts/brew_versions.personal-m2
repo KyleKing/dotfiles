@@ -19,15 +19,15 @@ bat-extras-prettybat 2023.09.19
 bottom 0.9.6
 brew-rmtree 2.2.6_1
 brotli 1.1.0
-c-ares 1.23.0
+c-ares 1.24.0
 ca-certificates 2023-12-12
 cairo 1.18.0
 cffi 1.16.0_1
-cheat 4.4.1
-chezmoi 2.42.2
+cheat 4.4.2
+chezmoi 2.42.3
 cjson 1.7.16
 cloc 1.98
-cmake 3.28.0
+cmake 3.28.1
 coreutils 9.4
 curl 8.5.0
 curlie 1.7.2
@@ -116,7 +116,7 @@ libpng 1.6.40
 libpq 16.1_1
 libraw 0.21.1
 librist 0.2.10
-librsvg 2.57.0
+librsvg 2.57.1
 libsamplerate 0.2.2
 libsm 1.2.4
 libsndfile 1.2.2
@@ -170,7 +170,7 @@ netpbm 11.02.06
 nettle 3.9.1
 node 21.4.0
 npth 1.6
-oh-my-posh 19.2.1
+oh-my-posh 19.3.0
 oniguruma 6.9.9
 openblas 0.3.25
 opencore-amr 0.1.6
@@ -265,7 +265,7 @@ zoxide 0.9.2
 zsh 5.9
 zstd 1.5.5
 1password 8.9.13
-1password-cli 2.23.0
+1password-cli 2.24.0
 alfred 5.0.6,2110
 appcleaner 3.6.7,4301
 blockblock 2.1.5
@@ -283,6 +283,7 @@ firefox-developer-edition latest
 flux 42.1
 font-fontawesome 6.5.1
 font-hack-nerd-font 3.1.1
+font-monaspace 1.000
 github 3.1.5-08d57d4b
 gitkraken 9.0.1
 google-chrome 109.0.5414.119
@@ -320,7 +321,6 @@ sublime-text 4143
 suspicious-package 4.3.3,1065.5
 taskexplorer 2.0.2
 texifier 1.9.18,735,78a0ba6
-visual-studio-code 1.78.2
 vlc 3.0.18
 webpquicklook 1.0
 wezterm 20230712-072601,f4abf8fd
