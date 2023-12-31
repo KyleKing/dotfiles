@@ -3,7 +3,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
    package bashate 2.1.1, installed using Python 3.12.1
     - bashate
-   package black 23.12.0, installed using Python 3.12.1
+   package black 23.12.1, installed using Python 3.12.1
     - black
     - blackd
    package calcipy 2.0.3, installed using Python 3.12.1
@@ -40,7 +40,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - tox-to-nox
    package pygments 2.17.2, installed using Python 3.12.1
     - pygmentize
-   package pyright 1.1.340, installed using Python 3.12.1
+   package pyright 1.1.343, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
@@ -48,13 +48,13 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package pytest-watcher 0.3.4, installed using Python 3.12.1
     - ptw
     - pytest-watcher
-   package ruff 0.1.8, installed using Python 3.12.1
+   package ruff 0.1.9, installed using Python 3.12.1
     - ruff
-   package semgrep 1.53.0, installed using Python 3.12.1
+   package semgrep 1.54.3, installed using Python 3.12.1
     - pysemgrep
     - semgrep
     - sg
-   package sourcery-cli 1.14.0, installed using Python 3.12.1
+   package sourcery-cli 1.15.0, installed using Python 3.12.1
     - sourcery
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl

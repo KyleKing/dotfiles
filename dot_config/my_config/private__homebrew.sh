@@ -23,6 +23,10 @@ alias bo="brew update && brew outdated"
 alias bcbd="brew cleanup && brew doctor"
 # Other useful commands: "brew uninstall <cask>" and "brew uses <...>"
 
+# FYI: to resolve compinit issues with omz, see this issue: https://github.com/ohmyzsh/ohmyzsh/issues/12002#issuecomment-1780351687
+# > ln -fsv /opt/homebrew/completions/zsh/_brew /usr/local/share/zsh/site-functions/_brew_cask
+# > ln -fsv /opt/homebrew/completions/zsh/_brew /usr/local/share/zsh/site-functions/_brew
+
 # tmux plugin manager; installed by brew
 alias tpm-install="/opt/homebrew/opt/tpm/share/tpm/bin/install_plugins"
 alias tpm-update="/opt/homebrew/opt/tpm/share/tpm/bin/update_plugins"
