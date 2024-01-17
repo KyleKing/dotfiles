@@ -10,3 +10,6 @@ alias odo="open -a Dropover"
 
 # Open in finder
 alias o="open ."
+
+# Load alternate nvim configs (from: https://github.com/nvim-lua/kickstart.nvim/#FAQ)
+alias astronvim='NVIM_APPNAME="nvim-astronvim" nvim'
