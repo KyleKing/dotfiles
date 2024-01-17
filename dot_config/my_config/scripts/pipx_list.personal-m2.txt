@@ -23,18 +23,20 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - copier
    package copier_template_tester 2.1.1, installed using Python 3.12.1
     - ctt
+   package em-keyboard 4.1.0, installed using Python 3.12.1
+    - em
    package flit 3.9.0, installed using Python 3.12.1
     - flit
    package licensecheck 2023.5.2, installed using Python 3.12.1
     - licensecheck
-   package mdformat 0.7.17, installed using Python 3.12.1
+   package mdformat_mkdocs 2.0.0, installed using Python 3.12.1
+    - markdown-it
     - mdformat
-    Injected Packages:
-      - mdformat-gfm 0.3.5
-      - mdformat-mkdocs 1.1.0
-      - mdformat-tables 0.4.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
+   package norwegianblue 0.16.0, installed using Python 3.12.1
+    - eol
+    - norwegianblue
    package nox 2023.4.22, installed using Python 3.12.1
     - nox
     - tox-to-nox
@@ -48,7 +50,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package pytest-watcher 0.3.4, installed using Python 3.12.1
     - ptw
     - pytest-watcher
-   package ruff 0.1.9, installed using Python 3.12.1
+   package ruff 0.1.13, installed using Python 3.12.1
     - ruff
    package semgrep 1.54.3, installed using Python 3.12.1
     - pysemgrep
