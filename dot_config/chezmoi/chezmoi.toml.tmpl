@@ -14,8 +14,9 @@ signing_key = "{{ .github.signing_key }}"
 gpg_program = "{{ .github.gpg_program }}"
 
 [edit]
-command = "subl"
-args = ["--wait", "--add"]
+# command = "subl"
+# args = ["--wait", "--add"]
+command = "nvim"
 
 [diff]
 pager = "delta"

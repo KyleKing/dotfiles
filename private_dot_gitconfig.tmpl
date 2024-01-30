@@ -42,7 +42,8 @@
 [core]
 	attributesfile = {{ .chezmoi.homeDir }}/.gitattributes_global
 	autocrlf = input
-	editor = subl --wait --add
+	# editor = subl --wait --add
+	editor = nvim
 	eol = lf
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
 	pager = delta

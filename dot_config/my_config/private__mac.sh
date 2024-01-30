@@ -13,3 +13,4 @@ alias o="open ."
 
 # Load alternate nvim configs (from: https://github.com/nvim-lua/kickstart.nvim/#FAQ)
 alias astronvim='NVIM_APPNAME="nvim-astronvim" nvim'
+alias plainvim='NVIM_APPNAME="nvim-plain" nvim'

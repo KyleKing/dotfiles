@@ -24,11 +24,11 @@ customCommands:
     command: gh pr view --web
     context: localBranches
     subprocess: true
-  - key: "O"
-    context: "global"
-    # FIXME: These don't open files from commit history
-    command: "subl {{.SelectedFile.Name | quote}}"
-    description: "Open file with Sublime"
+  # - key: "O"
+  #   context: "global"
+  #   # FIXME: These don't open files from commit history
+  #   command: "subl {{.SelectedFile.Name | quote}}"
+  #   description: "Open file with Sublime"
   - key: "o"
     context: "global"
     command: "open {{.SelectedFile.Name | quote}} -a {{.Form.App | quote}}"
@@ -160,4 +160,6 @@ git:
     pager: delta --paging=never --true-color=never
   log:
     showWholeGitGraph: true
+os:
+  editCommand: "nvim"
 # More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
