@@ -120,6 +120,29 @@ rpin() {
 # gojq (go-based jq replacement)
 alias jq='gojq'
 
+# Using htmlq (jq for HTML), extract the website's title
+get-title() {
+    resp=$(curl --silent "$1")
+    if [[ -z "$resp" ]]; then
+        echo "Failed to call: 'curl $1'"
+        return 1
+    fi
+    title=$(echo "$resp" | htmlq --text title)
+    if [[ -z "$title" ]]; then
+        echo "For '$1', failed to extract the title from: '$resp'"
+        return 1
+    fi
+    echo "$title"
+}
+# Output a readable markdown link with the webpage title
+url-to-md-link() {
+    title=$(get-title "$1")
+    if [[ "$?" == "1" ]]; then
+        return 1
+    fi
+    echo "[$title]($1)"
+}
+
 # Tip: check current path with (thanks to ChatGPT!):
 # echo $PATH | awk '{gsub(/:/, "\n"); print}'
 
