@@ -24,11 +24,11 @@ customCommands:
     command: gh pr view --web
     context: localBranches
     subprocess: true
-  # - key: "O"
-  #   context: "global"
-  #   # FIXME: These don't open files from commit history
-  #   command: "subl {{.SelectedFile.Name | quote}}"
-  #   description: "Open file with Sublime"
+  - key: "O"
+    context: "global"
+    # FIXME: These don't open files from commit history
+    command: "nvim {{.SelectedFile.Name | quote}}"
+    description: "Open file with nvim"
   - key: "o"
     context: "global"
     command: "open {{.SelectedFile.Name | quote}} -a {{.Form.App | quote}}"
@@ -38,7 +38,7 @@ customCommands:
         title: "Which application?"
         key: "App"
         suggestions:
-          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nVisual\ Studio\ Code\nRStudio\nSublime\ Text\nObsidian'"
+          command: "echo -n 'Firefox\nPreview\nExcel\nNumbers\nObsidian'"
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Command_Keybindings.md
   - key: <c-a>
     description: Add Staged Files to Last Commit
@@ -161,5 +161,6 @@ git:
   log:
     showWholeGitGraph: true
 os:
-  editCommand: "nvim"
+  # FYI: experimental support for within session editing (https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#configuring-file-editing)
+  editPreset: "nvim-remote"
 # More configuration: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
