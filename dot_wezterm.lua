@@ -144,22 +144,24 @@ local function calculateLuminance(hexColor)
     -- Calculate the luminance of the given color and compare against perceived brightness
     return 0.2126 * red / 255 + 0.7152 * green / 255 + 0.0722 * blue / 255
 end
-local function YtoLstar(luminance)
-    assert(0 <= luminance and luminance <= 1, "luminance is not within [0, 1]")
-    if luminance <= (216 / 24389) then -- The CIE standard states 0.008856 but 216/24389 is the intent for 0.008856451679036
-        return luminance * (24389 / 27) -- The CIE standard states 903.3, but 24389/27 is the intent, making 903.296296296296296
-    end
-    return luminance ^ (1 / 3) * 116 - 16
-end
+-- local function YtoLstar(luminance)
+--     assert(0 <= luminance and luminance <= 1, "luminance is not within [0, 1]")
+--     if luminance <= (216 / 24389) then -- The CIE standard states 0.008856 but 216/24389 is the intent for 0.008856451679036
+--         return luminance * (24389 / 27) -- The CIE standard states 903.3, but 24389/27 is the intent, making 903.296296296296296
+--     end
+--     return luminance ^ (1 / 3) * 116 - 16
+-- end
 local function selectContrastingForeground(hexColor)
     local luminance = calculateLuminance(hexColor)
-    if YtoLstar(luminance) > 70 then
+    if luminance > 0.5 then
         return "#000000" -- Black has higher contrast with colors perceived to be "bright"
     end
     return "#FFFFFF" -- White has higher contrast
 end
-assert(YtoLstar(calculateLuminance("#494CED")) >= 64, "Expected lightness of around 65")
+-- assert(YtoLstar(calculateLuminance("#494CED")) >= 64, "Expected lightness of around 65")
 assert(selectContrastingForeground("#494CED") == "#FFFFFF", "Expected higher contrast with white")
+assert(selectContrastingForeground("#128b26") == "#FFFFFF", "Expected higher contrast with white")
+assert(selectContrastingForeground("#58f5a6") == "#000000", "Expected higher contrast with black")
 assert(selectContrastingForeground("#EBD168") == "#000000", "Expected higher contrast with black")
 
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)

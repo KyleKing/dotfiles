@@ -8,9 +8,8 @@
 | TODO    | Should be a for loop to return to _last until battle (then stop and print _last)          | 2022-07-28  | [dot_config/my_config/private_cli_tools.sh:104](https://github.com/KyleKing/dotfiles/blame/b8605e0e56543fe52ff2224ed0f670ef4bfe90ea/dot_config/my_config/private_cli_tools.sh#L61) |
 | TODO    | Make main panel more visible: https://github.com/catppuccin/tmuxpull/94#issue-comment-box | 2024-01-31  | [dot_tmux.conf:69](https://github.com/KyleKing/dotfiles/blame/15f4b701546428a1ccdf5521363f2b3a15d59cac/dot_tmux.conf#L69)                                                          |
 | TODO    | And consider improvements from: https://github.com/gpakosz/.tmux                          | 2024-01-31  | [dot_tmux.conf:108](https://github.com/KyleKing/dotfiles/blame/15f4b701546428a1ccdf5521363f2b3a15d59cac/dot_tmux.conf#L108)                                                        |
-| FIXME   | Set the title to the project directory when NVIM                                          | 2024-02-01  | [dot_wezterm.lua:43](https://github.com/KyleKing/dotfiles/blame/main/dot_wezterm.lua#L43)                                                                                         |
 | FIXME   | These don't open files from commit history                                                | N/A         | private_Library/private_Application Support/lazygit/config.yml:29                                                                                                                  |
 
-Found code tags for FIXME (3), TODO (4), PLANNED (1)
+Found code tags for FIXME (2), TODO (4), PLANNED (1)
 
 <!-- calcipy_skip_tags -->
