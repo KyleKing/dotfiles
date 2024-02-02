@@ -23,7 +23,74 @@
 
 local wezterm = require("wezterm")
 
+-- ============================================================================
+-- Configuration for Tab Color
+
 -- Based on: https://github.com/protiumx/.dotfiles/blob/854d4b159a0a0512dc24cbc840af467ac84085f8/stow/wezterm/.config/wezterm/wezterm.lua#L291-L319
+
+local process_icons = {
+    ["bash"] = wezterm.nerdfonts.cod_terminal_bash,
+    ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
+    ["cargo"] = wezterm.nerdfonts.dev_rust,
+    ["curl"] = wezterm.nerdfonts.mdi_flattr,
+    ["docker"] = wezterm.nerdfonts.linux_docker,
+    ["docker-compose"] = wezterm.nerdfonts.linux_docker,
+    ["gh"] = wezterm.nerdfonts.dev_github_badge,
+    ["git"] = wezterm.nerdfonts.fa_git,
+    ["go"] = wezterm.nerdfonts.seti_go,
+    ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
+    ["kubectl"] = wezterm.nerdfonts.linux_docker,
+    ["kuberlr"] = wezterm.nerdfonts.linux_docker,
+    ["lazydocker"] = wezterm.nerdfonts.linux_docker,
+    ["lazygit"] = wezterm.nerdfonts.oct_git_compare,
+    ["lua"] = wezterm.nerdfonts.seti_lua,
+    ["make"] = wezterm.nerdfonts.seti_makefile,
+    ["node"] = wezterm.nerdfonts.mdi_hexagon,
+    ["nvim"] = wezterm.nerdfonts.custom_vim,
+    ["psql"] = "󱤢",
+    ["ruby"] = wezterm.nerdfonts.cod_ruby,
+    ["stern"] = wezterm.nerdfonts.linux_docker,
+    ["sudo"] = wezterm.nerdfonts.fa_hashtag,
+    ["usql"] = "󱤢",
+    ["vim"] = wezterm.nerdfonts.dev_vim,
+    ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
+    ["zsh"] = wezterm.nerdfonts.dev_terminal,
+}
+local function get_cwd(tab)
+    -- Returns URL Object: https://wezfurlong.org/wezterm/config/lua/pane/get_current_working_dir.html
+    return tab.active_pane.current_working_dir.file_path or ""
+end
+local function get_display_cwd(tab)
+    local current_dir = get_cwd(tab)
+    local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
+
+    return current_dir == HOME_DIR and "~/" or current_dir:gsub("(.*[/\\])(.*)", "%2")
+end
+local function get_process(tab)
+    if not tab.active_pane or tab.active_pane.foreground_process_name == "" then
+        return "[?]"
+    end
+
+    local process_name = tab.active_pane.foreground_process_name:gsub("(.*[/\\])(.*)", "%2")
+    if process_name:find("kubectl") then
+        process_name = "kubectl"
+    end
+
+    return process_icons[process_name] or string.format("[%s]", process_name)
+end
+local function format_title(tab)
+    local cwd = get_display_cwd(tab)
+    local process = get_process(tab)
+
+    local active_title = tab.active_pane.title
+    if active_title:find("- NVIM") then
+        active_title = active_title:gsub("^([^ ]+) .*", "%1")
+    end
+
+    local description = (not active_title or active_title == cwd) and "~" or active_title
+    return string.format(" %s %s/ %s ", process, cwd, description)
+end
+-- Determine if a tab has unseen output since last visited
 local function hasUnseenOutput(tab)
     if not tab.is_active then
         for _, pane in ipairs(tab.panes) do
@@ -35,19 +102,16 @@ local function hasUnseenOutput(tab)
     return false
 end
 
--- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
--- This function returns the suggested title for a tab.
--- It prefers the title that was set via `tab:set_title()`
--- or `wezterm cli set-tab-title`, but falls back to the
--- title of the active pane in that tab.
-local function tab_title(tab_info)
-    local title = tab_info.tab_title
+-- This function returns the suggested title for a tab. It prefers the title that was set via `tab:set_title()`
+--  or `wezterm cli set-tab-title` or creates a new representative title
+-- Based on: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
+local function get_tab_title(tab)
+    local title = tab.tab_title
     -- if the tab title is explicitly set, take that
     if title and #title > 0 then
         return title
     end
-    -- Otherwise, use the title from the active pane in that tab
-    return tab_info.active_pane.title
+    return format_title(tab)
 end
 
 -- Convert arbitrary strings to a unique hex value
@@ -99,11 +163,9 @@ assert(selectContrastingForeground("#494CED") == "#FFFFFF", "Expected higher con
 assert(selectContrastingForeground("#EBD168") == "#000000", "Expected higher contrast with black")
 
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-    -- local cwd = get_current_working_dir(tab)
-    -- local title = string.format(" %s ~ %s  ", get_process(tab), cwd)
+    local title = get_tab_title(tab)
+    local color = intToHex(hashCode(get_cwd(tab)))
 
-    local title = tab_title(tab)
-    local color = intToHex(hashCode(title))
     if tab.is_active then
         return {
             { Attribute = { Intensity = "Bold" } },
@@ -115,12 +177,15 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
     if hasUnseenOutput(tab) then
         return {
             { Attribute = { Intensity = "Bold" } },
-            { Foreground = { Color = "#28719c" } },
+            { Foreground = { Color = "#EBD168" } },
             { Text = title },
         }
     end
     return title
 end)
+
+-- ============================================================================
+-- General configuration
 
 return {
     bold_brightens_ansi_colors = true,
