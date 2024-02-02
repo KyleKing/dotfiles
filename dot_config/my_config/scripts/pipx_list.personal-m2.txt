@@ -46,7 +46,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - tox-to-nox
    package pygments 2.17.2, installed using Python 3.12.1
     - pygmentize
-   package pyright 1.1.343, installed using Python 3.12.1
+   package pyright 1.1.349, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
@@ -56,7 +56,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pytest-watcher
    package ruff 0.1.13, installed using Python 3.12.1
     - ruff
-   package semgrep 1.54.3, installed using Python 3.12.1
+   package semgrep 1.59.0, installed using Python 3.12.1
     - pysemgrep
     - semgrep
     - sg
