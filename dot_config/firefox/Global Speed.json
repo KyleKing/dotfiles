@@ -182,7 +182,11 @@
     {
       "condition": {
         "parts": [
-          { "id": "8059833635", "type": "CONTAINS", "value": "youtube.com" }
+          {
+            "id": "8059833635",
+            "type": "CONTAINS",
+            "value": "youtube.com"
+          }
         ]
       },
       "enabled": false,

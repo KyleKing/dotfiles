@@ -13,7 +13,7 @@ indent_size = 2
 indent_size = 2
 
 [**.{json,jsonc}]
-indent_size = 4
+indent_size = 2
 
 [*.lua]
 indent_size = 4
