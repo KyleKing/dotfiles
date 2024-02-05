@@ -1,5 +1,11 @@
 # README
 
+## Modifications
+
+### Wezterm
+
+Custom tab color/title. Discussion here: <https://github.com/wez/wezterm/discussions/4945>
+
 ## Installation Instructions
 
 ```sh
