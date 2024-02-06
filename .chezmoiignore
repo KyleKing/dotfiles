@@ -1,3 +1,5 @@
+# Docs: https://www.chezmoi.io/reference/special-files-and-directories/chezmoiignore
+
 # General Ignore Patterns
 *~
 .DS_Store
@@ -5,3 +7,10 @@
 # Repo-only files
 README.md
 .pre-commit-config.yaml
+
+# Configuration files for pre-commit
+.luacheckrc
+.luarc.json
+.stylua.toml
+selene.toml
+vim.toml
