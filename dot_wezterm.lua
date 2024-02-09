@@ -206,6 +206,15 @@ config.keys = {
     { key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\x05" }) },
 }
 
+config.mouse_bindings = {
+    -- Ctrl-click will open the link under the mouse cursor
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "CTRL",
+        action = wezterm.action.OpenLinkAtMouseCursor,
+    },
+}
+
 -- Ensure supported font
 config.font = wezterm.font_with_fallback({
     "Hack Nerd Font Mono",
