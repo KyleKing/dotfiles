@@ -127,20 +127,10 @@ local function string_to_color(str)
 end
 
 local function select_contrasting_fg_color(hex_color)
-    -- Based on: https://stackoverflow.com/a/56678483/3219667
-    local function calculate_luminance(color)
-        -- Extract RGB components from hex color
-        local red, green, blue
-        red = tonumber(color:sub(1, 2), 16)
-        green = tonumber(color:sub(3, 4), 16)
-        blue = tonumber(color:sub(5, 6), 16)
-        -- Calculate the luminance of the given color and compare against perceived brightness
-        return 0.2126 * red / 255 + 0.7152 * green / 255 + 0.0722 * blue / 255
-    end
-
-    local color = hex_color:gsub("#", "") -- Remove leading '#'
-    local luminance = calculate_luminance(color)
-    if luminance > 0.5 then
+    local color = wezterm.color.parse(hex_color)
+    ---@diagnostic disable-next-line: unused-local
+    local lightness, _a, _b, _alpha = color:laba()
+    if lightness > 0.5 then
         return "#000000" -- Black has higher contrast with colors perceived to be "bright"
     end
     return "#FFFFFF" -- White has higher contrast
