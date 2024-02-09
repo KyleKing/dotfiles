@@ -70,6 +70,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate $HOME/.zshrc"
 # alias ohmyzsh="mate $HOME/.oh-my-zsh"
 
+# Extend tmux plugin by auto-recognizing the current directory as the session name
+tsesh() {
+    _name=$(basename "$(echo $PWD)")
+    (ts $_name || ta $_name) || return 1
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Plugin configuration
 
