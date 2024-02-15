@@ -42,7 +42,7 @@ repos:
       - id: trailing-whitespace
         exclude: gh_extensions.*
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.14.0
+    rev: v3.14.1
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
@@ -69,7 +69,7 @@ repos:
         exclude: \.copier-answers\.yml|.*/cassettes/.*\.yaml|tests/.*assert-cache.*/.+\.json
         types_or: [html, javascript, json, shell, yaml]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.33.0
+    rev: v1.35.0
     hooks:
       - id: yamllint
   - repo: https://github.com/pappasam/toml-sort
@@ -101,8 +101,12 @@ repos:
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.20.0
     hooks:
-      - id: stylua-github
-  - repo: https://github.com/Calinou/pre-commit-luacheck
-    rev: v1.0.0
+      - id: stylua-system
+  - repo: local
     hooks:
-      - id: luacheck
+      - id: selene
+        name: Selene
+        description: Lints Lua files using Selene (install with homebrew)
+        entry: selene
+        language: system
+        types: [lua]

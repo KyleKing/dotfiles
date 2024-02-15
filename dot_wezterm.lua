@@ -118,9 +118,9 @@ local function string_to_color(str)
     -- Convert the string to a unique integer
     local hash = 0
     for i = 1, #str do
+        -- Bitwise Left Shift: https://stackoverflow.com/a/141873/3219667
         hash = string.byte(str, i) + ((hash << 5) - hash)
     end
-
     -- Convert the integer to a unique color
     local c = string.format("%06X", hash & 0x00FFFFFF)
     return "#" .. (string.rep("0", 6 - #c) .. c):upper()
@@ -189,11 +189,11 @@ config.keys = {
 
     -- Map jumping between words to Standard Mac keys
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
-    { key = "LeftArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bb" }) },
-    { key = "RightArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bf" }) },
+    { key = "LeftArrow", mods = "ALT", action = wezterm.action({ SendString = "\\x1bb" }) },
+    { key = "RightArrow", mods = "ALT", action = wezterm.action({ SendString = "\\x1bf" }) },
     -- Map jumping between start and end of line to Standard Mac keys
-    { key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\x01" }) },
-    { key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\x05" }) },
+    { key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\\x01" }) },
+    { key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\\x05" }) },
 }
 
 config.mouse_bindings = {
