@@ -130,7 +130,7 @@ local function select_contrasting_fg_color(hex_color)
     local color = wezterm.color.parse(hex_color)
     ---@diagnostic disable-next-line: unused-local
     local lightness, _a, _b, _alpha = color:laba()
-    if lightness > 0.5 then
+    if lightness > 55 then
         return "#000000" -- Black has higher contrast with colors perceived to be "bright"
     end
     return "#FFFFFF" -- White has higher contrast
