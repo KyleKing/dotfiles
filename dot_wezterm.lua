@@ -24,6 +24,25 @@
 local wezterm = require("wezterm")
 
 -- ============================================================================
+-- Bitwise helpers (because selene doesn't support ,, and &)
+
+local function left_shift(num, shift_amount) return num * (2 ^ shift_amount) end
+
+local function bitwise_and(num1, num2)
+    local result = 0
+    local bit = 1
+    while num1 > 0 and num2 > 0 do
+        local remainder1 = num1 % 2
+        local remainder2 = num2 % 2
+        if remainder1 == 1 and remainder2 == 1 then result = result + bit end
+        num1 = math.floor(num1 / 2)
+        num2 = math.floor(num2 / 2)
+        bit = bit * 2
+    end
+    return result
+end
+
+-- ============================================================================
 -- Configuration for Tab Color
 
 -- Based on: https://github.com/protiumx/.dotfiles/blob/854d4b159a0a0512dc24cbc840af467ac84085f8/stow/wezterm/.config/wezterm/wezterm.lua#L291-L319
@@ -119,10 +138,10 @@ local function string_to_color(str)
     local hash = 0
     for i = 1, #str do
         -- Bitwise Left Shift: https://stackoverflow.com/a/141873/3219667
-        hash = string.byte(str, i) + ((hash << 5) - hash)
+        hash = string.byte(str, i) + (left_shift(hash, 5) - hash)
     end
     -- Convert the integer to a unique color
-    local c = string.format("%06X", hash & 0x00FFFFFF)
+    local c = string.format("%06X", bitwise_and(hash, 0x00FFFFFF))
     return "#" .. (string.rep("0", 6 - #c) .. c):upper()
 end
 
