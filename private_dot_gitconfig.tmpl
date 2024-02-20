@@ -37,6 +37,8 @@
     sort = -committerdate
 [color]
 	ui = true
+[column]
+    ui = auto
 [commit]
 	gpgsign = true
 [credential]
@@ -85,6 +87,9 @@
 	ff = only
 [push]
 	default = simple
+[rerere]
+    # Remembers conflict resolution
+    enabled = true
 [tag]
 	forceSignAnnotated = true
 [user]
@@ -92,4 +97,6 @@
 	email = {{ .github.email }}
 	signingkey = {{ .github.signing_key }}
 [include]
+	# FYI: An alternative approach is to use 'includeIf' (example: https://blog.jannikwempe.com/git-config-includes#heading-overriding-git-configuration-for-some-repositories)
 	path = .ailabs.gitconfig
+# FYI: `git maintenance start` can speed up git operations by running cron tasks for large and active repos (https://git-scm.com/docs/git-maintenance)
