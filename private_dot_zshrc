@@ -46,3 +46,6 @@ fi
 
 # # Added with 'op plugin init openai'
 # source ~/.config/op/plugins.sh
+
+# Added manually for SQLite shell history: https://github.com/atuinsh/atuin?tab=readme-ov-file#shell-plugin
+eval "$(atuin init zsh)"
