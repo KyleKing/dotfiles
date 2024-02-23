@@ -11,7 +11,6 @@ source $MY_CONFIG/_omz.sh
 source $MY_CONFIG/_zsh.sh
 source $MY_CONFIG/_git.sh
 source $MY_CONFIG/_go.sh
-# source $MY_CONFIG/_lf.sh
 source $MY_CONFIG/_mac.sh
 source $MY_CONFIG/_node.sh
 source $MY_CONFIG/_python.sh
