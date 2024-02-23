@@ -22,13 +22,19 @@ source $MY_CONFIG/sync.sh
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
 
-# Activate McFly for terminal history
-#   https://github.com/cantino/mcfly
-eval "$(mcfly init zsh)"
+# # Activate McFly for terminal history
+# #   https://github.com/cantino/mcfly
+# eval "$(mcfly init zsh)"
 
 # Configure asdf for managing tool-versions
 #   Docs: https://github.com/asdf-vm/asdf
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
+
+# # Added with 'op plugin init openai'
+# source ~/.config/op/plugins.sh
+
+# Added manually for SQLite shell history: https://github.com/atuinsh/atuin?tab=readme-ov-file#shell-plugin
+eval "$(atuin init zsh)"
 
 # --------------------------------------------------------------------------------------
 # Work
@@ -42,9 +48,4 @@ fi
 if [[ -f ~/.docker/init-zsh.sh ]]; then
   source ~/.docker/init-zsh.sh
 fi
-
-# # Added with 'op plugin init openai'
-# source ~/.config/op/plugins.sh
-
-# Added manually for SQLite shell history: https://github.com/atuinsh/atuin?tab=readme-ov-file#shell-plugin
-eval "$(atuin init zsh)"
+# --------------------------------------------------------------------------------------

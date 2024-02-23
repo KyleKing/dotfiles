@@ -29,7 +29,7 @@ rgso() {
         echo "The search strings must be specified. Expected: 'rgso ...'"
         return 1
     else
-        paths=$(rgh --fixed-strings --files-with-matches -- $_search)
+        paths=$(rgh --fixed-strings --files-with-matches -- "$_search")
         echo "Found: '$paths'"
         # for path in $paths;
         #     do $EDITOR "$path";
@@ -63,59 +63,60 @@ fzf-bat() {
 # Tail a file with syntax highlighting. Infers from extension or can be set manually
 # > btail ~/.zprofile zsh
 btail() {
-    tail -f $1 | bat --paging=never -l ${2:-${1##*.}}
+    tail -f "$1" | bat --paging=never -l "${2:-${1##*.}}"
 }
 
-# Configuration for McFly for menu-based history search
-# All keybindings: https://github.com/copy/mcfly/blob/7a952c68c4910bcdeebaae2ab8b2cc82c60e4677/src/interface.rs#L541-L676
-#   tab to paste without run
-export MCFLY_DISABLE_MENU=TRUE
-export MCFLY_FUZZY=2
-export MCFLY_RESULTS=50
+# FYI: I'm now using atuin instead of hstr and mcfly
+# # Configuration for McFly for menu-based history search
+# # All keybindings: https://github.com/copy/mcfly/blob/7a952c68c4910bcdeebaae2ab8b2cc82c60e4677/src/interface.rs#L541-L676
+# #   tab to paste without run
+# export MCFLY_DISABLE_MENU=TRUE
+# export MCFLY_FUZZY=2
+# export MCFLY_RESULTS=50
+# # HSTR configuration - add this to ~/.zshrc
+# alias hh=hstr                         # hh to be alias for hstr
+# setopt histignorespace                # skip cmds w/ leading space from history
+# export HSTR_CONFIG=hicolor            # get more colors
+# bindkey -s "\C-r" "\C-a hstr -- \C-j" # bind hstr to Ctrl-r (for Vi mode check doc)
 
-# HSTR configuration - add this to ~/.zshrc
-alias hh=hstr                         # hh to be alias for hstr
-setopt histignorespace                # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor            # get more colors
-bindkey -s "\C-r" "\C-a hstr -- \C-j" # bind hstr to Ctrl-r (for Vi mode check doc)
-
-# rpg-cli: a filesystem dungeon
-# https://github.com/facundoolano/rpg-cli#shell-integration
-alias rpg=rpg-cli
-rcd() {
-    rpg-cli cd "$@" || return 1
-    cd "$(rpg-cli pwd)" || return 1
-    rpg-cli ls || return 1
-    rpg-cli pwd
-}
-rpz() {
-    z "$@" || return 1
-    rpg-cli cd "$PWD" || return 1
-    rpg-cli ls || return 1
-    rpg-cli pwd
-}
-rph() {
-    # Heal
-    _last="$PWD"
-    # TODO: Should be a for loop until home
-    # # Shellcheck doesn't understand zsh syntax:
-    # repeat 10 '{ echo '---' && rpg cd "~" }'
-    for _ in {1..10}; do rpg cd "~"; done || return 1
-    # TODO: Should be a for loop to return to _last until battle (then stop and print _last)
-    rpg-cli cd "$_last" || return 1
-}
-alias rpl="rpg-cli ls"
-rpin() {
-    rpg-cli pwd || return 1
-    rcd ~ || return 1
-    rpg-cli ls || return 1
-    echo "~~ Stats ~~"
-    rpg-cli stat || return 1
-    printf "\n~~ Shop ~~"
-    rpg-cli buy || return 1
-    printf "\n~~ Quests ~~"
-    rpg-cli todo || return 1
-}
+# FYI: I've uninstalled rpg-cli, which was fun, but not all that useful
+# # rpg-cli: a filesystem dungeon
+# # https://github.com/facundoolano/rpg-cli#shell-integration
+# alias rpg=rpg-cli
+# rcd() {
+#     rpg-cli cd "$@" || return 1
+#     cd "$(rpg-cli pwd)" || return 1
+#     rpg-cli ls || return 1
+#     rpg-cli pwd
+# }
+# rpz() {
+#     z "$@" || return 1
+#     rpg-cli cd "$PWD" || return 1
+#     rpg-cli ls || return 1
+#     rpg-cli pwd
+# }
+# rph() {
+#     # Heal
+#     _last="$PWD"
+#     # TODO: Should be a for loop until home
+#     # # Shellcheck doesn't understand zsh syntax:
+#     # repeat 10 '{ echo '---' && rpg cd "~" }'
+#     for _ in {1..10}; do rpg cd "~"; done || return 1
+#     # TODO: Should be a for loop to return to _last until battle (then stop and print _last)
+#     rpg-cli cd "$_last" || return 1
+# }
+# alias rpl="rpg-cli ls"
+# rpin() {
+#     rpg-cli pwd || return 1
+#     rcd ~ || return 1
+#     rpg-cli ls || return 1
+#     echo "~~ Stats ~~"
+#     rpg-cli stat || return 1
+#     printf "\n~~ Shop ~~"
+#     rpg-cli buy || return 1
+#     printf "\n~~ Quests ~~"
+#     rpg-cli todo || return 1
+# }
 
 # gojq (go-based jq replacement)
 alias jq='gojq'
@@ -143,7 +144,7 @@ url-to-md-link() {
     echo "[$title]($1)"
 }
 
-# Tip: check current path with (thanks to ChatGPT!):
+# # Tip: check current $PATH with (thanks to ChatGPT!):
 # echo $PATH | awk '{gsub(/:/, "\n"); print}'
 
 # Jira Dashboards
