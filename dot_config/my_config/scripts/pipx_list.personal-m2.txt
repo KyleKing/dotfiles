@@ -29,6 +29,11 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - flit
    package licensecheck 2024, installed using Python 3.12.1
     - licensecheck
+   package mdformat 0.7.17, installed using Python 3.12.2
+    - mdformat
+    Injected Packages:
+      - mdformat-mkdocs 2.0.3
+      - mdformat-wikilink 0.1.1.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
    package norwegianblue 0.17.0, installed using Python 3.12.1
@@ -39,7 +44,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - tox-to-nox
    package pygments 2.17.2, installed using Python 3.12.1
     - pygmentize
-   package pyright 1.1.350, installed using Python 3.12.1
+   package pyright 1.1.351, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
@@ -51,7 +56,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylsp
    package ruff 0.2.2, installed using Python 3.12.1
     - ruff
-   package semgrep 1.61.1, installed using Python 3.12.1
+   package semgrep 1.62.0, installed using Python 3.12.1
     - pysemgrep
     - semgrep
     - sg
@@ -67,7 +72,9 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package tui-typer-tutor 1.1.2, installed using Python 3.12.1
     - ttt
     - tui-typer-tutor
-   package watchgha 2.2.2, installed using Python 3.12.1
+   package watchgha 2.2.2, installed using Python 3.12.2
     - watch_gha_runs
    package whatsonpypi 0.3.7, installed using Python 3.12.1
     - whatsonpypi
+   package yamllint 1.35.1, installed using Python 3.12.2
+    - yamllint
