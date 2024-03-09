@@ -189,11 +189,11 @@ config.keys = {
 
     -- Map jumping between words to Standard Mac keys
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
-    { key = "LeftArrow", mods = "ALT", action = wezterm.action({ SendString = "\\x1bb" }) },
-    { key = "RightArrow", mods = "ALT", action = wezterm.action({ SendString = "\\x1bf" }) },
+    { key = "LeftArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bb" }) },
+    { key = "RightArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bf" }) },
     -- Map jumping between start and end of line to Standard Mac keys
-    { key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\\x01" }) },
-    { key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\\x05" }) },
+    { key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\x01" }) },
+    { key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\x05" }) },
 }
 
 config.mouse_bindings = {
