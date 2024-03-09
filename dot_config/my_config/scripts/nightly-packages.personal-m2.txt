@@ -1,4 +1,4 @@
 cs cs version 1.4.0
 gotz v0.1.9
-lazygit commit=af56065dd69885dc394a78387ae07feb53162baf, build date=2024-02-21T09:00:49Z, build source=unknown, version=af56065d, os=darwin, arch=arm64, git version=2.43.2
+lazygit commit=44f553b6093c69d09718f617e0a7659c64f51015, build date=2024-03-07T19:20:42Z, build source=unknown, version=44f553b6, os=darwin, arch=arm64, git version=2.44.0
 shfmt 3.8.0

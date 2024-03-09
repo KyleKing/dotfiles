@@ -39,12 +39,12 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package norwegianblue 0.17.0, installed using Python 3.12.1
     - eol
     - norwegianblue
-   package nox 2023.4.22, installed using Python 3.12.1
+   package nox 2024.3.2, installed using Python 3.12.1
     - nox
     - tox-to-nox
    package pygments 2.17.2, installed using Python 3.12.1
     - pygmentize
-   package pyright 1.1.351, installed using Python 3.12.1
+   package pyright 1.1.353, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
@@ -52,11 +52,9 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package pytest-watcher 0.4.1, installed using Python 3.12.1
     - ptw
     - pytest-watcher
-   package python-lsp-server 1.10.0, installed using Python 3.12.1
-    - pylsp
-   package ruff 0.2.2, installed using Python 3.12.1
+   package ruff 0.3.1, installed using Python 3.12.1
     - ruff
-   package semgrep 1.62.0, installed using Python 3.12.1
+   package semgrep 1.64.0, installed using Python 3.12.1
     - pysemgrep
     - semgrep
     - sg
@@ -66,7 +64,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.12.1
     - toml-sort
-   package tox 4.13.0, installed using Python 3.12.1
+   package tox 4.14.1, installed using Python 3.12.1
     - tox
     - tox-quickstart
    package tui-typer-tutor 1.1.2, installed using Python 3.12.1
