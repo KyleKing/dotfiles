@@ -1,4 +1,5 @@
 ---
+# PLANNED: How to tell which directories in this directory aren't managed by mani?
 projects:
   calcipy:
     url: git@github.com:kyleking/calcipy.git
@@ -26,8 +27,16 @@ projects:
     url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
     url: git@github.com:kyleking/mdformat-admon.git
+    tags: ["mdformat-plugin"]
+  mdformat-gfm-alerts:
+    url: git@github.com:kyleking/mdformat-gfm-alerts.git
+    tags: ["mdformat-plugin"]
   mdformat-mkdocs:
     url: git@github.com:kyleking/mdformat-mkdocs.git
+    tags: ["mdformat-plugin"]
+  mdformat-obsidian:
+    url: git@github.com:kyleking/mdformat-obsidian.git
+    tags: ["mdformat-plugin"]
   # My-Programming-Sketchbook:
   #   url: git@github.com:kyleking/My-Programming-Sketchbook.git
   # personal-man:
