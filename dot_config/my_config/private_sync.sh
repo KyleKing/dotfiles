@@ -43,10 +43,18 @@ ch-rad() {
 }
 
 # Obsidian Syncing Snippets
-# FYI: `man strftime` provides the same information as Python and that website
 alias mvl="cd / && z obsidian-kyleking-vault && git pull"
 mvb() {
+    # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
     MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
     cd / && z obsidian-kyleking-vault && git add . && gcmsg "$MSG" && lzg
+}
+
+# NVIM Syncing
+alias mnl="cd ~/.config/nvim && git pull"
+mnb() {
+    MSG="Manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
+    printf "Creating commit for: '%s'\n" "$MSG"
+    cd ~/.config/nvim && git add . && gcmsg "$MSG" && lzg
 }
