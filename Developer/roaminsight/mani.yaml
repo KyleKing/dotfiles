@@ -80,8 +80,20 @@ projects:
     url: git@github.com:roaminsight/config-service.git
     desc: Overengineered links between applications
 
+  corporate-productivity:
+    url: git@github.com:roaminsight/corporate-productivity.git
+    desc: General Roam Project
+
+  csa:
+    url: git@github.com:roaminsight/csa.git
+    desc: General Roam Project
+
   data-classification:
     url: git@github.com:roaminsight/data-classification.git
+    desc: General Roam Project
+
+  dougs-private-pocs:
+    url: git@github.com:roaminsight/dougs-private-pocs.git
     desc: General Roam Project
 
   drugparse:
@@ -280,6 +292,10 @@ projects:
 
   sanitize-html:
     url: git@github.com:roaminsight/sanitize-html.git
+    desc: General Roam Project
+
+  sas-extension-poc:
+    url: git@github.com:roaminsight/sas-extension-poc.git
     desc: General Roam Project
 
   semantic-search:
