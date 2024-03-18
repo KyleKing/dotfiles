@@ -58,3 +58,6 @@ mnb() {
     printf "Creating commit for: '%s'\n" "$MSG"
     cd ~/.config/nvim && git add . && gcmsg "$MSG" && lzg
 }
+
+# Pull all changes
+alias mla="op signin && echo '\n\n# mvl\n' && mvl && echo '\n\n# mnl\n' && mnl && echo '\n\n# ch-sync\n' && ch-sync"
