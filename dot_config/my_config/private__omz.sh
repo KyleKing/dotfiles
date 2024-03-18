@@ -7,7 +7,12 @@
 export ZSH="/Users/kyleking/.oh-my-zsh"
 # export ZSH_CUSTOM=$ZSH  # Set in `$ZSH/oh-my-zsh.sh`
 
+# Remove some functionality to make omz much faster. Docs: https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#library-settings
+export DISABLE_MAGIC_FUNCTIONS=true
+export DISABLE_UNTRACKED_FILES_DIRTY=true
+
 # Configure the navi widget for completions
+# TODO: Should I use navi, cheat, tldr, or other tool for all quick reference?
 eval "$(navi widget zsh)"
 
 # Use `omz plugin info <name>  | glow -` to learn more about each. Prints the README
@@ -24,11 +29,11 @@ export plugins=(
     # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
     # perms: recursively set permissions (fixperms, set755, set644)
     # python: useful aliases (`pyfind` recursively find .py / `pyclean` Delete byte and cache)
-    # timer: Time commands (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
+    # timer: time commands integration to the prompt (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
     # tmux: auto-start in tmux session, tmuxconf to edit config, tl to list, ta to attach, etc.
     # urltools: urlencode/urldecode (urldecode 'https%3A%2F%2Fgithub.com%2Fohmyzsh%2Fohmyzsh%2Fsearch%3Fq%3Durltools%26type%3DCode')
-    copybuffer
-    copypath
+    # copybuffer
+    # copypath
     # encode64
     git
     # history
@@ -72,8 +77,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Extend tmux plugin by auto-recognizing the current directory as the session name
 tsesh() {
-    _name=$(basename "$(echo $PWD)")
-    (ts $_name || ta $_name) || return 1
+    _name=$(basename "$PWD")
+    (ts "$_name" || ta "$_name") || return 1
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
