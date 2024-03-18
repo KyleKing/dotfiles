@@ -18,13 +18,13 @@ ASDF_CONFIG_FILE=/Users/kyleking/.asdfrc
 
 ASDF INSTALLED PLUGINS:
 awscli-local                 https://github.com/amrox/asdf-pyapp.git master 41f5275
-deno                         https://github.com/asdf-community/asdf-deno.git master 87442fe
+deno                         https://github.com/asdf-community/asdf-deno.git master fec2a08
 extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
-nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master 4f8aa3d
-postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master f8cf805
-python                       https://github.com/danhper/asdf-python.git master 8505457
+nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master c5b7c40
+postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master e970a77
+python                       https://github.com/danhper/asdf-python.git master 5e277e2
 terraform-local              https://github.com/amrox/asdf-pyapp.git master 41f5275
-terraform                    https://github.com/asdf-community/asdf-hashicorp.git master c048526
+terraform                    https://github.com/asdf-community/asdf-hashicorp.git master 197e3ec
 textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
 textract                     https://github.com/amrox/asdf-pyapp.git master 41f5275
 yarn                         https://github.com/twuni/asdf-yarn.git main 376c540
