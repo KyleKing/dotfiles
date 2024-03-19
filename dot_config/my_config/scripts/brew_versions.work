@@ -119,11 +119,9 @@ hyperfine 1.18.0
 icu4c 74.2
 imagemagick 7.1.1-29_1
 imath 3.1.11
-img2pdf 0.5.1_1
 isl 0.26
 jasper 4.2.2
 jbig2dec 0.20
-jbig2enc 0.29_3
 jc 1.25.1
 jira-cli 1.5.1
 jj 0.15.1
@@ -158,7 +156,6 @@ libgpg-error 1.48
 libheif 1.17.6
 libidn 1.42
 libidn2 2.3.7
-libimagequant 4.3.0
 libksba 1.6.6
 liblqr 0.4.2_1
 libmagic 5.45
@@ -170,7 +167,6 @@ libogg 1.3.5
 libomp 18.1.1
 libpng 1.6.43
 libpq 16.2_1
-libraqm 0.10.1
 libraw 0.21.2
 librist 0.2.10
 librsvg 2.57.2
@@ -238,7 +234,6 @@ nspr 4.35
 nss 3.99
 numpy 1.26.4
 nyancat 1.5.2
-ocrmypdf 16.1.1
 oh-my-posh 19.17.2
 oniguruma 6.9.9
 openblas 0.3.26
@@ -260,22 +255,18 @@ pcre2 10.43
 pet 0.7.0
 pgsync 0.7.4_1
 php 8.3.4
-pillow 10.2.0_1
 pinentry 1.2.1
 pipx 1.4.3
 pixman 0.42.2
 pkg-config 0.29.2_3
 plantuml 1.2024.3
 pngcrush 1.8.13
-pngquant 3.0.3
 poetry 1.8.2
 poppler 24.03.0
-portaudio 19.7.0
 postgresql@15 15.6_1
 pre-commit 3.6.2
 prettier 3.2.5
 pugixml 1.14
-pybind11 2.11.1
 pycparser 2.21_1
 pygments 2.17.2
 python-lxml 5.1.0
@@ -284,7 +275,6 @@ python-typing-extensions 4.10.0
 python@3.10 3.10.13_2
 python@3.11 3.11.8
 python@3.12 3.12.2_1
-qpdf 11.9.0
 rav1e 0.7.1
 readline 8.2.10
 redis 7.2.4
@@ -307,7 +297,6 @@ snappy 1.1.10
 socli 7.3
 speedtest-cli 2.1.3_1
 speex 1.2.1
-spotifyd 0.3.5
 sqlite 3.45.2
 srt 1.5.3
 stern 1.28.0
@@ -315,12 +304,10 @@ stylua 0.20.0
 svt-av1 2.0.0
 swig 4.2.1
 tbb 2021.11.0
-tcl-tk 8.6.14
 tere 1.5.1
 terraform-docs 0.17.0
 terrascan 1.19.1
 tesseract 5.3.4_1
-tesseract-lang 4.1.0
 tflint 0.50.3
 tfsec 1.28.5
 tfupdate 0.8.1
@@ -340,7 +327,6 @@ tzdiff 1.2
 unbound 1.19.3
 unibilium 2.1.1
 unixodbc 2.3.12
-unpaper 7.0.0_1
 unrtf 0.21.10
 utf8proc 2.9.0
 vale 3.3.0
