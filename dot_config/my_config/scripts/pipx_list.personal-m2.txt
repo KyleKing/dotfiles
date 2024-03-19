@@ -32,8 +32,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package mdformat 0.7.17, installed using Python 3.12.2
     - mdformat
     Injected Packages:
-      - mdformat-mkdocs 2.0.3
-      - mdformat-wikilink 0.1.1.1
+      - mdformat-gfm 0.3.6
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
    package norwegianblue 0.17.0, installed using Python 3.12.1
@@ -74,5 +73,3 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - watch_gha_runs
    package whatsonpypi 0.3.7, installed using Python 3.12.1
     - whatsonpypi
-   package yamllint 1.35.1, installed using Python 3.12.2
-    - yamllint
