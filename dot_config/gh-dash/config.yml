@@ -30,7 +30,7 @@ defaults:
   preview:
     open: true
     width: 90
-  prsLimit: 50
+  prsLimit: 10
   issuesLimit: 50
   view: prs
 keybindings:
