@@ -88,6 +88,10 @@ projects:
     url: git@github.com:roaminsight/csa.git
     desc: General Roam Project
 
+  ccioms-summarization:
+    url: git@github.com:roaminsight/ccioms-summarization.git
+    desc: General Roam Project
+
   data-classification:
     url: git@github.com:roaminsight/data-classification.git
     desc: General Roam Project
@@ -150,6 +154,10 @@ projects:
 
   jupyter-react-widgets:
     url: git@github.com:roaminsight/jupyter-react-widgets.git
+    desc: General Roam Project
+
+  k8s-gitops:
+    url: git@github.com:roaminsight/k8s-gitops.git
     desc: General Roam Project
 
   knowledge-service:
