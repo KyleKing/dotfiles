@@ -157,7 +157,7 @@ git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
     colorArg: always
-    pager: delta --paging=never --true-color=never
+    pager: delta --paging=never --true-color=never --dark
   log:
     showWholeGitGraph: true
 os:
