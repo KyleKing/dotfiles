@@ -27,7 +27,6 @@ certifi 2024.2.2
 cffi 1.16.0_1
 cheat 4.4.2
 checkov 3.2.30
-chezmoi 2.47.2
 circumflex 3.5
 cjson 1.7.17
 cloc 2.00
