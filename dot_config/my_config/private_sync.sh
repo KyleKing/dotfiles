@@ -60,4 +60,9 @@ mnb() {
 }
 
 # Pull all changes
-alias mla="op signin && echo '\n\n# mvl\n' && mvl && echo '\n\n# mnl\n' && mnl && echo '\n\n# ch-sync\n' && ch-sync"
+mla() {
+    op signin &&
+        printf "\n\n# mvl\n" && mvl && git status &&
+        printf "\n\n# mnl\n" && mnl && git status &&
+        printf "\n\n# ch-sync\n" && ch-sync && git status
+}
