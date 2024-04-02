@@ -129,6 +129,7 @@ brew "prettier"
 brew "redis", restart_service: true
 brew "ripgrep"
 brew "rust"
+brew "selene"
 brew "sevenzip"
 brew "shellcheck"
 brew "shellharden"
