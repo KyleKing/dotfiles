@@ -177,6 +177,7 @@ config.initial_cols = 200
 config.initial_rows = 60
 config.scrollback_lines = 7500
 
+local act = wezterm.action
 config.keys = {
     {
         key = "w",
@@ -184,16 +185,21 @@ config.keys = {
         action = wezterm.action.CloseCurrentTab({ confirm = true }),
     },
     -- Map tab navigation
-    { key = "LeftArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
-    { key = "RightArrow", mods = "CMD|ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
+    { key = "LeftArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = -1 }) },
+    { key = "RightArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = 1 }) },
 
     -- Map jumping between words to Standard Mac keys
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
-    { key = "LeftArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bb" }) },
-    { key = "RightArrow", mods = "ALT", action = wezterm.action({ SendString = "\x1bf" }) },
+    { key = "LeftArrow", mods = "ALT", action = act({ SendString = "\x1bb" }) },
+    { key = "RightArrow", mods = "ALT", action = act({ SendString = "\x1bf" }) },
     -- Map jumping between start and end of line to Standard Mac keys
-    { key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\x01" }) },
-    { key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\x05" }) },
+    { key = "LeftArrow", mods = "CMD", action = act({ SendString = "\x01" }) },
+    { key = "RightArrow", mods = "CMD", action = act({ SendString = "\x05" }) },
+
+    -- Map vim-friendly scrolling
+    { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
+    { key = "f", mods = "CTRL", action = act.ScrollByPage(0.9) },
+    { key = "DownArrow", mods = "CMD", action = act.ScrollToBottom },
 }
 
 config.mouse_bindings = {
