@@ -121,7 +121,6 @@ brew "php"
 brew "pipx"
 brew "plantuml"
 brew "pngcrush"
-brew "poetry"
 brew "poppler"
 brew "postgresql@15"
 brew "pre-commit"
@@ -263,7 +262,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
-mas "Slack", id: 803453959
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
