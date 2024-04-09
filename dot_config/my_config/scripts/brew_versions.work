@@ -33,7 +33,6 @@ cloc 2.00
 cmake 3.29.1
 cmatrix 2.0
 cmctl 2.0.0
-container-diff 0.19.0
 coreutils 9.5
 cryptography 42.0.5
 ctop 0.7.7
@@ -43,6 +42,7 @@ dark-mode 3.0.2
 dav1d 1.4.1
 dbus 1.14.10
 ddgr 2.2
+diffoci 0.1.4
 dive 0.12.0
 docker-credential-helper-ecr 0.7.1
 dotenv-linter 3.3.0
@@ -233,7 +233,6 @@ npth 1.7
 nspr 4.35
 nss 3.99
 numpy 1.26.4
-nyancat 1.5.2
 oh-my-posh 19.20.0
 oniguruma 6.9.9
 openblas 0.3.27
