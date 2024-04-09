@@ -13,7 +13,7 @@ at-spi2-core 2.52.0
 atuin 18.1.0
 autoconf 2.72
 automake 1.16.5
-awscli 2.15.35
+awscli 2.15.36
 bat 0.24.0
 bat-extras 2024.02.12
 boost 1.84.0_1
@@ -55,8 +55,8 @@ eza 0.18.9
 fb303 2024.04.01.00
 fbthrift 2024.04.01.00
 fd 9.0.0
-ffmpeg 6.1.1_6
-ffmpeg@4 4.4.4_4
+ffmpeg 6.1.1_7
+ffmpeg@4 4.4.4_5
 fizz 2024.04.01.00
 fjira 1.3.2
 flac 1.4.3
@@ -67,7 +67,7 @@ freetds 1.4.12
 freetype 2.13.2
 frei0r 2.3.2
 fribidi 1.0.13
-fzf 0.48.1
+fzf 0.49.0
 gawk 5.3.0
 gcc 13.2.0
 gd 2.3.3_6
@@ -117,7 +117,7 @@ humanlog 0.7.6
 hwloc 2.10.0
 hyperfine 1.18.0
 icu4c 74.2
-imagemagick 7.1.1-29_1
+imagemagick 7.1.1-30
 imath 3.1.11
 isl 0.26
 jasper 4.2.3
@@ -153,7 +153,7 @@ libevent 2.1.12_1
 libgcrypt 1.10.3
 libgit2 1.7.2
 libgpg-error 1.48
-libheif 1.17.6
+libheif 1.17.6_1
 libidn 1.42
 libidn2 2.3.7
 libksba 1.6.6
@@ -162,7 +162,7 @@ libmagic 5.45
 libmaxminddb 1.9.1
 libmicrohttpd 1.0.1
 libmpc 1.3.1
-libnghttp2 1.60.0
+libnghttp2 1.61.0
 libogg 1.3.5
 libomp 18.1.3
 libpng 1.6.43
@@ -189,7 +189,7 @@ libvmaf 3.0.0
 libvorbis 1.3.7
 libvpx 1.13.1
 libvterm 0.3.3
-libx11 1.8.8
+libx11 1.8.9
 libxau 1.0.11
 libxcb 1.16.1
 libxdmcp 1.1.5
@@ -202,7 +202,7 @@ libyaml 0.2.5
 libzip 1.10.1
 little-cms2 2.16
 llvm 17.0.6_1
-lnav 0.12.0
+lnav 0.12.1
 lolcat 100.0.1
 lua 5.4.6
 luacheck 1.1.2
@@ -218,7 +218,7 @@ mas 1.8.6
 mbedtls 3.6.0
 mpdecimal 4.0.0
 mpfr 4.2.1
-mpg123 1.32.5
+mpg123 1.32.6
 msgpack 6.0.1
 mujs 1.3.4
 mupdf 1.23.11
@@ -236,7 +236,7 @@ numpy 1.26.4
 nyancat 1.5.2
 oh-my-posh 19.20.0
 oniguruma 6.9.9
-openblas 0.3.26
+openblas 0.3.27
 opencore-amr 0.1.6
 openexr 3.2.4
 openjdk 21.0.2
@@ -248,7 +248,7 @@ openvino 2024.0.0
 opus 1.5.1
 ossp-uuid 1.6.2_2
 p11-kit 0.25.3
-pandoc 3.1.12.3
+pandoc 3.1.13
 pango 1.52.2
 pcre 8.45
 pcre2 10.43
@@ -259,7 +259,7 @@ pinentry 1.3.0
 pipx 1.5.0
 pixman 0.42.2
 pkg-config 0.29.2_3
-plantuml 1.2024.3
+plantuml 1.2024.4
 pngcrush 1.8.13
 poppler 24.04.0
 postgresql@15 15.6_1
@@ -282,7 +282,7 @@ ripgrep 14.1.0
 rtmpdump 2.4-20151223_3
 rubberband 3.3.0
 rust 1.77.1
-sad 0.4.27
+sad 0.4.28
 screenresolution 1.6
 sdl2 2.30.2
 selene 0.26.1
@@ -323,14 +323,14 @@ trash 0.9.2
 tre-command 0.4.0
 tree 2.1.1_1
 tree-sitter 0.22.2
-typos-cli 1.20.3
+typos-cli 1.20.4
 tzdiff 1.2.1
 unbound 1.19.3
 unibilium 2.1.1
 unixodbc 2.3.12
 unrtf 0.21.10
 utf8proc 2.9.0
-vale 3.3.1
+vale 3.4.1
 virtualenv 20.25.1
 walk 1.7.0
 wangle 2024.04.01.00
@@ -339,7 +339,7 @@ webp 1.3.2
 wego 2.2
 wget 1.24.5
 x264 r3108
-x265 3.5
+x265 3.6
 xc 0.8.0
 xh 0.21.0
 xorgproto 2024.1
@@ -362,17 +362,17 @@ alfred 5.5,2257
 another-redis-desktop-manager 1.6.3
 appcleaner 3.6.8
 aws-vault 7.2.0
-beekeeper-studio 4.1.13
+beekeeper-studio 4.2.9
 blockblock 2.2.2
 cloudflare-warp 2024.3.407.0,20240329.17
 customshortcuts 1.1
 daisydisk 4.30
 dash6 6.4.3
-dbeaver-community 24.0.1
+dbeaver-community 24.0.2
 dhs 1.5.1
-docker 4.28.0,139021
+docker 4.29.0,145265
 drop-to-gif 1.28
-dropbox 195.4.4995
+dropbox 196.4.6900
 duo-connect 2.0.4
 firefox 124.0.2
 firefox-developer-edition latest
@@ -409,7 +409,7 @@ postman 10.24.16
 postman-cli 1.7.1
 qlmarkdown 1.0.17
 quicklook-json 2,1.0
-rectangle-pro 3.0.21
+rectangle-pro 3.0.22
 reikey 1.4.2
 rocket 1.9.3,85
 skim 1.7.1
