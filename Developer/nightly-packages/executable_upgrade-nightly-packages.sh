@@ -4,7 +4,7 @@
 
 original_dir=$PWD
 
-for pth in cs gotz lazygit "sh/cmd/shfmt"; do
+for pth in cs gotz "Kube-Node-Usage" lazygit "sh/cmd/shfmt"; do
     echo "Upgrading $original_dir/$pth" && (cd "$pth" && git pull && go install . && cd "$original_dir") || echo "error"
 done
 

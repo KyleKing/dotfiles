@@ -1,7 +1,6 @@
 iexec
 images
 ktop
-kurt
 lineage
 neat
 resource-capacity
