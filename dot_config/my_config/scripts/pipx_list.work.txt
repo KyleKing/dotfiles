@@ -23,7 +23,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - man1/glances.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package pipdeptree 2.17.0, installed using Python 3.12.1
+   package pipdeptree 2.18.0, installed using Python 3.12.1
     - pipdeptree
    package poetry 1.8.2, installed using Python 3.12.2
     - poetry
@@ -34,12 +34,12 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.357, installed using Python 3.12.1
+   package pyright 1.1.358, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.3.5, installed using Python 3.12.1
+   package ruff 0.3.7, installed using Python 3.12.1
     - ruff
    package sourcery-cli 1.16.0, installed using Python 3.12.1
     - sourcery
@@ -52,5 +52,5 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package tui-typer-tutor 1.1.2, installed using Python 3.12.1
     - ttt
     - tui-typer-tutor
-   package watchgha 2.2.2, installed using Python 3.12.1
+   package watchgha 2.3.0, installed using Python 3.12.1
     - watch_gha_runs
