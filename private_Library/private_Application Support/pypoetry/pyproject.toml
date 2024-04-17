@@ -1,0 +1,20 @@
+# Keep up to date with:
+# poetry self add poetry-plugin-export@latest poetry-plugin-sort@latest poetry-relax@latest
+
+[tool.poetry]
+authors = []
+description = ""
+license = ""
+name = "poetry-instance"
+version = "1.8.2"
+
+[tool.poetry.dependencies]
+python = "3.12.3"
+poetry = "1.8.2"
+
+[tool.poetry.group.additional.dependencies]
+poetry-plugin-export = "^1.7.1"
+poetry-plugin-sort = "^0.2.1"
+poetry-plugin-up = "^0.6.0"
+poetry-relax = "^1.1.0"
+setuptools = "^68.2.0"

@@ -37,6 +37,8 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package nox 2024.3.2, installed using Python 3.12.1
     - nox
     - tox-to-nox
+   package poetry 1.8.2, installed using Python 3.12.3
+    - poetry
    package pygments 2.17.2, installed using Python 3.12.1
     - pygmentize
    package pyright 1.1.353, installed using Python 3.12.1
