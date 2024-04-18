@@ -5,4 +5,9 @@ working fine: please don't worry or file an issue; just ignore this. Thanks![0m
 Warning: Some installed formulae are deprecated or disabled.
 You should find replacements for the following formulae:
   openssl@1.1
-  python-typing-extensions
+
+Warning: Some installed formulae are missing dependencies.
+You should `brew install` the missing dependencies:
+  brew install llvm@17
+
+Run `brew missing` for more details.
