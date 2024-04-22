@@ -46,7 +46,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.358, installed using Python 3.12.1
+   package pyright 1.1.359, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python

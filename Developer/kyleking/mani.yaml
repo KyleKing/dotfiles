@@ -66,7 +66,7 @@ projects:
   tui-typer-tutor:
     url: git@github.com:kyleking/tui-typer-tutor.git
     tags:
-      - calcipy-template
+      - archived
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
 
