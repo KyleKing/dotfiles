@@ -192,6 +192,10 @@ projects:
     url: git@github.com:roaminsight/model-utils.git
     desc: General Roam Project
 
+  mvrs:
+    url: git@github.com:roaminsight/mvrs.git
+    desc: General Roam Project
+
   object-permissions:
     url: git@github.com:roaminsight/object-permissions.git
     desc: General Roam Project
