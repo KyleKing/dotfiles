@@ -54,7 +54,7 @@ mvb() {
 # NVIM Syncing
 alias mnl="cd ~/.config/nvim && git pull"
 mnb() {
-    MSG="Manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
+    MSG="chore: manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
     cd ~/.config/nvim && git add . && gcmsg "$MSG" && lzg
 }
