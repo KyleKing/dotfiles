@@ -204,6 +204,10 @@ projects:
     url: git@github.com:roaminsight/ocr-pipelines.git
     desc: General Roam Project
 
+  okta-ldap-sync:
+    url: git@github.com:roaminsight/okta-ldap-sync.git
+    desc: General Roam Project
+
   opsbot:
     url: git@github.com:roaminsight/opsbot.git
     desc: General Roam Project
