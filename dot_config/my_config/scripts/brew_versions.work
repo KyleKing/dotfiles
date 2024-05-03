@@ -395,6 +395,7 @@ microsoft-remote-desktop 10.9.6
 microsoft-teams 24046.2813.2770.1094
 monitorcontrol 4.2.0
 netiquette 2.2.0
+nosql-workbench 3.13.0
 obsidian 1.5.12
 oversight 2.3.0
 paletro 1.9.0
@@ -409,6 +410,7 @@ rocket 1.9.3,85
 skim 1.7.1
 spotify 1.2.34.783,923721d9,4676
 suspicious-package 4.4,1088
+temurin 22.0.1,8
 vlc 3.0.20
 webcatalog 56.1.1
 webpquicklook 1.0
