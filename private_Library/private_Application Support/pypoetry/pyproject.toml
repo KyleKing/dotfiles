@@ -3,11 +3,12 @@ authors = []
 description = ""
 license = ""
 name = "poetry-instance"
-version = "1.8.2"
+package-mode = false
+version = "1.8.3"
 
 [tool.poetry.dependencies]
 python = "3.12.3"
-poetry = "1.8.2"
+poetry = "1.8.3"
 
 [tool.poetry.group.additional.dependencies]
 cryptography = "^42.0.5"

@@ -21,6 +21,8 @@ awscli-local                 https://github.com/amrox/asdf-pyapp.git master 41f5
 chezmoi                      https://github.com/joke/asdf-chezmoi.git main a37f235
 deno                         https://github.com/asdf-community/asdf-deno.git master fec2a08
 extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
+localstack-core              https://github.com/amrox/asdf-pyapp.git master 41f5275
+localstack                   https://github.com/amrox/asdf-pyapp.git master 41f5275
 nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master c5b7c40
 postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master e970a77
 python                       https://github.com/danhper/asdf-python.git master 5e277e2

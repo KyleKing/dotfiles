@@ -6,6 +6,10 @@ Warning: Some installed formulae are deprecated or disabled.
 You should find replacements for the following formulae:
   openssl@1.1
 
+Warning: You have the following deprecated, official taps tapped:
+  Homebrew/homebrew-cask-versions
+Untap them with `brew untap`.
+
 Warning: Some installed formulae are missing dependencies.
 You should `brew install` the missing dependencies:
   brew install llvm@17

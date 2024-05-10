@@ -23,23 +23,23 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - man1/glances.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package pipdeptree 2.19.0, installed using Python 3.12.1
+   package pipdeptree 2.20.0, installed using Python 3.12.1
     - pipdeptree
-   package poetry 1.8.2, installed using Python 3.12.2
+   package poetry 1.8.3, installed using Python 3.12.2
     - poetry
-   package pygments 2.17.2, installed using Python 3.12.1
+   package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
    package pylint 3.1.0, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.360, installed using Python 3.12.1
+   package pyright 1.1.362, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.4.2, installed using Python 3.12.1
+   package ruff 0.4.3, installed using Python 3.12.1
     - ruff
    package sourcery-cli 1.16.0, installed using Python 3.12.1
     - sourcery
