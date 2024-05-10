@@ -1,0 +1,16 @@
+# http://editorconfig.org
+root = true
+
+[*]
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+tab_width = 3
+trim_trailing_whitespace = true
+
+[**.{toml,yml,yaml,tf}]
+indent_size = 2
+
+[**.{js,jsx,ts,tsx,html}]
+indent_size = 2
