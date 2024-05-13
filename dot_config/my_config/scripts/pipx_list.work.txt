@@ -18,7 +18,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - cortex
    package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
-   package glances 3.4.0.5, installed using Python 3.12.1
+   package glances 4.0.1, installed using Python 3.12.1
     - glances
     - man1/glances.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
@@ -39,9 +39,9 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.4.3, installed using Python 3.12.1
+   package ruff 0.4.4, installed using Python 3.12.1
     - ruff
-   package sourcery-cli 1.16.0, installed using Python 3.12.1
+   package sourcery-cli 1.18.0, installed using Python 3.12.1
     - sourcery
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl
