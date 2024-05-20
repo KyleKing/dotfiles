@@ -18,7 +18,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - cortex
    package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
-   package glances 4.0.1, installed using Python 3.12.1
+   package glances 4.0.5, installed using Python 3.12.1
     - glances
     - man1/glances.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
@@ -29,12 +29,12 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - poetry
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.1.0, installed using Python 3.12.1
+   package pylint 3.2.2, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.362, installed using Python 3.12.1
+   package pyright 1.1.363, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
