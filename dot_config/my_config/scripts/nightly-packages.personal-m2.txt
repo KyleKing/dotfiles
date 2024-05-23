@@ -1,4 +1,5 @@
 cs cs version 1.4.0
 gotz v0.1.9
-lazygit commit=189f39de2be6fadc225f3fc56420bab739397ec1, build date=2024-05-18T08:07:24Z, build source=unknown, version=189f39de, os=darwin, arch=arm64, git version=2.45.1
+lazygit commit=0fbed71f15eed55947e301095c4e0c138ba69d4a, build date=2024-05-20T19:05:58Z, build source=unknown, version=0fbed71f, os=darwin, arch=arm64, git version=2.45.1
 shfmt 3.8.0
+superfile superfile version v1.1.3

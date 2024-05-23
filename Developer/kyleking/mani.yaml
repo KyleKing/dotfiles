@@ -59,6 +59,10 @@ projects:
     url: git@github.com:kyleking/shoal.git
     tags:
       - calcipy-template
+  SpecNet:
+    url: git@github.com:kyleking/SpecNet.git
+    tags:
+      - calcipy-template
   tail-jsonl:
     url: git@github.com:kyleking/tail-jsonl.git
     tags:
