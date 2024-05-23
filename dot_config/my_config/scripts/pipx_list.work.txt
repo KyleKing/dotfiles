@@ -23,7 +23,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - man1/glances.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package pipdeptree 2.20.0, installed using Python 3.12.1
+   package pipdeptree 2.21.0, installed using Python 3.12.1
     - pipdeptree
    package poetry 1.8.3, installed using Python 3.12.2
     - poetry
@@ -34,7 +34,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.363, installed using Python 3.12.1
+   package pyright 1.1.364, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
