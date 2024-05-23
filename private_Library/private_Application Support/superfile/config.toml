@@ -1,0 +1,37 @@
+# change your theme
+
+#
+# Auto check for update
+auto_check_update = true
+border_bottom = '─'
+border_bottom_left = '╰'
+border_bottom_right = '╯'
+border_left = '│'
+border_middle_left = '├'
+border_middle_right = '┤'
+border_right = '│'
+#
+# Border style
+border_top = '─'
+border_top_left = '╭'
+border_top_right = '╮'
+#
+# Cd on quit
+cd_on_quit = false
+#
+# Whether to open file preview automatically every time superfile is opened.
+default_open_file_preview = false
+#
+# File preview width allow '0' (this mean same as file panel),'x' x must be less than 10 and greater than 1 (This means that the width of the file preview will be one xth of the total width.)
+file_preview_width = 0
+#
+# ==========PLUGINS========== #
+#
+# Show more detailed metadata, please install exiftool before enabling this plugin!
+metadata = false
+theme = 'catppuccin'
+#
+# ================   Style =================
+#
+# Set transparent background or not (this only work when your terminal background is transparent)
+transparent_background = false
