@@ -175,7 +175,6 @@ nettle 3.9.1
 node 22.2.0
 npth 1.7
 numpy 1.26.4
-oatmeal 0.13.0
 oh-my-posh 20.2.0
 oniguruma 6.9.9
 openblas 0.3.27
@@ -244,7 +243,6 @@ unbound 1.20.0
 unibilium 2.1.1
 unixodbc 2.3.12
 utf8proc 2.9.0
-uv 0.1.44
 vale 3.4.2
 vhs 0.7.2
 walk 1.7.0
@@ -300,7 +298,6 @@ monitorcontrol 4.1.0
 monodraw 1.6.1,111
 netiquette 2.2.0
 obsidian 1.4.13
-ollama 0.1.25
 oversight 2.3.0
 paletro 1.7.0
 pika 0.0.16
