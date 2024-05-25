@@ -16,7 +16,1957 @@
           "basic.to_if_held_down_threshold_milliseconds": 500,
           "mouse_motion_to_scroll.speed": 100
         },
-        "rules": []
+        "rules": [
+          {
+            "description": "Home Row (w/out CapsLock)\t⟶\t  [C]FnSAG ([Ctrl] Fn Shift Alt GUI)",
+            "manipulators": [
+              {
+                "description": "Hold A ⟶ Fn",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "a"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold S ⟶ Left Shift",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "s"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold D ⟶ Left Option",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "d"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "d"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold F ⟶ Left Command",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "f"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "f"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold J ⟶ Right Command",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "j"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold K ⟶ Right Option",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "k"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "k"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold L ⟶ Right Shift",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "l"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "l"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Semicolon ⟶ Fn",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "semicolon"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "semicolon"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Quote ⟶ Right Control",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "quote"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "quote"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Home Row (w/out CapsLock)\t⟶\t  [Fn]CAGS ([Fn] Ctrl Alt GUI Shift)",
+            "manipulators": [
+              {
+                "description": "Hold A ⟶ Left Control",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "a"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_control"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold S ⟶ Left Option",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "s"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold D ⟶ Left Command",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "d"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "d"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold F ⟶ Left Shift",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "f"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "f"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold J ⟶ Right Shift",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "j"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold K ⟶ Right Command",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "k"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "k"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold L ⟶ Right Option",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "l"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "l"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Semicolon ⟶ Right Control",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "semicolon"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "semicolon"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Quote ⟶ Fn",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "quote"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "quote"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Home Row (w/out CapsLock)\t⟶\t  [C]FnAGS ([Fn] Alt GUI Shift)",
+            "manipulators": [
+              {
+                "description": "Hold A ⟶ Fn",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "a"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold S ⟶ Left Option",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "s"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold D ⟶ Left Command",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "d"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "d"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold F ⟶ Left Shift",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "f"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "f"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold J ⟶ Right Shift",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "j"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold K ⟶ Right Command",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "k"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "k"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold L ⟶ Right Option",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "l"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "l"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Semicolon ⟶ Fn",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "semicolon"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "semicolon"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Quote ⟶ Right Control",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "quote"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "quote"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Caps to Fn\t⟶\t  Forward Delete Only",
+            "manipulators": [
+              {
+                "description": "Hold Caps Lock ⟶ Fn",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "delete_forward"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "delete_forward"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Home Row (with CapsLock)\t⟶\t  CFnSAG (Ctrl Fn Shift Alt GUI)",
+            "manipulators": [
+              {
+                "description": "Hold Caps Lock ⟶ Left Control",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "delete_forward"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "delete_forward"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_control"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold A ⟶ Fn",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "a"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold S ⟶ Left Shift",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "s"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold D ⟶ Left Option",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "d"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "d"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold F ⟶ Left Command",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "f"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "f"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold J ⟶ Right Command",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "j"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold K ⟶ Right Option",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "k"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "k"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold L ⟶ Right Shift",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "l"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "l"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Semicolon ⟶ Fn",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "semicolon"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "semicolon"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Quote ⟶ Right Control",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "quote"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "quote"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Home Row (with CapsLock)\t⟶\t  FnCAGS (Fn Ctrl Alt GUI Shift)",
+            "manipulators": [
+              {
+                "description": "Hold Caps Lock ⟶ Fn",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "delete_forward"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "delete_forward"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold A ⟶ Left Control",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "a"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_control"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold S ⟶ Left Option",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "s"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold D ⟶ Left Command",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "d"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "d"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold F ⟶ Left Shift",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "f"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "f"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold J ⟶ Right Shift",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "j"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold K ⟶ Right Command",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "k"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "k"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold L ⟶ Right Option",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "l"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "l"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Semicolon ⟶ Right Control",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "semicolon"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "semicolon"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Quote ⟶ Fn",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "quote"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "quote"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Home Row (with CapsLock)\t⟶\t  CFnAGS (Ctrl Fn Alt GUI Shift)",
+            "manipulators": [
+              {
+                "description": "Hold Caps Lock ⟶ Left Control",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "delete_forward"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "delete_forward"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_control"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold A ⟶ Fn",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "a"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "a"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold S ⟶ Left Option",
+                "from": {
+                  "key_code": "s",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "s"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "s"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold D ⟶ Left Command",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "d"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "d"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold F ⟶ Left Shift",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "f"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "f"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold J ⟶ Right Shift",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "j"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold K ⟶ Right Command",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "k"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "k"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold L ⟶ Right Option",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "l"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "l"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Semicolon ⟶ Fn",
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "semicolon"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "semicolon"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "Hold Quote ⟶ Right Control",
+                "from": {
+                  "key_code": "quote",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 80,
+                  "basic.to_if_alone_timeout_milliseconds": 300,
+                  "basic.to_if_held_down_threshold_milliseconds": 80
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "quote"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "quote"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
       },
       "devices": [
         {
@@ -54,6 +2004,72 @@
           },
           "ignore": true,
           "manipulate_caps_lock_led": false,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
+        },
+        {
+          "disable_built_in_keyboard_if_exists": false,
+          "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": false,
+            "product_id": 10203,
+            "vendor_id": 5824
+          },
+          "ignore": false,
+          "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
+        },
+        {
+          "disable_built_in_keyboard_if_exists": false,
+          "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": false,
+            "is_pointing_device": true,
+            "product_id": 613,
+            "vendor_id": 1452
+          },
+          "ignore": true,
+          "manipulate_caps_lock_led": false,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
+        },
+        {
+          "disable_built_in_keyboard_if_exists": false,
+          "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": false,
+            "product_id": 402,
+            "vendor_id": 1241
+          },
+          "ignore": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_horizontal_wheel": false,
           "mouse_flip_vertical_wheel": false,
           "mouse_flip_x": false,
