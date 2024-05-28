@@ -7,14 +7,14 @@
 ch-app() {
     # Apply any changes to local files
     eval "$(op signin)" || return 1
-    PAGER="" chezmoi apply --verbose
+    PAGER="bat --paging=never" chezmoi apply --verbose
 }
 
 ch-sync() {
     # Pull latest version and apply to local files
     eval "$(op signin)" || return 1
     cd "$(chezmoi source-path)" || return 1
-    PAGER="" chezmoi update --verbose
+    PAGER="bat --paging=never" chezmoi update --verbose
 
     # Ensure other packages are up to date:
     tldr --update
