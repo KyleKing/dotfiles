@@ -7,14 +7,14 @@
 ch-app() {
     # Apply any changes to local files
     eval "$(op signin)" || return 1
-    PAGER="bat --paging=never" chezmoi apply --verbose
+    chezmoi apply
 }
 
 ch-sync() {
     # Pull latest version and apply to local files
     eval "$(op signin)" || return 1
     cd "$(chezmoi source-path)" || return 1
-    PAGER="bat --paging=never" chezmoi update --verbose
+    chezmoi update
 
     # Ensure other packages are up to date:
     tldr --update
@@ -32,7 +32,7 @@ ch-rad() {
         eval "$(op signin)" || return 1
         ch-scripts || return 1
         # Sync with files already tracked by chezmoi
-        PAGER="" chezmoi re-add --verbose || return 1
+        chezmoi re-add || return 1
     else
         RED='\033[0;31m'
         NC='\033[0m'
