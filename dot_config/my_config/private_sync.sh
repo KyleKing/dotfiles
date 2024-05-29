@@ -43,26 +43,33 @@ ch-rad() {
 }
 
 # Obsidian Syncing Snippets
-alias mvl="cd / && z obsidian-kyleking-vault && git pull"
-mvb() {
+alias back-obs-pull="cd / && z obsidian-kyleking-vault && git pull"
+back-obs() {
     # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
     MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd / && z obsidian-kyleking-vault && git add . && gcmsg "$MSG" && lzg
+    cd / && z obsidian-kyleking-vault && ga && gcmsg "$MSG" && lzg
 }
 
 # NVIM Syncing
-alias mnl="cd ~/.config/nvim && git pull"
-mnb() {
+alias back-nvim-pull="cd ~/.config/nvim && git pull"
+back-nvim() {
     MSG="chore: manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd ~/.config/nvim && git add . && gcmsg "$MSG" && lzg
+    cd ~/.config/nvim && ga && gcmsg "$MSG" && lzg
 }
 
 # Pull all changes
-mla() {
+back-all-pull() {
     op signin &&
-        printf "\n\n# mvl\n" && mvl && git status &&
-        printf "\n\n# mnl\n" && mnl && git status &&
+        printf "\n\n# back-obs-pull\n" && back-obs-pull && git status &&
+        printf "\n\n# back-nvim-pull\n" && back-nvim-pull && git status &&
         printf "\n\n# ch-sync\n" && ch-sync && git status
+}
+# Just show status
+back-all-stat() {
+    op signin &&
+        printf "\n\n# Obsidian:\n" && cd / && z obsidian-kyleking-vault && echo "$PWD" && git status &&
+        printf "\n\n# nvim\n" && cd ~/.config/nvim && echo "$PWD" && git status &&
+        printf "\n\n# Chezmoi\n" && cd / && z chezmoi && echo "$PWD" && git status
 }
