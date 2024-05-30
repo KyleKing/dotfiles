@@ -48,7 +48,7 @@ back-obs() {
     # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
     MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd / && z obsidian-kyleking-vault && ga && gcmsg "$MSG" && lzg
+    cd / && z obsidian-kyleking-vault && ga . && gcmsg "$MSG" && lzg
 }
 
 # NVIM Syncing
@@ -56,7 +56,7 @@ alias back-nvim-pull="cd ~/.config/nvim && git pull"
 back-nvim() {
     MSG="chore: manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd ~/.config/nvim && ga && gcmsg "$MSG" && lzg
+    cd ~/.config/nvim && ga . && gcmsg "$MSG" && lzg
 }
 
 # Pull all changes
