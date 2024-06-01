@@ -13,8 +13,13 @@ done
 # echo "Upgrading $pth" && cd "$pth" && git pull && ...(See README) && cd "$original_dir"
 # bat cache --build
 
-pth="firefox-vertical-tabs"
-echo "Upgrading $pth" && cd "$pth" && git pull && cd "$original_dir"
+# TODO: The upstream repository was removed or turned private
+#   Expected: https://github.com/ranmaru22/firefox-vertical-tabs
+# May need to find an alternative?
+#
+# pth="firefox-vertical-tabs"
+# echo "Upgrading $pth" && cd "$pth" && git pull && cd "$original_dir"
+#
 # # Note: symlink this project into the Firefox profiles (id's might differ per system)
 # > cd /Users/kyleking/Library/Application\ Support/Firefox/Profiles
 # > lsl
