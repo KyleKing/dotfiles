@@ -44,10 +44,6 @@ projects:
     url: git@github.com:roaminsight/babylon.git
     desc: Backend Pipelines and Moana Replacement
 
-  babylon-next:
-    url: git@github.com:roaminsight/babylon-next.git
-    desc: Split from Babylon
-
   babylon-notebooks:
     url: git@github.com:roaminsight/babylon-notebooks.git
     desc: General Roam Project
