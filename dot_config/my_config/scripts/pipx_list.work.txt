@@ -1,6 +1,8 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
+   package bump-pydantic 0.8.0, installed using Python 3.12.3
+    - bump-pydantic
    package calcipy 2.1.0, installed using Python 3.12.1
     - calcipy
     - calcipy-docs
