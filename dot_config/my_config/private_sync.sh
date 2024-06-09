@@ -4,13 +4,13 @@
 #
 # Dot File Syncing Scripts
 
-ch-app() {
+back-apply-ch() {
     # Apply any changes to local files
     eval "$(op signin)" || return 1
     chezmoi apply
 }
 
-ch-sync() {
+back-pull-ch() {
     # Pull latest version and apply to local files
     eval "$(op signin)" || return 1
     cd "$(chezmoi source-path)" || return 1
@@ -20,17 +20,17 @@ ch-sync() {
     tldr --update
 }
 
-ch-scripts() {
+back-scripts-ch() {
     # Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
     "$HOME/.config/my_config/generate_machine_snapshot.sh"
 }
 
-ch-rad() {
+back-c-ch() {
     # Prevent overwriting chezmoi edits by checking for staged or unstaged changes
     cd "$(chezmoi source-path)" || return 1
     if output=$(git status --porcelain) && [ -z "$output" ]; then
         eval "$(op signin)" || return 1
-        ch-scripts || return 1
+        back-scripts-ch || return 1
         # Sync with files already tracked by chezmoi
         chezmoi re-add || return 1
     else
@@ -43,8 +43,8 @@ ch-rad() {
 }
 
 # Obsidian Syncing Snippets
-alias back-obs-pull="cd / && z obsidian-kyleking-vault && git pull"
-back-obs() {
+alias back-pull-obs="cd / && z obsidian-kyleking-vault && git pull"
+back-c-obs() {
     # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
     MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
@@ -52,22 +52,22 @@ back-obs() {
 }
 
 # NVIM Syncing
-alias back-nvim-pull="cd ~/.config/nvim && git pull"
-back-nvim() {
+alias back-pull-nvim="cd ~/.config/nvim && git pull"
+back-c-nvim() {
     MSG="chore: manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
     cd ~/.config/nvim && ga . && gcmsg "$MSG" && lzg
 }
 
 # Pull all changes
-back-all-pull() {
+back-pull-all() {
     op signin &&
-        printf "\n\n# back-obs-pull\n" && back-obs-pull && git status &&
-        printf "\n\n# back-nvim-pull\n" && back-nvim-pull && git status &&
-        printf "\n\n# ch-sync\n" && ch-sync && git status
+        printf "\n\n# back-pull-obs\n" && back-pull-obs && git status &&
+        printf "\n\n# back-pull-nvim\n" && back-pull-nvim && git status &&
+        printf "\n\n# back-pull-ch\n" && back-pull-ch && git status
 }
 # Just show status
-back-all-stat() {
+back-stat-all() {
     op signin &&
         printf "\n\n# Obsidian:\n" && cd / && z obsidian-kyleking-vault && echo "$PWD" && git status &&
         printf "\n\n# nvim\n" && cd ~/.config/nvim && echo "$PWD" && git status &&
