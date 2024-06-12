@@ -4,6 +4,10 @@ projects:
     url: git@github.com:roaminsight/active-learning-pipelines.git
     desc: General Roam Project
 
+  ai-labs-diagrams:
+    url: git@github.com:roaminsight/ai-labs-diagrams.git
+    desc: General Roam Project
+
   alp-client:
     url: git@github.com:roaminsight/alp-client.git
     desc: General Roam Project
