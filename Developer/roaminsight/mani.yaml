@@ -148,6 +148,10 @@ projects:
     url: git@github.com:roaminsight/import-parser.git
     desc: Email Parser Backend for Reviewer
 
+  intern-projects:
+    url: git@github.com:roaminsight/intern-projects.git
+    desc: General Roam Project
+
   janus:
     url: git@github.com:roaminsight/janus.git
     desc: General Roam Project
@@ -344,6 +348,10 @@ projects:
 
   spinnaker:
     url: git@github.com:roaminsight/spinnaker.git
+    desc: General Roam Project
+
+  stap:
+    url: git@github.com:roaminsight/stap.git
     desc: General Roam Project
 
   sumo-logic:
