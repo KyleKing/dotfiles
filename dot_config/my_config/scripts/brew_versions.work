@@ -24,7 +24,6 @@ cairo 1.18.0
 certifi 2024.6.2
 cffi 1.16.0_1
 cheat 4.4.2
-checkov 3.2.140
 circumflex 3.6
 cjson 1.7.18
 cloc 2.00
@@ -100,7 +99,6 @@ gts 0.7.6_3
 gum 0.14.1
 hadolint 2.12.0
 harfbuzz 8.5.0
-hcledit 0.2.11
 helm 3.15.2
 hicolor-icon-theme 0.17
 highway 1.2.0
@@ -223,7 +221,6 @@ node 22.3.0
 npth 1.7
 nspr 4.35
 nss 3.101
-numpy 1.26.4
 oh-my-posh 21.13.1
 oniguruma 6.9.9
 openblas 0.3.27
@@ -287,12 +284,8 @@ svt-av1 2.1.0
 swig 4.2.1
 tere 1.5.1
 terraform-docs 0.18.0
-terrascan 1.19.1
 tesseract 5.4.1
 tesseract-lang 4.1.0
-tflint 0.51.1
-tfsec 1.28.6
-tfupdate 0.8.2
 theora 1.1.1
 tidy-html5 5.8.0
 tldr 1.6.1
