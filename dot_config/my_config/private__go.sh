@@ -4,7 +4,6 @@
 #
 # Add global go modules to PATH
 
+# Note: go CLI packages are managed in nightly-packages by mani
 GOPATH="$(go env GOPATH)"
 export PATH="$PATH:$GOPATH/bin"
-
-# Install gotz with: go install github.com/merschformann/gotz@latest
