@@ -28,6 +28,10 @@ projects:
     url: git@github.com:merschformann/gotz.git
     tags:
       - go-install
+  Kube-Node-Usage:
+    url: git@github.com:AKSarav/Kube-Node-Usage.git
+    tags:
+      - go-install
   lazygit:
     url: git@github.com:jesseduffield/lazygit.git
     tags:
@@ -41,4 +45,5 @@ projects:
 tasks:
   install:
     desc: Install with go
-    cmd: go install .
+    cmd: |
+      git pull && go install .
