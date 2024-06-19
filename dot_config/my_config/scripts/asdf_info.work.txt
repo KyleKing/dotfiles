@@ -18,7 +18,6 @@ ASDF_CONFIG_FILE=/Users/kyleking/.asdfrc
 
 ASDF INSTALLED PLUGINS:
 awscli-local                 https://github.com/amrox/asdf-pyapp.git master 41f5275
-chezmoi                      https://github.com/joke/asdf-chezmoi.git main 53f30be
 deno                         https://github.com/asdf-community/asdf-deno.git master fec2a08
 extract-msg                  https://github.com/amrox/asdf-pyapp.git master 41f5275
 localstack-core              https://github.com/amrox/asdf-pyapp.git master 41f5275

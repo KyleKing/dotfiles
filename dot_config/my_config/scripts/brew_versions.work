@@ -24,6 +24,7 @@ cairo 1.18.0
 certifi 2024.6.2
 cffi 1.16.0_1
 cheat 4.4.2
+chezmoi 2.49.0
 circumflex 3.6
 cjson 1.7.18
 cloc 2.00
