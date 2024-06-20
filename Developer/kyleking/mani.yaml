@@ -47,6 +47,10 @@ projects:
     url: git@github.com:kyleking/PersonalFinanceExplorer.git
     tags:
       - archived
+  PhyloSpec:
+    url: git@github.com:kyleking/PhyloSpec.git
+    tags:
+      - calcipy-template
   # private-snippets:
   #   url: git@github.com:kyleking/private-snippets.git
   pytest_cache_assert:
@@ -59,10 +63,6 @@ projects:
       - calcipy-template
   shoal:
     url: git@github.com:kyleking/shoal.git
-    tags:
-      - calcipy-template
-  SpecNet:
-    url: git@github.com:kyleking/SpecNet.git
     tags:
       - calcipy-template
   tail-jsonl:
