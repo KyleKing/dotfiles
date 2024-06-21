@@ -222,7 +222,7 @@ node 22.3.0
 npth 1.7
 nspr 4.35
 nss 3.101
-oh-my-posh 21.13.1
+oh-my-posh 21.16.0
 oniguruma 6.9.9
 openblas 0.3.27
 opencore-amr 0.1.6
@@ -287,6 +287,7 @@ tere 1.5.1
 terraform-docs 0.18.0
 tesseract 5.4.1
 tesseract-lang 4.1.0
+tflint 0.51.1
 theora 1.1.1
 tidy-html5 5.8.0
 tldr 1.6.1
@@ -375,6 +376,8 @@ netiquette 2.2.0
 obsidian 1.5.12
 oversight 2.3.0
 paletro 1.9.0
+pieces 2.12.3
+pieces-os 9.0.6
 pika 0.0.16
 postman 10.24.16
 postman-cli 1.7.1

@@ -350,6 +350,10 @@ projects:
     url: git@github.com:roaminsight/spinnaker.git
     desc: General Roam Project
 
+  stage-replication:
+    url: git@github.com:roaminsight/stage-replication.git
+    desc: General Roam Project
+
   stap:
     url: git@github.com:roaminsight/stap.git
     desc: General Roam Project
