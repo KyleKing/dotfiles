@@ -1,9 +1,6 @@
 [alias]
 	# Previously used legit: https://github.com/frostming/legit
 
-	# Based on: https://stackoverflow.com/a/65746041/3219667
-	# Use: git publish-branch
-	publish-branch = push -u origin $(git rev-parse --abbrev-ref HEAD)
 	# Snippet from: https://github.com/roaminsight/matt-dotfiles/blob/master/.bash_prompt
     recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
 
