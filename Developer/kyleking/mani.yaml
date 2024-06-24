@@ -21,10 +21,6 @@ projects:
     url: git@github.com:kyleking/cz_legacy.git
     tags:
       - calcipy-template
-  extract_finances:
-    url: git@github.com:kyleking/extract_finances.git
-    tags:
-      - archived
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
@@ -41,22 +37,12 @@ projects:
     tags: ["mdformat-plugin"]
   # My-Programming-Sketchbook:
   #   url: git@github.com:kyleking/My-Programming-Sketchbook.git
-  # personal-man:
-  #   url: git@github.com:kyleking/personal-man.git
-  PersonalFinanceExplorer:
-    url: git@github.com:kyleking/PersonalFinanceExplorer.git
-    tags:
-      - archived
   PhyloSpec:
     url: git@github.com:kyleking/PhyloSpec.git
     tags:
       - calcipy-template
-  # private-snippets:
-  #   url: git@github.com:kyleking/private-snippets.git
-  pytest_cache_assert:
-    url: git@github.com:kyleking/pytest_cache_assert.git
-    tags:
-      - archived
+  private-snippets:
+    url: git@github.com:kyleking/private-snippets.git
   recipes:
     url: git@github.com:kyleking/recipes.git
     tags:
@@ -69,10 +55,6 @@ projects:
     url: git@github.com:kyleking/tail-jsonl.git
     tags:
       - calcipy-template
-  tui-typer-tutor:
-    url: git@github.com:kyleking/tui-typer-tutor.git
-    tags:
-      - archived
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
 
