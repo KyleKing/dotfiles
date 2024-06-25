@@ -76,7 +76,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate $HOME/.oh-my-zsh"
 
 # Extend tmux plugin by auto-recognizing the current directory as the session name
-tsesh() {
+#   'terminal session here'
+tsh() {
     _name=$(basename "$PWD")
     (ts "$_name" || ta "$_name") || return 1
 }
