@@ -16,7 +16,6 @@ awscli 2.17.1
 bat 0.24.0
 bat-extras 2024.07.10
 boost 1.85.0
-bottom 0.9.6
 brotli 1.1.0
 c-ares 1.31.0
 ca-certificates 2024-03-11
