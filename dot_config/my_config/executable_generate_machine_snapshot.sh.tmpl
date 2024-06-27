@@ -25,7 +25,8 @@ gh extension upgrade --all || return 1
 (brew bundle dump --file=- > "$SCRIPT_DIR/Brewfile.{{- .computer_name }}") || return 1
 (brew list --versions > "$SCRIPT_DIR/brew_versions.{{- .computer_name }}") || return 1
 (brew doctor 2> "$SCRIPT_DIR/brew_doctor.{{- .computer_name }}") || true
-# FYI: use 'brew leaves' to see top-level installs
+(brew leaves > "$SCRIPT_DIR/brew_leaves.{{- .computer_name }}") || return 1
+chezmoi add "$SCRIPT_DIR" || return 1
 
 # Keep local checkouts up-to-date
 cd ~/Developer/nightly-packages
