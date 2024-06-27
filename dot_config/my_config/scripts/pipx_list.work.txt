@@ -31,17 +31,17 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - poetry
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.2.3, installed using Python 3.12.1
+   package pylint 3.2.4, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.368, installed using Python 3.12.1
+   package pyright 1.1.369, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.4.8, installed using Python 3.12.1
+   package ruff 0.4.10, installed using Python 3.12.1
     - ruff
    package sourcery-cli 1.19.0, installed using Python 3.12.1
     - sourcery
@@ -51,5 +51,5 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - toml-sort
    package trcli 1.9.5, installed using Python 3.12.1
     - trcli
-   package watchgha 2.3.1, installed using Python 3.12.1
+   package watchgha 2.3.2, installed using Python 3.12.1
     - watch_gha_runs
