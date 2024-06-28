@@ -12,13 +12,6 @@ python $SCRIPT_DIR/../backup_templates.py || return 1
 # Store code tags
 calcipy-tags tags.collect-code-tags --doc-sub-dir=.github --filename=Chezmoi_Code_Tags.md --base-dir=$HOME/.local/share/chezmoi || return 1
 
-# # Sync my nvim user config. From: https://github.com/KyleKing/AstroNvim-User
-# (cd ~/.config/nvim-astronvim/lua/user && git pull && cd) || return 1
-
-# Sync the community cheat sheets. Initialize with:
-#   gh repo clone cheat/cheatsheets ~/.config/cheat/cheatsheets/community
-(cd ~/.config/cheat/cheatsheets/community && git pull && cd) || return 1
-
 gh extension upgrade --all || return 1
 
 # Note: no trailing '-}}' for below commands:
