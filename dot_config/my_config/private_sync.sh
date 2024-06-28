@@ -15,9 +15,6 @@ back-pull-ch() {
     eval "$(op signin)" || return 1
     cd "$(chezmoi source-path)" || return 1
     chezmoi update
-
-    # Ensure other packages are up to date:
-    tldr --update
 }
 
 back-scripts-ch() {
