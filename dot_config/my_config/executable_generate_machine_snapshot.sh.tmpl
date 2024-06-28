@@ -6,9 +6,6 @@
 
 SCRIPT_DIR=$HOME/.config/my_config/scripts
 
-# Overwrite template files from local changes
-python $SCRIPT_DIR/../backup_templates.py || return 1
-
 # Store code tags
 calcipy-tags tags.collect-code-tags --doc-sub-dir=.github --filename=Chezmoi_Code_Tags.md --base-dir=$HOME/.local/share/chezmoi || return 1
 
@@ -25,12 +22,11 @@ chezmoi add "$SCRIPT_DIR" || return 1
 cd ~/Developer/nightly-packages
 ./upgrade-nightly-packages.sh || return 1
 (./dump-version.sh > "$SCRIPT_DIR/nightly-packages.{{- .computer_name -}}.txt") || return 1
-cd
+cd ~
 
 (gh extension list > "$SCRIPT_DIR/gh_extensions.{{- .computer_name -}}.txt") || return 1
 which kubectl && ((kubectl krew list > "$SCRIPT_DIR/krew_plugins.{{- .computer_name -}}.txt") || return 1)
 (pipx list --include-injected > "$SCRIPT_DIR/pipx_list.{{- .computer_name -}}.txt") || return 1
 (pip config list --verbose > "$SCRIPT_DIR/pip_config.{{- .computer_name -}}.txt") || return 1
-asdf_info=$(asdf info)
-(printf '%s\n' "$asdf_info" > "$SCRIPT_DIR/asdf_info.{{- .computer_name -}}.txt") || return 1
+(printf '%s\n' "$(asdf info)" > "$SCRIPT_DIR/asdf_info.{{- .computer_name -}}.txt") || return 1
 {{ end -}}
