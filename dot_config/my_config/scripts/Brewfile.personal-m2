@@ -13,8 +13,6 @@ brew "pcre2"
 brew "cairo"
 brew "chezmoi"
 brew "cloc"
-brew "cmake"
-brew "curl"
 brew "curlie"
 brew "dotenv-linter"
 brew "envchain"
@@ -56,7 +54,6 @@ brew "typos-cli"
 brew "vale"
 brew "vhs"
 brew "walk"
-brew "xh"
 brew "yamllint"
 brew "zoxide"
 brew "zsh"
@@ -100,13 +97,11 @@ cask "malwarebytes"
 cask "metabase"
 cask "microsoft-teams"
 cask "monitorcontrol"
-cask "monodraw"
 cask "netiquette"
 cask "obsidian"
 cask "oversight"
 cask "paletro"
 cask "pika"
-cask "privileges"
 cask "qlmarkdown"
 cask "quicklook-json"
 cask "rectangle-pro"
@@ -138,7 +133,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
-mas "Slack", id: 803453959
 mas "Spark", id: 1176895641
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457

@@ -4,8 +4,6 @@ asdf
 atuin
 chezmoi
 cloc
-cmake
-curl
 curlie
 dotenv-linter
 envchain
@@ -43,7 +41,6 @@ typos-cli
 vale
 vhs
 walk
-xh
 yamllint
 zoxide
 zsh
