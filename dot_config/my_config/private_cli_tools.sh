@@ -146,12 +146,3 @@ url-to-md-link() {
 
 # # Tip: check current $PATH with (thanks to ChatGPT!):
 # echo $PATH | awk '{gsub(/:/, "\n"); print}'
-
-# Jira Dashboards
-# wraps jira-cli: https://github.com/ankitpokhrel/jira-cli
-r-jira() {
-    # shellcheck disable=SC2046
-    export $(envchain JIRA env | grep JIRA_API_TOKEN=) || return 1
-    # shellcheck disable=SC2068
-    jira ${@} || return 1
-}

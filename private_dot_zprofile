@@ -11,12 +11,7 @@ export PATH="$PATH:/Users/kyleking/.local/bin"
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config
 
-# Prevent collection of metrics by gpt-engineer (https://github.com/AntonOsika/gpt-engineer/blob/main/TERMS_OF_USE.md)
-export COLLECT_LEARNINGS_OPT_OUT=true
-
 # Set bat as default Pager (instead of less)
 export PAGER=bat
-# jira-cli requires less. Use this override (https://github.com/ankitpokhrel/jira-cli/discussions/569)
-export JIRA_PAGER=less
 
 source $MY_CONFIG/on_login.sh

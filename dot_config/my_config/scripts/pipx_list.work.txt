@@ -31,7 +31,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - poetry
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.2.4, installed using Python 3.12.1
+   package pylint 3.2.5, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
@@ -41,7 +41,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.4.10, installed using Python 3.12.1
+   package ruff 0.5.0, installed using Python 3.12.1
     - ruff
    package sourcery-cli 1.19.0, installed using Python 3.12.1
     - sourcery
