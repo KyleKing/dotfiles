@@ -38,20 +38,8 @@
       "TZ": "Asia/Calcutta"
     },
     {
-      "Name": "Turkey",
-      "TZ": "Turkey"
-    },
-    {
       "Name": "London",
       "TZ": "Europe/Belfast"
-    },
-    {
-      "Name": "Hong Kong",
-      "TZ": "Asia/Hong_Kong"
-    },
-    {
-      "Name": "Amsterdam",
-      "TZ": "Europe/Amsterdam"
     }
   ]
 }
