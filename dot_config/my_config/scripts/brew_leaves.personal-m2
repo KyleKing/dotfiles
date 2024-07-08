@@ -29,6 +29,7 @@ oh-my-posh
 pipx
 plantuml
 pre-commit
+pyright
 rhysd/git-brws/git-brws
 selene
 sevenzip

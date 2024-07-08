@@ -15,7 +15,7 @@ bat-extras-batwatch 2023.09.19
 bat-extras-prettybat 2023.09.19
 brotli 1.1.0
 c-ares 1.31.0
-ca-certificates 2024-03-11
+ca-certificates 2024-07-02
 cairo 1.18.0
 chezmoi 2.49.1
 cjson 1.7.18
@@ -145,10 +145,10 @@ ncurses 6.5
 neovim 0.10.0
 netpbm 11.02.09
 nettle 3.10
-node 22.3.0
+node 22.4.0
 npth 1.7
 numpy 1.26.4
-oh-my-posh 21.16.2
+oh-my-posh 21.21.1
 oniguruma 6.9.9
 openblas 0.3.27
 opencore-amr 0.1.6
@@ -170,6 +170,7 @@ plantuml 1.2024.5
 pre-commit 3.7.1
 prettier 3.3.2
 pugixml 1.14
+pyright 1.1.370
 python-packaging 24.1
 python@3.12 3.12.4
 rav1e 0.7.1

@@ -6,3 +6,6 @@ url = "https://nexus.roaminsight.net/repository/pypi-all/simple"
 [virtualenvs]
 in-project = true
 prefer-active-python = true
+
+[warnings]
+export = false

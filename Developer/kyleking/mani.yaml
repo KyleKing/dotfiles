@@ -17,10 +17,6 @@ projects:
     url: git@github.com:kyleking/corallium.git
     tags:
       - calcipy-template
-  cz_legacy:
-    url: git@github.com:kyleking/cz_legacy.git
-    tags:
-      - calcipy-template
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
