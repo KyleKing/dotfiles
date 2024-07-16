@@ -34,12 +34,20 @@
       "TZ": "America/Santa_Isabel"
     },
     {
-      "Name": "IST",
-      "TZ": "Asia/Calcutta"
+      "Name": "CDMX",
+      "TZ": "America/Mexico_City"
+    },
+    {
+      "Name": "UTC",
+      "TZ": "UTC"
     },
     {
       "Name": "London",
-      "TZ": "Europe/Belfast"
+      "TZ": "Europe/London"
+    },
+    {
+      "Name": "IST",
+      "TZ": "Asia/Calcutta"
     }
   ]
 }
