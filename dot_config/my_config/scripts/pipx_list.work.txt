@@ -3,7 +3,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
    package bump-pydantic 0.8.0, installed using Python 3.12.3
     - bump-pydantic
-   package calcipy 3.0.2, installed using Python 3.12.1
+   package calcipy 4.0.0, installed using Python 3.12.1
     - calcipy
     - calcipy-docs
     - calcipy-lint
@@ -14,18 +14,15 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
-   package copier 9.2.0, installed using Python 3.12.1
+   package copier 9.3.1, installed using Python 3.12.1
     - copier
    package cortex 0.42.1, installed using Python 3.12.1
     - cortex
    package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
-   package glances 4.0.8, installed using Python 3.12.1
-    - glances
-    - man1/glances.1
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package pipdeptree 2.23.0, installed using Python 3.12.1
+   package pipdeptree 2.23.1, installed using Python 3.12.1
     - pipdeptree
    package poetry 1.8.3, installed using Python 3.12.4
     - poetry
@@ -36,15 +33,13 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.369, installed using Python 3.12.1
+   package pyright 1.1.371, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.5.0, installed using Python 3.12.1
+   package ruff 0.5.2, installed using Python 3.12.1
     - ruff
-   package sourcery-cli 1.19.0, installed using Python 3.12.1
-    - sourcery
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.12.1
