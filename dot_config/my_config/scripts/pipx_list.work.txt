@@ -3,7 +3,7 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
    package bump-pydantic 0.8.0, installed using Python 3.12.3
     - bump-pydantic
-   package calcipy 4.0.0, installed using Python 3.12.1
+   package calcipy 4.0.0, installed using Python 3.12.4
     - calcipy
     - calcipy-docs
     - calcipy-lint
