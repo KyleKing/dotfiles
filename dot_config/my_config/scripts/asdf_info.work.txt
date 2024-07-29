@@ -25,6 +25,7 @@ localstack                   https://github.com/amrox/asdf-pyapp.git master 41f5
 nodejs                       https://github.com/asdf-vm/asdf-nodejs.git master c5b7c40
 postgres                     https://github.com/smashedtoatoms/asdf-postgres.git master acbbc49
 python                       https://github.com/danhper/asdf-python.git master 5e277e2
+rust                         https://github.com/code-lever/asdf-rust.git master 95acf4f
 terraform-local              https://github.com/amrox/asdf-pyapp.git master 41f5275
 terraform                    https://github.com/asdf-community/asdf-hashicorp.git master f1602b6
 textract-py3                 https://github.com/amrox/asdf-pyapp.git master 41f5275
