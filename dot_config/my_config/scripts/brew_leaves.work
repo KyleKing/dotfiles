@@ -59,6 +59,7 @@ sevenzip
 shellcheck
 shellharden
 shfmt
+sniffnet
 speedtest-cli
 stern
 stylua

@@ -401,6 +401,10 @@ tasks:
       done
       git fetch --prune --prune-tags
 
+  sync-tags:
+    desc: Sync deployment tags
+    cmd: git sync-tags
+
   git-status:
     desc: show working tree status
     output: table
