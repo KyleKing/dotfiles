@@ -9,6 +9,7 @@ chezmoi
 cloc
 curlie
 diffoci
+difftastic
 dive
 docker-credential-helper-ecr
 dotenv-linter
@@ -31,13 +32,13 @@ jj
 jpegoptim
 k9s
 krew
+kubetui
 kubie
 lazydocker
 luacheck
 luarocks
 mackup
 mas-cli/tap/mas
-ms-jpq/sad/sad
 navi
 neovim
 oh-my-posh
@@ -54,6 +55,7 @@ pre-commit
 prettier
 rhysd/git-brws/git-brws
 ripgrep
+sad
 selene
 sevenzip
 shellcheck

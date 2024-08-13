@@ -156,10 +156,7 @@ gui:
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
-    colorArg: always
-    pager: delta --paging=never --true-color=never --dark
-  log:
-    showWholeGitGraph: true
+    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=off
 os:
   # FYI: experimental support for within session editing (https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#configuring-file-editing)
   editPreset: "nvim-remote"

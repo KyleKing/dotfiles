@@ -33,12 +33,12 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.374, installed using Python 3.12.1
+   package pyright 1.1.375, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.5.6, installed using Python 3.12.1
+   package ruff 0.5.7, installed using Python 3.12.1
     - ruff
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl

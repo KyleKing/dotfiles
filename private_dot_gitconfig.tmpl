@@ -47,17 +47,17 @@
 	editor = nvim
 	eol = lf
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
-	pager = delta --paging=never
-[delta]
-	navigate = true
+	pager = difft --color=always
 [diff]
-	# guitool = delta
-    colorMoved = default
+    external = difft
+    tool = difftastic
 [diff "image"]
     textconv = wezterm imgcat
     command = {{ .chezmoi.homeDir }}/.local/bin/imgdiff.sh
-[difftool "kdiff3"]
-	path = /usr/local/bin/kdiff3
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
 [filter "hawser"]
 	clean = git hawser clean %f
 	required = true
@@ -73,13 +73,10 @@
 	smudge = git media smudge %f
 [gpg]
 	program = {{ .github.gpg_program }}
-[interactive]
-	diffFilter = delta --color-only
 [init]
 	defaultBranch = main
-[merge]
-	tool = kdiff3
-    conflictstyle = diff3
+[pager]
+    difftool = true
 [pull]
 	ff = only
 [push]
