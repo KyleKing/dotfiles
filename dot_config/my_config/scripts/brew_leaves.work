@@ -65,6 +65,7 @@ sniffnet
 speedtest-cli
 stern
 stylua
+swig
 tealdeer
 terraform-docs
 tesseract-lang

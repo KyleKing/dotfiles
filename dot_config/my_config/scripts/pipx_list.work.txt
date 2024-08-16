@@ -24,8 +24,12 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - mypy-silent
    package pipdeptree 2.23.1, installed using Python 3.12.1
     - pipdeptree
-   package poetry 1.8.3, installed using Python 3.12.4
+   package poetry 1.8.3, installed using Python 3.12.5
     - poetry
+    Injected Packages:
+      - poetry-plugin-export 1.8.0
+      - poetry-plugin-sort 0.2.1
+      - poetry-relax 1.1.0
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
    package pylint 3.2.6, installed using Python 3.12.1

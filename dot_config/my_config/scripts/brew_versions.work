@@ -9,7 +9,7 @@ at-spi2-core 2.52.0
 atuin 18.3.0
 autoconf 2.72
 automake 1.17
-awscli 2.17.28
+awscli 2.17.30
 bat 0.24.0_1
 bat-extras 2024.07.10
 boost 1.85.0
@@ -92,7 +92,7 @@ jpegoptim 1.5.5
 k9s 0.32.5
 krb5 1.21.3
 krew 0.4.4
-kubernetes-cli 1.30.3
+kubernetes-cli 1.31.0
 kubetui 1.5.3
 kubie 0.23.1
 lazydocker 0.23.3
@@ -212,6 +212,7 @@ speedtest-cli 2.1.3_1
 sqlite 3.46.0
 stern 1.30.0
 stylua 0.20.0
+swig 4.2.1
 tealdeer 1.6.1
 terraform-docs 0.18.0
 tesseract 5.4.1
@@ -277,7 +278,7 @@ lunacy 9.6.1
 mac-mouse-fix 3.0.2
 metabase 0.41.6
 microsoft-auto-update 4.69.24031120
-microsoft-edge 123.0.2420.65,7bbba6d8-bd7d-473a-82fe-c136ab40996b
+microsoft-edge 127.0.2651.98,03fc999c-7996-4c5e-b4a6-dfb3687a3af0
 microsoft-office 16.83.24031120
 microsoft-remote-desktop 10.9.6
 microsoft-teams 24046.2813.2770.1094
