@@ -1,5 +1,5 @@
 OS:
-Darwin Kyles-MacBook-Pro.local 23.5.0 Darwin Kernel Version 23.5.0: Wed May  1 20:14:38 PDT 2024; root:xnu-10063.121.3~5/RELEASE_ARM64_T6020 arm64
+Darwin Kyles-MacBook-Pro.local 23.6.0 Darwin Kernel Version 23.6.0: Mon Jul 29 21:13:04 PDT 2024; root:xnu-10063.141.2~1/RELEASE_ARM64_T6020 arm64
 
 SHELL:
 zsh 5.9 (x86_64-apple-darwin23.0)
@@ -8,7 +8,7 @@ BASH VERSION:
 3.2.57(1)-release
 
 ASDF VERSION:
-v0.14.0
+v0.14.1
 
 ASDF INTERNAL VARIABLES:
 ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=.tool-versions

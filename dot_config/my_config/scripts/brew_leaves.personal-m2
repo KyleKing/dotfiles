@@ -5,6 +5,7 @@ atuin
 chezmoi
 cloc
 curlie
+difftastic
 dotenv-linter
 envchain
 eth-p/software/bat-extras
@@ -21,11 +22,13 @@ hadolint
 hyperfine
 imagemagick
 luacheck
+luarocks
 mas-cli/tap/mas
 ms-jpq/sad/sad
 navi
 neovim
 oh-my-posh
+php
 pipx
 plantuml
 pre-commit

@@ -3,10 +3,10 @@ apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
    package bashate 2.1.1, installed using Python 3.12.1
     - bashate
-   package black 24.4.2, installed using Python 3.12.1
+   package black 24.8.0, installed using Python 3.12.1
     - black
     - blackd
-   package calcipy 4.0.0, installed using Python 3.12.4
+   package calcipy 4.0.0, installed using Python 3.12.5
     - calcipy
     - calcipy-docs
     - calcipy-lint
@@ -34,11 +34,14 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package norwegianblue 0.17.0, installed using Python 3.12.1
     - eol
     - norwegianblue
-   package poetry 1.8.3, installed using Python 3.12.3
+   package poetry 1.8.3, installed using Python 3.12.5
     - poetry
+    Injected Packages:
+      - poetry-plugin-sort 0.2.1
+      - poetry-relax 1.1.0
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.2.5, installed using Python 3.12.2
+   package pylint 3.2.6, installed using Python 3.12.2
     - pylint
     - pylint-config
     - pyreverse
@@ -46,13 +49,13 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package pytest-watcher 0.4.2, installed using Python 3.12.1
     - ptw
     - pytest-watcher
-   package ruff 0.5.1, installed using Python 3.12.1
+   package ruff 0.6.1, installed using Python 3.12.1
     - ruff
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.12.1
     - toml-sort
-   package tox 4.16.0, installed using Python 3.12.1
+   package tox 4.18.0, installed using Python 3.12.1
     - tox
     - tox-quickstart
    package watchgha 2.3.2, installed using Python 3.12.2
