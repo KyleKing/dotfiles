@@ -32,23 +32,23 @@ manual pages are exposed at /Users/kyleking/.local/share/man
       - poetry-relax 1.1.0
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.2.6, installed using Python 3.12.1
+   package pylint 3.2.7, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.377, installed using Python 3.12.1
+   package pyright 1.1.379, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.6.2, installed using Python 3.12.1
+   package ruff 0.6.3, installed using Python 3.12.1
     - ruff
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.12.1
     - toml-sort
-   package trcli 1.9.5, installed using Python 3.12.1
+   package trcli 1.9.7, installed using Python 3.12.1
     - trcli
    package watchgha 2.3.2, installed using Python 3.12.1
     - watch_gha_runs
