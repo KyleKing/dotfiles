@@ -10,20 +10,6 @@ projects:
     url: git@github.com:boyter/cs.git
     tags:
       - go-install
-  # # FYI: Appears to be deleted with no direct replacement
-  # firefox-vertical-tabs:
-  #   url: git@github.com:ranmaru22/firefox-vertical-tabs.git
-  #   # # Note: symlink this project into the Firefox profiles (id's might differ per system)
-  #   # > cd /Users/kyleking/Library/Application\ Support/Firefox/Profiles
-  #   # > lsl
-  #   # Permissions Size User     Date Created Name
-  #   # drwx------@    - kyleking  2 Sep  2022  4c2wgopw.dev-edition-default
-  #   # drwx------@    - kyleking  2 Sep  2022  6zuyes7x.default-release
-  #   # drwx------@    - kyleking  2 Sep  2022  trii2qfj.default
-  #   # > mkcd 4c2wgopw.dev-edition-default/chrome
-  #   # > ln -s /Users/kyleking/Developer/nightly-packages/firefox-vertical-tabs/userChrome.css userChrome.css
-  #   # > ...
-  #   # > # Repeat
   gotz:
     url: git@github.com:merschformann/gotz.git
     tags:
