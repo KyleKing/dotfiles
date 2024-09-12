@@ -96,6 +96,10 @@ projects:
     url: git@github.com:roaminsight/data-classification.git
     desc: General Roam Project
 
+  data-converter:
+    url: git@github.com:roaminsight/data-converter.git
+    desc: General Roam Project
+
   dougs-private-pocs:
     url: git@github.com:roaminsight/dougs-private-pocs.git
     desc: General Roam Project

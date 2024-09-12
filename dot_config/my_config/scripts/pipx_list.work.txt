@@ -16,8 +16,6 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - calcipy_types
    package copier 9.3.1, installed using Python 3.12.1
     - copier
-   package cortex 0.42.1, installed using Python 3.12.1
-    - cortex
    package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
    package mypy-silent 0.4.0, installed using Python 3.12.1
