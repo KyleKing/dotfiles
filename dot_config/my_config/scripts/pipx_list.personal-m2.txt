@@ -29,6 +29,10 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - flit
    package licensecheck 2024.2, installed using Python 3.12.1
     - licensecheck
+   package mdformat 0.7.17, installed using Python 3.12.5
+    - mdformat
+    Injected Packages:
+      - mdformat-config 0.1.3
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
    package norwegianblue 0.17.0, installed using Python 3.12.1

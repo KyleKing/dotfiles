@@ -11,6 +11,7 @@ envchain
 eth-p/software/bat-extras
 eza
 fd
+gcc
 gh
 git
 glow
