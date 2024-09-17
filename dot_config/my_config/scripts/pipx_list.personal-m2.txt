@@ -23,11 +23,11 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - copier
    package copier_template_tester 2.1.1, installed using Python 3.12.1
     - ctt
-   package em-keyboard 4.2.0, installed using Python 3.12.1
+   package em-keyboard 4.3.0, installed using Python 3.12.1
     - em
    package flit 3.9.0, installed using Python 3.12.1
     - flit
-   package licensecheck 2024.2, installed using Python 3.12.1
+   package licensecheck 2024.3, installed using Python 3.12.1
     - licensecheck
    package mdformat 0.7.17, installed using Python 3.12.5
     - mdformat
@@ -35,7 +35,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
       - mdformat-config 0.1.3
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package norwegianblue 0.17.0, installed using Python 3.12.1
+   package norwegianblue 0.18.0, installed using Python 3.12.1
     - eol
     - norwegianblue
    package poetry 1.8.3, installed using Python 3.12.5
@@ -45,21 +45,21 @@ manual pages are exposed at /Users/kyleking/.local/share/man
       - poetry-relax 1.1.0
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.2.6, installed using Python 3.12.2
+   package pylint 3.2.7, installed using Python 3.12.2
     - pylint
     - pylint-config
     - pyreverse
     - symilar
-   package pytest-watcher 0.4.2, installed using Python 3.12.1
+   package pytest-watcher 0.4.3, installed using Python 3.12.1
     - ptw
     - pytest-watcher
-   package ruff 0.6.1, installed using Python 3.12.1
+   package ruff 0.6.5, installed using Python 3.12.1
     - ruff
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.12.1
     - toml-sort
-   package tox 4.18.0, installed using Python 3.12.1
+   package tox 4.19.0, installed using Python 3.12.1
     - tox
     - tox-quickstart
    package watchgha 2.3.2, installed using Python 3.12.2

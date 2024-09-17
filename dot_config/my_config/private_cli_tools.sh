@@ -118,9 +118,6 @@ btail() {
 #     rpg-cli todo || return 1
 # }
 
-# gojq (go-based jq replacement)
-alias jq='gojq'
-
 # Using htmlq (jq for HTML), extract the website's title
 get-title() {
     resp=$(curl --silent "$1")
