@@ -21,8 +21,6 @@ gh
 git
 glow
 go
-gojq
-gtk+3
 gum
 hadolint
 howdoi
@@ -42,7 +40,6 @@ mas-cli/tap/mas
 navi
 neovim
 oh-my-posh
-openblas
 ossp-uuid
 pandoc
 php
@@ -77,6 +74,7 @@ unrtf
 vale
 virtualenv
 watchman
+xdot
 yadm
 yamllint
 zlib
