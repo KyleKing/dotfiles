@@ -33,6 +33,7 @@ krew
 kubetui
 kubie
 lazydocker
+lazygit
 luacheck
 luarocks
 mackup
@@ -74,7 +75,6 @@ unrtf
 vale
 virtualenv
 watchman
-xdot
 yadm
 yamllint
 zlib

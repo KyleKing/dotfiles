@@ -258,6 +258,10 @@ projects:
     url: git@github.com:roaminsight/reviewer.git
     desc: Reviewer
 
+  risk-tools:
+    url: git@github.com:roaminsight/risk-tools.git
+    desc: General Roam Project
+
   roam-confluence:
     url: git@github.com:roaminsight/roam-confluence.git
     desc: Self-hosted Confluence Instance

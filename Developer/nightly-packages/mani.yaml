@@ -14,10 +14,6 @@ projects:
     url: git@github.com:merschformann/gotz.git
     tags:
       - go-install
-  lazygit:
-    url: git@github.com:jesseduffield/lazygit.git
-    tags:
-      - go-install
   sh:
     url: git@github.com:mvdan/sh.git
     # FYI: use nested directory instead (sh/cmd/shfmt)

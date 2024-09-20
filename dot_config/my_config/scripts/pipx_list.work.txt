@@ -18,9 +18,14 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - copier
    package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
+   package mdformat 0.7.17, installed using Python 3.12.6
+    - mdformat
+    Injected Packages:
+      - mdformat-gfm-alerts 1.0.1
+      - mdformat-mkdocs 3.0.0
    package mypy-silent 0.4.0, installed using Python 3.12.1
     - mypy-silent
-   package pipdeptree 2.23.3, installed using Python 3.12.1
+   package pipdeptree 2.23.4, installed using Python 3.12.1
     - pipdeptree
    package poetry 1.8.3, installed using Python 3.12.5
     - poetry
@@ -35,7 +40,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.380, installed using Python 3.12.1
+   package pyright 1.1.381, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
