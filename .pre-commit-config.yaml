@@ -40,7 +40,7 @@ repos:
       - id: mixed-line-ending
         args: [--fix=auto]
       - id: trailing-whitespace
-        exclude: gh_extensions.*
+        exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.14.1
     hooks:

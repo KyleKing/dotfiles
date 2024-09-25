@@ -5,6 +5,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 # And support new M1 '$(brew --prefix)'
 export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 
+# Added for mise
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 # Created by `pipx`
 export PATH="$PATH:/Users/kyleking/.local/bin"
 

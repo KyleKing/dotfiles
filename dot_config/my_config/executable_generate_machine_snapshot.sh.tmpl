@@ -28,5 +28,7 @@ cd ~
 which kubectl && ((kubectl krew list > "$SCRIPT_DIR/krew_plugins.{{- .computer_name -}}.txt") || return 1)
 (pipx list --include-injected > "$SCRIPT_DIR/pipx_list.{{- .computer_name -}}.txt") || return 1
 (pip config list --verbose > "$SCRIPT_DIR/pip_config.{{- .computer_name -}}.txt") || return 1
-(printf '%s\n' "$(asdf info)" > "$SCRIPT_DIR/asdf_info.{{- .computer_name -}}.txt") || return 1
+# PLANNED: Currently replacing asdf with mise
+# (printf '%s\n' "$(asdf info)" > "$SCRIPT_DIR/asdf_info.{{- .computer_name -}}.txt") || return 1
+(printf '%s\n' "$(mise doctor)" > "$SCRIPT_DIR/mise_info.{{- .computer_name -}}.txt") || return 1
 {{ end -}}

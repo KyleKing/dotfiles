@@ -24,6 +24,7 @@ imagemagick
 luacheck
 luarocks
 mas-cli/tap/mas
+mise
 ms-jpq/sad/sad
 navi
 neovim

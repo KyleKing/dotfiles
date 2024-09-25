@@ -1,0 +1,109 @@
+version: 2024.9.7 macos-arm64 (2024-09-23)
+activated: yes
+shims_on_path: yes
+
+build_info: 
+  Target: aarch64-apple-darwin
+  Features: DEFAULT, NATIVE_TLS
+  Built: Mon, 23 Sep 2024 21:02:25 +0000
+  Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
+  Profile: release
+
+shell: 
+  /bin/zsh
+  zsh 5.9 (arm64-apple-darwin24.0)
+
+dirs: 
+  data: ~/.local/share/mise
+  config: ~/.config/mise
+  cache: ~/Library/Caches/mise
+  state: ~/.local/state/mise
+  shims: ~/.local/share/mise/shims
+
+config_files: 
+  ~/.tool-versions
+  ~/.config/mise/config.toml
+
+backends: 
+  cargo
+  core
+  go
+  npm
+  pipx
+  spm
+  ubi
+  vfox
+
+plugins: 
+
+
+toolset: 
+  node@19.5.0    
+  python@3.10.9  
+  python@3.12.1  
+  python@3.11.2  
+  python@3.9.13  
+  python@3.8.12  
+  python@3.7.14  
+
+env_vars: 
+  MISE_SHELL=zsh
+
+settings: 
+  activate_aggressive = false
+  all_compile = false
+  always_keep_download = false
+  always_keep_install = false
+  asdf = true
+  asdf_compat = false
+  cache_prune_age = "30d"
+  cargo_binstall = true
+  color = true
+  disable_default_shorthands = false
+  disable_hints = []
+  disable_tools = []
+  experimental = false
+  go_default_packages_file = "~/.default-go-packages"
+  go_download_mirror = "https://dl.google.com/go"
+  go_repo = "https://github.com/golang/go"
+  go_set_gopath = false
+  go_set_goroot = true
+  go_skip_checksum = false
+  http_timeout = 30
+  jobs = 4
+  legacy_version_file = true
+  legacy_version_file_disable_tools = []
+  libgit2 = true
+  node_compile = false
+  not_found_auto_install = true
+  paranoid = false
+  pipx_uvx = false
+  plugin_autoupdate_last_check_duration = "7d"
+  python_default_packages_file = "~/.default-python-packages"
+  python_pyenv_repo = "https://github.com/pyenv/pyenv.git"
+  raw = false
+  trusted_config_paths = []
+  quiet = false
+  use_versions_host = true
+  verbose = false
+  vfox = false
+  yes = false
+  ci = false
+  debug = false
+  trace = false
+  log_level = "info"
+  python_venv_auto_create = false
+
+  [ruby]
+  default_packages_file = "~/.default-gems"
+  ruby_build_repo = "https://github.com/rbenv/ruby-build.git"
+  ruby_install = false
+  ruby_install_repo = "https://github.com/postmodern/ruby-install.git"
+
+  [status]
+  missing_tools = "if_other_versions_installed"
+  show_env = false
+  show_tools = false
+
+No warnings found
+No problems found
