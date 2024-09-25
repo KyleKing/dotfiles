@@ -37,6 +37,8 @@ zstyle :compinstall filename '~/.zshrc'
 
 # Configure mise (Rust clone of asdf; previously known as rtx)
 eval "$(mise activate zsh)"
+# For asdf-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
+export HOMEBREW_PREFIX=$(brew --prefix)
 
 # # Added with 'op plugin init openai'
 # source ~/.config/op/plugins.sh
