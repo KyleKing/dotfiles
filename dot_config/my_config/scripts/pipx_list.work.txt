@@ -1,7 +1,7 @@
 venvs are in /Users/kyleking/.local/pipx/venvs
 apps are exposed on your $PATH at /Users/kyleking/.local/bin
 manual pages are exposed at /Users/kyleking/.local/share/man
-   package bump-pydantic 0.8.0, installed using Python 3.12.3
+   package bump-pydantic 0.8.0, installed using Python 3.12.6
     - bump-pydantic
    package calcipy 4.0.0, installed using Python 3.12.4
     - calcipy
@@ -35,7 +35,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
       - poetry-relax 1.1.0
    package pygments 2.18.0, installed using Python 3.12.1
     - pygmentize
-   package pylint 3.2.7, installed using Python 3.12.1
+   package pylint 3.3.1, installed using Python 3.12.1
     - pylint
     - pylint-config
     - pyreverse
@@ -45,7 +45,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.6.5, installed using Python 3.12.1
+   package ruff 0.6.7, installed using Python 3.12.1
     - ruff
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl

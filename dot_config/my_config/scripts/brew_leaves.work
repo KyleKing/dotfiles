@@ -38,6 +38,7 @@ luacheck
 luarocks
 mackup
 mas-cli/tap/mas
+mise
 navi
 neovim
 oh-my-posh
