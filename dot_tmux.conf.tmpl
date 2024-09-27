@@ -96,7 +96,7 @@ set -g @plugin 'tmux-plugins/tmux-yank'
 # set -g @plugin 'MunifTanjim/tmux-mode-indicator'
 
 # 'brew install tpm'
-run '/opt/homebrew/opt/tpm/share/tpm/tpm'
+run '{{- .homebrew_prefix -}}/opt/tpm/share/tpm/tpm'
 
 # set vi-mode for easier yank/copy experience
 set-window-option -g mode-keys vi
