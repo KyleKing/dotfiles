@@ -374,6 +374,10 @@ projects:
     url: git@github.com:roaminsight/surge.git
     desc: General Roam Project
 
+  template-ui-app:
+    url: git@github.com:roaminsight/template-ui-app.git
+    desc: General Roam Project
+
   terraform-modules:
     url: git@github.com:roaminsight/terraform-modules.git
     desc: General Roam Project

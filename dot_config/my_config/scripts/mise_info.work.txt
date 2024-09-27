@@ -1,0 +1,113 @@
+version: 2024.9.8 macos-arm64 (2024-09-25)
+activated: yes
+shims_on_path: no
+
+build_info: 
+  Target: aarch64-apple-darwin
+  Features: DEFAULT, NATIVE_TLS
+  Built: Wed, 25 Sep 2024 02:02:52 +0000
+  Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
+  Profile: release
+
+shell: 
+  /opt/homebrew/bin/zsh
+  zsh 5.9 (arm-apple-darwin21.3.0)
+
+dirs: 
+  data: ~/.local/share/mise
+  config: ~/.config/mise
+  cache: ~/Library/Caches/mise
+  state: ~/.local/state/mise
+  shims: ~/.local/share/mise/shims
+
+config_files: 
+  ~/.tool-versions
+  ~/.config/mise/config.toml
+
+backends: 
+  cargo
+  core
+  go
+  npm
+  pipx
+  spm
+  ubi
+  vfox
+
+plugins: 
+  postgres   https://github.com/smashedtoatoms/asdf-postgres.git#acbbc49
+  terraform  https://github.com/asdf-community/asdf-hashicorp.git#22eb1c4
+
+toolset: 
+  node@16.17.0          
+  postgres@14.5         
+  python@3.11.6         
+  terraform@1.9.5       
+  pipx:textract-py3@2.0.1  
+  pipx:extract-msg@0.46.2  
+
+env_vars: 
+  MISE_SHELL=zsh
+  MISE_PIPX_UVX=true
+
+settings: 
+  activate_aggressive = false
+  all_compile = false
+  always_keep_download = false
+  always_keep_install = false
+  asdf = true
+  asdf_compat = false
+  cache_prune_age = "30d"
+  cargo_binstall = true
+  ci = false
+  color = true
+  debug = false
+  disable_default_shorthands = false
+  disable_hints = ["python_multi"]
+  disable_tools = []
+  experimental = true
+  go_default_packages_file = "~/.default-go-packages"
+  go_download_mirror = "https://dl.google.com/go"
+  go_repo = "https://github.com/golang/go"
+  go_set_gopath = false
+  go_set_goroot = true
+  go_skip_checksum = false
+  http_timeout = 30
+  jobs = 4
+  legacy_version_file = true
+  legacy_version_file_disable_tools = []
+  libgit2 = true
+  log_level = "info"
+  not_found_auto_install = true
+  paranoid = false
+  pipx_uvx = true
+  plugin_autoupdate_last_check_duration = "7d"
+  python_default_packages_file = "~/.default-python-packages"
+  python_pyenv_repo = "https://github.com/pyenv/pyenv.git"
+  python_venv_auto_create = false
+  quiet = false
+  raw = false
+  trace = false
+  trusted_config_paths = []
+  use_versions_host = true
+  verbose = false
+  vfox = false
+  yes = false
+
+  [node]
+
+  [ruby]
+  default_packages_file = "~/.default-gems"
+  ruby_build_repo = "https://github.com/rbenv/ruby-build.git"
+  ruby_install = false
+  ruby_install_repo = "https://github.com/postmodern/ruby-install.git"
+
+  [status]
+  missing_tools = "if_other_versions_installed"
+  show_env = false
+  show_tools = false
+
+No warnings found
+1 problem found:
+
+1. new mise version 2024.9.10 available, currently on 2024.9.8

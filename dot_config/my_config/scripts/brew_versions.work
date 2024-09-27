@@ -8,7 +8,7 @@ aspell 0.60.8.1_1
 atuin 18.3.0
 autoconf 2.72
 automake 1.17
-awscli 2.17.55
+awscli 2.17.60
 bat 0.24.0_1
 bat-extras 2024.08.24
 boost 1.86.0
@@ -217,6 +217,7 @@ unixodbc 2.3.12
 unrtf 0.21.10
 usage 0.3.1
 utf8proc 2.9.0
+uv 0.4.16
 vale 3.7.1
 virtualenv 20.26.5
 wangle 2024.09.23.00
