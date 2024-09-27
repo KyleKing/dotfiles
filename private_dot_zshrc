@@ -1,5 +1,9 @@
 # Sourced for interactive shells - https://unix.stackexchange.com/a/487889
 
+# Set bat as default Pager (instead of less)
+export PAGER=bat
+export EDITOR={{- .homebrew_prefix -}}/bin/nvim
+
 # Useful for debugging performance
 #   After un-commenting and restarting zsh, check the output with: `zprof`
 # zmodload zsh/zprof
@@ -37,11 +41,7 @@ zstyle :compinstall filename '~/.zshrc'
 
 # Configure mise (Rust clone of asdf; previously known as rtx)
 eval "$(mise activate zsh)"
-# For asdf-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
-export HOMEBREW_PREFIX=$(brew --prefix)
-
-# # Added with 'op plugin init openai'
-# source ~/.config/op/plugins.sh
+export MISE_PIPX_UVX=true
 
 # Added manually for SQLite shell history: https://github.com/atuinsh/atuin?tab=readme-ov-file#shell-plugin
 eval "$(atuin init zsh --disable-up-arrow)"
@@ -59,7 +59,3 @@ if [[ -f ~/.docker/init-zsh.sh ]]; then
   source ~/.docker/init-zsh.sh
 fi
 # --------------------------------------------------------------------------------------
-
-# grit
-export GRIT_INSTALL="$HOME/.grit"
-export PATH="$GRIT_INSTALL/bin:$PATH"

@@ -2,19 +2,19 @@
 
 # Add sbin and bin from homebrew
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
-# And support new M1 '$(brew --prefix)'
-export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
+export PATH="{{- .homebrew_prefix -}}/sbin:{{- .homebrew_prefix -}}/bin:$PATH"
 
-# Added for mise
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+# For asdf-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
+export HOMEBREW_PREFIX={{- .homebrew_prefix -}}
 
 # Created by `pipx`
-export PATH="$PATH:/Users/kyleking/.local/bin"
+export PATH="/Users/kyleking/.local/bin:$PATH"
+
+# Created by `gritql`
+export GRIT_INSTALL="$HOME/.grit"
+export PATH="$GRIT_INSTALL/bin:$PATH"
 
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config
-
-# Set bat as default Pager (instead of less)
-export PAGER=bat
 
 source $MY_CONFIG/on_login.sh
