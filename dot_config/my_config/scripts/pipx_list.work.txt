@@ -18,6 +18,10 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - copier
    package envtpl 0.7.2, installed using Python 3.12.1
     - envtpl
+   package frogmouth 0.9.2, installed using Python 3.12.6
+    - frogmouth
+   package ghstack 0.9.3, installed using Python 3.12.6
+    - ghstack
    package mdformat 0.7.17, installed using Python 3.12.6
     - mdformat
     Injected Packages:
@@ -40,12 +44,12 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.381, installed using Python 3.12.1
+   package pyright 1.1.382.post1, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python
     - pyright-python-langserver
-   package ruff 0.6.7, installed using Python 3.12.1
+   package ruff 0.6.8, installed using Python 3.12.1
     - ruff
    package tail-jsonl 1.2.5, installed using Python 3.12.1
     - tail-jsonl

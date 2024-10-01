@@ -1,30 +1,30 @@
-version: 2024.9.8 macos-arm64 (2024-09-25)
+version: 2024.9.13 macos-arm64 (2024-09-29)
 activated: yes
 shims_on_path: no
 
-build_info: 
+build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Wed, 25 Sep 2024 02:02:52 +0000
+  Built: Sun, 29 Sep 2024 19:09:35 +0000
   Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
   Profile: release
 
-shell: 
+shell:
   /opt/homebrew/bin/zsh
   zsh 5.9 (arm-apple-darwin21.3.0)
 
-dirs: 
+dirs:
   data: ~/.local/share/mise
   config: ~/.config/mise
   cache: ~/Library/Caches/mise
   state: ~/.local/state/mise
   shims: ~/.local/share/mise/shims
 
-config_files: 
+config_files:
   ~/.tool-versions
   ~/.config/mise/config.toml
 
-backends: 
+backends:
   cargo
   core
   go
@@ -34,23 +34,23 @@ backends:
   ubi
   vfox
 
-plugins: 
+plugins:
   postgres   https://github.com/smashedtoatoms/asdf-postgres.git#acbbc49
   terraform  https://github.com/asdf-community/asdf-hashicorp.git#22eb1c4
 
-toolset: 
-  node@16.17.0          
-  postgres@14.5         
-  python@3.11.6         
-  terraform@1.9.5       
-  pipx:textract-py3@2.0.1  
-  pipx:extract-msg@0.46.2  
+toolset:
+  node@16.17.0
+  postgres@14.5
+  python@3.11.6
+  terraform@1.9.5
+  pipx:textract-py3@2.0.1
+  pipx:extract-msg@0.46.2
 
-env_vars: 
+env_vars:
   MISE_SHELL=zsh
   MISE_PIPX_UVX=true
 
-settings: 
+settings:
   activate_aggressive = false
   all_compile = false
   always_keep_download = false
@@ -106,8 +106,5 @@ settings:
   missing_tools = "if_other_versions_installed"
   show_env = false
   show_tools = false
-
 No warnings found
-1 problem found:
-
-1. new mise version 2024.9.10 available, currently on 2024.9.8
+No problems found
