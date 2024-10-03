@@ -14,6 +14,8 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - calcipy_lint
     - calcipy_tags
     - calcipy_types
+   package codeartifact_lockfile_tool 0.0.0, installed using Python 3.12.7
+    - codeartifact-lockfile-tool
    package copier 9.3.1, installed using Python 3.12.1
     - copier
    package envtpl 0.7.2, installed using Python 3.12.1
@@ -44,7 +46,7 @@ manual pages are exposed at /Users/kyleking/.local/share/man
     - pylint-config
     - pyreverse
     - symilar
-   package pyright 1.1.382.post1, installed using Python 3.12.1
+   package pyright 1.1.383, installed using Python 3.12.1
     - pyright
     - pyright-langserver
     - pyright-python

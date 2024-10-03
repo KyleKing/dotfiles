@@ -2,4 +2,4 @@ For variant 'global', will try loading '/Library/Application Support/pip/pip.con
 For variant 'user', will try loading '/Users/kyleking/.pip/pip.conf'
 For variant 'user', will try loading '/Users/kyleking/.config/pip/pip.conf'
 For variant 'site', will try loading '/Users/kyleking/.local/share/mise/installs/python/3.11.6/pip.conf'
-global.index-url='https://nexus.roaminsight.net/repository/pypi-all/simple'
+global.index-url='https://parexelailabs-888577033709.d.codeartifact.eu-west-1.amazonaws.com/pypi/package_registry/simple/'

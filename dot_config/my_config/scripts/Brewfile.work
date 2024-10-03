@@ -5,7 +5,6 @@ tap "mas-cli/tap"
 tap "rhysd/git-brws", "https://github.com/rhysd/git-brws"
 brew "actionlint"
 brew "openssl@3"
-brew "asdf"
 brew "atuin"
 brew "awscli"
 brew "bat"
@@ -141,7 +140,6 @@ cask "metabase"
 cask "microsoft-auto-update"
 cask "microsoft-edge"
 cask "microsoft-office"
-cask "microsoft-remote-desktop"
 cask "microsoft-teams"
 cask "monitorcontrol"
 cask "netiquette"
@@ -165,6 +163,7 @@ cask "vlc"
 cask "webcatalog"
 cask "webpquicklook"
 cask "wezterm"
+cask "windows-app"
 cask "zoom"
 mas "Charmstone", id: 1563735522
 mas "ColorSlurp", id: 1287239339
@@ -175,7 +174,6 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "HotKey", id: 975890633
 mas "Keynote", id: 409183694
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Qmenu", id: 1567442612

@@ -107,4 +107,6 @@ settings:
   show_env = false
   show_tools = false
 No warnings found
-No problems found
+1 problem found:
+
+1. new mise version 2024.10.0 available, currently on 2024.9.13
