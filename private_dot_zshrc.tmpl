@@ -1,12 +1,11 @@
 # Sourced for interactive shells - https://unix.stackexchange.com/a/487889
 
+# Added to debug startup time. See: https://lildude.co.uk/speeding-up-my-zsh-shell
+[ -z "$ZPROF" ] || zmodload zsh/zprof
+
 # Set bat as default Pager (instead of less)
 export PAGER=bat
 export EDITOR={{- .homebrew_prefix -}}/bin/nvim
-
-# Useful for debugging performance
-#   After un-commenting and restarting zsh, check the output with: `zprof`
-# zmodload zsh/zprof
 
 # fzf installer for useful key bindings and fuzzy completion: https://github.com/junegunn/fzf
 # 	Run once! $(brew --prefix)/opt/fzf/install
@@ -55,3 +54,6 @@ if [[ -f ~/.docker/init-zsh.sh ]]; then
   source ~/.docker/init-zsh.sh
 fi
 # --------------------------------------------------------------------------------------
+
+# See 'ZPROF' above
+[ -z "$ZPROF" ] || zprof

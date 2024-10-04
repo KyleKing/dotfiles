@@ -5,6 +5,9 @@
 
 # General ZSH Configuration
 
+# Use with modifications to ~/.zsrhc
+alias time-zsh-startup="ZPROF=1 zsh -i -c exit"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 

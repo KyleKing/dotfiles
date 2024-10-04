@@ -9,8 +9,12 @@
 if type brew &> /dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+    # Check once per day, from: https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
     autoload -Uz compinit
-    compinit
+    if [ "$(find ~/.zcompdump -mtime 1)" ] ; then
+        compinit
+    fi
+    compinit -C
 fi
 
 # A few helpful snippets not included in the homebrew zsh plugin

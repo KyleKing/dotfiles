@@ -10,6 +10,8 @@ export ZSH="/Users/kyleking/.oh-my-zsh"
 # Remove some functionality to make omz much faster. Docs: https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#library-settings
 export DISABLE_MAGIC_FUNCTIONS=true
 export DISABLE_UNTRACKED_FILES_DIRTY=true
+# Decrease update check frequency
+zstyle ':omz:update' frequency 14
 
 # Configure the navi widget for completions
 # TODO: Should I use navi, cheat, tldr, or other tool for all quick reference?
