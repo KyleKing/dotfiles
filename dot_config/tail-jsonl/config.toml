@@ -1,3 +1,0 @@
-[keys]
-level = ["level", "levelname", "record.level.name"]
-timestamp = ["record.time.repr", "time", "timestamp"]
