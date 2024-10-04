@@ -1,25 +1,19 @@
--- Docs: https://wezfurlong.org/wezterm/config/lua/general.html
---  Debug logs in: lst $HOME/.local/share/wezterm (Docs: https://wezfurlong.org/wezterm/troubleshooting.html#increasing-log-verbosity)
---
--- Keybindings: https://wezfurlong.org/wezterm/config/keys.html#default-shortcut--key-binding-assignments
--- CMD N/T/W; CMD 1-9 all work as expected. Use `CMD Shift ] or [` to switch tabs
--- CMD R to reload configuration file
--- To clear scrollback, use both CMD-k and <C-l> in any order (or enter 'clear')
--- Added custom shortcuts specified below for splitting, but kept the defaults for:
---  navigation (CTRL+SHIFT and arrow key)
---  resize (CTRL+SHIFT+ALT and arrow key)
--- There is a nice feature if wanted for leader keys to behave like tmux or Sublime origami (i.e. CMD K)
--- https://github.com/zhaohongxuan/dotfiles/blob/3ac55a1c31b9f706b366fb79b2b4328581c9fd91/dot_config/wezterm/wezterm.lua#L26-L38
--- Searching scrollback: https://wezfurlong.org/wezterm/scrollback.html?highlight=clear#searching-the-scrollback
---  Ctrl|Shift|f w/ up and down arrows (or pgUp/pgDown) to navigate
---  Ctrl-U to clear and Ctrl-R to switch pattern matching mode
---  Copy Mode: https://wezfurlong.org/wezterm/copymode.html
---   Ctrl|Shift|X to enter copy mode
---   Ctrl|Shift|C to copy to clipboard
---   etc.
+-- Wezterm Docs: https://wezfurlong.org/wezterm/config/lua/general.html
+--  Debug logs in: `lst $HOME/.local/share/wezterm` (Docs: https://wezfurlong.org/wezterm/troubleshooting.html#increasing-log-verbosity)
 
--- Examples
--- https://github.com/wez/wezterm/discussions/628
+-- Keybindings: https://wezfurlong.org/wezterm/config/keys.html#default-shortcut--key-binding-assignments
+--  CMD N/T/W; CMD 1-9 all work as expected. Use `CMD Shift ] or [` to switch tabs
+--  CMD R to reload configuration file
+--  To clear scrollback, use both CMD-k and <C-l> in any order (or enter 'clear')
+--  Searching scrollback: https://wezfurlong.org/wezterm/scrollback.html?highlight=clear#searching-the-scrollback
+--   Ctrl|Shift|f w/ up and down arrows (or pgUp/pgDown) to navigate
+--   Ctrl-U to clear and Ctrl-R to switch pattern matching mode
+--   Copy Mode: https://wezfurlong.org/wezterm/copymode.html
+--    Ctrl|Shift|X to enter copy mode
+--    Ctrl|Shift|C to copy to clipboard
+--    etc.
+
+-- Example User Configs: https://github.com/wez/wezterm/discussions/628
 
 local wezterm = require("wezterm")
 
@@ -173,10 +167,10 @@ end)
 
 local config = wezterm.config_builder()
 config.bold_brightens_ansi_colors = true
-config.font_size = 12.5
+config.font_size = 13.5
 config.initial_cols = 200
 config.initial_rows = 60
-config.scrollback_lines = 7500
+config.scrollback_lines = 10000
 
 local act = wezterm.action
 config.keys = {
@@ -212,21 +206,17 @@ config.mouse_bindings = {
     },
 }
 
--- Ensure supported font
+-- Brew install fonts and verify installation and name in Apple's "Font Book"
 config.font = wezterm.font_with_fallback({
+    { family = "Iosevka", weight = "Medium", stretch = "Normal" },
     "Hack Nerd Font Mono",
     "Fira Code",
 })
 
--- Colors: https://wezfurlong.org/wezterm/config/appearance.html
--- Note that "color_scheme" overrides "colors"
--- color_scheme = "Firewatch",
+-- Colors & Appearance Docs: https://wezfurlong.org/wezterm/config/appearance.html
 --
--- FYI: Consider Evergreen
--- 	https://git.sr.ht/~maksim/wezterm-everforest/tree/master/item/everforest.toml
---
--- Based on "Tokyo Night Storm variant": https://github.com/enkia/tokyo-night-vscode-theme#other-portings
--- For Wez: https://github.com/wez/wezterm/blob/main/assets/colors/3024%20Day.toml
+-- Based on "Tokyo Night Storm variant": https://github.com/tokyo-night/tokyo-night-vscode-theme/blob/master/README.md#other-ports
+--  For Wez: https://github.com/wez/iTerm2-Color-Schemes/blob/0966005b775691cb757a6be8db56a34a779960b9/wezterm/3024%20Day.toml
 config.colors = {
     -- The default text color
     foreground = "#a9b1d6",
