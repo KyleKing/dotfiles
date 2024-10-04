@@ -6,7 +6,7 @@ argon2 20190702_1
 aspell 0.60.8.1_1
 atuin 18.3.0
 autoconf 2.72
-awscli 2.17.64
+awscli 2.17.65
 bat 0.24.0_1
 bat-extras 2024.08.24
 boost 1.86.0
@@ -140,7 +140,7 @@ m4 1.4.19
 mackup 0.8.41
 mani 0.25.0
 mas 1.8.6
-mise 2024.9.13
+mise 2024.10.0
 mpdecimal 4.0.0
 msgpack 6.1.0
 mvfst 2024.09.30.00
@@ -249,6 +249,8 @@ dropbox 197.4.7629
 duo-connect 2.0.4
 firefox 124.0.2
 firefox@developer-edition latest
+font-fira-code 6.2
+font-hack-nerd-font 3.2.1
 google-chrome 123.0.6312.107
 httpie 2024.1.2
 imageoptim 1.9.3
