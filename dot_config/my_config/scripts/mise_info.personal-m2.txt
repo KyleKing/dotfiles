@@ -1,11 +1,11 @@
-version: 2024.9.10 macos-arm64 (2024-09-26)
+version: 2024.10.0 macos-arm64 (2024-10-03)
 activated: yes
-shims_on_path: yes
+shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Thu, 26 Sep 2024 21:41:52 +0000
+  Built: Thu, 3 Oct 2024 18:27:18 +0000
   Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
   Profile: release
 
@@ -47,6 +47,7 @@ toolset:
 
 env_vars:
   MISE_SHELL=zsh
+  MISE_PIPX_UVX=true
 
 settings:
   activate_aggressive = false
@@ -78,7 +79,7 @@ settings:
   log_level = "info"
   not_found_auto_install = true
   paranoid = false
-  pipx_uvx = false
+  pipx_uvx = true
   plugin_autoupdate_last_check_duration = "7d"
   python_default_packages_file = "~/.default-python-packages"
   python_pyenv_repo = "https://github.com/pyenv/pyenv.git"
@@ -105,6 +106,4 @@ settings:
   show_env = false
   show_tools = false
 No warnings found
-1 problem found:
-
-1. new mise version 2024.9.11 available, currently on 2024.9.10
+No problems found

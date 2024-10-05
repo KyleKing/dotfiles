@@ -53,13 +53,13 @@ manual pages are exposed at /Users/kyleking/.local/share/man
    package pytest-watcher 0.4.3, installed using Python 3.12.1
     - ptw
     - pytest-watcher
-   package ruff 0.6.8, installed using Python 3.12.1
+   package ruff 0.6.9, installed using Python 3.12.1
     - ruff
-   package tail-jsonl 1.2.5, installed using Python 3.12.1
+   package tail-jsonl 1.2.6, installed using Python 3.12.1
     - tail-jsonl
    package toml-sort 0.23.1, installed using Python 3.12.1
     - toml-sort
-   package tox 4.20.0, installed using Python 3.12.1
+   package tox 4.21.2, installed using Python 3.12.1
     - tox
     - tox-quickstart
    package watchgha 2.3.2, installed using Python 3.12.2
