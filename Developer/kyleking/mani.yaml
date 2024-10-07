@@ -17,6 +17,8 @@ projects:
     url: git@github.com:kyleking/corallium.git
     tags:
       - calcipy-template
+  karabiner-actions:
+    url: git@github.com:KyleKing/karabiner-actions
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
