@@ -16,7 +16,7 @@ default_install_hook_types: ["commit-msg", "pre-commit", "pre-push"]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-executables-have-shebangs
@@ -42,7 +42,7 @@ repos:
       - id: trailing-whitespace
         exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.14.1
+    rev: v3.29.1
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
@@ -53,7 +53,7 @@ repos:
         args: [--wrap=no]
         exclude: _.+\.md|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.6
+    rev: v0.10.0.1
     hooks:
       - id: shellcheck
         args: [--severity=warning]
@@ -69,7 +69,7 @@ repos:
         exclude: \.copier-answers\.yml|.*/cassettes/.*\.yaml|tests/.*assert-cache.*/.+\.json
         types_or: [html, javascript, json, shell, yaml]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.35.0
+    rev: v1.35.1
     hooks:
       - id: yamllint
   - repo: https://github.com/pappasam/toml-sort
@@ -85,11 +85,11 @@ repos:
           ]
         exclude: poetry\.lock|superfile/[^\.]+\.toml
   - repo: https://github.com/KyleKing/calcipy
-    rev: 2.0.4
+    rev: 4.0.0
     hooks:
       - id: copier-forbidden-files
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       # Can't generate baseline with Py 3.8. Use exclude regex rules instead
       # See: https://github.com/Yelp/detect-secrets/issues/452
@@ -97,7 +97,7 @@ repos:
         # args: ["--baseline", ".secrets.baseline"]
         exclude: poetry\.lock|.*/cassettes/.*\.yaml
         stages:
-          - push
+          - pre-push
   - repo: https://github.com/JohnnyMorganz/StyLua
     rev: v0.20.0
     hooks:
