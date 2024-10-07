@@ -88,10 +88,6 @@ projects:
     url: git@github.com:roaminsight/csa.git
     desc: General Roam Project
 
-  ccioms-summarization:
-    url: git@github.com:roaminsight/ccioms-summarization.git
-    desc: General Roam Project
-
   data-classification:
     url: git@github.com:roaminsight/data-classification.git
     desc: General Roam Project
