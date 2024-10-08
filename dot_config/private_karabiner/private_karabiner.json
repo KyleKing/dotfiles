@@ -2,7 +2,12 @@
   "profiles": [
     {
       "complex_modifications": {
-        "parameters": { "basic.to_if_held_down_threshold_milliseconds": 100 },
+        "parameters": {
+          "basic.simultaneous_threshold_milliseconds": 45,
+          "basic.to_delayed_action_delay_milliseconds": 300,
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 90
+        },
         "rules": [
           {
             "description": "Home Row Mods (GUI: a, Ctrl: d, Alt: s, Shift: f)",
@@ -34,7 +39,7 @@
                 },
                 "to_if_held_down": [
                   {
-                    "key_code": "left_command",
+                    "key_code": "left_shift",
                     "modifiers": ["left_option", "left_control"]
                   }
                 ],
@@ -51,7 +56,7 @@
                 "to_if_held_down": [
                   {
                     "key_code": "left_shift",
-                    "modifiers": ["left_command", "left_control"]
+                    "modifiers": ["left_command", "left_option"]
                   }
                 ],
                 "type": "basic"
@@ -66,7 +71,7 @@
                 },
                 "to_if_held_down": [
                   {
-                    "key_code": "left_shift",
+                    "key_code": "left_control",
                     "modifiers": ["left_command", "left_option"]
                   }
                 ],
@@ -75,7 +80,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "f" }, { "key_code": "d" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "f" }, { "key_code": "d" }],
                 "to_if_held_down": [
@@ -89,7 +94,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "d" }, { "key_code": "f" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "d" }, { "key_code": "f" }],
                 "to_if_held_down": [
@@ -103,7 +108,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "f" }, { "key_code": "s" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "f" }, { "key_code": "s" }],
                 "to_if_held_down": [
@@ -117,7 +122,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "s" }, { "key_code": "f" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "s" }, { "key_code": "f" }],
                 "to_if_held_down": [
@@ -131,7 +136,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "f" }, { "key_code": "a" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "f" }, { "key_code": "a" }],
                 "to_if_held_down": [
@@ -145,7 +150,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "a" }, { "key_code": "f" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "a" }, { "key_code": "f" }],
                 "to_if_held_down": [
@@ -159,7 +164,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "d" }, { "key_code": "s" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "d" }, { "key_code": "s" }],
                 "to_if_held_down": [
@@ -173,7 +178,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "s" }, { "key_code": "d" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "s" }, { "key_code": "d" }],
                 "to_if_held_down": [
@@ -187,7 +192,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "d" }, { "key_code": "a" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "d" }, { "key_code": "a" }],
                 "to_if_held_down": [
@@ -201,7 +206,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "a" }, { "key_code": "d" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "a" }, { "key_code": "d" }],
                 "to_if_held_down": [
@@ -215,7 +220,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "s" }, { "key_code": "a" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "s" }, { "key_code": "a" }],
                 "to_if_held_down": [
@@ -229,7 +234,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "a" }, { "key_code": "s" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "a" }, { "key_code": "s" }],
                 "to_if_held_down": [
@@ -397,7 +402,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "j" }, { "key_code": "k" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "j" }, { "key_code": "k" }],
                 "to_if_held_down": [
@@ -411,7 +416,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "k" }, { "key_code": "j" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "k" }, { "key_code": "j" }],
                 "to_if_held_down": [
@@ -425,7 +430,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "j" }, { "key_code": "l" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "j" }, { "key_code": "l" }],
                 "to_if_held_down": [
@@ -439,7 +444,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "l" }, { "key_code": "j" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "l" }, { "key_code": "j" }],
                 "to_if_held_down": [
@@ -456,7 +461,7 @@
                     { "key_code": "j" },
                     { "key_code": "semicolon" }
                   ],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [
                   { "key_code": "j" },
@@ -476,7 +481,7 @@
                     { "key_code": "semicolon" },
                     { "key_code": "j" }
                   ],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [
                   { "key_code": "semicolon" },
@@ -493,7 +498,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "k" }, { "key_code": "l" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "k" }, { "key_code": "l" }],
                 "to_if_held_down": [
@@ -507,7 +512,7 @@
               {
                 "from": {
                   "simultaneous": [{ "key_code": "l" }, { "key_code": "k" }],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [{ "key_code": "l" }, { "key_code": "k" }],
                 "to_if_held_down": [
@@ -524,7 +529,7 @@
                     { "key_code": "k" },
                     { "key_code": "semicolon" }
                   ],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [
                   { "key_code": "k" },
@@ -544,7 +549,7 @@
                     { "key_code": "semicolon" },
                     { "key_code": "k" }
                   ],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [
                   { "key_code": "semicolon" },
@@ -564,7 +569,7 @@
                     { "key_code": "l" },
                     { "key_code": "semicolon" }
                   ],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [
                   { "key_code": "l" },
@@ -584,7 +589,7 @@
                     { "key_code": "semicolon" },
                     { "key_code": "l" }
                   ],
-                  "simultaneous_options": { "key_down_order": "strict" }
+                  "simultaneous_options": { "key_down_order": "insensitive" }
                 },
                 "to_if_alone": [
                   { "key_code": "semicolon" },

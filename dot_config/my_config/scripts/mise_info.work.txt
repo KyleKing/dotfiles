@@ -1,11 +1,11 @@
-version: 2024.10.0 macos-arm64 (2024-10-03)
+version: 2024.10.1 macos-arm64 (2024-10-07)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Thu, 3 Oct 2024 18:27:18 +0000
+  Built: Mon, 7 Oct 2024 19:01:35 +0000
   Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
   Profile: release
 
@@ -80,6 +80,7 @@ settings:
   log_level = "info"
   not_found_auto_install = true
   paranoid = false
+  pin = false
   pipx_uvx = true
   plugin_autoupdate_last_check_duration = "7d"
   python_default_packages_file = "~/.default-python-packages"
