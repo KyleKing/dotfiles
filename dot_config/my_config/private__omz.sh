@@ -17,6 +17,10 @@ zstyle ':omz:update' frequency 14
 # TODO: Should I use navi, cheat, tldr, or other tool for all quick reference?
 eval "$(navi widget zsh)"
 
+# Source brew-installed package completions
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # Use `omz plugin info <name>  | glow -` to learn more about each. Prints the README
 #   omz plugin info zsh-autosuggestions | glow -
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
