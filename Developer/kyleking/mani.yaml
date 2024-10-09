@@ -19,6 +19,8 @@ projects:
       - calcipy-template
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
+  karabiner-config:
+    url: git@github.com:KyleKing/karabiner-config
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
