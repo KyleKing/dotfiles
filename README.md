@@ -31,9 +31,9 @@ open ~/.config/chezmoi/chezmoi.toml
 chezmoi apply --verbose
 
 # Install all packages managed by brew
-brew bundle --file ~/.Brewfile-personal
+brew bundle --file ~/.Brewfile-personal --no-lock
 
-# Install Rosetta for Mac Silicon
+# (Optional, hard to uninstall) Install Rosetta for Mac Silicon
 /usr/sbin/softwareupdate --install-rosetta --agree-to-license
 
 # Run the fzf post-install steps. Accept all prompts
@@ -41,19 +41,7 @@ brew bundle --file ~/.Brewfile-personal
 $(brew --prefix)/opt/fzf/install
 ```
 
-## Sublime
-
-[Sublime is synced through Dropbox](https://packagecontrol.io/docs/syncing#dropbox-osx)
-
-```sh
-cd ~/Library/Application\ Support/Sublime\ Text/Packages
-# On 1st computer: mv User $HOMR/Library/CloudStorage/Dropbox/Apps/Sublime
-# On n+1 computers:
-mv User User-Backup
-ln -s "$HOME/Library/CloudStorage/Dropbox/Apps/Sublime/User"
-```
-
-## Custom Colorschems
+## Custom Color Schemes
 
 ### K9s
 
