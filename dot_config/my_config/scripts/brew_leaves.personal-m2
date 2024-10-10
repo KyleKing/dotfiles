@@ -5,6 +5,7 @@ chezmoi
 cloc
 curlie
 difftastic
+direnv
 dotenv-linter
 envchain
 eth-p/software/bat-extras
@@ -29,7 +30,6 @@ navi
 neovim
 oh-my-posh
 php
-pipx
 plantuml
 pre-commit
 pyright

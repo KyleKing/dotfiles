@@ -18,7 +18,7 @@ back-pull-ch() {
 }
 
 back-scripts-ch() {
-    # Run useful scripts to update generated files, such as listing plugins for Brew, pipx, etc.
+    # Run useful scripts to update generated files, such as listing plugins for Brew, uvx, etc.
     "$HOME/.config/my_config/generate_machine_snapshot.sh"
 }
 

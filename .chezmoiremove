@@ -1,5 +1,7 @@
 .config/cheat/
 .config/my_config/_r.sh
+.config/my_config/scripts/pipx_list.personal-m2.txt
+.config/my_config/scripts/pipx_list.work.txt
 .wegorc
 Library/Application Support/Code/
 Library/Application Support/superfile/

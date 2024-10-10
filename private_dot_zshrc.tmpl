@@ -40,6 +40,10 @@ eval "$(mise activate zsh)"
 # Added manually for SQLite shell history: https://github.com/atuinsh/atuin?tab=readme-ov-file#shell-plugin
 eval "$(atuin init zsh --disable-up-arrow)"
 
+# UV/UVX Setup
+# Make sure to run `uv python install` because the brew-installed python is updated frequently
+export UV_PYTHON_DOWNLOADS=never
+
 # --------------------------------------------------------------------------------------
 # Work
 
