@@ -13,22 +13,6 @@ export BETTER_EXCEPTIONS=1
 # Ensure that poetry creates a .venv
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
-# > pipx completions require bashcompinit
-# autoload -U bashcompinit
-# bashcompinit
-eval "$(register-python-argcomplete pipx)"
-
-# Run pre-commit
-alias pc-c="pre-commit run --hook-stage commit --all-files"
-alias pc-p="pre-commit run --hook-stage push --all-files"
-
-# Some useful aliases for calcipy/invoke-related projects
-alias prc="poetry run calcipy"
-alias prcv="poetry run calcipy -vvv"
-
-# Wrap useful plugins
-alias prsl="toml-sort pyproject.toml --in-place --all --trailing-comma-inline-array --sort-first=python && poetry relax && poetry relax --group=dev && poetry lock --no-update"
-
 # Automate accepting copier commands by sending 'Enter' via STDIN
 alias copier-update="copier update --UNSAFE --conflict=rej"
 alias copier-auto-update="copier-update --defaults"
