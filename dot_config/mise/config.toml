@@ -1,6 +1,7 @@
 [settings]
 disable_hints = ["python_multi"]
 experimental = true
+pipx_uvx = true
 
 [tools]
 node = "22.9.0"
