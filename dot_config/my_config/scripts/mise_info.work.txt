@@ -39,7 +39,7 @@ plugins:
   terraform  https://github.com/asdf-community/asdf-hashicorp.git#22eb1c4
 
 toolset:
-  node@16.17.0
+  node@22.9.0
   postgres@14.5
   python@3.11.6
   terraform@1.9.5
@@ -48,7 +48,6 @@ toolset:
 
 env_vars:
   MISE_SHELL=zsh
-  MISE_PIPX_UVX=true
 
 settings:
   activate_aggressive = false
