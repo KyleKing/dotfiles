@@ -1,4 +1,5 @@
 .config/cheat/
+.config/my_config/_r.sh
 .wegorc
 Library/Application Support/Code/
 Library/Application Support/superfile/
