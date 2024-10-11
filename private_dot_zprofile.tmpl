@@ -4,7 +4,7 @@
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 export PATH="{{- .homebrew_prefix -}}/sbin:{{- .homebrew_prefix -}}/bin:$PATH"
 
-# For asdf-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
+# For mise-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
 export HOMEBREW_PREFIX={{- .homebrew_prefix }}
 
 # Created by `pipx` and used by `uv` tools as well

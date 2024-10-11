@@ -2,6 +2,8 @@
 .config/cheat/
 .config/marzano
 .config/my_config/_r.sh
+.config/my_config/scripts/asdf_info.personal-m2.txt
+.config/my_config/scripts/asdf_info.work.txt
 .config/my_config/scripts/pipx_list.personal-m2.txt
 .config/my_config/scripts/pipx_list.work.txt
 .config/ov
