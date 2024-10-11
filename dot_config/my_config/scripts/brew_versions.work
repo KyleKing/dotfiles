@@ -4,6 +4,7 @@ apr 1.7.5
 apr-util 1.6.3_1
 argon2 20190702_1
 aspell 0.60.8.1_1
+ast-grep 0.28.0
 atuin 18.3.0
 autoconf 2.72
 awscli 2.18.3
