@@ -1,7 +1,16 @@
+.config/.jira
 .config/cheat/
+.config/marzano
 .config/my_config/_r.sh
 .config/my_config/scripts/pipx_list.personal-m2.txt
 .config/my_config/scripts/pipx_list.work.txt
+.config/ov
+.config/pet
+.config/sourcery/
+.config/ttyper
+.config/yamllint
+.config/yazi
+.config/zellij
 .wegorc
 Library/Application Support/Code/
 Library/Application Support/superfile/
