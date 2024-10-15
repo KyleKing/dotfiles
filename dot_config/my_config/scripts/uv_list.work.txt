@@ -10,7 +10,7 @@ calcipy v4.1.0
 - calcipy-types
 codeartifact-lockfile-tool v1.0.0
 - codeartifact-lockfile-tool
-copier v9.3.1
+copier v9.4.0
 - copier
 envtpl v0.7.2
 - envtpl
@@ -18,13 +18,13 @@ frogmouth v0.9.2
 - frogmouth
 ghstack v0.9.3
 - ghstack
-mdformat v0.7.17
+mdformat v0.7.18
 - mdformat
 mypy-silent v0.4.0
 - mypy-silent
 pipdeptree v2.23.4
 - pipdeptree
-poetry v1.8.3
+poetry v1.8.4
 - poetry
 pygments v2.18.0
 - pygmentize
