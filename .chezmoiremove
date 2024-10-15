@@ -10,7 +10,6 @@
 .config/pet
 .config/sourcery/
 .config/ttyper
-.config/yamllint
 .config/yazi
 .config/zellij
 .wegorc
