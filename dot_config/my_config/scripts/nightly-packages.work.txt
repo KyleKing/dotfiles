@@ -1,3 +1,2 @@
-cs cs version 1.4.0
 gotz v0.1.9
 shfmt 3.9.0

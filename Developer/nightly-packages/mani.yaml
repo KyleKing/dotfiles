@@ -6,10 +6,6 @@ projects:
     # BAT_CONFIG_DIR="$(bat --config-dir)"
     # echo "Upgrading $pth" && cd "$pth" && git pull && ...(See README) && cd "$original_dir"
     # bat cache --build
-  cs:
-    url: git@github.com:boyter/cs.git
-    tags:
-      - go-install
   gotz:
     url: git@github.com:merschformann/gotz.git
     tags:
