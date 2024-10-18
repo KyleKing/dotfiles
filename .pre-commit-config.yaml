@@ -46,7 +46,7 @@ repos:
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.17
+    rev: 0.7.18
     hooks:
       - id: mdformat
         additional_dependencies: ["mdformat-mkdocs[recommended]>=2.0.1"]
@@ -85,7 +85,7 @@ repos:
           ]
         exclude: poetry\.lock|superfile/[^\.]+\.toml
   - repo: https://github.com/KyleKing/calcipy
-    rev: 4.0.0
+    rev: 4.1.0
     hooks:
       - id: copier-forbidden-files
   - repo: https://github.com/Yelp/detect-secrets

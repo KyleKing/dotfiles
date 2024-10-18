@@ -33,4 +33,6 @@ which kubectl && ((kubectl krew list > "$SCRIPT_DIR/krew_plugins.{{- .computer_n
 (uv tool list > "$SCRIPT_DIR/uv_list.{{- .computer_name -}}.txt") || return 1
 (pip config list --verbose > "$SCRIPT_DIR/pip_config.{{- .computer_name -}}.txt") || return 1
 (printf '%s\n' "$(mise doctor)" > "$SCRIPT_DIR/mise_info.{{- .computer_name -}}.txt") || return 1
+
+echo "Script Complete"
 {{ end -}}

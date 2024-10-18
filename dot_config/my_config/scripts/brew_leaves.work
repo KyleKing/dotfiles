@@ -1,5 +1,6 @@
 actionlint
 alajmo/mani/mani
+ansible
 ast-grep
 atuin
 awscli
@@ -50,6 +51,7 @@ php
 plantuml
 pngcrush
 poppler
+postgresql@14
 postgresql@15
 pre-commit
 prettier
