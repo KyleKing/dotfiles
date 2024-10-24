@@ -1,0 +1,23 @@
+---
+projects:
+  mdformat-myst:
+    url: git@github.com:executablebooks/mdformat-myst.git
+  mdformat-tables:
+    url: git@github.com:executablebooks/mdformat-tables.git
+
+tasks:
+  git-status:
+    desc: show working tree status
+    output: table
+    parallel: true
+    cmd: git status
+
+  git-pull:
+    desc: pull remote updates. Exit 0 on error
+    cmd: git pull || true
+
+  gpoi:
+    desc: Run GH poi to remove closed branches
+    cmd: |
+      COUNT=$(git branch --format='%(HEAD) %(refname:short) -> %(upstream:short)' | wc -l)
+      if (("$COUNT" > 1)); then git checkout main && gh poi && git pull; else echo "No change; only one checked out branch"; fi
