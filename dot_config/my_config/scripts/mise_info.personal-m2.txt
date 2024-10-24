@@ -1,12 +1,12 @@
-version: 2024.10.1 macos-arm64 (2024-10-07)
+version: 2024.10.8 macos-arm64 (2024-10-22)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Mon, 7 Oct 2024 19:01:35 +0000
-  Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
+  Built: Tue, 22 Oct 2024 13:48:19 +0000
+  Rust Version: rustc 1.82.0 (f6e511eec 2024-10-15) (Homebrew)
   Profile: release
 
 shell:
@@ -53,24 +53,25 @@ settings:
   all_compile = false
   always_keep_download = false
   always_keep_install = false
-  asdf = true
   asdf_compat = false
   cache_prune_age = "30d"
-  cargo_binstall = true
   ci = false
   color = true
   debug = false
-  disable_default_shorthands = false
+  disable_backends = []
+  disable_default_registry = false
   disable_hints = ["python_multi"]
   disable_tools = []
   experimental = true
+  fetch_remote_versions_cache = "1h"
+  fetch_remote_versions_timeout = "10s"
   go_default_packages_file = "~/.default-go-packages"
   go_download_mirror = "https://dl.google.com/go"
   go_repo = "https://github.com/golang/go"
   go_set_gopath = false
   go_set_goroot = true
   go_skip_checksum = false
-  http_timeout = 30
+  http_timeout = "30s"
   jobs = 4
   legacy_version_file = true
   legacy_version_file_disable_tools = []
@@ -82,18 +83,27 @@ settings:
   pipx_uvx = true
   plugin_autoupdate_last_check_duration = "7d"
   python_default_packages_file = "~/.default-python-packages"
-  python_pyenv_repo = "https://github.com/pyenv/pyenv.git"
-  python_venv_auto_create = false
   quiet = false
   raw = false
   trace = false
   trusted_config_paths = []
   use_versions_host = true
   verbose = false
-  vfox = false
   yes = false
 
+  [cargo]
+  binstall = true
+
   [node]
+
+  [pipx]
+  uvx = true
+
+  [python]
+  default_packages_file = "~/.default-python-packages"
+  pyenv_repo = "https://github.com/pyenv/pyenv.git"
+  venv_auto_create = false
+  venv_stdlib = false
 
   [ruby]
   default_packages_file = "~/.default-gems"
@@ -106,4 +116,6 @@ settings:
   show_env = false
   show_tools = false
 No warnings found
-No problems found
+1 problem found:
+
+1. new mise version 2024.10.9 available, currently on 2024.10.8
