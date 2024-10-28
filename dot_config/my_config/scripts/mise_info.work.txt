@@ -1,12 +1,12 @@
-version: 2024.10.7 macos-arm64 (2024-10-14)
+version: 2024.10.13 macos-arm64 (2024-10-28)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Mon, 14 Oct 2024 22:13:17 +0000
-  Rust Version: rustc 1.81.0 (eeb90cda1 2024-09-04) (Homebrew)
+  Built: Mon, 28 Oct 2024 03:18:15 +0000
+  Rust Version: rustc 1.82.0 (f6e511eec 2024-10-15) (Homebrew)
   Profile: release
 
 shell:
@@ -40,6 +40,7 @@ plugins:
 
 toolset:
   node@22.9.0
+  cargo:lazyjj@0.4.2
   postgres@14.5
   python@3.11.6
   terraform@1.9.5
@@ -77,13 +78,13 @@ settings:
   legacy_version_file = true
   legacy_version_file_disable_tools = []
   libgit2 = true
+  lockfile = false
   log_level = "info"
   not_found_auto_install = true
   paranoid = false
   pin = false
   pipx_uvx = true
   plugin_autoupdate_last_check_duration = "7d"
-  python_default_packages_file = "~/.default-python-packages"
   quiet = false
   raw = false
   trace = false

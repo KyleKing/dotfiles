@@ -6,6 +6,7 @@ atuin
 awscli
 bat
 bat-extras
+cargo-binstall
 chezmoi
 cloc
 curlie
@@ -69,7 +70,6 @@ stern
 stylua
 swig
 tealdeer
-terraform-docs
 tesseract-lang
 tflint
 tpm
