@@ -14,7 +14,7 @@ git-set-upstream() {
     # Use: "git-set-upstream"
     repo=$1
     [ -z "$repo" ] && repo=origin
-    branch=$(git-current-branch)
+    branch=$(git rev-parse --abbrev-ref HEAD)
     git push "$repo" "$branch" --set-upstream
 }
 
