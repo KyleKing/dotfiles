@@ -20,6 +20,9 @@ git-set-upstream() {
 
 alias lzg='lazygit'
 
+# jj (jujitsu) git-compatible VCS (installed with mise)
+alias lzj='lazyjj'
+
 # Navigate to top-level git directory (from: https://github.com/kakulukia/dotfiles/blob/eb4fd73d876727a6325362b21fad45dc7bd18913/.alias#L25C1-L25C115)
 alias ,,='git rev-parse --git-dir >/dev/null 2>&1 && cd `git rev-parse --show-toplevel` || echo "Not in git repo"'
 

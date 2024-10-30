@@ -14,13 +14,13 @@ fd
 gcc
 gh
 git
-glow
 gnupg
 go
 gum
 hadolint
 hyperfine
 imagemagick
+jj
 luacheck
 luarocks
 mas-cli/tap/mas
