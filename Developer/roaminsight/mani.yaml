@@ -141,6 +141,12 @@ projects:
   kubewatch:
     url: git@github.com:roaminsight/kubewatch.git
 
+  lessons-learned-api:
+    url: git@github.com:roaminsight/lessons-learned-api.git
+
+  lessons-learned-eda:
+    url: git@github.com:roaminsight/lessons-learned-eda.git
+
   logging-utils:
     url: git@github.com:roaminsight/logging-utils.git
 
@@ -271,8 +277,14 @@ projects:
   serve-client:
     url: git@github.com:roaminsight/serve-client.git
 
+  serve-management:
+    url: git@github.com:roaminsight/serve-management.git
+
   shared-dotfiles:
     url: git@github.com:roaminsight/shared-dotfiles.git
+
+  site-fees:
+    url: git@github.com:roaminsight/site-fees.git
 
   solve-pv:
     url: git@github.com:roaminsight/solve-pv.git
