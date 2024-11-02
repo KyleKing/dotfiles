@@ -187,9 +187,7 @@ config.keys = {
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
     { key = "LeftArrow", mods = "ALT", action = act({ SendString = "\x1bb" }) },
     { key = "RightArrow", mods = "ALT", action = act({ SendString = "\x1bf" }) },
-    -- Map jumping between start and end of line to Standard Mac keys
-    { key = "LeftArrow", mods = "CMD", action = act({ SendString = "\x01" }) },
-    { key = "RightArrow", mods = "CMD", action = act({ SendString = "\x05" }) },
+    -- Jump between start and end of line using standard: C-a (beginning) or C-e (end)
 
     -- Map vim-friendly scrolling
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
