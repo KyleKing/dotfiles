@@ -1,6 +1,6 @@
 bump-pydantic v0.8.0
 - bump-pydantic
-calcipy v4.1.0
+calcipy v4.3.0
 - calcipy
 - calcipy-docs
 - calcipy-lint
@@ -33,12 +33,12 @@ pylint v3.3.1
 - pylint-config
 - pyreverse
 - symilar
-pyright v1.1.386
+pyright v1.1.388
 - pyright
 - pyright-langserver
 - pyright-python
 - pyright-python-langserver
-ruff v0.7.1
+ruff v0.7.2
 - ruff
 tail-jsonl v1.2.6
 - tail-jsonl
