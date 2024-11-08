@@ -209,7 +209,9 @@ projects:
 
   reviewer:
     url: git@github.com:roaminsight/reviewer.git
-    desc: Reviewer
+
+  reviewer-data-lake-api:
+    url: git@github.com:roaminsight/reviewer-data-lake-api.git
 
   risk-tools:
     url: git@github.com:roaminsight/risk-tools.git
