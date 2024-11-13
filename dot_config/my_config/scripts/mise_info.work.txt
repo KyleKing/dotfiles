@@ -1,11 +1,11 @@
-version: 2024.11.3 macos-arm64 (2024-11-06)
+version: 2024.11.8 macos-arm64 (2024-11-12)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Wed, 6 Nov 2024 11:51:34 +0000
+  Built: Tue, 12 Nov 2024 03:01:02 +0000
   Rust Version: rustc 1.82.0 (f6e511eec 2024-10-15) (Homebrew)
   Profile: release
 
@@ -25,6 +25,7 @@ config_files:
   ~/.config/mise/config.toml
 
 backends:
+  aqua
   cargo
   core
   go
@@ -55,6 +56,7 @@ settings:
   all_compile = false
   always_keep_download = false
   always_keep_install = false
+  aqua_registry_url = "https://github.com/aquaproj/aqua-registry"
   asdf_compat = false
   cache_prune_age = "30d"
   ci = false
@@ -87,16 +89,42 @@ settings:
   plugin_autoupdate_last_check_duration = "7d"
   quiet = false
   raw = false
+  task_timings = false
   trace = false
   trusted_config_paths = []
+  unix_default_file_shell_args = ["sh"]
+  unix_default_inline_shell_args = [
+      "sh",
+      "-c",
+  ]
+  use_file_shell_for_executable_tasks = false
   use_versions_host = true
   verbose = false
+  windows_default_file_shell_args = [
+      "cmd",
+      "/c",
+  ]
+  windows_default_inline_shell_args = [
+      "cmd",
+      "/c",
+  ]
+  windows_executable_extensions = [
+      "exe",
+      "bat",
+      "cmd",
+      "com",
+      "ps1",
+      "vbs",
+  ]
   yes = false
 
   [cargo]
   binstall = true
 
   [node]
+
+  [npm]
+  bun = false
 
   [pipx]
   uvx = true

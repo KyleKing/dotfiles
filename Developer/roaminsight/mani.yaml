@@ -196,6 +196,9 @@ projects:
   permission:
     url: git@github.com:roaminsight/permission.git
 
+  protocol-structuring:
+    url: git@github.com:roaminsight/protocol-structuring.git
+
   redux-kit:
     url: git@github.com:roaminsight/redux-kit.git
 
