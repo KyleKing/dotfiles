@@ -31,7 +31,7 @@ pylint v3.3.1
 - pylint-config
 - pyreverse
 - symilar
-pyright v1.1.388
+pyright v1.1.389
 - pyright
 - pyright-langserver
 - pyright-python
