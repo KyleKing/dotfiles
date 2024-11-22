@@ -1,11 +1,11 @@
-version: 2024.11.20 macos-arm64 (2024-11-21)
+version: 2024.11.23 macos-arm64 (2024-11-21)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Thu, 21 Nov 2024 02:22:44 +0000
+  Built: Thu, 21 Nov 2024 22:17:32 +0000
   Rust Version: rustc 1.82.0 (f6e511eec 2024-10-15) (Homebrew)
   Profile: release
 
@@ -80,7 +80,7 @@ settings:
   legacy_version_file = true
   legacy_version_file_disable_tools = []
   libgit2 = true
-  lockfile = false
+  lockfile = true
   log_level = "info"
   not_found_auto_install = true
   paranoid = false
@@ -89,7 +89,6 @@ settings:
   plugin_autoupdate_last_check_duration = "7d"
   quiet = false
   raw = false
-  task_timings = false
   trace = false
   trusted_config_paths = []
   unix_default_file_shell_args = ["sh"]

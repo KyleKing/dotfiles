@@ -69,7 +69,6 @@ gts 0.7.6_3
 gum 0.14.5
 hadolint 2.12.0
 harfbuzz 10.1.0
-hcl2json 0.6.4
 highway 1.2.0
 howdoi 2.0.20_9
 hyperfine 1.19.0
@@ -147,7 +146,7 @@ m4 1.4.19
 mackup 0.8.41
 mani 0.25.0
 mas 1.8.6
-mise 2024.11.20
+mise 2024.11.23
 mpdecimal 4.0.0
 msgpack 6.1.0
 navi 2.23.0
