@@ -16,8 +16,6 @@ frogmouth v0.9.2
 - frogmouth
 ghstack v0.9.4
 - ghstack
-mdformat v0.7.18
-- mdformat
 mypy-silent v0.4.0
 - mypy-silent
 pipdeptree v2.23.4
@@ -36,11 +34,11 @@ pyright v1.1.389
 - pyright-langserver
 - pyright-python
 - pyright-python-langserver
-ruff v0.7.3
+ruff v0.7.4
 - ruff
 tail-jsonl v1.2.6
 - tail-jsonl
-toml-sort v0.23.1
+toml-sort v0.24.2
 - toml-sort
 trcli v1.9.8
 - trcli
