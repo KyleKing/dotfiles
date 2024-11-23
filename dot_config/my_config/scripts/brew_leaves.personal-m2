@@ -1,6 +1,7 @@
 actionlint
 alajmo/mani/mani
 atuin
+bat
 chezmoi
 cloc
 curlie
@@ -8,7 +9,6 @@ difftastic
 direnv
 dotenv-linter
 envchain
-eth-p/software/bat-extras
 eza
 fd
 gcc
@@ -29,15 +29,18 @@ ms-jpq/sad/sad
 navi
 neovim
 oh-my-posh
+pandoc
 php
 plantuml
 pre-commit
+prettier
 pyright
 rhysd/git-brws/git-brws
 selene
 sevenzip
 shellcheck
 shellharden
+shfmt
 stylua
 tealdeer
 tpm

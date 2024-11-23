@@ -26,6 +26,9 @@ projects:
   mdformat-admon:
     url: git@github.com:kyleking/mdformat-admon.git
     tags: ["mdformat-plugin"]
+  mdformat-admonition-utils:
+    url: git@github.com:kyleking/mdformat-admonition-utils.git
+    tags: ["mdformat-plugin"]
   mdformat-gfm-alerts:
     url: git@github.com:kyleking/mdformat-gfm-alerts.git
     tags: ["mdformat-plugin"]

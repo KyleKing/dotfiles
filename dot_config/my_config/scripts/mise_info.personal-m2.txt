@@ -1,11 +1,11 @@
-version: 2024.10.12 macos-arm64 (2024-10-27)
+version: 2024.11.23 macos-arm64 (2024-11-21)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Sun, 27 Oct 2024 18:40:32 +0000
+  Built: Thu, 21 Nov 2024 22:17:32 +0000
   Rust Version: rustc 1.82.0 (f6e511eec 2024-10-15) (Homebrew)
   Profile: release
 
@@ -14,17 +14,19 @@ shell:
   zsh 5.9 (arm64-apple-darwin24.0)
 
 dirs:
-  data: ~/.local/share/mise
-  config: ~/.config/mise
   cache: ~/Library/Caches/mise
-  state: ~/.local/state/mise
+  config: ~/.config/mise
+  data: ~/.local/share/mise
   shims: ~/.local/share/mise/shims
+  state: ~/.local/state/mise
 
 config_files:
   ~/.tool-versions
   ~/.config/mise/config.toml
 
 backends:
+  aqua
+  asdf
   cargo
   core
   go
@@ -38,13 +40,13 @@ plugins:
 
 toolset:
   cargo:lazyjj@0.4.2
-  node@22.9.0
-  python@3.10.9
-  python@3.12.1
-  python@3.11.2
-  python@3.9.13
-  python@3.8.12
-  python@3.7.14
+  core:node@22.9.0
+  core:python@3.10.9
+  core:python@3.11.2
+  core:python@3.12.1
+  core:python@3.7.14
+  core:python@3.8.12
+  core:python@3.9.13
 
 env_vars:
   MISE_SHELL=zsh
@@ -77,7 +79,7 @@ settings:
   legacy_version_file = true
   legacy_version_file_disable_tools = []
   libgit2 = true
-  lockfile = false
+  lockfile = true
   log_level = "info"
   not_found_auto_install = true
   paranoid = false
@@ -88,14 +90,39 @@ settings:
   raw = false
   trace = false
   trusted_config_paths = []
+  unix_default_file_shell_args = ["sh"]
+  unix_default_inline_shell_args = [
+      "sh",
+      "-c",
+  ]
+  use_file_shell_for_executable_tasks = false
   use_versions_host = true
   verbose = false
+  windows_default_file_shell_args = [
+      "cmd",
+      "/c",
+  ]
+  windows_default_inline_shell_args = [
+      "cmd",
+      "/c",
+  ]
+  windows_executable_extensions = [
+      "exe",
+      "bat",
+      "cmd",
+      "com",
+      "ps1",
+      "vbs",
+  ]
   yes = false
 
   [cargo]
   binstall = true
 
   [node]
+
+  [npm]
+  bun = false
 
   [pipx]
   uvx = true
