@@ -18,13 +18,13 @@ ghstack v0.9.4
 - ghstack
 mypy-silent v0.4.0
 - mypy-silent
-pipdeptree v2.23.4
+pipdeptree v2.24.0
 - pipdeptree
 poetry v1.8.4
 - poetry
 pygments v2.18.0
 - pygmentize
-pylint v3.3.1
+pylint v3.3.2
 - pylint
 - pylint-config
 - pyreverse
@@ -34,7 +34,7 @@ pyright v1.1.389
 - pyright-langserver
 - pyright-python
 - pyright-python-langserver
-ruff v0.8.0
+ruff v0.8.1
 - ruff
 tail-jsonl v1.2.6
 - tail-jsonl

@@ -1,11 +1,11 @@
-version: 2024.11.29 macos-arm64 (2024-11-25)
+version: 2024.11.37 macos-arm64 (2024-11-30)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Mon, 25 Nov 2024 04:03:52 +0000
+  Built: Sat, 30 Nov 2024 00:54:51 +0000
   Rust Version: rustc 1.82.0 (f6e511eec 2024-10-15) (Homebrew)
   Profile: release
 
@@ -29,6 +29,7 @@ backends:
   asdf
   cargo
   core
+  gem
   go
   npm
   pipx
@@ -53,104 +54,8 @@ env_vars:
   MISE_SHELL=zsh
 
 settings:
-  activate_aggressive = false
-  all_compile = false
-  always_keep_download = false
-  always_keep_install = false
-  asdf_compat = false
-  cache_prune_age = "30d"
-  ci = false
-  color = true
-  debug = false
-  disable_backends = []
-  disable_default_registry = false
-  disable_hints = ["python_multi"]
-  disable_tools = []
-  exec_auto_install = true
-  experimental = true
-  fetch_remote_versions_cache = "1h"
-  fetch_remote_versions_timeout = "10s"
-  go_default_packages_file = "~/.default-go-packages"
-  go_download_mirror = "https://dl.google.com/go"
-  go_repo = "https://github.com/golang/go"
-  go_set_gopath = false
-  go_set_goroot = true
-  go_skip_checksum = false
-  http_timeout = "30s"
-  ignored_config_paths = []
-  jobs = 4
-  legacy_version_file = true
-  legacy_version_file_disable_tools = []
-  libgit2 = true
-  lockfile = true
-  log_level = "info"
-  not_found_auto_install = true
-  paranoid = false
-  pin = false
-  pipx_uvx = true
-  plugin_autoupdate_last_check_duration = "7d"
-  quiet = false
-  raw = false
-  task_run_auto_install = true
-  task_skip = []
-  trace = false
-  trusted_config_paths = []
-  unix_default_file_shell_args = ["sh"]
-  unix_default_inline_shell_args = [
-      "sh",
-      "-c",
-  ]
-  use_file_shell_for_executable_tasks = false
-  use_versions_host = true
-  verbose = false
-  windows_default_file_shell_args = [
-      "cmd",
-      "/c",
-  ]
-  windows_default_inline_shell_args = [
-      "cmd",
-      "/c",
-  ]
-  windows_executable_extensions = [
-      "exe",
-      "bat",
-      "cmd",
-      "com",
-      "ps1",
-      "vbs",
-  ]
-  yes = false
-
-  [aqua]
-  cosign = true
-  slsa = true
-
-  [cargo]
-  binstall = true
-
-  [node]
-
-  [npm]
-  bun = false
-
-  [pipx]
-  uvx = true
-
-  [python]
-  default_packages_file = "~/.default-python-packages"
-  pyenv_repo = "https://github.com/pyenv/pyenv.git"
-  venv_auto_create = false
-  venv_stdlib = false
-
-  [ruby]
-  default_packages_file = "~/.default-gems"
-  ruby_build_repo = "https://github.com/rbenv/ruby-build.git"
-  ruby_install = false
-  ruby_install_repo = "https://github.com/postmodern/ruby-install.git"
-
-  [status]
-  missing_tools = "if_other_versions_installed"
-  show_env = false
-  show_tools = false
+  disable_hints  ["python_multi"] ~/.config/mise/config.toml
+  experimental   true             ~/.config/mise/config.toml
+  pipx_uvx       true             ~/.config/mise/config.toml
 
 No problems found
