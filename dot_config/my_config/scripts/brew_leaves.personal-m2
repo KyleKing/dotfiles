@@ -21,6 +21,7 @@ hadolint
 hyperfine
 imagemagick
 jj
+lazygit
 luacheck
 luarocks
 mas-cli/tap/mas
@@ -43,6 +44,7 @@ shellharden
 shfmt
 stylua
 tealdeer
+television
 tpm
 typos-cli
 uv

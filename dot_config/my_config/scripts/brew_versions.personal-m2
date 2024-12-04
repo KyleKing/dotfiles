@@ -68,6 +68,7 @@ jpeg-xl 0.11.0_1
 json-c 0.18
 krb5 1.21.3
 lame 3.100
+lazygit 0.44.1
 leptonica 1.85.0
 libarchive 3.7.7
 libass 0.17.3
@@ -192,6 +193,7 @@ srt 1.5.4
 stylua 2.0.1
 svt-av1 2.2.1
 tealdeer 1.7.1
+television 0.5.3
 tesseract 5.5.0
 theora 1.1.1
 tidy-html5 5.8.0
@@ -228,6 +230,7 @@ anki 24.06.3
 appcleaner 3.6.7,4301
 blockblock 2.2.4
 brave-browser 1.67.123.0
+calibre 7.22.0
 cloudflare-warp 2022.12.593.0,20230118.6
 customshortcuts 1.1,102
 daisydisk 4.24

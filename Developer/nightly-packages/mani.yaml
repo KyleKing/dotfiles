@@ -2,15 +2,18 @@
 projects:
   catppuccin-bat:
     url: git@github.com:catppuccin/bat.git
+    # FIXME: Uninstall!
     # pth="catppuccin-bat"
     # BAT_CONFIG_DIR="$(bat --config-dir)"
     # echo "Upgrading $pth" && cd "$pth" && git pull && ...(See README) && cd "$original_dir"
     # bat cache --build
   gotz:
+    # FIXME: Still go-only?
     url: git@github.com:merschformann/gotz.git
     tags:
       - go-install
   sh:
+    # Isn't this brew-installed?
     url: git@github.com:mvdan/sh.git
     # FYI: use nested directory instead (sh/cmd/shfmt)
     # tags:
