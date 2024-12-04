@@ -176,6 +176,7 @@ python@3.12 3.12.7_1
 python@3.13 3.13.0_1
 rav1e 0.7.1
 readline 8.2.13
+ripgrep 14.1.1
 rtmpdump 2.4-20151223_3
 rubberband 4.0.0
 sad 0.4.31

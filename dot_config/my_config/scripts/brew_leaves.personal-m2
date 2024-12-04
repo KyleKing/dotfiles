@@ -37,6 +37,7 @@ pre-commit
 prettier
 pyright
 rhysd/git-brws/git-brws
+ripgrep
 selene
 sevenzip
 shellcheck
