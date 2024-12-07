@@ -48,7 +48,7 @@ toolset:
   core:node@22.9.0
   core:python@3.11.6
   pipx:extract-msg@0.46.2
-  pipx:textract-py3@2.0.1
+  pipx:textract-py3@2.1.0
 
 env_vars:
   MISE_SHELL=zsh
