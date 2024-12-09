@@ -20,7 +20,7 @@ mypy-silent v0.4.0
 - mypy-silent
 pipdeptree v2.24.0
 - pipdeptree
-poetry v1.8.4
+poetry v1.8.5
 - poetry
 pygments v2.18.0
 - pygmentize
@@ -29,12 +29,12 @@ pylint v3.3.2
 - pylint-config
 - pyreverse
 - symilar
-pyright v1.1.389
+pyright v1.1.390
 - pyright
 - pyright-langserver
 - pyright-python
 - pyright-python-langserver
-ruff v0.8.1
+ruff v0.8.2
 - ruff
 tail-jsonl v1.2.6
 - tail-jsonl
