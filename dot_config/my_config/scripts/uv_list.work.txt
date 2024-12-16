@@ -34,7 +34,7 @@ pyright v1.1.390
 - pyright-langserver
 - pyright-python
 - pyright-python-langserver
-ruff v0.8.2
+ruff v0.8.3
 - ruff
 tail-jsonl v1.2.6
 - tail-jsonl

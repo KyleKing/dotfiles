@@ -1,11 +1,11 @@
-version: 2024.12.5 macos-arm64 (2024-12-10)
+version: 2024.12.11 macos-arm64 (2024-12-15)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Tue, 10 Dec 2024 18:39:48 +0000
+  Built: Sun, 15 Dec 2024 22:56:43 +0000
   Rust Version: rustc 1.83.0 (90b35a623 2024-11-26) (Homebrew)
   Profile: release
 
@@ -49,6 +49,33 @@ toolset:
   core:python@3.11.6
   pipx:extract-msg@0.46.2
   pipx:textract-py3@2.1.0
+
+path:
+  ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
+  ~/.local/share/mise/installs/node/22.9.0/bin
+  ~/.local/share/mise/installs/postgres/14.5/bin
+  ~/.local/share/mise/installs/python/3.11.6/bin
+  ~/.local/share/mise/installs/terraform/1.9.5/bin
+  ~/.local/share/mise/installs/pipx-textract-py3/2.1.0/bin
+  ~/.local/share/mise/installs/pipx-extract-msg/0.46.2/bin
+  ~/.docker/bin
+  ~/.local/bin
+  /opt/homebrew/sbin
+  /opt/homebrew/bin
+  /usr/local/sbin
+  /usr/local/bin
+  /usr/local/bin
+  /System/Cryptexes/App/usr/bin
+  /usr/bin
+  /bin
+  /usr/sbin
+  /sbin
+  /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin
+  /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
+  /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+  /opt/homebrew/opt/fzf/bin
+  ~/go/bin
+  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
