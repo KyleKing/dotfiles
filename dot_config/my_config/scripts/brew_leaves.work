@@ -56,7 +56,6 @@ pngcrush
 poppler
 postgresql@14
 postgresql@15
-pre-commit
 prettier
 rhysd/git-brws/git-brws
 ripgrep

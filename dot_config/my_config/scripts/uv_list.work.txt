@@ -22,6 +22,8 @@ pipdeptree v2.24.0
 - pipdeptree
 poetry v1.8.5
 - poetry
+pre-commit v4.0.1
+- pre-commit
 pygments v2.18.0
 - pygmentize
 pylint v3.3.2
