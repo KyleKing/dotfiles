@@ -1,5 +1,7 @@
 ---
 projects:
+  mdformat-deflist:
+    url: git@github.com:executablebooks/mdformat-deflist.git
   mdformat-myst:
     url: git@github.com:executablebooks/mdformat-myst.git
   mdformat-tables:

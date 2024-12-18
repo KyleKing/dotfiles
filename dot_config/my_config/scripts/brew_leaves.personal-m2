@@ -38,6 +38,7 @@ prettier
 pyright
 rhysd/git-brws/git-brws
 ripgrep
+rust
 selene
 sevenzip
 shellcheck
