@@ -168,6 +168,9 @@ projects:
   mvrs:
     url: git@github.com:roaminsight/mvrs.git
 
+  mvr-service:
+    url: git@github.com:roaminsight/mvr-service.git
+
   object-permissions:
     url: git@github.com:roaminsight/object-permissions.git
 
