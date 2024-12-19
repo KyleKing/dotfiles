@@ -145,7 +145,7 @@ m4 1.4.19
 mackup 0.8.41
 mani 0.25.0
 mas 1.8.6
-mise 2024.12.13
+mise 2024.12.14
 mpdecimal 4.0.0
 msgpack 6.1.0
 navi 2.23.0
@@ -207,6 +207,7 @@ tealdeer 1.7.1
 television 0.7.1
 tesseract 5.5.0
 tesseract-lang 4.1.0
+tfk8s 0.1.10
 tflint 0.54.0
 tidy-html5 5.8.0
 tmux 3.5a
@@ -218,7 +219,7 @@ unbound 1.22.0
 unibilium 2.1.2
 unixodbc 2.3.12
 unrtf 0.21.10
-usage 1.7.0
+usage 1.7.2
 utf8proc 2.9.0
 uv 0.5.10
 vale 3.9.1
