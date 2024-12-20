@@ -1,5 +1,6 @@
 [settings]
 disable_hints = ["python_multi"]
+disable_tools = ["extract-msg", "textract-py3"]
 experimental = true
 pipx_uvx = true
 
