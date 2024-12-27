@@ -41,7 +41,7 @@ lazygit
 luacheck
 luarocks
 mackup
-mas-cli/tap/mas
+mas
 mise
 navi
 neovim

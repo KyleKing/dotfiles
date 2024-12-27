@@ -1,0 +1,7 @@
+# Docs: https://ghostty.org/docs/config/reference
+
+bold-is-bright = true
+initial-window = true
+macos-titlebar-style = tabs
+theme = catppuccin-frappe
+quit-after-last-window-closed = true
