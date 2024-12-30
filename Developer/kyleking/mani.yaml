@@ -53,8 +53,6 @@ projects:
     url: git@github.com:kyleking/private-snippets.git
   recipes:
     url: git@github.com:kyleking/recipes.git
-    tags:
-      - calcipy-template
   shoal:
     url: git@github.com:kyleking/shoal.git
     tags:

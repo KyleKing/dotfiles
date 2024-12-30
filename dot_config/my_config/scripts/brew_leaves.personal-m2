@@ -24,7 +24,7 @@ jj
 lazygit
 luacheck
 luarocks
-mas-cli/tap/mas
+mas
 mise
 ms-jpq/sad/sad
 navi
@@ -36,6 +36,7 @@ php
 plantuml
 prettier
 pyright
+rename
 rhysd/git-brws/git-brws
 ripgrep
 rust

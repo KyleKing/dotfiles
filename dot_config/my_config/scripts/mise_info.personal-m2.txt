@@ -1,11 +1,11 @@
-version: 2024.12.14 macos-arm64 (2024-12-18)
+version: 2024.12.22 macos-arm64 (2024-12-30)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Wed, 18 Dec 2024 18:50:28 +0000
+  Built: Mon, 30 Dec 2024 00:20:47 +0000
   Rust Version: rustc 1.83.0 (90b35a623 2024-11-26) (Homebrew)
   Profile: release
 
@@ -24,11 +24,14 @@ config_files:
   ~/.tool-versions
   ~/.config/mise/config.toml
 
+ignored_config_files: (none)
+
 backends:
   aqua
   asdf
   cargo
   core
+  dotnet
   gem
   go
   npm
@@ -41,23 +44,15 @@ plugins:
 
 toolset:
   cargo:lazyjj@0.4.2
-  core:node@22.9.0
-  core:python@3.10.9
-  core:python@3.11.2
-  core:python@3.12.1
-  core:python@3.7.14
-  core:python@3.8.12
-  core:python@3.9.13
+  core:go@1.23.4
+  core:node@23.5.0
+  core:python@3.13.1
 
 path:
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
-  ~/.local/share/mise/installs/node/22.9.0/bin
-  ~/.local/share/mise/installs/python/3.10.9/bin
-  ~/.local/share/mise/installs/python/3.12.1/bin
-  ~/.local/share/mise/installs/python/3.11.2/bin
-  ~/.local/share/mise/installs/python/3.9.13/bin
-  ~/.local/share/mise/installs/python/3.8.12/bin
-  ~/.local/share/mise/installs/python/3.7.14/bin
+  ~/.local/share/mise/installs/go/1.23.4/bin
+  ~/.local/share/mise/installs/node/23.5.0/bin
+  ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
@@ -74,6 +69,7 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /Library/Apple/usr/bin
   /Library/TeX/texbin
+  /Applications/Ghostty.app/Contents/MacOS
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
@@ -82,8 +78,9 @@ env_vars:
   MISE_SHELL=zsh
 
 settings:
-  disable_hints  ["python_multi"] ~/.config/mise/config.toml
-  experimental   true             ~/.config/mise/config.toml
-  pipx_uvx       true             ~/.config/mise/config.toml
+  disable_hints  ["python_multi"]                ~/.config/mise/config.toml
+  disable_tools  ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
+  experimental   true                            ~/.config/mise/config.toml
+  pipx_uvx       true                            ~/.config/mise/config.toml
 
 No problems found

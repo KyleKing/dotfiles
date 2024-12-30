@@ -5,5 +5,7 @@ experimental = true
 pipx_uvx = true
 
 [tools]
+python = "latest"
 "cargo:lazyjj" = "latest"
-node = "22.9.0"
+go = "latest"
+node = "latest"
