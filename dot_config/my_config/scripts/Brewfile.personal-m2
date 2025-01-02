@@ -3,6 +3,7 @@ tap "homebrew/bundle"
 tap "homebrew/services"
 tap "ms-jpq/sad"
 tap "rhysd/git-brws", "https://github.com/rhysd/git-brws"
+brew "shellcheck"
 brew "actionlint"
 brew "xz"
 brew "atuin"
@@ -53,10 +54,10 @@ brew "ripgrep"
 brew "rust"
 brew "selene"
 brew "sevenzip"
-brew "shellcheck"
 brew "shellharden"
 brew "shfmt"
 brew "stylua"
+brew "syncthing", restart_service: true
 brew "tealdeer"
 brew "television"
 brew "tmux"
@@ -150,3 +151,4 @@ mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
 mas "Weathergraph", id: 1501958576
+mas "Xcode", id: 497799835

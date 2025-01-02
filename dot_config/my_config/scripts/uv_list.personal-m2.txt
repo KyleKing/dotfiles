@@ -32,7 +32,7 @@ pre-commit v4.0.1
 - pre-commit
 pygments v2.18.0
 - pygmentize
-pylint v3.3.2
+pylint v3.3.3
 - pylint
 - pylint-config
 - pyreverse
@@ -40,7 +40,7 @@ pylint v3.3.2
 pytest-watcher v0.4.3
 - ptw
 - pytest-watcher
-ruff v0.8.3
+ruff v0.8.5
 - ruff
 tail-jsonl v1.2.6
 - tail-jsonl

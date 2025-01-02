@@ -1,11 +1,11 @@
-version: 2024.12.22 macos-arm64 (2024-12-30)
+version: 2025.1.0 macos-arm64 (2025-01-01)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Mon, 30 Dec 2024 00:20:47 +0000
+  Built: Wed, 1 Jan 2025 20:00:46 +0000
   Rust Version: rustc 1.83.0 (90b35a623 2024-11-26) (Homebrew)
   Profile: release
 
@@ -49,10 +49,10 @@ toolset:
   core:python@3.13.1
 
 path:
+  ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
   ~/.local/share/mise/installs/go/1.23.4/bin
   ~/.local/share/mise/installs/node/23.5.0/bin
-  ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
