@@ -1,7 +1,12 @@
 # Docs: https://ghostty.org/docs/config/reference
+#   ghostty +list-themes
+#   ghostty +list-fonts
+# User site: https://github.com/zerebos/ghostty-config
 
 bold-is-bright = true
+# font-codepoint-map =  Fira Code Medium
+font-family = Hack Nerd Font Mono
 initial-window = true
 macos-titlebar-style = tabs
-theme = catppuccin-frappe
 quit-after-last-window-closed = true
+theme = catppuccin-frappe

@@ -191,6 +191,7 @@ rtmpdump 2.4-20151223_3
 ruby 3.4.1
 sad 0.4.31
 selene 0.27.1
+serie 0.4.1
 sevenzip 24.09
 shared-mime-info 2.4
 shellcheck 0.10.0
