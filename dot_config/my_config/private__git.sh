@@ -1,6 +1,8 @@
 #!/bin/bash -e
 #      ^----- get shellcheck hints based on bash
 # https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
+#
+# Customize git
 
 # Work with no-tty for gpg & pinentry (https://stackoverflow.com/a/42265848)
 GPG_TTY=$(tty)
@@ -19,7 +21,6 @@ git-set-upstream() {
 }
 
 alias lzg='lazygit'
-
 # jj (jujitsu) git-compatible VCS (installed with mise)
 alias lzj='lazyjj'
 
