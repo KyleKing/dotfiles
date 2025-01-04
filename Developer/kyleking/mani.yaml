@@ -63,6 +63,8 @@ projects:
       - calcipy-template
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
+  yak-shears:
+    url: git@github.com:kyleking/yak-shears.git
 
 tasks:
   git-status:

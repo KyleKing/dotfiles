@@ -4,6 +4,9 @@
 #
 # Configure CLI Tools
 
+# Mise-en-place asdf alternative: https://mise.jdx.dev/tasks/running-tasks.html
+alias mr="mise task run"
+
 # See local weather. Full docs: https://github.com/chubin/wttr.in
 alias wttr="curl v2d.wttr.in"
 
