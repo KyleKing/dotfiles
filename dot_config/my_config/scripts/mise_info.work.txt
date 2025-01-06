@@ -1,11 +1,11 @@
-version: 2025.1.0 macos-arm64 (2025-01-01)
+version: 2025.1.1 macos-arm64 (2025-01-06)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Wed, 1 Jan 2025 20:00:46 +0000
+  Built: Mon, 6 Jan 2025 08:18:00 +0000
   Rust Version: rustc 1.83.0 (90b35a623 2024-11-26) (Homebrew)
   Profile: release
 
@@ -48,7 +48,7 @@ toolset:
   asdf:postgres@14.5
   asdf:terraform@1.9.5
   cargo:lazyjj@0.4.2
-  core:go@1.23.4        (missing)
+  core:go@1.23.4
   core:node@22.9.0
   core:python@3.12.6
   pipx:extract-msg@0.46.2
@@ -57,6 +57,7 @@ toolset:
 path:
   ~/.local/share/mise/installs/python/3.12.6/bin
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
+  ~/.local/share/mise/installs/go/1.23.4/bin
   ~/.local/share/mise/installs/node/22.9.0/bin
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.local/share/mise/installs/terraform/1.9.5/bin
@@ -91,4 +92,7 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. shims are missing, run mise reshim to create them
+   Missing shims: gotz, shfmt

@@ -85,6 +85,7 @@ virtualenv
 watchman
 yadm
 yamllint
+yazi
 zlib
 zoxide
 zsh
