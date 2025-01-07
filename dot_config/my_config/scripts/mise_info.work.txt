@@ -92,7 +92,4 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. shims are missing, run mise reshim to create them
-   Missing shims: gotz, shfmt
+No problems found

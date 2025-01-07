@@ -24,7 +24,7 @@ poetry v2.0.0
 - poetry
 pre-commit v4.0.1
 - pre-commit
-pygments v2.19.0
+pygments v2.19.1
 - pygmentize
 pylint v3.3.3
 - pylint
