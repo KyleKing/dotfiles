@@ -28,7 +28,6 @@ set -g allow-passthrough on
 
 # Use all colors (https://stackoverflow.com/questions/60309665/neovim-colorscheme-does-not-look-right-when-using-nvim-inside-tmux)
 # From: https://stackoverflow.com/a/73376447/3219667
-set-option -g default-terminal "screen-256color"
 set-option -ga terminal-overrides ",xterm-256color:RGB"
 
 # Supports scrollback, click to select, etc.
@@ -39,6 +38,7 @@ set -g mouse on
 unbind C-b
 set -g prefix C-Space
 bind C-Space send-prefix
+# TODO: maybe restore default C-b?
 
 # Vim style pane selection
 bind h select-pane -L
@@ -46,30 +46,23 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# Start windows and panes at 1, not 0
-set -g base-index 1
-set -g pane-base-index 1
-set-window-option -g pane-base-index 1
-set-option -g renumber-windows on
-
-# Use Alt-arrow keys without prefix key to switch panes
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
-
 # Plugins managed with tpm (tpm-install, tpm-update all)
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'christoomey/vim-tmux-navigator'
+#
+# Just copy: https://github.com/tmux-plugins/tmux-sensible/blob/master/sensible.tmux
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+#
+# Is this necessary?
+# https://github.com/tmux-plugins/tmux-yank
 set -g @plugin 'tmux-plugins/tmux-yank'
 
+# Can tpm be removed?
 # 'brew install tpm'
 run '{{- .homebrew_prefix -}}/opt/tpm/share/tpm/tpm'
 
 # set vi-mode for easier yank/copy experience
 set-window-option -g mode-keys vi
-# WIth custom keybindings that match Vim defaults
+# With custom keybindings that match Vim defaults
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
