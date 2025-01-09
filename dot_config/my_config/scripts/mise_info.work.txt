@@ -64,6 +64,8 @@ path:
   ~/.local/share/mise/installs/pipx-textract-py3/2.1.0/bin
   ~/.local/share/mise/installs/pipx-extract-msg/0.46.2/bin
   ~/.docker/bin
+  ~/.local/share/nvim/mason/bin
+  ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
@@ -82,6 +84,8 @@ path:
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
+  ~/go/bin
+  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
@@ -92,4 +96,6 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.1.3 available, currently on 2025.1.1
