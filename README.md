@@ -45,6 +45,8 @@ $(brew --prefix)/opt/fzf/install
 
 ### K9s
 
+<!--TODO: remove installed theme, which no longer works-->
+
 <https://github.com/catppuccin/k9s>
 
 ```sh
@@ -54,6 +56,8 @@ cp "${K9S_CONFIG_PATH}/skins/catppuccin/dist/mocha.yml" "${K9S_CONFIG_PATH}/skin
 ```
 
 ### bat
+
+<!--TODO: remove installed theme, which no longer works-->
 
 <https://github.com/catppuccin/bat>
 
