@@ -1,11 +1,11 @@
-version: 2025.1.0 macos-arm64 (2025-01-01)
+version: 2025.1.4 macos-arm64 (2025-01-10)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Wed, 1 Jan 2025 20:00:46 +0000
+  Built: Fri, 10 Jan 2025 23:35:12 +0000
   Rust Version: rustc 1.83.0 (90b35a623 2024-11-26) (Homebrew)
   Profile: release
 
@@ -47,12 +47,39 @@ toolset:
   core:go@1.23.4
   core:node@23.5.0
   core:python@3.13.1
+  pipx:black@24.10.0
+  pipx:code2flow@2.5.1
+  pipx:copier-template-tester@2.1.4
+  pipx:copier@9.4.1
+  pipx:macnotesapp@0.8.0
+  pipx:mypy-silent@0.4.0
+  pipx:poetry@2.0.0
+  pipx:pre-commit@4.0.1
+  pipx:pygments@2.19.1
+  pipx:ruff@0.9.1
+  pipx:toml-sort@0.24.2
+  pipx:watchgha@2.3.2
+  ubi:watchexec/watchexec@2.2.1
 
 path:
   ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
   ~/.local/share/mise/installs/go/1.23.4/bin
   ~/.local/share/mise/installs/node/23.5.0/bin
+  ~/.local/share/mise/installs/watchexec/2.2.1/bin
+  ~/.local/share/mise/installs/pipx-black/24.10.0/bin
+  ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
+  ~/.local/share/mise/installs/pipx-copier/9.4.1/bin
+  ~/.local/share/mise/installs/pipx-copier-template-tester/2.1.4/bin
+  ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
+  ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
+  ~/.local/share/mise/installs/pipx-poetry/2.0.0/bin
+  ~/.local/share/mise/installs/pipx-pre-commit/4.0.1/bin
+  ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.9.1/bin
+  ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
+  ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
+  ~/.local/share/nvim/mason/bin
   ~/.local/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
@@ -71,6 +98,8 @@ path:
   /Library/TeX/texbin
   /Applications/Ghostty.app/Contents/MacOS
   /opt/homebrew/opt/fzf/bin
+  ~/go/bin
+  ~/.krew/bin
   ~/go/bin
   ~/.krew/bin
 
