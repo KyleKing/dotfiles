@@ -6,6 +6,16 @@ export PATH="{{- .homebrew_prefix -}}/sbin:{{- .homebrew_prefix -}}/bin:$PATH"
 
 # For mise-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
 export HOMEBREW_PREFIX={{- .homebrew_prefix }}
+#
+# Adapted from `brew info icu4c` guidance
+export PREFIX_ICU4C=$(brew --prefix icu4c)
+export PATH="$PREFIX_ICU4C/bin:$PATH"
+export PATH="$PREFIX_ICU4C/sbin:$PATH"
+# For compilers to find icu4c@76
+export LDFLAGS="-L$PREFIX_ICU4C/lib"
+export CPPFLAGS="-I$PREFIX_ICU4C/include"
+# For pkg-config to find icu4c@76
+export PKG_CONFIG_PATH="$PREFIX_ICU4C/lib/pkgconfig"
 
 # Created by `pipx` and used by `uv` tools as well
 export PATH="/Users/kyleking/.local/bin:$PATH"

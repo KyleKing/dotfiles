@@ -20,8 +20,6 @@ mypy-silent v0.4.0
 - mypy-silent
 pipdeptree v2.24.0
 - pipdeptree
-poetry v2.0.0
-- poetry
 pre-commit v4.0.1
 - pre-commit
 pygments v2.19.1

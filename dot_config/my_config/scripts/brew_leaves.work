@@ -19,6 +19,7 @@ dust
 envchain
 eza
 fd
+gcc
 gh
 git
 git-filter-repo
@@ -51,6 +52,7 @@ ossp-uuid
 pandoc
 pgsync
 php
+pkgconf
 plantuml
 pngcrush
 poppler
