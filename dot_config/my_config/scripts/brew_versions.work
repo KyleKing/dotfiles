@@ -7,7 +7,7 @@ argon2 20190702_1
 ast-grep 0.33.1
 atuin 18.4.0
 autoconf 2.72
-awscli 2.22.33
+awscli 2.22.35
 bat 0.25.0_1
 bat-extras 2024.08.24
 boost 1.87.0
@@ -15,7 +15,7 @@ brotli 1.1.0
 c-ares 1.34.4
 ca-certificates 2024-12-31
 cairo 1.18.2
-cargo-binstall 1.10.20
+cargo-binstall 1.10.21
 certifi 2024.12.14
 cffi 1.17.1_1
 chezmoi 2.58.0
@@ -52,7 +52,7 @@ gflags 2.2.2
 gh 2.65.0
 ghostscript 10.04.0
 giflib 5.2.2
-git 2.48.0
+git 2.48.1
 git-brws 0.11.12
 git-filter-repo 2.47.0
 glib 2.82.4
@@ -61,12 +61,12 @@ glow 2.0.0
 gmp 6.3.0
 gnupg 2.4.7
 gnutls 3.8.4
-go 1.23.4
+go 1.23.4_1
 gpgme 1.24.1
 graphite2 1.3.14
 graphviz 12.2.1
 gts 0.7.6_3
-gum 0.14.5
+gum 0.15.0
 hadolint 2.12.0
 harfbuzz 10.2.0
 highway 1.2.0
@@ -111,7 +111,7 @@ libksba 1.6.7
 liblqr 0.4.3
 libmpc 1.3.1
 libnghttp2 1.64.0
-libomp 19.1.6
+libomp 19.1.7
 libpng 1.6.45
 libpq 17.2
 libraw 0.21.3
@@ -139,7 +139,7 @@ little-cms2 2.16
 lpeg 1.1.0
 lua 5.4.7
 luacheck 1.2.0
-luajit 2.1.1734355927
+luajit 2.1.1736781742
 luarocks 3.11.1
 luv 1.48.0-2
 lz4 1.10.0
@@ -148,7 +148,7 @@ m4 1.4.19
 mackup 0.8.41
 mani 0.30.0
 mas 1.9.0
-mise 2025.1.6
+mise 2025.1.7
 mpdecimal 4.0.0
 mpfr 4.2.1
 msgpack 6.1.0
@@ -163,7 +163,7 @@ npth 1.8
 nspr 4.36
 nss 3.107
 oh-my-posh 24.18.1
-ollama 0.5.4
+ollama 0.5.6
 oniguruma 6.9.10
 openexr 3.3.2
 openjdk 23.0.1
@@ -196,7 +196,7 @@ ripgrep 14.1.1
 rtmpdump 2.4-20151223_3
 ruby 3.4.1
 sad 0.4.31
-selene 0.27.1
+selene 0.28.0
 serie 0.4.2
 sevenzip 24.09
 shared-mime-info 2.4
@@ -303,5 +303,5 @@ suspicious-package 4.5,1213
 vlc 3.0.20
 webpquicklook 1.0
 wezterm 20240203-110809,5046fc22
-windows-app 11.0.8
+windows-app 11.0.9
 zoom 5.17.11.31580

@@ -1,11 +1,11 @@
-version: 2025.1.6 macos-arm64 (2025-01-12)
+version: 2025.1.7 macos-arm64 (2025-01-15)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Sun, 12 Jan 2025 13:24:26 +0000
+  Built: Wed, 15 Jan 2025 01:37:14 +0000
   Rust Version: rustc 1.84.0 (9fc6b4312 2025-01-07) (Homebrew)
   Profile: release
 
@@ -126,6 +126,4 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.1.7 available, currently on 2025.1.6
+No problems found
