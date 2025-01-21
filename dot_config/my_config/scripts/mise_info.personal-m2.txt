@@ -48,7 +48,6 @@ toolset:
   core:node@23.5.0
   core:python@3.13.1
   go:github.com/merschformann/gotz@0.1.10
-  go:mvdan.cc/sh/v3/cmd/shfmt@3.10.0
   pipx:black@24.10.0
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.1.4
@@ -81,7 +80,6 @@ path:
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
   ~/.local/share/mise/installs/watchexec/2.2.1/bin
-  ~/.local/share/mise/installs/go-mvdan-cc-sh-v3-cmd-shfmt/3.10.0/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.10/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@76/sbin
