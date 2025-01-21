@@ -18,12 +18,6 @@ gh extension upgrade --all || return 1
 (brew leaves > "$SCRIPT_DIR/brew_leaves.{{- .computer_name }}") || return 1
 chezmoi add "$SCRIPT_DIR" || return 1
 
-# Keep local checkouts up-to-date
-cd ~/Developer/nightly-packages
-./upgrade-nightly-packages.sh || return 1
-(./dump-version.sh > "$SCRIPT_DIR/nightly-packages.{{- .computer_name -}}.txt") || return 1
-cd ~
-
 cd ~/Developer/kyleking/karabiner-actions/
 (git pull && npm run build) || return 1
 cd ~

@@ -56,7 +56,6 @@ brew "rust"
 brew "selene"
 brew "sevenzip"
 brew "shellharden"
-brew "shfmt"
 brew "stylua"
 brew "syncthing", restart_service: :changed
 brew "tealdeer"
