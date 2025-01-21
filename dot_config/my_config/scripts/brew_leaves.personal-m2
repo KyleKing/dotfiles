@@ -11,6 +11,7 @@ dotenv-linter
 envchain
 eza
 fd
+fish
 gcc
 gh
 git

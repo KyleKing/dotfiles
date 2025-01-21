@@ -1,12 +1,12 @@
-version: 2025.1.4 macos-arm64 (2025-01-10)
+version: 2025.1.9 macos-arm64 (2025-01-17)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Fri, 10 Jan 2025 23:35:12 +0000
-  Rust Version: rustc 1.83.0 (90b35a623 2024-11-26) (Homebrew)
+  Built: Fri, 17 Jan 2025 19:31:29 +0000
+  Rust Version: rustc 1.84.0 (9fc6b4312 2025-01-07) (Homebrew)
   Profile: release
 
 shell:
@@ -44,7 +44,7 @@ plugins:
 
 toolset:
   cargo:lazyjj@0.4.2
-  core:go@1.23.4
+  core:go@1.23.5
   core:node@23.5.0
   core:python@3.13.1
   pipx:black@24.10.0
@@ -64,9 +64,8 @@ toolset:
 path:
   ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
-  ~/.local/share/mise/installs/go/1.23.4/bin
+  ~/.local/share/mise/installs/go/1.23.5/bin
   ~/.local/share/mise/installs/node/23.5.0/bin
-  ~/.local/share/mise/installs/watchexec/2.2.1/bin
   ~/.local/share/mise/installs/pipx-black/24.10.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
   ~/.local/share/mise/installs/pipx-copier/9.4.1/bin
@@ -79,8 +78,10 @@ path:
   ~/.local/share/mise/installs/pipx-ruff/0.9.1/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
-  ~/.local/share/nvim/mason/bin
+  ~/.local/share/mise/installs/watchexec/2.2.1/bin
   ~/.local/bin
+  /opt/homebrew/opt/icu4c@76/sbin
+  /opt/homebrew/opt/icu4c@76/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
   /usr/local/sbin
@@ -96,6 +97,13 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /Library/Apple/usr/bin
   /Library/TeX/texbin
+  ~/.local/share/nvim/mason/bin
+  ~/.local/bin
+  /opt/homebrew/opt/icu4c@76/sbin
+  /opt/homebrew/opt/icu4c@76/bin
+  /opt/homebrew/sbin
+  /opt/homebrew/bin
+  /usr/local/sbin
   /Applications/Ghostty.app/Contents/MacOS
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
@@ -112,4 +120,7 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. shims are missing, run mise reshim to create them
+   Missing shims: gotz, shfmt

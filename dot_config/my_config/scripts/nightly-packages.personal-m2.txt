@@ -1,2 +1,2 @@
-gotz v0.1.9
+gotz v0.1.10
 shfmt (devel)
