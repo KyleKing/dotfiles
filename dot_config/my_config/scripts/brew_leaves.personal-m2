@@ -35,6 +35,7 @@ ollama
 pandoc
 php
 plantuml
+podman-compose
 prettier
 pyright
 rename
