@@ -1,11 +1,11 @@
-version: 2025.1.7 macos-arm64 (2025-01-15)
+version: 2025.1.9 macos-arm64 (2025-01-17)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS
-  Built: Wed, 15 Jan 2025 01:37:14 +0000
+  Built: Fri, 17 Jan 2025 19:31:29 +0000
   Rust Version: rustc 1.84.0 (9fc6b4312 2025-01-07) (Homebrew)
   Profile: release
 
@@ -52,6 +52,8 @@ toolset:
   core:go@1.23.4
   core:node@23.6.0
   core:python@3.13.1
+  go:github.com/boyter/dcd@1.1.0
+  go:github.com/merschformann/gotz@0.1.10
   pipx:black@24.10.0
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.1.4
@@ -70,6 +72,7 @@ path:
   ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
   ~/.local/share/mise/installs/go/1.23.4/bin
+  ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.10/bin
   ~/.local/share/mise/installs/node/23.6.0/bin
   ~/.local/share/mise/installs/pipx-black/24.10.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
@@ -84,19 +87,14 @@ path:
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
   ~/.local/share/mise/installs/watchexec/2.2.1/bin
+  ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.local/share/mise/installs/terraform/1.9.5/bin
+  ~/.docker/bin
+  ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@76/sbin
   /opt/homebrew/opt/icu4c@76/bin
-  /opt/homebrew/sbin
-  /opt/homebrew/bin
-  /usr/local/sbin
-  /usr/local/bin
-  ~/.docker/bin
-  ~/.local/share/nvim/mason/bin
-  ~/.docker/bin
-  ~/.local/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
   /usr/local/sbin

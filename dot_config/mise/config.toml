@@ -8,6 +8,7 @@ pipx_uvx = true
 python = "latest"
 "cargo:lazyjj" = "latest"
 go = "latest"
+"go:github.com/boyter/dcd" = "latest"
 "go:github.com/merschformann/gotz" = "latest"
 node = "latest"
 "pipx:black" = "latest"
