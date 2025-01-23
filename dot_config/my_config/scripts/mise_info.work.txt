@@ -49,7 +49,7 @@ toolset:
   asdf:postgres@14.5
   asdf:terraform@1.9.5
   cargo:lazyjj@0.4.2
-  core:go@1.23.4
+  core:go@1.23.5
   core:node@23.6.0
   core:python@3.13.1
   go:github.com/boyter/dcd@1.1.0
@@ -58,20 +58,27 @@ toolset:
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.1.4
   pipx:copier@9.4.1
+  pipx:extract-msg@0.52.0
   pipx:macnotesapp@0.8.0
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.0.1
-  pipx:pre-commit@4.0.1
+  pipx:pre-commit@4.1.0
   pipx:pygments@2.19.1
-  pipx:ruff@0.9.1
+  pipx:pylint@3.3.3
+  pipx:pyright@1.1.392.post0
+  pipx:ruff@0.9.2
+  pipx:tail-jsonl@1.2.6
+  pipx:textract-py3@2.1.0
   pipx:toml-sort@0.24.2
+  pipx:trcli@1.9.8
   pipx:watchgha@2.3.2
   ubi:watchexec/watchexec@2.2.1
 
 path:
   ~/.local/share/mise/installs/python/3.13.1/bin
   ~/.local/share/mise/installs/cargo-lazyjj/0.4.2/bin
-  ~/.local/share/mise/installs/go/1.23.4/bin
+  ~/.local/share/mise/installs/go/1.23.5/bin
+  ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.10/bin
   ~/.local/share/mise/installs/node/23.6.0/bin
   ~/.local/share/mise/installs/pipx-black/24.10.0/bin
@@ -81,16 +88,20 @@ path:
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
   ~/.local/share/mise/installs/pipx-poetry/2.0.1/bin
-  ~/.local/share/mise/installs/pipx-pre-commit/4.0.1/bin
+  ~/.local/share/mise/installs/pipx-pre-commit/4.1.0/bin
   ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
-  ~/.local/share/mise/installs/pipx-ruff/0.9.1/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.9.2/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
   ~/.local/share/mise/installs/watchexec/2.2.1/bin
-  ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
+  ~/.local/share/mise/installs/pipx-textract-py3/2.1.0/bin
+  ~/.local/share/mise/installs/pipx-extract-msg/0.52.0/bin
+  ~/.local/share/mise/installs/pipx-pylint/3.3.3/bin
+  ~/.local/share/mise/installs/pipx-pyright/1.1.392.post0/bin
+  ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
+  ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.local/share/mise/installs/terraform/1.9.5/bin
-  ~/.docker/bin
   ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@76/sbin
@@ -110,8 +121,6 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /Applications/Ghostty.app/Contents/MacOS
   /opt/homebrew/opt/fzf/bin
-  ~/go/bin
-  ~/.krew/bin
   ~/go/bin
   ~/.krew/bin
 
