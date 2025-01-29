@@ -23,7 +23,6 @@ hyperfine
 imagemagick
 jj
 lazygit
-llvm@18
 luacheck
 luarocks
 mas

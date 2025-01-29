@@ -127,7 +127,6 @@ libyaml 0.2.5
 libzip 1.11.3
 little-cms2 2.16
 llvm 19.1.7
-llvm@18 18.1.8
 lpeg 1.1.0
 lua 5.4.7
 luacheck 1.2.0
