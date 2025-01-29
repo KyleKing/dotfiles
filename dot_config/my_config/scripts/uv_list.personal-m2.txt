@@ -10,6 +10,8 @@ em-keyboard v4.5.0
 - em
 flit v3.10.1
 - flit
+mdformat v0.7.21
+- mdformat
 norwegianblue v0.20.0
 - eol
 - norwegianblue
