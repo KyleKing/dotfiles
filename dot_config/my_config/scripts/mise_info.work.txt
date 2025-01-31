@@ -50,7 +50,7 @@ toolset:
   asdf:terraform@1.10.5
   cargo:lazyjj@0.4.2
   core:go@1.23.5
-  core:node@18.13.0
+  core:node@20.17.0
   core:python@3.13.1
   go:github.com/boyter/dcd@1.1.0
   go:github.com/merschformann/gotz@0.1.10
@@ -66,10 +66,12 @@ toolset:
   pipx:pygments@2.19.1
   pipx:pylint@3.3.3
   pipx:pyright@1.1.392.post0
+  pipx:pytest-watcher@0.4.3
   pipx:ruff@0.9.3
   pipx:tail-jsonl@1.2.6
   pipx:textract-py3@2.1.0
   pipx:toml-sort@0.24.2
+  pipx:tox@4.24.1
   pipx:trcli@1.9.8
   pipx:watchgha@2.3.2
   ubi:watchexec/watchexec@2.2.1
@@ -80,7 +82,7 @@ path:
   ~/.local/share/mise/installs/go/1.23.5/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.10/bin
-  ~/.local/share/mise/installs/node/18.13.0/bin
+  ~/.local/share/mise/installs/node/20.17.0/bin
   ~/.local/share/mise/installs/pipx-black/24.10.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
   ~/.local/share/mise/installs/pipx-copier/9.4.1/bin
@@ -93,14 +95,16 @@ path:
   ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
   ~/.local/share/mise/installs/pipx-pylint/3.3.3/bin
   ~/.local/share/mise/installs/pipx-pyright/1.1.392.post0/bin
+  ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
   ~/.local/share/mise/installs/pipx-ruff/0.9.3/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
   ~/.local/share/mise/installs/pipx-textract-py3/2.1.0/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
+  ~/.local/share/mise/installs/pipx-tox/4.24.1/bin
   ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
-  ~/.local/share/mise/installs/watchexec/2.2.1/bin
   ~/.local/share/mise/installs/terraform/1.10.5/bin
+  ~/.local/share/mise/installs/watchexec/2.2.1/bin
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
   ~/.local/bin
@@ -133,4 +137,6 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.1.16 available, currently on 2025.1.15
