@@ -10,3 +10,7 @@ initial-window = true
 macos-titlebar-style = tabs
 quit-after-last-window-closed = true
 theme = catppuccin-frappe
+
+# Quick Terminal
+# https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
+keybind = global:alt+escape=toggle_quick_terminal
