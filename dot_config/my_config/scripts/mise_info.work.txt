@@ -1,12 +1,12 @@
-version: 2025.1.15 macos-arm64 (2025-01-26)
+version: 2025.2.1 macos-arm64 (2025-02-03)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
-  Features: DEFAULT, NATIVE_TLS
-  Built: Sun, 26 Jan 2025 01:57:43 +0000
-  Rust Version: rustc 1.84.0 (9fc6b4312 2025-01-07) (Homebrew)
+  Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
+  Built: Mon, 3 Feb 2025 11:24:41 +0000
+  Rust Version: rustc 1.84.1 (e71f9a9a9 2025-01-27) (Homebrew)
   Profile: release
 
 shell:
@@ -132,11 +132,10 @@ env_vars:
   MISE_SHELL=zsh
 
 settings:
-  disable_hints  ["python_multi"]                ~/.config/mise/config.toml
-  disable_tools  ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
-  experimental   true                            ~/.config/mise/config.toml
-  pipx_uvx       true                            ~/.config/mise/config.toml
+  disable_hints   ["python_multi"]                ~/.config/mise/config.toml
+  disable_tools   ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
+  experimental    true                            ~/.config/mise/config.toml
+  pipx_uvx        true                            ~/.config/mise/config.toml
+  python.compile  true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.1.16 available, currently on 2025.1.15
+No problems found

@@ -4,6 +4,9 @@ disable_tools = ["extract-msg", "textract-py3"]
 experimental = true
 pipx_uvx = true
 
+[settings.python]
+compile = true
+
 [tools]
 python = "latest"
 "cargo:lazyjj" = "latest"
