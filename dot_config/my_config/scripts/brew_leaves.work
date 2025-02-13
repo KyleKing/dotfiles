@@ -19,7 +19,6 @@ dust
 envchain
 eza
 fd
-fish
 gcc
 gh
 git
@@ -32,7 +31,6 @@ howdoi
 hyperfine
 imagemagick
 jd
-jj
 jpegoptim
 k9s
 krew
@@ -40,6 +38,7 @@ kubetui
 kubie
 lazydocker
 lazygit
+lazyjj
 luacheck
 luarocks
 mackup

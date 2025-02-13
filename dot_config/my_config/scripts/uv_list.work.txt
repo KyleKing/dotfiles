@@ -14,5 +14,3 @@ frogmouth v0.9.2
 - frogmouth
 ghstack v0.9.4
 - ghstack
-pipdeptree v2.25.0
-- pipdeptree
