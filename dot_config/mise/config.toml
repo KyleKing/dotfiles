@@ -20,6 +20,7 @@ node = "latest"
 "pipx:extract-msg" = "latest"
 "pipx:macnotesapp" = "latest"
 "pipx:mypy-silent" = "latest"
+"pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}
 "pipx:pre-commit" = "latest"
 "pipx:pygments" = "latest"
 "pipx:pylint" = "latest"
