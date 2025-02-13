@@ -9,7 +9,6 @@ compile = true
 
 [tools]
 python = "latest"
-"cargo:lazyjj" = "latest"
 go = "latest"
 "go:github.com/boyter/dcd" = "latest"
 "go:github.com/merschformann/gotz" = "latest"
@@ -21,7 +20,6 @@ node = "latest"
 "pipx:extract-msg" = "latest"
 "pipx:macnotesapp" = "latest"
 "pipx:mypy-silent" = "latest"
-"pipx:poetry" = "latest"
 "pipx:pre-commit" = "latest"
 "pipx:pygments" = "latest"
 "pipx:pylint" = "latest"

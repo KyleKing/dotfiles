@@ -8,6 +8,7 @@ curlie
 difftastic
 direnv
 dotenv-linter
+duckdb
 envchain
 eza
 fd
@@ -20,8 +21,8 @@ gum
 hadolint
 hyperfine
 imagemagick
-jj
 lazygit
+lazyjj
 luacheck
 luarocks
 mas
@@ -37,6 +38,7 @@ plantuml
 podman-compose
 prettier
 pyright
+rclone
 rename
 rhysd/git-brws/git-brws
 ripgrep

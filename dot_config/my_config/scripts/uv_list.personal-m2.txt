@@ -10,8 +10,12 @@ em-keyboard v4.5.0
 - em
 flit v3.10.1
 - flit
+mdformat v0.7.22
+- mdformat
 norwegianblue v0.20.0
 - eol
 - norwegianblue
+poetry v2.0.1
+- poetry
 whatsonpypi v0.3.7
 - whatsonpypi
