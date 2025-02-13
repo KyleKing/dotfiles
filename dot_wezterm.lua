@@ -207,6 +207,8 @@ config.mouse_bindings = {
 -- Brew install fonts and verify installation and name in Apple's "Font Book"
 config.font = wezterm.font_with_fallback({
     "Atkinson Hyperlegible Mono",
+    "FiraCode Nerd Font Mono",
+    "FiraMono Nerd Font Mono",
     "Hack Nerd Font Mono",
     "Fira Code",
 })

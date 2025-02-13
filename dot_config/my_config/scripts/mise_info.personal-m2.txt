@@ -100,6 +100,7 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
   ~/.local/share/mise/installs/terraform/1.10.5
   ~/.local/share/mise/installs/watchexec/2.3.0
+  ~/.local/share/nvim/mason/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@76/sbin
   /opt/homebrew/opt/icu4c@76/bin
@@ -118,8 +119,9 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /Library/Apple/usr/bin
   /Library/TeX/texbin
-  /Applications/Ghostty.app/Contents/MacOS
   /opt/homebrew/opt/fzf/bin
+  ~/go/bin
+  ~/.krew/bin
   ~/go/bin
   ~/.krew/bin
 

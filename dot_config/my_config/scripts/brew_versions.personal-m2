@@ -254,6 +254,10 @@ dropbox 165.4.4300
 firefox 109.0
 firefox-developer-edition latest
 flux 42.1
+font-atkinson-hyperlegible-mono latest
+font-fira-code-nerd-font 3.3.0
+font-fira-mono-nerd-font 3.3.0
+font-hack-nerd-font 3.3.0
 ghostty 1.0.0
 github 3.1.5-08d57d4b
 google-chrome 109.0.5414.119
