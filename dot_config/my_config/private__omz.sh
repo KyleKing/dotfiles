@@ -46,7 +46,7 @@ export plugins=(
     # history
     # macos
     # perms
-    # python
+    python
     timer
     tmux
     # urltools
@@ -67,7 +67,11 @@ export plugins=(
     zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
+# Auto-activate venv (https://github.com/astral-sh/uv/issues/1910#issuecomment-2394878577)
+export PYTHON_VENV_NAME=".venv"
+export PYTHON_AUTO_VRUN=true
+
+source "$ZSH/oh-my-zsh.sh"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # User configuration

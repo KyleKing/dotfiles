@@ -10,8 +10,6 @@ alias odo="open -a Dropover"
 # Open in finder
 alias o="open ."
 
-# Launch nvim using the local poetry environment
-alias prn='poetry run nvim'
 # Load alternate nvim configs (from: https://github.com/nvim-lua/kickstart.nvim/#FAQ)
 alias astronvim='NVIM_APPNAME="nvim-astronvim" nvim'
 alias plainvim='NVIM_APPNAME="nvim-plain" nvim'
