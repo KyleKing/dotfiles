@@ -183,6 +183,9 @@ projects:
   opsbot:
     url: git@github.com:roaminsight/opsbot.git
 
+  pagerduty:
+    url: git@github.com:roaminsight/pagerduty.git
+
   parexel-chat:
     url: git@github.com:roaminsight/parexel-chat.git
 
