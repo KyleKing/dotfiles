@@ -121,16 +121,7 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
-  ~/.docker/bin
-  ~/.local/bin
-  /opt/homebrew/opt/icu4c@76/sbin
-  /opt/homebrew/opt/icu4c@76/bin
-  /opt/homebrew/sbin
-  /opt/homebrew/bin
-  /usr/local/sbin
   /opt/homebrew/opt/fzf/bin
-  ~/go/bin
-  ~/.krew/bin
   ~/go/bin
   ~/.krew/bin
 
@@ -144,4 +135,6 @@ settings:
   pipx_uvx        true                            ~/.config/mise/config.toml
   python.compile  true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.2.9 available, currently on 2025.2.7
