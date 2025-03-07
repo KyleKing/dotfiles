@@ -24,6 +24,7 @@ gcc
 gh
 git
 git-filter-repo
+git-lfs
 glow
 go
 gum

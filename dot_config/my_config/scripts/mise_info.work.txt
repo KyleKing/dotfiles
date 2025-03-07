@@ -1,12 +1,12 @@
-version: 2025.2.7 macos-arm64 (2025-02-19)
+version: 2025.3.0 macos-arm64 (2025-03-01)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Wed, 19 Feb 2025 20:57:49 +0000
-  Rust Version: rustc 1.84.1 (e71f9a9a9 2025-01-27) (Homebrew)
+  Built: Sat, 1 Mar 2025 20:51:53 +0000
+  Rust Version: rustc 1.85.0 (4d91de4e4 2025-02-17) (Homebrew)
   Profile: release
 
 shell:
@@ -52,7 +52,7 @@ toolset:
   core:node@23.8.0
   core:python@3.13.2
   go:github.com/boyter/dcd@1.1.0
-  go:github.com/merschformann/gotz@0.1.12
+  go:github.com/merschformann/gotz@0.1.14
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.2.0
@@ -64,11 +64,11 @@ toolset:
   pipx:pre-commit@4.1.0
   pipx:pygments@2.19.1
   pipx:pylint@3.3.4
-  pipx:pyright@1.1.394
+  pipx:pyright@1.1.396
   pipx:pytest-watcher@0.4.3
-  pipx:ruff@0.9.7
+  pipx:ruff@0.9.9
   pipx:tail-jsonl@1.2.6
-  pipx:textract-py3@2.1.0
+  pipx:textract-py3@2.1.1
   pipx:toml-sort@0.24.2
   pipx:tox@4.24.1
   pipx:trcli@1.9.8
@@ -79,7 +79,7 @@ path:
   ~/.local/share/mise/installs/python/3.13.2/bin
   ~/.local/share/mise/installs/go/1.24.0/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
-  ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.12/bin
+  ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
   ~/.local/share/mise/installs/node/23.8.0/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
@@ -92,11 +92,11 @@ path:
   ~/.local/share/mise/installs/pipx-pre-commit/4.1.0/bin
   ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
   ~/.local/share/mise/installs/pipx-pylint/3.3.4/bin
-  ~/.local/share/mise/installs/pipx-pyright/1.1.394/bin
+  ~/.local/share/mise/installs/pipx-pyright/1.1.396/bin
   ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
-  ~/.local/share/mise/installs/pipx-ruff/0.9.7/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.9.9/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
-  ~/.local/share/mise/installs/pipx-textract-py3/2.1.0/bin
+  ~/.local/share/mise/installs/pipx-textract-py3/2.1.1/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-tox/4.24.1/bin
   ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
@@ -137,4 +137,4 @@ settings:
 
 1 problem found:
 
-1. new mise version 2025.2.9 available, currently on 2025.2.7
+1. new mise version 2025.3.1 available, currently on 2025.3.0
