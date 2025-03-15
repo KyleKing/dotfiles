@@ -6,9 +6,9 @@ calcipy v5.0.0
 - calcipy-tags
 - calcipy-test
 - calcipy-types
-em-keyboard v4.5.0
+em-keyboard v5.0.1
 - em
-flit v3.10.1
+flit v3.11.0
 - flit
 norwegianblue v0.20.0
 - eol

@@ -15,6 +15,7 @@ fd
 gcc
 gh
 git
+git-delta
 gnupg
 go
 gum
@@ -27,7 +28,6 @@ luacheck
 luarocks
 mas
 mise
-ms-jpq/sad/sad
 navi
 neovim
 oh-my-posh
@@ -38,11 +38,11 @@ plantuml
 podman-compose
 prettier
 pyright
-rclone
 rename
 rhysd/git-brws/git-brws
 ripgrep
 rust
+sad
 selene
 sevenzip
 shellharden
