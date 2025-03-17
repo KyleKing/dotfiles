@@ -43,9 +43,7 @@ export plugins=(
     # copypath
     # encode64
     git
-    # history
-    # macos
-    # perms
+    jj # https://github.com/ohmyzsh/ohmyzsh/tree/1c2127727af0ac452292f844ee32306f12906d03/plugins/jj
     python
     timer
     tmux

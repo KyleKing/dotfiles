@@ -300,6 +300,9 @@ projects:
   shared-dotfiles:
     url: git@github.com:roaminsight/shared-dotfiles.git
 
+  site-contracts:
+    url: git@github.com:roaminsight/site-contracts.git
+
   site-fees:
     url: git@github.com:roaminsight/site-fees.git
 

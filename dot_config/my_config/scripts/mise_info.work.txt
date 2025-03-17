@@ -47,7 +47,7 @@ plugins:
 
 toolset:
   asdf:postgres@14.5
-  asdf:terraform@1.10.5
+  asdf:terraform@1.11.2
   core:go@1.24.0
   core:node@23.8.0
   core:python@3.13.2
@@ -57,7 +57,7 @@ toolset:
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.2.0
   pipx:copier@9.5.0
-  pipx:extract-msg@0.53.1
+  pipx:extract-msg@0.53.2
   pipx:macnotesapp@0.8.0
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.1.1
@@ -85,7 +85,7 @@ path:
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
   ~/.local/share/mise/installs/pipx-copier/9.5.0/bin
   ~/.local/share/mise/installs/pipx-copier-template-tester/2.2.0/bin
-  ~/.local/share/mise/installs/pipx-extract-msg/0.53.1/bin
+  ~/.local/share/mise/installs/pipx-extract-msg/0.53.2/bin
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
   ~/.local/share/mise/installs/pipx-poetry/2.1.1/bin
@@ -101,7 +101,7 @@ path:
   ~/.local/share/mise/installs/pipx-tox/4.24.1/bin
   ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
-  ~/.local/share/mise/installs/terraform/1.10.5/bin
+  ~/.local/share/mise/installs/terraform/1.11.2/bin
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
@@ -137,4 +137,4 @@ settings:
 
 1 problem found:
 
-1. new mise version 2025.3.1 available, currently on 2025.3.0
+1. new mise version 2025.3.3 available, currently on 2025.3.0

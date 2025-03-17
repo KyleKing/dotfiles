@@ -13,3 +13,9 @@ Warning: The following formulae have the same name as core formulae:
   charmbracelet/tap/soft-serve
   charmbracelet/tap/vhs
 Their taps are in use, so you must use these full names throughout Homebrew.
+
+Warning: Some installed formulae are missing dependencies.
+You should `brew install` the missing dependencies:
+  brew install icu4c@77
+
+Run `brew missing` for more details.
