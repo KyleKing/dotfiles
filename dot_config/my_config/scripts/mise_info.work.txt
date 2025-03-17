@@ -1,11 +1,11 @@
-version: 2025.3.0 macos-arm64 (2025-03-01)
+version: 2025.3.3 macos-arm64 (2025-03-14)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Sat, 1 Mar 2025 20:51:53 +0000
+  Built: Fri, 14 Mar 2025 17:25:11 +0000
   Rust Version: rustc 1.85.0 (4d91de4e4 2025-02-17) (Homebrew)
   Profile: release
 
@@ -63,10 +63,10 @@ toolset:
   pipx:poetry@2.1.1
   pipx:pre-commit@4.1.0
   pipx:pygments@2.19.1
-  pipx:pylint@3.3.4
+  pipx:pylint@3.3.5
   pipx:pyright@1.1.396
   pipx:pytest-watcher@0.4.3
-  pipx:ruff@0.9.9
+  pipx:ruff@0.11.0
   pipx:tail-jsonl@1.2.6
   pipx:textract-py3@2.1.1
   pipx:toml-sort@0.24.2
@@ -91,10 +91,10 @@ path:
   ~/.local/share/mise/installs/pipx-poetry/2.1.1/bin
   ~/.local/share/mise/installs/pipx-pre-commit/4.1.0/bin
   ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
-  ~/.local/share/mise/installs/pipx-pylint/3.3.4/bin
+  ~/.local/share/mise/installs/pipx-pylint/3.3.5/bin
   ~/.local/share/mise/installs/pipx-pyright/1.1.396/bin
   ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
-  ~/.local/share/mise/installs/pipx-ruff/0.9.9/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.11.0/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
   ~/.local/share/mise/installs/pipx-textract-py3/2.1.1/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
@@ -135,6 +135,4 @@ settings:
   pipx_uvx        true                            ~/.config/mise/config.toml
   python.compile  true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.3.3 available, currently on 2025.3.0
+No problems found
