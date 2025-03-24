@@ -1,7 +1,5 @@
 tap "alajmo/mani"
 tap "charmbracelet/tap"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "rhysd/git-brws", "https://github.com/rhysd/git-brws"
 brew "shellcheck"
 brew "actionlint"

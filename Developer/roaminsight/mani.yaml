@@ -211,6 +211,9 @@ projects:
   protocol-structuring:
     url: git@github.com:roaminsight/protocol-structuring.git
 
+  python_queue_experiments:
+    url: git@github.com:roaminsight/python_queue_experiments.git
+
   redux-kit:
     url: git@github.com:roaminsight/redux-kit.git
 
@@ -249,10 +252,6 @@ projects:
 
   roam-infra:
     url: git@github.com:roaminsight/roam-infra.git
-
-  roam-jenkins:
-    url: git@github.com:roaminsight/roam-jenkins.git
-    desc: Self-hosted Jenkins instance
 
   roam-jira:
     url: git@github.com:roaminsight/roam-jira.git

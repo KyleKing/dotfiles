@@ -1,12 +1,12 @@
-version: 2025.3.3 macos-arm64 (2025-03-14)
+version: 2025.3.7 macos-arm64 (2025-03-21)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Fri, 14 Mar 2025 17:25:11 +0000
-  Rust Version: rustc 1.85.0 (4d91de4e4 2025-02-17) (Homebrew)
+  Built: Fri, 21 Mar 2025 16:14:41 +0000
+  Rust Version: rustc 1.85.1 (4eb161250 2025-03-15) (Homebrew)
   Profile: release
 
 shell:
@@ -61,12 +61,12 @@ toolset:
   pipx:macnotesapp@0.8.0
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.1.1
-  pipx:pre-commit@4.1.0
+  pipx:pre-commit@4.2.0
   pipx:pygments@2.19.1
-  pipx:pylint@3.3.5
-  pipx:pyright@1.1.396
+  pipx:pylint@3.3.6
+  pipx:pyright@1.1.397
   pipx:pytest-watcher@0.4.3
-  pipx:ruff@0.11.0
+  pipx:ruff@0.11.2
   pipx:tail-jsonl@1.2.6
   pipx:textract-py3@2.1.1
   pipx:toml-sort@0.24.2
@@ -89,12 +89,12 @@ path:
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
   ~/.local/share/mise/installs/pipx-poetry/2.1.1/bin
-  ~/.local/share/mise/installs/pipx-pre-commit/4.1.0/bin
+  ~/.local/share/mise/installs/pipx-pre-commit/4.2.0/bin
   ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
-  ~/.local/share/mise/installs/pipx-pylint/3.3.5/bin
-  ~/.local/share/mise/installs/pipx-pyright/1.1.396/bin
+  ~/.local/share/mise/installs/pipx-pylint/3.3.6/bin
+  ~/.local/share/mise/installs/pipx-pyright/1.1.397/bin
   ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
-  ~/.local/share/mise/installs/pipx-ruff/0.11.0/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.11.2/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
   ~/.local/share/mise/installs/pipx-textract-py3/2.1.1/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
@@ -106,8 +106,8 @@ path:
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
   ~/.local/bin
-  /opt/homebrew/opt/icu4c@76/sbin
-  /opt/homebrew/opt/icu4c@76/bin
+  /opt/homebrew/opt/icu4c@77/sbin
+  /opt/homebrew/opt/icu4c@77/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
   /usr/local/sbin

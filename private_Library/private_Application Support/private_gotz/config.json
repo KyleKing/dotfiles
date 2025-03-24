@@ -3,6 +3,8 @@
   "hours12": false,
   "inline": true,
   "live": false,
+  "sort_local_top": false,
+  "sorting": "none",
   "stretch": false,
   "style": {
     "coloring": {
