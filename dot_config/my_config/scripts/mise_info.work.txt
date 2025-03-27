@@ -47,7 +47,7 @@ plugins:
 
 toolset:
   asdf:postgres@14.5
-  asdf:terraform@1.11.2
+  asdf:terraform@1.11.3
   core:go@1.24.0
   core:node@23.8.0
   core:python@3.13.2
@@ -101,7 +101,7 @@ path:
   ~/.local/share/mise/installs/pipx-tox/4.24.1/bin
   ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
-  ~/.local/share/mise/installs/terraform/1.11.2/bin
+  ~/.local/share/mise/installs/terraform/1.11.3/bin
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
@@ -135,4 +135,6 @@ settings:
   pipx_uvx        true                            ~/.config/mise/config.toml
   python.compile  true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.3.10 available, currently on 2025.3.7
