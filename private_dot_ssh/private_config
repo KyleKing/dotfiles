@@ -3,3 +3,8 @@ Host *
   ForwardAgent yes
   IdentitiesOnly yes
   UseKeychain yes
+
+Host ubuntu-4gb-hel1-1
+  HostName 157.180.43.106
+  User root
+  IdentityFile ~/.ssh/id_ed25519_hetzner_demo
