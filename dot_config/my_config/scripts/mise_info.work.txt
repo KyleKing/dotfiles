@@ -1,11 +1,11 @@
-version: 2025.3.7 macos-arm64 (2025-03-21)
+version: 2025.3.11 macos-arm64 (2025-03-28)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Fri, 21 Mar 2025 16:14:41 +0000
+  Built: Fri, 28 Mar 2025 20:29:02 +0000
   Rust Version: rustc 1.85.1 (4eb161250 2025-03-15) (Homebrew)
   Profile: release
 
@@ -60,11 +60,11 @@ toolset:
   pipx:extract-msg@0.53.2
   pipx:macnotesapp@0.8.0
   pipx:mypy-silent@0.4.0
-  pipx:poetry@2.1.1
+  pipx:poetry@2.1.2
   pipx:pre-commit@4.2.0
   pipx:pygments@2.19.1
   pipx:pylint@3.3.6
-  pipx:pyright@1.1.397
+  pipx:pyright@1.1.398
   pipx:pytest-watcher@0.4.3
   pipx:ruff@0.11.2
   pipx:tail-jsonl@1.2.6
@@ -72,7 +72,7 @@ toolset:
   pipx:toml-sort@0.24.2
   pipx:tox@4.24.1
   pipx:trcli@1.9.8
-  pipx:watchgha@2.3.2
+  pipx:watchgha@2.4.1
   ubi:watchexec/watchexec@2.3.0
 
 path:
@@ -88,11 +88,11 @@ path:
   ~/.local/share/mise/installs/pipx-extract-msg/0.53.2/bin
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
-  ~/.local/share/mise/installs/pipx-poetry/2.1.1/bin
+  ~/.local/share/mise/installs/pipx-poetry/2.1.2/bin
   ~/.local/share/mise/installs/pipx-pre-commit/4.2.0/bin
   ~/.local/share/mise/installs/pipx-pygments/2.19.1/bin
   ~/.local/share/mise/installs/pipx-pylint/3.3.6/bin
-  ~/.local/share/mise/installs/pipx-pyright/1.1.397/bin
+  ~/.local/share/mise/installs/pipx-pyright/1.1.398/bin
   ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
   ~/.local/share/mise/installs/pipx-ruff/0.11.2/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
@@ -100,11 +100,15 @@ path:
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-tox/4.24.1/bin
   ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
-  ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
+  ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3/bin
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
+  ~/.local/share/mise/installs/python/3.10.14/bin
+  ~/.local/share/mise/installs/pipx-poetry/2.1.1/bin
+  ~/.local/share/mise/installs/pipx-pyright/1.1.397/bin
+  ~/.local/share/mise/installs/pipx-watchgha/2.3.2/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -135,6 +139,4 @@ settings:
   pipx_uvx        true                            ~/.config/mise/config.toml
   python.compile  true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.3.10 available, currently on 2025.3.7
+No problems found
