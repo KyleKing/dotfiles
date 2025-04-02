@@ -8,3 +8,24 @@ Host ubuntu-4gb-hel1-1
   HostName 157.180.43.106
   User root
   IdentityFile ~/.ssh/id_ed25519_hetzner_demo
+
+Host *-devm.roaminsight.net 10.0.* !ssh-devm.roaminsight.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-devm.roaminsight.net
+
+Host *-sandbox.roamsandbox.net 10.50.* !ssh-sandbox.roamsandbox.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-sandbox.roamsandbox.net
+
+Host *-dev.roam-dev.net 10.200.* !ssh-dev.roam-dev.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-dev.roam-dev.net
+
+Host *-stage.roam-stage.net 10.2.* !ssh-stage.roam-stage.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-stage.roam-stage.net
+
+Host *-prod.roamanalytics.net 10.3.* !ssh-prod.roamanalytics.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-prod.roamanalytics.net
+
+Host *hostedstage.roam-hostedstage.net 10.60.* !ssh-hostedstage.roam-hostedstage.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-hostedstage.roam-hostedstage.net
+
+Host *hostedappsprod.roam-hostedappsprod.net 10.55.* !ssh-hostedappsprod.roam-hostedappsprod.net
+  ProxyCommand duoconnect -host=%h:%p -relay=https://ssh-hostedappsprod.roam-hostedappsprod.net
