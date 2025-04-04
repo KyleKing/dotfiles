@@ -31,6 +31,7 @@ brew "gnupg"
 brew "go"
 brew "gum"
 brew "hadolint"
+brew "hk"
 brew "hyperfine"
 brew "imagemagick"
 brew "jj"
@@ -84,6 +85,7 @@ cask "blockblock"
 cask "brave-browser"
 cask "calibre"
 cask "cloudflare-warp"
+cask "cursor"
 cask "customshortcuts"
 cask "daisydisk"
 cask "dash6"
@@ -138,9 +140,10 @@ cask "thunderbird"
 cask "vlc"
 cask "webpquicklook"
 cask "wezterm"
+cask "windsurf"
+cask "zed"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
-mas "Capital One Shopping", id: 1477110326
 mas "Charmstone", id: 1563735522
 mas "ColorSlurp", id: 1287239339
 mas "Downlink", id: 1454269192
@@ -161,3 +164,9 @@ mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
 mas "Weathergraph", id: 1501958576
 mas "Xcode", id: 497799835
+vscode "github.vscode-github-actions"
+vscode "golang.go"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-vscode.makefile-tools"

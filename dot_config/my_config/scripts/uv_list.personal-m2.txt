@@ -1,3 +1,5 @@
+aider-chat v0.81.0
+- aider
 calcipy v5.0.0
 - calcipy
 - calcipy-docs
