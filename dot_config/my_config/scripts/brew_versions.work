@@ -254,6 +254,7 @@ aws-vault 7.2.0
 beekeeper-studio 4.3.0
 blockblock 2.2.4
 cloudflare-warp 2024.3.407.0,20240329.17
+cursor 0.48.7,1d623c4cc1d3bb6e0fe4f1d5434b47b958b05876
 customshortcuts 1.1
 daisydisk 4.30
 dash6 6.4.3
@@ -301,9 +302,12 @@ rocket 1.9.3,85
 skim 1.7.1
 spotify 1.2.34.783,923721d9,4676
 suspicious-package 4.5,1213
+visual-studio-code 1.99.0
 vlc 3.0.20
 webpquicklook 1.0
 wezterm 20240203-110809,5046fc22
 windows-app 11.1.4
+windsurf 1.6.2,1eabbe10abd0f4843e53460086ba8422a1aebe02
 yaak 2025.1.2
+zed 0.180.2
 zoom 5.17.11.31580

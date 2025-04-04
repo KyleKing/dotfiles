@@ -1,3 +1,5 @@
+aider-chat v0.81.0
+- aider
 bump-pydantic v0.8.0
 - bump-pydantic
 calcipy v5.0.0
