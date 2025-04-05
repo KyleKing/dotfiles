@@ -1,0 +1,18 @@
+{
+  "workbench.colorTheme": "Bearded Theme Arc",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.agent.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.generateTests.codeLens": true,
+  "workbench.startupEditor": "none",
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.pythonPath": "C:\\Users\\king.kyle\\AppData\\Local\\Continuum\\anaconda3\\python.exe",
+  "workbench.activityBar.location": "bottom",
+  "workbench.secondarySideBar.showLabels": false,
+  "cSpell.enabled": false
+}

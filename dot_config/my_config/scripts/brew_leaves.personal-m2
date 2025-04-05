@@ -1,4 +1,3 @@
-actionlint
 alajmo/mani/mani
 atuin
 bat
@@ -47,6 +46,7 @@ rust
 sad
 selene
 sevenzip
+shellcheck
 shellharden
 shfmt
 stylua

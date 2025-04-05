@@ -1,11 +1,11 @@
-version: 2025.3.11 macos-arm64 (2025-03-28)
+version: 2025.4.0 macos-arm64 (2025-04-02)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Fri, 28 Mar 2025 20:29:02 +0000
+  Built: Wed, 2 Apr 2025 00:03:05 +0000
   Rust Version: rustc 1.85.1 (4eb161250 2025-03-15) (Homebrew)
   Profile: release
 
@@ -45,8 +45,8 @@ plugins:
 
 toolset:
   aqua:hashicorp/terraform@1.11.3
-  core:go@1.24.1
-  core:node@23.10.0
+  core:go@1.24.2
+  core:node@23.11.0
   core:python@3.13.2
   go:github.com/boyter/dcd@1.1.0
   go:github.com/merschformann/gotz@0.1.14
@@ -54,7 +54,7 @@ toolset:
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.2.0
   pipx:copier@9.6.0
-  pipx:extract-msg@0.53.2
+  pipx:extract-msg@0.54.0
   pipx:macnotesapp@0.8.0
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.1.2
@@ -63,7 +63,7 @@ toolset:
   pipx:pylint@3.3.6
   pipx:pyright@1.1.398
   pipx:pytest-watcher@0.4.3
-  pipx:ruff@0.11.2
+  pipx:ruff@0.11.4
   pipx:tail-jsonl@1.2.6
   pipx:textract-py3@2.1.1
   pipx:toml-sort@0.24.2
@@ -74,15 +74,15 @@ toolset:
 
 path:
   ~/.local/share/mise/installs/python/3.13.2/bin
-  ~/.local/share/mise/installs/go/1.24.1/bin
+  ~/.local/share/mise/installs/go/1.24.2/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
-  ~/.local/share/mise/installs/node/23.10.0/bin
+  ~/.local/share/mise/installs/node/23.11.0/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
   ~/.local/share/mise/installs/pipx-copier/9.6.0/bin
   ~/.local/share/mise/installs/pipx-copier-template-tester/2.2.0/bin
-  ~/.local/share/mise/installs/pipx-extract-msg/0.53.2/bin
+  ~/.local/share/mise/installs/pipx-extract-msg/0.54.0/bin
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
   ~/.local/share/mise/installs/pipx-poetry/2.1.2/bin
@@ -91,7 +91,7 @@ path:
   ~/.local/share/mise/installs/pipx-pylint/3.3.6/bin
   ~/.local/share/mise/installs/pipx-pyright/1.1.398/bin
   ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
-  ~/.local/share/mise/installs/pipx-ruff/0.11.2/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.11.4/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
   ~/.local/share/mise/installs/pipx-textract-py3/2.1.1/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
@@ -100,7 +100,6 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.codeium/windsurf/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -133,6 +132,4 @@ settings:
   pipx_uvx        true                            ~/.config/mise/config.toml
   python.compile  true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.4.0 available, currently on 2025.3.11
+No problems found
