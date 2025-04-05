@@ -1,11 +1,16 @@
+# Tips:
+# - Add post-install hooks with: `mise config set tools.node.postinstall "npm install -g neovim"`
+# = Manage environment with `mise set SHEARS_SUBDIR=test` and `mise settings`
+# - Share uv-installed Python using `mise sync python --uv`
+
+[env]
+MISE_PYTHON_UV_VENV_AUTO = "true"
+
 [settings]
 disable_hints = ["python_multi"]
 disable_tools = ["extract-msg", "textract-py3"]
 experimental = true
 pipx_uvx = true
-
-[settings.python]
-compile = true
 
 [tools]
 python = "latest"

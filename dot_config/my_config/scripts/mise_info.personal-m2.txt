@@ -100,6 +100,8 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3
   ~/.local/share/mise/installs/watchexec/2.3.0
+  ~/.local/share/mise/installs/python/3.12.5/bin
+  ~/.local/share/mise/installs/python/3.9.13/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -124,12 +126,13 @@ path:
 
 env_vars:
   MISE_SHELL=zsh
+  MISE_PYENV_REPO=
+  MISE_PYTHON_UV_VENV_AUTO=true
 
 settings:
-  disable_hints   ["python_multi"]                ~/.config/mise/config.toml
-  disable_tools   ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
-  experimental    true                            ~/.config/mise/config.toml
-  pipx_uvx        true                            ~/.config/mise/config.toml
-  python.compile  true                            ~/.config/mise/config.toml
+  disable_hints  ["python_multi"]                ~/.config/mise/config.toml
+  disable_tools  ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
+  experimental   true                            ~/.config/mise/config.toml
+  pipx_uvx       true                            ~/.config/mise/config.toml
 
 No problems found
