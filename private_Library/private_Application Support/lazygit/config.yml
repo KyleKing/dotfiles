@@ -157,7 +157,6 @@ git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
     externalDiffCommand: difft --color=always --display=inline --syntax-highlight=off
-  overrideGpg: true
 os:
   # FYI: experimental support for within session editing (https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#configuring-file-editing)
   editPreset: "nvim-remote"
