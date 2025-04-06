@@ -3,8 +3,10 @@
 # Added to debug startup time. See: https://lildude.co.uk/speeding-up-my-zsh-shell
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
-# Set bat as default Pager (instead of less)
-export PAGER=bat
+# # Set bat as default Pager (instead of less)
+# export PAGER=bat
+# Update: try using nvim instead (installed with brew)
+export PAGER=nvimpager
 
 export EDITOR={{- .homebrew_prefix -}}/bin/nvim
 export VISUAL=TextEdit

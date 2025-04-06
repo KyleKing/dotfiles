@@ -41,6 +41,7 @@ brew "mas"
 brew "mise"
 brew "navi"
 brew "neovim"
+brew "nvimpager"
 brew "oh-my-posh"
 brew "ollama", restart_service: :changed
 brew "pandoc"
