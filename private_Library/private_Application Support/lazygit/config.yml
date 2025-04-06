@@ -7,6 +7,7 @@ notARepository: skip
 # https://github.com/jesseduffield/lazygit/issues/1576
 # promptToReturnFromSubprocess: false
 
+# Tip: use <c-w> to toggle ignore whitespace
 customCommands:
   # Override push to be a subprocess to see pre-commit output
   - key: P

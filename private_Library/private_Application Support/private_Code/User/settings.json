@@ -9,10 +9,9 @@
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.generateTests.codeLens": true,
   "workbench.startupEditor": "none",
-  "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": true,
-  "python.pythonPath": "C:\\Users\\king.kyle\\AppData\\Local\\Continuum\\anaconda3\\python.exe",
   "workbench.activityBar.location": "bottom",
   "workbench.secondarySideBar.showLabels": false,
-  "cSpell.enabled": false
+  "cSpell.enabled": false,
+  "redhat.telemetry.enabled": false,
+  "go.toolsManagement.autoUpdate": true
 }

@@ -54,7 +54,7 @@ toolset:
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.2.0
   pipx:copier@9.6.0
-  pipx:extract-msg@0.54.0
+  pipx:extract-msg@0.53.2
   pipx:macnotesapp@0.8.0
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.1.2
@@ -82,7 +82,7 @@ path:
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
   ~/.local/share/mise/installs/pipx-copier/9.6.0/bin
   ~/.local/share/mise/installs/pipx-copier-template-tester/2.2.0/bin
-  ~/.local/share/mise/installs/pipx-extract-msg/0.54.0/bin
+  ~/.local/share/mise/installs/pipx-extract-msg/0.53.2/bin
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
   ~/.local/share/mise/installs/pipx-poetry/2.1.2/bin
@@ -100,8 +100,7 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.local/share/mise/installs/python/3.12.5/bin
-  ~/.local/share/mise/installs/python/3.9.13/bin
+  ~/.local/share/nvim/mason/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -123,10 +122,11 @@ path:
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
+  ~/go/bin
+  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
-  MISE_PYENV_REPO=
   MISE_PYTHON_UV_VENV_AUTO=true
 
 settings:
@@ -135,4 +135,7 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. shims are missing, run mise reshim to create them
+   Missing shims: errcheck, golangci-lint
