@@ -104,8 +104,6 @@ path:
   ~/.local/share/mise/installs/terraform/1.11.3/bin
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
-  ~/.docker/bin
-  ~/.local/share/mise/installs/python/3.10.14/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -123,17 +121,15 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /opt/homebrew/opt/fzf/bin
-  ~/go/bin
-  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
+  MISE_PYTHON_UV_VENV_AUTO=true
 
 settings:
-  disable_hints   ["python_multi"]                ~/.config/mise/config.toml
-  disable_tools   ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
-  experimental    true                            ~/.config/mise/config.toml
-  pipx_uvx        true                            ~/.config/mise/config.toml
-  python.compile  true                            ~/.config/mise/config.toml
+  disable_hints  ["python_multi"]                ~/.config/mise/config.toml
+  disable_tools  ["extract-msg", "textract-py3"] ~/.config/mise/config.toml
+  experimental   true                            ~/.config/mise/config.toml
+  pipx_uvx       true                            ~/.config/mise/config.toml
 
 No problems found

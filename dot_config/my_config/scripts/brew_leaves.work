@@ -1,5 +1,4 @@
 actionlint
-alajmo/mani/mani
 ansible
 ast-grep
 atuin
@@ -44,6 +43,7 @@ lazyjj
 luacheck
 luarocks
 mackup
+mani
 mas
 mise
 navi
@@ -66,7 +66,6 @@ ripgrep
 sad
 scc
 selene
-serie
 sevenzip
 shellharden
 shfmt
