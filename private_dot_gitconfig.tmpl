@@ -50,10 +50,10 @@
 [diff]
     external = difft
     tool = difftastic
-# [difftool]
-#    prompt = false
-# [difftool "difftastic"]
-#    cmd = difft "$LOCAL" "$REMOTE"
+[difftool]
+   prompt = false
+[difftool "difftastic"]
+   cmd = difft "$LOCAL" "$REMOTE"
 [filter "hawser"]
 	clean = git hawser clean %f
 	required = true
@@ -71,8 +71,8 @@
 	program = {{ .github.gpg_program }}
 [init]
 	defaultBranch = main
-#[pager]
-#    difftool = true
+[pager]
+    difftool = false
 [pull]
 	ff = only
 [push]
