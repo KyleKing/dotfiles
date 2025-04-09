@@ -45,7 +45,7 @@ plugins:
   yarn       https://github.com/mise-plugins/mise-yarn.git#376c540
 
 toolset:
-  aqua:evilmartians/lefthook@1.11.7
+  aqua:evilmartians/lefthook@1.11.8  (missing)
   aqua:hashicorp/terraform@1.11.3
   core:go@1.24.2
   core:node@23.11.0
@@ -104,7 +104,6 @@ path:
   ~/.local/share/mise/installs/terraform/1.11.3
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
-  ~/.local/share/mise/installs/lefthook/1.11.7
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -137,7 +136,4 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. shims are missing, run mise reshim to create them
-   Missing shims: yak-notes-cli
+No problems found

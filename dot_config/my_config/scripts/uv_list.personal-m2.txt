@@ -13,7 +13,5 @@ flit v3.12.0
 norwegianblue v0.21.0
 - eol
 - norwegianblue
-tox v4.25.0
-- tox
 whatsonpypi v0.3.7
 - whatsonpypi
