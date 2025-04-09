@@ -41,14 +41,17 @@ backends:
   vfox
 
 plugins:
-  yarn  https://github.com/mise-plugins/mise-yarn.git#376c540
+  swiftlint  https://github.com/mise-plugins/mise-swiftlint.git#447f94c
+  yarn       https://github.com/mise-plugins/mise-yarn.git#376c540
 
 toolset:
+  aqua:evilmartians/lefthook@1.11.7
   aqua:hashicorp/terraform@1.11.3
   core:go@1.24.2
   core:node@23.11.0
   core:python@3.13.2
   go:github.com/boyter/dcd@1.1.0
+  go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
@@ -100,6 +103,8 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3
   ~/.local/share/mise/installs/watchexec/2.3.0
+  ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
+  ~/.local/share/mise/installs/lefthook/1.11.7
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -132,4 +137,7 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. shims are missing, run mise reshim to create them
+   Missing shims: yak-notes-cli

@@ -1,4 +1,3 @@
-alajmo/mani/mani
 atuin
 bat
 chezmoi
@@ -27,12 +26,14 @@ lazygit
 lazyjj
 luacheck
 luarocks
+mani
 mas
 mise
 navi
 nvimpager
 oh-my-posh
 ollama
+orlangure/tap/gocovsh
 pandoc
 php
 plantuml
