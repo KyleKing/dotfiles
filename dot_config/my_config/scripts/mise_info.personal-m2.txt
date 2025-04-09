@@ -45,7 +45,6 @@ plugins:
   yarn       https://github.com/mise-plugins/mise-yarn.git#376c540
 
 toolset:
-  aqua:evilmartians/lefthook@1.11.8  (missing)
   aqua:hashicorp/terraform@1.11.3
   core:go@1.24.2
   core:node@23.11.0
@@ -53,12 +52,14 @@ toolset:
   go:github.com/boyter/dcd@1.1.0
   go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
+  pipx:beautysh@6.2.1
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.2.0
   pipx:copier@9.6.0
   pipx:extract-msg@0.53.2
   pipx:macnotesapp@0.8.0
+  pipx:mdformat@0.7.22
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.1.2
   pipx:pre-commit@4.2.0
@@ -79,6 +80,7 @@ path:
   ~/.local/share/mise/installs/python/3.13.2/bin
   ~/.local/share/mise/installs/go/1.24.2/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
+  ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
   ~/.local/share/mise/installs/node/23.11.0/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
@@ -103,7 +105,8 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
+  ~/.local/share/mise/installs/pipx-beautysh/6.2.1/bin
+  ~/.local/share/mise/installs/pipx-mdformat/0.7.22/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
