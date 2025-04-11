@@ -52,6 +52,8 @@ toolset:
   core:node@23.8.0
   core:python@3.13.2
   go:github.com/boyter/dcd@1.1.0
+  go:github.com/dhth/act3@1.1.4
+  go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
@@ -79,6 +81,7 @@ path:
   ~/.local/share/mise/installs/python/3.13.2/bin
   ~/.local/share/mise/installs/go/1.24.0/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
+  ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
   ~/.local/share/mise/installs/node/23.8.0/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
@@ -103,7 +106,11 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3/bin
   ~/.local/share/mise/installs/watchexec/2.3.0
+  ~/.local/share/mise/installs/go-github-com-dhth-act3/1.1.4/bin
   ~/.local/share/mise/installs/postgres/14.5/bin
+  ~/.docker/bin
+  ~/.local/share/nvim/mason/bin
+  ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -121,6 +128,10 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /opt/homebrew/opt/fzf/bin
+  ~/go/bin
+  ~/.krew/bin
+  ~/go/bin
+  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
@@ -132,4 +143,6 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.4.1 available, currently on 2025.4.0

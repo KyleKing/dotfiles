@@ -1,35 +1,5 @@
 {
   "config_version": "1.0",
-  "hours12": false,
-  "inline": true,
-  "live": false,
-  "sort_local_top": false,
-  "sorting": "none",
-  "stretch": false,
-  "style": {
-    "coloring": {
-      "DynamicColorBackground": "",
-      "DynamicColorDay": "",
-      "DynamicColorEvening": "",
-      "DynamicColorForeground": "",
-      "DynamicColorMorning": "",
-      "DynamicColorNight": "",
-      "StaticColorDay": "",
-      "StaticColorEvening": "",
-      "StaticColorForeground": "",
-      "StaticColorMorning": "",
-      "StaticColorNight": ""
-    },
-    "colorize": true,
-    "day_segments": {
-      "day": 9,
-      "evening": 17,
-      "morning": 8,
-      "night": 19
-    },
-    "symbols": "rectangles"
-  },
-  "tics": false,
   "timezones": [
     {
       "Name": "SF",
@@ -51,5 +21,35 @@
       "Name": "IST",
       "TZ": "Asia/Calcutta"
     }
-  ]
+  ],
+  "style": {
+    "symbols": "rectangles",
+    "colorize": true,
+    "day_segments": {
+      "morning": 8,
+      "day": 9,
+      "evening": 17,
+      "night": 19
+    },
+    "coloring": {
+      "StaticColorMorning": "",
+      "StaticColorDay": "",
+      "StaticColorEvening": "",
+      "StaticColorNight": "",
+      "StaticColorForeground": "",
+      "DynamicColorMorning": "",
+      "DynamicColorDay": "",
+      "DynamicColorEvening": "",
+      "DynamicColorNight": "",
+      "DynamicColorForeground": "",
+      "DynamicColorBackground": ""
+    }
+  },
+  "tics": false,
+  "stretch": false,
+  "inline": true,
+  "hours12": false,
+  "live": false,
+  "sorting": "none",
+  "sort_local_top": false
 }
