@@ -21,7 +21,7 @@ repos:
       - id: check-added-large-files
       - id: check-executables-have-shebangs
       - id: check-json
-        exclude: private_keybindings.json
+        exclude: private_keybindings.json|zed/.*settings\.json
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
