@@ -1,11 +1,11 @@
-version: 2025.4.2 macos-arm64 (2025-04-11)
+version: 2025.4.4 macos-arm64 (2025-04-15)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Fri, 11 Apr 2025 22:47:33 +0000
+  Built: Tue, 15 Apr 2025 01:53:51 +0000
   Rust Version: rustc 1.86.0 (05f9846f8 2025-03-31) (Homebrew)
   Profile: release
 
@@ -143,6 +143,4 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.4.4 available, currently on 2025.4.2
+No problems found
