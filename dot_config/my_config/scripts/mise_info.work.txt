@@ -1,12 +1,12 @@
-version: 2025.4.0 macos-arm64 (2025-04-02)
+version: 2025.4.2 macos-arm64 (2025-04-11)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Wed, 2 Apr 2025 00:03:05 +0000
-  Rust Version: rustc 1.85.1 (4eb161250 2025-03-15) (Homebrew)
+  Built: Fri, 11 Apr 2025 22:47:33 +0000
+  Rust Version: rustc 1.86.0 (05f9846f8 2025-03-31) (Homebrew)
   Profile: release
 
 shell:
@@ -55,12 +55,14 @@ toolset:
   go:github.com/dhth/act3@1.1.4
   go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
+  pipx:beautysh@6.2.1
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
   pipx:copier-template-tester@2.2.0
   pipx:copier@9.5.0
   pipx:extract-msg@0.53.2
   pipx:macnotesapp@0.8.0
+  pipx:mdformat@0.7.22
   pipx:mypy-silent@0.4.0
   pipx:poetry@2.1.2
   pipx:pre-commit@4.2.0
@@ -81,15 +83,18 @@ path:
   ~/.local/share/mise/installs/python/3.13.2/bin
   ~/.local/share/mise/installs/go/1.24.0/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
+  ~/.local/share/mise/installs/go-github-com-dhth-act3/1.1.4/bin
   ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
   ~/.local/share/mise/installs/node/23.8.0/bin
+  ~/.local/share/mise/installs/pipx-beautysh/6.2.1/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
   ~/.local/share/mise/installs/pipx-copier/9.5.0/bin
   ~/.local/share/mise/installs/pipx-copier-template-tester/2.2.0/bin
   ~/.local/share/mise/installs/pipx-extract-msg/0.53.2/bin
   ~/.local/share/mise/installs/pipx-macnotesapp/0.8.0/bin
+  ~/.local/share/mise/installs/pipx-mdformat/0.7.22/bin
   ~/.local/share/mise/installs/pipx-mypy-silent/0.4.0/bin
   ~/.local/share/mise/installs/pipx-poetry/2.1.2/bin
   ~/.local/share/mise/installs/pipx-pre-commit/4.2.0/bin
@@ -106,10 +111,7 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.3/bin
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.local/share/mise/installs/go-github-com-dhth-act3/1.1.4/bin
   ~/.local/share/mise/installs/postgres/14.5/bin
-  ~/.docker/bin
-  ~/.local/share/nvim/mason/bin
   ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
@@ -130,8 +132,6 @@ path:
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
-  ~/go/bin
-  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
@@ -145,4 +145,4 @@ settings:
 
 1 problem found:
 
-1. new mise version 2025.4.1 available, currently on 2025.4.0
+1. new mise version 2025.4.4 available, currently on 2025.4.2
