@@ -113,6 +113,8 @@ path:
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
+  ~/.local/share/nvim/mason/bin
+  ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -130,6 +132,8 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
   /opt/homebrew/opt/fzf/bin
+  ~/go/bin
+  ~/.krew/bin
   ~/go/bin
   ~/.krew/bin
 

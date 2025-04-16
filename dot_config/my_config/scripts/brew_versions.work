@@ -49,14 +49,14 @@ gd 2.3.3_6
 gdk-pixbuf 2.42.12_1
 gettext 0.24
 gflags 2.2.2
-gh 2.69.0
+gh 2.70.0
 ghostscript 10.05.0_1
 giflib 5.2.2
 git 2.49.0
 git-brws 0.11.12
 git-filter-repo 2.47.0
 git-lfs 3.6.1
-glib 2.84.0_1
+glib 2.84.1
 glog 0.6.0
 glow 2.1.0
 gmp 6.3.0
@@ -113,7 +113,7 @@ libksba 1.6.7
 liblqr 0.4.3
 libmpc 1.3.1
 libnghttp2 1.65.0
-libomp 20.1.2
+libomp 20.1.3
 libpng 1.6.47
 libpq 17.4_1
 libraw 0.21.4
@@ -156,7 +156,7 @@ navi 2.24.0
 ncurses 6.5
 neovim 0.11.0
 net-snmp 5.9.4
-netpbm 11.02.14
+netpbm 11.02.15
 nettle 3.10.1
 node 23.11.0
 npth 1.8
@@ -210,7 +210,7 @@ sniffnet 1.3.2
 sqlite 3.49.1
 stern 1.32.0
 stylua 2.0.2
-swig 4.3.0
+swig 4.3.1
 syncthing 1.29.5
 tealdeer 1.7.2
 television 0.11.7
@@ -283,7 +283,7 @@ keyboard-cleaner 1.3
 keycastr 0.9.18
 knockknock 3.1.0
 libreoffice 25.2.2
-lulu 3.1.4
+lulu 3.1.5
 mac-mouse-fix 3.0.2
 microsoft-auto-update 4.69.24031120
 microsoft-edge 133.0.3065.82,14e056f8-ec7a-459c-abcd-d1d4a7604189
