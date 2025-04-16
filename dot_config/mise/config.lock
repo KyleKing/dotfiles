@@ -1,0 +1,123 @@
+[tools.go]
+version = "1.24.2"
+backend = "core:go"
+
+[tools."go:github.com/boyter/dcd"]
+version = "1.1.0"
+backend = "go:github.com/boyter/dcd"
+
+[tools."go:github.com/dhth/act3"]
+version = "1.1.4"
+backend = "go:github.com/dhth/act3"
+
+[tools."go:github.com/idursun/jjui/cmd/jjui"]
+version = "0.8.4"
+backend = "go:github.com/idursun/jjui/cmd/jjui"
+
+[tools."go:github.com/merschformann/gotz"]
+version = "0.1.14"
+backend = "go:github.com/merschformann/gotz"
+
+[tools.node]
+version = "23.11.0"
+backend = "core:node"
+
+[tools."pipx:beautysh"]
+version = "6.2.1"
+backend = "pipx:beautysh"
+
+[tools."pipx:black"]
+version = "25.1.0"
+backend = "pipx:black"
+
+[tools."pipx:code2flow"]
+version = "2.5.1"
+backend = "pipx:code2flow"
+
+[tools."pipx:copier"]
+version = "9.6.0"
+backend = "pipx:copier"
+
+[tools."pipx:copier-template-tester"]
+version = "2.2.0"
+backend = "pipx:copier-template-tester"
+
+[tools."pipx:extract-msg"]
+version = "0.53.2"
+backend = "pipx:extract-msg"
+
+[tools."pipx:macnotesapp"]
+version = "0.8.0"
+backend = "pipx:macnotesapp"
+
+[tools."pipx:mdformat"]
+version = "0.7.22"
+backend = "pipx:mdformat"
+
+[tools."pipx:mypy-silent"]
+version = "0.4.0"
+backend = "pipx:mypy-silent"
+
+[tools."pipx:poetry"]
+version = "2.1.2"
+backend = "pipx:poetry"
+
+[tools."pipx:pre-commit"]
+version = "4.2.0"
+backend = "pipx:pre-commit"
+
+[tools."pipx:pygments"]
+version = "2.19.1"
+backend = "pipx:pygments"
+
+[tools."pipx:pylint"]
+version = "3.3.6"
+backend = "pipx:pylint"
+
+[tools."pipx:pyright"]
+version = "1.1.399"
+backend = "pipx:pyright"
+
+[tools."pipx:pytest-watcher"]
+version = "0.4.3"
+backend = "pipx:pytest-watcher"
+
+[tools."pipx:ruff"]
+version = "0.11.5"
+backend = "pipx:ruff"
+
+[tools."pipx:tail-jsonl"]
+version = "1.2.6"
+backend = "pipx:tail-jsonl"
+
+[tools."pipx:textract-py3"]
+version = "2.1.1"
+backend = "pipx:textract-py3"
+
+[tools."pipx:toml-sort"]
+version = "0.24.2"
+backend = "pipx:toml-sort"
+
+[tools."pipx:tox"]
+version = "4.25.0"
+backend = "pipx:tox"
+
+[tools."pipx:trcli"]
+version = "1.9.8"
+backend = "pipx:trcli"
+
+[tools."pipx:watchgha"]
+version = "2.4.1"
+backend = "pipx:watchgha"
+
+[tools.python]
+version = "3.13.3"
+backend = "core:python"
+
+[tools.terraform]
+version = "1.11.4"
+backend = "aqua:hashicorp/terraform"
+
+[tools.watchexec]
+version = "2.3.0"
+backend = "ubi:watchexec/watchexec"
