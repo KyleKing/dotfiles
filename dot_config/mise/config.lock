@@ -1,3 +1,10 @@
+[tools.bun]
+version = "1.2.9"
+backend = "core:bun"
+
+[tools.bun.checksums]
+"bun-darwin-aarch64.zip" = "sha256:bda96ffb68f8e5fd16d2b3443225ae5e26c8dbe790cbb35ddba261b7be280618"
+
 [tools.go]
 version = "1.24.2"
 backend = "core:go"
@@ -21,6 +28,10 @@ backend = "go:github.com/merschformann/gotz"
 [tools.node]
 version = "23.11.0"
 backend = "core:node"
+
+[tools."npm:@anthropic-ai/claude-code"]
+version = "0.2.72"
+backend = "npm:@anthropic-ai/claude-code"
 
 [tools."pipx:beautysh"]
 version = "6.2.1"

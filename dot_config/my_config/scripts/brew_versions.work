@@ -21,6 +21,7 @@ cffi 1.17.1_1
 chezmoi 2.62.1
 cloc 2.04
 cryptography 44.0.2
+cueitup 1.0.0
 curl 8.13.0
 curlie 1.8.2
 diffoci 0.1.6
