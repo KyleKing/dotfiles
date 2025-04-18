@@ -25,6 +25,13 @@ backend = "go:github.com/idursun/jjui/cmd/jjui"
 version = "0.1.14"
 backend = "go:github.com/merschformann/gotz"
 
+[tools.lefthook]
+version = "1.11.10"
+backend = "aqua:evilmartians/lefthook"
+
+[tools.lefthook.checksums]
+"lefthook_1.11.10_MacOS_arm64.gz" = "sha256:9ae5c0e1f46555cbd35de0d43f94418597819ef8c4e1932026b1a16ba01f9189"
+
 [tools.node]
 version = "23.11.0"
 backend = "core:node"

@@ -1,4 +1,4 @@
-aom 3.12.0
+aom 3.12.1
 apr 1.7.5
 apr-util 1.6.3_1
 argon2 20190702_1
@@ -11,7 +11,7 @@ brotli 1.1.0
 c-ares 1.34.5
 ca-certificates 2025-02-25
 cairo 1.18.4
-chezmoi 2.62.0
+chezmoi 2.62.1
 cjson 1.7.18
 cloc 2.04
 curl 8.13.0
@@ -27,7 +27,7 @@ fd 10.2.0
 ffmpeg 7.1.1_1
 flac 1.5.0
 fontconfig 2.16.0
-freetds 1.4.26
+freetds 1.5
 freetype 2.13.3
 frei0r 2.3.3
 fribidi 1.0.16
@@ -36,14 +36,14 @@ gcc 14.2.0_1
 gd 2.3.3_6
 gdk-pixbuf 2.42.12_1
 gettext 0.24
-gh 2.69.0
+gh 2.70.0
 ghostscript 10.05.0_1
 giflib 5.2.2
 git 2.49.0
 git-brws 0.11.12
 git-delta 0.18.2_3
 git-lfs 3.6.1
-glib 2.84.0_1
+glib 2.84.1
 gmp 6.3.0
 gnupg 2.4.7
 gnutls 3.8.9
@@ -54,7 +54,7 @@ graphviz 12.2.1
 gts 0.7.6_3
 gum 0.16.0
 hadolint 2.12.0
-harfbuzz 11.0.1
+harfbuzz 11.1.0
 highway 1.2.0
 hk 0.7.5
 hyperfine 1.19.0
@@ -71,7 +71,7 @@ jpeg-xl 0.11.1_1
 json-c 0.18
 krb5 1.21.3
 lame 3.100
-lazygit 0.48.0
+lazygit 0.49.0
 lazyjj 0.5.0
 leptonica 1.85.0
 libarchive 3.7.9
@@ -85,7 +85,7 @@ libdeflate 1.23
 libevent 2.1.12_1
 libgcrypt 1.11.0
 libgit2 1.9.0
-libgpg-error 1.53
+libgpg-error 1.54
 libheif 1.19.7
 libidn 1.43
 libidn2 2.3.8
@@ -95,10 +95,10 @@ libmicrohttpd 1.0.1
 libmpc 1.3.1
 libnghttp2 1.65.0
 libogg 1.3.5
-libomp 20.1.2
+libomp 20.1.3
 libpng 1.6.47
 libpq 17.4_1
-libraw 0.21.3
+libraw 0.21.4
 librist 0.2.11
 librsvg 2.60.0
 libsamplerate 0.2.2
@@ -139,9 +139,9 @@ lz4 1.10.0
 lzo 2.10
 m4 1.4.19
 mani 0.30.1
-mas 1.9.0
+mas 2.1.0
 mbedtls 3.6.3
-mise 2025.4.2
+mise 2025.4.4
 mpdecimal 4.0.0
 mpfr 4.2.2
 mpg123 1.32.10
@@ -149,12 +149,12 @@ navi 2.24.0
 ncurses 6.5
 neovim 0.11.0
 net-snmp 5.9.4
-netpbm 11.02.13
+netpbm 11.02.15
 nettle 3.10.1
 node 23.11.0
 npth 1.8
 nvimpager 0.13.0
-oh-my-posh 25.13.0
+oh-my-posh 25.14.0
 ollama 0.6.5
 oniguruma 6.9.10
 opencore-amr 0.1.6
@@ -173,7 +173,7 @@ php 8.4.6
 pinentry 1.3.1_1
 pixman 0.44.2
 pkgconf 2.4.3
-pkl 0.28.1
+pkl 0.28.2
 plantuml 1.2025.2
 podman 5.4.2
 podman-compose 1.3.0
@@ -203,9 +203,9 @@ sqlite 3.49.1
 srt 1.5.4
 stylua 2.0.2
 svt-av1 3.0.2
-syncthing 1.29.4
+syncthing 1.29.5
 tealdeer 1.7.2
-television 0.11.6
+television 0.11.7
 tesseract 5.5.0_1
 theora 1.1.1
 tidy-html5 5.8.0
@@ -239,7 +239,7 @@ zstd 1.5.7
 1password 8.10.28
 1password-cli 2.30.3
 alfred 5.0.6,2110
-anki 25.02
+anki 25.02.1
 appcleaner 3.6.7,4301
 blockblock 2.2.4
 brave-browser 1.67.123.0
@@ -271,7 +271,7 @@ keybase 6.0.4,20230113195947,6e1343b357
 keyboard-cleaner 1.3
 keycastr 0.9.18
 knockknock 3.1.0
-lulu 3.1.4
+lulu 3.1.5
 mactex-no-gui 2025.0308
 mactracker 7.12.1
 malwarebytes 4.18.11.4873

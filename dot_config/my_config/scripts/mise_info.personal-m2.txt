@@ -1,11 +1,11 @@
-version: 2025.4.2 macos-arm64 (2025-04-11)
+version: 2025.4.4 macos-arm64 (2025-04-15)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Fri, 11 Apr 2025 22:47:33 +0000
+  Built: Tue, 15 Apr 2025 01:53:51 +0000
   Rust Version: rustc 1.86.0 (05f9846f8 2025-03-31) (Homebrew)
   Profile: release
 
@@ -45,12 +45,13 @@ plugins:
   yarn       https://github.com/mise-plugins/mise-yarn.git#376c540
 
 toolset:
-  aqua:evilmartians/lefthook@1.11.9
+  aqua:evilmartians/lefthook@1.11.10
   aqua:hashicorp/terraform@1.11.4
   core:go@1.24.2
   core:node@23.11.0
   core:python@3.13.3
   go:github.com/boyter/dcd@1.1.0
+  go:github.com/dhth/act3@1.1.4
   go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
   pipx:beautysh@6.2.1
@@ -81,6 +82,7 @@ path:
   ~/.local/share/mise/installs/python/3.13.3/bin
   ~/.local/share/mise/installs/go/1.24.2/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
+  ~/.local/share/mise/installs/go-github-com-dhth-act3/1.1.4/bin
   ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
   ~/.local/share/mise/installs/node/23.11.0/bin
@@ -108,7 +110,7 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.4
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.local/share/mise/installs/lefthook/1.11.9
+  ~/.local/share/mise/installs/lefthook/1.11.10
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -128,8 +130,6 @@ path:
   /Library/Apple/usr/bin
   /Library/TeX/texbin
   /opt/homebrew/opt/fzf/bin
-  ~/go/bin
-  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
@@ -141,4 +141,6 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.4.5 available, currently on 2025.4.4
