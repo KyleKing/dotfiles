@@ -1,11 +1,11 @@
-version: 2025.4.4 macos-arm64 (2025-04-15)
+version: 2025.4.5 macos-arm64 (2025-04-18)
 activated: yes
 shims_on_path: no
 
 build_info:
   Target: aarch64-apple-darwin
   Features: DEFAULT, NATIVE_TLS, SELF_UPDATE
-  Built: Tue, 15 Apr 2025 01:53:51 +0000
+  Built: Fri, 18 Apr 2025 01:31:18 +0000
   Rust Version: rustc 1.86.0 (05f9846f8 2025-03-31) (Homebrew)
   Profile: release
 
@@ -45,15 +45,22 @@ plugins:
   yarn       https://github.com/mise-plugins/mise-yarn.git#376c540
 
 toolset:
+  aqua:LuaLS/lua-language-server@3.14.0
+  aqua:apple/pkl@0.28.1
   aqua:evilmartians/lefthook@1.11.10
   aqua:hashicorp/terraform@1.11.4
+  aqua:jdx/hk@0.8.2
+  core:bun@1.2.9
   core:go@1.24.2
   core:node@23.11.0
   core:python@3.13.3
+  go:github.com/Zxilly/go-size-analyzer/cmd/gsa@1.8.0
   go:github.com/boyter/dcd@1.1.0
   go:github.com/dhth/act3@1.1.4
   go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
+  npm:@anthropic-ai/claude-code@0.2.72
+  npm:bash-language-server@5.6.0
   pipx:beautysh@6.2.1
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
@@ -80,12 +87,15 @@ toolset:
 
 path:
   ~/.local/share/mise/installs/python/3.13.3/bin
+  ~/.local/share/mise/installs/bun/1.2.9/bin
   ~/.local/share/mise/installs/go/1.24.2/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
   ~/.local/share/mise/installs/go-github-com-dhth-act3/1.1.4/bin
   ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
+  ~/.local/share/mise/installs/lefthook/1.11.10
   ~/.local/share/mise/installs/node/23.11.0/bin
+  ~/.local/share/mise/installs/npm-anthropic-ai-claude-code/0.2.72/bin
   ~/.local/share/mise/installs/pipx-beautysh/6.2.1/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
@@ -110,7 +120,12 @@ path:
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
   ~/.local/share/mise/installs/terraform/1.11.4
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.local/share/mise/installs/lefthook/1.11.10
+  ~/.local/share/mise/installs/lua-language-server/3.14.0/bin
+  ~/.local/share/mise/installs/npm-bash-language-server/5.6.0/bin
+  ~/.local/share/mise/installs/hk/0.8.2
+  ~/.local/share/mise/installs/pkl/0.28.1
+  ~/.local/share/mise/installs/go-github-com-zxilly-go-size-analyzer-cmd-gsa/1.8.0/bin
+  ~/.local/share/nvim/mason/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -130,6 +145,10 @@ path:
   /Library/Apple/usr/bin
   /Library/TeX/texbin
   /opt/homebrew/opt/fzf/bin
+  ~/go/bin
+  ~/.krew/bin
+  ~/go/bin
+  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
@@ -141,6 +160,4 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-1 problem found:
-
-1. new mise version 2025.4.5 available, currently on 2025.4.4
+No problems found

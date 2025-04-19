@@ -9,6 +9,10 @@ backend = "core:bun"
 version = "1.24.2"
 backend = "core:go"
 
+[tools."go:github.com/Zxilly/go-size-analyzer/cmd/gsa"]
+version = "1.8.0"
+backend = "go:github.com/Zxilly/go-size-analyzer/cmd/gsa"
+
 [tools."go:github.com/boyter/dcd"]
 version = "1.1.0"
 backend = "go:github.com/boyter/dcd"
@@ -25,12 +29,26 @@ backend = "go:github.com/idursun/jjui/cmd/jjui"
 version = "0.1.14"
 backend = "go:github.com/merschformann/gotz"
 
+[tools.hk]
+version = "0.8.2"
+backend = "aqua:jdx/hk"
+
+[tools.hk.checksums]
+"hk-aarch64-apple-darwin.tar.gz" = "sha256:210ac2d1818c148dbae33c0bad519a32df32a71b21a9e9436cf5114ecfcc629a"
+
 [tools.lefthook]
 version = "1.11.10"
 backend = "aqua:evilmartians/lefthook"
 
 [tools.lefthook.checksums]
 "lefthook_1.11.10_MacOS_arm64.gz" = "sha256:9ae5c0e1f46555cbd35de0d43f94418597819ef8c4e1932026b1a16ba01f9189"
+
+[tools.lua-language-server]
+version = "3.14.0"
+backend = "aqua:LuaLS/lua-language-server"
+
+[tools.lua-language-server.checksums]
+"lua-language-server-3.14.0-darwin-arm64.tar.gz" = "sha256:85d67a12fd6d58927b9d0670bce8f2d62b0da62442b6afbcce2db38c0bf82e0a"
 
 [tools.node]
 version = "23.11.0"
@@ -39,6 +57,10 @@ backend = "core:node"
 [tools."npm:@anthropic-ai/claude-code"]
 version = "0.2.72"
 backend = "npm:@anthropic-ai/claude-code"
+
+[tools."npm:bash-language-server"]
+version = "5.6.0"
+backend = "npm:bash-language-server"
 
 [tools."pipx:beautysh"]
 version = "6.2.1"
@@ -127,6 +149,10 @@ backend = "pipx:trcli"
 [tools."pipx:watchgha"]
 version = "2.4.1"
 backend = "pipx:watchgha"
+
+[tools.pkl]
+version = "0.28.1"
+backend = "aqua:apple/pkl"
 
 [tools.python]
 version = "3.13.3"
