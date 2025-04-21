@@ -29,7 +29,6 @@ glow
 go
 gum
 hadolint
-hk
 howdoi
 hyperfine
 imagemagick
@@ -73,6 +72,7 @@ shellharden
 shfmt
 sniffnet
 stern
+structurizr-cli
 stylua
 swig
 syncthing
