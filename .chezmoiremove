@@ -12,6 +12,7 @@
 .config/ttyper
 .config/yazi
 .config/zellij
+.editorconfig
 .wegorc
 Library/Application Support/superfile/
 docs/docs/CODE_TAG_SUMMARY.md
