@@ -10,7 +10,10 @@ alias mr="mise task run"
 # See local weather. Full docs: https://github.com/chubin/wttr.in
 alias wttr="curl v2d.wttr.in"
 
-# Alias common ripgrep (rg) searches
+# Aliases for find (fd)
+alias fdh='fd --hidden'
+
+# Aliases for ripgrep (rg)
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/.ripgreprc
 # FYI: Add -A/-B/-C for context before/after the match
 alias rgh='rg --hidden'
