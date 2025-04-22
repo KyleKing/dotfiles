@@ -4,6 +4,7 @@
 # - Share uv-installed Python using `mise sync python --uv`
 
 [env]
+MISE_NPM_BUN = "true"
 MISE_PYTHON_UV_VENV_AUTO = "true"
 
 [settings]
