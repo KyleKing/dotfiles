@@ -45,10 +45,6 @@ squash-me() {
 # Commit with no pre-commit
 alias gcnv='git commit --no-verify --message'
 
-# Add aliases for interactive selection of the ref branch
-alias pick-branch='echo $(gh pr list -L100 | fzf | cut -f3)'
-alias gh-run-pick='gh workflow run --ref=$(gh pr list -L100 | fzf | cut -f3)'
-
 # Add shorthand alias for watchgha/watch_gha_runs (https://github.com/nedbat/watchgha)
 gh-runs() {
     echo "$PWD"
