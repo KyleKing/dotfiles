@@ -1,10 +1,10 @@
 actionlint
 ansible
+asak
 ast-grep
 atuin
 awscli
 bat
-bat-extras
 cargo-binstall
 charmbracelet/tap/wishlist
 chezmoi
@@ -71,6 +71,7 @@ sevenzip
 shellharden
 shfmt
 sniffnet
+srgn
 stern
 structurizr-cli
 stylua
@@ -89,6 +90,7 @@ uv
 vale
 virtualenv
 watchman
+whisper-cpp
 yadm
 yamllint
 yazi

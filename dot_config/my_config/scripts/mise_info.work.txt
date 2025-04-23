@@ -129,6 +129,8 @@ path:
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
+  ~/.local/share/nvim/mason/bin
+  ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -148,9 +150,12 @@ path:
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
+  ~/go/bin
+  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
+  MISE_NPM_BUN=true
   MISE_PYTHON_UV_VENV_AUTO=true
 
 settings:
@@ -159,4 +164,6 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.4.7 available, currently on 2025.4.5
