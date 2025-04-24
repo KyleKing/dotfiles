@@ -198,6 +198,7 @@ shfmt 3.11.0
 snappy 1.2.1
 speex 1.2.1
 sqlite 3.49.1
+srgn 0.13.6
 srt 1.5.4
 stylua 2.0.2
 svt-av1 3.0.2
@@ -230,6 +231,7 @@ xz 5.8.1
 yamllint 1.37.0
 yazi 25.4.8
 zeromq 4.3.5_1
+zf 0.10.2
 zimg 3.0.5
 zoxide 0.9.7
 zsh 5.9

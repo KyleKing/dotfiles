@@ -49,6 +49,7 @@ sevenzip
 shellcheck
 shellharden
 shfmt
+srgn
 stylua
 syncthing
 tealdeer
@@ -61,5 +62,6 @@ vhs
 walk
 yamllint
 yazi
+zf
 zoxide
 zsh

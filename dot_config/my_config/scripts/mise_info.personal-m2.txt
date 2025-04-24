@@ -46,7 +46,7 @@ plugins:
 
 toolset:
   aqua:LuaLS/lua-language-server@3.14.0
-  aqua:apple/pkl@0.28.1
+  aqua:apple/pkl@0.28.2
   aqua:evilmartians/lefthook@1.11.10
   aqua:hashicorp/terraform@1.11.4
   aqua:jdx/hk@0.8.2
@@ -54,12 +54,12 @@ toolset:
   core:go@1.24.2
   core:node@23.11.0
   core:python@3.13.3
-  go:github.com/Zxilly/go-size-analyzer/cmd/gsa@1.8.0
+  go:github.com/Zxilly/go-size-analyzer/cmd/gsa@1.8.1
   go:github.com/boyter/dcd@1.1.0
   go:github.com/dhth/act3@1.1.4
   go:github.com/idursun/jjui/cmd/jjui@0.8.4
   go:github.com/merschformann/gotz@0.1.14
-  npm:@anthropic-ai/claude-code@0.2.72
+  npm:@anthropic-ai/claude-code@0.2.74
   npm:bash-language-server@5.6.0
   pipx:beautysh@6.2.1
   pipx:black@25.1.0
@@ -76,7 +76,7 @@ toolset:
   pipx:pylint@3.3.6
   pipx:pyright@1.1.399
   pipx:pytest-watcher@0.4.3
-  pipx:ruff@0.11.5
+  pipx:ruff@0.11.6
   pipx:tail-jsonl@1.2.6
   pipx:textract-py3@2.1.1
   pipx:toml-sort@0.24.2
@@ -89,13 +89,17 @@ path:
   ~/.local/share/mise/installs/python/3.13.3/bin
   ~/.local/share/mise/installs/bun/1.2.9/bin
   ~/.local/share/mise/installs/go/1.24.2/bin
+  ~/.local/share/mise/installs/go-github-com-zxilly-go-size-analyzer-cmd-gsa/1.8.1/bin
   ~/.local/share/mise/installs/go-github-com-boyter-dcd/1.1.0/bin
   ~/.local/share/mise/installs/go-github-com-dhth-act3/1.1.4/bin
   ~/.local/share/mise/installs/go-github-com-idursun-jjui-cmd-jjui/0.8.4/bin
   ~/.local/share/mise/installs/go-github-com-merschformann-gotz/0.1.14/bin
+  ~/.local/share/mise/installs/hk/0.8.2
   ~/.local/share/mise/installs/lefthook/1.11.10
+  ~/.local/share/mise/installs/lua-language-server/3.14.0/bin
   ~/.local/share/mise/installs/node/23.11.0/bin
-  ~/.local/share/mise/installs/npm-anthropic-ai-claude-code/0.2.72/bin
+  ~/.local/share/mise/installs/npm-anthropic-ai-claude-code/0.2.74/bin
+  ~/.local/share/mise/installs/npm-bash-language-server/5.6.0/bin
   ~/.local/share/mise/installs/pipx-beautysh/6.2.1/bin
   ~/.local/share/mise/installs/pipx-black/25.1.0/bin
   ~/.local/share/mise/installs/pipx-code2flow/2.5.1/bin
@@ -111,21 +115,16 @@ path:
   ~/.local/share/mise/installs/pipx-pylint/3.3.6/bin
   ~/.local/share/mise/installs/pipx-pyright/1.1.399/bin
   ~/.local/share/mise/installs/pipx-pytest-watcher/0.4.3/bin
-  ~/.local/share/mise/installs/pipx-ruff/0.11.5/bin
+  ~/.local/share/mise/installs/pipx-ruff/0.11.6/bin
   ~/.local/share/mise/installs/pipx-tail-jsonl/1.2.6/bin
   ~/.local/share/mise/installs/pipx-textract-py3/2.1.1/bin
   ~/.local/share/mise/installs/pipx-toml-sort/0.24.2/bin
   ~/.local/share/mise/installs/pipx-tox/4.25.0/bin
   ~/.local/share/mise/installs/pipx-trcli/1.9.8/bin
   ~/.local/share/mise/installs/pipx-watchgha/2.4.1/bin
+  ~/.local/share/mise/installs/pkl/0.28.2
   ~/.local/share/mise/installs/terraform/1.11.4
   ~/.local/share/mise/installs/watchexec/2.3.0
-  ~/.local/share/mise/installs/lua-language-server/3.14.0/bin
-  ~/.local/share/mise/installs/npm-bash-language-server/5.6.0/bin
-  ~/.local/share/mise/installs/hk/0.8.2
-  ~/.local/share/mise/installs/pkl/0.28.1
-  ~/.local/share/mise/installs/go-github-com-zxilly-go-size-analyzer-cmd-gsa/1.8.0/bin
-  ~/.local/share/nvim/mason/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -147,11 +146,10 @@ path:
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
-  ~/go/bin
-  ~/.krew/bin
 
 env_vars:
   MISE_SHELL=zsh
+  MISE_NPM_BUN=true
   MISE_PYTHON_UV_VENV_AUTO=true
 
 settings:
@@ -160,4 +158,6 @@ settings:
   experimental   true                            ~/.config/mise/config.toml
   pipx_uvx       true                            ~/.config/mise/config.toml
 
-No problems found
+1 problem found:
+
+1. new mise version 2025.4.8 available, currently on 2025.4.5
