@@ -48,10 +48,13 @@ plugins:
 toolset:
   aqua:LuaLS/lua-language-server@3.14.0
   aqua:apple/pkl@0.28.2
+  aqua:crate-ci/typos@1.31.1  (missing)
   aqua:evilmartians/lefthook@1.11.10
   aqua:hashicorp/terraform@1.11.4
   aqua:jdx/hk@0.8.2
+  aqua:mikefarah/yq@4.45.1  (missing)
   asdf:postgres@14.5
+  cargo:selene@0.28.0   (missing)
   core:bun@1.2.9
   core:go@1.24.2
   core:node@23.11.0
@@ -63,6 +66,7 @@ toolset:
   go:github.com/merschformann/gotz@0.1.14
   npm:@anthropic-ai/claude-code@0.2.74
   npm:bash-language-server@5.6.0
+  npm:stylelint@16.14.1  (missing)
   pipx:beautysh@6.2.1
   pipx:black@25.1.0
   pipx:code2flow@2.5.1
@@ -79,12 +83,14 @@ toolset:
   pipx:pyright@1.1.399
   pipx:pytest-watcher@0.4.3
   pipx:ruff@0.11.6
+  pipx:sqlfluff@3.4.0   (missing)
   pipx:tail-jsonl@1.2.6
   pipx:textract-py3@2.1.1
   pipx:toml-sort@0.24.2
   pipx:tox@4.25.0
   pipx:trcli@1.9.8
   pipx:watchgha@2.4.1
+  ubi:koalaman/shellcheck@0.10.0  (missing)
   ubi:watchexec/watchexec@2.3.0
 
 path:
@@ -129,8 +135,6 @@ path:
   ~/.local/share/mise/installs/watchexec/2.3.0
   ~/.local/share/mise/installs/postgres/14.5/bin
   ~/.docker/bin
-  ~/.local/share/nvim/mason/bin
-  ~/.docker/bin
   ~/.local/bin
   /opt/homebrew/opt/icu4c@77/sbin
   /opt/homebrew/opt/icu4c@77/bin
@@ -147,6 +151,13 @@ path:
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
   /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+  ~/.docker/bin
+  ~/.local/bin
+  /opt/homebrew/opt/icu4c@77/sbin
+  /opt/homebrew/opt/icu4c@77/bin
+  /opt/homebrew/sbin
+  /opt/homebrew/bin
+  /usr/local/sbin
   /opt/homebrew/opt/fzf/bin
   ~/go/bin
   ~/.krew/bin
@@ -166,4 +177,4 @@ settings:
 
 1 problem found:
 
-1. new mise version 2025.4.7 available, currently on 2025.4.5
+1. new mise version 2025.4.9 available, currently on 2025.4.5
