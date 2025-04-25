@@ -5,6 +5,10 @@ backend = "core:bun"
 [tools.bun.checksums]
 "bun-darwin-aarch64.zip" = "sha256:bda96ffb68f8e5fd16d2b3443225ae5e26c8dbe790cbb35ddba261b7be280618"
 
+[tools."cargo:selene"]
+version = "0.28.0"
+backend = "cargo:selene"
+
 [tools.go]
 version = "1.24.2"
 backend = "core:go"
@@ -61,6 +65,10 @@ backend = "npm:@anthropic-ai/claude-code"
 [tools."npm:bash-language-server"]
 version = "5.6.0"
 backend = "npm:bash-language-server"
+
+[tools."npm:stylelint"]
+version = "16.14.1"
+backend = "npm:stylelint"
 
 [tools."pipx:beautysh"]
 version = "6.2.1"
@@ -126,6 +134,10 @@ backend = "pipx:pytest-watcher"
 version = "0.11.6"
 backend = "pipx:ruff"
 
+[tools."pipx:sqlfluff"]
+version = "3.4.0"
+backend = "pipx:sqlfluff"
+
 [tools."pipx:tail-jsonl"]
 version = "1.2.6"
 backend = "pipx:tail-jsonl"
@@ -161,10 +173,25 @@ pkl-macos-aarch64 = "sha256:452c75769d85c07714356f223a9d99a02bdc0bf360c074176595
 version = "3.13.3"
 backend = "core:python"
 
+[tools.shellcheck]
+version = "0.10.0"
+backend = "ubi:koalaman/shellcheck"
+
 [tools.terraform]
 version = "1.11.4"
 backend = "aqua:hashicorp/terraform"
 
+[tools.typos]
+version = "1.31.1"
+backend = "aqua:crate-ci/typos"
+
+[tools.typos.checksums]
+"typos-v1.31.1-aarch64-apple-darwin.tar.gz" = "sha256:a172195e1b1f1e011b3034913d1c87f0bbf0552a096b4ead0e3fa0620f4329cd"
+
 [tools.watchexec]
 version = "2.3.0"
 backend = "ubi:watchexec/watchexec"
+
+[tools.yq]
+version = "4.45.1"
+backend = "aqua:mikefarah/yq"

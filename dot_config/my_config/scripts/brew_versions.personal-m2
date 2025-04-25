@@ -189,10 +189,8 @@ rubberband 4.0.0
 rust 1.86.0
 sad 0.4.32
 sdl2 2.32.4
-selene 0.28.0
 sevenzip 24.09
 shared-mime-info 2.4
-shellcheck 0.10.0
 shellharden 4.3.1
 shfmt 3.11.0
 snappy 1.2.1
@@ -212,7 +210,6 @@ tmux 3.5a
 tpm 3.1.0
 tree-sitter 0.25.3
 ttyd 1.7.7_2
-typos-cli 1.31.1
 unbound 1.22.0
 unibilium 2.1.2
 unixodbc 2.3.12

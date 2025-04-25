@@ -44,9 +44,7 @@ rhysd/git-brws/git-brws
 ripgrep
 rust
 sad
-selene
 sevenzip
-shellcheck
 shellharden
 shfmt
 srgn
@@ -55,7 +53,6 @@ syncthing
 tealdeer
 television
 tpm
-typos-cli
 uv
 vale
 vhs
