@@ -62,9 +62,17 @@ backend = "core:node"
 version = "0.2.86"
 backend = "npm:@anthropic-ai/claude-code"
 
+[tools."npm:@fsouza/prettierd"]
+version = "0.26.1"
+backend = "npm:@fsouza/prettierd"
+
 [tools."npm:bash-language-server"]
 version = "5.6.0"
 backend = "npm:bash-language-server"
+
+[tools."npm:prettier"]
+version = "3.5.2"
+backend = "npm:prettier"
 
 [tools."npm:stylelint"]
 version = "16.19.1"
