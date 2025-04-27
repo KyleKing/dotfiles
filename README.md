@@ -40,33 +40,3 @@ brew bundle --file ~/.Brewfile-personal --no-lock
 # https://github.com/junegunn/fzf#using-homebrew
 $(brew --prefix)/opt/fzf/install
 ```
-
-## Custom Color Schemes
-
-### K9s
-
-<!--TODO: remove installed theme, which no longer works-->
-
-<https://github.com/catppuccin/k9s>
-
-```sh
-K9S_CONFIG_PATH="${XDG_CONFIG_HOME:-$HOME/Library/Application Support}/k9s"
-gh repo clone catppuccin/k9s "${K9S_CONFIG_PATH}/skins/catppuccin" -- --depth 1
-cp "${K9S_CONFIG_PATH}/skins/catppuccin/dist/mocha.yml" "${K9S_CONFIG_PATH}/skin.yml"
-```
-
-### bat
-
-<!--TODO: remove installed theme, which no longer works-->
-
-<https://github.com/catppuccin/bat>
-
-```sh
-CAT_BAT_DIR="$HOME/Developer/nightly-packages/catppuccin-bat"
-gh repo clone catppuccin/bat "$CAT_BAT_DIR" -- --depth 1
-BAT_CONFIG_DIR="$(bat --config-dir)"
-chdir "$CAT_BAT_DIR"
-mkdir "$BAT_CONFIG_DIR/themes" || return true
-cp *.tmTheme "$BAT_CONFIG_DIR/themes"
-bat cache --build
-```
