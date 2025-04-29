@@ -1,5 +1,4 @@
 actionlint
-ansible
 asak
 ast-grep
 atuin
@@ -11,6 +10,7 @@ chezmoi
 cloc
 curlie
 dhth/tap/cueitup
+dhth/tap/prs
 diffoci
 difftastic
 dive
@@ -54,6 +54,7 @@ ollama
 ossp-uuid
 pandoc
 pgsync
+pgvector
 php
 pkgconf
 plantuml
