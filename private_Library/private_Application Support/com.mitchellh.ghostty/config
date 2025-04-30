@@ -5,7 +5,8 @@
 
 bold-is-bright = true
 # font-codepoint-map =  Fira Code Medium
-font-family = Hack Nerd Font Mono
+font-family = Atkinson Hyperlegible Mono
+# font-family = Hack Nerd Font Mono
 initial-window = true
 macos-titlebar-style = tabs
 quit-after-last-window-closed = true
