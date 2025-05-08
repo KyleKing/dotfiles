@@ -21,6 +21,7 @@ certifi 2025.4.26
 cffi 1.17.1_1
 chezmoi 2.62.3
 cloc 2.04
+coreutils 9.7
 cryptography 44.0.3
 cueitup 1.0.0
 curl 8.13.0

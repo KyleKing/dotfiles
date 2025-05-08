@@ -220,6 +220,9 @@ projects:
   python_queue_experiments:
     url: git@github.com:roaminsight/python_queue_experiments.git
 
+  quicksight:
+    url: git@github.com:roaminsight/quicksight.git
+
   redux-kit:
     url: git@github.com:roaminsight/redux-kit.git
 

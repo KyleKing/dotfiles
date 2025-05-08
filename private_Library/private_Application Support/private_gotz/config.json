@@ -2,12 +2,16 @@
   "config_version": "1.0",
   "timezones": [
     {
-      "Name": "SF",
+      "Name": "US West",
       "TZ": "America/Santa_Isabel"
     },
     {
       "Name": "CDMX",
       "TZ": "America/Mexico_City"
+    },
+    {
+      "Name": "US East",
+      "TZ": "America/New_York"
     },
     {
       "Name": "UTC",
