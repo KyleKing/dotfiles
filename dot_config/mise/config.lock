@@ -1,9 +1,9 @@
 [tools.bun]
-version = "1.2.11"
+version = "1.2.13"
 backend = "core:bun"
 
 [tools.bun.checksums]
-"bun-darwin-aarch64.zip" = "sha256:7d54c55c59274f2f2706481b38e6f7d90999c979f2ea522e7611bf051c5b19f4"
+"bun-darwin-aarch64.zip" = "sha256:8154367524d8c298edb269b8d0df61d469ec4194d361c07e4b8d2c65fbbc2efb"
 
 [tools."cargo:selene"]
 version = "0.28.0"
@@ -29,7 +29,7 @@ version = "1.1.4"
 backend = "go:github.com/dhth/act3"
 
 [tools."go:github.com/idursun/jjui/cmd/jjui"]
-version = "0.8.6"
+version = "0.8.8"
 backend = "go:github.com/idursun/jjui/cmd/jjui"
 
 [tools."go:github.com/merschformann/gotz"]
@@ -58,11 +58,14 @@ backend = "aqua:LuaLS/lua-language-server"
 "lua-language-server-3.14.0-darwin-arm64.tar.gz" = "sha256:85d67a12fd6d58927b9d0670bce8f2d62b0da62442b6afbcce2db38c0bf82e0a"
 
 [tools.node]
-version = "23.11.0"
+version = "24.0.1"
 backend = "core:node"
 
+[tools.node.checksums]
+"node-v24.0.1-darwin-arm64.tar.gz" = "sha256:f38faa6ea209aa31f56e5d82ee021ba5b8f149137734d81a31fda65c327f0be4"
+
 [tools."npm:@anthropic-ai/claude-code"]
-version = "0.2.104"
+version = "0.2.107"
 backend = "npm:@anthropic-ai/claude-code"
 
 [tools."npm:@fsouza/prettierd"]
@@ -142,7 +145,7 @@ version = "0.4.3"
 backend = "pipx:pytest-watcher"
 
 [tools."pipx:ruff"]
-version = "0.11.8"
+version = "0.11.9"
 backend = "pipx:ruff"
 
 [tools."pipx:sqlfluff"]
@@ -204,8 +207,8 @@ version = "2.3.0"
 backend = "ubi:watchexec/watchexec"
 
 [tools.yq]
-version = "4.45.2"
+version = "4.45.4"
 backend = "aqua:mikefarah/yq"
 
 [tools.yq.checksums]
-yq_darwin_arm64 = "sha256:7a1d495bee143cab1444149aa6179316865351576a1c8422cc59c81a6965ecb3"
+yq_darwin_arm64 = "sha256:602dbbc116af9eb8a91d2239d0ec286eb9c90b94e76676d5268ab6ca184719b6"

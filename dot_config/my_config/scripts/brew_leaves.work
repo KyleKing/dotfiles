@@ -28,6 +28,7 @@ git-filter-repo
 git-lfs
 glow
 go
+go-parquet-tools
 gum
 hadolint
 howdoi
