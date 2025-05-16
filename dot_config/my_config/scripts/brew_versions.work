@@ -204,6 +204,7 @@ rtmpdump 2.4-20151223_3
 ruby 3.4.3
 sad 0.4.32
 scc 3.5.0
+scooter 0.5.0
 selene 0.28.0
 sevenzip 24.09
 shared-mime-info 2.4
@@ -318,5 +319,6 @@ vlc 3.0.20
 webpquicklook 1.0
 wezterm 20240203-110809,5046fc22
 windows-app 11.1.5
+wireshark 4.4.6
 zed 0.181.6
 zoom 5.17.11.31580
