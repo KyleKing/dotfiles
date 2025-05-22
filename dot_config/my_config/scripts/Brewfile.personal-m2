@@ -49,7 +49,6 @@ brew "php"
 brew "plantuml"
 brew "podman-compose"
 brew "prettier"
-brew "pueue"
 brew "pyright"
 brew "rename"
 brew "ripgrep"
@@ -120,6 +119,7 @@ cask "microsoft-teams"
 cask "monitorcontrol"
 cask "mullvadvpn"
 cask "netiquette"
+cask "netnewswire"
 cask "obsidian"
 cask "oversight"
 cask "paletro"
@@ -136,7 +136,6 @@ cask "spotify"
 cask "suspicious-package"
 cask "taskexplorer"
 cask "texifier"
-cask "thunderbird"
 cask "visual-studio-code"
 cask "vlc"
 cask "webpquicklook"
@@ -158,10 +157,10 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
-mas "Spark", id: 1176895641
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
+mas "Tot", id: 1491071483
 mas "Weathergraph", id: 1501958576
 mas "Xcode", id: 497799835
 vscode "alexcvzz.vscode-sqlite"
@@ -174,6 +173,8 @@ vscode "gruntfuggly.todo-tree"
 vscode "hashicorp.terraform"
 vscode "jebbs.plantuml"
 vscode "jgclark.vscode-todo-highlight"
+vscode "ms-python.debugpy"
 vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
 vscode "redhat.vscode-yaml"
 vscode "yoavbls.pretty-ts-errors"
