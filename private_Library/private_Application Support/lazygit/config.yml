@@ -1,8 +1,6 @@
----
 # Skip prompt to create a new repository if one not present
 # Allows for more seamlessly launching lazygit from anywhere and switching context with ctrl+r
 notARepository: skip
-
 # Without Enter, I don't see the result of the process and still have the key input error
 # https://github.com/jesseduffield/lazygit/issues/1576
 # promptToReturnFromSubprocess: false
@@ -14,17 +12,17 @@ customCommands:
     description: Git Push with Subprocess
     command: git push
     context: global
-    subprocess: true
+    output: terminal
   - key: <f7>
     description: Git Push (force) with Subprocess
     command: git push --force
     context: global
-    subprocess: true
+    output: terminal
   - key: <c-o>
     description: View the GitHub PR
     command: gh pr view --web
     context: localBranches
-    subprocess: true
+    output: terminal
   - key: "O"
     context: "global"
     # FIXME: These don't open files from commit history
@@ -45,35 +43,35 @@ customCommands:
     description: Add Staged Files to Last Commit
     command: export _MSG=$(git show -s --format=%s) && git reset --soft HEAD~1 && git commit --message "$_MSG" --no-verify
     context: files
-    subprocess: true
+    output: terminal
   - key: w
     description: Commit with `--no-verify`
     command: git commit --message {{.Form.Message | quote}} --no-verify
     context: files
-    subprocess: true
     prompts:
       - type: input
         title: "(No Verify) Commit Message:"
         key: "Message"
         initialValue: ""
+    output: terminal
   - key: <f11>
     description: Delete merged PR branches with gh-poi
     command: gh poi
     context: localBranches
-    subprocess: true
+    output: terminal
   - key: <f12>
     description: Publish local branch to origin
     command: git push -u origin $(git rev-parse --abbrev-ref HEAD)
     context: localBranches
     loadingText: Publishing local branch...
-    subprocess: true
+    output: terminal
   # More from the wiki: https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium
   - key: <f10>
     description: Committing via Commitizen (git cz)
     command: git cz
     context: files
     loadingText: Opening commitizen commit tool
-    subprocess: true
+    output: terminal
   - key: N
     description: create annotated tag
     command: git tag -a {{index .PromptResponses 0}} -m "{{index .PromptResponses 1}}"
