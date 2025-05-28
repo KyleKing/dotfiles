@@ -91,6 +91,7 @@ jpeg-turbo 3.1.0
 jpeg-xl 0.11.1_1
 jpegoptim 1.5.5
 k9s 0.50.6
+kdash v0.6.2
 krb5 1.21.3
 krew 0.4.5
 kubernetes-cli 1.33.1
