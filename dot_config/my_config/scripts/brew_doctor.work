@@ -18,3 +18,34 @@ Warning: The following formulae have the same name as core formulae:
   charmbracelet/tap/vhs
   dhth/tap/prs
 Their taps are in use, so you must use these full names throughout Homebrew.
+
+Warning: Some installed formulae are not readable:
+  antoniorodr/lexy/lexy: /opt/homebrew/Library/Taps/antoniorodr/homebrew-lexy/Formula/lexy.rb:5: syntax errors found
+   3 |   desc 'CLI tool that fetches programming tutorials from "Learn X in Y Minutes" directly into your terminal.'
+   4 |   homepage 'https://github.com/antoniorodr/lexy'
+>  5 | <<<<<<< HEAD
+     | ^~ unexpected <<, ignoring it
+     |   ^~ unexpected <<, ignoring it
+     |     ^~ unexpected <<, ignoring it
+     |       ^ unexpected '<', ignoring it
+   6 |   url 'https://github.com/antoniorodr/lexy/releases/download/v0.4.1/lexy-0.4.1.tar.gz'
+   7 |   sha256 '0e66ad13d485161f853fa1949783cf7afcf1d26d5f086a30b87bee2df282d38f'
+>  8 | =======
+     | ^~~ unexpected '===', ignoring it
+     |    ^~~ unexpected '===', ignoring it
+     |       ^ unexpected '=', ignoring it
+   9 |   url 'https://github.com/antoniorodr/lexy/releases/download/v0.4.0/lexy-0.4.0.tar.gz'
+  10 |   sha256 'c8507f797e539aaa834b7225b7b28c30ebab454820911fe71d0942fac3743c5a'
+> 11 | >>>>>>> d61de2f (release v0.4.0)
+     | ^~ unexpected >>, ignoring it
+     |   ^~ unexpected >>, ignoring it
+     |     ^~ unexpected >>, ignoring it
+     |       ^ unexpected '>', ignoring it
+     |                             ^~~ unexpected float; expecting a message to send to the receiver
+  12 |   license 'MIT'
+  13 | 
+
+
+Warning: Some taps are not on the default git origin branch and may not receive
+updates. If this is a surprise to you, check out the default branch with:
+  git -C $(brew --repo antoniorodr/lexy) checkout main

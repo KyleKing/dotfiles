@@ -1,4 +1,4 @@
-aider-chat v0.83.2
+aider-chat v0.84.0
 - aider
 bump-pydantic v0.8.0
 - bump-pydantic
