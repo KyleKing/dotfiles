@@ -13,5 +13,7 @@
   "workbench.secondarySideBar.showLabels": false,
   "cSpell.enabled": false,
   "redhat.telemetry.enabled": false,
-  "go.toolsManagement.autoUpdate": true
+  "go.toolsManagement.autoUpdate": true,
+  "git.openRepositoryInParentFolders": "always",
+  "extensions.ignoreRecommendations": true
 }
