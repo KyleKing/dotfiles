@@ -20,6 +20,7 @@ go
 gum
 hadolint
 hyperfine
+icu4c@76
 imagemagick
 lazygit
 lazyjj
