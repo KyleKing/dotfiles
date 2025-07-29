@@ -64,6 +64,8 @@ php
 pkgconf
 plantuml
 pngcrush
+podman-compose
+podman-tui
 poppler
 postgresql@14
 postgresql@15

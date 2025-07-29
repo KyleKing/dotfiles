@@ -193,6 +193,9 @@ pixman 0.46.4
 pkgconf 2.5.1
 plantuml 1.2025.4
 pngcrush 1.8.13
+podman 5.5.2_1
+podman-compose 1.5.0
+podman-tui 1.7.0
 poppler 25.07.0_1
 postgresql@14 14.18
 postgresql@15 15.13
@@ -308,6 +311,7 @@ obsidian 1.8.4
 oversight 2.4.0
 paletro 1.9.0
 pika 0.0.16
+podman-desktop 1.20.2
 postman 10.24.16
 postman-cli 1.7.1
 qlmarkdown 1.0.17
