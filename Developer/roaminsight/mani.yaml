@@ -83,6 +83,9 @@ projects:
   doug-ui:
     url: git@github.com:roaminsight/doug-ui.git
 
+  doug-paia-scripts:
+    url: git@github.com:roaminsight/doug-paia-scripts.git
+
   dougs-private-pocs:
     url: git@github.com:roaminsight/dougs-private-pocs.git
 
@@ -198,9 +201,6 @@ projects:
   parexel-chat-services:
     url: git@github.com:roaminsight/parexel-chat-services.git
 
-  doug-paia-scripts:
-    url: git@github.com:roaminsight/doug-paia-scripts.git
-
   paia-external-services:
     url: git@github.com:roaminsight/paia-external-services.git
 
@@ -216,6 +216,9 @@ projects:
 
   protocol-structuring:
     url: git@github.com:roaminsight/protocol-structuring.git
+
+  pv-case-intake-poc:
+    url: git@github.com:roaminsight/pv-case-intake-poc.git
 
   python_queue_experiments:
     url: git@github.com:roaminsight/python_queue_experiments.git
@@ -313,6 +316,9 @@ projects:
 
   site-fees:
     url: git@github.com:roaminsight/site-fees.git
+
+  site-fees-api:
+    url: git@github.com:roaminsight/site-fees-api.git
 
   solve-pv:
     url: git@github.com:roaminsight/solve-pv.git

@@ -38,6 +38,7 @@ hyperfine
 imagemagick
 jd
 jpegoptim
+k3d
 k9s
 kdash-rs/kdash/kdash
 krew
@@ -64,6 +65,7 @@ php
 pkgconf
 plantuml
 pngcrush
+podlet
 podman-compose
 podman-tui
 poppler

@@ -15,5 +15,6 @@
   "redhat.telemetry.enabled": false,
   "go.toolsManagement.autoUpdate": true,
   "git.openRepositoryInParentFolders": "always",
-  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true,
+  "editor.accessibilitySupport": "off"
 }
