@@ -152,6 +152,7 @@ gui:
     searchingActiveBorderColor:
       - "#f9e2af"
   nerdFontsVersion: "3"
+  useHunkModeInStagingView: false
 git:
   # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   paging:
