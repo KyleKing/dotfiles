@@ -23,6 +23,7 @@ dust
 envchain
 eza
 fd
+fluxcd/tap/flux
 gcc
 gh
 git

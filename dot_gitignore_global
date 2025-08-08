@@ -50,3 +50,4 @@ node_modules/*
 # Secrets
 .netrc
 .npmrc
+podman-build-secret*

@@ -17,4 +17,5 @@ Warning: The following formulae have the same name as core formulae:
   charmbracelet/tap/soft-serve
   charmbracelet/tap/vhs
   dhth/tap/prs
+  fluxcd/tap/flux
 Their taps are in use, so you must use these full names throughout Homebrew.
