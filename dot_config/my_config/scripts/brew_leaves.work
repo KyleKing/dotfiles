@@ -34,6 +34,7 @@ go
 go-parquet-tools
 gum
 hadolint
+helm
 howdoi
 hyperfine
 imagemagick
@@ -43,8 +44,10 @@ k3d
 k9s
 kdash-rs/kdash/kdash
 krew
+kubeconform
 kubetui
 kubie
+kustomize
 lazydocker
 lazygit
 lazyjj
