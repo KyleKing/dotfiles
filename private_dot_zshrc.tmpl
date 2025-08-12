@@ -43,6 +43,9 @@ eval "$(atuin init zsh --disable-up-arrow)"
 export UV_PYTHON_DOWNLOADS=never
 export UV_PYTHON_PREFERENCE=only-system
 
+# VSCode
+# [[ "$TERM_PROGRAM" == "vscode" ]] && . "/Applications/Visual\ Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-rc.zsh"
+
 # --------------------------------------------------------------------------------------
 # Work
 
@@ -55,6 +58,7 @@ fi
 if [[ -f ~/.docker/init-zsh.sh ]]; then
   source ~/.docker/init-zsh.sh
 fi
+
 # --------------------------------------------------------------------------------------
 
 # See 'ZPROF' above
