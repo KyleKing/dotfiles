@@ -38,6 +38,7 @@ helm
 howdoi
 hyperfine
 imagemagick
+istioctl
 jd
 jpegoptim
 k3d
