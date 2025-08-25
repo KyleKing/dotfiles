@@ -3,3 +3,5 @@
 *.jpeg diff=image
 *.jpg  diff=image
 *.png  diff=image
+# https://mergiraf.org/usage.html
+* merge=mergiraf
