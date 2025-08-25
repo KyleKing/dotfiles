@@ -5,17 +5,3 @@ working fine: please don't worry or file an issue; just ignore this. Thanks![0m
 Warning: Some installed formulae are deprecated or disabled.
 You should find replacements for the following formulae:
   icu4c@76
-
-Warning: The following formulae have the same name as core formulae:
-  charmbracelet/tap/charm
-  charmbracelet/tap/glow
-  charmbracelet/tap/gum
-  charmbracelet/tap/mods
-  charmbracelet/tap/pop
-  charmbracelet/tap/sequin
-  charmbracelet/tap/skate
-  charmbracelet/tap/soft-serve
-  charmbracelet/tap/vhs
-  dhth/tap/prs
-  fluxcd/tap/flux
-Their taps are in use, so you must use these full names throughout Homebrew.

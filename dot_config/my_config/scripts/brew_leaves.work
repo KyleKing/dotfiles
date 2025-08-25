@@ -26,6 +26,7 @@ fd
 fluxcd/tap/flux
 gcc
 gh
+ghostscript
 git
 git-filter-repo
 git-lfs
@@ -94,6 +95,7 @@ structurizr-cli
 stylua
 swig
 syncthing
+tabiew
 tealdeer
 television
 tesseract-lang
