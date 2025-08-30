@@ -1,5 +1,6 @@
 atuin
 bat
+block-goose-cli
 chezmoi
 cloc
 curlie
@@ -11,6 +12,7 @@ envchain
 eza
 fd
 gcc
+gemini-cli
 gh
 git
 git-delta
@@ -22,6 +24,7 @@ hadolint
 hyperfine
 icu4c@76
 imagemagick
+krew
 lazygit
 lazyjj
 luacheck
@@ -37,9 +40,12 @@ orlangure/tap/gocovsh
 pandoc
 php
 plantuml
+pnpm
 podman-compose
+postgresql@17
 prettier
 pyright
+qman
 rename
 rhysd/git-brws/git-brws
 ripgrep
@@ -49,8 +55,11 @@ sevenzip
 shellharden
 shfmt
 srgn
+sst/tap/opencode
 stylua
+supabase/tap/supabase
 syncthing
+tabiew
 tealdeer
 television
 tpm
