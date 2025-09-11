@@ -10,9 +10,13 @@ em-keyboard v5.2.0
 - em
 flit v3.12.0
 - flit
+git-filter-repo v2.47.0
+- git-filter-repo
 norwegianblue v0.22.0
 - eol
 - norwegianblue
+tail-jsonl v1.4.1
+- tail-jsonl
 whatsonpypi v0.4.3
 - whatsonpypi
 - wopp

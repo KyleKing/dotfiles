@@ -11,12 +11,14 @@ MISE_PYTHON_UV_VENV_AUTO = "true"
 disable_hints = ["python_multi"]
 disable_tools = ["extract-msg", "textract-py3"]
 experimental = true
+idiomatic_version_file_enable_tools = ["node"]
 pipx_uvx = true
 
 [tools]
 python = "latest"
 bun = "latest"
 "cargo:selene" = "latest"
+deno = "latest"
 go = "latest"
 "go:github.com/Zxilly/go-size-analyzer/cmd/gsa" = "latest"
 "go:github.com/boyter/dcd" = "latest"
@@ -29,7 +31,9 @@ lua-language-server = "latest"
 node = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@browsermcp/mcp" = "latest"
+"npm:@charmland/crush" = "latest"
 "npm:@fsouza/prettierd" = "latest"
+"npm:@musistudio/claude-code-router" = "latest"
 "npm:@qodo/command" = "latest"
 "npm:bash-language-server" = "latest"
 "npm:cchistory" = "latest"
@@ -46,6 +50,7 @@ node = "latest"
 "pipx:mypy-silent" = "latest"
 "pipx:openhands-ai" = "latest"
 "pipx:pint" = "latest"
+"pipx:pipenv" = "latest"
 "pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}
 "pipx:pre-commit" = "latest"
 "pipx:pygments" = "latest"
@@ -54,7 +59,6 @@ node = "latest"
 "pipx:pytest-watcher" = "latest"
 "pipx:ruff" = "latest"
 "pipx:sqlfluff" = "latest"
-"pipx:tail-jsonl" = "latest"
 "pipx:textract-py3" = "2.1.1"
 "pipx:toml-sort" = "latest"
 "pipx:tox" = {uvx_args = "--with=tox-uv", version = "latest"}
