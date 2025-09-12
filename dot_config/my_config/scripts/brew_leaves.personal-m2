@@ -1,14 +1,11 @@
 atuin
-awscli
 bat
 block-goose-cli
-charmbracelet/tap/mods
 chezmoi
 cloc
 curlie
 difftastic
 direnv
-docker-credential-helper-ecr
 dotenv-linter
 duckdb
 envchain
