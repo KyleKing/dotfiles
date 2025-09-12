@@ -101,8 +101,12 @@
 # https://gist.github.com/Pagliacii/8fcb4dc64937305c19df9bb3137e4cad
 [merge]
   tool = diffview
+	conflictStyle = diff3
 [mergetool]
   prompt = false
   keepBackup = false
 [mergetool "diffview"]
   cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+[merge "mergiraf"]
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
