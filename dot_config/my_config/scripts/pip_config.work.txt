@@ -1,5 +1,5 @@
 For variant 'global', will try loading '/Library/Application Support/pip/pip.conf'
 For variant 'user', will try loading '/Users/kyleking/.pip/pip.conf'
 For variant 'user', will try loading '/Users/kyleking/.config/pip/pip.conf'
-For variant 'site', will try loading '/Users/kyleking/.cache/uv/archive-v0/ZGyvbS6pRQbzKYBRtI2-D/pip.conf'
+For variant 'site', will try loading '/Users/kyleking/.cache/uv/archive-v0/Q0PozaMLL67mNV_diPRUc/pip.conf'
 global.index-url='https://parexelailabs-888577033709.d.codeartifact.eu-west-1.amazonaws.com/pypi/package_registry/simple/'

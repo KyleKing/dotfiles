@@ -12,7 +12,7 @@ frogmouth v0.9.2
 - frogmouth
 ghstack v0.11.0
 - ghstack
-parllama v0.3.28
+parllama v0.4.0
 - parllama
 smassh v3.1.6
 - smassh

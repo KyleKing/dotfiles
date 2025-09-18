@@ -204,6 +204,9 @@ projects:
   parexel-chat-services:
     url: git@github.com:roaminsight/parexel-chat-services.git
 
+  paia-system-testing:
+    url: git@github.com:roaminsight/paia-system-testing.git
+
   paia-external-services:
     url: git@github.com:roaminsight/paia-external-services.git
 
