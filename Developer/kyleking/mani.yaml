@@ -1,6 +1,8 @@
 ---
 # PLANNED: How to tell which directories in this directory aren't managed by mani?
 projects:
+  app-template:
+    url: git@github.com:kyleking/app-template.git
   calcipy:
     url: git@github.com:kyleking/calcipy.git
     tags:
@@ -21,6 +23,8 @@ projects:
     url: git@github.com:kyleking/diacea.git
     tags:
       - calcipy-template
+  gh-star-search:
+    url: git@github.com:kyleking/gh-star-search.git
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
   karabiner-config:
@@ -53,6 +57,8 @@ projects:
     url: git@github.com:kyleking/private-snippets.git
   recipes:
     url: git@github.com:kyleking/recipes.git
+  spaghetti-comb.nvim:
+    url: git@github.com:kyleking/spaghetti-comb.nvim.git
   shoal:
     url: git@github.com:kyleking/shoal.git
     tags:
