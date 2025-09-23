@@ -279,7 +279,6 @@ zlib 1.3.1
 zoxide 0.9.8
 zsh 5.9
 zstd 1.5.7
-1password 8.10.30
 1password-cli 2.32.0
 alfred 5.5,2257
 appcleaner 3.6.8
@@ -290,12 +289,9 @@ cloudflare-warp 2024.3.407.0,20240329.17
 cursor 0.48.7,1d623c4cc1d3bb6e0fe4f1d5434b47b958b05876
 customshortcuts 1.1
 daisydisk 4.30
-dash6 6.4.3
 dbeaver-community 24.0.2
 dhs 1.5.1
-dropbox 197.4.7629
 firefox 124.0.2
-firefox@developer-edition latest
 font-atkinson-hyperlegible-mono latest
 font-fira-code 6.2
 font-fira-code-nerd-font 3.4.0
@@ -326,7 +322,6 @@ netiquette 2.3.0
 obsidian 1.8.4
 opcode 0.1.0
 oversight 2.4.0
-paletro 1.9.0
 pika 0.0.16
 podman-desktop 1.20.2
 postman 10.24.16
