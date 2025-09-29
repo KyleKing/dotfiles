@@ -15,7 +15,7 @@ git-filter-repo v2.47.0
 norwegianblue v0.22.0
 - eol
 - norwegianblue
-tail-jsonl v1.4.1
+tail-jsonl v1.4.2
 - tail-jsonl
 whatsonpypi v0.4.3
 - whatsonpypi
