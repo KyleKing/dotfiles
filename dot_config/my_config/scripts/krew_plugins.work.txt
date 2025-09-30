@@ -1,7 +1,0 @@
-iexec
-images
-ktop
-lineage
-neat
-resource-capacity
-status

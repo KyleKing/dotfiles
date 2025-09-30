@@ -1,13 +1,13 @@
 ---
 prSections:
   - title: My Work
-    filters: author:@me org:roaminsight archived:false is:open sort:updated-desc
+    filters: author:@me org:coverbasedev archived:false is:open sort:updated-desc
   - title: Needs My Review
     filters: review-requested:@me archived:false is:open sort:updated-desc
   - title: My Non-Work
-    filters: author:@me -org:roaminsight archived:false is:open sort:updated-desc
-  - title: Work PRs Pending Review (KB's View)
-    filters: org:roaminsight draft:false -review:approved -author:app/dependabot archived:false is:open sort:updated-desc
+    filters: author:@me -org:coverbasedev archived:false is:open sort:updated-desc
+  - title: Work PRs Pending Review
+    filters: org:coverbasedev draft:false -review:approved -author:app/dependabot archived:false is:open sort:updated-desc
 issuesSections:
   - title: Assigned
     filters: assignee:@me archived:false is:open sort:updated-desc
@@ -17,8 +17,8 @@ issuesSections:
     filters: -org:KyleKing author:@me archived:false is:open sort:updated-desc
   - title: Mentions Me
     filters: mentions:@me archived:false is:open sort:updated-desc
-  - title: Roaminsight
-    filters: org:roaminsight archived:false is:open sort:updated-desc
+  - title: coverbasedev
+    filters: org:coverbasedev archived:false is:open sort:updated-desc
 
 defaults:
   preview:

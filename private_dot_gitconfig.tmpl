@@ -1,7 +1,6 @@
 [alias]
 	# Previously used legit: https://github.com/frostming/legit
 
-	# Snippet from: https://github.com/roaminsight/matt-dotfiles/blob/master/.bash_prompt
     recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
 
     # Snippets from: https://github.com/ornicar/dotfiles/blob/7f0940aa42b7c79771ad1fe31be21cd49827f161/gitconfig#L55-L74
@@ -86,9 +85,6 @@
 	name = Kyle King
 	email = {{ .github.email }}
 	signingkey = {{ .github.signing_key }}
-[include]
-	# FYI: An alternative approach is to use 'includeIf' (example: https://blog.jannikwempe.com/git-config-includes#heading-overriding-git-configuration-for-some-repositories)
-	path = /Users/kyleking/.ailabs.gitconfig
 # FYI: `git maintenance start` can speed up git operations by running cron tasks for large and active repos (https://git-scm.com/docs/git-maintenance)
 
 #[difftool]

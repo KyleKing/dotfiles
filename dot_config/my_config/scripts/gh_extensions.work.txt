@@ -1,2 +1,0 @@
-gh dash	dlvhdr/gh-dash	v4.16.2
-gh poi	seachicken/gh-poi	v0.14.1
