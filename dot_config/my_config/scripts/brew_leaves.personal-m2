@@ -40,12 +40,10 @@ ollama
 orlangure/tap/gocovsh
 pandoc
 php
-pipx
 plantuml
 pnpm
 podman-compose
 postgresql@17
-pre-commit
 prettier
 pyright
 qman

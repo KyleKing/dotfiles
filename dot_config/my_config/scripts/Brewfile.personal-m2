@@ -52,12 +52,10 @@ brew "oh-my-posh"
 brew "ollama", restart_service: :changed
 brew "pandoc"
 brew "php"
-brew "pipx"
 brew "plantuml"
 brew "pnpm"
 brew "podman-compose"
 brew "postgresql@17"
-brew "pre-commit"
 brew "prettier"
 brew "pyright"
 brew "qman"
@@ -104,6 +102,7 @@ cask "cursor"
 cask "customshortcuts"
 cask "daisydisk"
 cask "dash6"
+cask "dayflow"
 cask "dhs"
 cask "discord"
 cask "docker-desktop"
@@ -142,6 +141,7 @@ cask "monitorcontrol"
 cask "mullvad-vpn"
 cask "netiquette"
 cask "netnewswire"
+cask "notion"
 cask "obsidian"
 cask "osaurus"
 cask "oversight"
@@ -185,6 +185,7 @@ mas "Shareful", id: 1522267256
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "The Unarchiver", id: 425424353
+mas "Toggl Track", id: 1291898086
 mas "Tot", id: 1491071483
 mas "Weathergraph", id: 1501958576
 mas "Xcode", id: 497799835
