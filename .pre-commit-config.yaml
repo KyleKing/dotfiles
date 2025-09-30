@@ -16,7 +16,7 @@ default_install_hook_types: ["commit-msg", "pre-commit", "pre-push"]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-executables-have-shebangs
@@ -40,18 +40,18 @@ repos:
       - id: trailing-whitespace
         exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
+    rev: v4.9.1
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.21
+    rev: 0.7.22
     hooks:
       - id: mdformat
         additional_dependencies: ["mdformat-mkdocs[recommended]>=2.0.1"]
         args: [--wrap=no]
         exclude: _.+\.md|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
         args: [--severity=warning]
@@ -67,11 +67,11 @@ repos:
         exclude: \.copier-answers\.yml|.*/cassettes/.*\.yaml|tests/.*assert-cache.*/.+\.json
         types_or: [html, javascript, json, shell, yaml]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.35.1
+    rev: v1.37.1
     hooks:
       - id: yamllint
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.2
+    rev: v0.24.3
     hooks:
       - id: toml-sort-fix
         args:
@@ -97,7 +97,7 @@ repos:
         stages:
           - pre-push
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v2.0.2
+    rev: v2.3.0
     hooks:
       - id: stylua-system
   - repo: local

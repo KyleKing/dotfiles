@@ -6,8 +6,9 @@
 
 SCRIPT_DIR=$HOME/.config/my_config/scripts
 
+# TODO: bad interpreter errors when running v5 locally
 # Store code tags
-calcipy-tags tags.collect-code-tags --doc-sub-dir=.github --filename=Chezmoi_Code_Tags.md --base-dir=$HOME/.local/share/chezmoi || return 1
+# calcipy-tags tags.collect-code-tags --doc-sub-dir=.github --filename=Chezmoi_Code_Tags.md --base-dir=$HOME/.local/share/chezmoi || return 1
 
 gh extension upgrade --all || return 1
 
