@@ -1,9 +1,11 @@
 abhimanyu003/sttr/sttr
 atuin
+awscli
 bat
 block-goose-cli
 chezmoi
 cloc
+codex
 curlie
 difftastic
 direnv
@@ -49,7 +51,6 @@ pyright
 qman
 rename
 rhysd/git-brws/git-brws
-ripgrep
 rust
 sad
 sevenzip

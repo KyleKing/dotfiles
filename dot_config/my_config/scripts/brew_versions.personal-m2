@@ -5,6 +5,7 @@ argon2 20190702_1
 aribb24 1.0.4
 atuin 18.8.0
 autoconf 2.72
+awscli 2.31.4
 bash 5.3.3
 bat 0.25.0_1
 block-goose-cli 1.9.0
@@ -15,6 +16,7 @@ cairo 1.18.4
 chezmoi 2.65.2
 cjson 1.7.19
 cloc 2.06
+codex 0.45.0
 curl 8.16.0
 curlie 1.8.2
 cyrus-sasl 2.1.28_2

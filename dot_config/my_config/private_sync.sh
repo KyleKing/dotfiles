@@ -6,7 +6,7 @@
 
 back-apply-ch() {
     # Apply any changes to local files
-    eval "$(op signin)" || return 1
+    eval "$(op signin --account=my.1password.com)" || return 1
     chezmoi apply
 }
 

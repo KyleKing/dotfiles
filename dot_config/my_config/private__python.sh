@@ -11,8 +11,9 @@ export PRE_COMMIT_COLOR=always
 # Turn On Better Exceptions for Python
 export BETTER_EXCEPTIONS=1
 
-# Ensure that poetry creates a .venv, but this is the default for uv
+# Ensure that poetry and pipenv creates a .venv. This is the default for uv
 export POETRY_VIRTUALENVS_IN_PROJECT=true
+export PIPENV_VENV_IN_PROJECT=1
 
 # Automate accepting copier commands by sending 'Enter' via STDIN
 alias copier-update="copier update --UNSAFE --conflict=rej"
