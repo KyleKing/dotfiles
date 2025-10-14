@@ -15,7 +15,7 @@ idiomatic_version_file_enable_tools = ["node"]
 pipx_uvx = true
 
 [tools]
-python = "latest"
+python = "3.11.11"
 bun = "latest"
 "cargo:selene" = "latest"
 deno = "latest"

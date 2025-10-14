@@ -9,6 +9,7 @@
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.generateTests.codeLens": true,
   "workbench.startupEditor": "none",
+  "python.venvPath": "./.venv/bin/python",
   "workbench.activityBar.location": "bottom",
   "workbench.secondarySideBar.showLabels": false,
   "cSpell.enabled": false,

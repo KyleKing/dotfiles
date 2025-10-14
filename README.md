@@ -9,9 +9,6 @@ Custom tab color/title. Discussion here: <https://github.com/wez/wezterm/discuss
 ## Installation Instructions
 
 ```sh
-# Install oh-my-zsh from: https://ohmyz.sh/#install
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 brew install chezmoi
 chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
@@ -26,6 +23,9 @@ eval "$(op signin)"
 touch ~/.config/chezmoi/chezmoi.toml
 open ~/.config/chezmoi/chezmoi.toml
 # These values need to be close enough, but don't need to be perfect and can be fixed later
+
+# Install oh-my-zsh from: https://ohmyz.sh/#install
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Apply synced files from Chezmoi
 chezmoi apply --verbose
