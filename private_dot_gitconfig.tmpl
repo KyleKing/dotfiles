@@ -1,110 +1,129 @@
+# -- Aliases for quick history review and branch exploration
 [alias]
-	# Previously used legit: https://github.com/frostming/legit
-
+    # Previously used legit: https://github.com/frostming/legit
     recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
-
     # Snippets from: https://github.com/ornicar/dotfiles/blob/7f0940aa42b7c79771ad1fe31be21cd49827f161/gitconfig#L55-L74
-	# Show list of contributors in descending order by number of commits
-	rank = shortlog -sn --no-merges
-	# Given any git object, try to show it briefly
-	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-	# Add modified files to previous commit
-	oups = !"git add -A -v && git commit --amend -C HEAD"
-	# Nice logs
-	l = log --decorate --graph --date=short --pretty=\"format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C()%s %C(black) [%an]%Creset\"
-	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-	mini = log --pretty=format:\"%h\"
-	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-	changelog = log --pretty=format:\" * %s\"
-	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
-	# Recent Branches
-	recent-branches = branch --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+    # Show list of contributors in descending order by number of commits
+    rank = shortlog -sn --no-merges
+    # Given any git object, try to show it briefly
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+    # Add modified files to previous commit
+    oups = !"git add -A -v && git commit --amend -C HEAD"
+    # Nice logs
+    l = log --decorate --graph --date=short --pretty=\"format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C()%s %C(black) [%an]%Creset\"
+    changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+    mini = log --pretty=format:\"%h\"
+    short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+    changelog = log --pretty=format:\" * %s\"
+    shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+    # Recent branches
+    recent-branches = branch --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+    # From old Alfred snippets
+    pretty-1 = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    pretty-2 = log --remotes --tags --oneline --decorate --stat --abbrev-commit --date=relative --branches --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n'
+    # gdiff
+    # > git diff --color | sed "s/^\\([^-+ ]*\\)[-+ ]/\\1/" | less -r
+    # comp
+    # > https://github.com/<org>/<repo>/compare/@<tag>..master@cursor?expand=1
 
-	# From old Alfred Snippets
-	pretty-1 = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-	pretty-2 = log --remotes --tags --oneline --decorate --stat --abbrev-commit --date=relative --branches --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n'
-
-	# `gdiff`
-	# > git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r
-	# `comp`
-	# > https://github.com/<org>/<repo>/compare/@<tag>..master@cursor?expand=1
-
+# -- Default branch list ordering
 [branch]
     sort = -committerdate
+
+# -- CLI presentation defaults
 [color]
-	ui = true
+    ui = true
 [column]
     ui = auto
+
+# -- Commit/signing defaults
 [commit]
-	gpgsign = true
+    gpgsign = true
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
+
+# -- Core repo defaults (line endings, ignore files, editor)
 [core]
-	attributesfile = {{ .chezmoi.homeDir }}/.gitattributes_global
-	autocrlf = input
-	# editor = subl --wait --add
-	editor = nvim
-	eol = lf
-	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+    attributesfile = {{ .chezmoi.homeDir }}/.gitattributes_global
+    autocrlf = input
+    # editor = subl --wait --add
+    editor = nvim
+    eol = lf
+    excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+
+# -- Diff tooling (requires difftastic + difft CLI)
 [diff]
     external = difft
     tool = difftastic
 [difftool]
-   prompt = false
+    prompt = false
 [difftool "difftastic"]
-   cmd = difft "$LOCAL" "$REMOTE"
+    cmd = difft "$LOCAL" "$REMOTE"
+
+# -- Filters for large files and media
 [filter "hawser"]
-	clean = git hawser clean %f
-	required = true
-	smudge = git hawser smudge %f
+    clean = git hawser clean %f
+    required = true
+    smudge = git hawser smudge %f
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	process = git-lfs filter-process
-	required = true
-	smudge = git-lfs smudge -- %f
+    clean = git-lfs clean -- %f
+    process = git-lfs filter-process
+    required = true
+    smudge = git-lfs smudge -- %f
 [filter "media"]
-	clean = git media clean %f
-	required = true
-	smudge = git media smudge %f
+    clean = git media clean %f
+    required = true
+    smudge = git media smudge %f
+
+# -- SSH-based signing via 1Password
 [gpg]
     format = ssh
 [gpg "ssh"]
-    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+# -- Branch defaults for new repositories
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
+# -- Disable pager for difftool to keep UI clean
 [pager]
     difftool = false
+
+# -- Pulls stay fast-forward-only to avoid accidental merge commits
 [pull]
-	ff = only
+    ff = only
+
+# -- Push with minimal refspec copying
 [push]
-	default = simple
+    default = simple
+
+# -- Enable rerere but it can auto-stage stale resolutions if left unchecked
 [rerere]
-    # Remembers conflict resolution
-    enabled = true
-[tag]
-	forceSignAnnotated = true
-[user]
-	name = Kyle King
-	email = {{ .github.email }}
-	signingkey = {{ .github.signing_key }}
-# FYI: `git maintenance start` can speed up git operations by running cron tasks for large and active repos (https://git-scm.com/docs/git-maintenance)
+    enabled = false
 
-#[difftool]
-#    prompt = true
-#[diff]
-#    tool = nvimdiff
-#[difftool "nvimdiff"]
-#    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-
-# https://gist.github.com/Pagliacii/8fcb4dc64937305c19df9bb3137e4cad
+# -- Merge defaults (mergiraf driver + diffview UI backup)
 [merge]
-  tool = diffview
-	conflictStyle = diff3
-[mergetool]
-  prompt = false
-  keepBackup = false
-[mergetool "diffview"]
-  cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+    tool = mergiraf
+    conflictStyle = zdiff3
 [merge "mergiraf"]
-	name = mergiraf
-	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+
+# -- Neovim Diffview integration for manual conflict reviews
+[mergetool]
+    prompt = false
+    keepBackup = false
+[mergetool "diffview"]
+    cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+
+# -- Enforce signed, annotated tags
+[tag]
+    forceSignAnnotated = true
+
+# -- Default author identity
+[user]
+    name = Kyle King
+    email = {{ .github.email }}
+    signingkey = {{ .github.signing_key }}
+
+# Tip: `git maintenance start` can speed up git operations by running cron tasks for large and active repos (https://git-scm.com/docs/git-maintenance)
