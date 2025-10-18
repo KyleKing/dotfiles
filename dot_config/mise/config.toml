@@ -45,7 +45,6 @@ node = "latest"
 "pipx:macnotesapp" = "latest"
 "pipx:mdformat" = "latest"
 "pipx:mypy-silent" = "latest"
-"pipx:openhands-ai" = "latest"
 "pipx:pint" = "latest"
 "pipx:pipenv" = "latest"
 "pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}

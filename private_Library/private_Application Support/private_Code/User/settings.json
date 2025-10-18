@@ -17,5 +17,12 @@
   "go.toolsManagement.autoUpdate": true,
   "git.openRepositoryInParentFolders": "always",
   "extensions.ignoreRecommendations": true,
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "security.workspace.trust.untrustedFiles": "open",
+  "chat.tools.terminal.autoApprove": {
+    "pnpm": true,
+    "uv": true
+  },
+  "workbench.secondarySideBar.defaultVisibility": "visible",
+  "diffEditor.experimental.showMoves": true
 }
