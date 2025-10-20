@@ -22,9 +22,11 @@ node
 nvimpager
 oh-my-posh
 pipenv
+plantuml
 pnpm
 rust
 sad
+shfmt
 stylua
 syncthing
 tmux
