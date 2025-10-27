@@ -24,5 +24,6 @@
     "uv": true
   },
   "workbench.secondarySideBar.defaultVisibility": "visible",
-  "diffEditor.experimental.showMoves": true
+  "diffEditor.experimental.showMoves": true,
+  "editor.minimap.autohide": "scroll"
 }
