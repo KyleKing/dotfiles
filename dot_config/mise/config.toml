@@ -9,7 +9,6 @@ MISE_PYTHON_UV_VENV_AUTO = "true"
 
 [settings]
 disable_hints = ["python_multi"]
-disable_tools = ["extract-msg", "textract-py3"]
 experimental = true
 idiomatic_version_file_enable_tools = ["node"]
 pipx_uvx = true
@@ -25,18 +24,16 @@ go = "latest"
 "go:github.com/dhth/act3" = "latest"
 "go:github.com/idursun/jjui/cmd/jjui" = "latest"
 "go:github.com/merschformann/gotz" = "latest"
-hk = "1.18.3"
+hk = "latest"
 lefthook = "latest"
 lua-language-server = "latest"
 node = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
 "npm:@browsermcp/mcp" = "latest"
 "npm:@fsouza/prettierd" = "latest"
 "npm:@qodo/command" = "latest"
 "npm:bash-language-server" = "latest"
 "npm:cchistory" = "latest"
 "npm:stylelint" = "latest"
-"npm:supabase" = "latest"
 "pipx:beautysh" = "latest"
 "pipx:black" = "latest"
 "pipx:code2flow" = "latest"
@@ -49,7 +46,6 @@ node = "latest"
 "pipx:pint" = "latest"
 "pipx:pipenv" = "latest"
 "pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}
-"pipx:pre-commit" = "latest"
 "pipx:pygments" = "latest"
 "pipx:pylint" = "latest"
 "pipx:pyright" = "latest"
