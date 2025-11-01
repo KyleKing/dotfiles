@@ -26,7 +26,6 @@ hadolint
 hyperfine
 icu4c@76
 imagemagick
-krew
 lazygit
 lazyjj
 luacheck
