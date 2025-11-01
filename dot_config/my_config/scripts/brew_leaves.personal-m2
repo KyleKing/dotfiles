@@ -46,7 +46,6 @@ pipenv
 plantuml
 pnpm
 postgresql@17
-pre-commit
 prek
 prettier
 pyright

@@ -191,7 +191,6 @@ pkgconf 2.5.1
 plantuml 1.2025.9
 pnpm 10.19.0
 postgresql@17 17.6
-pre-commit 4.3.0
 prek 0.2.11
 prettier 3.6.2
 psutils 3.3.14_1
