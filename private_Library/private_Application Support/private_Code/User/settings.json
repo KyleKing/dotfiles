@@ -21,9 +21,11 @@
   "security.workspace.trust.untrustedFiles": "open",
   "chat.tools.terminal.autoApprove": {
     "pnpm": true,
-    "uv": true
+    "uv": true,
+    "npm run typecheck:e2e": true
   },
   "workbench.secondarySideBar.defaultVisibility": "visible",
   "diffEditor.experimental.showMoves": true,
-  "editor.minimap.autohide": "scroll"
+  "editor.minimap.autohide": "scroll",
+  "traycer.additionalAgents": ["Claude Code", "Codex", "Export as Markdown"]
 }
