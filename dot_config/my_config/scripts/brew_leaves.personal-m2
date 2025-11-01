@@ -5,7 +5,6 @@ bat
 block-goose-cli
 chezmoi
 cloc
-codex
 curlie
 difftastic
 direnv
@@ -34,6 +33,7 @@ luacheck
 luarocks
 mani
 mas
+mergiraf
 mise
 navi
 nvimpager
@@ -42,15 +42,16 @@ ollama
 orlangure/tap/gocovsh
 pandoc
 php
+pipenv
 plantuml
 pnpm
-podman-compose
 postgresql@17
+pre-commit
+prek
 prettier
 pyright
 qman
 rename
-rhysd/git-brws/git-brws
 rust
 sad
 sevenzip
@@ -69,8 +70,10 @@ uv
 vale
 vhs
 walk
+withgraphite/tap/graphite
 yamllint
 yazi
 zf
+zizmor
 zoxide
 zsh

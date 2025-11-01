@@ -15,7 +15,7 @@ idiomatic_version_file_enable_tools = ["node"]
 pipx_uvx = true
 
 [tools]
-python = "3.11.11"
+python = "3.14.0"
 bun = "latest"
 "cargo:selene" = "latest"
 deno = "latest"
@@ -25,7 +25,7 @@ go = "latest"
 "go:github.com/dhth/act3" = "latest"
 "go:github.com/idursun/jjui/cmd/jjui" = "latest"
 "go:github.com/merschformann/gotz" = "latest"
-hk = "1.18.2"
+hk = "1.18.3"
 lefthook = "latest"
 lua-language-server = "latest"
 node = "latest"
@@ -45,6 +45,7 @@ node = "latest"
 "pipx:macnotesapp" = "latest"
 "pipx:mdformat" = "latest"
 "pipx:mypy-silent" = "latest"
+"pipx:openhands-ai" = "latest"
 "pipx:pint" = "latest"
 "pipx:pipenv" = "latest"
 "pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}
