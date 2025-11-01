@@ -32,8 +32,6 @@ local process_icons = {
     ["git"] = wezterm.nerdfonts.fa_git,
     ["go"] = wezterm.nerdfonts.seti_go,
     ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
-    ["kubectl"] = wezterm.nerdfonts.linux_docker,
-    ["kuberlr"] = wezterm.nerdfonts.linux_docker,
     ["lazydocker"] = wezterm.nerdfonts.linux_docker,
     ["lazygit"] = wezterm.nerdfonts.oct_git_compare,
     ["lua"] = wezterm.nerdfonts.seti_lua,
@@ -42,7 +40,6 @@ local process_icons = {
     ["nvim"] = wezterm.nerdfonts.custom_vim,
     ["psql"] = "󱤢",
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
-    ["stern"] = wezterm.nerdfonts.linux_docker,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
     ["usql"] = "󱤢",
     ["vim"] = wezterm.nerdfonts.dev_vim,
@@ -71,7 +68,6 @@ local function get_process(tab)
     if not tab.active_pane or tab.active_pane.foreground_process_name == "" then return "[?]" end
 
     local process_name = remove_abs_path(tab.active_pane.foreground_process_name)
-    if process_name:find("kubectl") then process_name = "kubectl" end
 
     return process_icons[process_name] or string.format("[%s]", process_name)
 end

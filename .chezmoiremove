@@ -17,6 +17,7 @@
 .config/ttyper
 .config/yazi
 .config/zellij
+.kubie/kubie.yaml
 .wegorc
 Library/Application Support/jj/
 Library/Application Support/superfile/

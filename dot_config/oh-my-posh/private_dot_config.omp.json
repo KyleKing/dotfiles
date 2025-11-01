@@ -60,16 +60,6 @@
       "segments": [
         {
           "properties": {
-            "display_error": false
-          },
-          "template": "\ufd31 {{.Context}}{{if .Namespace}}::{{.Namespace}}{{end}} ",
-          "foreground": "p:blue",
-          "background": "transparent",
-          "type": "kubectl",
-          "style": "plain"
-        },
-        {
-          "properties": {
             "display_error": true,
             "display_mode": "files",
             "fetch_package_manager": false,
