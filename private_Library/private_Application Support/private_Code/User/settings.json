@@ -22,7 +22,8 @@
   "chat.tools.terminal.autoApprove": {
     "pnpm": true,
     "uv": true,
-    "npm run typecheck:e2e": true
+    "npm run typecheck:e2e": true,
+    "npm run typecheck": true
   },
   "workbench.secondarySideBar.defaultVisibility": "visible",
   "diffEditor.experimental.showMoves": true,
