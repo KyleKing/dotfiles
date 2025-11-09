@@ -56,6 +56,7 @@ node = "latest"
 "pipx:trcli" = "latest"
 "pipx:watchgha" = "latest"
 "pipx:whisperlivekit" = {uvx_args = "--with torchaudio", version = "latest"}
+pitchfork = "latest"
 pkl = "latest"
 shellcheck = "latest"
 terraform = "latest"

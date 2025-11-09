@@ -26,6 +26,7 @@ hadolint
 hyperfine
 icu4c@76
 imagemagick
+lazydocker
 lazygit
 lazyjj
 luacheck
@@ -42,6 +43,7 @@ orlangure/tap/gocovsh
 pandoc
 php
 pipenv
+pkl-lsp
 plantuml
 pnpm
 postgresql@17

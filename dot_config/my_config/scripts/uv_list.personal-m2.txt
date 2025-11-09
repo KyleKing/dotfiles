@@ -1,17 +1,7 @@
-calcipy v5.0.0
-- calcipy
-- calcipy-docs
-- calcipy-lint
-- calcipy-pack
-- calcipy-tags
-- calcipy-test
-- calcipy-types
 em-keyboard v5.3.0
 - em
 flit v3.12.0
 - flit
-git-filter-repo v2.47.0
-- git-filter-repo
 norwegianblue v0.22.0
 - eol
 - norwegianblue
