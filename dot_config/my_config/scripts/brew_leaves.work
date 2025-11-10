@@ -13,6 +13,7 @@ git-lfs
 gnupg
 hk
 krew
+ktea
 lazydocker
 lazygit
 mani
@@ -36,6 +37,7 @@ syncthing
 tealdeer
 tesseract
 tmux
+tuios
 uv
 yadm
 zoxide

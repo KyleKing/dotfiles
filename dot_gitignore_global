@@ -44,6 +44,13 @@ Temporary Items
 .venv/*
 node_modules/*
 
+# For mise
+mise.local.toml
+
+# For now
+.claude/**/SKILL.md
+.cursor/*/*.md
+
 # nvim
 .null-ls*
 
