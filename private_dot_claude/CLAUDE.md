@@ -1,0 +1,8 @@
+- Do not add comments/docstrings when redundant to the code
+- Do not run Docker commands without instruction
+- For Python, prefer Pydantic, dataclasses, then dictionaries
+- Do not lazy import--place at the top of the file
+- Use modern Python, like pathlib.Path, defaultdict, Literal[...] and (str, Enum), etc.
+- If a function is only used within a file and not imported elsewhere, prefix with an underscore
+- Use uv in the directory with a uv.lock file parent to the relevant code to execute Python with the defined dependencies
+- Instead of find, use fd; use rg instead of grep; use 'sad' like `fd <...> | sad --pager=disable --commit --exact 'search' 'replace'`  to make bulk changes

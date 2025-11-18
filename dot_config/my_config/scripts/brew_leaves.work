@@ -2,6 +2,7 @@ atuin
 awscli
 bat
 chezmoi
+codelimit
 curl
 curlie
 difftastic
@@ -34,6 +35,7 @@ sad
 shfmt
 stylua
 syncthing
+tabiew
 tealdeer
 tesseract
 tmux
