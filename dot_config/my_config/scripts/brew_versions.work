@@ -1,6 +1,6 @@
 aom 3.13.1
 atuin 18.10.0
-awscli 2.31.38
+awscli 2.31.39
 bat 0.26.0
 brotli 1.2.0
 c-ares 1.34.5
@@ -22,6 +22,7 @@ fribidi 1.0.16
 fzf 0.67.0
 gd 2.3.3_6
 gdk-pixbuf 2.44.4
+gemini-cli 0.16.0
 gettext 0.26_1
 gh 2.83.1
 giflib 5.2.2
@@ -103,7 +104,7 @@ npth 1.8
 nvimpager 0.13.0
 oh-my-posh 27.6.0
 oniguruma 6.9.10
-opencode 1.0.74
+opencode 1.0.78
 openexr 3.4.3
 openjdk 25.0.1
 openjpeg 2.5.4
@@ -120,7 +121,7 @@ pkgconf 2.5.1
 pkl 0.30.0
 plantuml 1.2025.10
 pnpm 10.22.0
-prek 0.2.16
+prek 0.2.17
 pulumi 3.207.0
 python@3.13 3.13.9_1
 python@3.14 3.14.0_1
@@ -159,10 +160,10 @@ alfred 5.7.1,2307
 appcleaner 3.6.8
 beekeeper-studio 5.4.2
 brave-browser 1.83.120.0
-claude-code 2.0.44
+claude-code 2.0.46
 coderabbit 0.3.4
 codex 0.58.0
-conductor 0.22.3,01KAAQY00TQVK5VDE5S0P3Z2EA
+conductor 0.22.4,01KACV1V3PBFHGJ0WNYH0PFA7T
 cursor 2.0.63,505046dcfad2acda3d066e32b7cd8b6e2dc1fdcd
 cursor-cli 2025.11.06-8fe8a63
 customshortcuts 1.3
