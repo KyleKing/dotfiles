@@ -1,0 +1,75 @@
+# Jujutsu (jj) Configuration
+# Managed by chezmoi - edit in dotfiles repo
+
+[user]
+# Configure your user info
+name = "Kyle King"
+# email will be set via .gitconfig
+
+[ui]
+# Use difftastic for diffs (install via: brew install difftastic)
+diff.tool = ["difft", "--color=always", "$left", "$right"]
+# Show relative timestamps
+relative-timestamps = true
+# Use pager for long output
+paginate = "auto"
+
+[git]
+# Default remotes for fetch and push
+# Useful when contributing to repos with upstream and origin
+# fetch = "upstream"
+push = "origin"
+
+# Auto-push on commit (optional, uncomment if desired)
+# auto-local-bookmark = true
+
+[aliases]
+# Common workflow aliases
+st = ["status"]
+l = ["log"]
+s = ["show"]
+d = ["diff"]
+n = ["new"]
+e = ["edit"]
+desc = ["describe"]
+
+# Git-like aliases
+commit = ["describe"]
+checkout = ["edit"]
+branch = ["bookmark"]
+branches = ["bookmark", "list"]
+
+# Stacked diff workflow
+# Push current change
+push = ["git", "push", "-c", "@"]
+# Push with new bookmark
+push-new = ["git", "push", "--allow-new"]
+
+# Stack management
+# Rebase current change onto main
+rebase-main = ["rebase", "-d", "main"]
+# Rebase onto origin/main
+rebase-origin = ["rebase", "-d", "origin/main"]
+
+# Show the stack
+stack = ["log", "-r", "::@"]
+# Show all bookmarks/branches
+bookmarks = ["bookmark", "list", "--all"]
+
+[revset-aliases]
+# Custom revset aliases for common queries
+# Show only your bookmarks (not remote)
+mybookmarks = "bookmarks() & ~remote_bookmarks()"
+# Show the current stack from main to HEAD
+mystack = "main..@"
+
+[merge-tools]
+# Use mergiraf for 3-way merges (install via: brew install mergiraf)
+# Uncomment if you have mergiraf installed
+# mergiraf.program = "mergiraf"
+# mergiraf.merge-args = ["$left", "$base", "$right", "-o", "$output"]
+
+[colors]
+# Customize colors (optional)
+# "commit_id prefix" = "bright blue"
+# "change_id prefix" = "bright cyan"

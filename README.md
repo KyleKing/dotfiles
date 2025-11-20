@@ -6,6 +6,18 @@
 
 Custom tab color/title. Discussion here: <https://github.com/wez/wezterm/discussions/4945>
 
+### Jujutsu (jj) with jj-stack
+
+Configured for stacked diffs/PRs on GitHub using:
+- **jj**: Git-compatible VCS installed via Homebrew
+- **jj-stack**: npm package for creating/managing stacked PRs
+- **lazyjj**: TUI for visual jj workflows
+
+Documentation:
+- Quick start: `~/.config/my_config/scripts/JJ_GETTING_STARTED.md`
+- Full workflow: `~/.config/my_config/scripts/JJ_STACK_WORKFLOW.md`
+- Quick reference: Run `jhelp` in terminal
+
 ## Installation Instructions
 
 ```sh
