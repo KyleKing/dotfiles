@@ -14,55 +14,29 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # Decrease update check frequency
 zstyle ':omz:update' frequency 14
 
-# Configure the navi widget for completions
-# TODO: Should I use navi, cheat, tldr, or other tool for all quick reference?
+# Configure the navi widget for interactive cheat sheets with custom snippets
 eval "$(navi widget zsh)"
 
 # Source brew-installed package completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-# Use `omz plugin info <name>  | glow -` to learn more about each. Prints the README
-#   omz plugin info zsh-autosuggestions | glow -
+# Use `omz plugin info <name> | glow -` to learn more about each
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
 export plugins=(
-    # copybuffer: Ctrl+O to copy typed command
-    # copypath: Copies current path or the path to the specified file
-    # encode64: e64/d64: encodes or decode given data to/from base64 (`e64 '{"a": 1}'` // `pbpaste | d64 | gojq`)
-    # git: a TON of aliases. See: https://github.com/davidde/git and the alternative https://github.com/unixorn/git-extra-commands
-    # history: History. Use: h, hs <> (grep), hsi <> (grep -i)
-    # macos: Mac commands. Use: quick-look, man-preview, hidefiles, showfiles, music, rmdsstore, btrestart
-    # perms: recursively set permissions (fixperms, set755, set644)
-    # python: useful aliases (`pyfind` recursively find .py / `pyclean` Delete byte and cache)
-    # timer: time commands integration to the prompt (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/timer)
-    # tmux: auto-start in tmux session, tmuxconf to edit config, tl to list, ta to attach, etc.
-    # urltools: urlencode/urldecode (urldecode 'https%3A%2F%2Fgithub.com%2Fohmyzsh%2Fohmyzsh%2Fsearch%3Fq%3Durltools%26type%3DCode')
-    # copybuffer
-    # copypath
-    # encode64
-    git
-    jj # https://github.com/ohmyzsh/ohmyzsh/tree/1c2127727af0ac452292f844ee32306f12906d03/plugins/jj
-    python
-    timer
-    tmux
-    # urltools
+    # Built-in OMZ plugins
+    git        # Extensive git aliases. See: https://github.com/davidde/git
+    jj         # Jujutsu VCS integration
+    python     # Python aliases: pyfind (search .py files), pyclean (remove bytecode)
+    timer      # Command timing in prompt
+    tmux       # tmux integration: tmuxconf, tl, ta, etc.
 
-    # lol: alias yolo="git commit -m "$(curl -s http://whatthecommit.com/index.txt)""
-
-    # Chezmoi Git Submodules
-    #
-    # Docs: https://github.com/MichaelAquilina/zsh-auto-notify
-    auto-notify
-    # Docs: https://github.com/MichaelAquilina/zsh-you-should-use
-    you-should-use
-    # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
-    zsh-completions
-    # Docs: https://github.com/zsh-users/zsh-autosuggestions (Configuration below)
-    zsh-autosuggestions
-    # Syntax Highlighters must be last
-    zsh-syntax-highlighting
+    # External plugins (managed via chezmoi git submodules)
+    auto-notify          # Desktop notifications for long-running commands
+    you-should-use       # Reminds about existing aliases
+    zsh-completions      # Additional completions not in zsh-proper
+    zsh-autosuggestions  # Fish-like command suggestions (configured below)
+    zsh-syntax-highlighting  # Must be last - syntax highlighting as you type
 )
 
 # Auto-activate venv (https://github.com/astral-sh/uv/issues/1910#issuecomment-2394878577)
@@ -74,18 +48,8 @@ source "$ZSH/oh-my-zsh.sh"
 # ----------------------------------------------------------------------------------------------------------------------
 # User configuration
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-# FYI: Global variables are used as aliases for commands that take pipe input
-#
-# Example aliases
-# alias zshconfig="mate $HOME/.zshrc"
-# alias ohmyzsh="mate $HOME/.oh-my-zsh"
-
 # Extend tmux plugin by auto-recognizing the current directory as the session name
-#   'terminal session here'
+# Usage: tsh - 'terminal session here'
 tsh() {
     _name=$(basename "$PWD")
     (ts "$_name" || ta "$_name") || return 1
