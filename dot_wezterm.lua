@@ -108,11 +108,12 @@ local function string_to_color(str)
     -- Convert the string to a unique integer
     local hash = 0
     for i = 1, #str do
-        -- Bitwise Left Shift: https://stackoverflow.com/a/141873/3219667
-        hash = string.byte(str, i) + ((hash << 5) - hash)
+        -- Bitwise Left Shift: (hash << 5) is equivalent to hash * 32
+        hash = string.byte(str, i) + (hash * 32 - hash)
     end
-    -- Convert the integer to a unique color
-    local c = string.format("%06X", (hash & 0x00FFFFFF))
+    -- Convert the integer to a unique color (mask to 24 bits)
+    -- Bitwise AND with 0x00FFFFFF is equivalent to modulo 0x01000000
+    local c = string.format("%06X", math.abs(hash) % 0x01000000)
     return "#" .. (string.rep("0", 6 - #c) .. c):upper()
 end
 
