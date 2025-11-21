@@ -54,3 +54,31 @@ gh-runs() {
     export GITHUB_TOKEN
     watch_gha_runs --wait-for-start
 }
+
+# GitHub repository configuration management
+# See: ~/.config/my_config/scripts/GITHUB_CONFIG_MANAGEMENT.md
+alias gh-config='bash ~/.config/my_config/github_config_repo.sh'
+alias gh-audit='bash ~/.config/my_config/github_audit_repos.sh'
+alias gh-bulk='bash ~/.config/my_config/github_bulk_config.sh'
+
+# Quick audit current repo
+gh-audit-here() {
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        echo "Error: Not in a git repository"
+        return 1
+    fi
+    local repo
+    repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+    bash ~/.config/my_config/github_audit_repos.sh "$repo"
+}
+
+# Quick config current repo
+gh-config-here() {
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        echo "Error: Not in a git repository"
+        return 1
+    fi
+    local repo
+    repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+    bash ~/.config/my_config/github_config_repo.sh "$repo"
+}

@@ -1,6 +1,6 @@
 # Tool Purpose Documentation
 
-**Last Updated**: 2025-11-20
+**Last Updated**: 2025-11-21
 **Purpose**: Track why each tool is installed and prevent reinstalling removed tools
 
 ---
@@ -106,6 +106,35 @@
 - **Purpose**: GitHub operations from command line
 - **Usage**: PR management, workflow monitoring
 - **Extensions**: Tracked in machine snapshot
+
+### GitHub Configuration Management Tools ⭐ NEW
+- **Purpose**: Automate and audit GitHub repository settings across all repos
+- **Scripts**:
+  - `github_config_repo.sh` - Apply standard config to a repo
+  - `github_audit_repos.sh` - Audit repo configurations
+  - `github_bulk_config.sh` - Bulk operations across repos
+- **Aliases**:
+  - `gh-config-here` - Configure current repository
+  - `gh-audit-here` - Audit current repository
+  - `gh-audit` - Audit specified repo or all repos
+  - `gh-bulk` - Bulk operations with options
+- **Features**:
+  - ✅ Auto-delete branches after merge
+  - ✅ Consistent merge strategy settings
+  - ✅ Branch protection rules
+  - ✅ Bulk configuration updates
+  - ✅ Repository auditing and compliance
+- **Documentation**:
+  - Full guide: `~/.config/my_config/scripts/GITHUB_CONFIG_MANAGEMENT.md`
+  - Quick start: `~/.config/my_config/scripts/GITHUB_CONFIG_QUICKSTART.md`
+- **Usage Examples**:
+  ```bash
+  gh-config-here              # Apply standard config to current repo
+  gh-audit --all              # Audit all repositories
+  gh-bulk --auto-delete       # Enable auto-delete on all repos
+  gh-bulk --summary           # Show configuration summary
+  ```
+- **Why needed**: Personal GitHub accounts don't have organization-level settings, so consistent configuration across repos requires automation
 
 ### difftastic ✅ KEEP
 - **Purpose**: Structural diff tool
