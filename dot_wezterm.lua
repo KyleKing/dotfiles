@@ -56,11 +56,16 @@ end
 -- Remove all path components and return only the last value
 local function remove_abs_path(path) return path:gsub("(.*[/\\])(.*)", "%2") end
 
--- Return the pretty path of the tab's current working directory
-local function get_display_cwd(tab)
-    local current_dir = get_cwd(tab)
-    local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
-    return current_dir == HOME_DIR and "~/" or remove_abs_path(current_dir)
+-- Get the git root directory name, or fallback to current directory name
+local function get_git_dir_name(tab)
+    local cwd = get_cwd(tab):gsub("^file://", "")
+    local handle = io.popen("cd '" .. cwd .. "' 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null")
+    if handle then
+        local git_root = handle:read("*a"):gsub("%s+$", "")
+        handle:close()
+        if git_root ~= "" then return remove_abs_path(git_root) end
+    end
+    return remove_abs_path(cwd)
 end
 
 -- Return the concise name or icon of the running process for display
@@ -74,14 +79,9 @@ end
 
 -- Pretty format the tab title
 local function format_title(tab)
-    local cwd = get_display_cwd(tab)
+    local dir_name = get_git_dir_name(tab)
     local process = get_process(tab)
-
-    local active_title = tab.active_pane.title
-    if active_title:find("- NVIM") then active_title = active_title:gsub("^([^ ]+) .*", "%1") end
-
-    local description = (not active_title or active_title == cwd) and "~" or active_title
-    return string.format(" %s %s/ %s ", process, cwd, description)
+    return string.format(" %s %s ", process, dir_name)
 end
 
 -- Determine if a tab has unseen output since last visited
@@ -134,12 +134,24 @@ assert(select_contrasting_fg_color("#128b26") == "#FFFFFF", "Expected higher con
 assert(select_contrasting_fg_color("#58f5a6") == "#000000", "Expected higher contrast with black")
 assert(select_contrasting_fg_color("#EBD168") == "#000000", "Expected higher contrast with black")
 
+-- Get full git root path for color hashing (not just the name)
+local function get_git_root_path(tab)
+    local cwd = get_cwd(tab):gsub("^file://", "")
+    local handle = io.popen("cd '" .. cwd .. "' 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null")
+    if handle then
+        local git_root = handle:read("*a"):gsub("%s+$", "")
+        handle:close()
+        if git_root ~= "" then return "||" .. git_root end
+    end
+    return "./" .. cwd
+end
+
 -- On format tab title events, override the default handling to return a custom title
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
     local title = get_tab_title(tab)
-    local color = string_to_color(get_cwd(tab))
+    local color = string_to_color(get_git_root_path(tab))
 
     if tab.is_active then
         return {
