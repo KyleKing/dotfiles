@@ -47,6 +47,39 @@ local process_icons = {
     ["zsh"] = wezterm.nerdfonts.dev_terminal,
 }
 
+-- Git lookup cache to avoid repeated expensive io.popen calls
+local git_cache = {}
+local GIT_CACHE_TTL = 600 -- 10 minutes
+
+local function get_cached_git_root(cwd)
+    local now = os.time()
+    local cached = git_cache[cwd]
+
+    if cached and (now - cached.timestamp) < GIT_CACHE_TTL then return cached.root, cached.is_git_repo end
+
+    local git_root = ""
+    local is_git_repo = false
+
+    local handle = io.popen("cd '" .. cwd .. "' 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null")
+    if handle then
+        git_root = handle:read("*a"):gsub("%s+$", "")
+        handle:close()
+        if git_root ~= "" then is_git_repo = true end
+    end
+
+    git_cache[cwd] = {
+        root = git_root,
+        is_git_repo = is_git_repo,
+        timestamp = now,
+    }
+
+    for key, value in pairs(git_cache) do
+        if (now - value.timestamp) >= GIT_CACHE_TTL * 2 then git_cache[key] = nil end
+    end
+
+    return git_root, is_git_repo
+end
+
 -- Return the Tab's current working directory
 local function get_cwd(tab)
     -- Note, returns URL Object: https://wezfurlong.org/wezterm/config/lua/pane/get_current_working_dir.html
@@ -59,13 +92,9 @@ local function remove_abs_path(path) return path:gsub("(.*[/\\])(.*)", "%2") end
 -- Get the git root directory name, or fallback to current directory name
 local function get_git_dir_name(tab)
     local cwd = get_cwd(tab):gsub("^file://", "")
-    local handle = io.popen("cd '" .. cwd .. "' 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null")
-    if handle then
-        local git_root = handle:read("*a"):gsub("%s+$", "")
-        handle:close()
-        if git_root ~= "" then return remove_abs_path(git_root) end
-    end
-    return remove_abs_path(cwd)
+    local git_root, is_git_repo = get_cached_git_root(cwd)
+    if is_git_repo then return remove_abs_path(git_root) end
+    return "./" .. remove_abs_path(cwd)
 end
 
 -- Return the concise name or icon of the running process for display
@@ -138,12 +167,8 @@ assert(select_contrasting_fg_color("#EBD168") == "#000000", "Expected higher con
 -- Get full git root path for color hashing (not just the name)
 local function get_git_root_path(tab)
     local cwd = get_cwd(tab):gsub("^file://", "")
-    local handle = io.popen("cd '" .. cwd .. "' 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null")
-    if handle then
-        local git_root = handle:read("*a"):gsub("%s+$", "")
-        handle:close()
-        if git_root ~= "" then return "||" .. git_root end
-    end
+    local git_root, is_git_repo = get_cached_git_root(cwd)
+    if is_git_repo then return "||" .. git_root end
     return "./" .. cwd
 end
 
