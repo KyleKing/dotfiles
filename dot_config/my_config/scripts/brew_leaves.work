@@ -1,6 +1,7 @@
 atuin
 awscli
 bat
+ccache
 chezmoi
 codelimit
 curl

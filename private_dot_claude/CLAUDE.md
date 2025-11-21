@@ -6,3 +6,4 @@
 - If a function is only used within a file and not imported elsewhere, prefix with an underscore
 - Use uv (when ./uv.lock), poetry (when ./poetry.lock), or tox (when ./tox directory) to execute Python
 - Instead of find, use fd; use rg instead of grep; use 'sad' like `fd <...> | sad --pager=disable --commit --exact 'search' 'replace'`  to make bulk changes
+- Never use `__all__` when the direct import can be set. Never lazy load imports to resolve circular imports when refactoring is possible
