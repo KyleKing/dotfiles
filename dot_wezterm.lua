@@ -31,6 +31,8 @@
 --  ALT+Left/Right - Jump backward/forward by word
 --  CMD+Left/Right - Jump to start/end of line (standard: C-a, C-e)
 --  CTRL+B/F - Scroll page up/down (vim-style)
+--  CMD+Up - Jump to previous prompt (requires shell integration)
+--  CMD+Shift+Down - Jump to next prompt (requires shell integration)
 --  CMD+Down - Scroll to bottom
 --
 -- TEXT SELECTION & SEARCH:
@@ -56,6 +58,29 @@
 -- Resources:
 --  Example configs: https://github.com/wez/wezterm/discussions/628
 --  Pane splitting: https://wezfurlong.org/wezterm/config/lua/keyassignment/SplitPane.html
+--
+-- ============================================================================
+-- Shell Integration Setup (Required for prompt jumping and command tracking)
+-- ============================================================================
+-- Add to your shell config file (.zshrc, .bashrc, etc.):
+--
+-- For Zsh (~/.zshrc):
+--   eval "$(wezterm shell-integration --shell zsh)"
+--
+-- For Bash (~/.bashrc):
+--   eval "$(wezterm shell-integration --shell bash)"
+--
+-- For Fish (~/.config/fish/config.fish):
+--   wezterm shell-integration --shell fish | source
+--
+-- This enables:
+-- - Prompt jumping (CMD+Up/Down to jump between commands)
+-- - Command tracking in status bar
+-- - Error detection (shows alert icon when command fails)
+-- - Semantic zones for better text selection
+--
+-- Docs: https://wezfurlong.org/wezterm/shell-integration.html
+-- ============================================================================
 
 local wezterm = require("wezterm")
 
@@ -470,6 +495,10 @@ config.keys = {
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
     { key = "f", mods = "CTRL", action = act.ScrollByPage(0.9) },
     { key = "DownArrow", mods = "CMD", action = act.ScrollToBottom },
+
+    -- Prompt jumping (requires shell integration)
+    { key = "UpArrow", mods = "CMD", action = act.ScrollToPrompt(-1) },
+    { key = "DownArrow", mods = "CMD|SHIFT", action = act.ScrollToPrompt(1) },
 
     -- Enhanced text navigation
     { key = "x", mods = "CMD", action = act.ActivateCopyMode },
