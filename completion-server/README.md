@@ -14,9 +14,9 @@ IDE-like completion server for shell commands, providing rich, ranked completion
 
 ## Features
 
-### Current (v0.2.0)
+### Current (v0.3.0)
 
-- [x] Query command for getting completions
+**Completion Sources:**
 - [x] **Carapace-bin integration** (1000+ commands)
   - Export format parsing
   - Prefix filtering
@@ -26,28 +26,61 @@ IDE-like completion server for shell commands, providing rich, ranked completion
   - Flag completion with short/long forms
   - Flag value completion with choices
   - Context-aware completion
-- [x] JSON and text output formats
-- [x] **Completion engine with source merging**
-  - Multiple source support
-  - Automatic deduplication (keeps highest score)
-  - Functional options pattern
-  - Graceful source initialization
+
+**Intelligent Ranking:**
+- [x] **Atuin history integration**
+  - SQLite database queries
+  - Frequency, recency, success rate tracking
+  - Per-flag usage statistics
+  - Graceful fallback if unavailable
+- [x] **Multi-factor ranking algorithm**
+  - Logarithmic frequency scaling
+  - Exponential recency decay (24h half-life)
+  - Success rate weighting
+  - Context-aware boosting
+  - Configurable weights
+- [x] **Git context detection**
+  - Repository detection via directory tree walk
+  - Boosts git-related flags in git repos
+  - Working directory tracking
+
+**Performance:**
+- [x] **Daemon mode with Unix socket**
+  - Pre-loaded completion engine
+  - <10ms response times
+  - JSON protocol
+  - Concurrent connection handling
+  - Graceful shutdown
+
+**User Interface:**
+- [x] **Floating overlay with lipgloss**
+  - Main panel showing top 5 completions
+  - Detail panel with metadata
+  - Adaptive positioning (left/right/hidden)
+  - Toggleable above/below prompt
+  - ANSI escape code rendering
+- [x] **ZSH widget integration**
+  - Auto-trigger on typing (configurable delay)
+  - Keyboard navigation (arrows, Enter, Esc)
+  - Position toggle (Shift-Tab)
+  - Manual trigger mode
+
+**Testing & Quality:**
 - [x] **Comprehensive test coverage**
+  - 67+ tests across all packages
   - API-level integration tests
   - Mock infrastructure for testability
-  - 18+ test scenarios
   - All tests parallelized
+  - 45+ enabled linters (golangci-lint)
 
 ### Planned
 
-- [ ] Atuin history integration for ranking
 - [ ] TLDR pages integration
 - [ ] Man page parsing fallback
-- [ ] SQLite caching layer
-- [ ] Smart ranking algorithm (frequency, recency, context)
-- [ ] Git repo detection for context boosting
-- [ ] Bubbletea TUI for interactive selection
-- [ ] ZSH widget for seamless integration
+- [ ] SQLite caching layer for completions
+- [ ] Fuzzy matching for partial completions
+- [ ] Integration with existing ZSH completion system
+- [ ] WezTerm Lua integration (optional)
 - [ ] WezTerm Lua integration
 
 ## Installation
@@ -74,9 +107,45 @@ mise run build:install
 
 ## Usage
 
-### Query Completions
+### Quick Start (Recommended)
 
-Get completions for a command:
+1. **Start the daemon:**
+   ```bash
+   completion-server daemon &
+   ```
+
+2. **Load the ZSH widget** (add to your `.zshrc`):
+   ```bash
+   source /path/to/completion-server/zsh/completion-widget.zsh
+   ```
+
+3. **Use completions:**
+   - Press `Ctrl-X Ctrl-C` to trigger completions
+   - Navigate with `Up`/`Down` or `Ctrl-P`/`Ctrl-N`
+   - Accept with `Enter`, cancel with `Escape`
+   - Toggle position with `Shift-Tab`
+
+See [zsh/README.md](zsh/README.md) for full widget documentation.
+
+### Commands
+
+#### Daemon Mode
+
+Run as a background daemon for <10ms response times:
+
+```bash
+# Start daemon
+completion-server daemon
+
+# With custom socket
+completion-server daemon --socket /tmp/custom.sock
+```
+
+The daemon pre-loads all completion sources and history, enabling fast queries.
+
+#### Query Command
+
+Get completions directly (useful for testing):
 
 ```bash
 completion-server query "fd " --cursor 3 --max 5
@@ -89,30 +158,27 @@ Output (JSON):
     "value": "--hidden",
     "display": "-H, --hidden",
     "description": "Search hidden files and directories",
-    "score": 100,
-    "source": "carapace"
-  },
-  {
-    "value": "--type",
-    "display": "-t, --type <type>",
-    "description": "Filter by type (f=file, d=dir, l=symlink)",
-    "score": 100,
-    "source": "carapace"
+    "score": 150.5,
+    "source": "carapace",
+    "metadata": {}
   }
 ]
 ```
 
-### Text Format
-
+Text format:
 ```bash
 completion-server query "git checkout " --format text
 ```
 
-Output:
+#### Show Command (Demo)
+
+Display the UI with completions:
+
+```bash
+completion-server show "fd "
 ```
---hidden    -H, --hidden    Search hidden files and directories
---type      -t, --type      Filter by type (f=file, d=dir, l=symlink)
-```
+
+This demonstrates the floating overlay UI with main panel, detail panel, and different positions.
 
 ## Development
 
@@ -122,23 +188,38 @@ Output:
 completion-server/
 ├── cmd/                    # CLI commands
 │   ├── root.go            # Root command
-│   └── query.go           # Query subcommand
+│   ├── query.go           # Query subcommand
+│   ├── daemon.go          # Daemon mode
+│   └── show.go            # UI demo command
 ├── internal/
 │   ├── completion/        # Completion engine
 │   │   └── engine.go
-│   ├── ranker/            # Ranking algorithms
+│   ├── context/           # Context detection (git repo, etc.)
+│   ├── daemon/            # Unix socket server
+│   │   └── server.go
+│   ├── history/           # History providers (Atuin)
+│   │   └── atuin.go
+│   ├── ranker/            # Multi-factor ranking
+│   │   └── ranker.go
 │   ├── sources/           # Completion sources
 │   │   ├── source.go      # Source interface
 │   │   ├── carapace.go    # Carapace-bin source
 │   │   └── usage.go       # jdx/usage source
-│   └── ui/                # Bubbletea UI (future)
+│   ├── testutil/          # Testing utilities
+│   └── ui/                # Lipgloss UI rendering
+│       ├── model.go       # UI state model
+│       ├── renderer.go    # Rendering logic
+│       └── styles.go      # Lipgloss styles
 ├── pkg/
+│   ├── protocol/          # Daemon JSON protocol
 │   └── types/             # Shared types
-│       └── types.go
+├── zsh/                   # ZSH widget integration
+│   ├── completion-widget.zsh
+│   └── README.md
 ├── main.go                # Entry point
 ├── mise.toml              # Mise configuration
-├── hk.pkl                 # Task runner config
-└── .golangci.toml         # Linter config
+├── hk.pkl                 # Git hooks (pre-commit, pre-push)
+└── .golangci.toml         # 45+ linter configuration
 ```
 
 ### Available Tasks
