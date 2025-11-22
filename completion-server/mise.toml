@@ -1,0 +1,85 @@
+# Mise configuration for completion-server
+# See: https://mise.jdx.dev/configuration.html
+
+[tools]
+# Go toolchain
+go = "1.24.2"
+
+# Go development tools
+"go:github.com/golangci/golangci-lint/cmd/golangci-lint" = "latest"
+"go:github.com/segmentio/golines" = "latest"
+"go:mvdan.cc/gofumpt" = "latest"
+
+# Optional: Install carapace for testing
+carapace = { version = "latest", optional = true }
+
+[env]
+# Set CGO_ENABLED for better performance and smaller binaries
+CGO_ENABLED = "0"
+
+# Task definitions
+[tasks.format]
+description = "Format Go code"
+run = [
+    "gofumpt -l -w .",
+    "golines -w --max-len=120 --base-formatter=gofumpt .",
+]
+
+[tasks.lint]
+description = "Run linters"
+run = "golangci-lint run ./..."
+
+[tasks.lint-fix]
+description = "Run linters with auto-fix"
+run = "golangci-lint run --fix ./..."
+
+[tasks.test]
+description = "Run tests with coverage"
+run = "go test -v -race -coverprofile=coverage.out ./..."
+
+[tasks."test:coverage"]
+description = "View test coverage in browser"
+depends = ["test"]
+run = "go tool cover -html=coverage.out"
+
+[tasks.build]
+description = "Build the binary"
+run = """
+go build \
+  -ldflags="-s -w -X main.Version=$(git describe --tags --always --dirty) -X main.Commit=$(git rev-parse HEAD) -X main.BuildDate=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  -o bin/completion-server \
+  .
+"""
+
+[tasks."build:install"]
+description = "Build and install to ~/.local/bin"
+depends = ["build"]
+run = "cp bin/completion-server ~/.local/bin/"
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = "rm -rf bin/ coverage.out"
+
+[tasks.tidy]
+description = "Tidy Go modules"
+run = "go mod tidy"
+
+[tasks.update]
+description = "Update dependencies"
+run = [
+    "go get -u ./...",
+    "go mod tidy",
+]
+
+[tasks.dev]
+description = "Run in development mode (builds and runs)"
+depends = ["build"]
+run = "./bin/completion-server"
+
+[tasks.ci]
+description = "Run CI checks (format, lint, test)"
+run = [
+    { task = "format" },
+    { task = "lint" },
+    { task = "test" },
+]

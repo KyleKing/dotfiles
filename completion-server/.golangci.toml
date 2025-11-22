@@ -1,0 +1,79 @@
+# golangci-lint configuration
+# Based on best practices from Elastic Agent, Virtual Kubelet, and Containerd
+# See: https://golangci-lint.run/usage/configuration/
+
+[run]
+timeout = "1m"
+tests = true
+modules-download-mode = "readonly"
+
+[linters-settings.gomoddirectives]
+replace-allow-list = []
+
+[linters-settings.revive]
+enable-all-rules = true
+
+[linters-settings.staticcheck]
+checks = ["all"]
+
+[linters-settings.testifylint]
+enable-all = true
+
+[linters-settings.rowserrcheck]
+packages = ["github.com/jmoiron/sqlx"]
+
+[linters-settings.exhaustive]
+default-signifies-exhaustive = true
+
+[linters]
+disable = ["forbidigo"] # Disabled for now, can be enabled later
+enable = [
+    # Code quality
+    "asciicheck",
+    "bodyclose",
+    "copyloopvar",
+    "cyclop",
+    "durationcheck",
+    "errcheck",
+    "errorlint",
+    "fatcontext",
+    "gocritic",
+    "goimports",
+    "gomoddirectives",
+    "gomodguard",
+    "gosec",
+    "gosimple",
+    "govet",
+    "iface",
+    "ineffassign",
+    "intrange",
+    "misspell",
+    "nakedret",
+    "nilerr",
+    "noctx",
+    "nolintlint",
+    "perfsprint",
+    "prealloc",
+    "predeclared",
+    "revive",
+    "sqlclosecheck",
+    "staticcheck",
+    "stylecheck",
+    "testifylint",
+    "testpackage",
+    "typecheck",
+    "unconvert",
+    "unused",
+    "wastedassign",
+    "wrapcheck",
+    "wsl",
+]
+
+[issues]
+exclude-use-default = false
+max-same-issues = 0
+max-issues-per-linter = 0
+
+[[issues.exclude-rules]]
+path = "_test\\.go"
+linters = ["wrapcheck", "wsl"]

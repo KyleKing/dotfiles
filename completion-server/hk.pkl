@@ -1,0 +1,102 @@
+// HK configuration for completion-server
+// See: https://github.com/hk/hk
+amends "package://github.com/hkproject/hk/hk@0.8.2#/HkProject.pkl"
+
+import "package://github.com/hkproject/hk/hk@0.8.2#/Step.pkl"
+import "package://github.com/hkproject/hk/hk@0.8.2#/Fixer.pkl"
+import "package://github.com/hkproject/hk/hk@0.8.2#/Hook.pkl"
+
+// Linters and formatters
+local golangci: Fixer = new {
+  name = "golangci-lint"
+  glob = "**/*.go"
+  check = Step {
+    run = "golangci-lint run ./..."
+  }
+  fix = Step {
+    run = "golangci-lint run --fix ./..."
+  }
+}
+
+local gofumpt: Fixer = new {
+  name = "gofumpt"
+  glob = "**/*.go"
+  check = Step {
+    run = "gofumpt -l ."
+  }
+  fix = Step {
+    run = "gofumpt -l -w ."
+  }
+}
+
+local golines: Fixer = new {
+  name = "golines"
+  glob = "**/*.go"
+  check_first = false
+  fix = Step {
+    run = "golines -w --max-len=120 --base-formatter=gofumpt ."
+  }
+}
+
+local gotest: Fixer = new {
+  name = "go-test"
+  glob = "**/*.go"
+  check = Step {
+    run = "go test -race -short ./..."
+  }
+}
+
+local gomodtidy: Fixer = new {
+  name = "go-mod-tidy"
+  glob = "{go.mod,go.sum}"
+  check = Step {
+    run = "go mod tidy -diff"
+  }
+  fix = Step {
+    run = "go mod tidy"
+  }
+}
+
+// Hooks
+hooks {
+  ["pre-commit"] = new Hook {
+    steps {
+      new {
+        run = "git stash push --keep-index --include-untracked -m 'hk pre-commit stash'"
+      }
+    }
+    mapping {
+      ["format"] = new Listing {
+        gofumpt
+        golines
+        gomodtidy
+      }
+    }
+    steps {
+      new {
+        run = "git stash pop || true"
+      }
+    }
+  }
+
+  ["pre-push"] = new Hook {
+    mapping {
+      ["ci"] = new Listing {
+        gofumpt
+        golines
+        golangci
+        gotest
+        gomodtidy
+      }
+    }
+  }
+}
+
+// Commands
+fixers {
+  gofumpt
+  golines
+  golangci
+  gotest
+  gomodtidy
+}
