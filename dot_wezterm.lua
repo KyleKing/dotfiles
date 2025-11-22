@@ -5,6 +5,9 @@
 -- Custom Keybindings (https://wezfurlong.org/wezterm/config/keys.html)
 -- ============================================================================
 --
+-- WORKSPACE MANAGEMENT:
+--  CMD+Shift+S - Switch workspace (fuzzy finder with zoxide integration)
+--
 -- TAB MANAGEMENT:
 --  CMD+N - New window
 --  CMD+T - New tab
@@ -53,6 +56,24 @@
 --  Pane splitting: https://wezfurlong.org/wezterm/config/lua/keyassignment/SplitPane.html
 
 local wezterm = require("wezterm")
+
+-- ============================================================================
+-- Plugin: Zoxide Workspace Switcher
+-- ============================================================================
+-- Smart workspace switching with fuzzy finding and zoxide integration
+-- Allows quick project switching based on zoxide's directory frequency/recency
+local workspace_switcher = wezterm.plugin.require(
+    "https://github.com/MLFlexer/smart_workspace_switcher.wezterm"
+)
+
+-- Configure zoxide path (adjust if needed for your system)
+workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
+
+-- Optional: Filter to specific directories (uncomment and modify as needed)
+-- workspace_switcher.workspace_dirs = {
+--     wezterm.home_dir .. "/Developer",
+--     wezterm.home_dir .. "/Projects",
+-- }
 
 -- ============================================================================
 -- Configuration for Tab Color
@@ -385,6 +406,9 @@ config.quick_select_alphabet = "asdfghjklqwertyuiopzxcvbnm"
 
 local act = wezterm.action
 config.keys = {
+    -- Workspace management (zoxide integration)
+    { key = "s", mods = "CMD|SHIFT", action = workspace_switcher.switch_workspace() },
+
     -- Tab management
     { key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = true }) },
     { key = "LeftArrow", mods = "CMD|ALT", action = act.ActivateTabRelative(-1) },
