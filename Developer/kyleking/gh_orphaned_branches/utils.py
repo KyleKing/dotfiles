@@ -5,8 +5,6 @@ from datetime import datetime, timedelta, timezone
 from functools import reduce
 from typing import Any, TypeVar
 
-from dateutil import parser as dateutil_parser
-
 T = TypeVar("T")
 U = TypeVar("U")
 
@@ -135,9 +133,15 @@ def paginate(
 def parse_iso_date(date_str: str) -> datetime:
     """Parse an ISO 8601 date string to datetime.
 
-    Pure function wrapper around dateutil.parser.
+    GitHub API returns ISO 8601 with 'Z' suffix for UTC.
+    Python's fromisoformat() requires '+00:00' instead.
+
+    Pure function using standard library only.
     """
-    return dateutil_parser.isoparse(date_str)
+    # GitHub returns: "2024-01-15T10:30:00Z"
+    # Normalize to: "2024-01-15T10:30:00+00:00"
+    normalized = date_str.replace("Z", "+00:00") if date_str.endswith("Z") else date_str
+    return datetime.fromisoformat(normalized)
 
 
 def days_ago(dt: datetime, reference: datetime | None = None) -> int:

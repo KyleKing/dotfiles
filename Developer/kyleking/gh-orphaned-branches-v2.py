@@ -3,7 +3,7 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #     "rich>=13.7.0",
-#     "python-dateutil>=2.8.2",
+#     "httpx>=0.27.0",
 # ]
 # ///
 """
