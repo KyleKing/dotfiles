@@ -23,20 +23,21 @@ local wezterm = require("wezterm")
 -- Based on: https://github.com/protiumx/.dotfiles/blob/854d4b159a0a0512dc24cbc840af467ac84085f8/stow/wezterm/.config/wezterm/wezterm.lua#L291-L319
 -- Icons from: https://www.nerdfonts.com/cheat-sheet
 local process_icons = {
-    ["bash"] = wezterm.nerdfonts.cod_terminal_bash,
+    ["bash"] = wezterm.nerdfonts.md_bash,
     ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["cargo"] = wezterm.nerdfonts.dev_rust,
     ["curl"] = wezterm.nerdfonts.mdi_flattr,
-    ["docker"] = wezterm.nerdfonts.linux_docker,
-    ["docker-compose"] = wezterm.nerdfonts.linux_docker,
+    ["docker"] = wezterm.nerdfonts.md_docker,
+    ["docker-compose"] = wezterm.nerdfonts.md_docker,
     ["gh"] = wezterm.nerdfonts.dev_github_badge,
     ["git"] = wezterm.nerdfonts.fa_git,
     ["go"] = wezterm.nerdfonts.seti_go,
     ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
-    ["lazydocker"] = wezterm.nerdfonts.linux_docker,
-    ["lazygit"] = wezterm.nerdfonts.oct_git_compare,
+    ["lazydocker"] = wezterm.nerdfonts.md_docker,
+    ["lazygit"] = wezterm.nerdfonts.dev_git_branch,
     ["lua"] = wezterm.nerdfonts.seti_lua,
     ["make"] = wezterm.nerdfonts.seti_makefile,
+    ["mise"] = wezterm.nerdfonts.md_carrot,
     ["node"] = wezterm.nerdfonts.cod_json,
     ["nvim"] = wezterm.nerdfonts.linux_neovim,
     ["psql"] = wezterm.nerdfonts.md_database,
@@ -45,7 +46,7 @@ local process_icons = {
     ["usql"] = wezterm.nerdfonts.md_database,
     ["vim"] = wezterm.nerdfonts.dev_vim,
     ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
-    ["zsh"] = wezterm.nerdfonts.dev_terminal,
+    ["zsh"] = wezterm.nerdfonts.cod_terminal_bash,
 }
 
 local icon_active = wezterm.nerdfonts.md_rocket_launch
@@ -147,8 +148,19 @@ local function format_title(tab, has_unseen, is_active)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
     local process = get_process(tab)
+
+    -- Pad directory name to be at least 10 characters with whitespace on both sides
+    local min_width = 10
+    local dir_len = #dir_name
+    if dir_len < min_width then
+        local padding = min_width - dir_len
+        local left_pad = math.floor(padding / 2)
+        local right_pad = padding - left_pad
+        dir_name = string.rep(" ", left_pad) .. dir_name .. string.rep(" ", right_pad)
+    end
+
     local active_indicator = is_active and icon_active or " "
-    local unseen_indicator = has_unseen and icon_unseen or active_indicator
+    local unseen_indicator = has_unseen and icon_unseen or " "
     return string.format(" %s %s %s %s %s ", unseen_indicator, process, dir_name, depth_indicator, active_indicator)
 end
 
@@ -246,7 +258,8 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
     local has_unseen = has_unseen_output(tab)
     local title = get_tab_title(tab, has_unseen, tab.is_active)
     local base_color = string_to_color(get_git_root_path(tab))
-    local bg_color = tab.is_active and base_color or dim_color(base_color, 0.6)
+    local active_bg_color = "#F5F5F5" -- Off-white for active tabs
+    local bg_color = tab.is_active and active_bg_color or dim_color(base_color, 0.7)
     local fg_color = select_contrasting_fg_color(bg_color)
 
     local format = {
