@@ -1,66 +1,77 @@
-"""Tests for GitHub API wrapper with VCR."""
+"""Tests for GitHub API wrapper with httpx and VCR."""
 
 import pytest
+import httpx
 
 from gh_orphaned_branches.github_api import (
-    build_api_params,
-    create_paginated_fetcher,
-    fetch_branches,
-    fetch_pulls_for_branch,
+    _get_github_token,
+    _create_github_client,
+    _make_request,
     fetch_repositories,
+    fetch_branches,
 )
 
 
-class TestAPIHelpers:
-    """Test low-level API helpers."""
+class TestAuthentication:
+    """Test authentication helpers."""
 
-    def test_build_api_params(self):
-        """Test building API parameters."""
-        params = build_api_params(per_page=100, page=1)
-        assert params == ["-f", "per_page=100", "-f", "page=1"]
+    def test_get_github_token_from_env(self, monkeypatch):
+        """Test getting token from environment variable."""
+        monkeypatch.setenv("GITHUB_TOKEN", "test_token_123")
+        token = _get_github_token()
+        assert token == "test_token_123"
 
-    def test_build_api_params_empty(self):
-        """Test building API parameters with no args."""
-        params = build_api_params()
-        assert params == []
+    def test_get_github_token_gh_token_env(self, monkeypatch):
+        """Test getting token from GH_TOKEN environment variable."""
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+        monkeypatch.setenv("GH_TOKEN", "gh_token_456")
+        token = _get_github_token()
+        assert token == "gh_token_456"
 
-
-class TestPaginationBuilder:
-    """Test pagination function builder."""
-
-    def test_create_paginated_fetcher(self, monkeypatch):
-        """Test creating a paginated fetcher."""
-        # Mock the run_gh_command function
-        def mock_run_gh_command(args):
-            return [{"name": "test"}]
-
-        monkeypatch.setattr(
-            "gh_orphaned_branches.github_api.run_gh_command",
-            mock_run_gh_command
-        )
-
-        fetcher = create_paginated_fetcher("/test/endpoint", per_page=100)
-        result = fetcher(1)
-
-        assert result == [{"name": "test"}]
+    def test_create_github_client(self):
+        """Test creating GitHub client."""
+        client = _create_github_client(token="test_token")
+        assert isinstance(client, httpx.Client)
+        assert client.base_url == "https://api.github.com"
+        assert "Authorization" in client.headers
+        client.close()
 
 
 class TestAPIFunctions:
-    """Test API functions with mocked data."""
+    """Test API functions with mocked httpx."""
 
-    def test_fetch_repositories_user(self, monkeypatch):
-        """Test fetching repositories for a user."""
+    def test_fetch_repositories(self, monkeypatch):
+        """Test fetching repositories."""
         mock_repos = [
-            {"name": "repo1", "fork": False},
-            {"name": "repo2", "fork": False},
+            {"name": "repo1", "fork": False, "owner": {"login": "testuser"}},
+            {"name": "repo2", "fork": False, "owner": {"login": "testuser"}},
         ]
 
-        def mock_fetch_all_pages(endpoint, **params):
-            return mock_repos
+        class MockClient:
+            base_url = "https://api.github.com"
+            headers = {}
+
+            def get(self, endpoint, params=None):
+                class MockResponse:
+                    status_code = 200
+
+                    def raise_for_status(self):
+                        pass
+
+                    def json(self):
+                        return mock_repos
+
+                return MockResponse()
+
+            def close(self):
+                pass
+
+        def mock_create_client(token=None):
+            return MockClient()
 
         monkeypatch.setattr(
-            "gh_orphaned_branches.github_api.fetch_all_pages",
-            mock_fetch_all_pages
+            "gh_orphaned_branches.github_api._create_github_client",
+            mock_create_client,
         )
 
         repos = fetch_repositories("testuser", include_forks=False)
@@ -70,59 +81,66 @@ class TestAPIFunctions:
     def test_fetch_repositories_filter_forks(self, monkeypatch):
         """Test filtering forks when fetching repositories."""
         mock_repos = [
-            {"name": "repo1", "fork": False},
-            {"name": "repo2", "fork": True},
-            {"name": "repo3", "fork": False},
+            {"name": "repo1", "fork": False, "owner": {"login": "testuser"}},
+            {"name": "repo2", "fork": True, "owner": {"login": "testuser"}},
+            {"name": "repo3", "fork": False, "owner": {"login": "testuser"}},
         ]
 
-        def mock_fetch_all_pages(endpoint, **params):
-            return mock_repos
+        class MockClient:
+            base_url = "https://api.github.com"
+            headers = {}
+
+            def get(self, endpoint, params=None):
+                class MockResponse:
+                    status_code = 200
+
+                    def raise_for_status(self):
+                        pass
+
+                    def json(self):
+                        return mock_repos
+
+                return MockResponse()
+
+            def close(self):
+                pass
+
+        def mock_create_client(token=None):
+            return MockClient()
 
         monkeypatch.setattr(
-            "gh_orphaned_branches.github_api.fetch_all_pages",
-            mock_fetch_all_pages
+            "gh_orphaned_branches.github_api._create_github_client",
+            mock_create_client,
         )
 
         repos = fetch_repositories("testuser", include_forks=False)
         assert len(repos) == 2
         assert all(not r.get("fork") for r in repos)
 
-    def test_fetch_repositories_include_forks(self, monkeypatch):
-        """Test including forks when fetching repositories."""
-        mock_repos = [
-            {"name": "repo1", "fork": False},
-            {"name": "repo2", "fork": True},
-        ]
 
-        def mock_fetch_all_pages(endpoint, **params):
-            return mock_repos
+class TestErrorHandling:
+    """Test error handling in API functions."""
 
-        monkeypatch.setattr(
-            "gh_orphaned_branches.github_api.fetch_all_pages",
-            mock_fetch_all_pages
-        )
+    def test_make_request_http_error(self, monkeypatch):
+        """Test error when API returns HTTP error."""
+        from gh_orphaned_branches.github_api import _make_request
 
-        repos = fetch_repositories("testuser", include_forks=True)
-        assert len(repos) == 2
+        class MockClient:
+            def get(self, endpoint, params=None):
+                class MockResponse:
+                    status_code = 404
+                    text = "Not found"
 
-    def test_fetch_branches(self, monkeypatch):
-        """Test fetching branches."""
-        mock_branches = [
-            {"name": "main"},
-            {"name": "feature-1"},
-        ]
+                    def raise_for_status(self):
+                        raise httpx.HTTPStatusError(
+                            "404", request=None, response=self
+                        )
 
-        def mock_fetch_all_pages(endpoint, **params):
-            return mock_branches
+                return MockResponse()
 
-        monkeypatch.setattr(
-            "gh_orphaned_branches.github_api.fetch_all_pages",
-            mock_fetch_all_pages
-        )
-
-        branches = fetch_branches("owner", "repo")
-        assert len(branches) == 2
-        assert branches[0]["name"] == "main"
+        client = MockClient()
+        with pytest.raises(RuntimeError, match="GitHub API error"):
+            _make_request(client, "/test")
 
 
 # VCR tests (these would record real API interactions)
@@ -135,12 +153,12 @@ class TestGitHubAPIWithVCR:
     Subsequent runs use the recorded cassettes.
     """
 
-    @pytest.mark.skip(reason="Requires real GitHub API access")
+    @pytest.mark.skip(reason="Requires real GitHub API access and token")
     def test_fetch_repositories_vcr(self, vcr):
         """Test fetching repositories with VCR recording.
 
         This test is skipped by default as it requires real API access.
-        To run: pytest -v -m 'not skip' and ensure 'gh' is authenticated.
+        To run: pytest -v -m 'not skip' and ensure GITHUB_TOKEN is set.
         """
         repos = fetch_repositories("octocat", include_forks=False)
         assert isinstance(repos, list)
@@ -148,7 +166,7 @@ class TestGitHubAPIWithVCR:
             assert "name" in repos[0]
             assert "owner" in repos[0]
 
-    @pytest.mark.skip(reason="Requires real GitHub API access")
+    @pytest.mark.skip(reason="Requires real GitHub API access and token")
     def test_fetch_branches_vcr(self, vcr):
         """Test fetching branches with VCR recording.
 
@@ -158,42 +176,3 @@ class TestGitHubAPIWithVCR:
         assert isinstance(branches, list)
         if branches:
             assert "name" in branches[0]
-
-    @pytest.mark.skip(reason="Requires real GitHub API access")
-    def test_fetch_pulls_vcr(self, vcr):
-        """Test fetching pull requests with VCR recording.
-
-        This test is skipped by default as it requires real API access.
-        """
-        pulls = fetch_pulls_for_branch("octocat", "hello-world", "test-branch")
-        assert isinstance(pulls, list)
-
-
-class TestErrorHandling:
-    """Test error handling in API functions."""
-
-    def test_run_gh_command_not_found(self, monkeypatch):
-        """Test error when gh CLI is not found."""
-        from gh_orphaned_branches.github_api import run_gh_command
-
-        def mock_run(*args, **kwargs):
-            raise FileNotFoundError()
-
-        monkeypatch.setattr("subprocess.run", mock_run)
-
-        with pytest.raises(RuntimeError, match="GitHub CLI.*not found"):
-            run_gh_command(["/test"])
-
-    def test_run_gh_command_invalid_json(self, monkeypatch):
-        """Test error when API returns invalid JSON."""
-        from subprocess import CompletedProcess
-
-        from gh_orphaned_branches.github_api import run_gh_command
-
-        def mock_run(*args, **kwargs):
-            return CompletedProcess(args=[], returncode=0, stdout="invalid json")
-
-        monkeypatch.setattr("subprocess.run", mock_run)
-
-        with pytest.raises(RuntimeError, match="Invalid JSON"):
-            run_gh_command(["/test"])

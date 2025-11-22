@@ -13,9 +13,7 @@ from .github_api import (
 from .utils import (
     create_age_threshold,
     days_ago,
-    extract_fields,
     parse_iso_date,
-    partition,
 )
 
 
