@@ -38,8 +38,8 @@ gh_orphaned_branches/
 
 ## Prerequisites
 
-- [GitHub CLI (`gh`)](https://cli.github.com/) installed and authenticated
-- [uv](https://docs.astral.sh/uv/) for running the Python script
+- **GitHub Token**: Set `GITHUB_TOKEN` or `GH_TOKEN` environment variable, or have [`gh` CLI](https://cli.github.com/) authenticated
+- [uv](https://docs.astral.sh/uv/) for running the Python script (or use pip)
 - Python 3.11 or higher
 
 ## Installation
@@ -130,24 +130,14 @@ uv run gh-orphaned-branches-v2.py -n myusername --include-forks
 
 ## Functional Programming Highlights
 
-### Composable Utilities
+### Minimal, Focused Utilities
 
-The tool includes reusable functional utilities in `utils.py`:
+The tool includes only essential utilities in `utils.py`:
 
-- **Function composition**: `compose()`, `pipe()`
-- **Data transformation**: `filter_map()`, `partition()`, `flatten()`
-- **Pagination**: Generic `paginate()` helper
-- **Date utilities**: Pure functions for date operations
-- **Data extraction**: `safe_get()`, `extract_fields()`
+- **Pagination**: Generic `paginate()` helper for any paginated API
+- **Date utilities**: Pure stdlib-only functions (`parse_iso_date`, `days_ago`, `create_age_threshold`)
 
-Example:
-```python
-# Compose functions for data transformation
-transform = pipe(
-    lambda x: filter_map(is_stale, extract_info, x),
-    lambda x: group_by(lambda b: b['repo'], x)
-)
-```
+Design principle: **No unused code**. All functions are actually used in the codebase.
 
 ### Pure Core Logic
 
@@ -161,9 +151,10 @@ The core business logic (`core.py`) consists of pure functions:
 
 The GitHub API wrapper (`github_api.py`) uses:
 
-- **Higher-order functions**: `create_paginated_fetcher()`
-- **Function composition**: Combining API calls functionally
-- **Error handling**: Pure error propagation
+- **httpx for direct HTTP**: No subprocess overhead, enables VCR testing
+- **Higher-order functions**: `_create_paginated_fetcher()`
+- **Private functions**: All helpers prefixed with `_`, clear public API
+- **Error handling**: HTTP-native error propagation
 
 ## Development
 
@@ -282,16 +273,20 @@ This tool follows functional programming principles:
 
 ## Dependencies
 
-### Runtime
+### Runtime (minimal)
 - `rich` - Terminal formatting and tables
-- `python-dateutil` - Date parsing
+- `httpx` - HTTP client for GitHub API
 
 ### Development
 - `pytest` - Test framework
 - `pytest-vcr` - HTTP interaction recording
 - `pytest-cov` - Code coverage reporting
 
-All using **standard library alternatives** where possible (argparse instead of click).
+**Zero unnecessary dependencies:**
+- ✅ stdlib `datetime` instead of python-dateutil
+- ✅ stdlib `argparse` instead of click
+- ✅ `httpx` for direct HTTP (enables VCR testing)
+- ✅ pytest's `monkeypatch` instead of pytest-mock
 
 ## License
 
