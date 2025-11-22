@@ -5,7 +5,7 @@ argon2 20190702_1
 aribb24 1.0.4
 atuin 18.10.0
 autoconf 2.72
-awscli 2.32.2
+awscli 2.32.3
 bash 5.3.3
 bat 0.26.0
 block-goose-cli 1.15.0
@@ -21,6 +21,7 @@ curl 8.17.0
 curlie 1.8.2
 cyrus-sasl 2.1.28_2
 dav1d 1.5.2
+devcockpit 1.0.8
 difftastic 0.67.0
 direnv 2.37.1
 dotenv-linter 4.0.0
@@ -39,7 +40,7 @@ fzf 0.67.0
 gcc 15.2.0
 gd 2.3.3_6
 gdk-pixbuf 2.44.4
-gemini-cli 0.16.0
+gemini-cli 0.17.1
 gettext 0.26_1
 gh 2.83.1
 ghostscript 10.06.0
@@ -53,7 +54,6 @@ gnupg 2.4.8
 gnutls 3.8.11
 go 1.25.4
 gocovsh 0.6.1
-graphite 1.7.8
 graphite2 1.3.14
 graphviz 14.0.4
 groff 1.23.0_1
@@ -104,12 +104,12 @@ libnghttp2 1.68.0
 libnghttp3 1.12.0
 libngtcp2 1.17.0
 libogg 1.3.6
-libomp 21.1.5
+libomp 21.1.6
 libpaper 2.2.6
 libpng 1.6.50
 libpq 18.1
 libraw 0.21.4
-librist 0.2.11
+librist 0.2.11_1
 librsvg 2.61.3_1
 libsamplerate 0.2.2
 libsndfile 1.2.2_1
@@ -140,7 +140,7 @@ libxrender 0.9.12
 libyaml 0.2.5
 libzip 1.11.4
 little-cms2 2.17
-llvm 21.1.5
+llvm 21.1.6
 lpeg 1.1.0
 lua 5.4.8
 luacheck 1.2.0
@@ -152,7 +152,8 @@ lzo 2.10
 m4 1.4.20
 mani 0.31.1
 mas 3.0.1
-mbedtls 3.6.4
+mbedtls 4.0.0
+mbedtls@3 3.6.5
 mergiraf 0.16.1
 mise 2025.11.7
 mpdecimal 4.0.1
@@ -170,7 +171,7 @@ nvimpager 0.13.0
 oh-my-posh 27.6.0
 ollama 0.13.0
 oniguruma 6.9.10
-opencode 1.0.82
+opencode 1.0.92
 opencore-amr 0.1.6
 openexr 3.4.4
 openjdk 25.0.1
@@ -184,7 +185,7 @@ pandoc 3.8.2.1
 pango 1.57.0_1
 pcre 8.45
 pcre2 10.47
-php 8.4.15
+php 8.5.0
 pinentry 1.3.2
 pipenv 2025.0.4
 pixman 0.46.4
@@ -193,7 +194,7 @@ pkl-lsp 0.5.1
 plantuml 1.2025.10
 pnpm 10.23.0
 postgresql@17 17.7
-prek 0.2.17
+prek 0.2.18
 prettier 3.6.2
 psutils 3.3.14_1
 pyright 1.1.407
@@ -218,7 +219,7 @@ simdjson 4.2.2
 snappy 1.2.2
 speex 1.2.1
 sqlite 3.51.0
-srgn 0.14.0
+srgn 0.14.1
 srt 1.5.4
 sttr 0.2.28
 stylua 2.3.1
@@ -240,7 +241,7 @@ unibilium 2.1.2
 unixodbc 2.3.14
 usage 2.8.0
 utf8proc 2.11.1
-uv 0.9.10
+uv 0.9.11
 uvwasi 0.0.23
 vale 3.13.0
 vhs 0.10.0
@@ -268,12 +269,11 @@ anki 25.09
 appcleaner 3.6.7,4301
 blockblock 2.2.5
 brave-browser 1.67.123.0
-calibre 8.14.0
-claude-code 2.0.47
+calibre 8.15.0
+claude-code 2.0.50
 cloudflare-warp 2022.12.593.0,20230118.6
-codex 0.61.0
+codex 0.63.0
 cursor 2.0.43,8e4da76ad196925accaa169efcae28c45454cce3
-cursor-cli 2025.11.06-8fe8a63
 customshortcuts 1.1,102
 daisydisk 4.24
 dash6 6.4.3
@@ -290,7 +290,7 @@ font-atkinson-hyperlegible-next latest
 font-fira-code-nerd-font 3.4.0
 font-fira-mono-nerd-font 3.4.0
 font-hack-nerd-font 3.4.0
-frame0 1.2.1
+frame0 1.3.0
 ghostty 1.0.0
 github 3.1.5-08d57d4b
 google-chrome 109.0.5414.119
@@ -319,7 +319,7 @@ netnewswire 6.1.9
 notion 4.20.0
 obs 32.0.1
 obsidian 1.8.4
-osaurus 0.4.6
+osaurus 0.4.8
 oversight 2.4.0
 paletro 1.7.0
 photosweeper-x 5.1.2

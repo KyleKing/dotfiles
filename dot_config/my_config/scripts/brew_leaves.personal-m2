@@ -6,6 +6,7 @@ block-goose-cli
 chezmoi
 cloc
 curlie
+devcockpit
 difftastic
 direnv
 dotenv-linter
@@ -69,7 +70,6 @@ uv
 vale
 vhs
 walk
-withgraphite/tap/graphite
 yamllint
 yazi
 zf
