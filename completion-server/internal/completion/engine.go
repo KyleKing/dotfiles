@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/KyleKing/dotfiles/completion-server/internal/context"
+	"github.com/KyleKing/dotfiles/completion-server/internal/history"
+	"github.com/KyleKing/dotfiles/completion-server/internal/ranker"
 	"github.com/KyleKing/dotfiles/completion-server/internal/sources"
 	"github.com/KyleKing/dotfiles/completion-server/pkg/types"
 )
@@ -13,7 +16,10 @@ type Candidate = types.Candidate
 
 // Engine handles completion queries
 type Engine struct {
-	sources []sources.Source
+	sources         []sources.Source
+	historyProvider history.Provider
+	ranker          *ranker.Ranker
+	contextDetector *context.Detector
 }
 
 // EngineOption is a functional option for configuring Engine
@@ -27,10 +33,27 @@ func WithSources(sources ...sources.Source) EngineOption {
 	}
 }
 
+// WithHistoryProvider sets a custom history provider
+func WithHistoryProvider(provider history.Provider) EngineOption {
+	return func(e *Engine) error {
+		e.historyProvider = provider
+		return nil
+	}
+}
+
+// WithRanker sets a custom ranker
+func WithRanker(r *ranker.Ranker) EngineOption {
+	return func(e *Engine) error {
+		e.ranker = r
+		return nil
+	}
+}
+
 // New creates a new completion engine
 func New(opts ...EngineOption) (*Engine, error) {
 	engine := &Engine{
-		sources: []sources.Source{},
+		sources:         []sources.Source{},
+		contextDetector: context.New(),
 	}
 
 	// Apply options first
@@ -54,6 +77,19 @@ func New(opts ...EngineOption) (*Engine, error) {
 
 		// TODO: Add TLDR source
 		// TODO: Add ZSH completion source
+	}
+
+	// If no history provider set, try to initialize Atuin
+	if engine.historyProvider == nil {
+		if provider, err := history.NewAtuinProvider(); err == nil {
+			engine.historyProvider = provider
+		}
+		// If Atuin not available, continue without history
+	}
+
+	// If no ranker set, create default ranker
+	if engine.ranker == nil {
+		engine.ranker = ranker.New()
 	}
 
 	return engine, nil
@@ -81,8 +117,38 @@ func (e *Engine) Query(commandLine string, cursorPos, maxResults int) ([]Candida
 	// Deduplicate candidates
 	candidates = e.deduplicate(candidates)
 
-	// Rank candidates
-	// TODO: Implement ranking with history, recency, context
+	// Rank candidates if ranker is available
+	if e.ranker != nil && len(candidates) > 0 {
+		// Get history stats if provider is available
+		stats := make(map[string]types.HistoryStats)
+		if e.historyProvider != nil && ctx.ParsedCommand != "" {
+			// Get stats for the command
+			historyStats, err := e.historyProvider.GetCommandStats(ctx.ParsedCommand, 100)
+			if err == nil {
+				// Convert slice to map for easy lookup
+				for _, stat := range historyStats {
+					if stat.Flag != "" {
+						stats[stat.Flag] = stat
+					}
+				}
+
+				// Also get stats for specific candidate values
+				values := make([]string, len(candidates))
+				for i, c := range candidates {
+					values[i] = c.Value
+				}
+
+				if flagStats, err := e.historyProvider.GetFlagStats(ctx.ParsedCommand, values); err == nil {
+					for k, v := range flagStats {
+						stats[k] = v
+					}
+				}
+			}
+		}
+
+		// Rank candidates
+		candidates = e.ranker.Rank(candidates, stats, ctx)
+	}
 
 	// Limit results
 	if len(candidates) > maxResults {
@@ -109,7 +175,13 @@ func (e *Engine) parseContext(commandLine string, cursorPos int) (*types.QueryCo
 		}
 	}
 
-	// TODO: Detect git repo, working directory, etc.
+	// Detect working directory and git repo
+	if e.contextDetector != nil {
+		if wd, err := e.contextDetector.GetWorkingDirectory(); err == nil {
+			ctx.WorkingDir = wd
+			ctx.InGitRepo = e.contextDetector.IsInGitRepo(wd)
+		}
+	}
 
 	return ctx, nil
 }
