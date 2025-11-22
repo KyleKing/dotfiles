@@ -18,6 +18,7 @@
 --  CMD+Shift+D - Split pane vertically (top/bottom)
 --  CMD+[ or ] - Cycle through panes (prev/next)
 --  CMD+Shift+Arrow - Navigate to pane in direction
+--  CMD+Shift+Alt+Arrow - Resize pane in direction
 --  CMD+Shift+W - Close current pane (with confirmation)
 --  CMD+Z - Toggle pane zoom (maximize/restore current pane)
 --
@@ -400,6 +401,12 @@ config.keys = {
     { key = "DownArrow", mods = "CMD|SHIFT", action = act.ActivatePaneDirection("Down") },
     { key = "w", mods = "CMD|SHIFT", action = act.CloseCurrentPane({ confirm = true }) },
     { key = "z", mods = "CMD", action = act.TogglePaneZoomState },
+
+    -- Pane resizing
+    { key = "LeftArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
+    { key = "RightArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
+    { key = "UpArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
+    { key = "DownArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
 
     -- Word jumping (standard Mac behavior)
     { key = "LeftArrow", mods = "ALT", action = act.SendString("\x1bb") },
