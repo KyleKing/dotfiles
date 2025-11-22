@@ -4,6 +4,9 @@
 #
 # Homebrew configuration
 
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_USE_INTERNAL_API=1
+
 # A few helpful snippets not included in the homebrew zsh plugin
 alias bsh="brew search"
 alias bio="brew info"
