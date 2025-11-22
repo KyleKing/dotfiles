@@ -21,6 +21,7 @@ local wezterm = require("wezterm")
 -- Configuration for Tab Color
 
 -- Based on: https://github.com/protiumx/.dotfiles/blob/854d4b159a0a0512dc24cbc840af467ac84085f8/stow/wezterm/.config/wezterm/wezterm.lua#L291-L319
+-- Icons from: https://www.nerdfonts.com/cheat-sheet
 local process_icons = {
     ["bash"] = wezterm.nerdfonts.cod_terminal_bash,
     ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
@@ -36,16 +37,21 @@ local process_icons = {
     ["lazygit"] = wezterm.nerdfonts.oct_git_compare,
     ["lua"] = wezterm.nerdfonts.seti_lua,
     ["make"] = wezterm.nerdfonts.seti_makefile,
-    ["node"] = wezterm.nerdfonts.mdi_hexagon,
-    ["nvim"] = wezterm.nerdfonts.custom_vim,
-    ["psql"] = "󱤢",
+    ["node"] = wezterm.nerdfonts.cod_json,
+    ["nvim"] = wezterm.nerdfonts.linux_neovim,
+    ["psql"] = wezterm.nerdfonts.md_database,
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
-    ["usql"] = "󱤢",
+    ["usql"] = wezterm.nerdfonts.md_database,
     ["vim"] = wezterm.nerdfonts.dev_vim,
     ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
     ["zsh"] = wezterm.nerdfonts.dev_terminal,
 }
+
+local icon_active = wezterm.nerdfonts.md_rocket_launch
+local icon_unseen = wezterm.nerdfonts.cod_eye
+local icon_git_root = "./"
+local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
 
 -- Git lookup cache to avoid repeated expensive io.popen calls
 local git_cache = {}
@@ -55,21 +61,44 @@ local function get_cached_git_root(cwd)
     local now = os.time()
     local cached = git_cache[cwd]
 
-    if cached and (now - cached.timestamp) < GIT_CACHE_TTL then return cached.root, cached.is_git_repo end
+    if cached and (now - cached.timestamp) < GIT_CACHE_TTL then
+        return cached.root, cached.is_git_repo, cached.depth_indicator
+    end
 
     local git_root = ""
     local is_git_repo = false
+    local depth_indicator = icon_not_git
 
     local handle = io.popen("cd '" .. cwd .. "' 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null")
     if handle then
         git_root = handle:read("*a"):gsub("%s+$", "")
         handle:close()
-        if git_root ~= "" then is_git_repo = true end
+        if git_root ~= "" then
+            is_git_repo = true
+
+            -- At git root
+            if cwd == git_root then
+                depth_indicator = icon_git_root
+            else
+                -- Calculate depth indicator while we have the git root
+                local relative_path = cwd:gsub("^" .. git_root:gsub("([^%w])", "%%%1") .. "/?", "")
+                local depth = 0
+                for _ in relative_path:gmatch("/") do
+                    depth = depth + 1
+                end
+                depth = depth + 1
+
+                local current_dir = cwd:match("([^/]+)$") or ""
+                local prefix = current_dir:sub(1, 2):lower()
+                depth_indicator = string.format("%d%s", depth, prefix)
+            end
+        end
     end
 
     git_cache[cwd] = {
         root = git_root,
         is_git_repo = is_git_repo,
+        depth_indicator = depth_indicator,
         timestamp = now,
     }
 
@@ -77,7 +106,7 @@ local function get_cached_git_root(cwd)
         if (now - value.timestamp) >= GIT_CACHE_TTL * 2 then git_cache[key] = nil end
     end
 
-    return git_root, is_git_repo
+    return git_root, is_git_repo, depth_indicator
 end
 
 -- Return the Tab's current working directory
@@ -89,10 +118,17 @@ end
 -- Remove all path components and return only the last value
 local function remove_abs_path(path) return path:gsub("(.*[/\\])(.*)", "%2") end
 
+-- Calculate depth from git root and create indicator (uses cached value)
+local function get_git_depth_indicator(tab)
+    local cwd = get_cwd(tab):gsub("^file://", "")
+    local _, _, depth_indicator = get_cached_git_root(cwd)
+    return depth_indicator
+end
+
 -- Get the git root directory name, or fallback to current directory name
 local function get_git_dir_name(tab)
     local cwd = get_cwd(tab):gsub("^file://", "")
-    local git_root, is_git_repo = get_cached_git_root(cwd)
+    local git_root, is_git_repo, _ = get_cached_git_root(cwd)
     if is_git_repo then return remove_abs_path(git_root) end
     return "./" .. remove_abs_path(cwd)
 end
@@ -107,28 +143,47 @@ local function get_process(tab)
 end
 
 -- Pretty format the tab title
-local function format_title(tab)
+local function format_title(tab, has_unseen, is_active)
     local dir_name = get_git_dir_name(tab)
+    local depth_indicator = get_git_depth_indicator(tab)
     local process = get_process(tab)
-    return string.format(" %s %s ", process, dir_name)
+    local active_indicator = is_active and icon_active or " "
+    local unseen_indicator = has_unseen and icon_unseen or active_indicator
+    return string.format(" %s %s %s %s %s ", unseen_indicator, process, dir_name, depth_indicator, active_indicator)
 end
+
+-- Track which tabs have been visited to work around buggy has_unseen_output
+local visited_tabs = {}
 
 -- Determine if a tab has unseen output since last visited
 local function has_unseen_output(tab)
-    if not tab.is_active then
-        for _, pane in ipairs(tab.panes) do
-            if pane.has_unseen_output then return true end
-        end
+    local tab_id = tab.tab_id
+
+    -- If tab is currently active, mark it as visited
+    if tab.is_active then
+        visited_tabs[tab_id] = true
+        return false
     end
+
+    -- For inactive tabs, check if we've visited them before
+    if visited_tabs[tab_id] then
+        return false -- Already visited, no indicator
+    end
+
+    -- Not visited yet, check if there's unseen output
+    for _, pane in ipairs(tab.panes) do
+        if pane.has_unseen_output then return true end
+    end
+
     return false
 end
 
 -- Returns manually set title (from `tab:set_title()` or `wezterm cli set-tab-title`) or creates a new one
-local function get_tab_title(tab)
+local function get_tab_title(tab, has_unseen, is_active)
     local title = tab.tab_title
     -- if the tab title is explicitly set, take that
     if title and #title > 0 then return title end
-    return format_title(tab)
+    return format_title(tab, has_unseen, is_active)
 end
 
 -- Convert arbitrary strings to a unique hex color value
@@ -167,33 +222,43 @@ assert(select_contrasting_fg_color("#EBD168") == "#000000", "Expected higher con
 -- Get full git root path for color hashing (not just the name)
 local function get_git_root_path(tab)
     local cwd = get_cwd(tab):gsub("^file://", "")
-    local git_root, is_git_repo = get_cached_git_root(cwd)
-    if is_git_repo then return "||" .. git_root end
-    return "./" .. cwd
+    local git_root, is_git_repo, _ = get_cached_git_root(cwd)
+    if is_git_repo then return git_root end
+    return cwd
+end
+
+-- Helper function to dim colors for inactive tabs
+local function dim_color(hex_color, factor)
+    local color = wezterm.color.parse(hex_color)
+    local h, s, l, a = color:hsla()
+    -- Reduce lightness for inactive tabs to make them more subtle
+    l = l * factor
+    local dimmed = wezterm.color.from_hsla(h, s, l, a)
+    -- Convert back to hex string format
+    local r, g, b, _ = dimmed:srgba_u8()
+    return string.format("#%02X%02X%02X", r, g, b)
 end
 
 -- On format tab title events, override the default handling to return a custom title
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-    local title = get_tab_title(tab)
-    local color = string_to_color(get_git_root_path(tab))
+    local has_unseen = has_unseen_output(tab)
+    local title = get_tab_title(tab, has_unseen, tab.is_active)
+    local base_color = string_to_color(get_git_root_path(tab))
+    local bg_color = tab.is_active and base_color or dim_color(base_color, 0.6)
+    local fg_color = select_contrasting_fg_color(bg_color)
 
-    if tab.is_active then
-        return {
-            { Attribute = { Intensity = "Bold" } },
-            { Background = { Color = color } },
-            { Foreground = { Color = select_contrasting_fg_color(color) } },
-            { Text = title },
-        }
-    end
-    if has_unseen_output(tab) then
-        return {
-            { Foreground = { Color = "#EBD168" } },
-            { Text = title },
-        }
-    end
-    return title
+    local format = {
+        { Background = { Color = bg_color } },
+        { Foreground = { Color = fg_color } },
+    }
+
+    if tab.is_active then table.insert(format, { Attribute = { Intensity = "Bold" } }) end
+
+    table.insert(format, { Text = title })
+
+    return format
 end)
 
 -- ============================================================================
@@ -288,6 +353,8 @@ config.color_scheme = "Catppuccin Frappe"
 
 -- Stylize the Window
 config.window_decorations = "RESIZE"
+config.use_fancy_tab_bar = false -- Use retro tab bar for full color control
+config.tab_max_width = 64 -- Increase from default 16 to prevent clipping of tab titles
 config.hide_tab_bar_if_only_one_tab = true
 config.show_tab_index_in_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
