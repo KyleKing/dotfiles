@@ -14,20 +14,38 @@ IDE-like completion server for shell commands, providing rich, ranked completion
 
 ## Features
 
-### Current (v0.1.0)
+### Current (v0.2.0)
 
 - [x] Query command for getting completions
-- [x] Carapace-bin integration
+- [x] **Carapace-bin integration** (1000+ commands)
+  - Export format parsing
+  - Prefix filtering
+  - Graceful error handling
+- [x] **jdx/usage CLI integration**
+  - --help parsing for any command
+  - Flag completion with short/long forms
+  - Flag value completion with choices
+  - Context-aware completion
 - [x] JSON and text output formats
-- [x] Basic completion engine
+- [x] **Completion engine with source merging**
+  - Multiple source support
+  - Automatic deduplication (keeps highest score)
+  - Functional options pattern
+  - Graceful source initialization
+- [x] **Comprehensive test coverage**
+  - API-level integration tests
+  - Mock infrastructure for testability
+  - 18+ test scenarios
+  - All tests parallelized
 
 ### Planned
 
 - [ ] Atuin history integration for ranking
 - [ ] TLDR pages integration
-- [ ] Man page parsing
+- [ ] Man page parsing fallback
 - [ ] SQLite caching layer
-- [ ] Context-aware ranking (git repo detection, file types)
+- [ ] Smart ranking algorithm (frequency, recency, context)
+- [ ] Git repo detection for context boosting
 - [ ] Bubbletea TUI for interactive selection
 - [ ] ZSH widget for seamless integration
 - [ ] WezTerm Lua integration
@@ -196,11 +214,11 @@ User Input → ZSH Widget → completion-server query
 
 | Source | Coverage | Priority | Status |
 |--------|----------|----------|--------|
-| carapace-bin | 1000+ commands | High | ✅ Implemented |
-| jdx/usage | Any command with --help | Medium | 🚧 Planned |
-| TLDR | ~300 commands | Low | 🚧 Planned |
-| Man pages | All installed commands | Low | 🚧 Planned |
-| ZSH completions | Existing ZSH functions | High | 🚧 Planned |
+| carapace-bin | 1000+ commands | 100 | ✅ Implemented |
+| jdx/usage | Any command with --help | 90 | ✅ Implemented |
+| TLDR | ~300 commands | 80 | 🚧 Planned |
+| Man pages | All installed commands | 70 | 🚧 Planned |
+| ZSH completions | Existing ZSH functions | 85 | 🚧 Planned |
 
 ### Ranking Algorithm
 
