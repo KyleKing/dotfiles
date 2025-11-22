@@ -11,3 +11,10 @@
 
 # Prettier Cache
 node_modules/.cache/prettier/.prettier-caches
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
