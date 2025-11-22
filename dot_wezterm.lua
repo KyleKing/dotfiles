@@ -29,11 +29,16 @@
 --
 -- SCROLLBACK & SEARCH:
 --  CMD+K then C-l - Clear scrollback (or type 'clear')
---  CTRL+Shift+F - Search scrollback (Up/Down or PgUp/PgDn to navigate)
---  CTRL+U - Clear search, CTRL+R - Switch pattern mode
---  Copy Mode: https://wezfurlong.org/wezterm/copymode.html
---   CTRL+Shift+X - Enter copy mode
---   CTRL+Shift+C - Copy to clipboard
+--  CMD+F - Search scrollback (Enter/Ctrl-N/P to navigate matches, Ctrl-U to clear)
+--  CMD+X - Enter copy mode (vim-style navigation)
+--  Copy Mode (https://wezfurlong.org/wezterm/copymode.html):
+--   hjkl - Vim movement, w/b/e - Word navigation, 0/$/^ - Line navigation
+--   H/M/L - Move to top/middle/bottom of viewport
+--   gg/G - Jump to top/bottom of scrollback
+--   Ctrl-D/U - Half page down/up, Ctrl-F/B - Full page down/up
+--   / - Search, n/N - Next/previous match
+--   v/V/Ctrl-V - Visual select (char/line/block)
+--   y/Enter - Copy and exit, q/Escape - Exit without copying
 --
 -- MOUSE:
 --  CTRL+Click - Open link under cursor
@@ -379,6 +384,95 @@ config.keys = {
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
     { key = "f", mods = "CTRL", action = act.ScrollByPage(0.9) },
     { key = "DownArrow", mods = "CMD", action = act.ScrollToBottom },
+
+    -- Enhanced text navigation
+    { key = "x", mods = "CMD", action = act.ActivateCopyMode },
+    { key = "f", mods = "CMD", action = act.Search({ CaseInSensitiveString = "" }) },
+}
+
+-- ============================================================================
+-- Enhanced Copy Mode (Vim-style navigation for scrollback)
+-- ============================================================================
+config.key_tables = {
+    copy_mode = {
+        -- Vim-style movement
+        { key = "h", mods = "NONE", action = act.CopyMode("MoveLeft") },
+        { key = "j", mods = "NONE", action = act.CopyMode("MoveDown") },
+        { key = "k", mods = "NONE", action = act.CopyMode("MoveUp") },
+        { key = "l", mods = "NONE", action = act.CopyMode("MoveRight") },
+
+        -- Word navigation
+        { key = "w", mods = "NONE", action = act.CopyMode("MoveForwardWord") },
+        { key = "b", mods = "NONE", action = act.CopyMode("MoveBackwardWord") },
+        { key = "e", mods = "NONE", action = act.CopyMode("MoveForwardWordEnd") },
+
+        -- Line navigation
+        { key = "0", mods = "NONE", action = act.CopyMode("MoveToStartOfLine") },
+        { key = "$", mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
+        { key = "^", mods = "NONE", action = act.CopyMode("MoveToStartOfLineContent") },
+
+        -- Viewport navigation
+        { key = "H", mods = "SHIFT", action = act.CopyMode("MoveToViewportTop") },
+        { key = "M", mods = "SHIFT", action = act.CopyMode("MoveToViewportMiddle") },
+        { key = "L", mods = "SHIFT", action = act.CopyMode("MoveToViewportBottom") },
+
+        -- Scrollback navigation
+        { key = "g", mods = "NONE", action = act.CopyMode("MoveToScrollbackTop") },
+        { key = "G", mods = "SHIFT", action = act.CopyMode("MoveToScrollbackBottom") },
+        { key = "d", mods = "CTRL", action = act.CopyMode("MoveByPage(0.5)") },
+        { key = "u", mods = "CTRL", action = act.CopyMode("MoveByPage(-0.5)") },
+        { key = "f", mods = "CTRL", action = act.CopyMode("PageDown") },
+        { key = "b", mods = "CTRL", action = act.CopyMode("PageUp") },
+
+        -- Search
+        { key = "/", mods = "NONE", action = act.Search("CurrentSelectionOrEmptyString") },
+        { key = "n", mods = "NONE", action = act.CopyMode("NextMatch") },
+        { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
+
+        -- Visual selection modes
+        { key = "v", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+        { key = "V", mods = "SHIFT", action = act.CopyMode({ SetSelectionMode = "Line" }) },
+        {
+            key = "v",
+            mods = "CTRL",
+            action = act.CopyMode({ SetSelectionMode = "Block" }),
+        },
+
+        -- Copy and exit
+        {
+            key = "y",
+            mods = "NONE",
+            action = act.Multiple({
+                { CopyTo = "ClipboardAndPrimarySelection" },
+                { CopyMode = "Close" },
+            }),
+        },
+        {
+            key = "Enter",
+            mods = "NONE",
+            action = act.Multiple({
+                { CopyTo = "ClipboardAndPrimarySelection" },
+                { CopyMode = "Close" },
+            }),
+        },
+
+        -- Exit copy mode
+        { key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
+        { key = "q", mods = "NONE", action = act.CopyMode("Close") },
+        { key = "c", mods = "CTRL", action = act.CopyMode("Close") },
+    },
+
+    search_mode = {
+        -- Navigate between search matches
+        { key = "Enter", mods = "NONE", action = act.CopyMode("NextMatch") },
+        { key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") },
+        { key = "p", mods = "CTRL", action = act.CopyMode("PriorMatch") },
+        { key = "u", mods = "CTRL", action = act.CopyMode("ClearPattern") },
+        { key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
+
+        -- Exit search mode
+        { key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
+    },
 }
 
 config.mouse_bindings = {
