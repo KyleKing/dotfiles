@@ -16,9 +16,11 @@
 --  CMD+ALT+Left/Right - Switch to previous/next tab
 --  CMD+R - Reload configuration file
 --
--- PANE MANAGEMENT:
+-- PANE MANAGEMENT (with Neovim integration):
 --  CMD+D - Split pane horizontally (left/right)
 --  CMD+Shift+D - Split pane vertically (top/bottom)
+--  CTRL+H/J/K/L - Navigate panes/nvim splits (seamlessly with smart-splits.nvim)
+--  ALT+Arrow - Resize panes/nvim splits (seamlessly with smart-splits.nvim)
 --  CMD+[ or ] - Cycle through panes (prev/next)
 --  CMD+Shift+Arrow - Navigate to pane in direction
 --  CMD+Shift+Alt+Arrow - Resize pane in direction
@@ -74,6 +76,21 @@ workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
 --     wezterm.home_dir .. "/Developer",
 --     wezterm.home_dir .. "/Projects",
 -- }
+
+-- ============================================================================
+-- Plugin: Smart Splits (Neovim Integration)
+-- ============================================================================
+-- Seamless navigation between Neovim splits and WezTerm panes
+-- Requires smart-splits.nvim plugin in Neovim
+-- Install in Neovim: https://github.com/mrjones2014/smart-splits.nvim
+--
+-- Neovim setup (add to your init.lua):
+--   require('smart-splits').setup()
+--   vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+--   vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+--   vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+--   vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
 -- ============================================================================
 -- Configuration for Tab Color
@@ -362,6 +379,19 @@ end)
 -- General configuration
 
 local config = wezterm.config_builder()
+
+-- Apply smart-splits integration (must be done before defining keys)
+-- This enables seamless navigation between Neovim and WezTerm panes
+smart_splits.apply_to_config(config, {
+    direction_keys = {
+        move = { "h", "j", "k", "l" },
+        resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
+    },
+    modifiers = {
+        move = "CTRL",
+        resize = "META", -- ALT key
+    },
+})
 
 -- Font & Text
 config.font_size = 13.5
