@@ -614,4 +614,99 @@ config.window_padding = {
     bottom = 0,
 }
 
+-- ============================================================================
+-- Status Bar (with command tracking and git integration)
+-- ============================================================================
+
+-- Track command counts per pane
+local command_counts = {}
+
+-- Event: Track command execution (requires shell integration)
+wezterm.on("update-status", function(window, pane)
+    local pane_id = pane:pane_id()
+
+    -- Initialize command count for this pane if not exists
+    if not command_counts[pane_id] then command_counts[pane_id] = 0 end
+
+    -- Increment on new command (when user_vars.WEZTERM_PROG changes)
+    local user_vars = pane:get_user_vars()
+    if user_vars.WEZTERM_PROG and user_vars.WEZTERM_PROG ~= "" then
+        command_counts[pane_id] = command_counts[pane_id] + 1
+    end
+end)
+
+-- Event: Update right status bar
+wezterm.on("update-right-status", function(window, pane)
+    local workspace = window:active_workspace()
+    local cwd_uri = pane:get_current_working_dir()
+    local date = wezterm.strftime("%H:%M")
+
+    -- Get git branch if in a git repo
+    local git_branch = ""
+    if cwd_uri then
+        local cwd = cwd_uri.file_path
+        local success, stdout, stderr = wezterm.run_child_process({
+            "git",
+            "-C",
+            cwd,
+            "branch",
+            "--show-current",
+        })
+        if success and stdout ~= "" then
+            git_branch = " " .. wezterm.nerdfonts.dev_git_branch .. " " .. stdout:gsub("\n", "")
+        end
+    end
+
+    -- Get command count for current pane
+    local pane_id = pane:pane_id()
+    local cmd_count = command_counts[pane_id] or 0
+
+    -- Check for errors (exit status from last command)
+    local exit_status = pane:get_user_vars().WEZTERM_EXIT_STATUS or "0"
+    local error_indicator = ""
+    if exit_status ~= "0" then
+        error_indicator = " " .. wezterm.nerdfonts.md_alert_circle .. " "
+    end
+
+    -- Check if pane is zoomed
+    local zoomed = ""
+    if pane:tab():get_size().rows ~= pane:get_dimensions().viewport_rows then
+        zoomed = " " .. wezterm.nerdfonts.md_arrow_expand_all .. " "
+    end
+
+    -- Build status line with color-coded sections
+    local status_items = {
+        { Foreground = { Color = "#8AADF4" } },
+        { Text = " " .. workspace .. " " },
+    }
+
+    if git_branch ~= "" then
+        table.insert(status_items, { Foreground = { Color = "#A6DA95" } })
+        table.insert(status_items, { Text = git_branch })
+    end
+
+    if cmd_count > 0 then
+        table.insert(status_items, { Foreground = { Color = "#EED49F" } })
+        table.insert(
+            status_items,
+            { Text = " " .. wezterm.nerdfonts.md_console .. " " .. tostring(cmd_count) }
+        )
+    end
+
+    if error_indicator ~= "" then
+        table.insert(status_items, { Foreground = { Color = "#ED8796" } })
+        table.insert(status_items, { Text = error_indicator })
+    end
+
+    if zoomed ~= "" then
+        table.insert(status_items, { Foreground = { Color = "#F5A97F" } })
+        table.insert(status_items, { Text = zoomed })
+    end
+
+    table.insert(status_items, { Foreground = { Color = "#CAD3F5" } })
+    table.insert(status_items, { Text = date .. " " })
+
+    window:set_right_status(wezterm.format(status_items))
+end)
+
 return config
