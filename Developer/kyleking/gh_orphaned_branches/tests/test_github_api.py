@@ -12,167 +12,116 @@ from gh_orphaned_branches.github_api import (
 )
 
 
-class TestAuthentication:
-    """Test authentication helpers."""
-
-    def test_get_github_token_from_env(self, monkeypatch):
-        """Test getting token from environment variable."""
-        monkeypatch.setenv("GITHUB_TOKEN", "test_token_123")
-        token = _get_github_token()
-        assert token == "test_token_123"
-
-    def test_get_github_token_gh_token_env(self, monkeypatch):
-        """Test getting token from GH_TOKEN environment variable."""
-        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
-        monkeypatch.setenv("GH_TOKEN", "gh_token_456")
-        token = _get_github_token()
-        assert token == "gh_token_456"
-
-    def test_create_github_client(self):
-        """Test creating GitHub client."""
-        client = _create_github_client(token="test_token")
-        assert isinstance(client, httpx.Client)
-        assert client.base_url == "https://api.github.com"
-        assert "Authorization" in client.headers
-        client.close()
+@pytest.mark.parametrize("env_var,value", [
+    ("GITHUB_TOKEN", "test_token_123"),
+    ("GH_TOKEN", "gh_token_456"),
+])
+def test_get_github_token_from_env(monkeypatch, env_var, value):
+    """Test getting token from environment variables."""
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.delenv("GH_TOKEN", raising=False)
+    monkeypatch.setenv(env_var, value)
+    token = _get_github_token()
+    assert token == value
 
 
-class TestAPIFunctions:
-    """Test API functions with mocked httpx."""
+def test_create_github_client():
+    """Test creating GitHub client."""
+    client = _create_github_client(token="test_token")
+    assert isinstance(client, httpx.Client)
+    assert client.base_url == "https://api.github.com"
+    assert "Authorization" in client.headers
+    client.close()
 
-    def test_fetch_repositories(self, monkeypatch):
-        """Test fetching repositories."""
-        mock_repos = [
-            {"name": "repo1", "fork": False, "owner": {"login": "testuser"}},
-            {"name": "repo2", "fork": False, "owner": {"login": "testuser"}},
-        ]
 
-        class MockClient:
-            base_url = "https://api.github.com"
-            headers = {}
+class MockClient:
+    """Mock httpx client for testing."""
+    base_url = "https://api.github.com"
+    headers = {}
 
-            def get(self, endpoint, params=None):
-                class MockResponse:
-                    status_code = 200
+    def __init__(self, response_data):
+        self.response_data = response_data
 
-                    def raise_for_status(self):
-                        pass
+    def get(self, endpoint, params=None):
+        class MockResponse:
+            def __init__(self, data):
+                self.data = data
+                self.status_code = 200
 
-                    def json(self):
-                        return mock_repos
-
-                return MockResponse()
-
-            def close(self):
+            def raise_for_status(self):
                 pass
 
-        def mock_create_client(token=None):
-            return MockClient()
+            def json(self):
+                return self.data
 
-        monkeypatch.setattr(
-            "gh_orphaned_branches.github_api._create_github_client",
-            mock_create_client,
-        )
+        return MockResponse(self.response_data)
 
-        repos = fetch_repositories("testuser", include_forks=False)
-        assert len(repos) == 2
-        assert repos[0]["name"] == "repo1"
+    def close(self):
+        pass
 
-    def test_fetch_repositories_filter_forks(self, monkeypatch):
-        """Test filtering forks when fetching repositories."""
-        mock_repos = [
-            {"name": "repo1", "fork": False, "owner": {"login": "testuser"}},
-            {"name": "repo2", "fork": True, "owner": {"login": "testuser"}},
-            {"name": "repo3", "fork": False, "owner": {"login": "testuser"}},
-        ]
 
-        class MockClient:
-            base_url = "https://api.github.com"
-            headers = {}
+@pytest.mark.parametrize("include_forks,expected_count", [
+    (False, 2),
+    (True, 3),
+])
+def test_fetch_repositories(monkeypatch, include_forks, expected_count):
+    """Test fetching repositories with fork filtering."""
+    mock_repos = [
+        {"name": "repo1", "fork": False, "owner": {"login": "testuser"}},
+        {"name": "repo2", "fork": True, "owner": {"login": "testuser"}},
+        {"name": "repo3", "fork": False, "owner": {"login": "testuser"}},
+    ]
 
-            def get(self, endpoint, params=None):
-                class MockResponse:
-                    status_code = 200
+    def mock_create_client(token=None):
+        return MockClient(mock_repos)
 
-                    def raise_for_status(self):
-                        pass
+    monkeypatch.setattr(
+        "gh_orphaned_branches.github_api._create_github_client",
+        mock_create_client,
+    )
 
-                    def json(self):
-                        return mock_repos
-
-                return MockResponse()
-
-            def close(self):
-                pass
-
-        def mock_create_client(token=None):
-            return MockClient()
-
-        monkeypatch.setattr(
-            "gh_orphaned_branches.github_api._create_github_client",
-            mock_create_client,
-        )
-
-        repos = fetch_repositories("testuser", include_forks=False)
-        assert len(repos) == 2
+    repos = fetch_repositories("testuser", include_forks=include_forks)
+    assert len(repos) == expected_count
+    if not include_forks:
         assert all(not r.get("fork") for r in repos)
 
 
-class TestErrorHandling:
-    """Test error handling in API functions."""
+def test_make_request_http_error():
+    """Test error when API returns HTTP error."""
+    class MockErrorClient:
+        def get(self, endpoint, params=None):
+            class MockResponse:
+                status_code = 404
+                text = "Not found"
 
-    def test_make_request_http_error(self, monkeypatch):
-        """Test error when API returns HTTP error."""
-        from gh_orphaned_branches.github_api import _make_request
+                def raise_for_status(self):
+                    raise httpx.HTTPStatusError(
+                        "404", request=None, response=self
+                    )
 
-        class MockClient:
-            def get(self, endpoint, params=None):
-                class MockResponse:
-                    status_code = 404
-                    text = "Not found"
+            return MockResponse()
 
-                    def raise_for_status(self):
-                        raise httpx.HTTPStatusError(
-                            "404", request=None, response=self
-                        )
-
-                return MockResponse()
-
-        client = MockClient()
-        with pytest.raises(RuntimeError, match="GitHub API error"):
-            _make_request(client, "/test")
+    client = MockErrorClient()
+    with pytest.raises(RuntimeError, match="GitHub API error"):
+        _make_request(client, "/test")
 
 
-# VCR tests (these would record real API interactions)
 @pytest.mark.vcr()
-class TestGitHubAPIWithVCR:
-    """Test GitHub API with VCR cassettes.
+@pytest.mark.skip(reason="Requires real GitHub API access and token")
+def test_fetch_repositories_vcr(vcr):
+    """Test fetching repositories with VCR recording."""
+    repos = fetch_repositories("octocat", include_forks=False)
+    assert isinstance(repos, list)
+    if repos:
+        assert "name" in repos[0]
+        assert "owner" in repos[0]
 
-    These tests use pytest-vcr to record/replay HTTP interactions.
-    On first run, they make real API calls and record the responses.
-    Subsequent runs use the recorded cassettes.
-    """
 
-    @pytest.mark.skip(reason="Requires real GitHub API access and token")
-    def test_fetch_repositories_vcr(self, vcr):
-        """Test fetching repositories with VCR recording.
-
-        This test is skipped by default as it requires real API access.
-        To run: pytest -v -m 'not skip' and ensure GITHUB_TOKEN is set.
-        """
-        repos = fetch_repositories("octocat", include_forks=False)
-        assert isinstance(repos, list)
-        if repos:
-            assert "name" in repos[0]
-            assert "owner" in repos[0]
-
-    @pytest.mark.skip(reason="Requires real GitHub API access and token")
-    def test_fetch_branches_vcr(self, vcr):
-        """Test fetching branches with VCR recording.
-
-        This test is skipped by default as it requires real API access.
-        """
-        branches = fetch_branches("octocat", "hello-world")
-        assert isinstance(branches, list)
-        if branches:
-            assert "name" in branches[0]
+@pytest.mark.vcr()
+@pytest.mark.skip(reason="Requires real GitHub API access and token")
+def test_fetch_branches_vcr(vcr):
+    """Test fetching branches with VCR recording."""
+    branches = fetch_branches("octocat", "hello-world")
+    assert isinstance(branches, list)
+    if branches:
+        assert "name" in branches[0]

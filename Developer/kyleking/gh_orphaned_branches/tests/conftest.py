@@ -88,3 +88,13 @@ def sample_pr_open():
 def fixed_datetime():
     """Fixed datetime for testing."""
     return datetime(2024, 2, 1, 12, 0, 0, tzinfo=timezone.utc)
+
+
+@pytest.fixture
+def sample_branch_info():
+    """Sample branch info data."""
+    return {
+        "name": "feature-branch",
+        "last_commit": "2024-01-01T12:00:00Z",
+        "age_days": 31,
+    }
