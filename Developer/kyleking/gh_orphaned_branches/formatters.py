@@ -1,4 +1,4 @@
-"""Output formatters (pure functions)."""
+"""Output formatters."""
 
 import json
 from typing import Any
@@ -11,32 +11,13 @@ from rich.text import Text
 from .core import RepositoryResults
 
 
-# ============================================================================
-# Pure Formatting Functions
-# ============================================================================
-
-
-def format_pr_status(merged: bool) -> str:
-    """Format PR status as a string.
-
-    Pure function.
-    """
-    return "Merged" if merged else "Closed"
-
-
-def format_date(date_str: str) -> str:
-    """Format an ISO date string to a short date.
-
-    Pure function.
-    """
+def _format_date(date_str: str) -> str:
+    """Format ISO date string to short date."""
     return date_str[:10] if date_str else "N/A"
 
 
-def create_summary_text(summary: dict[str, int], stale_days: int) -> str:
-    """Create summary text from statistics.
-
-    Pure function that generates markup text.
-    """
+def _create_summary_text(summary: dict[str, int], stale_days: int) -> str:
+    """Create summary markup text."""
     return f"""[bold]Summary[/bold]
 
 [red]Branches with closed/merged PRs:[/red] {summary['closed_pr_branches']}
@@ -50,164 +31,54 @@ def create_summary_text(summary: dict[str, int], stale_days: int) -> str:
     """
 
 
-# ============================================================================
-# Table Builders (Pure Functions Returning Table Objects)
-# ============================================================================
-
-
-def build_closed_pr_table(
-    repo_name: str, branches: list[dict[str, Any]]
-) -> Table:
-    """Build a table for branches with closed PRs.
-
-    Pure function that returns a Table object.
-    """
-    table = Table(
-        title=f"{repo_name} - Branches with Closed/Merged PRs",
-        show_header=True,
-        header_style="bold magenta",
-    )
-    table.add_column("Branch", style="cyan")
-    table.add_column("PR #", style="yellow")
-    table.add_column("Status", style="green")
-    table.add_column("Last Commit", style="blue")
-
-    for branch in branches:
-        status = format_pr_status(branch["merged"])
-        table.add_row(
-            branch["name"],
-            f"#{branch['pr_number']}",
-            status,
-            format_date(branch["last_commit"]),
-        )
-
+def _build_table(repo_name: str, title: str, columns: list[tuple[str, str]], rows: list[tuple], header_style: str) -> Table:
+    """Build a generic table."""
+    table = Table(title=f"{repo_name} - {title}", show_header=True, header_style=header_style)
+    for col_name, col_style in columns:
+        table.add_column(col_name, style=col_style)
+    for row in rows:
+        table.add_row(*row)
     return table
 
 
-def build_stale_branches_table(
-    repo_name: str, branches: list[dict[str, Any]], stale_days: int
-) -> Table:
-    """Build a table for stale branches without PRs.
-
-    Pure function that returns a Table object.
-    """
-    table = Table(
-        title=f"{repo_name} - Stale Branches (>{stale_days} days, No PR)",
-        show_header=True,
-        header_style="bold red",
-    )
-    table.add_column("Branch", style="cyan")
-    table.add_column("Age (days)", style="red")
-    table.add_column("Last Commit", style="blue")
-
-    for branch in branches:
-        table.add_row(
-            branch["name"],
-            str(branch["age_days"]),
-            format_date(branch["last_commit"]),
-        )
-
-    return table
+def output_json(results: dict[str, RepositoryResults], console: Console) -> None:
+    """Output results as JSON."""
+    console.print(json.dumps(results, indent=2))
 
 
-def build_recent_branches_table(
-    repo_name: str, branches: list[dict[str, Any]], stale_days: int
-) -> Table:
-    """Build a table for recent branches without PRs.
+def output_markdown(results: dict[str, RepositoryResults], summary: dict[str, int], stale_days: int, console: Console) -> None:
+    """Output results as Markdown."""
+    lines = ["# Orphaned Branches Report\n"]
 
-    Pure function that returns a Table object.
-    """
-    table = Table(
-        title=f"{repo_name} - Recent Branches (≤{stale_days} days, No PR)",
-        show_header=True,
-        header_style="bold blue",
-    )
-    table.add_column("Branch", style="cyan")
-    table.add_column("Age (days)", style="blue")
-    table.add_column("Last Commit", style="blue")
+    for repo_name, repo_results in results.items():
+        lines.append(f"\n## {repo_name}\n")
 
-    for branch in branches:
-        table.add_row(
-            branch["name"],
-            str(branch["age_days"]),
-            format_date(branch["last_commit"]),
-        )
+        if repo_results["closed_pr_branches"]:
+            lines.append("### Branches with Closed/Merged PRs\n")
+            lines.append("| Branch | PR # | Status | Last Commit |")
+            lines.append("|--------|------|--------|-------------|")
+            for b in repo_results["closed_pr_branches"]:
+                status = "Merged" if b["merged"] else "Closed"
+                lines.append(f"| {b['name']} | #{b['pr_number']} | {status} | {_format_date(b['last_commit'])} |")
+            lines.append(f"\n**Action:** Delete {len(repo_results['closed_pr_branches'])} branch(es)\n")
 
-    return table
+        if repo_results["no_pr_branches_stale"]:
+            lines.append(f"### Stale Branches (>{stale_days} days, No PR)\n")
+            lines.append("| Branch | Age (days) | Last Commit |")
+            lines.append("|--------|------------|-------------|")
+            for b in repo_results["no_pr_branches_stale"]:
+                lines.append(f"| {b['name']} | {b['age_days']} | {_format_date(b['last_commit'])} |")
+            lines.append(f"\n**Action:** Review and consider deleting {len(repo_results['no_pr_branches_stale'])} branch(es)\n")
 
+        if repo_results["no_pr_branches_recent"]:
+            lines.append(f"### Recent Branches (≤{stale_days} days, No PR)\n")
+            lines.append("| Branch | Age (days) | Last Commit |")
+            lines.append("|--------|------------|-------------|")
+            for b in repo_results["no_pr_branches_recent"]:
+                lines.append(f"| {b['name']} | {b['age_days']} | {_format_date(b['last_commit'])} |")
+            lines.append(f"\n**Info:** {len(repo_results['no_pr_branches_recent'])} active branch(es)\n")
 
-# ============================================================================
-# Markdown Formatting (Pure Functions)
-# ============================================================================
-
-
-def format_closed_pr_markdown(
-    repo_name: str, branches: list[dict[str, Any]]
-) -> list[str]:
-    """Format closed PR branches as Markdown.
-
-    Pure function returning lines of text.
-    """
-    lines = ["### Branches with Closed/Merged PRs\n"]
-    lines.append("| Branch | PR # | Status | Last Commit |")
-    lines.append("|--------|------|--------|-------------|")
-
-    for branch in branches:
-        status = format_pr_status(branch["merged"])
-        lines.append(
-            f"| {branch['name']} | #{branch['pr_number']} | {status} | {format_date(branch['last_commit'])} |"
-        )
-
-    lines.append(f"\n**Action:** Delete {len(branches)} branch(es)\n")
-    return lines
-
-
-def format_stale_branches_markdown(
-    repo_name: str, branches: list[dict[str, Any]], stale_days: int
-) -> list[str]:
-    """Format stale branches as Markdown.
-
-    Pure function returning lines of text.
-    """
-    lines = [f"### Stale Branches (>{stale_days} days, No PR)\n"]
-    lines.append("| Branch | Age (days) | Last Commit |")
-    lines.append("|--------|------------|-------------|")
-
-    for branch in branches:
-        lines.append(
-            f"| {branch['name']} | {branch['age_days']} | {format_date(branch['last_commit'])} |"
-        )
-
-    lines.append(f"\n**Action:** Review and consider deleting {len(branches)} branch(es)\n")
-    return lines
-
-
-def format_recent_branches_markdown(
-    repo_name: str, branches: list[dict[str, Any]], stale_days: int
-) -> list[str]:
-    """Format recent branches as Markdown.
-
-    Pure function returning lines of text.
-    """
-    lines = [f"### Recent Branches (≤{stale_days} days, No PR)\n"]
-    lines.append("| Branch | Age (days) | Last Commit |")
-    lines.append("|--------|------------|-------------|")
-
-    for branch in branches:
-        lines.append(
-            f"| {branch['name']} | {branch['age_days']} | {format_date(branch['last_commit'])} |"
-        )
-
-    lines.append(f"\n**Info:** {len(branches)} active branch(es)\n")
-    return lines
-
-
-def format_summary_markdown(summary: dict[str, int], stale_days: int) -> list[str]:
-    """Format summary as Markdown.
-
-    Pure function returning lines of text.
-    """
-    return [
+    lines.extend([
         "\n## Summary\n",
         f"- **Branches with closed/merged PRs:** {summary['closed_pr_branches']}",
         f"- **Stale branches without PR (>{stale_days} days):** {summary['stale_no_pr_branches']}",
@@ -216,90 +87,43 @@ def format_summary_markdown(summary: dict[str, int], stale_days: int) -> list[st
         "1. Delete branches with closed/merged PRs (safe to remove)",
         "2. Review stale branches without PRs - may be abandoned work",
         "3. Monitor recent branches - may be work in progress",
-    ]
-
-
-# ============================================================================
-# Main Output Functions (Side Effects: Console Output)
-# ============================================================================
-
-
-def output_json(results: dict[str, RepositoryResults], console: Console) -> None:
-    """Output results as JSON.
-
-    Side effect: prints to console.
-    """
-    console.print(json.dumps(results, indent=2))
-
-
-def output_markdown(
-    results: dict[str, RepositoryResults],
-    summary: dict[str, int],
-    stale_days: int,
-    console: Console,
-) -> None:
-    """Output results as Markdown.
-
-    Side effect: prints to console.
-    """
-    lines = ["# Orphaned Branches Report\n"]
-
-    for repo_name, repo_results in results.items():
-        lines.append(f"\n## {repo_name}\n")
-
-        if repo_results["closed_pr_branches"]:
-            lines.extend(format_closed_pr_markdown(repo_name, repo_results["closed_pr_branches"]))
-
-        if repo_results["no_pr_branches_stale"]:
-            lines.extend(format_stale_branches_markdown(repo_name, repo_results["no_pr_branches_stale"], stale_days))
-
-        if repo_results["no_pr_branches_recent"]:
-            lines.extend(format_recent_branches_markdown(repo_name, repo_results["no_pr_branches_recent"], stale_days))
-
-    lines.extend(format_summary_markdown(summary, stale_days))
+    ])
 
     console.print("\n".join(lines))
 
 
-def output_table(
-    results: dict[str, RepositoryResults],
-    summary: dict[str, int],
-    stale_days: int,
-    console: Console,
-) -> None:
-    """Output results as rich tables.
-
-    Side effect: prints to console.
-    """
+def output_table(results: dict[str, RepositoryResults], summary: dict[str, int], stale_days: int, console: Console) -> None:
+    """Output results as rich tables."""
     console.print("\n")
 
     for repo_name, repo_results in results.items():
         if repo_results["closed_pr_branches"]:
-            table = build_closed_pr_table(repo_name, repo_results["closed_pr_branches"])
+            rows = [(b["name"], f"#{b['pr_number']}", "Merged" if b["merged"] else "Closed", _format_date(b["last_commit"]))
+                    for b in repo_results["closed_pr_branches"]]
+            table = _build_table(repo_name, "Branches with Closed/Merged PRs",
+                                [("Branch", "cyan"), ("PR #", "yellow"), ("Status", "green"), ("Last Commit", "blue")],
+                                rows, "bold magenta")
             console.print(table)
-            console.print(
-                f"[yellow]→ Action: Delete {len(repo_results['closed_pr_branches'])} branch(es)[/yellow]\n"
-            )
+            console.print(f"[yellow]→ Action: Delete {len(repo_results['closed_pr_branches'])} branch(es)[/yellow]\n")
 
         if repo_results["no_pr_branches_stale"]:
-            table = build_stale_branches_table(repo_name, repo_results["no_pr_branches_stale"], stale_days)
+            rows = [(b["name"], str(b["age_days"]), _format_date(b["last_commit"]))
+                    for b in repo_results["no_pr_branches_stale"]]
+            table = _build_table(repo_name, f"Stale Branches (>{stale_days} days, No PR)",
+                                [("Branch", "cyan"), ("Age (days)", "red"), ("Last Commit", "blue")],
+                                rows, "bold red")
             console.print(table)
-            console.print(
-                f"[yellow]→ Action: Review and consider deleting {len(repo_results['no_pr_branches_stale'])} branch(es)[/yellow]\n"
-            )
+            console.print(f"[yellow]→ Action: Review and consider deleting {len(repo_results['no_pr_branches_stale'])} branch(es)[/yellow]\n")
 
         if repo_results["no_pr_branches_recent"]:
-            table = build_recent_branches_table(repo_name, repo_results["no_pr_branches_recent"], stale_days)
+            rows = [(b["name"], str(b["age_days"]), _format_date(b["last_commit"]))
+                    for b in repo_results["no_pr_branches_recent"]]
+            table = _build_table(repo_name, f"Recent Branches (≤{stale_days} days, No PR)",
+                                [("Branch", "cyan"), ("Age (days)", "blue"), ("Last Commit", "blue")],
+                                rows, "bold blue")
             console.print(table)
-            console.print(
-                f"[blue]→ Info: {len(repo_results['no_pr_branches_recent'])} active branch(es)[/blue]\n"
-            )
+            console.print(f"[blue]→ Info: {len(repo_results['no_pr_branches_recent'])} active branch(es)[/blue]\n")
 
-    # Summary panel
-    summary_text = create_summary_text(summary, stale_days)
-    summary_panel = Panel(
-        Text.from_markup(summary_text),
-        title="Orphaned Branches Report",
-        border_style="green",
-    )
+    summary_panel = Panel(Text.from_markup(_create_summary_text(summary, stale_days)),
+                          title="Orphaned Branches Report", border_style="green")
     console.print(summary_panel)
