@@ -27,8 +27,9 @@
 --  CTRL+B/F - Scroll page up/down (vim-style)
 --  CMD+Down - Scroll to bottom
 --
--- SCROLLBACK & SEARCH:
---  CMD+K then C-l - Clear scrollback (or type 'clear')
+-- TEXT SELECTION & SEARCH:
+--  CMD+Space - Quick select (highlights URLs, paths, hashes, IPs for quick copy)
+--  CMD+O - Quick select and open URLs
 --  CMD+F - Search scrollback (Enter/Ctrl-N/P to navigate matches, Ctrl-U to clear)
 --  CMD+X - Enter copy mode (vim-style navigation)
 --  Copy Mode (https://wezfurlong.org/wezterm/copymode.html):
@@ -39,6 +40,9 @@
 --   / - Search, n/N - Next/previous match
 --   v/V/Ctrl-V - Visual select (char/line/block)
 --   y/Enter - Copy and exit, q/Escape - Exit without copying
+--
+-- SCROLLBACK MANAGEMENT:
+--  CMD+K then C-l - Clear scrollback (or type 'clear')
 --
 -- MOUSE:
 --  CTRL+Click - Open link under cursor
@@ -345,7 +349,7 @@ config.line_height = 1.0
 -- Window & Terminal
 config.initial_cols = 200
 config.initial_rows = 60
-config.scrollback_lines = 10000
+config.scrollback_lines = 50000 -- Increased for long build outputs
 config.enable_scroll_bar = false
 config.adjust_window_size_when_changing_font_size = false
 
@@ -356,6 +360,27 @@ config.front_end = "WebGpu" -- Options: OpenGL, WebGpu, Software
 
 -- Shell integration for better prompts and command tracking
 config.enable_kitty_graphics = true
+
+-- ============================================================================
+-- Quick Select Patterns (for fast URL/path/hash selection)
+-- ============================================================================
+config.quick_select_patterns = {
+    -- Git commit hashes (7-40 characters)
+    "\\b[0-9a-f]{7,40}\\b",
+    -- UUIDs
+    "\\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\b",
+    -- Issue tracker references (JIRA-style)
+    "\\b[A-Z]{2,}-\\d+\\b",
+    -- Kubernetes resource names
+    "\\b[a-z0-9]([-a-z0-9]*[a-z0-9])?\\b",
+    -- IP addresses (already in defaults but explicit here)
+    "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
+    -- File paths with common extensions
+    "[\\w\\-\\.\\/]+\\.(py|js|ts|lua|rs|go|md|json|yaml|yml|toml|txt)\\b",
+}
+
+-- Quick select alphabet (default but can be customized for easier finger positions)
+config.quick_select_alphabet = "asdfghjklqwertyuiopzxcvbnm"
 
 local act = wezterm.action
 config.keys = {
@@ -388,6 +413,21 @@ config.keys = {
     -- Enhanced text navigation
     { key = "x", mods = "CMD", action = act.ActivateCopyMode },
     { key = "f", mods = "CMD", action = act.Search({ CaseInSensitiveString = "" }) },
+
+    -- Quick select (URLs, paths, hashes, etc.)
+    { key = "Space", mods = "CMD", action = act.QuickSelect },
+    {
+        key = "o",
+        mods = "CMD",
+        action = act.QuickSelectArgs({
+            label = "open url",
+            patterns = { "https?://\\S+" },
+            action = wezterm.action_callback(function(window, pane)
+                local url = window:get_selection_text_for_pane(pane)
+                wezterm.open_with(url)
+            end),
+        }),
+    },
 }
 
 -- ============================================================================
