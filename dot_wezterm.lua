@@ -54,6 +54,9 @@ local icon_unseen = wezterm.nerdfonts.cod_eye
 local icon_git_root = "./"
 local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
 
+-- Non-breaking space to prevent Wezterm from collapsing consecutive spaces
+local nbsp = "\u{00A0}"
+
 -- Git lookup cache to avoid repeated expensive io.popen calls
 local git_cache = {}
 local GIT_CACHE_TTL = 600 -- 10 minutes
@@ -143,8 +146,8 @@ local function get_process(tab)
     return process_icons[process_name] or string.format("[%s]", process_name)
 end
 
--- Pretty format the tab title
-local function format_title(tab, has_unseen, is_active)
+-- Format the main content of the tab (everything except edge whitespace)
+local function format_tab_content(tab, has_unseen, is_active)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
     local process = get_process(tab)
@@ -159,9 +162,16 @@ local function format_title(tab, has_unseen, is_active)
         dir_name = string.rep(" ", left_pad) .. dir_name .. string.rep(" ", right_pad)
     end
 
-    local active_indicator = is_active and icon_active or " "
     local unseen_indicator = has_unseen and icon_unseen or " "
-    return string.format(" %s %s %s %s %s ", unseen_indicator, process, dir_name, depth_indicator, active_indicator)
+    return string.format("%s %s %s %s", unseen_indicator, process, dir_name, depth_indicator)
+end
+
+-- Helper to add a segment to the format table
+local function add_segment(format, bg_color, fg_color, text, bold)
+    table.insert(format, { Background = { Color = bg_color } })
+    table.insert(format, { Foreground = { Color = fg_color } })
+    if bold then table.insert(format, { Attribute = { Intensity = "Bold" } }) end
+    table.insert(format, { Text = text })
 end
 
 -- Track which tabs have been visited to work around buggy has_unseen_output
@@ -190,13 +200,6 @@ local function has_unseen_output(tab)
     return false
 end
 
--- Returns manually set title (from `tab:set_title()` or `wezterm cli set-tab-title`) or creates a new one
-local function get_tab_title(tab, has_unseen, is_active)
-    local title = tab.tab_title
-    -- if the tab title is explicitly set, take that
-    if title and #title > 0 then return title end
-    return format_title(tab, has_unseen, is_active)
-end
 
 -- Convert arbitrary strings to a unique hex color value
 -- Based on: https://stackoverflow.com/a/3426956/3219667
@@ -256,20 +259,36 @@ end
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
     local has_unseen = has_unseen_output(tab)
-    local title = get_tab_title(tab, has_unseen, tab.is_active)
     local base_color = string_to_color(get_git_root_path(tab))
-    local active_bg_color = "#F5F5F5" -- Off-white for active tabs
-    local bg_color = tab.is_active and active_bg_color or dim_color(base_color, 0.7)
-    local fg_color = select_contrasting_fg_color(bg_color)
 
-    local format = {
-        { Background = { Color = bg_color } },
-        { Foreground = { Color = fg_color } },
-    }
+    -- Handle custom titles
+    if tab.tab_title and #tab.tab_title > 0 then
+        local bg_color = tab.is_active and "#F5F5F5" or dim_color(base_color, 0.7)
+        local fg_color = select_contrasting_fg_color(bg_color)
+        local format = {}
+        local padding = tab.is_active and (nbsp .. nbsp) or nbsp
+        add_segment(format, bg_color, fg_color, padding .. tab.tab_title .. padding, true) -- tab.is_active)
+        return format
+    end
 
-    if tab.is_active then table.insert(format, { Attribute = { Intensity = "Bold" } }) end
+    local content = format_tab_content(tab, has_unseen, tab.is_active)
+    local format = {}
 
-    table.insert(format, { Text = title })
+    if tab.is_active then
+        -- Active tab: minimal off-white edges, colored middle with more padding
+        local off_white = "#F5F5F5"
+        local main_bg = base_color
+        local main_fg = select_contrasting_fg_color(main_bg)
+
+        add_segment(format, off_white, "#000000", nbsp)
+        add_segment(format, main_bg, main_fg, nbsp .. nbsp .. content .. nbsp .. nbsp, true)
+        add_segment(format, off_white, "#000000", nbsp .. icon_active .. nbsp, true)
+    else
+        -- Inactive tab: single color with minimal padding (narrower)
+        local bg_color = dim_color(base_color, 0.7)
+        local fg_color = select_contrasting_fg_color(bg_color)
+        add_segment(format, bg_color, fg_color, content, true)
+    end
 
     return format
 end)
