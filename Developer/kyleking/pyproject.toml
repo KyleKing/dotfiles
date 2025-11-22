@@ -1,0 +1,44 @@
+[project]
+name = "gh-orphaned-branches"
+version = "1.0.0"
+description = "Find orphaned branches across GitHub repositories"
+requires-python = ">=3.11"
+dependencies = [
+    "rich>=13.7.0",
+    "python-dateutil>=2.8.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-vcr>=1.0.2",
+    "pytest-cov>=4.1.0",
+]
+
+[project.scripts]
+gh-orphaned-branches = "gh_orphaned_branches.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["gh_orphaned_branches/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--cov=gh_orphaned_branches",
+    "--cov-report=term-missing",
+]
+
+[tool.coverage.run]
+source = ["gh_orphaned_branches"]
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
