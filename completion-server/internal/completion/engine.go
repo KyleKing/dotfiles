@@ -16,19 +16,47 @@ type Engine struct {
 	sources []sources.Source
 }
 
+// EngineOption is a functional option for configuring Engine
+type EngineOption func(*Engine) error
+
+// WithSources sets custom sources (for testing)
+func WithSources(sources ...sources.Source) EngineOption {
+	return func(e *Engine) error {
+		e.sources = sources
+		return nil
+	}
+}
+
 // New creates a new completion engine
-func New() (*Engine, error) {
-	// Initialize all sources
-	srcs := []sources.Source{}
+func New(opts ...EngineOption) (*Engine, error) {
+	engine := &Engine{
+		sources: []sources.Source{},
+	}
 
-	// TODO: Add carapace source
-	// TODO: Add usage source
-	// TODO: Add TLDR source
-	// TODO: Add ZSH completion source
+	// Apply options first
+	for _, opt := range opts {
+		if err := opt(engine); err != nil {
+			return nil, fmt.Errorf("failed to apply option: %w", err)
+		}
+	}
 
-	return &Engine{
-		sources: srcs,
-	}, nil
+	// If no sources were set via options, initialize default sources
+	if len(engine.sources) == 0 {
+		// Try to initialize carapace source
+		if carapace, err := sources.NewCarapaceSource(); err == nil {
+			engine.sources = append(engine.sources, carapace)
+		}
+
+		// Try to initialize usage source
+		if usage, err := sources.NewUsageSource(); err == nil {
+			engine.sources = append(engine.sources, usage)
+		}
+
+		// TODO: Add TLDR source
+		// TODO: Add ZSH completion source
+	}
+
+	return engine, nil
 }
 
 // Query retrieves completions for the given command line
