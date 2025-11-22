@@ -147,7 +147,7 @@ local function get_process(tab)
 end
 
 -- Format the main content of the tab (everything except edge whitespace)
-local function format_tab_content(tab, has_unseen, is_active)
+local function format_tab_content(tab, has_unseen)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
     local process = get_process(tab)
@@ -199,7 +199,6 @@ local function has_unseen_output(tab)
 
     return false
 end
-
 
 -- Convert arbitrary strings to a unique hex color value
 -- Based on: https://stackoverflow.com/a/3426956/3219667
@@ -271,18 +270,18 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
         return format
     end
 
-    local content = format_tab_content(tab, has_unseen, tab.is_active)
+    local content = format_tab_content(tab, has_unseen)
     local format = {}
 
     if tab.is_active then
-        -- Active tab: minimal off-white edges, colored middle with more padding
+        -- Active tab: left edge with rocket, padded colored content
         local off_white = "#F5F5F5"
         local main_bg = base_color
         local main_fg = select_contrasting_fg_color(main_bg)
 
-        add_segment(format, off_white, "#000000", nbsp)
-        add_segment(format, main_bg, main_fg, nbsp .. nbsp .. content .. nbsp .. nbsp, true)
-        add_segment(format, off_white, "#000000", nbsp .. icon_active .. nbsp, true)
+        add_segment(format, off_white, "#000000", " " .. icon_active .. " ", true)
+        add_segment(format, main_bg, main_fg, " " .. content .. " ", true)
+        add_segment(format, off_white, "#000000", " " .. icon_active .. " ", true)
     else
         -- Inactive tab: single color with minimal padding (narrower)
         local bg_color = dim_color(base_color, 0.7)
