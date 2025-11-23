@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/KyleKing/dotfiles/completion-server/internal/context"
+	"github.com/KyleKing/dotfiles/completion-server/internal/fuzzy"
 	"github.com/KyleKing/dotfiles/completion-server/internal/history"
 	"github.com/KyleKing/dotfiles/completion-server/internal/ranker"
 	"github.com/KyleKing/dotfiles/completion-server/internal/sources"
@@ -16,10 +17,13 @@ type Candidate = types.Candidate
 
 // Engine handles completion queries
 type Engine struct {
-	sources         []sources.Source
-	historyProvider history.Provider
-	ranker          *ranker.Ranker
-	contextDetector *context.Detector
+	sources           []sources.Source
+	historyProvider   history.Provider
+	ranker            *ranker.Ranker
+	contextDetector   *context.Detector
+	fuzzyMatcher      *fuzzy.Matcher
+	fuzzyEnabled      bool // Enable fuzzy matching
+	fuzzyMinChars     int  // Minimum characters before fuzzy matching activates
 }
 
 // EngineOption is a functional option for configuring Engine
@@ -49,11 +53,23 @@ func WithRanker(r *ranker.Ranker) EngineOption {
 	}
 }
 
+// WithFuzzyMatching enables fuzzy matching with a minimum character threshold
+func WithFuzzyMatching(enabled bool, minChars int) EngineOption {
+	return func(e *Engine) error {
+		e.fuzzyEnabled = enabled
+		e.fuzzyMinChars = minChars
+		return nil
+	}
+}
+
 // New creates a new completion engine
 func New(opts ...EngineOption) (*Engine, error) {
 	engine := &Engine{
 		sources:         []sources.Source{},
 		contextDetector: context.New(),
+		fuzzyMatcher:    fuzzy.New(),
+		fuzzyEnabled:    true,  // Enable by default
+		fuzzyMinChars:   4,     // Default: 4 characters before fuzzy matching
 	}
 
 	// Apply options first
@@ -116,6 +132,15 @@ func (e *Engine) Query(commandLine string, cursorPos, maxResults int) ([]Candida
 			continue
 		}
 		candidates = append(candidates, sourceCandidates...)
+	}
+
+	// Apply fuzzy matching if enabled and query is long enough
+	if e.fuzzyEnabled && len(ctx.ParsedArgs) > 0 {
+		lastArg := ctx.ParsedArgs[len(ctx.ParsedArgs)-1]
+		if len(lastArg) >= e.fuzzyMinChars {
+			// Use fuzzy matching to filter and score candidates
+			candidates = e.fuzzyMatcher.Filter(lastArg, candidates)
+		}
 	}
 
 	// Deduplicate candidates
