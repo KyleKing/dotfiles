@@ -193,8 +193,12 @@ Authentication:
   gh auth login                  Authenticate GitHub CLI
   jst auth test                  Test jj-stack auth
 
-More info:
-  See: ~/.config/my_config/scripts/JJ_STACK_WORKFLOW.md
+Documentation (with visual diagrams):
+  Quick Start:   ~/.config/my_config/scripts/JJ_GETTING_STARTED.md
+  Mental Model:  ~/.config/my_config/scripts/JJ_MENTAL_MODEL.md
+  Workflows:     ~/.config/my_config/scripts/JJ_WORKFLOWS.md
+  Decision Tree: ~/.config/my_config/scripts/JJ_DECISION_TREES.md
+  Stacked Diffs: ~/.config/my_config/scripts/JJ_STACKED_WORKFLOW.md
 EOF
 }
 

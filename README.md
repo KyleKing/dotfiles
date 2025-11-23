@@ -13,10 +13,13 @@ Configured for stacked diffs/PRs on GitHub using:
 - **jj-stack**: npm package for creating/managing stacked PRs
 - **lazyjj**: TUI for visual jj workflows
 
-Documentation:
-- Quick start: `~/.config/my_config/scripts/JJ_GETTING_STARTED.md`
-- Full workflow: `~/.config/my_config/scripts/JJ_STACK_WORKFLOW.md`
-- Quick reference: Run `jhelp` in terminal
+Documentation (with mermaid diagrams):
+- **Quick start**: `~/.config/my_config/scripts/JJ_GETTING_STARTED.md`
+- **Mental model**: `~/.config/my_config/scripts/JJ_MENTAL_MODEL.md` - Core concepts visualized
+- **Workflows**: `~/.config/my_config/scripts/JJ_WORKFLOWS.md` - Operations and patterns
+- **Decision trees**: `~/.config/my_config/scripts/JJ_DECISION_TREES.md` - Command selection guide
+- **Stacked diffs**: `~/.config/my_config/scripts/JJ_STACKED_WORKFLOW.md` - jj-stack workflows
+- **Quick reference**: Run `jhelp` in terminal
 
 ## Installation Instructions
 

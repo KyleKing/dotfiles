@@ -200,10 +200,20 @@ jj rebase -b feature-b -d correct-parent
 
 ## Learn More
 
-- Full workflow guide: `~/.config/my_config/scripts/JJ_STACK_WORKFLOW.md`
-- Quick help: `jhelp`
-- Official jj docs: https://jj-vcs.github.io/jj/
-- jj-stack repo: https://github.com/keanemind/jj-stack
+### Visual Guides (with diagrams)
+
+- **Mental Model**: `~/.config/my_config/scripts/JJ_MENTAL_MODEL.md` - Core concepts with visual diagrams
+- **Workflows**: `~/.config/my_config/scripts/JJ_WORKFLOWS.md` - Common operations visualized
+- **Decision Trees**: `~/.config/my_config/scripts/JJ_DECISION_TREES.md` - What command should I use?
+- **Stacked Diffs**: `~/.config/my_config/scripts/JJ_STACKED_WORKFLOW.md` - jj-stack workflows with diagrams
+
+### Other Resources
+
+- **Quick help**: `jhelp` in terminal
+- **Full workflow guide**: `~/.config/my_config/scripts/JJ_STACK_WORKFLOW.md`
+- **Official jj docs**: https://jj-vcs.github.io/jj/
+- **jj-stack repo**: https://github.com/keanemind/jj-stack
+- **Steve's Tutorial**: https://steveklabnik.github.io/jujutsu-tutorial/
 
 ## Common Patterns
 
