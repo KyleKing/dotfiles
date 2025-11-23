@@ -96,6 +96,11 @@ func New(opts ...EngineOption) (*Engine, error) {
 			engine.sources = append(engine.sources, tldr)
 		}
 
+		// Try to initialize man source (fallback)
+		if man, err := sources.NewManSource(); err == nil {
+			engine.sources = append(engine.sources, man)
+		}
+
 		// TODO: Add ZSH completion source
 	}
 
