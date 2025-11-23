@@ -5,6 +5,7 @@
 set -euo pipefail
 
 NOTES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/wezterm/workspace-notes"
+INDEX_FILE="$NOTES_DIR/.index.json"
 mkdir -p "$NOTES_DIR"
 
 # Get workspace name (from wezterm or fallback to directory basename)
@@ -24,6 +25,60 @@ get_workspace() {
     basename "$(pwd)"
 }
 
+# Update index with metadata
+update_index() {
+    local workspace="$1"
+    local operation="${2:-update}"
+
+    if [[ ! -f "$INDEX_FILE" ]]; then
+        echo '{}' > "$INDEX_FILE"
+    fi
+
+    local now
+    now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+    if [[ "$operation" == "create" ]]; then
+        jq --arg ws "$workspace" --arg time "$now" \
+            '.[$ws] = {created: $time, updated: $time}' \
+            "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+    elif [[ "$operation" == "update" ]]; then
+        if jq -e --arg ws "$workspace" '.[$ws]' "$INDEX_FILE" >/dev/null 2>&1; then
+            jq --arg ws "$workspace" --arg time "$now" \
+                '.[$ws].updated = $time' \
+                "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+        else
+            jq --arg ws "$workspace" --arg time "$now" \
+                '.[$ws] = {created: $time, updated: $time}' \
+                "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+        fi
+    elif [[ "$operation" == "delete" ]]; then
+        jq --arg ws "$workspace" 'del(.[$ws])' \
+            "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+    fi
+}
+
+# Format relative time
+relative_time() {
+    local timestamp="$1"
+    local now
+    now=$(date +%s)
+    local then
+    then=$(date -d "$timestamp" +%s 2>/dev/null || echo "$now")
+    local diff=$((now - then))
+
+    if [[ $diff -lt 60 ]]; then
+        echo "just now"
+    elif [[ $diff -lt 3600 ]]; then
+        echo "$((diff / 60))m ago"
+    elif [[ $diff -lt 86400 ]]; then
+        echo "$((diff / 3600))h ago"
+    elif [[ $diff -lt 604800 ]]; then
+        echo "$((diff / 86400))d ago"
+    else
+        echo "$((diff / 604800))w ago"
+    fi
+}
+
 WORKSPACE=$(get_workspace)
 NOTE_FILE="$NOTES_DIR/${WORKSPACE}.txt"
 
@@ -36,6 +91,7 @@ case "${1:-get}" in
             exit 1
         fi
         echo "$*" > "$NOTE_FILE"
+        update_index "$WORKSPACE" "update"
         echo "✓ Note saved for workspace: $WORKSPACE"
         ;;
 
@@ -51,6 +107,7 @@ case "${1:-get}" in
     edit)
         ${EDITOR:-vim} "$NOTE_FILE"
         if [[ -f "$NOTE_FILE" && -s "$NOTE_FILE" ]]; then
+            update_index "$WORKSPACE" "update"
             echo "✓ Note updated for workspace: $WORKSPACE"
         fi
         ;;
@@ -58,6 +115,7 @@ case "${1:-get}" in
     clear)
         if [[ -f "$NOTE_FILE" ]]; then
             rm -f "$NOTE_FILE"
+            update_index "$WORKSPACE" "delete"
             echo "✓ Note cleared for workspace: $WORKSPACE"
         else
             echo "No note to clear for workspace: $WORKSPACE"
@@ -79,6 +137,30 @@ case "${1:-get}" in
         fi
         ;;
 
+    overview|all)
+        echo "Workspace Notes Overview:"
+        echo "─────────────────────────────────────────────────────────────────"
+
+        if [[ ! -f "$INDEX_FILE" ]]; then
+            echo "No notes found."
+            exit 0
+        fi
+
+        # Get all workspaces from index sorted by update time (most recent first)
+        jq -r 'to_entries | sort_by(.value.updated) | reverse |
+               .[] | "\(.key)|\(.value.created)|\(.value.updated)"' "$INDEX_FILE" 2>/dev/null | \
+        while IFS='|' read -r ws created updated; do
+            if [[ -f "$NOTES_DIR/${ws}.txt" ]]; then
+                note_preview=$(head -1 "$NOTES_DIR/${ws}.txt" | cut -c1-50)
+                rel_time=$(relative_time "$updated")
+                created_time=$(relative_time "$created")
+                printf "%-20s  %-12s  (created %-12s)\n" "$ws:" "$rel_time" "$created_time"
+                printf "  %s\n" "$note_preview"
+                echo ""
+            fi
+        done
+        ;;
+
     workspace)
         # Just print current workspace (for testing)
         echo "$WORKSPACE"
@@ -96,6 +178,7 @@ Commands:
   edit            Edit note in \$EDITOR
   clear           Clear note for current workspace
   list            List all workspace notes
+  overview        Show all workspace notes with metadata (alias: all)
   workspace       Show current workspace name
   help            Show this help
 
@@ -104,6 +187,7 @@ Examples:
   wnote get
   wnote edit
   wnote list
+  wnote overview  # See all notes across workspaces
   wnote clear
 
 Storage: $NOTES_DIR
