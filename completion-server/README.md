@@ -14,7 +14,7 @@ IDE-like completion server for shell commands, providing rich, ranked completion
 
 ## Features
 
-### Current (v0.3.0)
+### Current (v0.4.0)
 
 **Completion Sources:**
 - [x] **Carapace-bin integration** (1000+ commands)
@@ -26,6 +26,12 @@ IDE-like completion server for shell commands, providing rich, ranked completion
   - Flag completion with short/long forms
   - Flag value completion with choices
   - Context-aware completion
+- [x] **TLDR pages integration**
+  - Extracts flags from community-curated examples
+  - Parses markdown format
+  - Context from real-world usage examples
+  - Supports both long and short flags
+  - Medium priority (complements other sources)
 
 **Intelligent Ranking:**
 - [x] **Atuin history integration**
@@ -46,11 +52,12 @@ IDE-like completion server for shell commands, providing rich, ranked completion
 
 **Performance:**
 - [x] **Daemon mode with Unix socket**
-  - Pre-loaded completion engine
+  - Pre-loaded completion engine (sources + history + ranker)
   - <10ms response times
   - JSON protocol
-  - Concurrent connection handling
-  - Graceful shutdown
+  - Concurrent connection handling with goroutines
+  - Graceful shutdown on SIGTERM/SIGINT
+  - Configurable socket path
 
 **User Interface:**
 - [x] **Floating overlay with lipgloss**
@@ -65,9 +72,18 @@ IDE-like completion server for shell commands, providing rich, ranked completion
   - Position toggle (Shift-Tab)
   - Manual trigger mode
 
+**Fuzzy Matching:**
+- [x] **Intelligent fuzzy matching**
+  - Partial character matching (e.g., "hid" matches "--hidden")
+  - Score bonuses for consecutive matches
+  - Early match preference
+  - Separator-aware matching
+  - CamelCase support
+  - Case-insensitive by default
+
 **Testing & Quality:**
 - [x] **Comprehensive test coverage**
-  - 67+ tests across all packages
+  - 96+ tests across all packages
   - API-level integration tests
   - Mock infrastructure for testability
   - All tests parallelized
@@ -75,12 +91,11 @@ IDE-like completion server for shell commands, providing rich, ranked completion
 
 ### Planned
 
-- [ ] TLDR pages integration
 - [ ] Man page parsing fallback
 - [ ] SQLite caching layer for completions
-- [ ] Fuzzy matching for partial completions
 - [ ] Integration with existing ZSH completion system
 - [ ] WezTerm Lua integration (optional)
+- [ ] Fuzzy matching integration in completion engine
 - [ ] WezTerm Lua integration
 
 ## Installation
