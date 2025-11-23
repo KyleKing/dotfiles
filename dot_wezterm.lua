@@ -14,6 +14,8 @@
 --  CMD+W - Close current tab (with confirmation)
 --  CMD+1-9 - Jump to tab number
 --  CMD+ALT+Left/Right - Switch to previous/next tab
+--  CMD+CTRL+Left/Right (or H/L) - Move tab left/right
+--  CMD+Shift+O - Auto-organize tabs by git directory
 --  CMD+R - Reload configuration file
 --
 -- PANE MANAGEMENT (with Neovim integration):
@@ -517,6 +519,72 @@ config.keys = {
                 wezterm.open_with(url)
             end),
         }),
+    },
+
+    -- Tab reordering
+    { key = "LeftArrow", mods = "CMD|CTRL", action = act.MoveTabRelative(-1) },
+    { key = "RightArrow", mods = "CMD|CTRL", action = act.MoveTabRelative(1) },
+    { key = "h", mods = "CMD|CTRL", action = act.MoveTabRelative(-1) },
+    { key = "l", mods = "CMD|CTRL", action = act.MoveTabRelative(1) },
+
+    -- Auto-organize tabs by git directory
+    {
+        key = "o",
+        mods = "CMD|SHIFT",
+        action = wezterm.action_callback(function(window, pane)
+            local mux_window = window:mux_window()
+            local tabs = mux_window:tabs_with_info()
+
+            -- Build tab info with git roots
+            local tab_info = {}
+            for _, tab_item in ipairs(tabs) do
+                local tab = tab_item.tab
+                local cwd = ""
+                if tab:active_pane() and tab:active_pane():get_current_working_dir() then
+                    cwd = tab:active_pane():get_current_working_dir().file_path or ""
+                end
+
+                local git_root, _, _ = get_cached_git_root(cwd)
+                table.insert(tab_info, {
+                    tab = tab,
+                    git_root = git_root,
+                    cwd = cwd,
+                    index = tab_item.index,
+                })
+            end
+
+            -- Sort by git root, then by cwd
+            table.sort(tab_info, function(a, b)
+                if a.git_root ~= b.git_root then
+                    -- Sort by git root (non-git repos at end)
+                    if a.git_root == "" then
+                        return false
+                    elseif b.git_root == "" then
+                        return true
+                    else
+                        return a.git_root < b.git_root
+                    end
+                else
+                    -- Within same repo, sort by cwd
+                    return a.cwd < b.cwd
+                end
+            end)
+
+            -- Reorder tabs
+            for new_index, info in ipairs(tab_info) do
+                local old_index = info.index
+                if old_index ~= new_index - 1 then
+                    info.tab:set_active()
+                    -- Move tab to new position
+                    for i = old_index, new_index - 2, -1 do
+                        window:perform_action(act.MoveTabRelative(-1), pane)
+                    end
+                    for i = old_index, new_index, 1 do
+                        window:perform_action(act.MoveTabRelative(1), pane)
+                    end
+                end
+            end
+        end),
     },
 }
 
