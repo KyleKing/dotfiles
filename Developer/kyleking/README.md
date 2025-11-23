@@ -28,6 +28,7 @@ gh_orphaned_branches/
 ├── github_api.py          # GitHub API wrapper (httpx)
 ├── formatters.py          # Output formatters (Rich)
 ├── interactive.py         # Interactive mode (Rich prompts)
+├── graph.py               # Branch relationship graph analysis
 ├── utils.py               # Generic reusable utilities
 └── tests/                 # Test suite with pytest-vcr
     ├── conftest.py        # Test fixtures
@@ -35,6 +36,7 @@ gh_orphaned_branches/
     ├── test_github_api.py # API tests with VCR
     ├── test_formatters.py # Formatter tests
     ├── test_interactive.py # Interactive mode tests
+    ├── test_graph.py      # Graph analysis tests
     └── test_utils.py      # Utility tests
 ```
 
@@ -93,6 +95,31 @@ gh-orphaned-branches -n USERNAME -d 14 --interactive
 - ⚡ Batch operations with confirmation prompts
 - 🎨 Rich terminal UI with colored prompts
 
+### Branch Graph Mode
+
+Use `--graph` or `-g` to explore branch relationships and create stacked PRs:
+
+```bash
+# Explore branch graph for a specific repository
+gh-orphaned-branches -n USERNAME --graph REPO_NAME
+
+# Example with real repo
+gh-orphaned-branches -n myorg --graph my-project
+```
+
+**Graph features:**
+- 📊 **Tree visualization** - see which branches are ahead/behind default branch
+- 🔢 **Comparison matrix** - view ahead/behind counts for all branch pairs
+- 🔗 **Stacked PRs** - create PR chains for dependent branches
+- 🎯 **Smart ordering** - automatically calculate optimal PR dependency order
+- 📋 **Multi-select** - choose multiple branches (e.g., `1,3,5` or `1-10` or `all`)
+
+**Stacked PR workflow:**
+1. View branch tree to understand relationships
+2. Select multiple related branches
+3. Tool calculates dependency order based on commit ancestry
+4. Creates PRs in sequence (e.g., main←feature-a, feature-a←feature-b, feature-b←feature-c)
+
 ### Non-Interactive Options
 
 ```bash
@@ -144,6 +171,20 @@ uv run gh-orphaned-branches.py -n myusername --interactive
 # - Delete closed PR branches in batch
 # - Create PRs for branches without them
 # - Skip branches that need review
+```
+
+### Explore branch relationships and create stacked PRs
+```bash
+# Visualize branch graph for a repository
+uv run gh-orphaned-branches.py -n myorg --graph my-project
+
+# Example graph session:
+# 1. View tree: see branches ahead/behind default
+# 2. View matrix: see all branch-to-branch comparisons
+# 3. Select branches: e.g., "1,3,5" or "all"
+# 4. Create stacked PRs: tool calculates optimal order
+#    - If feature-b builds on feature-a which builds on main:
+#      Creates: main←feature-a, feature-a←feature-b
 ```
 
 ### Find stale branches older than 5 days

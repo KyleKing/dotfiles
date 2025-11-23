@@ -10,7 +10,13 @@ from rich.panel import Panel
 from . import __version__
 from .core import analyze_namespace, calculate_summary
 from .formatters import output_json, output_markdown, output_table
-from .interactive import handle_batch_delete, handle_branch_interactive, show_category_menu
+from .interactive import (
+    handle_batch_delete,
+    handle_branch_interactive,
+    handle_branch_graph_interactive,
+    show_category_menu,
+)
+from .github_api import fetch_branches
 
 console = Console()
 
@@ -104,6 +110,8 @@ Identifies:
                        help="Output format (default: table)")
     parser.add_argument("--interactive", "-i", action="store_true",
                        help="Interactive mode for branch review and actions")
+    parser.add_argument("--graph", "-g", metavar="REPO",
+                       help="Show branch relationship graph for specific repository")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     return parser
 
@@ -112,6 +120,27 @@ def main(argv: list[str] | None = None) -> None:
     """Main entry point."""
     parser = _create_parser()
     args = parser.parse_args(argv)
+
+    if args.graph:
+        console.print(Panel.fit(
+            f"[bold]Branch Graph Explorer v{__version__}[/bold]\n"
+            f"Repository: {args.namespace}/{args.graph}",
+            border_style="blue",
+        ))
+
+        try:
+            branches = fetch_branches(args.namespace, args.graph)
+            branch_names = [b["name"] for b in branches]
+            default_branch = "main"
+
+            handle_branch_graph_interactive(
+                args.namespace, args.graph, branch_names, default_branch, console
+            )
+        except Exception as e:
+            console.print(f"\n[red]Error: {e}[/red]\n")
+            sys.exit(1)
+        return
+
     _print_banner(args.namespace, args.stale_days, args.include_forks, args.output, args.interactive)
 
     try:

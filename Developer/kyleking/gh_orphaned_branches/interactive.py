@@ -9,6 +9,11 @@ from rich.syntax import Syntax
 from rich.table import Table
 
 from .github_api import compare_commits, create_pull_request, delete_branch
+from .graph import (
+    calculate_stacked_pr_order,
+    show_branch_comparison_matrix,
+    visualize_branch_graph,
+)
 
 
 def _format_commit_summary(commits: list[dict[str, Any]], limit: int = 5) -> str:
@@ -177,3 +182,134 @@ def show_category_menu(category: str, count: int, console: Console) -> str:
         console.print(f"  [{key}] {action}")
 
     return Prompt.ask("Choose action", choices=list(choices.keys()), default="s")
+
+
+def _select_branches_interactive(branches: list[str], console: Console) -> list[str]:
+    """Interactively select multiple branches."""
+    if not branches:
+        return []
+
+    console.print("\n[bold]Select branches[/bold] (comma-separated numbers, or 'all'):")
+    for i, branch in enumerate(branches, 1):
+        console.print(f"  [{i}] {branch}")
+
+    selection = Prompt.ask("\nEnter selection", default="")
+
+    if not selection:
+        return []
+
+    if selection.lower() == "all":
+        return branches.copy()
+
+    selected = []
+    try:
+        for part in selection.split(","):
+            part = part.strip()
+            if "-" in part:
+                start, end = part.split("-")
+                start_idx = int(start) - 1
+                end_idx = int(end)
+                selected.extend(branches[start_idx:end_idx])
+            else:
+                idx = int(part) - 1
+                if 0 <= idx < len(branches):
+                    selected.append(branches[idx])
+    except (ValueError, IndexError):
+        console.print("[yellow]Invalid selection[/yellow]")
+        return []
+
+    return selected
+
+
+def handle_stacked_prs(
+    owner: str,
+    repo: str,
+    branches: list[str],
+    default_branch: str,
+    console: Console,
+) -> int:
+    """Handle creation of stacked PRs for selected branches."""
+    if len(branches) < 2:
+        console.print("[yellow]Need at least 2 branches for stacked PRs[/yellow]")
+        return 0
+
+    console.print(f"\n[bold cyan]Calculating stacked PR order for {len(branches)} branches...[/bold cyan]")
+    pr_pairs = calculate_stacked_pr_order(owner, repo, branches, default_branch)
+
+    if not pr_pairs:
+        console.print("[yellow]Could not calculate PR order[/yellow]")
+        return 0
+
+    console.print("\n[bold]Proposed stacked PRs:[/bold]")
+    for i, (base, head) in enumerate(pr_pairs, 1):
+        console.print(f"  {i}. {base} ← {head}")
+
+    if not Confirm.ask(f"\nCreate {len(pr_pairs)} pull requests?", default=False):
+        console.print("[dim]Cancelled[/dim]")
+        return 0
+
+    created = 0
+    for base, head in pr_pairs:
+        title = Prompt.ask(f"\nPR title for {head} → {base}", default=f"Merge {head} into {base}")
+        body = Prompt.ask("PR description (optional)", default="")
+
+        try:
+            pr = create_pull_request(owner, repo, title, head, base, body)
+            pr_number = pr.get("number", "")
+            pr_url = pr.get("html_url", "")
+            console.print(f"[green]✓[/green] Created PR #{pr_number}: {pr_url}")
+            created += 1
+        except RuntimeError as e:
+            console.print(f"[red]✗[/red] Failed to create PR {head} → {base}: {e}")
+
+    console.print(f"\n[bold]Created {created}/{len(pr_pairs)} pull requests[/bold]")
+    return created
+
+
+def show_branch_graph_menu(
+    owner: str, repo: str, branches: list[str], default_branch: str, console: Console
+) -> str:
+    """Show branch graph and interactive menu."""
+    choices = {
+        "t": "Show tree view",
+        "m": "Show comparison matrix",
+        "s": "Select branches for stacked PRs",
+        "b": "Back to main menu",
+    }
+
+    console.print(f"\n[bold cyan]Branch Graph:[/bold cyan] {owner}/{repo}")
+    console.print("\n[dim]Actions:[/dim]")
+    for key, action in choices.items():
+        console.print(f"  [{key}] {action}")
+
+    return Prompt.ask("Choose action", choices=list(choices.keys()), default="b")
+
+
+def handle_branch_graph_interactive(
+    owner: str, repo: str, all_branches: list[str], default_branch: str, console: Console
+) -> bool:
+    """Handle interactive branch graph exploration. Returns True to continue, False to exit."""
+    branches = [b for b in all_branches if b != default_branch]
+
+    if not branches:
+        console.print("[yellow]No branches to analyze[/yellow]")
+        return True
+
+    while True:
+        action = show_branch_graph_menu(owner, repo, branches, default_branch, console)
+
+        if action == "b":
+            return True
+        elif action == "t":
+            visualize_branch_graph(owner, repo, branches, default_branch, console)
+        elif action == "m":
+            show_branch_comparison_matrix(owner, repo, branches[:10], console)
+        elif action == "s":
+            selected = _select_branches_interactive(branches, console)
+            if selected:
+                console.print(f"\n[bold]Selected {len(selected)} branches:[/bold]")
+                for branch in selected:
+                    console.print(f"  • {branch}")
+                handle_stacked_prs(owner, repo, selected, default_branch, console)
+            else:
+                console.print("[dim]No branches selected[/dim]")
