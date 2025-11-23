@@ -75,7 +75,11 @@ func New(opts ...EngineOption) (*Engine, error) {
 			engine.sources = append(engine.sources, usage)
 		}
 
-		// TODO: Add TLDR source
+		// Try to initialize TLDR source
+		if tldr, err := sources.NewTldrSource(); err == nil {
+			engine.sources = append(engine.sources, tldr)
+		}
+
 		// TODO: Add ZSH completion source
 	}
 
