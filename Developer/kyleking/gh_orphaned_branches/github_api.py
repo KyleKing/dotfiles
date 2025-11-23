@@ -39,7 +39,7 @@ def _create_github_client(token: str | None = None) -> httpx.Client:
 
 
 def _make_request(client: httpx.Client, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any] | list[dict[str, Any]]:
-    """Make GitHub API request."""
+    """Make GitHub API GET request."""
     try:
         response = client.get(endpoint, params=params or {})
         response.raise_for_status()
@@ -50,6 +50,32 @@ def _make_request(client: httpx.Client, endpoint: str, params: dict[str, Any] | 
         raise RuntimeError(f"Network error: {e}") from e
     except json.JSONDecodeError as e:
         raise RuntimeError(f"Invalid JSON response: {e}") from e
+
+
+def _make_post_request(client: httpx.Client, endpoint: str, data: dict[str, Any]) -> dict[str, Any]:
+    """Make GitHub API POST request."""
+    try:
+        response = client.post(endpoint, json=data)
+        response.raise_for_status()
+        return response.json()
+    except httpx.HTTPStatusError as e:
+        raise RuntimeError(f"GitHub API error ({e.response.status_code}): {e.response.text}") from e
+    except httpx.RequestError as e:
+        raise RuntimeError(f"Network error: {e}") from e
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"Invalid JSON response: {e}") from e
+
+
+def _make_delete_request(client: httpx.Client, endpoint: str) -> bool:
+    """Make GitHub API DELETE request."""
+    try:
+        response = client.delete(endpoint)
+        response.raise_for_status()
+        return True
+    except httpx.HTTPStatusError as e:
+        raise RuntimeError(f"GitHub API error ({e.response.status_code}): {e.response.text}") from e
+    except httpx.RequestError as e:
+        raise RuntimeError(f"Network error: {e}") from e
 
 
 def _create_paginated_fetcher(client: httpx.Client, endpoint: str, per_page: int = 100, **base_params: Any) -> Callable[[int], list[dict[str, Any]]]:
@@ -129,6 +155,51 @@ def fetch_pulls_for_branch(owner: str, repo: str, branch: str, client: httpx.Cli
         open_pulls = _fetch_all_pages(client, f"/repos/{owner}/{repo}/pulls", head=f"{owner}:{branch}", state="open", per_page=100)
         closed_pulls = _fetch_all_pages(client, f"/repos/{owner}/{repo}/pulls", head=f"{owner}:{branch}", state="closed", per_page=100)
         return open_pulls + closed_pulls
+    finally:
+        if should_close:
+            client.close()
+
+
+def compare_commits(owner: str, repo: str, base: str, head: str, client: httpx.Client | None = None) -> dict[str, Any]:
+    """Compare two branches to get commits ahead/behind."""
+    should_close = client is None
+    if client is None:
+        client = _create_github_client()
+    try:
+        return _fetch_single(client, f"/repos/{owner}/{repo}/compare/{base}...{head}")
+    finally:
+        if should_close:
+            client.close()
+
+
+def delete_branch(owner: str, repo: str, branch: str, client: httpx.Client | None = None) -> bool:
+    """Delete a branch from repository."""
+    should_close = client is None
+    if client is None:
+        client = _create_github_client()
+    try:
+        return _make_delete_request(client, f"/repos/{owner}/{repo}/git/refs/heads/{branch}")
+    finally:
+        if should_close:
+            client.close()
+
+
+def create_pull_request(
+    owner: str,
+    repo: str,
+    title: str,
+    head: str,
+    base: str,
+    body: str = "",
+    client: httpx.Client | None = None,
+) -> dict[str, Any]:
+    """Create a pull request."""
+    should_close = client is None
+    if client is None:
+        client = _create_github_client()
+    try:
+        data = {"title": title, "head": head, "base": base, "body": body}
+        return _make_post_request(client, f"/repos/{owner}/{repo}/pulls", data)
     finally:
         if should_close:
             client.close()

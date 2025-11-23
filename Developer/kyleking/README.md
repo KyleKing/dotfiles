@@ -22,18 +22,20 @@ The tool is built with a **functional programming approach** featuring:
 
 ```
 gh_orphaned_branches/
-├── __init__.py           # Package initialization
-├── cli.py                # CLI interface (argparse)
-├── core.py               # Core business logic (pure functions)
-├── github_api.py         # GitHub API wrapper (functional)
-├── formatters.py         # Output formatters (pure functions)
-├── utils.py              # Generic reusable utilities
-└── tests/                # Test suite with pytest-vcr
-    ├── conftest.py       # Test fixtures
-    ├── test_core.py      # Core logic tests
+├── __init__.py            # Package initialization
+├── cli.py                 # CLI interface (argparse)
+├── core.py                # Core business logic (pure functions)
+├── github_api.py          # GitHub API wrapper (httpx)
+├── formatters.py          # Output formatters (Rich)
+├── interactive.py         # Interactive mode (Rich prompts)
+├── utils.py               # Generic reusable utilities
+└── tests/                 # Test suite with pytest-vcr
+    ├── conftest.py        # Test fixtures
+    ├── test_core.py       # Core logic tests
     ├── test_github_api.py # API tests with VCR
     ├── test_formatters.py # Formatter tests
-    └── test_utils.py     # Utility tests
+    ├── test_interactive.py # Interactive mode tests
+    └── test_utils.py      # Utility tests
 ```
 
 ## Prerequisites
@@ -59,11 +61,11 @@ pip install -e .
 
 ```bash
 # Basic usage
-uv run Developer/kyleking/gh-orphaned-branches-v2.py --namespace USERNAME
+uv run Developer/kyleking/gh-orphaned-branches.py --namespace USERNAME
 
 # Or use the shorter path if in the directory
 cd Developer/kyleking
-uv run gh-orphaned-branches-v2.py -n USERNAME
+uv run gh-orphaned-branches.py -n USERNAME
 ```
 
 ### After package installation
@@ -72,7 +74,26 @@ uv run gh-orphaned-branches-v2.py -n USERNAME
 gh-orphaned-branches --namespace USERNAME
 ```
 
-### Advanced options
+### Interactive Mode
+
+Use `--interactive` or `-i` to review and take actions on branches:
+
+```bash
+# Interactive mode
+gh-orphaned-branches -n USERNAME --interactive
+
+# Interactive with custom stale threshold
+gh-orphaned-branches -n USERNAME -d 14 --interactive
+```
+
+**Interactive features:**
+- 🔍 View commit details and branch comparison (ahead/behind)
+- 🗑️ Delete branches individually or in batches
+- 🔀 Create pull requests for branches
+- ⚡ Batch operations with confirmation prompts
+- 🎨 Rich terminal UI with colored prompts
+
+### Non-Interactive Options
 
 ```bash
 # Change stale threshold to 14 days
@@ -113,19 +134,31 @@ Markdown-formatted report suitable for GitHub issues or documentation.
 
 ## Examples
 
+### Interactive cleanup workflow
+```bash
+# Review and clean up branches interactively
+uv run gh-orphaned-branches.py -n myusername --interactive
+
+# Example interactive session:
+# - View branch details (commits ahead/behind)
+# - Delete closed PR branches in batch
+# - Create PRs for branches without them
+# - Skip branches that need review
+```
+
 ### Find stale branches older than 5 days
 ```bash
-uv run gh-orphaned-branches-v2.py -n myusername --stale-days 5
+uv run gh-orphaned-branches.py -n myusername --stale-days 5
 ```
 
 ### Generate a report for your organization
 ```bash
-uv run gh-orphaned-branches-v2.py -n myorg --output markdown > orphaned-branches-report.md
+uv run gh-orphaned-branches.py -n myorg --output markdown > orphaned-branches-report.md
 ```
 
 ### Check all repos including forks
 ```bash
-uv run gh-orphaned-branches-v2.py -n myusername --include-forks
+uv run gh-orphaned-branches.py -n myusername --include-forks
 ```
 
 ## Functional Programming Highlights
@@ -155,6 +188,16 @@ The GitHub API wrapper (`github_api.py`) uses:
 - **Higher-order functions**: `_create_paginated_fetcher()`
 - **Private functions**: All helpers prefixed with `_`, clear public API
 - **Error handling**: HTTP-native error propagation
+- **Write operations**: DELETE for branch deletion, POST for PR creation
+
+### Interactive Features
+
+The interactive module (`interactive.py`) provides:
+
+- **Rich prompts**: Menu-driven interface with `Prompt` and `Confirm`
+- **Branch actions**: View details, delete, create PR
+- **Batch operations**: Handle multiple branches with single confirmation
+- **Safe operations**: All destructive actions require confirmation
 
 ## Development
 
@@ -213,7 +256,24 @@ The tool categorizes branches into three groups:
 
 ## Suggested Actions
 
-After running the report:
+### Option 1: Interactive Mode (Recommended)
+
+Use `--interactive` for a guided workflow:
+
+```bash
+gh-orphaned-branches -n USERNAME --interactive
+```
+
+Interactive mode provides:
+- Category-level actions (delete all, skip, review individually)
+- Per-branch actions (view details, delete, create PR, skip)
+- Batch deletion with confirmation
+- Commit comparison (ahead/behind)
+- Safe confirmation prompts for all destructive operations
+
+### Option 2: Manual Cleanup
+
+After running the report in table/JSON/markdown mode:
 
 1. **Delete branches with closed/merged PRs**
    ```bash

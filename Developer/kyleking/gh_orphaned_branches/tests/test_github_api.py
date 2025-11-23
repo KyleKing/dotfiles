@@ -7,8 +7,13 @@ from gh_orphaned_branches.github_api import (
     _get_github_token,
     _create_github_client,
     _make_request,
+    _make_post_request,
+    _make_delete_request,
     fetch_repositories,
     fetch_branches,
+    compare_commits,
+    delete_branch,
+    create_pull_request,
 )
 
 
@@ -125,3 +130,139 @@ def test_fetch_branches_vcr(vcr):
     assert isinstance(branches, list)
     if branches:
         assert "name" in branches[0]
+
+
+def test_make_post_request(monkeypatch):
+    """Test POST request helper."""
+    class MockClient:
+        def post(self, endpoint, json=None):
+            class MockResponse:
+                status_code = 201
+
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    return {"created": True, "data": json}
+
+            return MockResponse()
+
+    client = MockClient()
+    result = _make_post_request(client, "/test", {"key": "value"})
+    assert result["created"] is True
+    assert result["data"]["key"] == "value"
+
+
+def test_make_delete_request(monkeypatch):
+    """Test DELETE request helper."""
+    class MockClient:
+        def delete(self, endpoint):
+            class MockResponse:
+                status_code = 204
+
+                def raise_for_status(self):
+                    pass
+
+            return MockResponse()
+
+    client = MockClient()
+    result = _make_delete_request(client, "/test")
+    assert result is True
+
+
+def test_compare_commits(monkeypatch):
+    """Test comparing commits between branches."""
+    mock_comparison = {
+        "ahead_by": 5,
+        "behind_by": 3,
+        "commits": [
+            {"sha": "abc123", "commit": {"message": "Test commit"}}
+        ]
+    }
+
+    def mock_create_client(token=None):
+        return MockClient(mock_comparison)
+
+    monkeypatch.setattr(
+        "gh_orphaned_branches.github_api._create_github_client",
+        mock_create_client,
+    )
+
+    result = compare_commits("owner", "repo", "main", "feature")
+    assert result["ahead_by"] == 5
+    assert result["behind_by"] == 3
+    assert len(result["commits"]) == 1
+
+
+def test_delete_branch(monkeypatch):
+    """Test deleting a branch."""
+    deleted = []
+
+    class MockClient:
+        def delete(self, endpoint):
+            deleted.append(endpoint)
+
+            class MockResponse:
+                status_code = 204
+
+                def raise_for_status(self):
+                    pass
+
+            return MockResponse()
+
+        def close(self):
+            pass
+
+    def mock_create_client(token=None):
+        return MockClient()
+
+    monkeypatch.setattr(
+        "gh_orphaned_branches.github_api._create_github_client",
+        mock_create_client,
+    )
+
+    result = delete_branch("owner", "repo", "feature-branch")
+    assert result is True
+    assert deleted[0] == "/repos/owner/repo/git/refs/heads/feature-branch"
+
+
+def test_create_pull_request(monkeypatch):
+    """Test creating a pull request."""
+    created_prs = []
+
+    class MockClient:
+        def post(self, endpoint, json=None):
+            created_prs.append(json)
+
+            class MockResponse:
+                status_code = 201
+
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    return {
+                        "number": 42,
+                        "html_url": "https://github.com/owner/repo/pull/42",
+                        "title": json["title"],
+                    }
+
+            return MockResponse()
+
+        def close(self):
+            pass
+
+    def mock_create_client(token=None):
+        return MockClient()
+
+    monkeypatch.setattr(
+        "gh_orphaned_branches.github_api._create_github_client",
+        mock_create_client,
+    )
+
+    result = create_pull_request("owner", "repo", "Test PR", "feature", "main", "Description")
+    assert result["number"] == 42
+    assert result["title"] == "Test PR"
+    assert created_prs[0]["head"] == "feature"
+    assert created_prs[0]["base"] == "main"
+    assert created_prs[0]["body"] == "Description"
