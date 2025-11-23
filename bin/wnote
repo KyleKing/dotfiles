@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+# wnote - Workspace Note tool for focus management
+# Zero-friction context tracking for workspace switching
+
+set -euo pipefail
+
+NOTES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/wezterm/workspace-notes"
+mkdir -p "$NOTES_DIR"
+
+# Get workspace name (from wezterm or fallback to directory basename)
+get_workspace() {
+    # Try to get from wezterm active workspace
+    if command -v wezterm &>/dev/null; then
+        local ws
+        ws=$(wezterm cli list --format json 2>/dev/null | \
+            jq -r '.[] | select(.is_active == true) | .workspace' 2>/dev/null | head -1)
+        if [[ -n "$ws" && "$ws" != "null" ]]; then
+            echo "$ws"
+            return
+        fi
+    fi
+
+    # Fallback to directory basename
+    basename "$(pwd)"
+}
+
+WORKSPACE=$(get_workspace)
+NOTE_FILE="$NOTES_DIR/${WORKSPACE}.txt"
+
+# Commands
+case "${1:-get}" in
+    set)
+        shift
+        if [[ $# -eq 0 ]]; then
+            echo "Usage: wnote set <message>" >&2
+            exit 1
+        fi
+        echo "$*" > "$NOTE_FILE"
+        echo "✓ Note saved for workspace: $WORKSPACE"
+        ;;
+
+    get)
+        if [[ -f "$NOTE_FILE" ]]; then
+            cat "$NOTE_FILE"
+        else
+            echo "(No note set for workspace: $WORKSPACE)" >&2
+            exit 1
+        fi
+        ;;
+
+    edit)
+        ${EDITOR:-vim} "$NOTE_FILE"
+        if [[ -f "$NOTE_FILE" && -s "$NOTE_FILE" ]]; then
+            echo "✓ Note updated for workspace: $WORKSPACE"
+        fi
+        ;;
+
+    clear)
+        if [[ -f "$NOTE_FILE" ]]; then
+            rm -f "$NOTE_FILE"
+            echo "✓ Note cleared for workspace: $WORKSPACE"
+        else
+            echo "No note to clear for workspace: $WORKSPACE"
+        fi
+        ;;
+
+    list)
+        echo "Workspace notes:"
+        if [[ -d "$NOTES_DIR" ]]; then
+            for note in "$NOTES_DIR"/*.txt; do
+                if [[ -f "$note" ]]; then
+                    local ws
+                    ws=$(basename "$note" .txt)
+                    local preview
+                    preview=$(head -1 "$note" | cut -c1-60)
+                    printf "  %-20s %s\n" "$ws:" "$preview"
+                fi
+            done
+        fi
+        ;;
+
+    workspace)
+        # Just print current workspace (for testing)
+        echo "$WORKSPACE"
+        ;;
+
+    help|--help|-h)
+        cat <<EOF
+wnote - Workspace Note tool for focus management
+
+Usage: wnote <command> [args]
+
+Commands:
+  set <message>   Set note for current workspace
+  get             Get note for current workspace (default)
+  edit            Edit note in \$EDITOR
+  clear           Clear note for current workspace
+  list            List all workspace notes
+  workspace       Show current workspace name
+  help            Show this help
+
+Examples:
+  wnote set "Debugging JWT expiry in auth middleware"
+  wnote get
+  wnote edit
+  wnote list
+  wnote clear
+
+Storage: $NOTES_DIR
+
+Focus Management Philosophy:
+- Quick, ephemeral notes for "what am I doing?"
+- Workspace-scoped context switching aid
+- Not a permanent knowledge base (use zk/Obsidian for that)
+EOF
+        ;;
+
+    *)
+        echo "Unknown command: ${1:-}" >&2
+        echo "Run 'wnote help' for usage" >&2
+        exit 1
+        ;;
+esac
