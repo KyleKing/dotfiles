@@ -14,6 +14,7 @@ from gh_orphaned_branches.github_api import (
     compare_commits,
     delete_branch,
     create_pull_request,
+    check_merge_conflict,
 )
 
 
@@ -266,3 +267,73 @@ def test_create_pull_request(monkeypatch):
     assert created_prs[0]["head"] == "feature"
     assert created_prs[0]["base"] == "main"
     assert created_prs[0]["body"] == "Description"
+
+
+def test_check_merge_conflict(monkeypatch):
+    """Test checking merge conflicts."""
+    class MockClient:
+        def close(self):
+            pass
+
+    def mock_fetch(client, endpoint):
+        return {
+            "status": "ahead",
+            "ahead_by": 5,
+            "behind_by": 0,
+        }
+
+    def mock_create_client(token=None):
+        return MockClient()
+
+    monkeypatch.setattr("gh_orphaned_branches.github_api._fetch_single", mock_fetch)
+    monkeypatch.setattr("gh_orphaned_branches.github_api._create_github_client", mock_create_client)
+
+    result = check_merge_conflict("owner", "repo", "main", "feature")
+    assert result["can_merge"] is True
+    assert result["status"] == "ahead"
+    assert result["ahead_by"] == 5
+    assert result["behind_by"] == 0
+
+
+def test_check_merge_conflict_diverged(monkeypatch):
+    """Test checking merge conflicts when diverged."""
+    class MockClient:
+        def close(self):
+            pass
+
+    def mock_fetch(client, endpoint):
+        return {
+            "status": "diverged",
+            "ahead_by": 5,
+            "behind_by": 3,
+        }
+
+    def mock_create_client(token=None):
+        return MockClient()
+
+    monkeypatch.setattr("gh_orphaned_branches.github_api._fetch_single", mock_fetch)
+    monkeypatch.setattr("gh_orphaned_branches.github_api._create_github_client", mock_create_client)
+
+    result = check_merge_conflict("owner", "repo", "main", "feature")
+    assert result["can_merge"] is False
+    assert result["status"] == "diverged"
+
+
+def test_check_merge_conflict_error(monkeypatch):
+    """Test checking merge conflicts with API error."""
+    class MockClient:
+        def close(self):
+            pass
+
+    def mock_fetch_error(client, endpoint):
+        raise RuntimeError("API error")
+
+    def mock_create_client(token=None):
+        return MockClient()
+
+    monkeypatch.setattr("gh_orphaned_branches.github_api._fetch_single", mock_fetch_error)
+    monkeypatch.setattr("gh_orphaned_branches.github_api._create_github_client", mock_create_client)
+
+    result = check_merge_conflict("owner", "repo", "main", "feature")
+    assert result["can_merge"] is False
+    assert result["status"] == "error"

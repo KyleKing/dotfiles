@@ -10,6 +10,7 @@ from gh_orphaned_branches.graph import (
     calculate_stacked_pr_order,
     visualize_branch_graph,
     show_branch_comparison_matrix,
+    export_to_dot,
 )
 
 
@@ -137,3 +138,70 @@ def test_show_branch_comparison_matrix(monkeypatch):
 
     console = Console()
     show_branch_comparison_matrix("owner", "repo", ["main", "feature-a"], console)
+
+
+def test_export_to_dot(monkeypatch, tmp_path):
+    """Test exporting graph to DOT format."""
+    def mock_compare(owner, repo, base, head, client=None):
+        return {"ahead_by": 5, "behind_by": 0, "commits": []}
+
+    def mock_merge(owner, repo, base, head, client=None):
+        return {"can_merge": True, "status": "ahead", "ahead_by": 5, "behind_by": 0}
+
+    def mock_fetch_details(owner, repo, branch, client=None):
+        return {
+            "commit": {
+                "commit": {
+                    "committer": {
+                        "date": "2024-01-01T12:00:00Z"
+                    }
+                }
+            }
+        }
+
+    monkeypatch.setattr("gh_orphaned_branches.graph.compare_commits", mock_compare)
+    monkeypatch.setattr("gh_orphaned_branches.graph.check_merge_conflict", mock_merge)
+    monkeypatch.setattr("gh_orphaned_branches.graph.fetch_branch_details", mock_fetch_details)
+
+    output_file = tmp_path / "test.dot"
+    result = export_to_dot("owner", "repo", ["feature-a"], "main", str(output_file))
+
+    assert "digraph branches" in result
+    assert "main" in result
+    assert "feature-a" in result
+    assert output_file.exists()
+
+    content = output_file.read_text()
+    assert "digraph branches" in content
+    assert "lightgreen" in content or "lightblue" in content
+
+
+def test_build_branch_relationships_with_merge_status(monkeypatch):
+    """Test building relationships with merge status."""
+    def mock_compare(owner, repo, base, head, client=None):
+        return {"ahead_by": 5, "behind_by": 2, "commits": []}
+
+    def mock_merge(owner, repo, base, head, client=None):
+        return {"can_merge": False, "status": "diverged", "ahead_by": 5, "behind_by": 2}
+
+    def mock_fetch_details(owner, repo, branch, client=None):
+        return {
+            "commit": {
+                "commit": {
+                    "committer": {
+                        "date": "2024-01-01T12:00:00Z"
+                    }
+                }
+            }
+        }
+
+    monkeypatch.setattr("gh_orphaned_branches.graph.compare_commits", mock_compare)
+    monkeypatch.setattr("gh_orphaned_branches.graph.check_merge_conflict", mock_merge)
+    monkeypatch.setattr("gh_orphaned_branches.graph.fetch_branch_details", mock_fetch_details)
+
+    result = _build_branch_relationships("owner", "repo", ["feature-a"], "main", include_merge_status=True)
+
+    assert "feature-a" in result
+    assert result["feature-a"]["can_merge"] is False
+    assert result["feature-a"]["merge_status"] == "diverged"
+    assert "age_days" in result["feature-a"]

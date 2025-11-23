@@ -1,15 +1,17 @@
 """Branch relationship graph analysis and visualization."""
 
+from datetime import datetime, timezone
 from typing import Any
 
 from rich.console import Console
 from rich.tree import Tree
 
-from .github_api import compare_commits
+from .github_api import check_merge_conflict, compare_commits, fetch_branch_details
+from .utils import parse_iso_date
 
 
 def _build_branch_relationships(
-    owner: str, repo: str, branches: list[str], base_branch: str
+    owner: str, repo: str, branches: list[str], base_branch: str, include_merge_status: bool = False
 ) -> dict[str, dict[str, Any]]:
     """Build relationship graph comparing all branches."""
     relationships = {}
@@ -23,12 +25,30 @@ def _build_branch_relationships(
             ahead = comparison.get("ahead_by", 0)
             behind = comparison.get("behind_by", 0)
 
-            relationships[branch] = {
+            branch_info = {
                 "ahead_of_base": ahead,
                 "behind_base": behind,
                 "commits": comparison.get("commits", []),
                 "base_branch": base_branch,
             }
+
+            if include_merge_status:
+                merge_status = check_merge_conflict(owner, repo, base_branch, branch)
+                branch_info["can_merge"] = merge_status["can_merge"]
+                branch_info["merge_status"] = merge_status["status"]
+
+            try:
+                details = fetch_branch_details(owner, repo, branch)
+                commit_date = details.get("commit", {}).get("commit", {}).get("committer", {}).get("date")
+                if commit_date:
+                    parsed_date = parse_iso_date(commit_date)
+                    age_days = (datetime.now(timezone.utc) - parsed_date).days
+                    branch_info["age_days"] = age_days
+                    branch_info["last_commit_date"] = commit_date
+            except (RuntimeError, KeyError):
+                pass
+
+            relationships[branch] = branch_info
         except RuntimeError:
             relationships[branch] = {
                 "ahead_of_base": 0,
@@ -125,12 +145,12 @@ def calculate_stacked_pr_order(
 
 
 def visualize_branch_graph(
-    owner: str, repo: str, branches: list[str], base_branch: str, console: Console
+    owner: str, repo: str, branches: list[str], base_branch: str, console: Console, show_merge_status: bool = True
 ) -> None:
     """Visualize branch relationships as a tree."""
     console.print(f"\n[bold cyan]Branch Graph: {owner}/{repo}[/bold cyan]\n")
 
-    relationships = _build_branch_relationships(owner, repo, branches, base_branch)
+    relationships = _build_branch_relationships(owner, repo, branches, base_branch, include_merge_status=show_merge_status)
 
     tree = Tree(f"[bold blue]{base_branch}[/bold blue] (default)")
 
@@ -142,15 +162,22 @@ def visualize_branch_graph(
     for branch, rel in sorted_branches:
         ahead = rel["ahead_of_base"]
         behind = rel["behind_base"]
+        age_days = rel.get("age_days")
+        can_merge = rel.get("can_merge", True)
 
         if rel.get("error"):
             label = f"[dim]{branch}[/dim] (comparison error)"
         elif behind > 0:
-            label = f"[yellow]{branch}[/yellow] ({ahead} ahead, {behind} behind) ⚠"
+            merge_indicator = "⚠ conflicts" if not can_merge else "⚠ behind"
+            age_info = f", {age_days}d old" if age_days is not None else ""
+            label = f"[yellow]{branch}[/yellow] ({ahead} ahead, {behind} behind{age_info}) {merge_indicator}"
         elif ahead == 0:
-            label = f"[dim]{branch}[/dim] (up to date)"
+            age_info = f", {age_days}d old" if age_days is not None else ""
+            label = f"[dim]{branch}[/dim] (up to date{age_info})"
         else:
-            label = f"[green]{branch}[/green] ({ahead} ahead) ✓"
+            merge_indicator = "✓ can merge" if can_merge else "⚠ conflicts"
+            age_info = f", {age_days}d old" if age_days is not None else ""
+            label = f"[green]{branch}[/green] ({ahead} ahead{age_info}) {merge_indicator}"
 
         tree.add(label)
 
@@ -194,3 +221,49 @@ def show_branch_comparison_matrix(
 
     console.print(table)
     console.print()
+
+
+def export_to_dot(
+    owner: str, repo: str, branches: list[str], base_branch: str, output_file: str | None = None
+) -> str:
+    """Export branch graph to DOT/Graphviz format."""
+    relationships = _build_branch_relationships(owner, repo, branches, base_branch, include_merge_status=True)
+
+    lines = [
+        "digraph branches {",
+        '  rankdir=LR;',
+        f'  node [shape=box, style=filled];',
+        f'  "{base_branch}" [fillcolor=lightblue, label="{base_branch}\\n(default)"];',
+    ]
+
+    for branch, rel in relationships.items():
+        ahead = rel["ahead_of_base"]
+        behind = rel["behind_base"]
+        can_merge = rel.get("can_merge", True)
+        age_days = rel.get("age_days")
+
+        if rel.get("error"):
+            color = "lightgray"
+            label_suffix = "\\n(error)"
+        elif behind > 0:
+            color = "yellow" if can_merge else "red"
+            label_suffix = f"\\n{ahead}↑ {behind}↓"
+        elif ahead == 0:
+            color = "white"
+            label_suffix = "\\n(up to date)"
+        else:
+            color = "lightgreen" if can_merge else "orange"
+            label_suffix = f"\\n{ahead}↑"
+
+        age_suffix = f"\\n{age_days}d" if age_days is not None else ""
+        lines.append(f'  "{branch}" [fillcolor={color}, label="{branch}{label_suffix}{age_suffix}"];')
+        lines.append(f'  "{base_branch}" -> "{branch}";')
+
+    lines.append("}")
+    dot_content = "\n".join(lines)
+
+    if output_file:
+        with open(output_file, "w") as f:
+            f.write(dot_content)
+
+    return dot_content

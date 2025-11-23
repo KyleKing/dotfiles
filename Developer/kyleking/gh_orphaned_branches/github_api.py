@@ -203,3 +203,25 @@ def create_pull_request(
     finally:
         if should_close:
             client.close()
+
+
+def check_merge_conflict(owner: str, repo: str, base: str, head: str, client: httpx.Client | None = None) -> dict[str, Any]:
+    """Check if two branches can be merged without conflicts."""
+    should_close = client is None
+    if client is None:
+        client = _create_github_client()
+    try:
+        comparison = _fetch_single(client, f"/repos/{owner}/{repo}/compare/{base}...{head}")
+        return {
+            "can_merge": comparison.get("status") != "diverged" and comparison.get("ahead_by", 0) > 0,
+            "status": comparison.get("status", "unknown"),
+            "ahead_by": comparison.get("ahead_by", 0),
+            "behind_by": comparison.get("behind_by", 0),
+        }
+    except RuntimeError:
+        return {
+            "can_merge": False,
+            "status": "error",
+            "ahead_by": 0,
+            "behind_by": 0,
+        }

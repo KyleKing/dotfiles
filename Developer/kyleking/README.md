@@ -109,16 +109,26 @@ gh-orphaned-branches -n myorg --graph my-project
 
 **Graph features:**
 - 📊 **Tree visualization** - see which branches are ahead/behind default branch
+  - ✓ Merge conflict detection (shows ✓ can merge or ⚠ conflicts)
+  - 📅 Branch age display (e.g., "5d old")
+  - 🎨 Color-coded status (green=ready, yellow=behind, red=conflicts)
 - 🔢 **Comparison matrix** - view ahead/behind counts for all branch pairs
 - 🔗 **Stacked PRs** - create PR chains for dependent branches
 - 🎯 **Smart ordering** - automatically calculate optimal PR dependency order
 - 📋 **Multi-select** - choose multiple branches (e.g., `1,3,5` or `1-10` or `all`)
+- 💾 **DOT export** - export graph to Graphviz format for external visualization
 
 **Stacked PR workflow:**
 1. View branch tree to understand relationships
 2. Select multiple related branches
 3. Tool calculates dependency order based on commit ancestry
 4. Creates PRs in sequence (e.g., main←feature-a, feature-a←feature-b, feature-b←feature-c)
+
+**DOT export workflow:**
+1. In graph mode, press `[e]` to export
+2. Enter filename (default: `repo-graph.dot`)
+3. Visualize with: `dot -Tpng repo-graph.dot -o graph.png`
+4. Graph includes merge status, branch age, and relationship indicators
 
 ### Non-Interactive Options
 

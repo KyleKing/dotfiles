@@ -11,6 +11,7 @@ from rich.table import Table
 from .github_api import compare_commits, create_pull_request, delete_branch
 from .graph import (
     calculate_stacked_pr_order,
+    export_to_dot,
     show_branch_comparison_matrix,
     visualize_branch_graph,
 )
@@ -274,6 +275,7 @@ def show_branch_graph_menu(
         "t": "Show tree view",
         "m": "Show comparison matrix",
         "s": "Select branches for stacked PRs",
+        "e": "Export to DOT/Graphviz",
         "b": "Back to main menu",
     }
 
@@ -304,6 +306,14 @@ def handle_branch_graph_interactive(
             visualize_branch_graph(owner, repo, branches, default_branch, console)
         elif action == "m":
             show_branch_comparison_matrix(owner, repo, branches[:10], console)
+        elif action == "e":
+            filename = Prompt.ask("Output file", default=f"{repo}-graph.dot")
+            try:
+                export_to_dot(owner, repo, branches, default_branch, filename)
+                console.print(f"[green]✓[/green] Exported graph to {filename}")
+                console.print(f"[dim]Visualize with: dot -Tpng {filename} -o {repo}-graph.png[/dim]")
+            except Exception as e:
+                console.print(f"[red]✗[/red] Failed to export: {e}")
         elif action == "s":
             selected = _select_branches_interactive(branches, console)
             if selected:
