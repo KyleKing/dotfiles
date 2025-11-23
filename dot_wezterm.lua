@@ -7,6 +7,8 @@
 --
 -- WORKSPACE MANAGEMENT:
 --  CMD+Shift+S - Switch workspace (fuzzy finder with zoxide integration)
+--  CMD+Shift+N - Workspace note menu (view/edit/clear note)
+--    CLI: wnote set "message" | wnote get | wnote edit | wnote clear
 --
 -- TAB MANAGEMENT:
 --  CMD+N - New window
@@ -586,6 +588,63 @@ config.keys = {
             end
         end),
     },
+
+    -- Workspace notes management
+    {
+        key = "n",
+        mods = "CMD|SHIFT",
+        action = wezterm.action_callback(function(window, pane)
+            local workspace = window:active_workspace()
+
+            -- Read current note
+            local notes_dir = os.getenv("HOME") .. "/.local/share/wezterm/workspace-notes"
+            local note_file = notes_dir .. "/" .. workspace .. ".txt"
+            local current_note = "[No note set]"
+
+            local file = io.open(note_file, "r")
+            if file then
+                current_note = file:read("*all"):gsub("^%s*(.-)%s*$", "%1")
+                file:close()
+            end
+
+            -- Show menu
+            window:perform_action(
+                act.InputSelector({
+                    title = "Workspace Note: " .. workspace,
+                    choices = {
+                        { id = "view", label = "📄 " .. current_note },
+                        { id = "set", label = "✏️  Quick set note" },
+                        { id = "edit", label = "📝 Edit in $EDITOR" },
+                        { id = "clear", label = "🗑️  Clear note" },
+                        { id = "list", label = "📋 List all notes" },
+                    },
+                    fuzzy = false,
+                    action = wezterm.action_callback(function(win, pane, id, label)
+                        if id == "set" then
+                            win:perform_action(
+                                act.PromptInputLine({
+                                    description = "Enter note for " .. workspace .. ":",
+                                    action = wezterm.action_callback(function(win, pane, line)
+                                        if line and line ~= "" then
+                                            pane:send_text("wnote set \"" .. line .. "\"\n")
+                                        end
+                                    end),
+                                }),
+                                pane
+                            )
+                        elseif id == "edit" then
+                            pane:send_text("wnote edit\n")
+                        elseif id == "clear" then
+                            pane:send_text("wnote clear\n")
+                        elseif id == "list" then
+                            pane:send_text("wnote list\n")
+                        end
+                    end),
+                }),
+                pane
+            )
+        end),
+    },
 }
 
 -- ============================================================================
@@ -800,8 +859,31 @@ wezterm.on("update-right-status", function(window, pane)
         table.insert(status_items, { Text = zoomed })
     end
 
+    -- Workspace note (truncated)
+    local notes_dir = os.getenv("HOME") .. "/.local/share/wezterm/workspace-notes"
+    local note_file = notes_dir .. "/" .. workspace .. ".txt"
+    local note_file_handle = io.open(note_file, "r")
+    if note_file_handle then
+        local note_content = note_file_handle:read("*all"):gsub("^%s*(.-)%s*$", "%1")
+        note_file_handle:close()
+
+        if note_content and note_content ~= "" then
+            -- Truncate to 40 characters
+            local note_preview = note_content:sub(1, 40)
+            if #note_content > 40 then
+                note_preview = note_preview .. "..."
+            end
+
+            table.insert(status_items, { Foreground = { Color = "#C6A0F6" } })
+            table.insert(
+                status_items,
+                { Text = " " .. wezterm.nerdfonts.md_note_text .. " " .. note_preview }
+            )
+        end
+    end
+
     table.insert(status_items, { Foreground = { Color = "#CAD3F5" } })
-    table.insert(status_items, { Text = date .. " " })
+    table.insert(status_items, { Text = " " .. date .. " " })
 
     window:set_right_status(wezterm.format(status_items))
 end)
