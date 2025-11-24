@@ -44,12 +44,12 @@ repos:
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.22
+    rev: 1.0.0
     hooks:
       - id: mdformat
         additional_dependencies:
-          - "mdformat-mkdocs[recommended]>=2.0.1"
-          - "beautysh==6.2.1" # https://github.com/hukkin/mdformat-beautysh/issues/4
+          - "mdformat-mkdocs[recommended]>=5.0.0"
+          - "mdformat-beautysh>=1.0.0" # https://github.com/hukkin/mdformat-beautysh/issues/4
         args: [--wrap=no]
         exclude: _.+\.md|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -102,6 +102,10 @@ repos:
     rev: v2.3.1
     hooks:
       - id: stylua-system
+  - repo: https://github.com/sirwart/ripsecrets
+    rev: v0.1.11
+    hooks:
+      - id: ripsecrets-system
   - repo: local
     hooks:
       - id: selene
