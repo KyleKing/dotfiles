@@ -7,6 +7,8 @@
 --
 -- WORKSPACE MANAGEMENT:
 --  CMD+Shift+S - Switch workspace (fuzzy finder with zoxide integration)
+--  CMD+Shift+N - Workspace note menu (view/edit/clear note)
+--    CLI: wnote set "message" | wnote get | wnote edit | wnote clear
 --
 -- TAB MANAGEMENT:
 --  CMD+N - New window
@@ -14,6 +16,8 @@
 --  CMD+W - Close current tab (with confirmation)
 --  CMD+1-9 - Jump to tab number
 --  CMD+ALT+Left/Right - Switch to previous/next tab
+--  CMD+CTRL+Left/Right (or H/L) - Move tab left/right
+--  CMD+Shift+O - Auto-organize tabs by git directory
 --  CMD+R - Reload configuration file
 --
 -- PANE MANAGEMENT (with Neovim integration):
@@ -518,6 +522,129 @@ config.keys = {
             end),
         }),
     },
+
+    -- Tab reordering
+    { key = "LeftArrow", mods = "CMD|CTRL", action = act.MoveTabRelative(-1) },
+    { key = "RightArrow", mods = "CMD|CTRL", action = act.MoveTabRelative(1) },
+    { key = "h", mods = "CMD|CTRL", action = act.MoveTabRelative(-1) },
+    { key = "l", mods = "CMD|CTRL", action = act.MoveTabRelative(1) },
+
+    -- Auto-organize tabs by git directory
+    {
+        key = "o",
+        mods = "CMD|SHIFT",
+        action = wezterm.action_callback(function(window, pane)
+            local mux_window = window:mux_window()
+            local tabs = mux_window:tabs_with_info()
+
+            -- Build tab info with git roots
+            local tab_info = {}
+            for _, tab_item in ipairs(tabs) do
+                local tab = tab_item.tab
+                local cwd = ""
+                if tab:active_pane() and tab:active_pane():get_current_working_dir() then
+                    cwd = tab:active_pane():get_current_working_dir().file_path or ""
+                end
+
+                local git_root, _, _ = get_cached_git_root(cwd)
+                table.insert(tab_info, {
+                    tab = tab,
+                    git_root = git_root,
+                    cwd = cwd,
+                    index = tab_item.index,
+                })
+            end
+
+            -- Sort by git root, then by cwd
+            table.sort(tab_info, function(a, b)
+                if a.git_root ~= b.git_root then
+                    -- Sort by git root (non-git repos at end)
+                    if a.git_root == "" then
+                        return false
+                    elseif b.git_root == "" then
+                        return true
+                    else
+                        return a.git_root < b.git_root
+                    end
+                else
+                    -- Within same repo, sort by cwd
+                    return a.cwd < b.cwd
+                end
+            end)
+
+            -- Reorder tabs
+            for new_index, info in ipairs(tab_info) do
+                local old_index = info.index
+                if old_index ~= new_index - 1 then
+                    info.tab:set_active()
+                    -- Move tab to new position
+                    for i = old_index, new_index - 2, -1 do
+                        window:perform_action(act.MoveTabRelative(-1), pane)
+                    end
+                    for i = old_index, new_index, 1 do
+                        window:perform_action(act.MoveTabRelative(1), pane)
+                    end
+                end
+            end
+        end),
+    },
+
+    -- Workspace notes management
+    {
+        key = "n",
+        mods = "CMD|SHIFT",
+        action = wezterm.action_callback(function(window, pane)
+            local workspace = window:active_workspace()
+
+            -- Read current note
+            local notes_dir = os.getenv("HOME") .. "/.local/share/wezterm/workspace-notes"
+            local note_file = notes_dir .. "/" .. workspace .. ".txt"
+            local current_note = "[No note set]"
+
+            local file = io.open(note_file, "r")
+            if file then
+                current_note = file:read("*all"):gsub("^%s*(.-)%s*$", "%1")
+                file:close()
+            end
+
+            -- Show menu
+            window:perform_action(
+                act.InputSelector({
+                    title = "Workspace Note: " .. workspace,
+                    choices = {
+                        { id = "view", label = "📄 " .. current_note },
+                        { id = "set", label = "✏️  Quick set note" },
+                        { id = "edit", label = "📝 Edit in $EDITOR" },
+                        { id = "clear", label = "🗑️  Clear note" },
+                        { id = "list", label = "📋 List all notes" },
+                    },
+                    fuzzy = false,
+                    action = wezterm.action_callback(function(win, pane, id, label)
+                        if id == "set" then
+                            win:perform_action(
+                                act.PromptInputLine({
+                                    description = "Enter note for " .. workspace .. ":",
+                                    action = wezterm.action_callback(function(win, pane, line)
+                                        if line and line ~= "" then
+                                            pane:send_text("wnote set \"" .. line .. "\"\n")
+                                        end
+                                    end),
+                                }),
+                                pane
+                            )
+                        elseif id == "edit" then
+                            pane:send_text("wnote edit\n")
+                        elseif id == "clear" then
+                            pane:send_text("wnote clear\n")
+                        elseif id == "list" then
+                            pane:send_text("wnote list\n")
+                        end
+                    end),
+                }),
+                pane
+            )
+        end),
+    },
 }
 
 -- ============================================================================
@@ -732,8 +859,31 @@ wezterm.on("update-right-status", function(window, pane)
         table.insert(status_items, { Text = zoomed })
     end
 
+    -- Workspace note (truncated)
+    local notes_dir = os.getenv("HOME") .. "/.local/share/wezterm/workspace-notes"
+    local note_file = notes_dir .. "/" .. workspace .. ".txt"
+    local note_file_handle = io.open(note_file, "r")
+    if note_file_handle then
+        local note_content = note_file_handle:read("*all"):gsub("^%s*(.-)%s*$", "%1")
+        note_file_handle:close()
+
+        if note_content and note_content ~= "" then
+            -- Truncate to 40 characters
+            local note_preview = note_content:sub(1, 40)
+            if #note_content > 40 then
+                note_preview = note_preview .. "..."
+            end
+
+            table.insert(status_items, { Foreground = { Color = "#C6A0F6" } })
+            table.insert(
+                status_items,
+                { Text = " " .. wezterm.nerdfonts.md_note_text .. " " .. note_preview }
+            )
+        end
+    end
+
     table.insert(status_items, { Foreground = { Color = "#CAD3F5" } })
-    table.insert(status_items, { Text = date .. " " })
+    table.insert(status_items, { Text = " " .. date .. " " })
 
     window:set_right_status(wezterm.format(status_items))
 end)

@@ -1,0 +1,207 @@
+#!/usr/bin/env bash
+# wnote - Workspace Note tool for focus management
+# Zero-friction context tracking for workspace switching
+
+set -euo pipefail
+
+NOTES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/wezterm/workspace-notes"
+INDEX_FILE="$NOTES_DIR/.index.json"
+mkdir -p "$NOTES_DIR"
+
+# Get workspace name (from wezterm or fallback to directory basename)
+get_workspace() {
+    # Try to get from wezterm active workspace
+    if command -v wezterm &>/dev/null; then
+        local ws
+        ws=$(wezterm cli list --format json 2>/dev/null | \
+            jq -r '.[] | select(.is_active == true) | .workspace' 2>/dev/null | head -1)
+        if [[ -n "$ws" && "$ws" != "null" ]]; then
+            echo "$ws"
+            return
+        fi
+    fi
+
+    # Fallback to directory basename
+    basename "$(pwd)"
+}
+
+# Update index with metadata
+update_index() {
+    local workspace="$1"
+    local operation="${2:-update}"
+
+    if [[ ! -f "$INDEX_FILE" ]]; then
+        echo '{}' > "$INDEX_FILE"
+    fi
+
+    local now
+    now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+    if [[ "$operation" == "create" ]]; then
+        jq --arg ws "$workspace" --arg time "$now" \
+            '.[$ws] = {created: $time, updated: $time}' \
+            "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+    elif [[ "$operation" == "update" ]]; then
+        if jq -e --arg ws "$workspace" '.[$ws]' "$INDEX_FILE" >/dev/null 2>&1; then
+            jq --arg ws "$workspace" --arg time "$now" \
+                '.[$ws].updated = $time' \
+                "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+        else
+            jq --arg ws "$workspace" --arg time "$now" \
+                '.[$ws] = {created: $time, updated: $time}' \
+                "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+        fi
+    elif [[ "$operation" == "delete" ]]; then
+        jq --arg ws "$workspace" 'del(.[$ws])' \
+            "$INDEX_FILE" > "$INDEX_FILE.tmp" && mv "$INDEX_FILE.tmp" "$INDEX_FILE"
+    fi
+}
+
+# Format relative time
+relative_time() {
+    local timestamp="$1"
+    local now
+    now=$(date +%s)
+    local then
+    then=$(date -d "$timestamp" +%s 2>/dev/null || echo "$now")
+    local diff=$((now - then))
+
+    if [[ $diff -lt 60 ]]; then
+        echo "just now"
+    elif [[ $diff -lt 3600 ]]; then
+        echo "$((diff / 60))m ago"
+    elif [[ $diff -lt 86400 ]]; then
+        echo "$((diff / 3600))h ago"
+    elif [[ $diff -lt 604800 ]]; then
+        echo "$((diff / 86400))d ago"
+    else
+        echo "$((diff / 604800))w ago"
+    fi
+}
+
+WORKSPACE=$(get_workspace)
+NOTE_FILE="$NOTES_DIR/${WORKSPACE}.txt"
+
+# Commands
+case "${1:-get}" in
+    set)
+        shift
+        if [[ $# -eq 0 ]]; then
+            echo "Usage: wnote set <message>" >&2
+            exit 1
+        fi
+        echo "$*" > "$NOTE_FILE"
+        update_index "$WORKSPACE" "update"
+        echo "✓ Note saved for workspace: $WORKSPACE"
+        ;;
+
+    get)
+        if [[ -f "$NOTE_FILE" ]]; then
+            cat "$NOTE_FILE"
+        else
+            echo "(No note set for workspace: $WORKSPACE)" >&2
+            exit 1
+        fi
+        ;;
+
+    edit)
+        ${EDITOR:-vim} "$NOTE_FILE"
+        if [[ -f "$NOTE_FILE" && -s "$NOTE_FILE" ]]; then
+            update_index "$WORKSPACE" "update"
+            echo "✓ Note updated for workspace: $WORKSPACE"
+        fi
+        ;;
+
+    clear)
+        if [[ -f "$NOTE_FILE" ]]; then
+            rm -f "$NOTE_FILE"
+            update_index "$WORKSPACE" "delete"
+            echo "✓ Note cleared for workspace: $WORKSPACE"
+        else
+            echo "No note to clear for workspace: $WORKSPACE"
+        fi
+        ;;
+
+    list)
+        echo "Workspace notes:"
+        if [[ -d "$NOTES_DIR" ]]; then
+            for note in "$NOTES_DIR"/*.txt; do
+                if [[ -f "$note" ]]; then
+                    local ws
+                    ws=$(basename "$note" .txt)
+                    local preview
+                    preview=$(head -1 "$note" | cut -c1-60)
+                    printf "  %-20s %s\n" "$ws:" "$preview"
+                fi
+            done
+        fi
+        ;;
+
+    overview|all)
+        echo "Workspace Notes Overview:"
+        echo "─────────────────────────────────────────────────────────────────"
+
+        if [[ ! -f "$INDEX_FILE" ]]; then
+            echo "No notes found."
+            exit 0
+        fi
+
+        # Get all workspaces from index sorted by update time (most recent first)
+        jq -r 'to_entries | sort_by(.value.updated) | reverse |
+               .[] | "\(.key)|\(.value.created)|\(.value.updated)"' "$INDEX_FILE" 2>/dev/null | \
+        while IFS='|' read -r ws created updated; do
+            if [[ -f "$NOTES_DIR/${ws}.txt" ]]; then
+                note_preview=$(head -1 "$NOTES_DIR/${ws}.txt" | cut -c1-50)
+                rel_time=$(relative_time "$updated")
+                created_time=$(relative_time "$created")
+                printf "%-20s  %-12s  (created %-12s)\n" "$ws:" "$rel_time" "$created_time"
+                printf "  %s\n" "$note_preview"
+                echo ""
+            fi
+        done
+        ;;
+
+    workspace)
+        # Just print current workspace (for testing)
+        echo "$WORKSPACE"
+        ;;
+
+    help|--help|-h)
+        cat <<EOF
+wnote - Workspace Note tool for focus management
+
+Usage: wnote <command> [args]
+
+Commands:
+  set <message>   Set note for current workspace
+  get             Get note for current workspace (default)
+  edit            Edit note in \$EDITOR
+  clear           Clear note for current workspace
+  list            List all workspace notes
+  overview        Show all workspace notes with metadata (alias: all)
+  workspace       Show current workspace name
+  help            Show this help
+
+Examples:
+  wnote set "Debugging JWT expiry in auth middleware"
+  wnote get
+  wnote edit
+  wnote list
+  wnote overview  # See all notes across workspaces
+  wnote clear
+
+Storage: $NOTES_DIR
+
+Focus Management Philosophy:
+- Quick, ephemeral notes for "what am I doing?"
+- Workspace-scoped context switching aid
+- Not a permanent knowledge base (use zk/Obsidian for that)
+EOF
+        ;;
+
+    *)
+        echo "Unknown command: ${1:-}" >&2
+        echo "Run 'wnote help' for usage" >&2
+        exit 1
+        ;;
+esac

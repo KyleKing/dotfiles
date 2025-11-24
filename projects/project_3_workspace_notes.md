@@ -18,20 +18,46 @@ Add context-aware note-taking for each workspace, displayed in the status bar or
 - Visual reminder of context
 
 
-## Open Questions
+## Design Philosophy: Focus Management vs. General Note-Taking
+
+**Key Distinction from tools like zk (Zettelkasten):**
+
+| Focus Management (This Tool) | General Note-Taking (zk, Obsidian) |
+|------------------------------|-------------------------------------|
+| **Purpose:** Context-switching aid | Long-term knowledge management |
+| **Scope:** Workspace/session | Global knowledge base |
+| **Duration:** Ephemeral (days/weeks) | Permanent (months/years) |
+| **Content:** "What am I doing?" | "What do I know?" |
+| **Structure:** Minimal | Rich (links, tags, backlinks) |
+| **Friction:** Zero - instant set/view | Low - but requires thought |
+
+**Use case:** "I'm switching to the API project. What was I working on? Oh right, debugging JWT expiry in auth middleware, blocked by need for prod logs."
+
+**NOT:** Building a personal wiki or permanent knowledge base.
+
+---
+
+## Open Questions - ANSWERED
 
 ### 1. Note Format
 
 **Question:** What format should notes use?
 
 Options:
-- [ ] **Plain text** - Simple, fast, no parsing
+- [x] **Plain text** - Simple, fast, no parsing ✅ **CHOSEN**
 - [ ] **Markdown** - Rich formatting, links, code blocks
 - [ ] **Structured YAML** - Frontmatter + content (tasks, links, notes)
 - [ ] **JSON** - Fully structured (metadata + content)
 - [ ] **Custom format** - Key-value pairs for specific fields
 
-**[YOUR PREFERENCE:]**
+**[DECISION: Plain text for MVP, upgrade to simple markdown later if needed]**
+
+**Reasoning:**
+- Focus management needs zero friction
+- Plain text = instant read/write
+- No parsing overhead
+- Can upgrade to markdown later if valuable
+- Most notes are 1-2 sentences anyway ("debugging auth", "blocked by PR #123")
 
 
 ### 2. Storage Location
@@ -39,7 +65,7 @@ Options:
 **Question:** Where should notes be stored?
 
 Options:
-- [ ] **Centralized** - `~/.local/share/wezterm/workspace-notes/`
+- [x] **Centralized** - `~/.local/share/wezterm/workspace-notes/` ✅ **CHOSEN**
   - Pros: One location, easy to backup, workspace-agnostic
   - Cons: Not in git, not portable with project
 
@@ -55,7 +81,14 @@ Options:
   - Pros: Available everywhere
   - Cons: Dependency, privacy concerns
 
-**[YOUR PREFERENCE:]**
+**[DECISION: Centralized storage]**
+
+**Reasoning:**
+- Notes are ephemeral focus aids, not permanent project documentation
+- Don't want to clutter repositories
+- Single location easier to backup/manage
+- Workspace-scoped (not repo-scoped) - same note across all terminals in workspace
+- Can easily grep/search all notes: `rg "auth" ~/.local/share/wezterm/workspace-notes/`
 
 
 ### 3. Display Method
@@ -68,9 +101,15 @@ Options:
 - [ ] **Keybinding popup** - CMD+Shift+N to view/edit
 - [ ] **Sidebar panel** - Persistent panel (advanced)
 - [ ] **Hover tooltip** - Hover workspace name in status bar
-- [ ] **Multiple** - Status bar + keybinding
+- [x] **Multiple** - Status bar + keybinding ✅ **CHOSEN**
 
-**[YOUR PREFERENCE:]**
+**[DECISION: Status bar (truncated) + CMD+Shift+N keybinding for full view/edit]**
+
+**Reasoning:**
+- **Status bar:** Always visible reminder of context (30-40 chars max)
+- **Keybinding:** Full note when needed, quick edit capability
+- Best of both worlds: passive reminder + active access
+- Don't show on workspace switch (too intrusive, not every switch needs reminder)
 
 
 ### 4. Editing Workflow
@@ -82,9 +121,29 @@ Options:
 - [ ] **External editor** - Opens $EDITOR (full features)
 - [ ] **WezTerm overlay** - Text editor in WezTerm overlay
 - [ ] **CLI tool** - `wnote edit` command
-- [ ] **Multiple methods** - Quick edit + full editor option
+- [x] **Multiple methods** - Quick edit + full editor option ✅ **CHOSEN**
 
-**[YOUR PREFERENCE:]**
+**[DECISION: CLI tool with both quick-set and full-edit modes]**
+
+**Reasoning:**
+```bash
+# Quick set (90% of use cases)
+wnote set "Debugging JWT expiry - check token config"
+
+# Full edit (when you need more detail)
+wnote edit  # Opens $EDITOR
+
+# View current note
+wnote get
+
+# Clear when done
+wnote clear
+```
+
+- CLI tool = works from any terminal (not just WezTerm with keybinding)
+- Quick-set for fast updates during flow
+- Full editor for multi-line notes or todos
+- Keybinding in WezTerm shows menu with both options
 
 
 ### 5. Note Scope & Features
@@ -93,7 +152,7 @@ Options:
 
 Options:
 - [ ] **Simple notes only** - Just free-form text
-- [ ] **Todo lists** - Checkable items
+- [x] **Simple notes + basic todos** ✅ **CHOSEN (Phase 2)**
 - [ ] **Links** - URLs, file paths
 - [ ] **Tags** - Categorization
 - [ ] **Timestamps** - Last updated, created
@@ -101,7 +160,138 @@ Options:
 - [ ] **Templates** - Pre-filled notes for project types
 - [ ] **All of the above** - Full-featured
 
-**[YOUR PREFERENCE:]**
+**[DECISION: Start with simple notes (Phase 1), add basic todos later (Phase 2)]**
+
+**Reasoning:**
+```
+Phase 1 (MVP):
+  Just plain text notes
+  "Debugging auth - JWT expiry issue"
+
+Phase 2 (If valuable):
+  Support simple checkbox todos in note
+  "Debugging auth
+   [ ] Check token config
+   [ ] Review refresh logic
+   [x] Test with longer expiry"
+```
+
+- Start simple, add todos only if needed
+- Focus management doesn't need heavy features
+- Most context is "what" and "where", not detailed task breakdown
+- Can always upgrade format later without breaking existing notes
+
+---
+
+## APPROVED IMPLEMENTATION PLAN
+
+### Phase 1: MVP Focus Management (IMPLEMENT THIS)
+
+**Goal:** Zero-friction workspace context tracking
+
+**Features:**
+1. **CLI tool `wnote`** - Quick set/get/edit/clear
+2. **WezTerm status bar** - Show truncated note
+3. **WezTerm keybinding** - CMD+Shift+N for full note view/menu
+4. **Centralized storage** - `~/.local/share/wezterm/workspace-notes/`
+
+**File Structure:**
+```
+~/.local/share/wezterm/workspace-notes/
+├── dotfiles.txt          # "Adding workspace notes feature"
+├── myproject.txt         # "Debugging JWT expiry in auth"
+└── api-service.txt       # "Blocked by PR #456 review"
+```
+
+**CLI Commands:**
+```bash
+wnote set "Debugging auth - JWT expiry"
+wnote get
+wnote edit  # Opens $EDITOR
+wnote clear
+wnote list  # Show all workspace notes
+```
+
+**WezTerm Integration:**
+- Status bar: `[myproject] [main] [📝 Debugging auth - JWT...] [15:30]`
+- CMD+Shift+N: Popup menu with:
+  - View full note
+  - Quick edit (send `wnote set "..."` to terminal)
+  - Open in editor (send `wnote edit` to terminal)
+  - Clear note
+
+**Implementation Checklist:**
+- [ ] Create `wnote` CLI script in `~/.local/bin/`
+- [ ] Add workspace note reading function to `dot_wezterm.lua`
+- [ ] Integrate note display in status bar
+- [ ] Add CMD+Shift+N keybinding with menu
+- [ ] Test workflow: set note → see in status bar → edit → clear
+- [ ] Document in wezterm config header
+
+**Estimated Time:** 3-4 hours
+
+### Phase 2: Basic Todos (Future - If Needed)
+
+Only implement if Phase 1 proves valuable and todos are actually needed.
+
+**Format:**
+```
+Debugging auth
+
+Tasks:
+[ ] Check token config
+[ ] Review refresh logic
+[x] Test with longer expiry
+
+Blocked: Need prod logs access
+```
+
+**CLI additions:**
+```bash
+wnote todo add "Check token config"
+wnote todo list
+wnote todo done 1
+```
+
+**Status bar enhancement:**
+- Show todo count: `[📝 Debugging auth (2/3)]`
+
+---
+
+## Integration with Broader Workflow
+
+**Workspace Notes (this tool)** focuses on ephemeral context:
+```
+"What am I doing in THIS workspace right now?"
+Duration: Hours to days
+Updates: Frequently (multiple times per session)
+```
+
+**vs. Other Tools:**
+
+**zk/Obsidian** for permanent knowledge:
+```
+"What do I know about JWT authentication?"
+Duration: Permanent
+Updates: Occasionally (when learning something new)
+```
+
+**Together:**
+- Workspace note: "Debugging JWT expiry - see auth-notes"
+- zk note: Detailed JWT architecture documentation
+- Different purposes, complementary tools
+
+**Git commit messages** for historical record:
+```
+"fix: increase JWT token expiry from 1h to 4h"
+```
+
+**Project README** for newcomer context:
+```
+"How to run the auth service"
+```
+
+---
 
 
 ## Technical Proposal
