@@ -80,6 +80,7 @@
     format = ssh
 [gpg "ssh"]
     program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+    allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
 
 # -- Branch defaults for new repositories
 [init]
@@ -124,6 +125,6 @@
 [user]
     name = Kyle King
     email = {{ .github.email }}
-    signingkey = {{ .github.signing_key }}
+    signingkey = {{ .github.ssh_public_key }}
 
 # Tip: `git maintenance start` can speed up git operations by running cron tasks for large and active repos (https://git-scm.com/docs/git-maintenance)
