@@ -7,12 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "assistant": {
+  "base_keymap": "VSCode",
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-5-sonnet-latest"
-    },
-    "version": "2"
+    }
   },
   "features": {
     "edit_prediction_provider": "zed"
@@ -22,7 +22,7 @@
   "buffer_font_size": 14,
   "theme": {
     "mode": "system",
-    "light": "One Dark",
-    "dark": "One Dark"
+    "light": "Ayu Light",
+    "dark": "Ayu Dark"
   }
 }

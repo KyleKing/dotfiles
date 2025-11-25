@@ -1,4 +1,5 @@
-- Do not add comments/docstrings when redundant to the code
+- ONLY USE THE git operations to READ; NEVER modify the staged files or commit
+- Do not add comments/docstrings when redundant to the code. Only add args/returns/raises to docstrings for exported functions, but never for irm/
 - Do not run Docker commands without instruction
 - For Python, prefer Pydantic, dataclasses, then dictionaries
 - Do not lazy import--place at the top of the file
@@ -6,4 +7,5 @@
 - If a function is only used within a file and not imported elsewhere, prefix with an underscore
 - Use uv (when ./uv.lock), poetry (when ./poetry.lock), or tox (when ./tox directory) to execute Python
 - Instead of find, use fd; use rg instead of grep; use 'sad' like `fd <...> | sad --pager=disable --commit --exact 'search' 'replace'`  to make bulk changes
+- For fast renaming, use `fd --glob="<glob>" --hidden <etc.> | sad --pager=never --commit --exact '<before>' '<after>'` (or use the regex options)
 - Only use `__all__` in `__init__.py` file. Never lazy load imports to resolve circular imports when refactoring is possible
