@@ -226,6 +226,7 @@ local function select_contrasting_fg_color(hex_color)
 end
 
 -- Inline tests
+-- PLANNED: local testColor = string_to_color("/Robots/TermA/Developer/ProjectA")
 local testColor = string_to_color("/Users/kyleking/Developer/ProjectA")
 assert(testColor == "#EBD168", "Unexpected color value for test hash (" .. testColor .. ")")
 assert(select_contrasting_fg_color("#494CED") == "#FFFFFF", "Expected higher contrast with white")

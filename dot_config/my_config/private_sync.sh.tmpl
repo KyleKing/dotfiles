@@ -6,7 +6,7 @@
 
 back-apply-ch() {
     # Apply any changes to local files
-    eval "$(op signin --account=my.1password.com)" || return 1
+    eval "$(op signin --account={{ .onepassword.domain }})" || return 1
     chezmoi apply
 }
 
@@ -40,12 +40,12 @@ back-c-ch() {
 }
 
 # Obsidian Syncing Snippets
-alias back-pull-obs="cd / && z obsidian-kyleking-vault && git pull"
+alias back-pull-obs="cd / && z {{ .obsidian.vault_name }} && git pull"
 back-c-obs() {
     # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
     MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd / && z obsidian-kyleking-vault && ga . && gcmsg "$MSG" && lzg
+    cd / && z {{ .obsidian.vault_name }} && ga . && gcmsg "$MSG" && lzg
 }
 
 # NVIM Syncing
@@ -66,7 +66,7 @@ back-pull-all() {
 # Just show status
 back-stat-all() {
     op signin &&
-        printf "\n\n# Obsidian:\n" && cd / && z obsidian-kyleking-vault && echo "$PWD" && git status &&
+        printf "\n\n# Obsidian:\n" && cd / && z {{ .obsidian.vault_name }} && echo "$PWD" && git status &&
         printf "\n\n# nvim\n" && cd ~/.config/nvim && echo "$PWD" && git status &&
         printf "\n\n# Chezmoi\n" && cd / && z chezmoi && echo "$PWD" && git status
 }

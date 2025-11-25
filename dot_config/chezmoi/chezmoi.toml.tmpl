@@ -9,7 +9,20 @@ poetry_repositories = '''{{ .poetry_repositories }}'''
 
 [data.github]
 email = "{{ .github.email }}"
+username = "{{ .github.username }}"
 signing_key = "{{ .github.signing_key }}"
+ssh_public_key = "{{ .github.ssh_public_key }}"
+
+[data.aws]
+account_id = "{{ .aws.account_id }}"
+aws_profile = "{{ .aws.aws_profile }}"
+
+[data.onepassword]
+account_id = "{{ .onepassword.account_id }}"
+domain = "{{ .onepassword.domain }}"
+
+[data.obsidian]
+vault_name = "{{ .obsidian.vault_name }}"
 
 [edit]
 # command = "subl"
