@@ -1,21 +1,121 @@
 -- Wezterm Docs: https://wezfurlong.org/wezterm/config/lua/general.html
---  Debug logs in: `lst $HOME/.local/share/wezterm` (Docs: https://wezfurlong.org/wezterm/troubleshooting.html#increasing-log-verbosity)
+--  Debug logs: `ls $HOME/.local/share/wezterm` (https://wezfurlong.org/wezterm/troubleshooting.html)
 
--- Keybindings: https://wezfurlong.org/wezterm/config/keys.html#default-shortcut--key-binding-assignments
---  CMD N/T/W; CMD 1-9 all work as expected. Use `CMD Shift ] or [` to switch tabs
---  CMD R to reload configuration file
---  To clear scrollback, use both CMD-k and <C-l> in any order (or enter 'clear')
---  Searching scrollback: https://wezfurlong.org/wezterm/scrollback.html?highlight=clear#searching-the-scrollback
---   Ctrl|Shift|f w/ up and down arrows (or pgUp/pgDown) to navigate
---   Ctrl-U to clear and Ctrl-R to switch pattern matching mode
---   Copy Mode: https://wezfurlong.org/wezterm/copymode.html
---    Ctrl|Shift|X to enter copy mode
---    Ctrl|Shift|C to copy to clipboard
---    etc.
-
--- Example User Configs: https://github.com/wez/wezterm/discussions/628
+-- ============================================================================
+-- Custom Keybindings (https://wezfurlong.org/wezterm/config/keys.html)
+-- ============================================================================
+--
+-- WORKSPACE MANAGEMENT:
+--  CMD+Shift+S - Switch workspace (fuzzy finder with zoxide integration)
+--
+-- TAB MANAGEMENT:
+--  CMD+N - New window
+--  CMD+T - New tab
+--  CMD+W - Close current tab (with confirmation)
+--  CMD+1-9 - Jump to tab number
+--  CMD+ALT+Left/Right - Switch to previous/next tab
+--  CMD+R - Reload configuration file
+--
+-- PANE MANAGEMENT (with Neovim integration):
+--  CMD+D - Split pane horizontally (left/right)
+--  CMD+Shift+D - Split pane vertically (top/bottom)
+--  CTRL+H/J/K/L - Navigate panes/nvim splits (seamlessly with smart-splits.nvim)
+--  ALT+Arrow - Resize panes/nvim splits (seamlessly with smart-splits.nvim)
+--  CMD+[ or ] - Cycle through panes (prev/next)
+--  CMD+Shift+Arrow - Navigate to pane in direction
+--  CMD+Shift+Alt+Arrow - Resize pane in direction
+--  CMD+Shift+W - Close current pane (with confirmation)
+--  CMD+Z - Toggle pane zoom (maximize/restore current pane)
+--
+-- NAVIGATION & EDITING:
+--  ALT+Left/Right - Jump backward/forward by word
+--  CMD+Left/Right - Jump to start/end of line (standard: C-a, C-e)
+--  CTRL+B/F - Scroll page up/down (vim-style)
+--  CMD+Up - Jump to previous prompt (requires shell integration)
+--  CMD+Shift+Down - Jump to next prompt (requires shell integration)
+--  CMD+Down - Scroll to bottom
+--
+-- TEXT SELECTION & SEARCH:
+--  CMD+Space - Quick select (highlights URLs, paths, hashes, IPs for quick copy)
+--  CMD+O - Quick select and open URLs
+--  CMD+F - Search scrollback (Enter/Ctrl-N/P to navigate matches, Ctrl-U to clear)
+--  CMD+X - Enter copy mode (vim-style navigation)
+--  Copy Mode (https://wezfurlong.org/wezterm/copymode.html):
+--   hjkl - Vim movement, w/b/e - Word navigation, 0/$/^ - Line navigation
+--   H/M/L - Move to top/middle/bottom of viewport
+--   gg/G - Jump to top/bottom of scrollback
+--   Ctrl-D/U - Half page down/up, Ctrl-F/B - Full page down/up
+--   / - Search, n/N - Next/previous match
+--   v/V/Ctrl-V - Visual select (char/line/block)
+--   y/Enter - Copy and exit, q/Escape - Exit without copying
+--
+-- SCROLLBACK MANAGEMENT:
+--  CMD+K then C-l - Clear scrollback (or type 'clear')
+--
+-- MOUSE:
+--  CTRL+Click - Open link under cursor
+--
+-- Resources:
+--  Example configs: https://github.com/wez/wezterm/discussions/628
+--  Pane splitting: https://wezfurlong.org/wezterm/config/lua/keyassignment/SplitPane.html
+--
+-- ============================================================================
+-- Shell Integration Setup (Required for prompt jumping and command tracking)
+-- ============================================================================
+-- Add to your shell config file (.zshrc, .bashrc, etc.):
+--
+-- For Zsh (~/.zshrc):
+--   eval "$(wezterm shell-integration --shell zsh)"
+--
+-- For Bash (~/.bashrc):
+--   eval "$(wezterm shell-integration --shell bash)"
+--
+-- For Fish (~/.config/fish/config.fish):
+--   wezterm shell-integration --shell fish | source
+--
+-- This enables:
+-- - Prompt jumping (CMD+Up/Down to jump between commands)
+-- - Command tracking in status bar
+-- - Error detection (shows alert icon when command fails)
+-- - Semantic zones for better text selection
+--
+-- Docs: https://wezfurlong.org/wezterm/shell-integration.html
+-- ============================================================================
 
 local wezterm = require("wezterm")
+
+-- ============================================================================
+-- Plugin: Zoxide Workspace Switcher
+-- ============================================================================
+-- Smart workspace switching with fuzzy finding and zoxide integration
+-- Allows quick project switching based on zoxide's directory frequency/recency
+local workspace_switcher = wezterm.plugin.require(
+    "https://github.com/MLFlexer/smart_workspace_switcher.wezterm"
+)
+
+-- Configure zoxide path (adjust if needed for your system)
+workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
+
+-- Optional: Filter to specific directories (uncomment and modify as needed)
+-- workspace_switcher.workspace_dirs = {
+--     wezterm.home_dir .. "/Developer",
+--     wezterm.home_dir .. "/Projects",
+-- }
+
+-- ============================================================================
+-- Plugin: Smart Splits (Neovim Integration)
+-- ============================================================================
+-- Seamless navigation between Neovim splits and WezTerm panes
+-- Requires smart-splits.nvim plugin in Neovim
+-- Install in Neovim: https://github.com/mrjones2014/smart-splits.nvim
+--
+-- Neovim setup (add to your init.lua):
+--   require('smart-splits').setup()
+--   vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+--   vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+--   vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+--   vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
 -- ============================================================================
 -- Configuration for Tab Color
@@ -27,25 +127,37 @@ local process_icons = {
     ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["cargo"] = wezterm.nerdfonts.dev_rust,
     ["curl"] = wezterm.nerdfonts.mdi_flattr,
+    ["deno"] = wezterm.nerdfonts.md_dinosaur,
     ["docker"] = wezterm.nerdfonts.md_docker,
     ["docker-compose"] = wezterm.nerdfonts.md_docker,
     ["gh"] = wezterm.nerdfonts.dev_github_badge,
     ["git"] = wezterm.nerdfonts.fa_git,
     ["go"] = wezterm.nerdfonts.seti_go,
     ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
+    ["kubectl"] = wezterm.nerdfonts.md_kubernetes,
     ["lazydocker"] = wezterm.nerdfonts.md_docker,
     ["lazygit"] = wezterm.nerdfonts.dev_git_branch,
     ["lua"] = wezterm.nerdfonts.seti_lua,
     ["make"] = wezterm.nerdfonts.seti_makefile,
     ["mise"] = wezterm.nerdfonts.md_carrot,
     ["node"] = wezterm.nerdfonts.cod_json,
+    ["npm"] = wezterm.nerdfonts.md_npm,
     ["nvim"] = wezterm.nerdfonts.linux_neovim,
+    ["pnpm"] = wezterm.nerdfonts.md_package_variant,
     ["psql"] = wezterm.nerdfonts.md_database,
+    ["python"] = wezterm.nerdfonts.dev_python,
+    ["python3"] = wezterm.nerdfonts.dev_python,
+    ["rg"] = wezterm.nerdfonts.md_magnify,
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
+    ["rust"] = wezterm.nerdfonts.dev_rust,
+    ["ssh"] = wezterm.nerdfonts.md_server_network,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
+    ["terraform"] = wezterm.nerdfonts.md_terraform,
+    ["top"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["usql"] = wezterm.nerdfonts.md_database,
     ["vim"] = wezterm.nerdfonts.dev_vim,
     ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
+    ["yarn"] = wezterm.nerdfonts.md_nodejs,
     ["zsh"] = wezterm.nerdfonts.cod_terminal_bash,
 }
 
@@ -146,24 +258,21 @@ local function get_process(tab)
     return process_icons[process_name] or string.format("[%s]", process_name)
 end
 
--- Format the main content of the tab (everything except edge whitespace)
+-- Format the main content of the tab
 local function format_tab_content(tab, has_unseen)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
     local process = get_process(tab)
+    local unseen_indicator = has_unseen and icon_unseen or ""
 
-    -- Pad directory name to be at least 10 characters with whitespace on both sides
-    local min_width = 10
-    local dir_len = #dir_name
-    if dir_len < min_width then
-        local padding = min_width - dir_len
-        local left_pad = math.floor(padding / 2)
-        local right_pad = padding - left_pad
-        dir_name = string.rep(" ", left_pad) .. dir_name .. string.rep(" ", right_pad)
-    end
+    -- Build content with consistent spacing
+    local parts = {}
+    if unseen_indicator ~= "" then table.insert(parts, unseen_indicator) end
+    table.insert(parts, process)
+    table.insert(parts, dir_name)
+    table.insert(parts, depth_indicator)
 
-    local unseen_indicator = has_unseen and icon_unseen or " "
-    return string.format("%s %s %s %s", unseen_indicator, process, dir_name, depth_indicator)
+    return table.concat(parts, " ")
 end
 
 -- Helper to add a segment to the format table
@@ -262,11 +371,11 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
 
     -- Handle custom titles
     if tab.tab_title and #tab.tab_title > 0 then
-        local bg_color = tab.is_active and "#F5F5F5" or dim_color(base_color, 0.7)
+        local bg_color = tab.is_active and "#FFFFFF" or dim_color(base_color, 0.7)
         local fg_color = select_contrasting_fg_color(bg_color)
         local format = {}
         local padding = tab.is_active and (nbsp .. nbsp) or nbsp
-        add_segment(format, bg_color, fg_color, padding .. tab.tab_title .. padding, true) -- tab.is_active)
+        add_segment(format, bg_color, fg_color, padding .. tab.tab_title .. padding, tab.is_active)
         return format
     end
 
@@ -274,19 +383,18 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
     local format = {}
 
     if tab.is_active then
-        -- Active tab: left edge with rocket, padded colored content
-        local off_white = "#F5F5F5"
-        local main_bg = base_color
-        local main_fg = select_contrasting_fg_color(main_bg)
+        -- Active tab: clean white background with colored accent on left
+        local white_bg = "#FFFFFF"
+        local accent_bg = base_color
+        local accent_fg = select_contrasting_fg_color(accent_bg)
 
-        add_segment(format, off_white, "#000000", " " .. icon_active .. " ", true)
-        add_segment(format, main_bg, main_fg, " " .. content .. " ", true)
-        add_segment(format, off_white, "#000000", " " .. icon_active .. " ", true)
+        add_segment(format, accent_bg, accent_fg, " " .. icon_active, true)
+        add_segment(format, white_bg, "#000000", " " .. content .. " ", true)
     else
-        -- Inactive tab: single color with minimal padding (narrower)
-        local bg_color = dim_color(base_color, 0.7)
+        -- Inactive tab: dimmed color with subtle padding
+        local bg_color = dim_color(base_color, 0.6)
         local fg_color = select_contrasting_fg_color(bg_color)
-        add_segment(format, bg_color, fg_color, content, true)
+        add_segment(format, bg_color, fg_color, nbsp .. content .. nbsp, false)
     end
 
     return format
@@ -296,33 +404,205 @@ end)
 -- General configuration
 
 local config = wezterm.config_builder()
-config.bold_brightens_ansi_colors = true
+
+-- Apply smart-splits integration (must be done before defining keys)
+-- This enables seamless navigation between Neovim and WezTerm panes
+smart_splits.apply_to_config(config, {
+    direction_keys = {
+        move = { "h", "j", "k", "l" },
+        resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
+    },
+    modifiers = {
+        move = "CTRL",
+        resize = "META", -- ALT key
+    },
+})
+
+-- Font & Text
 config.font_size = 13.5
+config.bold_brightens_ansi_colors = true
+config.line_height = 1.0
+
+-- Window & Terminal
 config.initial_cols = 200
 config.initial_rows = 60
-config.scrollback_lines = 10000
+config.scrollback_lines = 50000 -- Increased for long build outputs
+config.enable_scroll_bar = false
+config.adjust_window_size_when_changing_font_size = false
+
+-- Performance
+config.animation_fps = 60
+config.max_fps = 60
+config.front_end = "WebGpu" -- Options: OpenGL, WebGpu, Software
+
+-- Shell integration for better prompts and command tracking
+config.enable_kitty_graphics = true
+
+-- ============================================================================
+-- Quick Select Patterns (for fast URL/path/hash selection)
+-- ============================================================================
+config.quick_select_patterns = {
+    -- Git commit hashes (7-40 characters)
+    "\\b[0-9a-f]{7,40}\\b",
+    -- UUIDs
+    "\\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\b",
+    -- Issue tracker references (JIRA-style)
+    "\\b[A-Z]{2,}-\\d+\\b",
+    -- Kubernetes resource names
+    "\\b[a-z0-9]([-a-z0-9]*[a-z0-9])?\\b",
+    -- IP addresses (already in defaults but explicit here)
+    "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
+    -- File paths with common extensions
+    "[\\w\\-\\.\\/]+\\.(py|js|ts|lua|rs|go|md|json|yaml|yml|toml|txt)\\b",
+}
+
+-- Quick select alphabet (default but can be customized for easier finger positions)
+config.quick_select_alphabet = "asdfghjklqwertyuiopzxcvbnm"
 
 local act = wezterm.action
 config.keys = {
-    {
-        key = "w",
-        mods = "CMD",
-        action = wezterm.action.CloseCurrentTab({ confirm = true }),
-    },
-    -- Map tab navigation
-    { key = "LeftArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = -1 }) },
-    { key = "RightArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = 1 }) },
+    -- Workspace management (zoxide integration)
+    { key = "s", mods = "CMD|SHIFT", action = workspace_switcher.switch_workspace() },
 
-    -- Map jumping between words to Standard Mac keys
-    -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
-    { key = "LeftArrow", mods = "ALT", action = act({ SendString = "\x1bb" }) },
-    { key = "RightArrow", mods = "ALT", action = act({ SendString = "\x1bf" }) },
-    -- Jump between start and end of line using standard: C-a (beginning) or C-e (end)
+    -- Tab management
+    { key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = true }) },
+    { key = "LeftArrow", mods = "CMD|ALT", action = act.ActivateTabRelative(-1) },
+    { key = "RightArrow", mods = "CMD|ALT", action = act.ActivateTabRelative(1) },
 
-    -- Map vim-friendly scrolling
+    -- Pane splitting and navigation
+    { key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "d", mods = "CMD|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "[", mods = "CMD", action = act.ActivatePaneDirection("Prev") },
+    { key = "]", mods = "CMD", action = act.ActivatePaneDirection("Next") },
+    { key = "LeftArrow", mods = "CMD|SHIFT", action = act.ActivatePaneDirection("Left") },
+    { key = "RightArrow", mods = "CMD|SHIFT", action = act.ActivatePaneDirection("Right") },
+    { key = "UpArrow", mods = "CMD|SHIFT", action = act.ActivatePaneDirection("Up") },
+    { key = "DownArrow", mods = "CMD|SHIFT", action = act.ActivatePaneDirection("Down") },
+    { key = "w", mods = "CMD|SHIFT", action = act.CloseCurrentPane({ confirm = true }) },
+    { key = "z", mods = "CMD", action = act.TogglePaneZoomState },
+
+    -- Pane resizing
+    { key = "LeftArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
+    { key = "RightArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
+    { key = "UpArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
+    { key = "DownArrow", mods = "CMD|ALT|SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
+
+    -- Word jumping (standard Mac behavior)
+    { key = "LeftArrow", mods = "ALT", action = act.SendString("\x1bb") },
+    { key = "RightArrow", mods = "ALT", action = act.SendString("\x1bf") },
+
+    -- Vim-friendly scrolling
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
     { key = "f", mods = "CTRL", action = act.ScrollByPage(0.9) },
     { key = "DownArrow", mods = "CMD", action = act.ScrollToBottom },
+
+    -- Prompt jumping (requires shell integration)
+    { key = "UpArrow", mods = "CMD", action = act.ScrollToPrompt(-1) },
+    { key = "DownArrow", mods = "CMD|SHIFT", action = act.ScrollToPrompt(1) },
+
+    -- Enhanced text navigation
+    { key = "x", mods = "CMD", action = act.ActivateCopyMode },
+    { key = "f", mods = "CMD", action = act.Search({ CaseInSensitiveString = "" }) },
+
+    -- Quick select (URLs, paths, hashes, etc.)
+    { key = "Space", mods = "CMD", action = act.QuickSelect },
+    {
+        key = "o",
+        mods = "CMD",
+        action = act.QuickSelectArgs({
+            label = "open url",
+            patterns = { "https?://\\S+" },
+            action = wezterm.action_callback(function(window, pane)
+                local url = window:get_selection_text_for_pane(pane)
+                wezterm.open_with(url)
+            end),
+        }),
+    },
+}
+
+-- ============================================================================
+-- Enhanced Copy Mode (Vim-style navigation for scrollback)
+-- ============================================================================
+config.key_tables = {
+    copy_mode = {
+        -- Vim-style movement
+        { key = "h", mods = "NONE", action = act.CopyMode("MoveLeft") },
+        { key = "j", mods = "NONE", action = act.CopyMode("MoveDown") },
+        { key = "k", mods = "NONE", action = act.CopyMode("MoveUp") },
+        { key = "l", mods = "NONE", action = act.CopyMode("MoveRight") },
+
+        -- Word navigation
+        { key = "w", mods = "NONE", action = act.CopyMode("MoveForwardWord") },
+        { key = "b", mods = "NONE", action = act.CopyMode("MoveBackwardWord") },
+        { key = "e", mods = "NONE", action = act.CopyMode("MoveForwardWordEnd") },
+
+        -- Line navigation
+        { key = "0", mods = "NONE", action = act.CopyMode("MoveToStartOfLine") },
+        { key = "$", mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
+        { key = "^", mods = "NONE", action = act.CopyMode("MoveToStartOfLineContent") },
+
+        -- Viewport navigation
+        { key = "H", mods = "SHIFT", action = act.CopyMode("MoveToViewportTop") },
+        { key = "M", mods = "SHIFT", action = act.CopyMode("MoveToViewportMiddle") },
+        { key = "L", mods = "SHIFT", action = act.CopyMode("MoveToViewportBottom") },
+
+        -- Scrollback navigation
+        { key = "g", mods = "NONE", action = act.CopyMode("MoveToScrollbackTop") },
+        { key = "G", mods = "SHIFT", action = act.CopyMode("MoveToScrollbackBottom") },
+        { key = "d", mods = "CTRL", action = act.CopyMode("MoveByPage(0.5)") },
+        { key = "u", mods = "CTRL", action = act.CopyMode("MoveByPage(-0.5)") },
+        { key = "f", mods = "CTRL", action = act.CopyMode("PageDown") },
+        { key = "b", mods = "CTRL", action = act.CopyMode("PageUp") },
+
+        -- Search
+        { key = "/", mods = "NONE", action = act.Search("CurrentSelectionOrEmptyString") },
+        { key = "n", mods = "NONE", action = act.CopyMode("NextMatch") },
+        { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
+
+        -- Visual selection modes
+        { key = "v", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+        { key = "V", mods = "SHIFT", action = act.CopyMode({ SetSelectionMode = "Line" }) },
+        {
+            key = "v",
+            mods = "CTRL",
+            action = act.CopyMode({ SetSelectionMode = "Block" }),
+        },
+
+        -- Copy and exit
+        {
+            key = "y",
+            mods = "NONE",
+            action = act.Multiple({
+                { CopyTo = "ClipboardAndPrimarySelection" },
+                { CopyMode = "Close" },
+            }),
+        },
+        {
+            key = "Enter",
+            mods = "NONE",
+            action = act.Multiple({
+                { CopyTo = "ClipboardAndPrimarySelection" },
+                { CopyMode = "Close" },
+            }),
+        },
+
+        -- Exit copy mode
+        { key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
+        { key = "q", mods = "NONE", action = act.CopyMode("Close") },
+        { key = "c", mods = "CTRL", action = act.CopyMode("Close") },
+    },
+
+    search_mode = {
+        -- Navigate between search matches
+        { key = "Enter", mods = "NONE", action = act.CopyMode("NextMatch") },
+        { key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") },
+        { key = "p", mods = "CTRL", action = act.CopyMode("PriorMatch") },
+        { key = "u", mods = "CTRL", action = act.CopyMode("ClearPattern") },
+        { key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
+
+        -- Exit search mode
+        { key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
+    },
 }
 
 config.mouse_bindings = {
@@ -343,43 +623,8 @@ config.font = wezterm.font_with_fallback({
     "Fira Code",
 })
 
--- Colors & Appearance Docs: https://wezfurlong.org/wezterm/config/appearance.html
---
--- -- Based on "Tokyo Night Storm variant": https://github.com/tokyo-night/tokyo-night-vscode-theme/blob/master/README.md#other-ports
--- --  For Wez: https://github.com/wez/iTerm2-Color-Schemes/blob/0966005b775691cb757a6be8db56a34a779960b9/wezterm/3024%20Day.toml
--- config.colors = {
---     -- The default text color
---     foreground = "#a9b1d6",
---     -- The default background color
---     background = "#24283b",
---
---     -- Overrides the cell background color when the current cell is occupied by the
---     -- cursor and the cursor style is set to Block
---     cursor_bg = "#52ad70",
---     -- Overrides the text color when the current cell is occupied by the cursor
---     cursor_fg = "#1E212F",
---     -- Specifies the border color of the cursor when the cursor style is set to Block,
---     -- or the color of the vertical or horizontal bar when the cursor style is set to
---     -- Bar or Underline.
---     cursor_border = "#52ad70",
---
---     -- the foreground color of selected text
---     selection_fg = "#1E212F",
---     -- the background color of selected text
---     selection_bg = "#fffacd",
---
---     -- The color of the scrollbar "thumb"; the portion that represents the current viewport
---     scrollbar_thumb = "#222222",
---
---     -- The color of the split lines between panes
---     split = "#444444",
---
---     -- Order from: https://cli.r-lib.org/reference/ansi_palettes.html
---     -- blck red  grn  yllw blue mgnt cyan whte
---     ansi = { "#32344a", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#ad8ee6", "#449dab", "#e1e1e3" },
---     brights = { "#757DA1", "#ff7a93", "#b9f27c", "#ff9e64", "#7da6ff", "#bb9af7", "#0db9d7", "#f7f7f7" },
--- }
---
+-- Colors & Appearance
+-- Docs: https://wezfurlong.org/wezterm/config/appearance.html
 config.color_scheme = "Catppuccin Frappe"
 
 -- Stylize the Window
@@ -397,5 +642,100 @@ config.window_padding = {
     top = 0,
     bottom = 0,
 }
+
+-- ============================================================================
+-- Status Bar (with command tracking and git integration)
+-- ============================================================================
+
+-- Track command counts per pane
+local command_counts = {}
+
+-- Event: Track command execution (requires shell integration)
+wezterm.on("update-status", function(window, pane)
+    local pane_id = pane:pane_id()
+
+    -- Initialize command count for this pane if not exists
+    if not command_counts[pane_id] then command_counts[pane_id] = 0 end
+
+    -- Increment on new command (when user_vars.WEZTERM_PROG changes)
+    local user_vars = pane:get_user_vars()
+    if user_vars.WEZTERM_PROG and user_vars.WEZTERM_PROG ~= "" then
+        command_counts[pane_id] = command_counts[pane_id] + 1
+    end
+end)
+
+-- Event: Update right status bar
+wezterm.on("update-right-status", function(window, pane)
+    local workspace = window:active_workspace()
+    local cwd_uri = pane:get_current_working_dir()
+    local date = wezterm.strftime("%H:%M")
+
+    -- Get git branch if in a git repo
+    local git_branch = ""
+    if cwd_uri then
+        local cwd = cwd_uri.file_path
+        local success, stdout, stderr = wezterm.run_child_process({
+            "git",
+            "-C",
+            cwd,
+            "branch",
+            "--show-current",
+        })
+        if success and stdout ~= "" then
+            git_branch = " " .. wezterm.nerdfonts.dev_git_branch .. " " .. stdout:gsub("\n", "")
+        end
+    end
+
+    -- Get command count for current pane
+    local pane_id = pane:pane_id()
+    local cmd_count = command_counts[pane_id] or 0
+
+    -- Check for errors (exit status from last command)
+    local exit_status = pane:get_user_vars().WEZTERM_EXIT_STATUS or "0"
+    local error_indicator = ""
+    if exit_status ~= "0" then
+        error_indicator = " " .. wezterm.nerdfonts.md_alert_circle .. " "
+    end
+
+    -- Check if pane is zoomed
+    local zoomed = ""
+    if pane:tab():get_size().rows ~= pane:get_dimensions().viewport_rows then
+        zoomed = " " .. wezterm.nerdfonts.md_arrow_expand_all .. " "
+    end
+
+    -- Build status line with color-coded sections
+    local status_items = {
+        { Foreground = { Color = "#8AADF4" } },
+        { Text = " " .. workspace .. " " },
+    }
+
+    if git_branch ~= "" then
+        table.insert(status_items, { Foreground = { Color = "#A6DA95" } })
+        table.insert(status_items, { Text = git_branch })
+    end
+
+    if cmd_count > 0 then
+        table.insert(status_items, { Foreground = { Color = "#EED49F" } })
+        table.insert(
+            status_items,
+            { Text = " " .. wezterm.nerdfonts.md_console .. " " .. tostring(cmd_count) }
+        )
+    end
+
+    if error_indicator ~= "" then
+        table.insert(status_items, { Foreground = { Color = "#ED8796" } })
+        table.insert(status_items, { Text = error_indicator })
+    end
+
+    if zoomed ~= "" then
+        table.insert(status_items, { Foreground = { Color = "#F5A97F" } })
+        table.insert(status_items, { Text = zoomed })
+    end
+
+    table.insert(status_items, { Foreground = { Color = "#CAD3F5" } })
+    table.insert(status_items, { Text = date .. " " })
+
+    window:set_right_status(wezterm.format(status_items))
+end)
 
 return config
