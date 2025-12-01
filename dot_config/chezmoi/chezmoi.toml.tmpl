@@ -5,7 +5,6 @@
 computer_name = "{{ .computer_name }}"
 email = "{{ .email }}"
 homebrew_prefix = "{{ .homebrew_prefix }}"
-poetry_repositories = '''{{ .poetry_repositories }}'''
 
 [data.github]
 email = "{{ .github.email }}"
@@ -13,7 +12,6 @@ username = "{{ .github.username }}"
 ssh_public_key = "{{ .github.ssh_public_key }}"
 
 [data.aws]
-account_id = "{{ .aws.account_id }}"
 aws_profile = "{{ .aws.aws_profile }}"
 
 [data.onepassword]
