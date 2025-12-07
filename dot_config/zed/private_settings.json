@@ -22,7 +22,7 @@
   "buffer_font_size": 14,
   "theme": {
     "mode": "system",
-    "light": "Ayu Light",
-    "dark": "Ayu Dark"
+    "light": "One Light",
+    "dark": "One Dark"
   }
 }

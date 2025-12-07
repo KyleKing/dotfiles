@@ -6,7 +6,6 @@ block-goose-cli
 chezmoi
 cloc
 curlie
-devcockpit
 difftastic
 direnv
 dotenv-linter
@@ -24,6 +23,7 @@ gnupg
 go
 gum
 hadolint
+hcloud
 hyperfine
 icu4c@76
 imagemagick

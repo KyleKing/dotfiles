@@ -1,5 +1,4 @@
 [default]
-extend-ignore-words = ["PNGs"]
 
 [default.extend-words]
 ONGs = "PNGs"

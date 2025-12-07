@@ -21,7 +21,6 @@ curl 8.17.0
 curlie 1.8.2
 cyrus-sasl 2.1.28_2
 dav1d 1.5.2
-devcockpit 1.0.8
 difftastic 0.67.0
 direnv 2.37.1
 dotenv-linter 4.0.0
@@ -61,6 +60,7 @@ gts 0.7.6_3
 gum 0.17.0
 hadolint 2.14.0
 harfbuzz 12.2.0_1
+hcloud 1.57.0
 highway 1.3.0
 hyperfine 1.20.0
 icu4c@76 76.1_2
@@ -106,7 +106,7 @@ libngtcp2 1.17.0
 libogg 1.3.6
 libomp 21.1.6
 libpaper 2.2.6
-libpng 1.6.50
+libpng 1.6.51
 libpq 18.1
 libraw 0.21.4
 librist 0.2.11_1
@@ -151,7 +151,7 @@ lz4 1.10.0
 lzo 2.10
 m4 1.4.20
 mani 0.31.1
-mas 3.0.1
+mas 3.1.0
 mbedtls 4.0.0
 mbedtls@3 3.6.5
 mergiraf 0.16.1
@@ -168,10 +168,10 @@ nettle 3.10.2
 node 25.2.1
 npth 1.8
 nvimpager 0.13.0
-oh-my-posh 27.6.0
+oh-my-posh 28.0.0
 ollama 0.13.0
 oniguruma 6.9.10
-opencode 1.0.92
+opencode 1.0.106
 opencore-amr 0.1.6
 openexr 3.4.4
 openjdk 25.0.1
@@ -227,7 +227,7 @@ svt-av1 3.1.2
 syncthing 2.0.11
 tabiew 0.11.1
 tealdeer 1.8.1
-television 0.13.10
+television 0.13.11
 tesseract 5.5.1_1
 theora 1.2.0
 tidy-html5 5.8.0
@@ -240,7 +240,7 @@ unbound 1.24.1
 unibilium 2.1.2
 unixodbc 2.3.14
 usage 2.8.0
-utf8proc 2.11.1
+utf8proc 2.11.2
 uv 0.9.11
 uvwasi 0.0.23
 vale 3.13.0
@@ -270,8 +270,9 @@ appcleaner 3.6.7,4301
 blockblock 2.2.5
 brave-browser 1.67.123.0
 calibre 8.15.0
-claude-code 2.0.50
+claude-code 2.0.61
 cloudflare-warp 2022.12.593.0,20230118.6
+coderabbit 0.3.4
 codex 0.63.0
 cursor 2.0.43,8e4da76ad196925accaa169efcae28c45454cce3
 customshortcuts 1.1,102
@@ -312,14 +313,16 @@ mactracker 7.12.1
 malwarebytes 4.18.11.4873
 microsoft-edge 130.0.2849.52,edaa377f-a845-426a-ba3c-74a49b51a6c9
 microsoft-teams 1.5.00.33356
+miniconda py313_25.9.1-1
 monitorcontrol 4.3.3
 mullvad-vpn 2025.8
+nessie-app 1.2.37
 netiquette 2.3.0
 netnewswire 6.1.9
 notion 4.20.0
 obs 32.0.1
 obsidian 1.8.4
-osaurus 0.4.8
+osaurus 0.4.9
 oversight 2.4.0
 paletro 1.7.0
 photosweeper-x 5.1.2

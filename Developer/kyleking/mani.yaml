@@ -25,6 +25,8 @@ projects:
       - calcipy-template
   gh-star-search:
     url: git@github.com:kyleking/gh-star-search.git
+  hk-debugging:
+    url: git@github.com:kyleking/hk-debugging.git
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
   karabiner-config:
@@ -40,6 +42,12 @@ projects:
   #   tags: ["mdformat-plugin"]
   mdformat-gfm-alerts:
     url: git@github.com:kyleking/mdformat-gfm-alerts.git
+    tags: ["mdformat-plugin"]
+  mdformat-hooks:
+    url: git@github.com:kyleking/mdformat-hooks.git
+    tags: ["mdformat-plugin"]
+  mdformat-slw:
+    url: git@github.com:kyleking/mdformat-slw.git
     tags: ["mdformat-plugin"]
   mdformat-mkdocs:
     url: git@github.com:kyleking/mdformat-mkdocs.git
