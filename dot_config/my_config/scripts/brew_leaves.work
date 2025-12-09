@@ -19,6 +19,7 @@ krew
 ktea
 lazydocker
 lazygit
+libffi
 mani
 mergiraf
 mise
@@ -31,6 +32,7 @@ plantuml
 pnpm
 prek
 pulumi
+ripsecrets
 rust
 sad
 shfmt
@@ -42,5 +44,6 @@ tesseract
 tmux
 tuios
 uv
+weasyprint
 yadm
 zoxide
