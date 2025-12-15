@@ -10,6 +10,7 @@ difftastic
 dlvhdr/formulae/diffnav
 eza
 fd
+gcc
 gemini-cli
 gh
 git-lfs
@@ -27,6 +28,7 @@ navi
 nvimpager
 oh-my-posh
 opencode
+ossp-uuid
 oxlint
 plantuml
 pnpm
@@ -46,4 +48,5 @@ tuios
 uv
 weasyprint
 yadm
+zlib
 zoxide
