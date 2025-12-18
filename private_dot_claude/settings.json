@@ -10,7 +10,7 @@
       "Bash(gh pr view:*)",
       "Bash(git log:*)",
       "Bash(git show:*)",
-      "WebFetch(*)",
+      "WebFetch(domain:*)",
       "WebSearch"
     ],
     "defaultMode": "delegate"

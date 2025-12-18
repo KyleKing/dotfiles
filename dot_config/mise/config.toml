@@ -46,11 +46,11 @@ node = "latest"
 "pipx:copier-template-tester" = "latest"
 "pipx:em-keyboard" = "latest"
 "pipx:git-filter-repo" = "latest"
+"pipx:harlequin" = {extras = "postgres", version = "latest"}
 "pipx:macnotesapp" = "latest"
 "pipx:mypy-silent" = "latest"
 "pipx:norwegianblue" = "latest"
 "pipx:pint" = "latest"
-"pipx:pipenv" = "latest"
 "pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}
 "pipx:pygments" = "latest"
 "pipx:pylint" = "latest"
@@ -59,6 +59,7 @@ node = "latest"
 "pipx:pytest-watcher" = "latest"
 "pipx:ruff" = "latest"
 "pipx:sqlfluff" = "latest"
+"pipx:sqlit-tui" = {extras = "postgres", version = "latest"}
 "pipx:toml-sort" = "latest"
 "pipx:tox" = {uvx_args = "--with tox-uv>=1.29.0", version = "latest"}
 "pipx:trcli" = "latest"

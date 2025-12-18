@@ -56,6 +56,7 @@ ktea 0.6.3
 kubernetes-cli 1.34.3
 lazydocker 0.24.2
 lazygit 0.57.0
+lazysql 0.4.3
 leptonica 1.86.0
 libarchive 3.8.4
 libassuan 3.0.2
