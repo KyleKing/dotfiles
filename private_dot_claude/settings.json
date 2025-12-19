@@ -15,7 +15,7 @@
     ],
     "defaultMode": "delegate"
   },
-  "model": "opus",
+  "model": "sonnet",
   "enabledPlugins": {
     "pr-review-toolkit@claude-plugins-official": true
   },
