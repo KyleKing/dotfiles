@@ -22,8 +22,11 @@
           },
           "template": "{{ .Parent }}<p:blue>{{ .Path }}</> ",
           "foreground": "p:white",
-          "type": "path",
-          "style": "plain"
+          "type": "path"
+        },
+        {
+          "style": "plain",
+          "type": "jujutsu"
         },
         {
           "properties": {
