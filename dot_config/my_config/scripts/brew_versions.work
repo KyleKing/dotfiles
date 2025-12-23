@@ -161,7 +161,7 @@ unbound 1.24.2
 unibilium 2.1.2
 usage 2.9.0
 utf8proc 2.11.2
-uv 0.9.17
+uv 0.9.18
 uvwasi 0.0.23
 weasyprint 67.0
 webp 1.6.0
@@ -179,7 +179,7 @@ alfred 5.7.1,2307
 appcleaner 3.6.8
 beekeeper-studio 5.4.2
 brave-browser 1.83.120.0
-claude-code 2.0.70
+claude-code 2.0.73
 coderabbit 0.3.5
 codex 0.73.0
 cursor 2.0.63,505046dcfad2acda3d066e32b7cd8b6e2dc1fdcd
