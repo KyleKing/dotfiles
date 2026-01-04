@@ -43,7 +43,6 @@ ollama
 orlangure/tap/gocovsh
 pandoc
 php
-pipenv
 pkl-lsp
 plantuml
 pnpm

@@ -52,7 +52,6 @@ node = "latest"
 "pipx:mypy-silent" = "latest"
 "pipx:norwegianblue" = "latest"
 "pipx:pint" = "latest"
-"pipx:poetry" = {uvx_args = "--with=poetry-plugin-sort --with=poetry-relax --with=poetry-plugin-export", version = "latest"}
 "pipx:pygments" = "latest"
 "pipx:pylint" = "latest"
 "pipx:pyright" = "latest"
