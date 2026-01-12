@@ -48,7 +48,7 @@ node_modules/*
 mise.local.toml
 
 # For now
-.claude/**/SKILL.md
+.claude/skills
 .cursor/*/*.md
 
 # nvim
