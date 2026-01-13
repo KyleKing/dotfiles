@@ -10,6 +10,12 @@
 
 - Favor a functional-style; write small- to medium-sized composable functions with a single responsibility
 - Favor composition over inheritance
+- When adding code to a list-like structure, try to insert in alphabetical order while minimizing diff
+  ```yaml
+  services: [api, db, redis, web] # Good: alphabetical insertion of 'redis'
+  services: [api, db, redis, zebra, web] # Good: ignoring unordered zebra for a minimal diff
+  services: [api, db, web, redis] # Bad: append to end
+  ```
 
 ## Python Style
 
