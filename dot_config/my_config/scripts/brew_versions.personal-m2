@@ -9,6 +9,7 @@ awscli 2.32.24
 bash 5.3.9
 bat 0.26.1
 block-goose-cli 1.18.0
+bottom 0.12.3
 brotli 1.2.0
 c-ares 1.34.6
 ca-certificates 2025-12-02
@@ -16,6 +17,7 @@ cairo 1.18.4
 chezmoi 2.68.1
 cjson 1.7.19
 cloc 2.06
+codanna 0.9.10
 curl 8.17.0
 curlie 1.8.2
 cyrus-sasl 2.1.28_2
@@ -270,7 +272,7 @@ appcleaner 3.6.7,4301
 blockblock 2.2.5
 brave-browser 1.67.123.0
 calibre 8.16.2
-claude-code 2.0.76
+claude-code 2.1.4
 cloudflare-warp 2022.12.593.0,20230118.6
 coderabbit 0.3.5
 codex 0.77.0
@@ -337,6 +339,7 @@ skim 1.6.14,144
 slack 4.45.69
 spotify 1.2.3.1115,d61a8f5c,384
 suspicious-package 4.6,1311
+table-habit 1.22.10+137
 taskexplorer 2.1.0
 texifier 1.9.18,735,78a0ba6
 visual-studio-code 1.99.0
