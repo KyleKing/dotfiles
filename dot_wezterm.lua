@@ -297,6 +297,48 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
 end)
 
 -- ============================================================================
+-- Right Status Bar (shows zoom state and other info)
+
+wezterm.on("update-right-status", function(window, _pane)
+    local elements = {}
+
+    -- Show ZOOMED indicator when pane is zoomed
+    local tab = window:active_tab()
+    local is_zoomed = false
+    if tab then
+        local tab_panes = tab:panes_with_info()
+        for _, p in ipairs(tab_panes) do
+            if p.is_zoomed then
+                is_zoomed = true
+                break
+            end
+        end
+    end
+
+    if is_zoomed then
+        -- Prominent ZOOMED indicator with orange background (Catppuccin Frappe peach color)
+        table.insert(elements, { Foreground = { Color = "#303446" } }) -- Dark blue background color
+        table.insert(elements, { Background = { Color = "#ef9f76" } }) -- Peach/orange
+        table.insert(elements, { Attribute = { Intensity = "Bold" } })
+        table.insert(elements, { Text = " " .. wezterm.nerdfonts.cod_screen_full .. " ZOOMED " })
+
+        -- Separator
+        table.insert(elements, { Foreground = { Color = "#ef9f76" } })
+        table.insert(elements, { Background = { Color = "#414559" } })
+        table.insert(elements, { Text = "" }) -- Powerline separator
+    end
+
+    -- Date/time with subtle styling
+    local date = wezterm.strftime("%a %b %-d %H:%M")
+    table.insert(elements, { Foreground = { Color = "#c6d0f5" } }) -- Light text
+    table.insert(elements, { Background = { Color = "#414559" } }) -- Subtle gray background
+    table.insert(elements, { Attribute = { Intensity = "Normal" } })
+    table.insert(elements, { Text = " " .. date .. " " })
+
+    window:set_right_status(wezterm.format(elements))
+end)
+
+-- ============================================================================
 -- General configuration
 
 local config = wezterm.config_builder()
