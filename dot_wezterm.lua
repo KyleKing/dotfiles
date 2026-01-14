@@ -306,6 +306,13 @@ config.initial_cols = 200
 config.initial_rows = 60
 config.scrollback_lines = 10000
 
+-- Make inactive panes visually distinct
+config.inactive_pane_hsb = {
+    hue = 1.0,
+    saturation = 0.5, -- Desaturate to 50% (more gray/black and white)
+    brightness = 0.7, -- Dim to 70%
+}
+
 local act = wezterm.action
 config.keys = {
     {
@@ -322,6 +329,12 @@ config.keys = {
     { key = "LeftArrow", mods = "ALT", action = act({ SendString = "\x1bb" }) },
     { key = "RightArrow", mods = "ALT", action = act({ SendString = "\x1bf" }) },
     -- Jump between start and end of line using standard: C-a (beginning) or C-e (end)
+
+    -- Map pane splitting and zoom (like tmux)
+    { key = "DownArrow", mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "RightArrow", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "z", mods = "CTRL|SHIFT", action = act.TogglePaneZoomState },
+    -- Note: in nvim, you can use: <C-w>T (moves current window to new tab) for similar behavior
 
     -- Map vim-friendly scrolling
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
