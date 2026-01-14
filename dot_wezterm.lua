@@ -378,6 +378,12 @@ config.keys = {
     { key = "z", mods = "CTRL|SHIFT", action = act.TogglePaneZoomState },
     -- Note: in nvim, you can use: <C-w>T (moves current window to new tab) for similar behavior
 
+    -- Navigate between panes (Cmd+Ctrl+Arrow)
+    { key = "UpArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Up") },
+    { key = "DownArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Down") },
+    { key = "LeftArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Left") },
+    { key = "RightArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Right") },
+
     -- Map vim-friendly scrolling
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
     { key = "f", mods = "CTRL", action = act.ScrollByPage(0.9) },
