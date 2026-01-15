@@ -52,7 +52,6 @@ local process_icons = {
     ["zsh"] = wezterm.nerdfonts.cod_terminal_bash,
 }
 
-local icon_unseen = wezterm.nerdfonts.cod_eye
 local icon_git_root = "./"
 local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
 
@@ -151,7 +150,7 @@ local function get_process(tab)
 end
 
 -- Format the main content of the tab (everything except edge whitespace)
-local function format_tab_content(tab, has_unseen, is_active)
+local function format_tab_content(tab, is_active)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
     local process = is_active and "" or (get_process(tab) .. " ")
@@ -166,8 +165,7 @@ local function format_tab_content(tab, has_unseen, is_active)
         dir_name = string.rep(" ", left_pad) .. dir_name .. string.rep(" ", right_pad)
     end
 
-    local unseen_indicator = has_unseen and icon_unseen or " "
-    return string.format("%s %s%s %s", unseen_indicator, process, dir_name, depth_indicator)
+    return string.format(" %s%s %s", process, dir_name, depth_indicator)
 end
 
 -- Helper to add a segment to the format table
@@ -176,32 +174,6 @@ local function add_segment(format, bg_color, fg_color, text, bold)
     table.insert(format, { Foreground = { Color = fg_color } })
     if bold then table.insert(format, { Attribute = { Intensity = "Bold" } }) end
     table.insert(format, { Text = text })
-end
-
--- Track which tabs have been visited to work around buggy has_unseen_output
-local visited_tabs = {}
-
--- Determine if a tab has unseen output since last visited
-local function has_unseen_output(tab)
-    local tab_id = tab.tab_id
-
-    -- If tab is currently active, mark it as visited
-    if tab.is_active then
-        visited_tabs[tab_id] = true
-        return false
-    end
-
-    -- For inactive tabs, check if we've visited them before
-    if visited_tabs[tab_id] then
-        return false -- Already visited, no indicator
-    end
-
-    -- Not visited yet, check if there's unseen output
-    for _, pane in ipairs(tab.panes) do
-        if pane.has_unseen_output then return true end
-    end
-
-    return false
 end
 
 -- Convert arbitrary strings to a unique hex color value
@@ -262,7 +234,6 @@ end
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-    local has_unseen = has_unseen_output(tab)
     local base_color = string_to_color(get_git_root_path(tab))
 
     -- Handle custom titles
@@ -275,7 +246,7 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
         return format
     end
 
-    local content = format_tab_content(tab, has_unseen, tab.is_active)
+    local content = format_tab_content(tab, tab.is_active)
     local format = {}
 
     if tab.is_active then
