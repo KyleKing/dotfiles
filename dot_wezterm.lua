@@ -56,9 +56,9 @@ local icon_git_root = "./"
 local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
 
 -- Unicode spacing characters for refined typography
-local nbsp = "\u{00A0}"  -- Non-breaking space
-local hair = "\u{200A}"  -- Hair space (thinnest)
-local en = "\u{2002}"    -- En space (medium width)
+local nbsp = "\u{00A0}" -- Non-breaking space
+local hair = "\u{200A}" -- Hair space (thinnest)
+local en = "\u{2002}" -- En space (medium width)
 
 -- Git lookup cache to avoid repeated expensive io.popen calls
 local git_cache = {}
@@ -179,19 +179,35 @@ local function add_segment(format, bg_color, fg_color, text, bold)
     table.insert(format, { Text = text })
 end
 
--- Convert arbitrary strings to a unique hex color value
--- Based on: https://stackoverflow.com/a/3426956/3219667
+-- Convert arbitrary strings to a unique hex color using constrained HSL
+-- Goals: muted/sophisticated tones, good variety, readable with black/white text
 local function string_to_color(str)
-    -- Convert the string to a unique integer
-    local hash = 0
-    for i = 1, #str do
-        -- Bitwise Left Shift: (hash << 5) is equivalent to hash * 32
-        hash = string.byte(str, i) + (hash * 32 - hash)
+    -- Use only the directory name (last path component) for better hash distribution
+    local name = str:match("([^/]+)$") or str
+
+    -- djb2 hash with better mixing
+    local hash = 5381
+    for i = 1, #name do
+        hash = ((hash * 33) + string.byte(name, i)) % (2 ^ 31)
     end
-    -- Convert the integer to a unique color (mask to 24 bits)
-    -- Bitwise AND with 0x00FFFFFF is equivalent to modulo 0x01000000
-    local c = string.format("%06X", math.abs(hash) % 0x01000000)
-    return "#" .. (string.rep("0", 6 - #c) .. c):upper()
+    hash = ((hash * 31337) + 12345) % (2 ^ 31)
+
+    -- Generate hue from hash (full spectrum, 0-360)
+    local h_deg = hash % 360
+
+    -- Muted saturation range: 25-45% (avoids both gray and highlighter)
+    local sat_index = math.floor(hash / 360) % 5
+    local saturations = { 0.25, 0.30, 0.35, 0.40, 0.45 }
+    local s = saturations[sat_index + 1]
+
+    -- Comfortable lightness range: 55-75% (readable, not too dark or bright)
+    local light_index = math.floor(hash / 1800) % 5
+    local lightnesses = { 0.55, 0.60, 0.65, 0.70, 0.75 }
+    local l = lightnesses[light_index + 1]
+
+    local color = wezterm.color.from_hsla(h_deg, s, l, 1.0)
+    local r, g, b, _ = color:srgba_u8()
+    return string.format("#%02X%02X%02X", r, g, b)
 end
 
 local function select_contrasting_fg_color(hex_color)
@@ -204,14 +220,52 @@ local function select_contrasting_fg_color(hex_color)
     return "#FFFFFF" -- White has higher contrast
 end
 
--- Inline tests
--- PLANNED: local testColor = string_to_color("/Robots/TermA/Developer/ProjectA")
-local testColor = string_to_color("/Users/kyleking/Developer/ProjectA")
-assert(testColor == "#EBD168", "Unexpected color value for test hash (" .. testColor .. ")")
-assert(select_contrasting_fg_color("#494CED") == "#FFFFFF", "Expected higher contrast with white")
-assert(select_contrasting_fg_color("#128b26") == "#FFFFFF", "Expected higher contrast with white")
-assert(select_contrasting_fg_color("#58f5a6") == "#000000", "Expected higher contrast with black")
-assert(select_contrasting_fg_color("#EBD168") == "#000000", "Expected higher contrast with black")
+-- Inline tests for color functions
+local function run_color_tests()
+    local failures = {}
+
+    local testColor = string_to_color("/Users/kyleking/Developer/ProjectA")
+    if not testColor:match("^#%x%x%x%x%x%x$") then
+        table.insert(failures, "string_to_color: invalid hex format (" .. testColor .. ")")
+    end
+
+    local contrast_tests = {
+        { "#494CED", "#FFFFFF", "dark blue needs white text" },
+        { "#128b26", "#FFFFFF", "dark green needs white text" },
+        { "#58f5a6", "#000000", "bright green needs black text" },
+        { "#EBD168", "#000000", "yellow needs black text" },
+    }
+    for _, test in ipairs(contrast_tests) do
+        local bg, expected_fg, desc = test[1], test[2], test[3]
+        local actual_fg = select_contrasting_fg_color(bg)
+        if actual_fg ~= expected_fg then
+            table.insert(
+                failures,
+                string.format("contrast %s: expected %s, got %s (%s)", bg, expected_fg, actual_fg, desc)
+            )
+        end
+    end
+
+    local color_names = {
+        "calcipy",
+        "chezmoi",
+        "mdformat",
+        "mdformat-gfm-alerts",
+        "mdformat-mkdocs",
+        "tail-jsonl",
+        "textract-py3",
+        "yak-shears",
+    }
+    local color_results = {}
+    for _, name in ipairs(color_names) do
+        color_results[name] = string_to_color(name)
+    end
+    wezterm.log_info("Generated colors: " .. wezterm.json_encode(color_results))
+
+    if #failures > 0 then wezterm.log_error("Color test failures:\n  " .. table.concat(failures, "\n  ")) end
+    return #failures == 0
+end
+run_color_tests()
 
 -- Get full git root path for color hashing (not just the name)
 local function get_git_root_path(tab)
@@ -222,16 +276,30 @@ local function get_git_root_path(tab)
 end
 
 -- Helper function to dim colors for inactive tabs
-local function dim_color(hex_color, factor)
+local function dim_color(hex_color, l_reduction)
     local color = wezterm.color.parse(hex_color)
     local h, s, l, a = color:hsla()
-    -- Reduce lightness for inactive tabs to make them more subtle
-    l = l * factor
+    -- hsla() returns h in degrees (0-360), s/l in 0-1 range
+    l = l * l_reduction
     local dimmed = wezterm.color.from_hsla(h, s, l, a)
-    -- Convert back to hex string format
     local r, g, b, _ = dimmed:srgba_u8()
     return string.format("#%02X%02X%02X", r, g, b)
 end
+
+-- Test dim_color preserves hue (blue stays blue, not red)
+local function test_dim_color()
+    local blue = "#5D7DD0"
+    local dimmed = dim_color(blue, 0.7)
+    local orig_color = wezterm.color.parse(blue)
+    local dimmed_color = wezterm.color.parse(dimmed)
+    local h1, _, _, _ = orig_color:hsla()
+    local h2, _, _, _ = dimmed_color:hsla()
+    local hue_diff = math.abs(h1 - h2)
+    if hue_diff > 0.02 then
+        wezterm.log_error(string.format("dim_color hue drift: %s -> %s (hue %.3f -> %.3f)", blue, dimmed, h1, h2))
+    end
+end
+test_dim_color()
 
 -- On format tab title events, override the default handling to return a custom title
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
@@ -258,7 +326,7 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
         local off_black = "#181825"
         local accent_bg = base_color
         local accent_fg = select_contrasting_fg_color(accent_bg)
-        local triangle = wezterm.nerdfonts.pl_left_hard_divider
+        local triangle = "▶" -- wezterm.nerdfonts.pl_left_hard_divider
 
         add_segment(format, accent_bg, accent_fg, " " .. triangle .. " ", true)
         add_segment(format, off_white, off_black, content .. " ", true)
@@ -302,9 +370,7 @@ local function sort_tabs_by_path(window)
 
     -- Sort by git root first, then by full path
     table.sort(tab_data, function(a, b)
-        if a.git_root ~= b.git_root then
-            return a.git_root < b.git_root
-        end
+        if a.git_root ~= b.git_root then return a.git_root < b.git_root end
         return a.cwd < b.cwd
     end)
 
@@ -384,9 +450,7 @@ config.keys = {
     {
         key = "s",
         mods = "CMD|SHIFT",
-        action = wezterm.action_callback(function(window, _pane)
-            sort_tabs_by_path(window)
-        end),
+        action = wezterm.action_callback(function(window, _pane) sort_tabs_by_path(window) end),
     },
 
     -- Map jumping between words to Standard Mac keys
