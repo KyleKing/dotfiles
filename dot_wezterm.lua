@@ -119,7 +119,9 @@ end
 -- Return the Tab's current working directory
 local function get_cwd(tab)
     -- Note, returns URL Object: https://wezfurlong.org/wezterm/config/lua/pane/get_current_working_dir.html
-    return tab.active_pane.current_working_dir.file_path or ""
+    local pane = tab.active_pane
+    if not pane or not pane.current_working_dir then return "" end
+    return pane.current_working_dir.file_path or ""
 end
 
 -- Remove all path components and return only the last value
@@ -151,13 +153,25 @@ local function get_process(tab)
     return process_icons[base_name] or process_icons[process_name] or string.format("[%s]", process_name)
 end
 
+-- Abbreviate string to max_len with ".." suffix if needed
+local function abbreviate(str, max_len)
+    if #str <= max_len then return str end
+    return str:sub(1, max_len - 2) .. ".."
+end
+
 -- Format the main content of the tab (everything except edge whitespace)
-local function format_tab_content(tab, is_active)
+-- compact: use tighter spacing and abbreviated names for inactive tabs
+local function format_tab_content(tab, compact)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
-    local process = is_active and "" or (get_process(tab) .. " ")
 
-    -- Pad directory name to be at least 10 characters with whitespace on both sides
+    if compact then
+        -- Compact mode for inactive tabs: abbreviate and use minimal spacing
+        dir_name = abbreviate(dir_name, 10)
+        return string.format("%s%s%s%s", hair, dir_name, hair, depth_indicator)
+    end
+
+    -- Active tab: full width with centered padding
     local min_width = 10
     local dir_len = #dir_name
     if dir_len < min_width then
@@ -168,7 +182,7 @@ local function format_tab_content(tab, is_active)
     end
 
     -- Use refined spacing: hair space near icons, en space for content separation
-    return string.format("%s%s%s%s%s%s", hair, process, en, dir_name, en, depth_indicator)
+    return string.format("%s%s%s%s", hair, en, dir_name, en)
 end
 
 -- Helper to add a segment to the format table
@@ -276,11 +290,15 @@ local function get_git_root_path(tab)
 end
 
 -- Helper function to dim colors for inactive tabs
-local function dim_color(hex_color, l_reduction)
+local function dim_color(hex_color, l_reduction, s_reduction)
+    l_reduction = l_reduction or 0.8 -- default: reduce lightness to 80%
+    s_reduction = s_reduction or 0.8 -- default: reduce saturation to 80%
+
     local color = wezterm.color.parse(hex_color)
-    local h, s, l, a = color:hsla()
     -- hsla() returns h in degrees (0-360), s/l in 0-1 range
+    local h, s, l, a = color:hsla()
     l = l * l_reduction
+    s = s * s_reduction
     local dimmed = wezterm.color.from_hsla(h, s, l, a)
     local r, g, b, _ = dimmed:srgba_u8()
     return string.format("#%02X%02X%02X", r, g, b)
@@ -289,14 +307,14 @@ end
 -- Test dim_color preserves hue (blue stays blue, not red)
 local function test_dim_color()
     local blue = "#5D7DD0"
-    local dimmed = dim_color(blue, 0.7)
+    local dimmed = dim_color(blue)
     local orig_color = wezterm.color.parse(blue)
     local dimmed_color = wezterm.color.parse(dimmed)
     local h1, _, _, _ = orig_color:hsla()
     local h2, _, _, _ = dimmed_color:hsla()
     local hue_diff = math.abs(h1 - h2)
-    if hue_diff > 0.02 then
-        wezterm.log_error(string.format("dim_color hue drift: %s -> %s (hue %.3f -> %.3f)", blue, dimmed, h1, h2))
+    if hue_diff > 2.0 then -- 2 degree tolerance (hsla returns degrees 0-360)
+        wezterm.log_error(string.format("dim_color hue drift: %s -> %s (hue %.1f -> %.1f)", blue, dimmed, h1, h2))
     end
 end
 test_dim_color()
@@ -304,37 +322,57 @@ test_dim_color()
 -- On format tab title events, override the default handling to return a custom title
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 ---@diagnostic disable-next-line: unused-local
-wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
+wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max_width)
     local base_color = string_to_color(get_git_root_path(tab))
+    local off_white = "#ffffff"
+    local off_black = "#181825"
 
     -- Handle custom titles
     if tab.tab_title and #tab.tab_title > 0 then
-        local bg_color = tab.is_active and "#F5F5F5" or dim_color(base_color, 0.7)
+        local bg_color = tab.is_active and "#F5F5F5" or dim_color(base_color)
         local fg_color = select_contrasting_fg_color(bg_color)
         local format = {}
         local padding = tab.is_active and (nbsp .. nbsp) or nbsp
-        add_segment(format, bg_color, fg_color, padding .. tab.tab_title .. padding, true) -- tab.is_active)
+        add_segment(format, bg_color, fg_color, padding .. tab.tab_title .. padding, true)
         return format
     end
 
-    local content = format_tab_content(tab, tab.is_active)
     local format = {}
 
     if tab.is_active then
-        -- Active tab: colored accent bar with right-pointing triangle, off-white main section - colors selected from https://catppuccin.com/palette
-        local off_white = "#ffffff"
-        local off_black = "#181825"
+        -- Active tab: colored accent bar with right-pointing triangle, off-white main section
+        local content = format_tab_content(tab, false)
         local accent_bg = base_color
         local accent_fg = select_contrasting_fg_color(accent_bg)
-        local triangle = "▶" -- wezterm.nerdfonts.pl_left_hard_divider
+        local triangle = "▶"
 
         add_segment(format, accent_bg, accent_fg, " " .. triangle .. " ", true)
         add_segment(format, off_white, off_black, content .. " ", true)
     else
-        -- Inactive tab: single color with minimal padding (narrower)
-        local bg_color = dim_color(base_color, 0.7)
+        -- Inactive tab: check if same repo as active tab
+        local this_git_root = get_git_root_path(tab)
+        local active_git_root = nil
+        for _, t in ipairs(tabs) do
+            if t.is_active then
+                active_git_root = get_git_root_path(t)
+                break
+            end
+        end
+
+        local is_same_repo = active_git_root and this_git_root == active_git_root
+        local content = format_tab_content(tab, true) -- compact mode
+        local bg_color = dim_color(base_color, 0.8)
         local fg_color = select_contrasting_fg_color(bg_color)
-        add_segment(format, bg_color, fg_color, content, true)
+        local process = get_process(tab)
+
+        if is_same_repo then
+            -- Same repo as active: white accent behind process icon
+            add_segment(format, off_white, off_black, " " .. process .. " ", true)
+            add_segment(format, bg_color, fg_color, content, false)
+        else
+            -- Different repo: process icon with dimmed background
+            add_segment(format, bg_color, fg_color, " " .. process .. " " .. content, false)
+        end
     end
 
     return format
