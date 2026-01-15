@@ -55,8 +55,10 @@ local process_icons = {
 local icon_git_root = "./"
 local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
 
--- Non-breaking space to prevent Wezterm from collapsing consecutive spaces
-local nbsp = "\u{00A0}"
+-- Unicode spacing characters for refined typography
+local nbsp = "\u{00A0}"  -- Non-breaking space
+local hair = "\u{200A}"  -- Hair space (thinnest)
+local en = "\u{2002}"    -- En space (medium width)
 
 -- Git lookup cache to avoid repeated expensive io.popen calls
 local git_cache = {}
@@ -165,7 +167,8 @@ local function format_tab_content(tab, is_active)
         dir_name = string.rep(" ", left_pad) .. dir_name .. string.rep(" ", right_pad)
     end
 
-    return string.format(" %s%s %s", process, dir_name, depth_indicator)
+    -- Use refined spacing: hair space near icons, en space for content separation
+    return string.format("%s%s%s%s%s%s", hair, process, en, dir_name, en, depth_indicator)
 end
 
 -- Helper to add a segment to the format table
