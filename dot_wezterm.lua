@@ -52,7 +52,6 @@ local process_icons = {
     ["zsh"] = wezterm.nerdfonts.cod_terminal_bash,
 }
 
-local icon_active = wezterm.nerdfonts.md_rocket_launch
 local icon_unseen = wezterm.nerdfonts.cod_eye
 local icon_git_root = "./"
 local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
@@ -145,15 +144,17 @@ local function get_process(tab)
     if not tab.active_pane or tab.active_pane.foreground_process_name == "" then return "[?]" end
 
     local process_name = remove_abs_path(tab.active_pane.foreground_process_name)
+    -- Strip version numbers (e.g., python3.14 -> python, node24 -> node)
+    local base_name = process_name:gsub("%d[%.%d]*$", "")
 
-    return process_icons[process_name] or string.format("[%s]", process_name)
+    return process_icons[base_name] or process_icons[process_name] or string.format("[%s]", process_name)
 end
 
 -- Format the main content of the tab (everything except edge whitespace)
-local function format_tab_content(tab, has_unseen)
+local function format_tab_content(tab, has_unseen, is_active)
     local dir_name = get_git_dir_name(tab)
     local depth_indicator = get_git_depth_indicator(tab)
-    local process = get_process(tab)
+    local process = is_active and "" or (get_process(tab) .. " ")
 
     -- Pad directory name to be at least 10 characters with whitespace on both sides
     local min_width = 10
@@ -166,7 +167,7 @@ local function format_tab_content(tab, has_unseen)
     end
 
     local unseen_indicator = has_unseen and icon_unseen or " "
-    return string.format("%s %s %s %s", unseen_indicator, process, dir_name, depth_indicator)
+    return string.format("%s %s%s %s", unseen_indicator, process, dir_name, depth_indicator)
 end
 
 -- Helper to add a segment to the format table
@@ -274,18 +275,19 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
         return format
     end
 
-    local content = format_tab_content(tab, has_unseen)
+    local content = format_tab_content(tab, has_unseen, tab.is_active)
     local format = {}
 
     if tab.is_active then
-        -- Active tab: left edge with rocket, padded colored content
-        local off_white = "#F5F5F5"
-        local main_bg = base_color
-        local main_fg = select_contrasting_fg_color(main_bg)
+        -- Active tab: colored accent bar with right-pointing triangle, off-white main section - colors selected from https://catppuccin.com/palette
+        local off_white = "#ffffff"
+        local off_black = "#181825"
+        local accent_bg = base_color
+        local accent_fg = select_contrasting_fg_color(accent_bg)
+        local triangle = wezterm.nerdfonts.pl_left_hard_divider
 
-        add_segment(format, off_white, "#000000", " " .. icon_active .. " ", true)
-        add_segment(format, main_bg, main_fg, " " .. content .. " ", true)
-        add_segment(format, off_white, "#000000", " " .. icon_active .. " ", true)
+        add_segment(format, accent_bg, accent_fg, " " .. triangle .. " ", true)
+        add_segment(format, off_white, off_black, content .. " ", true)
     else
         -- Inactive tab: single color with minimal padding (narrower)
         local bg_color = dim_color(base_color, 0.7)
@@ -327,14 +329,6 @@ wezterm.on("update-right-status", function(window, _pane)
         table.insert(elements, { Background = { Color = "#414559" } })
         table.insert(elements, { Text = "" }) -- Powerline separator
     end
-
-    -- Date/time with subtle styling
-    local date = wezterm.strftime("%a %b %-d %H:%M")
-    table.insert(elements, { Foreground = { Color = "#c6d0f5" } }) -- Light text
-    table.insert(elements, { Background = { Color = "#414559" } }) -- Subtle gray background
-    table.insert(elements, { Attribute = { Intensity = "Normal" } })
-    table.insert(elements, { Text = " " .. date .. " " })
-
     window:set_right_status(wezterm.format(elements))
 end)
 

@@ -21,7 +21,8 @@
 ## Python Style
 
 - Prefer Pydantic, dataclasses, then dictionaries
-- Use modern Python: pathlib.Path, defaultdict, Literal[...], dataclass(frozen=True), StrEnum, pattern matching
+- Use modern Python: pathlib.Path, defaultdict, Literal[...], dataclass(frozen=True), StrEnum
+- **Use pattern matching when appropriate:** Prefer `match`/`case` for destructuring complex structures or 3+ branches; simple `if`/`elif` remains fine for 1-2 conditions or if if/else conditions are complex (even if 3 or more)
 - **Use walrus operator (:=):** `if (m := re.search(...)):` or `while (line := f.readline()):`
 - Prefix functions with underscore if only used within a file
 - Do not lazy import; Do place imports at top of file
