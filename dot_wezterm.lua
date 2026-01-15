@@ -273,6 +273,53 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
 end)
 
 -- ============================================================================
+-- Sort tabs by directory path with git-aware grouping
+
+local function sort_tabs_by_path(window)
+    local mux_window = window:mux_window()
+    local tabs = mux_window:tabs()
+
+    -- Build sorting data for each tab
+    local tab_data = {}
+    for idx, tab in ipairs(tabs) do
+        local pane = tab:active_pane()
+        if pane then
+            local cwd_url = pane:get_current_working_dir()
+            if cwd_url then
+                local cwd = cwd_url.file_path or ""
+                local git_root, is_git_repo, _ = get_cached_git_root(cwd)
+
+                table.insert(tab_data, {
+                    tab = tab,
+                    cwd = cwd,
+                    git_root = is_git_repo and git_root or cwd,
+                    is_git_repo = is_git_repo,
+                    original_index = idx - 1, -- 0-based for MoveTab
+                })
+            end
+        end
+    end
+
+    -- Sort by git root first, then by full path
+    table.sort(tab_data, function(a, b)
+        if a.git_root ~= b.git_root then
+            return a.git_root < b.git_root
+        end
+        return a.cwd < b.cwd
+    end)
+
+    -- Move tabs to their sorted positions
+    for new_index, data in ipairs(tab_data) do
+        local target_index = new_index - 1 -- 0-based
+        if data.original_index ~= target_index then
+            -- Activate the tab first, then move it
+            data.tab:activate()
+            window:perform_action(wezterm.action.MoveTab(target_index), data.tab:active_pane())
+        end
+    end
+end
+
+-- ============================================================================
 -- Right Status Bar (shows zoom state and other info)
 
 wezterm.on("update-right-status", function(window, _pane)
@@ -333,6 +380,14 @@ config.keys = {
     -- Map tab navigation
     { key = "LeftArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = -1 }) },
     { key = "RightArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = 1 }) },
+    -- Sort tabs by directory path (git-aware)
+    {
+        key = "s",
+        mods = "CMD|SHIFT",
+        action = wezterm.action_callback(function(window, _pane)
+            sort_tabs_by_path(window)
+        end),
+    },
 
     -- Map jumping between words to Standard Mac keys
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendString.html
