@@ -32,9 +32,6 @@ source $MY_CONFIG/sync.sh
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
 
-# Configure mise (Rust clone of asdf; previously known as rtx)
-eval "$(mise activate zsh)"
-
 # Added manually for SQLite shell history: https://github.com/atuinsh/atuin?tab=readme-ov-file#shell-plugin
 eval "$(atuin init zsh --disable-up-arrow)"
 
@@ -63,6 +60,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Configure mise (Rust clone of asdf; previously known as rtx). Run last to take priority
+eval "$(mise activate zsh)"
 
 # --------------------------------------------------------------------------------------
 # Work
