@@ -16,6 +16,7 @@
   services: [api, db, redis, zebra, web] # Good: ignoring unordered zebra for a minimal diff
   services: [api, db, web, redis] # Bad: append to end
   ```
+- Follow the charm/bubbletea design philosophy: minimal color usage, single unified background, borders provide visual hierarchy, and color is reserved for actionable elements (badges, accents)
 
 ## Python Style
 

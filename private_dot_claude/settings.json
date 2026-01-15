@@ -17,7 +17,8 @@
   },
   "model": "opus",
   "enabledPlugins": {
-    "pr-review-toolkit@claude-plugins-official": true
+    "pr-review-toolkit@claude-plugins-official": true,
+    "mise-skill@local-plugins": true
   },
   "alwaysThinkingEnabled": true,
   "promptSuggestionEnabled": false,

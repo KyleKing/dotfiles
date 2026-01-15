@@ -1,4 +1,5 @@
 abhimanyu003/sttr/sttr
+antiword
 atuin
 awscli
 bartolli/codanna/codanna
@@ -21,7 +22,6 @@ gh
 git
 git-delta
 git-lfs
-gnupg
 go
 gum
 hadolint
@@ -48,9 +48,11 @@ php
 pkl-lsp
 plantuml
 pnpm
+poppler
 postgresql@17
 prek
 prettier
+pulumi
 pyright
 qman
 rename
@@ -59,14 +61,17 @@ sad
 sevenzip
 shellharden
 shfmt
+sox
 srgn
 sst/tap/opencode
 stylua
+swig
 syncthing
 tabiew
 tealdeer
 television
 tpm
+unrtf
 uv
 vale
 vhs
