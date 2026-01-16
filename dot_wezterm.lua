@@ -167,7 +167,7 @@ local function format_tab_content(tab, compact)
 
     if compact then
         -- Compact mode for inactive tabs: abbreviate and use minimal spacing
-        dir_name = abbreviate(dir_name, 10)
+        dir_name = abbreviate(dir_name, 12)
         return string.format("%s%s%s%s", hair, dir_name, hair, depth_indicator)
     end
 

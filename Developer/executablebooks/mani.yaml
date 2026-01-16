@@ -6,6 +6,8 @@ projects:
     url: git@github.com:executablebooks/mdformat-footnote.git
   mdformat-myst:
     url: git@github.com:executablebooks/mdformat-myst.git
+  mdit-py-plugins:
+    url: git@github.com:executablebooks/mdit-py-plugins.git
 
 tasks:
   git-status:

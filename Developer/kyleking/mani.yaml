@@ -1,5 +1,3 @@
----
-# PLANNED: How to tell which directories in this directory aren't managed by mani?
 projects:
   app-template:
     url: git@github.com:kyleking/app-template.git
@@ -9,6 +7,8 @@ projects:
       - calcipy-template
   calcipy_template:
     url: git@github.com:kyleking/calcipy_template.git
+  codanna.nvim:
+    url: git@github.com:kyleking/codanna.nvim.git
   configapult:
     url: git@github.com:kyleking/configapult.git
   copier-template-tester:
@@ -19,35 +19,41 @@ projects:
     url: git@github.com:kyleking/corallium.git
     tags:
       - calcipy-template
+  dagster-taskiq-executor-demo:
+    url: git@github.com:kyleking/dagster-taskiq-executor-demo.git
+  dagtest:
+    url: git@github.com:kyleking/dagtest.git
   diacea:
     url: git@github.com:kyleking/diacea.git
     tags:
       - calcipy-template
   gh-star-search:
     url: git@github.com:kyleking/gh-star-search.git
+  gh-sweep:
+    url: git@github.com:kyleking/gh-sweep.git
+  gh-wfd:
+    url: git@github.com:kyleking/gh-wfd.git
   hk-debugging:
     url: git@github.com:kyleking/hk-debugging.git
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
   karabiner-config:
     url: git@github.com:KyleKing/karabiner-config
+  KyleKing:
+    url: git@github.com:kyleking/KyleKing.git
   KyleKing.github.io:
     url: git@github.com:kyleking/KyleKing.github.io.git
   mdformat-admon:
     url: git@github.com:kyleking/mdformat-admon.git
     tags: ["mdformat-plugin"]
-  # # Deleted and replaced with code in plugin-template
-  # mdformat-admonition-utils:
-  #   url: git@github.com:kyleking/mdformat-admonition-utils.git
-  #   tags: ["mdformat-plugin"]
+  mdformat-front-matters:
+    url: git@github.com:kyleking/mdformat-front-matters.git
+    tags: ["mdformat-plugin"]
   mdformat-gfm-alerts:
     url: git@github.com:kyleking/mdformat-gfm-alerts.git
     tags: ["mdformat-plugin"]
   mdformat-hooks:
     url: git@github.com:kyleking/mdformat-hooks.git
-    tags: ["mdformat-plugin"]
-  mdformat-slw:
-    url: git@github.com:kyleking/mdformat-slw.git
     tags: ["mdformat-plugin"]
   mdformat-mkdocs:
     url: git@github.com:kyleking/mdformat-mkdocs.git
@@ -55,8 +61,18 @@ projects:
   mdformat-obsidian:
     url: git@github.com:kyleking/mdformat-obsidian.git
     tags: ["mdformat-plugin"]
-  # My-Programming-Sketchbook:
-  #   url: git@github.com:kyleking/My-Programming-Sketchbook.git
+  mdformat-plugin-template:
+    url: git@github.com:kyleking/mdformat-plugin-template.git
+    tags: ["mdformat-plugin"]
+  mdformat-slw:
+    url: git@github.com:kyleking/mdformat-slw.git
+    tags: ["mdformat-plugin"]
+  mise-postgres:
+    url: git@github.com:kyleking/mise-postgres.git
+  paper-todo-tui:
+    url: git@github.com:kyleking/paper-todo-tui.git
+  patch_it.nvim:
+    url: git@github.com:kyleking/patch_it.nvim.git
   PhyloSpec:
     url: git@github.com:kyleking/PhyloSpec.git
     tags:
@@ -65,12 +81,16 @@ projects:
     url: git@github.com:kyleking/private-snippets.git
   recipes:
     url: git@github.com:kyleking/recipes.git
-  spaghetti-comb.nvim:
-    url: git@github.com:kyleking/spaghetti-comb.nvim.git
+  repo-dashboard:
+    url: git@github.com:kyleking/repo-dashboard.git
   shoal:
     url: git@github.com:kyleking/shoal.git
     tags:
       - calcipy-template
+  spaghetti-comb.nvim:
+    url: git@github.com:kyleking/spaghetti-comb.nvim.git
+  tail-cw:
+    url: git@github.com:kyleking/tail-cw.git
   tail-jsonl:
     url: git@github.com:kyleking/tail-jsonl.git
     tags:
@@ -79,6 +99,8 @@ projects:
     url: git@github.com:kyleking/textract-py3.git
   tlr:
     url: git@github.com:kyleking/tlr.git
+  vcr-tui:
+    url: git@github.com:kyleking/vcr-tui.git
   yak-shears:
     url: git@github.com:kyleking/yak-shears.git
 
