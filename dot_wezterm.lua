@@ -406,10 +406,9 @@ local function sort_tabs_by_path(window)
         end
     end
 
-    -- Sort by git root first, then by full path, then preserve original order
+    -- Sort by git root first, then preserve original order within each repo
     table.sort(tab_data, function(a, b)
         if a.git_root ~= b.git_root then return a.git_root < b.git_root end
-        if a.cwd ~= b.cwd then return a.cwd < b.cwd end
         return a.original_index < b.original_index
     end)
 

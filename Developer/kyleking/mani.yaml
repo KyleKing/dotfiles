@@ -27,12 +27,16 @@ projects:
     url: git@github.com:kyleking/diacea.git
     tags:
       - calcipy-template
+  doner:
+    url: git@github.com:kyleking/doner.git
+  extract_finances:
+    url: git@github.com:kyleking/extract_finances.git
+  gh-lazydispatch:
+    url: git@github.com:kyleking/gh-lazydispatch.git
   gh-star-search:
     url: git@github.com:kyleking/gh-star-search.git
   gh-sweep:
     url: git@github.com:kyleking/gh-sweep.git
-  gh-wfd:
-    url: git@github.com:kyleking/gh-wfd.git
   hk-debugging:
     url: git@github.com:kyleking/hk-debugging.git
   karabiner-actions:
@@ -69,6 +73,8 @@ projects:
     tags: ["mdformat-plugin"]
   mise-postgres:
     url: git@github.com:kyleking/mise-postgres.git
+  my_go_template:
+    url: git@github.com:kyleking/my_go_template.git
   paper-todo-tui:
     url: git@github.com:kyleking/paper-todo-tui.git
   patch_it.nvim:

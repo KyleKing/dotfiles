@@ -17,6 +17,7 @@ pipx_uvx = true
 python = "3.14.2"
 bun = "latest"
 "cargo:selene" = "latest"
+"cargo:tree-sitter-cli" = "latest"
 deno = "latest"
 go = "latest"
 "go:github.com/Zxilly/go-size-analyzer/cmd/gsa" = "latest"
