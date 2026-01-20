@@ -26,6 +26,7 @@ local process_icons = {
     ["bash"] = wezterm.nerdfonts.md_bash,
     ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["cargo"] = wezterm.nerdfonts.dev_rust,
+    ["chezmoi"] = wezterm.nerdfonts.md_sync,
     ["claude"] = wezterm.nerdfonts.md_robot_outline,
     ["curl"] = wezterm.nerdfonts.mdi_flattr,
     ["docker"] = wezterm.nerdfonts.md_docker,
@@ -41,10 +42,13 @@ local process_icons = {
     ["mise"] = wezterm.nerdfonts.md_carrot,
     ["node"] = wezterm.nerdfonts.cod_json,
     ["nvim"] = wezterm.nerdfonts.linux_neovim,
+    ["opentofu"] = wezterm.nerdfonts.md_dump_truck,
     ["psql"] = wezterm.nerdfonts.md_database,
+    ["pulumi"] = wezterm.nerdfonts.md_dump_truck,
     ["python"] = wezterm.nerdfonts.dev_python,
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
+    ["terraform"] = wezterm.nerdfonts.md_dump_truck,
     ["usql"] = wezterm.nerdfonts.md_database,
     ["uv"] = wezterm.nerdfonts.dev_python,
     ["vim"] = wezterm.nerdfonts.dev_vim,
@@ -367,7 +371,7 @@ wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max
 
         if is_same_repo then
             -- Same repo as active: white accent behind process icon
-            add_segment(format, off_white, off_black, " " .. process .. " ", true)
+            add_segment(format, off_black, off_white, " " .. process .. " ", true)
             add_segment(format, bg_color, fg_color, content, false)
         else
             -- Different repo: process icon with dimmed background
