@@ -16,6 +16,8 @@ gemini-cli
 gh
 git-lfs
 gnupg
+gum
+hadolint
 hk
 huseyinbabal/tap/taws
 krew
@@ -24,6 +26,8 @@ lazydocker
 lazygit
 lazysql
 libffi
+libpq
+llvm
 mani
 mergiraf
 mise
@@ -31,7 +35,6 @@ navi
 nvimpager
 oh-my-posh
 opencode
-opentofu
 ossp-uuid
 oxlint
 plantuml
@@ -39,7 +42,6 @@ pnpm
 prek
 pulumi
 ripsecrets
-rust
 sad
 shfmt
 stylua
