@@ -18,3 +18,7 @@
 
 # Because who cares about case!?
 --smart-case
+
+# Enable hyperlinks for clickable file paths in wezterm
+# Uses OSC 8 escape sequences compatible with wezterm and other modern terminals
+--hyperlink-format=kitty

@@ -638,6 +638,60 @@ config.mouse_bindings = {
     },
 }
 
+-- ============================================================================
+-- Hyperlink Rules for File Paths with Line Numbers
+
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
+-- Match absolute file paths with line and column (e.g., /path/to/file.py:123:45)
+table.insert(config.hyperlink_rules, {
+    regex = [[/[\w\._\-/]+:\d+:\d+]],
+    format = "file://$0",
+})
+
+-- Match absolute file paths with line only (e.g., /path/to/file.py:123)
+table.insert(config.hyperlink_rules, {
+    regex = [[/[\w\._\-/]+:\d+]],
+    format = "file://$0",
+})
+
+-- ============================================================================
+-- Open URI Handler for Clickable File Paths
+
+local function _is_shell(foreground_process_name)
+    local shell_names = { "bash", "fish", "ksh", "sh", "zsh" }
+    local process = string.match(foreground_process_name, "[^/\\]+$") or foreground_process_name
+    for _, shell in ipairs(shell_names) do
+        if process == shell then return true end
+    end
+    return false
+end
+
+wezterm.on("open-uri", function(_window, pane, uri)
+    if uri:find("^file:") == 1 and not pane:is_alt_screen_active() then
+        local url = wezterm.url.parse(uri)
+        if _is_shell(pane:get_foreground_process_name()) then
+            local file_path = url.file_path
+
+            -- Parse file:line:column from the path
+            local file, line, col = file_path:match("^(.+):(%d+):?(%d*)$")
+            if file then
+                local cmd = { "nvim", "+" .. line, file }
+                if col and col ~= "" then
+                    -- Use nvim -c to set column position
+                    cmd = { "nvim", "+" .. line, "-c", "normal " .. col .. "|", file }
+                end
+                pane:send_text(wezterm.shell_join_args(cmd) .. "\r")
+                return false
+            end
+
+            -- Fallback to simple file opening
+            pane:send_text(wezterm.shell_join_args({ "nvim", file_path }) .. "\r")
+            return false
+        end
+    end
+end)
+
 -- Brew install fonts and verify installation and name in Apple's "Font Book"
 config.font = wezterm.font_with_fallback({
     -- "Atkinson Hyperlegible Mono",
