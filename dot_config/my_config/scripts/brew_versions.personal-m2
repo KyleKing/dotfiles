@@ -218,6 +218,7 @@ qman 1.5.1
 rav1e 0.8.1
 readline 8.3.3
 rename 1.601
+repeater 0.1.1
 ripgrep 15.1.0
 rtmpdump 2.4-20151223_3
 rubberband 4.0.0
@@ -283,12 +284,13 @@ zstd 1.5.7
 1password 8.10.28
 1password-cli 2.32.0
 alfred 5.0.6,2110
+amical 0.1.13
 anki 25.09
 appcleaner 3.6.7,4301
 blockblock 2.2.5
 brave-browser 1.67.123.0
 calibre 8.16.2
-claude-code 2.1.12
+claude-code 2.1.14
 cloudflare-warp 2022.12.593.0,20230118.6
 coderabbit 0.3.5
 cursor 2.0.43,8e4da76ad196925accaa169efcae28c45454cce3

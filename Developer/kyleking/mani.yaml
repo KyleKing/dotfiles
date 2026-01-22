@@ -9,8 +9,6 @@ projects:
     url: git@github.com:kyleking/calcipy_template.git
   codanna.nvim:
     url: git@github.com:kyleking/codanna.nvim.git
-  configapult:
-    url: git@github.com:kyleking/configapult.git
   copier-template-tester:
     url: git@github.com:kyleking/copier-template-tester.git
     tags:
@@ -27,6 +25,8 @@ projects:
     url: git@github.com:kyleking/diacea.git
     tags:
       - calcipy-template
+  djot_formatter:
+    url: git@github.com:kyleking/djot_formatter.git
   doner:
     url: git@github.com:kyleking/doner.git
   extract_finances:
