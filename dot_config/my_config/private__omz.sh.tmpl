@@ -57,6 +57,8 @@ export plugins=(
     auto-notify
     # Docs: https://github.com/MichaelAquilina/zsh-you-should-use
     you-should-use
+    # Docs: https://github.com/Aloxaf/fzf-tab
+    fzf-tab
     # Docs (Extra completions not yet in Zsh-proper): https://github.com/zsh-users/zsh-completions
     zsh-completions
     # Docs: https://github.com/zsh-users/zsh-autosuggestions (Configuration below)
@@ -112,3 +114,20 @@ export AUTO_NOTIFY_THRESHOLD=15
 export AUTO_NOTIFY_EXPIRE_TIME=1000
 # Create an allowlist for auto-notifications
 export AUTO_NOTIFY_WHITELIST=("brew" "poetry install" "make install" "gh run" "gh workflow")
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'

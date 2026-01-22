@@ -5,6 +5,13 @@ stripComponents = 1
 type = "archive"
 url = "https://github.com/MichaelAquilina/zsh-auto-notify/archive/master.tar.gz"
 
+[".oh-my-zsh/custom/plugins/fzf-tab"]
+exact = true
+refreshPeriod = "168h"
+stripComponents = 1
+type = "archive"
+url = "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
+
 [".oh-my-zsh/custom/plugins/you-should-use"]
 exact = true
 refreshPeriod = "168h"
