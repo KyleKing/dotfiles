@@ -47,6 +47,7 @@ local process_icons = {
     ["pulumi"] = wezterm.nerdfonts.md_dump_truck,
     ["python"] = wezterm.nerdfonts.dev_python,
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
+    ["ssh"] = wezterm.nerdfonts.md_server_security,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
     ["terraform"] = wezterm.nerdfonts.md_dump_truck,
     ["usql"] = wezterm.nerdfonts.md_database,
@@ -462,6 +463,105 @@ wezterm.on("update-right-status", function(window, _pane)
 end)
 
 -- ============================================================================
+-- Balance Panes (evenly distribute sizes)
+-- Adapted from:
+--   https://gist.github.com/fcpg/eb3c05be5b480f4cad767199dac5cecd?permalink_comment_id=5510198#gistcomment-5510198
+--   https://gist.github.com/davidosomething/6c2615710003bec328719c0c50a0ad0f
+--   Feature Request: https://github.com/wezterm/wezterm/issues/2972
+
+-- Walk panes that are on the same axis as the tab's active pane
+local function walk_siblings(axis, tab, window, pane, do_func)
+    local initial_pane = pane
+    local initial_pane_id = initial_pane:pane_id()
+    local siblings = { (do_func and do_func(initial_pane) or initial_pane) }
+    local prev_dir = axis == "x" and "Left" or "Up"
+    local next_dir = axis == "x" and "Right" or "Down"
+    local max_iter = 20 -- prevent infinite loops
+    local visited_panes = { [initial_pane_id] = true }
+
+    local initial_pane_idx = 1
+    local panes_info = tab:panes_with_info()
+    for _, pi in ipairs(panes_info) do
+        if pi.is_active then initial_pane_idx = pi.index end
+    end
+
+    -- Loop on siblings backward and forward, starting from initial pane
+    for _, step_dir in ipairs({ "prev", "next" }) do
+        -- Start from initial pane for each direction
+        window:perform_action(wezterm.action.ActivatePaneByIndex(initial_pane_idx), tab:active_pane())
+
+        local last_pane = tab:active_pane()
+        window:perform_action(
+            wezterm.action.ActivatePaneDirection(step_dir == "prev" and prev_dir or next_dir),
+            tab:active_pane()
+        )
+        local new_pane = tab:active_pane()
+        local new_pane_id = new_pane:pane_id()
+
+        local i = 0
+        while new_pane_id ~= last_pane:pane_id() and not visited_panes[new_pane_id] and i < max_iter do
+            visited_panes[new_pane_id] = true
+
+            if step_dir == "prev" then
+                table.insert(siblings, 1, (do_func and do_func(new_pane) or new_pane))
+            else
+                table.insert(siblings, (do_func and do_func(new_pane) or new_pane))
+            end
+
+            last_pane = new_pane
+            window:perform_action(
+                wezterm.action.ActivatePaneDirection(step_dir == "prev" and prev_dir or next_dir),
+                tab:active_pane()
+            )
+            new_pane = tab:active_pane()
+            new_pane_id = new_pane:pane_id()
+            i = i + 1
+        end
+    end
+
+    -- Back to initial pane
+    window:perform_action(wezterm.action.ActivatePaneByIndex(initial_pane_idx), tab:active_pane())
+
+    return siblings
+end
+
+local function balance_panes(axis)
+    return function(window, pane)
+        local tab = window:active_tab()
+        local prev_dir = axis == "x" and "Left" or "Up"
+        local next_dir = axis == "x" and "Right" or "Down"
+        local siblings = walk_siblings(axis, tab, window, pane)
+        local tab_size = tab:get_size()[axis == "x" and "cols" or "rows"]
+        local balanced_size = math.floor(tab_size / #siblings)
+        local pane_size_key = axis == "x" and "cols" or "viewport_rows"
+
+        walk_siblings(axis, tab, window, pane, function(per_pane)
+            local pane_size = per_pane:get_dimensions()[pane_size_key]
+            local adj_amount = pane_size - balanced_size
+            local adj_dir = adj_amount < 0 and next_dir or prev_dir
+            adj_amount = math.abs(adj_amount)
+            window:perform_action(wezterm.action.AdjustPaneSize({ adj_dir, adj_amount }), per_pane)
+        end)
+    end
+end
+
+wezterm.on(
+    "augment-command-palette",
+    function()
+        return {
+            {
+                brief = "Balance panes horizontally",
+                action = wezterm.action_callback(balance_panes("x")),
+            },
+            {
+                brief = "Balance panes vertically",
+                action = wezterm.action_callback(balance_panes("y")),
+            },
+        }
+    end
+)
+
+-- ============================================================================
 -- General configuration
 
 local config = wezterm.config_builder()
@@ -512,6 +612,16 @@ config.keys = {
     { key = "DownArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Down") },
     { key = "LeftArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Left") },
     { key = "RightArrow", mods = "CMD|CTRL", action = act.ActivatePaneDirection("Right") },
+
+    -- Resize panes (Cmd+Shift+<hjkl>)
+    { key = "h", mods = "CMD|SHIFT", action = act.AdjustPaneSize({ "Left", 10 }) },
+    { key = "j", mods = "CMD|SHIFT", action = act.AdjustPaneSize({ "Down", 10 }) },
+    { key = "k", mods = "CMD|SHIFT", action = act.AdjustPaneSize({ "Up", 10 }) },
+    { key = "l", mods = "CMD|SHIFT", action = act.AdjustPaneSize({ "Right", 10 }) },
+
+    -- Balance panes (evenly distribute sizes)
+    { key = "=", mods = "CMD", action = wezterm.action_callback(balance_panes("x")) },
+    { key = "=", mods = "CMD|SHIFT", action = wezterm.action_callback(balance_panes("y")) },
 
     -- Map vim-friendly scrolling
     { key = "b", mods = "CTRL", action = act.ScrollByPage(-0.9) },
