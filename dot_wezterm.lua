@@ -24,6 +24,7 @@ local wezterm = require("wezterm")
 -- Icons from: https://www.nerdfonts.com/cheat-sheet
 local process_icons = {
     ["bash"] = wezterm.nerdfonts.md_bash,
+    ["hk"] = wezterm.nerdfonts.md_prescription,
     ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["cargo"] = wezterm.nerdfonts.dev_rust,
     ["chezmoi"] = wezterm.nerdfonts.md_sync,
@@ -151,11 +152,38 @@ end
 local function get_process(tab)
     if not tab.active_pane or tab.active_pane.foreground_process_name == "" then return "[?]" end
 
-    local process_name = remove_abs_path(tab.active_pane.foreground_process_name)
-    -- Strip version numbers (e.g., python3.14 -> python, node24 -> node)
-    local base_name = process_name:gsub("%d[%.%d]*$", "")
+    local raw_name = tab.active_pane.foreground_process_name
+    local process_name = remove_abs_path(raw_name)
 
-    return process_icons[base_name] or process_icons[process_name] or string.format("[%s]", process_name)
+    -- Check path components in reverse (e.g., /share/claude/versions/2.1.15 -> 2.1.15, versions, claude)
+    local components = {}
+    for component in raw_name:gmatch("[^/\\]+") do
+        table.insert(components, component)
+    end
+    for i = #components, 1, -1 do
+        local component = components[i]
+        if process_icons[component] then return process_icons[component] end
+    end
+
+    -- Strip version numbers only if there's a base name (e.g., python3.14 -> python, node24 -> node)
+    local base_name = process_name:gsub("^(%D+)%d[%.%d]*$", "%1")
+
+    -- Try to find icon, log if not found
+    local icon = process_icons[base_name] or process_icons[process_name]
+    if not icon then
+        wezterm.log_info(
+            "DEBUG get_process - no icon found: raw='"
+                .. raw_name
+                .. "' processed='"
+                .. process_name
+                .. "' base='"
+                .. base_name
+                .. "'"
+        )
+        return string.format("[%s]", process_name)
+    end
+
+    return icon
 end
 
 -- Abbreviate string to max_len with ".." suffix if needed
@@ -389,6 +417,8 @@ end)
 local function sort_tabs_by_path(window)
     local mux_window = window:mux_window()
     local tabs = mux_window:tabs()
+    local active_tab = window:active_tab()
+    local active_tab_id = active_tab:tab_id()
 
     -- Build sorting data for each tab
     local tab_data = {}
@@ -424,6 +454,14 @@ local function sort_tabs_by_path(window)
             -- Activate the tab first, then move it
             data.tab:activate()
             window:perform_action(wezterm.action.MoveTab(target_index), data.tab:active_pane())
+        end
+    end
+
+    -- Restore the originally active tab
+    for _, data in ipairs(tab_data) do
+        if data.tab:tab_id() == active_tab_id then
+            data.tab:activate()
+            break
         end
     end
 end
@@ -538,7 +576,7 @@ local function balance_panes(axis)
         walk_siblings(axis, tab, window, pane, function(per_pane)
             local pane_size = per_pane:get_dimensions()[pane_size_key]
             local adj_amount = pane_size - balanced_size
-            local adj_dir = adj_amount < 0 and next_dir or prev_dir
+            local adj_dir = adj_amount > 0 and next_dir or prev_dir
             adj_amount = math.abs(adj_amount)
             window:perform_action(wezterm.action.AdjustPaneSize({ adj_dir, adj_amount }), per_pane)
         end)
@@ -670,25 +708,23 @@ end
 wezterm.on("open-uri", function(_window, pane, uri)
     if uri:find("^file:") == 1 and not pane:is_alt_screen_active() then
         local url = wezterm.url.parse(uri)
-        if _is_shell(pane:get_foreground_process_name()) then
-            local file_path = url.file_path
+        local file_path = url.file_path
 
-            -- Parse file:line:column from the path
-            local file, line, col = file_path:match("^(.+):(%d+):?(%d*)$")
-            if file then
-                local cmd = { "nvim", "+" .. line, file }
-                if col and col ~= "" then
-                    -- Use nvim -c to set column position
-                    cmd = { "nvim", "+" .. line, "-c", "normal " .. col .. "|", file }
-                end
-                pane:send_text(wezterm.shell_join_args(cmd) .. "\r")
-                return false
+        -- Parse file:line:column from the path
+        local file, line, col = file_path:match("^(.+):(%d+):?(%d*)$")
+        if file then
+            local cmd = { "nvim", "+" .. line, file }
+            if col and col ~= "" then
+                -- Use nvim -c to set column position
+                cmd = { "nvim", "+" .. line, "-c", "normal " .. col .. "|", file }
             end
-
-            -- Fallback to simple file opening
-            pane:send_text(wezterm.shell_join_args({ "nvim", file_path }) .. "\r")
-            return false
+            pane:send_text(wezterm.shell_join_args(cmd) .. "\r")
+            return true
         end
+
+        -- Fallback to simple file opening
+        pane:send_text(wezterm.shell_join_args({ "nvim", file_path }) .. "\r")
+        return true
     end
 end)
 
