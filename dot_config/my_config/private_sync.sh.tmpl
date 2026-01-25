@@ -4,15 +4,19 @@
 #
 # Dot File Syncing Scripts
 
+op-sign-in() {
+  op signin --account={{ .onepassword.domain }}
+}
+
 back-apply-ch() {
     # Apply any changes to local files
-    eval "$(op signin --account={{ .onepassword.domain }})" || return 1
+    op-sign-in || return 1
     chezmoi apply
 }
 
 back-pull-ch() {
     # Pull latest version and apply to local files
-    eval "$(op signin)" || return 1
+    op-sign-in || return 1
     cd "$(chezmoi source-path)" || return 1
     chezmoi update
 }
@@ -26,7 +30,7 @@ back-c-ch() {
     # Prevent overwriting chezmoi edits by checking for staged or unstaged changes
     cd "$(chezmoi source-path)" || return 1
     if output=$(git status --porcelain) && [ -z "$output" ]; then
-        eval "$(op signin --account={{ .onepassword.domain }})" || return 1
+        op-sign-in || return 1
         back-scripts-ch || return 1
         # Sync with files already tracked by chezmoi
         chezmoi re-add || return 1
@@ -58,14 +62,14 @@ back-c-nvim() {
 
 # Pull all changes
 back-pull-all() {
-    op signin &&
+    op-sign-in &&
         printf "\n\n# back-pull-obs\n" && back-pull-obs && git status &&
         printf "\n\n# back-pull-nvim\n" && back-pull-nvim && git status &&
         printf "\n\n# back-pull-ch\n" && back-pull-ch && git status
 }
 # Just show status
 back-stat-all() {
-    op signin &&
+    op-sign-in &&
         printf "\n\n# Obsidian:\n" && cd / && z {{ .obsidian.vault_name }} && echo "$PWD" && git status &&
         printf "\n\n# nvim\n" && cd ~/.config/nvim && echo "$PWD" && git status &&
         printf "\n\n# Chezmoi\n" && cd / && z chezmoi && echo "$PWD" && git status
