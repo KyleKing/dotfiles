@@ -23,14 +23,14 @@ Generate a local SSH key and register it with GitHub for both authentication and
 
 ```sh
 # Generate SSH key
-ssh-keygen -t ed25519 -C "KyleKing@users.noreply.github.com"
+ssh-keygen -t ed25519 -C "KyleKing@users.noreply.github.com" -f ~/.ssh/id_ed25519_github_2026
 
 # Add to macOS keychain
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github_2026
 
 # Add to GitHub for authentication and signing
-gh ssh-key add ~/.ssh/id_ed25519.pub --title "$(scutil --get ComputerName)" --type authentication
-gh ssh-key add ~/.ssh/id_ed25519.pub --title "$(scutil --get ComputerName)-signing" --type signing
+gh ssh-key add ~/.ssh/id_ed25519_github_2026.pub --title "$(scutil --get ComputerName)" --type authentication
+gh ssh-key add ~/.ssh/id_ed25519_github_2026.pub --title "$(scutil --get ComputerName)-signing" --type signing
 
 # Verify SSH connection
 ssh -T git@github.com
@@ -39,38 +39,54 @@ ssh -T git@github.com
 ### 3. Initialize Chezmoi
 
 ```sh
+# Initialize chezmoi repository
 chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
-# Create local config from template
+# Interactive setup (Python script runs automatically)
+# New installs: prompts for all values
+# Upgrades: only prompts for missing fields, merges with existing config
+# Auto-detects: homebrew prefix, computer name
+# Auto-resolves: github.email and github.ssh_public_key from SSH key
+chezmoi apply --verbose
+```
+
+The setup script intelligently handles both new installations and upgrades:
+
+- **New installation**: Prompts for all configuration values
+- **Upgrade**: Loads existing config, only prompts for new fields added in dotfiles updates
+- Uses Python's `tomllib` (3.11+) or falls back to `tomli` for TOML parsing
+
+Alternatively, skip interactive setup and create config manually:
+
+```sh
 mkdir -p ~/.config/chezmoi
 cat > ~/.config/chezmoi/chezmoi.toml << 'EOF'
 [data]
-computer_name = ""
-email = ""
+computer_name = "placeholder"
+email = "placeholder"
+github_ssh_key_name = "id_ed25519_github_2026"
 homebrew_prefix = "/opt/homebrew"
 
 [data.github]
-email = "KyleKing@users.noreply.github.com"
-username = "kyleking"
-ssh_public_key = ""
-coderabbit_machineId = ""
+username = "placeholder"
+coderabbit_machineId = "placeholder"
 
 [data.aws]
-aws_profile = ""
+aws_profile = "placeholder"
+
+[data.onepassword]
+domain = "placeholder"
 
 [data.obsidian]
-vault_name = ""
+vault_name = "placeholder"
 
 [edit]
 command = "nvim"
 EOF
 
-# Fill in ssh_public_key from the generated key
-SSH_PUB_KEY=$(cat ~/.ssh/id_ed25519.pub)
-echo "Copy this to ssh_public_key: $SSH_PUB_KEY"
-
-# Edit config with actual values
-chezmoi edit-config
+# Edit with actual values, then apply
+nvim ~/.config/chezmoi/chezmoi.toml
+chezmoi apply --verbose
 ```
 
 ### 4. Shell and Packages
@@ -78,9 +94,6 @@ chezmoi edit-config
 ```sh
 # Install oh-my-zsh (https://ohmyz.sh/#install)
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Apply dotfiles
-chezmoi apply --verbose
 
 # Install brew packages
 brew bundle --file ~/.Brewfile-personal --no-lock
@@ -101,7 +114,8 @@ $(brew --prefix)/opt/fzf/install
 ```sh
 # Test commit signing
 cd /tmp && git init test-signing && cd test-signing
-echo "test" > test.txt && git add . && git commit -m "test"
+git config user.name "Test User" && git config user.email "test@example.com"
+echo "test" > test.txt && git add . && git commit -m "test: verify signing"
 git log --show-signature -1
 cd .. && rm -rf test-signing
 ```

@@ -10,4 +10,4 @@ Host ubuntu-4gb-hel1-1
   IdentityFile ~/.ssh/id_ed25519_hetzner_demo
 
 Host github.com
-  IdentityFile ~/.ssh/id_ed25519
+  IdentityFile {{ .github.ssh_key_path }}
