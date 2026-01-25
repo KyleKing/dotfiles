@@ -9,4 +9,5 @@ Host ubuntu-4gb-hel1-1
   User root
   IdentityFile ~/.ssh/id_ed25519_hetzner_demo
 
-Include ~/.ssh/1Password/config
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519

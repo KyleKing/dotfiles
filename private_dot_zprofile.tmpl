@@ -20,9 +20,6 @@ export PKG_CONFIG_PATH="$PREFIX_ICU4C/lib/pkgconfig"
 # Created by `pipx` and used by `uv` tools as well
 export PATH="{{ .chezmoi.homeDir }}/.local/bin:$PATH"
 
-# 1Password SSH Agent
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/{{ .onepassword.account_id }}/t/agent.sock
-
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config
 

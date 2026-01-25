@@ -75,11 +75,10 @@
     required = true
     smudge = git media smudge %f
 
-# -- SSH-based signing via 1Password
+# -- SSH-based signing (local key)
 [gpg]
     format = ssh
 [gpg "ssh"]
-    program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
     allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
 
 # -- Branch defaults for new repositories
