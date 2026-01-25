@@ -16,7 +16,10 @@ alias bo="brew update && brew outdated"
 alias bcbd="brew cleanup && brew doctor"
 # Other useful commands: "brew uninstall <cask>" and "brew uses <...>"
 
-# FY# tmux plugin manager; installed by brew
+# tmux plugin manager; installed by brew
 alias tpm-install="/opt/homebrew/opt/tpm/share/tpm/bin/install_plugins"
 alias tpm-update="/opt/homebrew/opt/tpm/share/tpm/bin/update_plugins"
 alias tpm-clean="/opt/homebrew/opt/tpm/share/tpm/bin/clean_plugins"
+
+# for steipete CLIs (gifgrep)
+export GIFGREP_INLINE=kitty

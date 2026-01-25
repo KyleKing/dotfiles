@@ -110,6 +110,8 @@ projects:
   yak-shears:
     url: git@github.com:kyleking/yak-shears.git
 
+  jj-diff:
+    url: git@github.com:kyleking/jj-diff.git
 tasks:
   git-status:
     desc: show working tree status

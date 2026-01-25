@@ -12,6 +12,7 @@ disable_hints = ["python_multi"]
 experimental = true
 idiomatic_version_file_enable_tools = ["node"]
 pipx_uvx = true
+npm.package_manager = "bun"
 
 [tools]
 python = "3.14.2"
