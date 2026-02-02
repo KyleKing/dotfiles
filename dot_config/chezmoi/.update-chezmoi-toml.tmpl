@@ -1,6 +1,4 @@
 {{- $github_ssh_key_name := .github_ssh_key_name -}}
-{{- $ssh_key_pub_path := joinPath .chezmoi.homeDir ".ssh" (printf "%s.pub" $github_ssh_key_name) -}}
-{{- $ssh_key_exists := stat $ssh_key_pub_path -}}
 # Chezmoi self-referential template. Use this format and fill in all values
 #	There will be errors for any missing data
 
@@ -11,18 +9,10 @@ github_ssh_key_name = "{{ $github_ssh_key_name }}"
 homebrew_prefix = "{{ .homebrew_prefix }}"
 
 [data.github]
-{{- if $ssh_key_exists }}
 email = {{ output "sh" "-c" (printf "awk '{print $3}' ~/.ssh/%s.pub" $github_ssh_key_name) | trim | quote }}
-{{- else }}
-email = "{{ .github.email }}"
-{{- end }}
 username = "{{ .github.username }}"
 ssh_key_path = {{ joinPath "~/.ssh" $github_ssh_key_name | quote }}
-{{- if $ssh_key_exists }}
-ssh_public_key = {{ output "cat" $ssh_key_pub_path | trim | quote }}
-{{- else }}
-ssh_public_key = "{{ .github.ssh_public_key }}"
-{{- end }}
+ssh_public_key = {{ output "cat" (joinPath .chezmoi.homeDir ".ssh" (printf "%s.pub" $github_ssh_key_name)) | trim | quote }}
 coderabbit_machineId = "{{ .github.coderabbit_machineId }}"
 
 [data.aws]

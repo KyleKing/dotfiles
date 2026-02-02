@@ -31,16 +31,14 @@ FIELDS = [
     ("email", "placeholder"),
     ("github_ssh_key_name", "id_ed25519_github_2026"),
     ("homebrew_prefix", homebrew_prefix),
-    ("github.email", "placeholder"),
     ("github.username", "placeholder"),
-    ("github.ssh_public_key", "placeholder"),
     ("github.coderabbit_machineId", "placeholder"),
     ("aws.aws_profile", "placeholder"),
     ("onepassword.domain", "placeholder"),
     ("obsidian.vault_name", "placeholder"),
 ]
 
-# Load existing config
+# Load existing config or start fresh
 if CONFIG_FILE.exists():
     config = tomllib.loads(CONFIG_FILE.read_text())
     is_new = False
@@ -49,48 +47,23 @@ else:
     is_new = True
     print("Setting up chezmoi configuration...\n")
 
-# Ensure data section exists
-config.setdefault("data", {})
-
-# Check and prompt for missing fields
+# Prompt for missing fields
 missing_any = False
 for field_path, default in FIELDS:
     parts = field_path.split(".")
-    section = config["data"]
-
-    # Navigate to subsection if needed
+    section = config.setdefault("data", {})
     for part in parts[:-1]:
         section = section.setdefault(part, {})
 
-    # Check if field exists
-    field_name = parts[-1]
-    if field_name not in section:
+    if parts[-1] not in section:
         missing_any = True
         value = input(f"{field_path} [{default}]: ").strip()
-        section[field_name] = value if value else default
-
-# Auto-resolve SSH key fields if key exists
-ssh_key_name = config["data"].get("github_ssh_key_name", "id_ed25519_github_2026")
-ssh_key_pub = Path.home() / ".ssh" / f"{ssh_key_name}.pub"
-if ssh_key_pub.exists():
-    try:
-        pub_key_content = ssh_key_pub.read_text().strip()
-        parts = pub_key_content.split()
-        if len(parts) >= 3:
-            config["data"].setdefault("github", {})["email"] = parts[2]
-            config["data"]["github"]["ssh_public_key"] = pub_key_content
-            if is_new or missing_any:
-                print(f"\nAuto-resolved from {ssh_key_pub}:")
-                print(f"  github.email = {parts[2]}")
-                print(f"  github.ssh_public_key = {parts[0][:20]}...")
-    except Exception:
-        pass
+        section[parts[-1]] = value if value else default
 
 # Write config if changes were made
 if missing_any or is_new:
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Write TOML manually (simple nested structure)
     lines = ["[data]"]
     for k, v in config["data"].items():
         if not isinstance(v, dict):
@@ -105,18 +78,8 @@ if missing_any or is_new:
             lines.append("")
 
     lines.append("[edit]")
-    for k, v in config["edit"].items():
+    for k, v in config.get("edit", {}).items():
         lines.append(f'{k} = "{v}"')
 
     CONFIG_FILE.write_text("\n".join(lines))
-
-    action = "updated" if not is_new else "created"
-    print(f"\nConfiguration {action} at {CONFIG_FILE}")
-
-    # Provide guidance based on SSH key status
-    ssh_key_name = config["data"]["github_ssh_key_name"]
-    ssh_key_pub = Path.home() / ".ssh" / f"{ssh_key_name}.pub"
-    if not ssh_key_pub.exists() and is_new:
-        print(f"\nNext: Create your SSH key, then run:")
-        print(f"  ~/.config/chezmoi/update-config.sh")
-        print(f"to auto-update github.email and github.ssh_public_key")
+    print(f"\nConfiguration {'updated' if not is_new else 'created'} at {CONFIG_FILE}")

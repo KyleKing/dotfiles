@@ -2,23 +2,18 @@
 
 ## Overview
 
-The `chezmoi.toml` config file is managed through a hybrid approach:
-- Initial creation: `run_once_before_setup-chezmoi-config.py.tmpl` creates the base config
-- Updates: Run `~/.config/chezmoi/update-config.sh` to auto-update SSH key fields
+Config file (`chezmoi.toml`) is managed through:
+1. **Initial creation**: `run_once_before_setup-chezmoi-config.py.tmpl` prompts for values
+2. **SSH key fields**: `update-config.sh` extracts `github.email` and `github.ssh_public_key` from SSH key
 
-## Why This Approach?
+## Why Separate Update Script?
 
-The config file provides data for templates, so it can't be a template itself (circular dependency). Instead:
-1. The `run_once` script creates initial config with user input
-2. The `.update-chezmoi-toml.tmpl` template auto-resolves `github.email` and `github.ssh_public_key` from your SSH key file
-3. The `update-config.sh` helper applies the template when you need to refresh these fields
+The config provides data for templates, so it can't be a template itself (circular dependency).
+The `.update-chezmoi-toml.tmpl` template resolves SSH fields from your key file, and `update-config.sh` applies it.
 
-## When to Run update-config.sh
+## Usage
 
-- After generating a new SSH key
-- After changing your SSH key file
-- When you want to sync github.email/ssh_public_key with your current key
-
-## Manual Editing
-
-You can also manually edit `~/.config/chezmoi/chezmoi.toml` directly - the helper script is optional.
+Run `~/.config/chezmoi/update-config.sh` after:
+- Initial setup
+- Generating new SSH key
+- Changing SSH key file

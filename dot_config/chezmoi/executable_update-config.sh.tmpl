@@ -1,23 +1,11 @@
 #!/bin/bash
-# Helper script to regenerate chezmoi.toml with auto-resolved SSH key info
-# Run this when you want to update github.email and github.ssh_public_key from your SSH key
+# Regenerate chezmoi.toml with auto-resolved SSH key info
 
 set -euo pipefail
 
 TEMPLATE_FILE="{{ .chezmoi.sourceDir }}/dot_config/chezmoi/.update-chezmoi-toml.tmpl"
 CONFIG_FILE="$HOME/.config/chezmoi/chezmoi.toml"
 
-if [[ ! -f "$TEMPLATE_FILE" ]]; then
-  echo "Error: Template file not found: $TEMPLATE_FILE" >&2
-  exit 1
-fi
-
-if [[ ! -f "$CONFIG_FILE" ]]; then
-  echo "Error: Config file not found: $CONFIG_FILE" >&2
-  echo "Run chezmoi apply first to create initial config" >&2
-  exit 1
-fi
-
-echo "Regenerating $CONFIG_FILE from template..."
+echo "Regenerating $CONFIG_FILE..."
 chezmoi execute-template < "$TEMPLATE_FILE" > "$CONFIG_FILE"
-echo "Done! Config updated with latest SSH key info."
+echo "Done!"

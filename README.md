@@ -17,9 +17,9 @@ brew install chezmoi gh
 gh auth login
 ```
 
-### 2. SSH Key Setup
+### 2. SSH Key Setup (Required)
 
-Generate a local SSH key and register it with GitHub for both authentication and commit signing:
+**Create SSH key before initializing chezmoi:**
 
 ```sh
 # Generate SSH key
@@ -42,21 +42,20 @@ ssh -T git@github.com
 # Initialize chezmoi repository
 chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
-# Interactive setup (Python script runs automatically)
-# Auto-detects: homebrew prefix, computer name, SSH key fields (if key exists)
-# New installs: prompts for all values
-# Upgrades: only prompts for missing fields, merges with existing config
+# Interactive setup prompts for missing values
 chezmoi apply --verbose
+
+# Auto-populate github.email and github.ssh_public_key from SSH key
+~/.config/chezmoi/update-config.sh
 ```
 
-The setup script intelligently handles both new installations and upgrades:
+Setup behavior:
 
-- **New installation**: Prompts for all configuration values, auto-detects SSH key email/public key if SSH key already exists
-- **Upgrade**: Loads existing config, only prompts for new fields added in dotfiles updates
-- **SSH key auto-resolution**: If SSH key exists during setup, fields are auto-populated. Otherwise run `~/.config/chezmoi/update-config.sh` after creating the key
-- Uses Python's `tomllib` (3.11+) or falls back to `tomli` for TOML parsing
+- **New installation**: Prompts for all configuration values
+- **Upgrade**: Loads existing config, only prompts for new fields
+- **SSH key resolution**: Run `~/.config/chezmoi/update-config.sh` to extract email and public key from SSH file
 
-Alternatively, skip interactive setup and create config manually:
+Alternatively, create config manually:
 
 ```sh
 mkdir -p ~/.config/chezmoi
@@ -84,9 +83,12 @@ vault_name = "placeholder"
 command = "nvim"
 EOF
 
-# Edit with actual values, then apply
+# Edit with actual values
 nvim ~/.config/chezmoi/chezmoi.toml
+
+# Apply dotfiles and populate SSH key fields
 chezmoi apply --verbose
+~/.config/chezmoi/update-config.sh
 ```
 
 ### 4. Shell and Packages
