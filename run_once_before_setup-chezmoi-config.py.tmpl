@@ -31,7 +31,9 @@ FIELDS = [
     ("email", "placeholder"),
     ("github_ssh_key_name", "id_ed25519_github_2026"),
     ("homebrew_prefix", homebrew_prefix),
+    ("github.email", "placeholder"),
     ("github.username", "placeholder"),
+    ("github.ssh_public_key", "placeholder"),
     ("github.coderabbit_machineId", "placeholder"),
     ("aws.aws_profile", "placeholder"),
     ("onepassword.domain", "placeholder"),
@@ -67,6 +69,23 @@ for field_path, default in FIELDS:
         value = input(f"{field_path} [{default}]: ").strip()
         section[field_name] = value if value else default
 
+# Auto-resolve SSH key fields if key exists
+ssh_key_name = config["data"].get("github_ssh_key_name", "id_ed25519_github_2026")
+ssh_key_pub = Path.home() / ".ssh" / f"{ssh_key_name}.pub"
+if ssh_key_pub.exists():
+    try:
+        pub_key_content = ssh_key_pub.read_text().strip()
+        parts = pub_key_content.split()
+        if len(parts) >= 3:
+            config["data"].setdefault("github", {})["email"] = parts[2]
+            config["data"]["github"]["ssh_public_key"] = pub_key_content
+            if is_new or missing_any:
+                print(f"\nAuto-resolved from {ssh_key_pub}:")
+                print(f"  github.email = {parts[2]}")
+                print(f"  github.ssh_public_key = {parts[0][:20]}...")
+    except Exception:
+        pass
+
 # Write config if changes were made
 if missing_any or is_new:
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
@@ -93,7 +112,11 @@ if missing_any or is_new:
 
     action = "updated" if not is_new else "created"
     print(f"\nConfiguration {action} at {CONFIG_FILE}")
-    if is_new:
-        key_name = config["data"]["github_ssh_key_name"]
-        print(f"\nNote: github.email and github.ssh_public_key are auto-resolved")
-        print(f"from ~/.ssh/{key_name}.pub when templates are processed")
+
+    # Provide guidance based on SSH key status
+    ssh_key_name = config["data"]["github_ssh_key_name"]
+    ssh_key_pub = Path.home() / ".ssh" / f"{ssh_key_name}.pub"
+    if not ssh_key_pub.exists() and is_new:
+        print(f"\nNext: Create your SSH key, then run:")
+        print(f"  ~/.config/chezmoi/update-config.sh")
+        print(f"to auto-update github.email and github.ssh_public_key")

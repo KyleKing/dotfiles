@@ -8,6 +8,12 @@
 README.md
 .pre-commit-config.yaml
 
+# Config file managed by run_once script and update-config.sh helper
+.config/chezmoi/chezmoi.toml
+# Helper files (not target files)
+.config/chezmoi/.update-chezmoi-toml.tmpl
+.config/chezmoi/README.md
+
 # Configuration files for pre-commit
 .luacheckrc
 .luarc.json

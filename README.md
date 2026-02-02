@@ -43,17 +43,17 @@ ssh -T git@github.com
 chezmoi init git@github.com:KyleKing/dotfiles.git --verbose
 
 # Interactive setup (Python script runs automatically)
+# Auto-detects: homebrew prefix, computer name, SSH key fields (if key exists)
 # New installs: prompts for all values
 # Upgrades: only prompts for missing fields, merges with existing config
-# Auto-detects: homebrew prefix, computer name
-# Auto-resolves: github.email and github.ssh_public_key from SSH key
 chezmoi apply --verbose
 ```
 
 The setup script intelligently handles both new installations and upgrades:
 
-- **New installation**: Prompts for all configuration values
+- **New installation**: Prompts for all configuration values, auto-detects SSH key email/public key if SSH key already exists
 - **Upgrade**: Loads existing config, only prompts for new fields added in dotfiles updates
+- **SSH key auto-resolution**: If SSH key exists during setup, fields are auto-populated. Otherwise run `~/.config/chezmoi/update-config.sh` after creating the key
 - Uses Python's `tomllib` (3.11+) or falls back to `tomli` for TOML parsing
 
 Alternatively, skip interactive setup and create config manually:
