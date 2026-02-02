@@ -1,2 +1,3 @@
 gh dash	dlvhdr/gh-dash	v4.22.0
-gh poi	seachicken/gh-poi	v0.15.1
+gh lazydispatch		
+gh poi	seachicken/gh-poi	v0.15.2

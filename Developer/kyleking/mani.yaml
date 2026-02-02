@@ -39,6 +39,8 @@ projects:
     url: git@github.com:kyleking/gh-sweep.git
   hk-debugging:
     url: git@github.com:kyleking/hk-debugging.git
+  jj-diff:
+    url: git@github.com:kyleking/jj-diff.git
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
   karabiner-config:
@@ -71,8 +73,8 @@ projects:
   mdformat-slw:
     url: git@github.com:kyleking/mdformat-slw.git
     tags: ["mdformat-plugin"]
-  mise-postgres:
-    url: git@github.com:kyleking/mise-postgres.git
+  mise-postgres-binary:
+    url: git@github.com:kyleking/mise-postgres-binary.git
   my_go_template:
     url: git@github.com:kyleking/my_go_template.git
   paper-todo-tui:
@@ -110,8 +112,6 @@ projects:
   yak-shears:
     url: git@github.com:kyleking/yak-shears.git
 
-  jj-diff:
-    url: git@github.com:kyleking/jj-diff.git
 tasks:
   git-status:
     desc: show working tree status
