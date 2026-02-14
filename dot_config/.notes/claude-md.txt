@@ -1,0 +1,29 @@
+Proposed CLAUDE.md Additions
+
+Under ## Comments and Documentation, consider adding:
+
+- NEVER use numpy-style docstring sections (Parameters/Returns/Examples with dashed
+underlines)
+- Docstrings should be one line when the function signature is self-explanatory
+- When modifying files, do NOT add or update docstrings for functions you didn't
+change
+- Prefer documenting non-obvious behavior (e.g., "Do not reuse after calling") over
+restating types
+
+Under ## Python Style or a new ## Code Changes section:
+
+- When fixing bugs or making changes, limit modifications to what's necessary for the
+fix
+- Do not "improve" or refactor adjacent code unless explicitly requested
+- Do not add documentation, type hints, or tests to unmodified functions in the same
+file
+
+---
+Why these additions help:
+
+1. Numpy-style prohibition - Explicitly bans the Parameters\n---------- format that
+caused the verbose docstrings
+2. Scope limitation - Prevents the LLM from expanding scope to "improve" nearby code,
+which is how unmodified functions likely got verbose docstrings added
+3. Docstring brevity - Reinforces that type annotations + clear naming should carry
+the weight, not redundant prose

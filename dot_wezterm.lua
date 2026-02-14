@@ -24,7 +24,7 @@ local wezterm = require("wezterm")
 -- Icons from: https://www.nerdfonts.com/cheat-sheet
 local process_icons = {
     ["bash"] = wezterm.nerdfonts.md_bash,
-    ["hk"] = wezterm.nerdfonts.md_prescription,
+    ["bat"] = wezterm.nerdfonts.md_bat,
     ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["cargo"] = wezterm.nerdfonts.dev_rust,
     ["chezmoi"] = wezterm.nerdfonts.md_sync,
@@ -35,6 +35,7 @@ local process_icons = {
     ["gh"] = wezterm.nerdfonts.dev_github_badge,
     ["git"] = wezterm.nerdfonts.fa_git,
     ["go"] = wezterm.nerdfonts.seti_go,
+    ["hk"] = wezterm.nerdfonts.md_prescription,
     ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["lazydocker"] = wezterm.nerdfonts.md_docker,
     ["lazygit"] = wezterm.nerdfonts.dev_git_branch,
@@ -780,7 +781,7 @@ config.color_scheme = "Catppuccin Frappe"
 config.window_decorations = "RESIZE"
 config.use_fancy_tab_bar = false -- Use retro tab bar for full color control
 config.tab_max_width = 64 -- Increase from default 16 to prevent clipping of tab titles
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false -- In order to show "Zoomed"
 config.show_tab_index_in_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 

@@ -1,0 +1,1 @@
+chezmoi remove ~/Library/Application\ Support/lazydocker/config.yml
