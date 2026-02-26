@@ -30,6 +30,7 @@ local process_icons = {
     ["chezmoi"] = wezterm.nerdfonts.md_sync,
     ["claude"] = wezterm.nerdfonts.md_robot_outline,
     ["curl"] = wezterm.nerdfonts.mdi_flattr,
+    ["deno"] = wezterm.nerdfonts.md_dinosaur,
     ["docker"] = wezterm.nerdfonts.md_docker,
     ["docker-compose"] = wezterm.nerdfonts.md_docker,
     ["gh"] = wezterm.nerdfonts.dev_github_badge,
@@ -37,6 +38,7 @@ local process_icons = {
     ["go"] = wezterm.nerdfonts.seti_go,
     ["hk"] = wezterm.nerdfonts.md_prescription,
     ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
+    ["kubectl"] = wezterm.nerdfonts.md_kubernetes,
     ["lazydocker"] = wezterm.nerdfonts.md_docker,
     ["lazygit"] = wezterm.nerdfonts.dev_git_branch,
     ["lua"] = wezterm.nerdfonts.seti_lua,
@@ -44,18 +46,25 @@ local process_icons = {
     ["mise"] = wezterm.nerdfonts.md_carrot,
     ["node"] = wezterm.nerdfonts.cod_json,
     ["nvim"] = wezterm.nerdfonts.linux_neovim,
+    ["npm"] = wezterm.nerdfonts.md_npm,
     ["opentofu"] = wezterm.nerdfonts.md_dump_truck,
     ["psql"] = wezterm.nerdfonts.md_database,
     ["pulumi"] = wezterm.nerdfonts.md_dump_truck,
+    ["pnpm"] = wezterm.nerdfonts.md_package_variant,
     ["python"] = wezterm.nerdfonts.dev_python,
+    ["python3"] = wezterm.nerdfonts.dev_python,
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
+    ["rg"] = wezterm.nerdfonts.md_magnify,
+    ["rust"] = wezterm.nerdfonts.dev_rust,
     ["ssh"] = wezterm.nerdfonts.md_server_security,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
     ["terraform"] = wezterm.nerdfonts.md_dump_truck,
+    ["top"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["usql"] = wezterm.nerdfonts.md_database,
     ["uv"] = wezterm.nerdfonts.dev_python,
     ["vim"] = wezterm.nerdfonts.dev_vim,
     ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
+    ["yarn"] = wezterm.nerdfonts.md_nodejs,
     ["zsh"] = wezterm.nerdfonts.cod_terminal_bash,
 }
 
@@ -605,10 +614,12 @@ wezterm.on(
 
 local config = wezterm.config_builder()
 config.bold_brightens_ansi_colors = true
+config.enable_kitty_graphics = true
 config.font_size = 13.5
+config.front_end = "WebGpu"
 config.initial_cols = 200
 config.initial_rows = 60
-config.scrollback_lines = 10000
+config.scrollback_lines = 50000
 
 -- Make inactive panes visually distinct
 config.inactive_pane_hsb = {
@@ -643,7 +654,11 @@ config.keys = {
     -- Map pane splitting and zoom (like tmux)
     { key = "DownArrow", mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "RightArrow", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "d", mods = "CMD|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "z", mods = "CTRL|SHIFT", action = act.TogglePaneZoomState },
+    { key = "[", mods = "CMD", action = act.ActivatePaneDirection("Prev") },
+    { key = "]", mods = "CMD", action = act.ActivatePaneDirection("Next") },
     -- Note: in nvim, you can use: <C-w>T (moves current window to new tab) for similar behavior
 
     -- Navigate between panes (Cmd+Ctrl+Arrow)
