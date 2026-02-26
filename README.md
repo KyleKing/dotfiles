@@ -70,9 +70,6 @@ homebrew_prefix = "/opt/homebrew"
 username = "placeholder"
 coderabbit_machineId = "placeholder"
 
-[data.aws]
-aws_profile = "placeholder"
-
 [data.onepassword]
 domain = "placeholder"
 
