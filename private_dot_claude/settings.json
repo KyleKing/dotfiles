@@ -15,13 +15,24 @@
     ],
     "defaultMode": "dontAsk"
   },
+  "model": "sonnet",
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "cavekit-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "juliusbrussee/cavekit",
+        "ref": "main"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
-  "model": "sonnet"
+  "editorMode": "vim",
+  "fileCheckpointingEnabled": false
 }

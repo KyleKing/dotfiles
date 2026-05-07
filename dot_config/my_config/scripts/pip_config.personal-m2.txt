@@ -1,4 +1,4 @@
 For variant 'global', will try loading '/Library/Application Support/pip/pip.conf'
 For variant 'user', will try loading '/Users/kyleking/.pip/pip.conf'
 For variant 'user', will try loading '/Users/kyleking/.config/pip/pip.conf'
-For variant 'site', will try loading '/Users/kyleking/.cache/uv/archive-v0/dsh08WmPaB2CFlDR-gkvq/pip.conf'
+For variant 'site', will try loading '/Users/kyleking/.cache/uv/archive-v0/VRJzTI5-Fxh0AqXE/pip.conf'

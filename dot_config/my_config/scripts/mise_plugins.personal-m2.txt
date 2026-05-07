@@ -51,7 +51,6 @@ babashka
 balena
 balena-cli
 bashbot
-bashly
 bat
 bat-extras
 bats
@@ -242,7 +241,6 @@ go-getter
 go-jira
 go-jsonnet
 go-junit-report
-go-sdk
 go-swagger
 goconvey
 gofumpt
@@ -384,7 +382,6 @@ libsql-server
 license-plist
 lima
 linkerd
-liqoctl
 liquibase
 litestream
 loki-logcli
@@ -453,7 +450,6 @@ opa
 opam
 openfaas-cli
 opensearch-cli
-openshift-install
 opentofu
 operator-sdk
 opsgenie-lamp
@@ -505,7 +501,6 @@ quarkus
 rancher
 rbac-lookup
 rclone
-rebar
 reckoner
 redis
 redo
