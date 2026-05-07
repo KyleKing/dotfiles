@@ -15,9 +15,11 @@ difftastic
 direnv
 dotenv-linter
 duckdb
+dust
 envchain
 eza
 fd
+fracturedjson
 gcc
 gemini-cli
 gh
@@ -34,8 +36,10 @@ imagemagick
 lazydocker
 lazygit
 lazyjj
+llmfit
 luacheck
 luarocks
+mactop
 mani
 mas
 mergiraf
@@ -61,6 +65,7 @@ python@3.12
 qman
 rename
 repeater
+rtk
 rust
 sad
 sevenzip
@@ -75,6 +80,7 @@ stylua
 swig
 syncthing
 tabiew
+taplo
 tealdeer
 television
 tpm
