@@ -37,6 +37,11 @@
   # Bad: implicit concatenation
   msg = ("line 1" "line 2")
   ```
+## Code Changes
+
+- When fixing bugs or making changes, limit modifications to what's necessary for the fix
+- Do not "improve" or refactor adjacent code unless explicitly requested
+- Do not add documentation, type hints, or tests to unmodified functions in the same file
 
 ## Comments and Documentation
 
@@ -45,7 +50,10 @@
 - Only add docstrings with args/returns/raises for public/exported functions
 - Do not repeat type info in docstrings when type annotations exist
 - Do not add numbered comments because they are difficult to maintain
-
+- NEVER use numpy-style docstring sections (Parameters/Returns/Examples with dashed underlines)
+- Docstrings should be one line when the function signature is self-explanatory
+- When modifying files, do NOT add or update docstrings for functions you didn't change
+- Prefer documenting non-obvious behavior (e.g., "Do not reuse after calling") over restating types
 ## Error Handling
 
 - Let exceptions propagate unless you can handle them meaningfully
