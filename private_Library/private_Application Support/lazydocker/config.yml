@@ -1,7 +1,0 @@
----
-gui:
-  returnImmediately: true
-  wrapMainPanel: true
-reporting: "on"
-commandTemplates:
-  dockerCompose: docker compose

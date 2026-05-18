@@ -20,5 +20,6 @@
 .kubie/kubie.yaml
 .wegorc
 Library/Application Support/jj/
+Library/Application Support/lazydocker/
 Library/Application Support/superfile/
 docs/docs/CODE_TAG_SUMMARY.md
