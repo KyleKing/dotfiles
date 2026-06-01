@@ -108,6 +108,12 @@ repos:
       - id: ripsecrets-system
   - repo: local
     hooks:
+      - id: check-empty-dirs
+        name: Check for empty directories
+        entry: bash -c 'empty=$(find . -mindepth 1 -type d -empty -not -path "./.git/*" -not -path "./.jj/*" -not -path "./.ruff_cache/*"); [ -z "$empty" ] || { echo "Empty directories:"; echo "$empty"; exit 1; }'
+        language: system
+        pass_filenames: false
+        always_run: true
       - id: selene
         name: Selene
         description: Lints Lua files using Selene (install with homebrew)
