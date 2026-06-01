@@ -10,6 +10,9 @@ alias mr="mise task run"
 # See local weather. Full docs: https://github.com/chubin/wttr.in
 alias wttr="curl v2d.wttr.in"
 
+# Interactive Make TUI
+alias lzm='lazymake'
+
 # Aliases for find (fd)
 alias fdh='fd --hidden'
 

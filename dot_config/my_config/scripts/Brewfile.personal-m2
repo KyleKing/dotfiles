@@ -7,8 +7,8 @@ tap "steipete/tap"
 brew "act"
 brew "actionlint"
 brew "antiword"
-brew "xz"
 brew "atuin"
+brew "xz"
 brew "awscli"
 brew "bat"
 brew "block-goose-cli"
@@ -49,6 +49,8 @@ brew "jj"
 brew "lazydocker"
 brew "lazygit"
 brew "lazyjj"
+brew "lazymake"
+brew "leaf-md"
 brew "llmfit"
 brew "luacheck"
 brew "luarocks"
@@ -76,6 +78,7 @@ brew "pulumi"
 brew "pyright"
 brew "python@3.12"
 brew "qman"
+brew "quien"
 brew "rename"
 brew "repeater"
 brew "ripgrep"
@@ -92,6 +95,7 @@ brew "swig"
 brew "syncthing", restart_service: :changed
 brew "tabiew"
 brew "taplo"
+brew "tdf"
 brew "tealdeer"
 brew "television"
 brew "tmux"
@@ -116,6 +120,7 @@ brew "steipete/tap/gifgrep"
 brew "steipete/tap/spogo"
 cask "1password"
 cask "1password-cli"
+cask "activitywatch"
 cask "alfred"
 cask "amical"
 cask "anki"
@@ -194,7 +199,9 @@ cask "slack"
 cask "spotify"
 cask "steam"
 cask "suspicious-package"
+cask "t3-code"
 cask "friesi23/brew-repo/table-habit"
+cask "taphouse"
 cask "taskexplorer"
 cask "texifier"
 cask "steipete/tap/trimmy"
@@ -218,10 +225,11 @@ mas "Ecosia", id: 1463400445
 mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "HotKey", id: 975890633
+mas "Keynote", id: 361285480
 mas "Keynote", id: 409183694
 mas "Kindle", id: 302584613
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Speedtest", id: 1153157709
@@ -258,3 +266,6 @@ cargo "flamegraph"
 cargo "lazyjj"
 cargo "tree-sitter-cli"
 uv "trafilatura"
+npm "cspell"
+npm "markdown-link-check"
+npm "neovim"

@@ -36,6 +36,8 @@ imagemagick
 lazydocker
 lazygit
 lazyjj
+lazymake
+leaf-md
 llmfit
 luacheck
 luarocks
@@ -63,6 +65,7 @@ pulumi
 pyright
 python@3.12
 qman
+quien
 rename
 repeater
 rtk
@@ -81,6 +84,7 @@ swig
 syncthing
 tabiew
 taplo
+tdf
 tealdeer
 television
 tpm
