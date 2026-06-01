@@ -39,6 +39,7 @@ brew "git-delta"
 brew "git-lfs"
 brew "gnupg"
 brew "go"
+brew "go-size-analyzer"
 brew "gum"
 brew "hadolint"
 brew "hcloud"
@@ -204,6 +205,7 @@ cask "friesi23/brew-repo/table-habit"
 cask "taphouse"
 cask "taskexplorer"
 cask "texifier"
+cask "the-unarchiver"
 cask "steipete/tap/trimmy"
 cask "visual-studio-code"
 cask "vlc"
@@ -234,7 +236,6 @@ mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
-mas "The Unarchiver", id: 425424353
 mas "Tot", id: 1491071483
 mas "Weathergraph", id: 1501958576
 mas "Xcode", id: 497799835
@@ -266,6 +267,7 @@ cargo "flamegraph"
 cargo "lazyjj"
 cargo "tree-sitter-cli"
 uv "trafilatura"
+npm "corepack"
 npm "cspell"
 npm "markdown-link-check"
 npm "neovim"

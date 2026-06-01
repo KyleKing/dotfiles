@@ -1,8 +1,70 @@
 {
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
+  "editorMode": "vim",
+  "effortLevel": "medium",
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  },
   "env": {
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "USE_BUILTIN_RIPGREP": "0"
   },
+  "extraKnownMarketplaces": {
+    "cavekit-marketplace": {
+      "source": {
+        "ref": "main",
+        "repo": "juliusbrussee\/cavekit",
+        "source": "github"
+      }
+    }
+  },
+  "fileCheckpointingEnabled": false,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "sonnet",
   "permissions": {
     "allow": [
       "Bash(find:*)",
@@ -15,24 +77,6 @@
     ],
     "defaultMode": "dontAsk"
   },
-  "model": "sonnet",
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "cavekit-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "juliusbrussee/cavekit",
-        "ref": "main"
-      }
-    }
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
   "promptSuggestionEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true,
-  "editorMode": "vim",
-  "fileCheckpointingEnabled": false
+  "skipDangerousModePermissionPrompt": true
 }

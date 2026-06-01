@@ -27,6 +27,7 @@ git
 git-delta
 git-lfs
 go
+go-size-analyzer
 gum
 hadolint
 hcloud
