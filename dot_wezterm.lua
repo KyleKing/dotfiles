@@ -654,11 +654,7 @@ config.keys = {
     -- Map pane splitting and zoom (like tmux)
     { key = "DownArrow", mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "RightArrow", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = "d", mods = "CMD|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "z", mods = "CTRL|SHIFT", action = act.TogglePaneZoomState },
-    { key = "[", mods = "CMD", action = act.ActivatePaneDirection("Prev") },
-    { key = "]", mods = "CMD", action = act.ActivatePaneDirection("Next") },
     -- Note: in nvim, you can use: <C-w>T (moves current window to new tab) for similar behavior
 
     -- Navigate between panes (Cmd+Ctrl+Arrow)
