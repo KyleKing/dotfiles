@@ -1,6 +1,5 @@
 tap "abhimanyu003/sttr"
 tap "bartolli/codanna"
-tap "friesi23/brew-repo"
 tap "orlangure/tap"
 tap "sst/tap"
 tap "steipete/tap"
@@ -137,6 +136,7 @@ cask "steipete/tap/codexbar"
 cask "cursor"
 cask "customshortcuts"
 cask "daisydisk"
+cask "dash"
 cask "dash6"
 cask "dayflow"
 cask "dhs"
@@ -194,15 +194,11 @@ cask "rectangle-pro"
 cask "steipete/tap/repobar"
 cask "rocket"
 cask "seam-app"
-cask "send-to-kindle"
 cask "skim"
 cask "slack"
 cask "spotify"
 cask "steam"
 cask "suspicious-package"
-cask "t3-code"
-cask "friesi23/brew-repo/table-habit"
-cask "taphouse"
 cask "taskexplorer"
 cask "texifier"
 cask "the-unarchiver"
@@ -227,8 +223,8 @@ mas "Ecosia", id: 1463400445
 mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "HotKey", id: 975890633
-mas "Keynote", id: 361285480
 mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
@@ -236,8 +232,10 @@ mas "Qmenu", id: 1567442612
 mas "Shareful", id: 1522267256
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
+mas "Table Habit", id: 6744886469
 mas "Tot", id: 1491071483
 mas "Weathergraph", id: 1501958576
+mas "World of Tanks Blitz", id: 1068932208
 mas "Xcode", id: 497799835
 vscode "alexcvzz.vscode-sqlite"
 vscode "anthropic.claude-code"
