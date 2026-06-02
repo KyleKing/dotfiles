@@ -74,6 +74,7 @@ npm:terser                                              5.44.0
 npm:textlint                                            15.4.0
 npm:typescript                                          5.9.2
 npm:vscode-langservers-extracted                        4.10.0                             ~/.config/mise/config.toml  latest
+npm:yaml-language-server                                1.23.0                             ~/.config/mise/config.toml  latest
 pipx:awscli-local                                       0.22.2
 pipx:beautysh                                           6.4.3                              ~/.config/mise/config.toml  latest
 pipx:black                                              25.12.0
