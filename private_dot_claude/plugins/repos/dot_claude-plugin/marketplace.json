@@ -1,0 +1,21 @@
+{
+  "name": "local-plugins",
+  "description": "Local plugin marketplace for custom Claude Code skills",
+  "owner": {
+    "name": "Kyle King",
+    "email": ""
+  },
+  "plugins": [
+    {
+      "name": "mise-skill",
+      "version": "1.0.0",
+      "description": "Skill for managing and running mise tasks",
+      "category": "productivity",
+      "author": {
+        "name": "Kyle King",
+        "email": ""
+      },
+      "source": "./mise-skill"
+    }
+  ]
+}
