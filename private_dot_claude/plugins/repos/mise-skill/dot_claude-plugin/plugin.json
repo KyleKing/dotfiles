@@ -1,9 +1,0 @@
-{
-  "name": "mise-skill",
-  "version": "1.0.0",
-  "description": "Skill for managing and running mise tasks",
-  "author": {
-    "name": "Kyle King",
-    "email": ""
-  }
-}
