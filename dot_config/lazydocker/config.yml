@@ -1,10 +1,25 @@
 gui:
+  scrollHeight: 15 # increased from 2 to match lazygit
+  border: "rounded"
+  language: "auto"
+  theme:
+    activeBorderColor: [green, bold]
+    inactiveBorderColor: [default]
+    selectedLineBgColor: [blue]
+    optionsTextColor: [blue]
+    searchingActiveBorderColor: [yellow, bold]
   wrapMainPanel: true
   sidePanelWidth: 0.333
-  expandFocusedSidePanel: true # set to true for auto-expand focused panel
-  containerStatusHealthStyle: "short" # 'long' | 'short' | 'icon'
+  showBottomLine: true
+  expandFocusedSidePanel: false
+  returnImmediately: true # from chezmoi config
+  containerStatusHealthStyle: "short"
+  screenMode: "normal"
+
+reporting: "on" # from chezmoi config
 
 stats:
+  maxDuration: "3m"
   graphs:
     - caption: CPU (%)
       statPath: DerivedStats.CPUPercentage
@@ -12,6 +27,19 @@ stats:
     - caption: Memory (%)
       statPath: DerivedStats.MemoryPercentage
       color: green
+
+logs:
+  timestamps: false
+  since: "60m"
+  tail: ""
+  viewerCommand: ""
+  filters:
+    - pattern: "heartbeat"
+    - pattern: "\\[DEBUG\\]"
+      containers: "web*|*worker*"
+
+commandTemplates:
+  dockerCompose: docker compose # from chezmoi config
 
 customCommands:
   containers:
@@ -28,3 +56,5 @@ customCommands:
     - name: dive
       attach: true
       command: "dive {{ .Image.Name }}"
+  services: []
+  volumes: []
