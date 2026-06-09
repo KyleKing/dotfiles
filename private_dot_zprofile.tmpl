@@ -4,6 +4,10 @@
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 export PATH="{{- .homebrew_prefix -}}/sbin:{{- .homebrew_prefix -}}/bin:$PATH"
 
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
 # For mise-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
 export HOMEBREW_PREFIX={{- .homebrew_prefix }}
 #
