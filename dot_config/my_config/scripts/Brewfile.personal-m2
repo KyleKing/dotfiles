@@ -1,217 +1,424 @@
-tap "abhimanyu003/sttr"
-tap "bartolli/codanna"
-tap "orlangure/tap"
-tap "sst/tap"
-tap "steipete/tap"
+tap "abhimanyu003/sttr", trusted: true
+tap "bartolli/codanna", trusted: true
+tap "orlangure/tap", trusted: true
+tap "sst/tap", trusted: true
+tap "steipete/tap", trusted: true
+# Run your GitHub Actions locally
 brew "act"
+# Static checker for GitHub Actions workflow files
 brew "actionlint"
+# Utility to read Word (.doc) files
 brew "antiword"
+# Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
+# General-purpose data compression with high compression ratio
 brew "xz"
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Open source, extensible AI agent that goes beyond code suggestions
 brew "block-goose-cli"
+# Yet another cross-platform graphical process/system monitor
 brew "bottom"
+# Perl compatible regular expressions library with a new API
 brew "pcre2"
+# Vector graphics library with cross-device output support
 brew "cairo"
+# Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Statistics utility to count lines of code
 brew "cloc"
+# Power of curl, ease of use of httpie
 brew "curlie"
+# Diff that understands syntax
 brew "difftastic"
+# Load/unload environment variables based on $PWD
 brew "direnv"
+# Lightning-fast linter for .env files written in Rust
 brew "dotenv-linter"
+# Embeddable SQL OLAP Database Management System
 brew "duckdb"
+# More intuitive version of du in rust
 brew "dust"
+# Secure your credentials in environment variables
 brew "envchain"
+# Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# JSON formatter that produces highly readable but fairly compact output
 brew "fracturedjson"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU compiler collection
 brew "gcc"
+# Interact with Google Gemini AI models from the command-line
 brew "gemini-cli"
+# GitHub command-line tool
 brew "gh"
+# OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Interpreter for PostScript and PDF
 brew "ghostscript"
+# Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Git extension for versioning large files
 brew "git-lfs"
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Analyzing the dependencies in compiled Golang binaries
 brew "go-size-analyzer"
+# Tool for glamorous shell scripts
 brew "gum"
+# Smarter Dockerfile linter to validate best practices
 brew "hadolint"
+# Command-line interface for Hetzner Cloud
 brew "hcloud"
+# Command-line benchmarking tool
 brew "hyperfine"
+# C/C++ and Java libraries for Unicode and globalization
 brew "icu4c@76"
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Git-compatible distributed version control system
 brew "jj"
+# Lazier way to manage everything docker
 brew "lazydocker"
+# Simple terminal UI for git commands
 brew "lazygit"
+# TUI for Jujutsu/jj
 brew "lazyjj"
+# Modern TUI for Makefiles
 brew "lazymake"
+# Terminal Markdown previewer with a GUI-like experience
 brew "leaf-md"
+# Find what models run on your hardware
 brew "llmfit"
+# Tool for linting and static analysis of Lua code
 brew "luacheck"
+# Package manager for the Lua programming language
 brew "luarocks"
+# Apple Silicon Monitor Top written in Go Lang
 brew "mactop"
+# CLI tool to help you manage repositories
 brew "mani"
+# Mac App Store command-line interface
 brew "mas"
+# Syntax-aware git merge driver
 brew "mergiraf"
+# Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# Interactive cheatsheet tool for the command-line
 brew "navi"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Use NeoVim as a pager to view manpages, diffs, etc.
 brew "nvimpager"
+# Prompt theme engine for any shell
 brew "oh-my-posh"
+# Create, run, and share large language models (LLMs)
 brew "ollama", restart_service: :changed
+# Swiss-army knife of markup format conversion
 brew "pandoc"
+# General-purpose scripting language
 brew "php"
+# Language server for Pkl
 brew "pkl-lsp"
+# Draw UML diagrams
 brew "plantuml"
+# Fast, disk space efficient package manager
 brew "pnpm"
+# Python package management tool
 brew "poetry"
+# PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Object-relational database system
 brew "postgresql@17"
+# Fast Git hook manager written in Rust, drop-in alternative to pre-commit
 brew "prek"
+# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Cloud native development platform
 brew "pulumi"
+# Static type checker for Python
 brew "pyright"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.12"
+# Modern man page viewer
 brew "qman"
+# Better WHOIS and domain intelligence toolkit
 brew "quien"
+# Perl-powered file rename script with many helpful built-ins
 brew "rename"
+# Flashcard program that uses spaced repetition
 brew "repeater"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# CLI proxy to minimize LLM token consumption
 brew "rtk"
+# Safe, concurrent, practical language
 brew "rust"
+# CLI search and replace | Space Age seD
 brew "sad"
+# 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# Bash syntax highlighter that encourages/fixes variables quoting
 brew "shellharden"
+# Autoformat shell script source code
 brew "shfmt"
+# SOund eXchange: universal sound sample translator
 brew "sox"
+# Code surgeon for precise text and code transplantation
 brew "srgn"
+# Opinionated Lua code formatter
 brew "stylua"
+# Generate scripting interfaces to C/C++ code
 brew "swig"
+# Open source continuous file synchronization application
 brew "syncthing", restart_service: :changed
+# TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
 brew "tabiew"
+# TOML toolkit written in Rust
 brew "taplo"
+# TUI-based PDF viewer
 brew "tdf"
+# Very fast implementation of tldr in Rust
 brew "tealdeer"
+# General purpose fuzzy finder TUI
 brew "television"
+# Terminal multiplexer
 brew "tmux"
+# Plugin manager for tmux
 brew "tpm"
+# RTF to other formats converter
 brew "unrtf"
+# Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Syntax-aware linter for prose
 brew "vale"
+# Your CLI home video recorder
 brew "vhs"
+# Terminal navigator
 brew "walk"
+# Linter for YAML files
 brew "yamllint"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
+# Command-line fuzzy finder that prioritizes matches on filenames
 brew "zf"
+# Find security issues in GitHub Actions setups
 brew "zizmor"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# UNIX shell (command interpreter)
 brew "zsh"
+# A cross-platform, cli app to perform various string operations.
 brew "abhimanyu003/sttr/sttr"
+# Code intelligence system with semantic search
 brew "bartolli/codanna/codanna"
+# Go Coverage in your terminal: a tool for exploring Go Coverage reports from the command line
 brew "orlangure/tap/gocovsh"
+# The AI coding agent built for the terminal.
 brew "sst/tap/opencode"
+# Grep the GIF. Stick the landing
 brew "steipete/tap/gifgrep"
+# Spotify power CLI using web cookies
 brew "steipete/tap/spogo"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
 cask "1password-cli"
+# Time tracker
 cask "activitywatch"
+# Application launcher and productivity software
 cask "alfred"
+# AI dictation app
 cask "amical"
+# Memory training application
 cask "anki"
+# Application uninstaller
 cask "appcleaner"
+# Monitors common persistence locations
 cask "blockblock"
+# Web browser focusing on privacy
 cask "brave-browser"
+# E-books management software
 cask "calibre"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Terminal-based AI coding assistant
 cask "claude-code"
+# Free app that makes your Internet safer
 cask "cloudflare-warp"
+# AI code review CLI
 cask "coderabbit"
+# Menu bar usage monitor for Codex and Claude
 cask "steipete/tap/codexbar"
+# Write, edit, and chat about your code with AI
 cask "cursor"
+# Customise menu item keyboard shortcuts
 cask "customshortcuts"
+# Disk space visualiser
 cask "daisydisk"
+# API documentation browser and code snippet manager
 cask "dash"
+# API documentation browser and code snippet manager
 cask "dash6"
+# Generate a timeline of your day, automatically
 cask "dayflow"
+# Scans for dylib hijacking
 cask "dhs"
+# Voice and text chat software
 cask "discord"
+# App to build and share containerised applications and microservices
 cask "docker-desktop"
+# Client for the Dropbox cloud storage service
 cask "dropbox"
+# Per-application volume mixer, equalizer, and audio router
 cask "finetune"
+# Web browser
 cask "firefox"
+# Web browser
 cask "firefox-developer-edition"
+# Screen colour temperature controller
 cask "flux-app"
 cask "font-atkinson-hyperlegible-mono"
 cask "font-atkinson-hyperlegible-next"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
 cask "font-hack-nerd-font"
+# Wireframing tool
 cask "frame0"
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Desktop client for GitHub repositories
 cask "github"
+# Web browser
 cask "google-chrome"
+# Speech to text application
 cask "handy"
+# Windows manager and desktop organiser
 cask "hazeover"
+# Tool to optimise images to a smaller size
 cask "imageoptim"
+# Menu bar manager
 cask "jordanbaird-ice@beta"
+# Keyboard customiser
 cask "karabiner-elements"
+# Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
+# End-to-end encryption software
 cask "keybase"
+# Desktop shield and keystroke interceptor
 cask "keyboard-cleaner"
+# Open-source keystroke visualiser
 cask "keycastr"
+# Use Vim in input fields and non input fields
 cask "kindavim"
+# Agent-centric IDE with spec-driven development
 cask "kiro"
+# Tool to show what is persistently installed on the computer
 cask "knockknock"
+# Open-source firewall to block unknown outgoing connections
 cask "lulu"
+# Detailed information on every Apple product ever made
 cask "mactracker"
+# Scan and remove malware, spyware, and viruses
 cask "malwarebytes"
+# Multi-platform web browser
 cask "microsoft-edge"
+# Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
+# Minimal installer for conda
 cask "miniconda"
+# Tool to control external monitor brightness & volume
 cask "monitorcontrol"
+# VPN client
 cask "mullvad-vpn"
+# Knowledge base from AI chats
 cask "nessie-app"
+# Network monitor
 cask "netiquette"
+# Free and open-source RSS reader
 cask "netnewswire"
+# App to write, plan, collaborate, and get organised
 cask "notion"
+# Open-source software for live streaming and screen recording
 cask "obs"
+# Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# AI coding agent desktop client
 cask "opencode-desktop"
+# LLM server built on MLX
 cask "osaurus"
+# Monitors computer mic and webcam
 cask "oversight"
+# Command palette in any application
 cask "paletro"
+# Tool to eliminate similar or duplicate photos
 cask "photosweeper-x"
+# Colour picker for colours onscreen
 cask "pika"
+# Quick Look generator for Markdown files
 cask "qlmarkdown"
+# Quick Look plugin for JSON files
 cask "quicklook-json"
+# Window snapping tool
 cask "rectangle-pro"
+# Menu bar dashboard for GitHub repository health
 cask "steipete/tap/repobar"
+# Emoji picker optimised for blind people
 cask "rocket"
+# Productivity-first Dynamic Island for your Notch
 cask "seam-app"
+# PDF reader and note-taking application
 cask "skim"
+# Team communication and collaboration software
 cask "slack"
+# Music streaming service
 cask "spotify"
+# Video game digital distribution service
 cask "steam"
+# Application for inspecting installer packages
 cask "suspicious-package"
+# Tool to explore all the running tasks (processes)
 cask "taskexplorer"
+# LaTeX editor
 cask "texifier"
+# Unpacks archive files
 cask "the-unarchiver"
+# Paste-once, run-once clipboard cleaner for terminal snippets
 cask "steipete/tap/trimmy"
+# Open-source code editor
 cask "visual-studio-code"
+# Multimedia player
 cask "vlc"
+# Rust-based terminal
 cask "warp"
+# Quick Look plugin for webp files
 cask "webpquicklook"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
+# Native desktop client for WhatsApp
 cask "whatsapp"
+# VPN client for secure internet access and private browsing
 cask "windscribe"
+# Open-source version of the X.Org X Window System
 cask "xquartz"
+# Multiplayer code editor
 cask "zed"
+# Gecko based web browser
+cask "zen"
+# Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "BookShelves", id: 6756848973
@@ -222,6 +429,7 @@ mas "Dropover", id: 1355679052
 mas "Ecosia", id: 1463400445
 mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
+mas "Hive", id: 6747834729
 mas "HotKey", id: 975890633
 mas "Keynote", id: 361285480
 mas "Keynote", id: 409183694
@@ -235,7 +443,6 @@ mas "Spotica Menu", id: 570549457
 mas "Table Habit", id: 6744886469
 mas "Tot", id: 1491071483
 mas "Weathergraph", id: 1501958576
-mas "World of Tanks Blitz", id: 1068932208
 mas "Xcode", id: 497799835
 vscode "alexcvzz.vscode-sqlite"
 vscode "anthropic.claude-code"

@@ -58,3 +58,5 @@ mise.local.toml
 .netrc
 .npmrc
 podman-build-secret*
+
+**/.claude/settings.local.json
