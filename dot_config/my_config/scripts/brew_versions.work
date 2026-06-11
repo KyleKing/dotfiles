@@ -2,7 +2,7 @@ act 0.2.89
 ada-url 3.4.4
 aom 3.14.1
 atuin 18.16.1
-awscli 2.34.64
+awscli 2.35.2
 bat 0.26.1
 blake3 1.8.5
 block-goose-cli 1.37.0
@@ -33,9 +33,9 @@ fribidi 1.0.16
 fzf 0.73.1
 gcc 15.2.0_1
 gd 2.3.3_6
-gdk-pixbuf 2.44.6
+gdk-pixbuf 2.44.6_1
 gettext 1.0
-gh 2.93.0
+gh 2.94.0
 giflib 6.1.3
 git 2.54.0
 git-delta 0.19.2
@@ -64,6 +64,7 @@ krb5 1.22.2
 krew 0.5.0
 ktea 0.8.0
 kubernetes-cli 1.36.1
+lazydocker 0.25.2
 lazygit 0.62.2
 lazymake 0.4.1
 lazysql 0.5.4
@@ -118,7 +119,7 @@ m4 1.4.21
 mani 0.32.1
 mergiraf 0.17.0
 merve 1.2.2_1
-mise 2026.6.1
+mise 2026.6.2
 mpdecimal 4.0.1
 mpfr 4.2.2
 navi 2.24.0
@@ -130,7 +131,7 @@ nettle 4.0
 node 26.3.0
 npth 1.8
 nvimpager 0.14.0
-oh-my-posh 29.14.0
+oh-my-posh 29.15.1
 oniguruma 6.9.10
 opencode 1.16.2
 openexr 3.4.12
@@ -138,7 +139,7 @@ openjdk 26.0.1
 openjpeg 2.5.4
 openjph 0.27.4
 openssl@3 3.6.2
-openssl@4 4.0.0
+openssl@4 4.0.1
 ossp-uuid 1.6.2_2
 oxlint 1.69.0
 p11-kit 0.26.2
@@ -152,7 +153,7 @@ pkgconf 2.5.1
 pkl 0.31.1
 pkl-lsp 0.7.1
 plantuml 1.2026.6
-pnpm 11.5.2
+pnpm 11.5.3
 postgresql@18 18.4
 prek 0.4.4
 pulumi 3.245.0
@@ -164,6 +165,7 @@ ripsecrets 0.1.11
 rust 1.96.0
 sad 0.4.32
 selene 0.31.0
+sem-cli 0.10.1
 sentry-cli 3.5.0
 shfmt 3.13.1
 simdjson 4.6.4
@@ -179,12 +181,12 @@ tesseract 5.5.2
 tmux 3.6b
 tree-sitter 0.26.9
 tuios 0.7.0
-ty 0.0.44
+ty 0.0.46
 unbound 1.25.1
 unibilium 2.1.2
-usage 3.4.0
+usage 3.5.0
 utf8proc 2.11.3
-uv 0.11.19
+uv 0.11.20
 uvwasi 0.0.23
 weasyprint 69.0
 webp 1.6.0
@@ -204,9 +206,9 @@ beekeeper-studio 5.4.2
 block-goose 1.37.0
 brave-browser 1.83.120.0
 claude 1.1.3189,1b7b58b8b5060b7d5d19c6863d8f0caef4f0fc97
-claude-code@latest 2.1.169
+claude-code@latest 2.1.172
 claude-devtools 0.5.0
-coderabbit 0.5.4
+coderabbit 0.6.0
 cursor 2.0.63,505046dcfad2acda3d066e32b7cd8b6e2dc1fdcd
 customshortcuts 1.3
 dash 8.0.1
@@ -218,9 +220,10 @@ firefox@developer-edition 144.0b9
 font-fira-code-nerd-font 3.4.0
 font-sarasa-gothic 1.0.39
 google-chrome 149.0.7827.54
-hatchet 0.88.0
+hatchet 0.89.0
 hazeover 1.9.6
 imageoptim 1.9.3
+incident-io 1.3.1
 jordanbaird-ice@beta 0.11.13-dev.2
 karabiner-elements 15.5.0
 keepingyouawake 1.6.8
@@ -230,6 +233,7 @@ libreoffice 26.2.4
 linear 1.28.6,251002av7g3go28
 microsoft-auto-update 4.80.25092610
 microsoft-teams 25255.703.3981.5698
+monarch 0.9.21
 monitorcontrol 4.3.3
 notion 4.21.1
 obs 32.0.2
@@ -245,4 +249,5 @@ viscosity 1.11.5
 visual-studio-code 1.105.0
 wezterm@nightly latest
 zed 0.213.4
+zen 1.21b
 zoom 6.6.2.65462

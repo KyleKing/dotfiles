@@ -26,6 +26,7 @@ huseyinbabal/tap/taws
 keidarcy/tap/e1s
 krew
 ktea
+lazydocker
 lazygit
 lazymake
 lazysql
@@ -50,6 +51,7 @@ ripsecrets
 rust
 sad
 selene
+sem-cli
 sentry-cli
 shfmt
 stylua

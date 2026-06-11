@@ -11,11 +11,13 @@
       "Bash(git log:*)",
       "Bash(git show:*)",
       "WebFetch(domain:*)",
-      "WebSearch"
+      "WebSearch",
+      "mcp__incident_io__*",
+      "Skill(incident)"
     ],
-    "defaultMode": "dontAsk"
+    "deny": ["Read(./dev.secret.local.env)"],
+    "defaultMode": "auto"
   },
-  "model": "sonnet",
   "hooks": {
     "PostToolUse": [
       {
@@ -60,6 +62,10 @@
       }
     ]
   },
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "workflowKeywordTriggerEnabled": false,
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true
   },
@@ -74,11 +80,13 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
-  "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
+  "preferredNotifChannel": "auto",
   "fileCheckpointingEnabled": false,
+  "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "model": "sonnet"
 }
