@@ -1,142 +1,271 @@
-tap "dlvhdr/formulae"
-tap "gaurav-gosain/tap"
-tap "hatchet-dev/hatchet"
-tap "huseyinbabal/tap"
-tap "jonas-grgt/ktea"
-tap "keidarcy/tap"
-tap "turbot/tap"
+tap "dlvhdr/formulae", trusted: true
+tap "gaurav-gosain/tap", trusted: true
+tap "hatchet-dev/hatchet", trusted: true
+tap "huseyinbabal/tap", trusted: true
+tap "jonas-grgt/ktea", trusted: true
+tap "keidarcy/tap", trusted: true
+tap "turbot/tap", trusted: true
+# Run your GitHub Actions locally
 brew "act"
+# Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
+# Library for command-line editing
 brew "readline"
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Open source, extensible AI agent that goes beyond code suggestions
 brew "block-goose-cli"
+# Yet another cross-platform graphical process/system monitor
 brew "bottom"
+# Object-file caching compiler wrapper
 brew "ccache"
+# Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Statistics utility to count lines of code
 brew "cloc"
+# Your Refactoring Alarm
 brew "codelimit"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Power of curl, ease of use of httpie
 brew "curlie"
+# Diff that understands syntax
 brew "difftastic"
+# Tool for exploring each layer in a docker image
 brew "dive"
+# Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# GNU compiler collection
 brew "gcc"
+# Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Git extension for versioning large files
 brew "git-lfs"
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Framework for layout and rendering of i18n text
 brew "pango"
+# Tool for glamorous shell scripts
 brew "gum"
+# Smarter Dockerfile linter to validate best practices
 brew "hadolint"
+# Git hook and pre-commit lint manager
 brew "hk"
+# Package manager for kubectl plugins
 brew "krew"
+# Kafka TUI client
 brew "ktea"
+# Lazier way to manage everything docker
 brew "lazydocker"
+# Simple terminal UI for git commands
 brew "lazygit"
+# Modern TUI for Makefiles
 brew "lazymake"
+# Cross-platform TUI database management tool
 brew "lazysql"
+# Portable Foreign Function Interface library
 brew "libffi"
+# Postgres C API library
 brew "libpq"
+# Next-gen compiler infrastructure
 brew "llvm"
+# CLI tool to help you manage repositories
 brew "mani"
+# Syntax-aware git merge driver
 brew "mergiraf"
+# Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# Interactive cheatsheet tool for the command-line
 brew "navi"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Use NeoVim as a pager to view manpages, diffs, etc.
 brew "nvimpager"
+# Prompt theme engine for any shell
 brew "oh-my-posh"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# AI coding agent, built for the terminal
 brew "opencode"
+# ISO-C API and CLI for generating UUIDs
 brew "ossp-uuid"
+# High-performance linter for JavaScript and TypeScript written in Rust
 brew "oxlint"
+# Swiss-army knife of markup format conversion
 brew "pandoc"
+# Package compiler and linker metadata toolkit
 brew "pkgconf"
+# Language server for Pkl
 brew "pkl-lsp"
+# Draw UML diagrams
 brew "plantuml"
+# Fast, disk space efficient package manager
 brew "pnpm"
+# Object-relational database system
 brew "postgresql@18", restart_service: :changed
+# Fast Git hook manager written in Rust, drop-in alternative to pre-commit
 brew "prek"
+# Cloud native development platform
 brew "pulumi"
+# Prevent committing secret keys into your source code
 brew "ripsecrets"
+# Safe, concurrent, practical language
 brew "rust"
+# CLI search and replace | Space Age seD
 brew "sad"
+# Blazing-fast modern Lua linter
 brew "selene"
+# Semantic version control CLI with entity-level diffs and blame
 brew "sem-cli"
+# Command-line utility to interact with Sentry
 brew "sentry-cli"
+# Autoformat shell script source code
 brew "shfmt"
+# Opinionated Lua code formatter
 brew "stylua"
+# Open source continuous file synchronization application
 brew "syncthing", restart_service: :changed
+# TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
 brew "tabiew"
+# Very fast implementation of tldr in Rust
 brew "tealdeer"
+# OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Terminal multiplexer
 brew "tmux"
+# Terminal UI OS (Terminal Multiplexer)
 brew "tuios"
+# Extremely fast Python type checker, written in Rust
 brew "ty"
+# Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Convert HTML to PDF
 brew "weasyprint"
+# Yet Another Dotfiles Manager
 brew "yadm"
+# General-purpose lossless data-compression library
 brew "zlib"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Git diff pager based on delta but with a file tree, à la GitHub
 brew "dlvhdr/formulae/diffnav"
+# Terminal UI for AWS
 brew "huseyinbabal/tap/taws"
+# e1s is a terminal application to simply browsing and manage AWS ECS resources, with a focus on Fargate. Inspired by k9s.
 brew "keidarcy/tap/e1s"
+# Steampipe exposes APIs and services as a high-performance relational database, giving you the ability to write SQL-based queries to explore, assess and report on dynamic data.
 brew "turbot/tap/steampipe"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
 cask "1password-cli"
+# Application launcher and productivity software
 cask "alfred"
+# Application uninstaller
 cask "appcleaner"
+# Cross platform SQL editor and database management app
 cask "beekeeper-studio"
+# Open source, extensible AI agent that goes beyond code suggestions
 cask "block-goose"
+# Web browser focusing on privacy
 cask "brave-browser"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Terminal-based AI coding assistant
 cask "claude-code@latest"
+# Visualise and analyse Claude Code session executions
 cask "claude-devtools"
-cask "coderabbit"
+# Write, edit, and chat about your code with AI
 cask "cursor"
+# Customise menu item keyboard shortcuts
 cask "customshortcuts"
+# API documentation browser and code snippet manager
 cask "dash"
+# App to build and share containerised applications and microservices
 cask "docker-desktop"
+# Security audit software
 cask "drata-agent"
+# Client for the Dropbox cloud storage service
 cask "dropbox"
+# Web browser
 cask "firefox"
+# Web browser
 cask "firefox@developer-edition"
 cask "font-fira-code-nerd-font"
 cask "font-sarasa-gothic"
+# Web browser
 cask "google-chrome"
+# Command-line interface for Hatchet workflow orchestration
 cask "hatchet-dev/hatchet/hatchet"
+# Windows manager and desktop organiser
 cask "hazeover"
+# Tool to optimise images to a smaller size
 cask "imageoptim"
+# Incident management platform
 cask "incident-io"
+# Menu bar manager
 cask "jordanbaird-ice@beta"
+# Keyboard customiser
 cask "karabiner-elements"
+# Tool to prevent the system from going into sleep mode
 cask "keepingyouawake"
+# Desktop shield and keystroke interceptor
 cask "keyboard-cleaner"
+# Open-source keystroke visualiser
 cask "keycastr"
+# Free cross-platform office suite, fresh version
 cask "libreoffice"
+# App to manage software development and track bugs
 cask "linear"
+# Provides updates to various Microsoft products
 cask "microsoft-auto-update"
+# Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
+# Spotlight Search
 cask "monarch"
+# Tool to control external monitor brightness & volume
 cask "monitorcontrol"
+# App to write, plan, collaborate, and get organised
 cask "notion"
+# Open-source software for live streaming and screen recording
 cask "obs"
+# Client program for the OpenVPN Access Server
 cask "openvpn-connect"
+# Replacement for Docker Desktop
 cask "orbstack"
+# Window snapping tool
 cask "rectangle-pro"
+# Productivity-first Dynamic Island for your Notch
 cask "seam-app"
+# Plugin for AWS CLI to start and end sessions that connect to managed instances
 cask "session-manager-plugin"
+# Team communication and collaboration software
 cask "slack"
+# Music streaming service
 cask "spotify"
+# Native GUI tool for relational databases
 cask "tableplus"
+# OpenVPN client with AppleScript support
 cask "viscosity"
+# Open-source code editor
 cask "visual-studio-code"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
+# Multiplayer code editor
 cask "zed"
+# Gecko based web browser
 cask "zen"
+# Video communication and virtual meeting platform
 cask "zoom"
 vscode "alexcvzz.vscode-sqlite"
 vscode "anthropic.claude-code"
@@ -161,7 +290,6 @@ vscode "yoavbls.pretty-ts-errors"
 go "cmd/go"
 go "cmd/gofmt"
 cargo "selene"
-npm "@anthropic-ai/claude-code"
 npm "corepack"
 npm "cspell"
 npm "markdown-link-check"
