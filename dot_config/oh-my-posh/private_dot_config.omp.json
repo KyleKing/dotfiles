@@ -98,6 +98,13 @@
           "style": "plain"
         },
         {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:blue",
+          "background": "transparent",
+          "template": "{{ if .Env.GH_PR_NUMBER }}#{{ .Env.GH_PR_NUMBER }} {{ end }}"
+        },
+        {
           "template": "at <p:blue><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>",
           "foreground": "p:white",
           "background": "transparent",
