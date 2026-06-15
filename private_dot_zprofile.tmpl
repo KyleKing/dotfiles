@@ -24,6 +24,9 @@ export PKG_CONFIG_PATH="$PREFIX_ICU4C/lib/pkgconfig"
 # Created by `pipx` and used by `uv` tools as well
 export PATH="{{ .chezmoi.homeDir }}/.local/bin:$PATH"
 
+# Source cargo-installed global packages like cbcli
+export PATH="{{ .chezmoi.homeDir }}/.cargo/bin:$PATH"
+
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config
 
