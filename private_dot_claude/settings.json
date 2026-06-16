@@ -66,18 +66,8 @@
     "baseRef": "fresh"
   },
   "workflowKeywordTriggerEnabled": false,
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "cavekit-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "juliusbrussee/cavekit",
-        "ref": "main"
-      }
-    }
-  },
+  "enabledPlugins": {},
+  "extraKnownMarketplaces": {},
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "autoUpdatesChannel": "latest",
@@ -87,6 +77,5 @@
   "fileCheckpointingEnabled": false,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "model": "sonnet"
+  "agentPushNotifEnabled": true
 }

@@ -4,6 +4,7 @@ tap "hatchet-dev/hatchet", trusted: true
 tap "huseyinbabal/tap", trusted: true
 tap "jonas-grgt/ktea", trusted: true
 tap "keidarcy/tap", trusted: true
+tap "matthart1983/tap"
 tap "turbot/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
@@ -163,6 +164,8 @@ brew "dlvhdr/formulae/diffnav"
 brew "huseyinbabal/tap/taws"
 # e1s is a terminal application to simply browsing and manage AWS ECS resources, with a focus on Fargate. Inspired by k9s.
 brew "keidarcy/tap/e1s"
+# Single-host system diagnostics TUI — sibling to netwatch
+brew "matthart1983/tap/syswatch", trusted: true
 # Steampipe exposes APIs and services as a high-performance relational database, giving you the ability to write SQL-based queries to explore, assess and report on dynamic data.
 brew "turbot/tap/steampipe"
 # Password manager that keeps all passwords secure behind one password
@@ -289,6 +292,7 @@ vscode "traycer.traycer-vscode"
 vscode "yoavbls.pretty-ts-errors"
 go "cmd/go"
 go "cmd/gofmt"
+cargo "cbcli"
 cargo "selene"
 npm "corepack"
 npm "cspell"

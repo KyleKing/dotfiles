@@ -34,7 +34,8 @@ npm:@mermaid-js/mermaid-cli                    11.15.0                 ~/.config
 npm:@microsoft/compose-language-service        0.5.0                   ~/.config/mise/config.toml  latest
 npm:@oh-my-pi/pi-coding-agent                  15.10.12
 npm:@oh-my-pi/pi-coding-agent                  15.11.0
-npm:@oh-my-pi/pi-coding-agent                  15.11.3                 ~/.config/mise/config.toml  latest
+npm:@oh-my-pi/pi-coding-agent                  15.11.3
+npm:@oh-my-pi/pi-coding-agent                  15.13.3                 ~/.config/mise/config.toml  latest
 npm:@qodo/command                              0.36.0                  ~/.config/mise/config.toml  latest
 npm:@sourcegraph/amp                           0.0.1764893126-gb1ffc3
 npm:@sourcegraph/amp                           0.0.1764921674-g2aab2c
@@ -43,10 +44,12 @@ npm:@sourcegraph/amp                           0.0.1781166336-g02cc1e
 npm:bash-language-server                       5.6.0                   ~/.config/mise/config.toml  latest
 npm:cchistory                                  0.3.0                   ~/.config/mise/config.toml  latest
 npm:dockerfile-language-server-nodejs          0.15.0                  ~/.config/mise/config.toml  latest
-npm:hunkdiff                                   0.15.1                  ~/.config/mise/config.toml  latest
+npm:hunkdiff                                   0.15.1
+npm:hunkdiff                                   0.15.3                  ~/.config/mise/config.toml  latest
 npm:jj-stack                                   1.2.1                   ~/.config/mise/config.toml  latest
 npm:n8n                                        2.2.4
-npm:n8n                                        2.25.7                  ~/.config/mise/config.toml  latest
+npm:n8n                                        2.25.7
+npm:n8n                                        2.26.4                  ~/.config/mise/config.toml  latest
 npm:stylelint                                  17.13.0                 ~/.config/mise/config.toml  latest
 npm:supabase                                   2.48.3
 npm:vscode-langservers-extracted               4.10.0                  ~/.config/mise/config.toml  latest
@@ -54,7 +57,8 @@ npm:yaml-language-server                       1.23.0                  ~/.config
 pipx:beautysh                                  6.4.3                   ~/.config/mise/config.toml  latest
 pipx:claude-conversation-extractor             1.1.2                   ~/.config/mise/config.toml  latest
 pipx:code2flow                                 2.5.1                   ~/.config/mise/config.toml  latest
-pipx:copier                                    9.15.1                  ~/.config/mise/config.toml  latest
+pipx:copier                                    9.15.1
+pipx:copier                                    9.15.2                  ~/.config/mise/config.toml  latest
 pipx:copier-template-tester                    2.3.0                   ~/.config/mise/config.toml  latest
 pipx:em-keyboard                               5.3.0                   ~/.config/mise/config.toml  latest
 pipx:git-filter-repo                           2.47.0                  ~/.config/mise/config.toml  latest
@@ -67,18 +71,20 @@ pipx:pint                                      0.25.3                  ~/.config
 pipx:poetry                                    2.2.1
 pipx:prek                                      0.2.18
 pipx:pygments                                  2.20.0                  ~/.config/mise/config.toml  latest
-pipx:pylint                                    4.0.5                   ~/.config/mise/config.toml  latest
+pipx:pylint                                    4.0.5
+pipx:pylint                                    4.0.6                   ~/.config/mise/config.toml  latest
 pipx:pyright                                   1.1.410                 ~/.config/mise/config.toml  latest
 pipx:pysentry-rs                               0.4.6                   ~/.config/mise/config.toml  latest
 pipx:pytest-watcher                            0.6.3                   ~/.config/mise/config.toml  latest
-pipx:ruff                                      0.15.16                 ~/.config/mise/config.toml  latest
+pipx:ruff                                      0.15.16
+pipx:ruff                                      0.15.17                 ~/.config/mise/config.toml  latest
 pipx:sqlfluff                                  4.2.2                   ~/.config/mise/config.toml  latest
 pipx:sqlit-tui                                 1.5.1                   ~/.config/mise/config.toml  latest
 pipx:toml-sort                                 0.24.4                  ~/.config/mise/config.toml  latest
 pipx:tox                                       4.31.0
 pipx:tox                                       4.55.1                  ~/.config/mise/config.toml  latest
-pipx:trcli                                     1.14.3                  ~/.config/mise/config.toml  latest
-pipx:trcli                                     1.15.0
+pipx:trcli                                     1.14.3
+pipx:trcli                                     1.15.0                  ~/.config/mise/config.toml  latest
 pipx:uv-secure                                 0.17.2                  ~/.config/mise/config.toml  latest
 pipx:watchgha                                  2.7.0                   ~/.config/mise/config.toml  latest
 pipx:whisperlivekit                            0.2.22                  ~/.config/mise/config.toml  latest
