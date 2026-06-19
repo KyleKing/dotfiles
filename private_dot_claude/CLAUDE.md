@@ -28,6 +28,11 @@
 
 - Limit modifications to what's necessary; don't refactor adjacent code or add docs/types/tests to unmodified functions
 
+## Files
+
+- Never write markdown, notes, plans, or research output to the temp/scratchpad directory; write them in the current working directory or the project root instead
+- The scratchpad directory is only for true intermediates that have no value after the task (e.g. a JSON blob being piped between steps)
+
 ## Mermaid Diagrams
 
 - Keep diagrams under ~15 nodes; group related items rather than enumerating individually
