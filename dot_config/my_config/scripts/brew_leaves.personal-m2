@@ -21,7 +21,6 @@ eza
 fd
 fracturedjson
 gcc
-gemini-cli
 gh
 git
 git-delta
@@ -32,7 +31,6 @@ gum
 hadolint
 hcloud
 hyperfine
-icu4c@76
 imagemagick
 lazydocker
 lazygit

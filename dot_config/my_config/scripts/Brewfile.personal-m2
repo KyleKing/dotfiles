@@ -55,8 +55,6 @@ brew "fracturedjson"
 brew "fzf"
 # GNU compiler collection
 brew "gcc"
-# Interact with Google Gemini AI models from the command-line
-brew "gemini-cli"
 # GitHub command-line tool
 brew "gh"
 # OCR (Optical Character Recognition) engine
@@ -83,8 +81,6 @@ brew "hadolint"
 brew "hcloud"
 # Command-line benchmarking tool
 brew "hyperfine"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@76"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Git-compatible distributed version control system
@@ -245,6 +241,8 @@ cask "alfred"
 cask "amical"
 # Memory training application
 cask "anki"
+# Terminal interface for Antigravity agents
+cask "antigravity-cli"
 # Application uninstaller
 cask "appcleaner"
 # Monitors common persistence locations
@@ -256,7 +254,7 @@ cask "calibre"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
-cask "claude-code"
+cask "claude-code@latest"
 # Free app that makes your Internet safer
 cask "cloudflare-warp"
 # AI code review CLI
@@ -370,8 +368,6 @@ cask "photosweeper-x"
 cask "pika"
 # Quick Look generator for Markdown files
 cask "qlmarkdown"
-# Quick Look plugin for JSON files
-cask "quicklook-json"
 # Window snapping tool
 cask "rectangle-pro"
 # Menu bar dashboard for GitHub repository health
