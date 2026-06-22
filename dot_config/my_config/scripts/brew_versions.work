@@ -2,11 +2,11 @@ act 0.2.89
 ada-url 3.4.4
 aom 3.14.1
 atuin 18.16.1
-awscli 2.35.8
+awscli 2.35.9
 bat 0.26.1
 blake3 1.8.5
 block-goose-cli 1.38.0
-bottom 0.12.3
+bottom 0.14.0
 brotli 1.2.0
 c-ares 1.34.6
 ca-certificates 2026-05-14
@@ -26,7 +26,7 @@ dive 0.13.1
 e1s 2.0.0-rc.4
 eza 0.23.4
 fd 10.4.2
-fmt 12.1.0
+fmt 12.2.0
 fontconfig 2.18.1
 freetype 2.14.3
 fribidi 1.0.16
@@ -76,7 +76,7 @@ libb2 0.98.1
 libdatrie 0.2.14
 libdeflate 1.25
 libevent 2.1.12_1
-libffi 3.5.2
+libffi 3.6.0
 libgcrypt 1.12.2
 libgit2 1.9.4
 libgpg-error 1.61
@@ -99,7 +99,7 @@ libtool 2.5.4
 libunistring 1.4.2
 libusb 1.0.30
 libuv 1.52.1
-libvmaf 3.1.0
+libvmaf 3.2.0
 libx11 1.8.13
 libxau 1.0.12
 libxcb 1.17.0
@@ -109,7 +109,7 @@ libxrender 0.9.12
 libyaml 0.2.5
 little-cms2 2.19
 llhttp 9.4.2
-llvm 22.1.7_1
+llvm 22.1.8
 lpeg 1.1.0_2
 luajit 2.1.1781602682
 luv 1.52.1-0
@@ -119,7 +119,7 @@ m4 1.4.21
 mani 0.32.1
 mergiraf 0.17.0
 merve 1.2.2_1
-mise 2026.6.11
+mise 2026.6.12
 mpdecimal 4.0.1
 mpfr 4.2.2
 navi 2.24.0
@@ -134,7 +134,7 @@ nvimpager 0.14.0
 oh-my-posh 29.17.0
 oniguruma 6.9.10
 opencode 1.17.5
-openexr 3.4.12_2
+openexr 3.4.13
 openjdk 26.0.1
 openjpeg 2.5.4
 openjph 0.29.0
@@ -182,12 +182,12 @@ tesseract 5.5.2
 tmux 3.6b
 tree-sitter 0.26.9
 tuios 0.7.0
-ty 0.0.50
+ty 0.0.51
 unbound 1.25.1
 unibilium 2.1.2
 usage 3.5.2
 utf8proc 2.11.3
-uv 0.11.22
+uv 0.11.23
 uvwasi 0.0.23
 weasyprint 69.0
 webp 1.6.0
@@ -207,7 +207,7 @@ beekeeper-studio 5.8.1
 block-goose 1.38.0
 brave-browser 1.83.120.0
 claude 1.14271.0,c8f4d811b076f6d3bb0a320ac9da463cd82a6a11
-claude-code@latest 2.1.183
+claude-code@latest 2.1.185
 claude-devtools 0.5.0
 cursor 3.8.11,e56ad3440df06d22ca7501e65fd518e905486ef7
 customshortcuts 1.3
@@ -246,7 +246,7 @@ slack 4.50.140
 spotify 1.2.92.148
 tableplus 7.2.2,722
 viscosity 1.11.5
-visual-studio-code 1.125.0
+visual-studio-code 1.125.1
 wezterm@nightly latest
 zed 1.7.2
 zen 1.21b
