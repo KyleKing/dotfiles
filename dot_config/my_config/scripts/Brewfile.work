@@ -1,5 +1,5 @@
 tap "dlvhdr/formulae", trusted: true
-tap "gaurav-gosain/tap", trusted: true
+tap "gaurav-gosain/tap", "https://github.com/Gaurav-Gosain/homebrew-tap", trusted: true
 tap "hatchet-dev/hatchet", trusted: true
 tap "huseyinbabal/tap", trusted: true
 tap "jonas-grgt/ktea", trusted: true

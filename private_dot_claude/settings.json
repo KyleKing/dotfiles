@@ -18,50 +18,7 @@
     "deny": ["Read(./dev.secret.local.env)"],
     "defaultMode": "auto"
   },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ]
-  },
+  "model": "sonnet",
   "worktree": {
     "baseRef": "fresh"
   },
@@ -75,7 +32,7 @@
   "editorMode": "vim",
   "preferredNotifChannel": "auto",
   "fileCheckpointingEnabled": false,
-  "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "remoteControlAtStartup": true
 }
