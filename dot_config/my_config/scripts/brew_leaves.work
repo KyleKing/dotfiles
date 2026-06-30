@@ -41,6 +41,7 @@ oh-my-posh
 opencode
 ossp-uuid
 oxlint
+p7zip
 pandoc
 pkl-lsp
 plantuml
@@ -54,6 +55,7 @@ sad
 selene
 sem-cli
 sentry-cli
+serie
 shfmt
 stylua
 syncthing

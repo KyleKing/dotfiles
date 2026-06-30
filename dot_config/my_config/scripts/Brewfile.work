@@ -130,6 +130,8 @@ brew "selene"
 brew "sem-cli"
 # Command-line utility to interact with Sentry
 brew "sentry-cli"
+# Rich git commit graph in your terminal
+brew "serie"
 # Autoformat shell script source code
 brew "shfmt"
 # Opinionated Lua code formatter

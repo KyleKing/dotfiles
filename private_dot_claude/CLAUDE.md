@@ -122,8 +122,16 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 - Favor paragraphs and bullets over bare lists; don't turn everything into a list
 - Don't start bullets with a bolded lead-in phrase followed by a colon (the "**Bold phrase:** sentence" pattern); write natural sentences instead
 - No trailing period at the end of a bulleted list item (even when the item is a full sentence); keep internal punctuation as needed
-- Minimize punctuation dashes (em/en dashes); prefer parentheses or a restructured sentence
+- No em/en dashes: use parentheses for asides and clarifications, "because"/"which"/"where" for causal or relative clauses, a period or comma for list-end elaborations
+- No semicolons joining independent clauses: split into two sentences, or move the second clause into parentheses if it is a short aside
 - PR descriptions: summary first, bullets, explain why not just what
+
+### PR inline comments and review replies
+
+- Self-notes on your own code: state the non-obvious "why" (constraint, invariant, workaround). Trim closing sentences that explain consequences the reader can infer
+- Review replies: acknowledge the bug briefly, state what was fixed, add a follow-up action if needed. Don't re-explain why the bug was bad or what would have happened
+- Follow-up actions: "I will confirm X after the next deploy to Stage" format
+- Don't over-explain: if the fix is visible in the diff, one sentence naming the change is enough
 
 ### Proposals and longer docs (Linear, design docs)
 
