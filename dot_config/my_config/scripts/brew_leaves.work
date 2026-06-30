@@ -41,7 +41,6 @@ oh-my-posh
 opencode
 ossp-uuid
 oxlint
-p7zip
 pandoc
 pkl-lsp
 plantuml
@@ -54,6 +53,7 @@ rust
 sad
 selene
 sem-cli
+semgrep
 sentry-cli
 serie
 shfmt
