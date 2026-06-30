@@ -40,7 +40,7 @@ repos:
       - id: trailing-whitespace
         exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.11.1
+    rev: v4.16.4
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
@@ -69,11 +69,11 @@ repos:
         exclude: \.copier-answers\.yml|.*/cassettes/.*\.yaml|tests/.*assert-cache.*/.+\.json
         types_or: [html, javascript, json, shell, yaml]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.37.1
+    rev: v1.38.0
     hooks:
       - id: yamllint
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.3
+    rev: v0.24.4
     hooks:
       - id: toml-sort-fix
         args:
@@ -85,7 +85,7 @@ repos:
           ]
         exclude: poetry\.lock|superfile/[^\.]+\.toml|dot_config/television/.+\.toml
   - repo: https://github.com/KyleKing/calcipy
-    rev: 5.0.0
+    rev: 6.0.1
     hooks:
       - id: copier-forbidden-files
   - repo: https://github.com/Yelp/detect-secrets
@@ -99,7 +99,7 @@ repos:
         stages:
           - pre-push
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v2.3.1
+    rev: v2.5.2
     hooks:
       - id: stylua-system
   - repo: https://github.com/sirwart/ripsecrets
