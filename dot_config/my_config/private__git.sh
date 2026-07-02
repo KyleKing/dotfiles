@@ -42,6 +42,61 @@ squash-me() {
     gh pr merge "$(whichpr)" --body='' --squash && gco master && gpoi && gl
 }
 
+# Wait for CI, check reviews, then squash-merge and clean up.
+#
+# Usage: git push && gh pr ready && pr-merge-watch
+#   Blocks the terminal until done; macOS notifications fire on success or any
+#   blocking condition. After a successful merge, switches to main and prunes.
+#
+# Alternatives:
+#   - Skip the watch entirely and queue a server-side auto-merge at push time:
+#       gh pr merge --auto --squash
+#     Requires "Allow auto-merge" enabled in repo Settings > General. Merges
+#     when required checks + required approvals clear, but gives no local
+#     notification and won't gate on optional reviewers (CodeRabbit, etc.).
+#   - For one-off CI watching without merging: gh pr checks --watch --fail-fast
+pr-merge-watch() {
+    echo "Waiting for CI checks..."
+    if ! gh pr checks --watch --fail-fast; then
+        osascript -e 'display notification "CI failed — check before merging" with title "PR Blocked" sound name "Basso"'
+        return 1
+    fi
+
+    # CodeRabbit posts its review shortly after CI completes but is not a
+    # required check, so it won't appear in `gh pr checks`. Wait 60s to give
+    # it time to finish before inspecting reviews. Remove this sleep if
+    # CodeRabbit is configured as a required branch-protection check.
+    echo "CI passed. Waiting 60s for optional reviewers (e.g. CodeRabbit)..."
+    sleep 60
+
+    local blockers
+    blockers=$(gh pr view --json reviews,reviewRequests \
+        --jq '
+            (.reviews // [] | map(select(.state == "CHANGES_REQUESTED")) | length) as $cr |
+            (.reviewRequests // [] | length) as $pending |
+            if $cr > 0 then "changes-requested(\($cr))"
+            elif $pending > 0 then "pending-reviews(\($pending))"
+            else ""
+            end
+        ')
+
+    if [[ -n "$blockers" ]]; then
+        osascript -e "display notification \"Blocked: $blockers\" with title \"PR Not Merged\" sound name \"Basso\""
+        gh pr view --web
+        return 1
+    fi
+
+    if gh pr merge --squash; then
+        osascript -e 'display notification "Squash-merged successfully" with title "PR Merged" sound name "Glass"'
+        gco main && gpoi
+    else
+        # Most likely cause: someone merged to main after your last push.
+        # Fix: git fetch origin && git rebase origin/main, then re-push and re-run.
+        osascript -e 'display notification "Merge failed — likely a conflict, rebase and retry" with title "PR Blocked" sound name "Basso"'
+        return 1
+    fi
+}
+
 # Commit with no pre-commit
 alias gcnv='git commit --no-verify --message'
 
