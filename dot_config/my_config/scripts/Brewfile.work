@@ -192,6 +192,8 @@ cask "claude"
 cask "claude-code@latest"
 # Visualise and analyse Claude Code session executions
 cask "claude-devtools"
+# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
+cask "cmux"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # Customise menu item keyboard shortcuts
