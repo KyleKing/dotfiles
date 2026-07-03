@@ -1,7 +1,6 @@
 abhimanyu003/sttr/sttr
 act
 actionlint
-antiword
 atuin
 awscli
 bartolli/codanna/codanna
@@ -49,6 +48,7 @@ navi
 nvimpager
 oh-my-posh
 ollama
+opencode
 orlangure/tap/gocovsh
 pandoc
 php
@@ -75,7 +75,6 @@ shellharden
 shfmt
 sox
 srgn
-sst/tap/opencode
 steipete/tap/gifgrep
 steipete/tap/spogo
 stylua
@@ -87,6 +86,7 @@ tdf
 tealdeer
 television
 tpm
+unbound
 unrtf
 uv
 vale

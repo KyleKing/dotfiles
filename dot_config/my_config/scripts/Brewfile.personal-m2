@@ -1,14 +1,12 @@
 tap "abhimanyu003/sttr", trusted: true
+tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
 tap "bartolli/codanna", trusted: true
 tap "orlangure/tap", trusted: true
-tap "sst/tap", trusted: true
 tap "steipete/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
-# Utility to read Word (.doc) files
-brew "antiword"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # General-purpose data compression with high compression ratio
@@ -121,6 +119,10 @@ brew "nvimpager"
 brew "oh-my-posh"
 # Create, run, and share large language models (LLMs)
 brew "ollama", restart_service: :changed
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# AI coding agent, built for the terminal
+brew "opencode"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # General-purpose scripting language
@@ -155,8 +157,6 @@ brew "quien"
 brew "rename"
 # Flashcard program that uses spaced repetition
 brew "repeater"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
 # CLI proxy to minimize LLM token consumption
 brew "rtk"
 # Safe, concurrent, practical language
@@ -223,8 +223,6 @@ brew "abhimanyu003/sttr/sttr"
 brew "bartolli/codanna/codanna"
 # Go Coverage in your terminal: a tool for exploring Go Coverage reports from the command line
 brew "orlangure/tap/gocovsh"
-# The AI coding agent built for the terminal.
-brew "sst/tap/opencode"
 # Grep the GIF. Stick the landing
 brew "steipete/tap/gifgrep"
 # Spotify power CLI using web cookies
@@ -400,8 +398,6 @@ cask "visual-studio-code"
 cask "vlc"
 # Rust-based terminal
 cask "warp"
-# Quick Look plugin for webp files
-cask "webpquicklook"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
 # Native desktop client for WhatsApp
@@ -416,30 +412,6 @@ cask "zed"
 cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
-mas "BookShelves", id: 6756848973
-mas "Charmstone", id: 1563735522
-mas "ColorSlurp", id: 1287239339
-mas "Downlink", id: 1454269192
-mas "Dropover", id: 1355679052
-mas "Ecosia", id: 1463400445
-mas "Encrypto", id: 935235287
-mas "GIPHY CAPTURE", id: 668208984
-mas "Hive", id: 6747834729
-mas "HotKey", id: 975890633
-mas "Keynote", id: 361285480
-mas "Keynote", id: 409183694
-mas "Kindle", id: 302584613
-mas "Numbers", id: 361304891
-mas "Pages", id: 361309726
-mas "Qmenu", id: 1567442612
-mas "Shareful", id: 1522267256
-mas "Speedtest", id: 1153157709
-mas "Spotica Menu", id: 570549457
-mas "Table Habit", id: 6744886469
-mas "Tot", id: 1491071483
-mas "Weathergraph", id: 1501958576
-mas "Xcode", id: 497799835
 vscode "alexcvzz.vscode-sqlite"
 vscode "anthropic.claude-code"
 vscode "beardedbear.beardedtheme"

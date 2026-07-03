@@ -51,6 +51,7 @@ node                                                    24.16.0                 
 node                                                    25.2.1
 node                                                    26.3.0
 npm:@ampcode/cli                                        0.0.1781362617-g977781
+npm:@biomejs/biome                                      2.2.4
 npm:@biomejs/biome                                      2.4.16
 npm:@browsermcp/mcp                                     0.1.3                              ~/.config/mise/config.toml  latest
 npm:@fsouza/prettierd                                   0.28.0                             ~/.config/mise/config.toml  latest
@@ -118,6 +119,7 @@ pipx:sqlfluff                                           4.2.1                   
 pipx:sqlit-tui                                          1.5.0                              ~/.config/mise/config.toml  latest
 pipx:taplo                                              0.9.3
 pipx:toml-sort                                          0.24.2
+pipx:toml-sort                                          0.24.3
 pipx:toml-sort                                          0.24.4                             ~/.config/mise/config.toml  latest
 pipx:tox                                                4.32.0
 pipx:tox                                                4.55.0                             ~/.config/mise/config.toml  latest
