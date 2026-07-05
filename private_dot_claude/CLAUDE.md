@@ -1,10 +1,13 @@
 ## General
 
-- Avoid emojis
+- Verify claims with web search, my input, and/or data that can be collected with Tools
+- In general, web search and ask me for guidance/input with the question tool as needed
+- When debugging, identify multiple possible causes and reason/experiment to determine which explain the root cause
 
 ## Git
 
-- ONLY USE git operations to READ; DO NOT stage NOR unstage; DO NOT commit NOR push
+- ONLY USE git operations to READ; DO NOT stage NOR unstage; DO NOT push
+- ONE exception is when implementing a SEQUENCE of changes where committing at checkpoints is advisable, otherwise defer to me staging/committing. NEVER include the AI model used in the description
 
 ## Design Principles
 
@@ -115,6 +118,7 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 
 ## Tone and Voice
 
+- Keep emojis and dashes to a minimum
 - Direct and action-oriented; no filler, no excessive enthusiasm, no vague language
 - Technical precision: specific about implementation details and decisions
 - Conversational but progressional: full sentences that move the reader forward, light first-person reasoning is fine, still no filler
