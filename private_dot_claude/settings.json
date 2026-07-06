@@ -1,8 +1,62 @@
 {
+  "agentPushNotifEnabled": true,
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
+  "editorMode": "vim",
+  "effortLevel": "medium",
+  "enabledPlugins": {},
   "env": {
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "USE_BUILTIN_RIPGREP": "0"
   },
+  "extraKnownMarketplaces": {},
+  "fileCheckpointingEnabled": false,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "inputNeededNotifEnabled": true,
+  "model": "sonnet",
   "permissions": {
     "allow": [
       "Bash(find:*)",
@@ -15,69 +69,15 @@
       "mcp__incident_io__*",
       "Skill(incident)"
     ],
-    "deny": ["Read(./dev.secret.local.env)"],
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "deny": ["Read(.\/dev.secret.local.env)"]
   },
-  "model": "sonnet",
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/kyleking/.seam/hooks/seam-claude-code.sh"
-          }
-        ]
-      }
-    ]
-  },
+  "preferredNotifChannel": "auto",
+  "remoteControlAtStartup": true,
+  "skipDangerousModePermissionPrompt": true,
+  "tui": "fullscreen",
+  "workflowKeywordTriggerEnabled": false,
   "worktree": {
     "baseRef": "fresh"
-  },
-  "workflowKeywordTriggerEnabled": false,
-  "enabledPlugins": {},
-  "extraKnownMarketplaces": {},
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
-  "autoUpdatesChannel": "latest",
-  "tui": "fullscreen",
-  "skipDangerousModePermissionPrompt": true,
-  "editorMode": "vim",
-  "preferredNotifChannel": "auto",
-  "fileCheckpointingEnabled": false,
-  "remoteControlAtStartup": true,
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  }
 }
