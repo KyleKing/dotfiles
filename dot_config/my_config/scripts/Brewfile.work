@@ -84,6 +84,8 @@ brew "mani"
 brew "mergiraf"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# Remote terminal application
+brew "mosh"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -134,6 +136,8 @@ brew "semgrep"
 brew "sentry-cli"
 # Rich git commit graph in your terminal
 brew "serie"
+# Smart session manager for the terminal
+brew "sesh"
 # Autoformat shell script source code
 brew "shfmt"
 # Opinionated Lua code formatter
@@ -254,6 +258,8 @@ cask "openvpn-connect"
 cask "orbstack"
 # Window snapping tool
 cask "rectangle-pro"
+# Open source virtual/remote desktop application
+cask "rustdesk"
 # Productivity-first Dynamic Island for your Notch
 cask "seam-app"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances
@@ -264,6 +270,8 @@ cask "slack"
 cask "spotify"
 # Native GUI tool for relational databases
 cask "tableplus"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 # OpenVPN client with AppleScript support
 cask "viscosity"
 # Open-source code editor

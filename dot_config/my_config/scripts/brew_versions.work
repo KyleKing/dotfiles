@@ -1,3 +1,4 @@
+abseil 20260107.1
 act 0.2.89
 ada-url 3.4.4
 aom 3.14.1
@@ -124,6 +125,7 @@ mani 0.32.1
 mergiraf 0.17.0
 merve 1.2.2_1
 mise 2026.7.0
+mosh 1.4.0_40
 mpdecimal 4.0.1
 mpfr 4.2.2
 navi 2.24.0
@@ -160,6 +162,7 @@ plantuml 1.2026.6
 pnpm 11.10.0
 postgresql@18 18.4
 prek 0.4.8
+protobuf 35.1
 pulumi 3.250.0
 pycparser 3.0
 pydantic 2.13.4
@@ -175,6 +178,7 @@ sem-cli 0.20.0
 semgrep 1.168.0
 sentry-cli 3.6.0
 serie 0.8.0
+sesh 2.26.2
 shfmt 3.13.1
 simdjson 4.6.4
 simdutf 9.0.0
@@ -214,7 +218,7 @@ beekeeper-studio 5.8.1
 block-goose 1.41.0
 brave-browser 1.83.120.0
 claude 1.18286.0,259c3fc2a647e4222ca15e99bba9b2649f31f051
-claude-code@latest 2.1.201
+claude-code@latest 2.1.202
 claude-devtools 0.5.0
 cmux 0.64.17
 cursor 3.10.11,4ef9fe3d055f8c4523179a090f14eb835bc3c94e
@@ -248,11 +252,13 @@ obs 32.0.2
 openvpn-connect 3.8.2,6009
 orbstack 2.0.5,19905
 rectangle-pro 3.80
+rustdesk 1.4.9
 seam-app 1.8.7
 session-manager-plugin 1.2.835.0
 slack 4.50.140
 spotify 1.2.93.667
 tableplus 26.6.0,730
+tailscale-app 1.98.8
 viscosity 1.11.5
 visual-studio-code 1.127.0
 wezterm@nightly latest

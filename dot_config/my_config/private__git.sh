@@ -88,7 +88,7 @@ pr-merge-watch() {
 
     if gh pr merge --squash; then
         osascript -e 'display notification "Squash-merged successfully" with title "PR Merged" sound name "Glass"'
-        gco main && gpoi
+        gco main && gpoi && gl --prune
     else
         # Most likely cause: someone merged to main after your last push.
         # Fix: git fetch origin && git rebase origin/main, then re-push and re-run.

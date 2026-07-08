@@ -8,6 +8,7 @@
 
 - ONLY USE git operations to READ; DO NOT stage NOR unstage; DO NOT push
 - ONE exception is when implementing a SEQUENCE of changes where committing at checkpoints is advisable, otherwise defer to me staging/committing. NEVER include the AI model used in the description
+- If files become staged, modified, or deleted outside of your own edits mid-session (e.g. working tree changes appear that you didn't make), do not restore, unstage, or otherwise fight them. This is likely me or another AI agent working in parallel. Just note it and flag for my review rather than acting on it
 
 ## Design Principles
 

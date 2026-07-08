@@ -106,8 +106,10 @@ python                                         3.12.5
 python                                         3.13.11
 python                                         3.14.2                  ~/.config/mise/config.toml  3.14.2
 ripsecrets                                     0.1.11                  ~/.config/mise/config.toml  latest
+semgrep                                        1.168.0
 shellcheck                                     0.11.0                  ~/.config/mise/config.toml  latest
 typos                                          1.48.0                  ~/.config/mise/config.toml  latest
 uv                                             0.9.7
+uv                                             0.11.27
 watchexec                                      2.5.1                   ~/.config/mise/config.toml  latest
 yq                                             4.53.3                  ~/.config/mise/config.toml  latest

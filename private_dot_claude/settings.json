@@ -11,50 +11,6 @@
   },
   "extraKnownMarketplaces": {},
   "fileCheckpointingEnabled": false,
-  "hooks": {
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
-            "type": "command"
-          }
-        ],
-        "matcher": ""
-      }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
-            "type": "command"
-          }
-        ],
-        "matcher": ""
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
-            "type": "command"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "command": "\/Users\/kyleking\/.seam\/hooks\/seam-claude-code.sh",
-            "type": "command"
-          }
-        ]
-      }
-    ]
-  },
   "inputNeededNotifEnabled": true,
   "model": "sonnet",
   "permissions": {
@@ -73,7 +29,7 @@
     "deny": ["Read(.\/dev.secret.local.env)"]
   },
   "preferredNotifChannel": "auto",
-  "remoteControlAtStartup": true,
+  "remoteControlAtStartup": false,
   "skipDangerousModePermissionPrompt": true,
   "tui": "fullscreen",
   "workflowKeywordTriggerEnabled": false,
