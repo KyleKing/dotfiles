@@ -163,6 +163,8 @@ brew "rtk"
 brew "rust"
 # CLI search and replace | Space Age seD
 brew "sad"
+# Smart session manager for the terminal
+brew "sesh"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Bash syntax highlighter that encourages/fixes variables quoting
@@ -181,6 +183,8 @@ brew "swig"
 brew "syncthing", restart_service: :changed
 # TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
 brew "tabiew"
+# Easiest, most secure way to use WireGuard and 2FA
+brew "tailscale", restart_service: :changed
 # TOML toolkit written in Rust
 brew "taplo"
 # TUI-based PDF viewer
@@ -374,6 +378,8 @@ cask "rectangle-pro"
 cask "steipete/tap/repobar"
 # Emoji picker optimised for blind people
 cask "rocket"
+# Open source virtual/remote desktop application
+cask "rustdesk"
 # Productivity-first Dynamic Island for your Notch
 cask "seam-app"
 # PDF reader and note-taking application
@@ -386,6 +392,8 @@ cask "spotify"
 cask "steam"
 # Application for inspecting installer packages
 cask "suspicious-package"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 # Tool to explore all the running tasks (processes)
 cask "taskexplorer"
 # LaTeX editor
@@ -425,8 +433,8 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "Hive", id: 6747834729
 mas "HotKey", id: 975890633
-mas "Keynote", id: 409183694
 mas "Keynote", id: 361285480
+mas "Keynote", id: 409183694
 mas "Kindle", id: 302584613
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
@@ -435,6 +443,7 @@ mas "Shareful", id: 1522267256
 mas "Speedtest", id: 1153157709
 mas "Spotica Menu", id: 570549457
 mas "Table Habit", id: 6744886469
+mas "Termius", id: 1176074088
 mas "Tot", id: 1491071483
 mas "Weathergraph", id: 1501958576
 mas "Xcode", id: 497799835

@@ -223,6 +223,7 @@ rust 1.96.0
 sad 0.4.32
 sdl2-compat 2.32.70
 sdl3 3.4.12
+sesh 2.26.2
 sevenzip 26.02
 shellcheck 0.11.0
 shellharden 4.3.2
@@ -239,6 +240,7 @@ svt-av1 4.1.0
 swig 4.4.1
 syncthing 2.1.1
 tabiew 0.14.0
+tailscale 1.98.8
 taplo 0.10.0
 tdf 0.5.0
 tealdeer 1.8.1
@@ -350,12 +352,14 @@ qlmarkdown 1.5.2
 rectangle-pro 3.80
 repobar 0.8.3
 rocket 1.9.2,84
+rustdesk 1.4.9
 seam-app 1.8.7
 skim 1.7.15
 slack 4.50.143
 spotify 1.2.93.667
 steam 6.0
 suspicious-package 4.6.2,1311.4
+tailscale-app 1.98.8
 taskexplorer 2.1.0
 texifier 1.9.33,855,ddb6e02
 the-unarchiver 4.3.9,147,1742287964
