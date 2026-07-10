@@ -1,0 +1,17 @@
+# sesh: fast tmux session manager - https://github.com/joshmedeski/sesh
+# `sesh list` merges: sessions defined here + live tmux sessions + zoxide dirs
+# `sesh connect <name>` attaches or creates. Bound to <prefix> s in tmux (see dot_tmux.conf.tmpl)
+# and to `sz` in the shell (see dot_config/my_config/private__zsh.sh) so it also works outside tmux.
+
+[default_session]
+preview_command = "eza --all --git --icons {}"
+
+# SSH targets are just named sessions with a startup_command, so a remote host
+# is fuzzy-pickable from the same popup used for local panes/projects.
+# `path` only matters for the preview pane; it doesn't need to exist locally.
+[[session]]
+name = "hetzner-demo"
+path = "~"
+startup_command = "ssh ubuntu-4gb-hel1-1" # Host defined in ~/.ssh/config
+
+# Add one [[session]] block per additional SSH/mosh host as they come up.
