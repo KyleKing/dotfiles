@@ -1,0 +1,10 @@
+{
+  "pythonPlatform": "Linux",
+  "pythonVersion": "3.7",
+  "reportGeneralTypeIssues": "information",
+  "reportImplicitStringConcatenation": false,
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "venv": ".venv",
+  "venvPath": "./reviewer-api"
+}

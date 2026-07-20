@@ -1,0 +1,15 @@
+{
+  "awsAuthRefresh": "aws sso login --profile PowerUserAccess-760682031284",
+  "env": {
+    "ANTHROPIC_MODEL": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "ANTHROPIC_SMALL_FAST_MODEL": "us.anthropic.claude-3-5-haiku-20241022-v1:0",
+    "AWS_PROFILE": "PowerUserAccess-760682031284",
+    "AWS_REGION": "us-east-1",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8192",
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "MAX_THINKING_TOKENS": "1024",
+    "USE_BUILTIN_RIPGREP": "0"
+  },
+  "alwaysThinkingEnabled": false
+}
