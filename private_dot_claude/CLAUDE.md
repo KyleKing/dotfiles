@@ -64,6 +64,12 @@
 - Do not run Docker commands without instruction
 - Python package manager: uv if `uv.lock`, poetry if `poetry.lock`, tox if `./tox`
 
+### CLIs
+
+- PostHog error tracking: the binary is `posthog-cli` but installed via mise. The agent-first surface is `posthog-cli api`: `search <regex>` to find tools, `info --json <tool>` for a schema, `call --json <tool> '<json>'` to run one. For "what errors are happening / being missed" use `query-error-tracking-issues-list` (defaults to active, last 7d, sorted by occurrences, test accounts filtered); pass `{"dateRange":{"date_from":"-30d"},"orderBy":"users"}` for impact. `assignee: null` across the board means nobody is triaging. Project is likely 420833 (`us.posthog.com`)
+- Sentry: <TODO update now that the personal, not org, Sentry-CLI token has been given READ access>
+- Hunk (interactive diff review): Drive a live session with `hunk session *` subcommands (`list`, `review --json`, `navigate`, `comment add/apply`). If no session exists, ask me to launch one. Skill at `~/node_modules/hunkdiff/skills/hunk-review/SKILL.md`
+
 ## Browser Screenshots
 
 - At the start of any visual review session, ask for a target directory if one hasn't been specified
@@ -129,6 +135,7 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 - No trailing period at the end of a bulleted list item (even when the item is a full sentence); keep internal punctuation as needed
 - No em/en dashes: use parentheses for asides and clarifications, "because"/"which"/"where" for causal or relative clauses, a period or comma for list-end elaborations
 - No semicolons joining independent clauses: split into two sentences, or move the second clause into parentheses if it is a short aside
+- No idiom or cutesy phrases ("earns its keep", "pulls its weight", "hangs off", "belt and suspenders"); state the concrete benefit or relationship plainly
 - PR descriptions: summary first, bullets, explain why not just what
 
 ### PR inline comments and review replies
@@ -146,3 +153,6 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 - At most one or two collapsible `<details>` sections to keep the post scannable
 - Tables stay compact (under ~120 chars wide) and high-level so they're easy to hand-edit; push detail into prose, not cells
 - Validate any external links before including them; cite docs/blogs/SDK references where they back a claim
+- Name concepts with common architecture or Python terms (responsibility, contract, Protocol, extension point) rather than coined metaphors like "seam"
+- When proposing an abstraction, include thin pseudo-Python of current vs target so the delta is concrete; keep snippets reaction-sized, not implementation-ready
+- Design-proposal diagrams should carry real detail: prefer a run-lifecycle sequenceDiagram plus an interface classDiagram over a single high-level flowchart (Linear renders mermaid natively)

@@ -60,6 +60,8 @@ brew "gum"
 brew "hadolint"
 # Git hook and pre-commit lint manager
 brew "hk"
+# Review-first terminal diff viewer for agent-authored changesets
+brew "hunk"
 # Package manager for kubectl plugins
 brew "krew"
 # Kafka TUI client
@@ -78,6 +80,10 @@ brew "libffi"
 brew "libpq"
 # Next-gen compiler infrastructure
 brew "llvm"
+# Sudoless performance monitoring for Apple Silicon processors
+brew "macmon"
+# Apple Silicon Monitor Top written in Go Lang
+brew "mactop"
 # CLI tool to help you manage repositories
 brew "mani"
 # Syntax-aware git merge driver
@@ -152,6 +158,8 @@ brew "tealdeer"
 brew "tesseract"
 # Terminal multiplexer
 brew "tmux"
+# TOML formatter, linter and language server
+brew "tombi"
 # Terminal UI OS (Terminal Multiplexer)
 brew "tuios"
 # Extremely fast Python type checker, written in Rust
