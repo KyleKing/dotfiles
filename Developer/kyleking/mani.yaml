@@ -105,8 +105,6 @@ projects:
       - calcipy-template
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
-  tlr:
-    url: git@github.com:kyleking/tlr.git
   vcr-tui:
     url: git@github.com:kyleking/vcr-tui.git
   yak-shears:

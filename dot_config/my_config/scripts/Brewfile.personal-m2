@@ -271,7 +271,6 @@ cask "customshortcuts"
 cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
-# API documentation browser and code snippet manager
 cask "dash6"
 # Generate a timeline of your day, automatically
 cask "dayflow"
@@ -287,7 +286,6 @@ cask "dropbox"
 cask "finetune"
 # Web browser
 cask "firefox"
-# Web browser
 cask "firefox-developer-edition"
 # Screen colour temperature controller
 cask "flux-app"

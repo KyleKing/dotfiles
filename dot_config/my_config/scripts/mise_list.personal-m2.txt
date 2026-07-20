@@ -35,6 +35,7 @@ go:github.com/segmentio/golines                         0.12.2
 go:github.com/tdewolff/minify/v2/cmd/minify             2.24.13
 go:golang.org/x/tools/cmd/goimports                     0.45.0
 golangci-lint                                           2.8.0
+golangci-lint                                           2.12.2
 hadolint                                                2.14.0
 hk                                                      0.8.2
 hk                                                      1.22.0
