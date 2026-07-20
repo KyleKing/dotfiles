@@ -68,7 +68,6 @@ homebrew_prefix = "/opt/homebrew"
 
 [data.github]
 username = "placeholder"
-coderabbit_machineId = "placeholder"
 
 [data.onepassword]
 domain = "placeholder"

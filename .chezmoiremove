@@ -16,6 +16,7 @@
 .config/sourcery/
 .config/ttyper
 .config/yazi
+.config/zed
 .config/zellij
 .kubie/kubie.yaml
 .wegorc

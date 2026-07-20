@@ -53,7 +53,7 @@ squash-me() {
 #       gh pr merge --auto --squash
 #     Requires "Allow auto-merge" enabled in repo Settings > General. Merges
 #     when required checks + required approvals clear, but gives no local
-#     notification and won't gate on optional reviewers (CodeRabbit, etc.).
+#     notification and won't gate on optional/async reviewers.
 #   - For one-off CI watching without merging: gh pr checks --watch --fail-fast
 pr-merge-watch() {
     echo "Waiting for CI checks..."
@@ -62,11 +62,11 @@ pr-merge-watch() {
         return 1
     fi
 
-    # CodeRabbit posts its review shortly after CI completes but is not a
-    # required check, so it won't appear in `gh pr checks`. Wait 60s to give
-    # it time to finish before inspecting reviews. Remove this sleep if
-    # CodeRabbit is configured as a required branch-protection check.
-    echo "CI passed. Waiting 60s for optional reviewers (e.g. CodeRabbit)..."
+    # Async reviewer bots post their review shortly after CI completes but
+    # aren't a required check, so they won't appear in `gh pr checks`. Wait
+    # 60s to give them time to finish before inspecting reviews. Remove this
+    # sleep if you don't rely on any async/optional reviewer bots.
+    echo "CI passed. Waiting 60s for optional/async reviewers..."
     sleep 60
 
     local blockers

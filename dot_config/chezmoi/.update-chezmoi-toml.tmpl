@@ -13,7 +13,6 @@ email = {{ output "sh" "-c" (printf "awk '{print $3}' ~/.ssh/%s.pub" $github_ssh
 username = "{{ .github.username }}"
 ssh_key_path = {{ joinPath "~/.ssh" $github_ssh_key_name | quote }}
 ssh_public_key = {{ output "cat" (joinPath .chezmoi.homeDir ".ssh" (printf "%s.pub" $github_ssh_key_name)) | trim | quote }}
-coderabbit_machineId = "{{ .github.coderabbit_machineId }}"
 
 [data.aws]
 aws_profile = "{{ .aws.aws_profile }}"
