@@ -37,6 +37,9 @@ repos:
       - id: forbid-new-submodules
       - id: mixed-line-ending
         args: [--fix=auto]
+      - id: pretty-format-json
+        args: [--autofix, --indent=2]
+        exclude: private_keybindings.json|zed/.*settings\.json
       - id: trailing-whitespace
         exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
