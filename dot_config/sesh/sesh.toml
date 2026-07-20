@@ -4,7 +4,10 @@
 # and to `sz` in the shell (see dot_config/my_config/private__zsh.sh) so it also works outside tmux.
 
 [default_session]
-preview_command = "eza --all --git --icons {}"
+# sesh-preview.sh renders a doing.txt (per-project "what I'm doing" note,
+# see dot_local/bin/executable_sesh-preview.sh) above the eza listing when
+# one exists at the project root.
+preview_command = "sesh-preview.sh {}"
 
 # SSH targets are just named sessions with a startup_command, so a remote host
 # is fuzzy-pickable from the same popup used for local panes/projects.
