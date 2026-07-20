@@ -33,6 +33,8 @@ projects:
     url: git@github.com:kyleking/extract_finances.git
   gh-lazydispatch:
     url: git@github.com:kyleking/gh-lazydispatch.git
+  gh-repo-dashboard:
+    url: git@github.com:kyleking/gh-repo-dashboard.git
   gh-star-search:
     url: git@github.com:kyleking/gh-star-search.git
   gh-sweep:
@@ -89,8 +91,6 @@ projects:
     url: git@github.com:kyleking/private-snippets.git
   recipes:
     url: git@github.com:kyleking/recipes.git
-  repo-dashboard:
-    url: git@github.com:kyleking/repo-dashboard.git
   shoal:
     url: git@github.com:kyleking/shoal.git
     tags:
@@ -110,6 +110,10 @@ projects:
   yak-shears:
     url: git@github.com:kyleking/yak-shears.git
 
+  djot-fmt:
+    url: git@github.com:kyleking/djot-fmt.git
+  my_lua_template:
+    url: git@github.com:kyleking/my_lua_template.git
 tasks:
   git-status:
     desc: show working tree status
