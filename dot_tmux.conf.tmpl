@@ -79,8 +79,10 @@ set-option -g status-position top
 # sesh: fast session manager for tmux (local sessions + SSH hosts + zoxide dirs)
 # 	https://github.com/joshmedeski/sesh
 # 	Session definitions, including SSH/mosh targets, live in ~/.config/sesh/sesh.toml (dot_config/sesh/sesh.toml)
+# 	sesh-picker.sh (dot_local/bin) tags each row with its source [tmux/cfg/dir]
+# 	and a 📝 marker for projects with a doing.txt; see sesh-annotated-list.sh
 # 	<prefix> s: fuzzy-pick any session (tmux/config/zoxide, incl. SSH hosts) via an fzf popup
-bind-key s run-shell "sesh connect \"$(sesh list --icons | fzf-tmux -p 80%,70% --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' --preview 'sesh preview {}')\""
+bind-key s run-shell "sesh-picker.sh fzf-tmux -p 80%,70% --no-sort --border-label ' sesh ' --prompt '⚡  '"
 # 	<prefix> L: jump back to the previously attached session (like `cd -`)
 bind -N "last-session" L run-shell "sesh last"
 # 	Recommended by sesh docs: don't detach the client when its session is killed

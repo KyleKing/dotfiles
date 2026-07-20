@@ -43,4 +43,6 @@ mkcd() {
 # sesh: fuzzy-pick a tmux session from the shell (tmux/config/zoxide, incl. SSH
 # hosts defined in ~/.config/sesh/sesh.toml). Attaches or creates; works outside
 # tmux too. In-tmux equivalent: <prefix> s (see dot_tmux.conf.tmpl)
-alias sz='sesh connect "$(sesh list --icons | fzf --height 40% --reverse --border --prompt "⚡ ")"'
+# sesh-picker.sh (dot_local/bin) tags each row with its source [tmux/cfg/dir]
+# and a 📝 marker for projects with a doing.txt; see sesh-annotated-list.sh
+alias sz='sesh-picker.sh fzf --height 60% --reverse --border --prompt "⚡ "'
