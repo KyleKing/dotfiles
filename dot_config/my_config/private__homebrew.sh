@@ -13,6 +13,7 @@ alias bil="brew install"
 alias brm="brew rmtree"
 alias bo="brew update && brew outdated"
 alias bcbd="brew cleanup && brew doctor"
+# Full post-upgrade + size-gated dev-cache sweep: see _cache_cleanup.sh for "bcbd-deep", "cache-status", "cache-sweep"
 # Other useful commands: "brew uninstall <cask>" and "brew uses <...>"
 
 # tmux plugin manager; installed by brew
