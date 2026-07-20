@@ -1,22 +1,25 @@
 {
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md"
+    ]
+  },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
     }
   },
-  "context": {
-    "fileName": ["AGENTS.md", "GEMINI.md"]
+  "tools": {
+    "autoAccept": true
   },
   "ui": {
     "footer": {
       "hideContextPercentage": false
     },
-    "showMemoryUsage": true,
-    "showLineNumbers": true,
     "showCitations": true,
+    "showLineNumbers": true,
+    "showMemoryUsage": true,
     "useFullWidth": true
-  },
-  "tools": {
-    "autoAccept": true
   }
 }
