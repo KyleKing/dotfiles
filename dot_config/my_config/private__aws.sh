@@ -4,4 +4,4 @@
 #
 # Customize AWS
 
-export AWS_PROFILE=
+# export AWS_PROFILE=

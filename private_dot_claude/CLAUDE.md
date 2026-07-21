@@ -131,12 +131,32 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 
 ## Tone and Voice
 
-- Keep emojis and dashes to a minimum
+- "Voice" below governs text I author myself (messages, replies, docs, comments I write in my own words). It does NOT mean rewrite or paraphrase AI-generated analysis into something that sounds like me — that misrepresents authorship. When relaying your own research/analysis output (a summary, a comparison, findings from a search) into a human-facing surface like a PR comment, Slack message, or doc: write a short framing sentence in my actual voice (why I'm including this, what I want the reader to do with it), then paste your analysis verbatim in a fenced code block or clearly quoted/attributed section, unedited. Don't reformat it to match the rules below — those apply to my own words, not to a quoted block. See how I pasted your sirv analysis in https://github.com/coverbasedev/irm/pull/13294#discussion_r3619540311 as the reference pattern.
+
+### The writing system (Orwell's six rules)
+
+These six rules govern all prose I author — docs, PR and commit text, messages, and the human-voice framing around your analysis. They never touch code, identifiers, or precise technical terms; swap in everyday words only where precision survives. Review every prose output against them before delivering. When rewriting existing text, first name each violation (stale phrase, long word with its short replacement, cuttable word, passive construction), then give the rewrite with every fact, number, and name unchanged.
+
+1. Never use a metaphor, simile, or figure of speech you are used to seeing in print.
+2. Never use a long word where a short one will do.
+3. If it is possible to cut a word out, cut it out.
+4. Never use the passive where you can use the active.
+5. Never use a foreign phrase, a scientific word, or a jargon word if an everyday English equivalent exists.
+6. Break any of these rules sooner than write something outright barbarous.
+
+The tells these rules exist to kill: achievement and marketing language ("comprehensive", "robust", "seamless", "leverage", "ensure", "successfully", "delve"), throat-clearing openers, hedge-stacking, and passive voice that hides who did what. "We added error handling to every API endpoint" beats "Comprehensive error handling has been implemented across all endpoints to ensure robust performance." Before/after pairs and rewrite recipes for READMEs, landing copy, PR text, and session reports live in [voice-examples.md](voice-examples.md).
+
+### Corrective juxtaposition — hunt this hardest
+
+Never frame a point as "not X, but Y" / "it's not just X, it's Y" / "this isn't about X, it's about Y". It is the most recognizable current AI tell. State Y directly. If the contrast with X actually carries information, give it its own plain sentence instead of the rhetorical setup.
+
+### Mechanical rules
+
 - Direct and action-oriented; no filler, no excessive enthusiasm, no vague language
 - Technical precision: specific about implementation details and decisions
 - Conversational but progressional: full sentences that move the reader forward, light first-person reasoning is fine, still no filler
-- Organized: bullet points, sections, hierarchy
-- Favor paragraphs and bullets over bare lists; don't turn everything into a list
+- Organized: bullet points, sections, hierarchy; favor paragraphs and bullets over bare lists, and don't turn everything into a list
+- Keep emojis to a minimum
 - Don't start bullets with a bolded lead-in phrase followed by a colon (the "**Bold phrase:** sentence" pattern); write natural sentences instead
 - No trailing period at the end of a bulleted list item (even when the item is a full sentence); keep internal punctuation as needed
 - No em/en dashes: use parentheses for asides and clarifications, "because"/"which"/"where" for causal or relative clauses, a period or comma for list-end elaborations
@@ -144,26 +164,39 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 - No idiom or cutesy phrases ("earns its keep", "pulls its weight", "hangs off", "belt and suspenders"); state the concrete benefit or relationship plainly
 - PR descriptions: summary first, bullets, explain why not just what
 
+### Rejecting a draft
+
+When a draft reads wrong, don't just delete and retry. Name the exact reason it failed — which rule it broke, which tic it used (corrective juxtaposition, achievement language, passive voice) — so the failure mode is fixed, not banned one word at a time. "Sounds like AI" is not a reason; "opened with 'it's not just X'" is. Hold that reason across the session so the same tic doesn't come back in a new form.
+
+### Progress and session reports
+
+Report in plain sentences: what changed, what failed, what comes next. No emoji checkmarks, no "Successfully", no "Perfect", no wall of bullets. Lead with the few lines that change my next action and add detail only when it does.
+
 ### PR inline comments and review replies
 
-- Self-notes on your own code: state the non-obvious "why" (constraint, invariant, workaround). Trim closing sentences that explain consequences the reader can infer
-- Review replies: acknowledge the bug briefly, state what was fixed, add a follow-up action if needed. Don't re-explain why the bug was bad or what would have happened
-- Follow-up actions: "I will confirm X after the next deploy to Stage" format
-- Don't over-explain: if the fix is visible in the diff, one sentence naming the change is enough
-- Validate every file:line against the checked-out code before writing a comment; subagent and bot (CodeRabbit, Codex) findings routinely cite hallucinated line numbers (e.g. line 993 in a 137-line file), so re-read the real file and pin the true line
-- The code must be checked out locally (branch checked out, or fetched to `FETCH_HEAD` per the code-review skill's Step 0) before generating any file:line comment. If it can't be checked out or fetched, stop and say so rather than writing comments from `gh pr diff` text alone
+- Self-notes on your own code: state the non-obvious "why" (constraint, invariant, workaround); don't restate what's already visible in the diff
+- Review replies: acknowledge the bug briefly, state what was fixed, add a follow-up action if needed ("I will confirm X after the next deploy to Stage"). Don't re-explain why the bug was bad or what would have happened, and don't over-explain a fix that's visible in the diff — one sentence naming the change is enough
+- Validate every file:line against code checked out locally (branch checked out, or fetched to `FETCH_HEAD` per the code-review skill's Step 0) before writing a comment — subagent and bot (CodeRabbit, Codex) findings routinely cite hallucinated line numbers (e.g. line 993 in a 137-line file). If the code can't be checked out or fetched, stop and say so rather than writing comments from `gh pr diff` text alone
 - Default to the same hedged framing I use when reviewing: "maybe", "consider", or naming more than one option, rather than a flat directive. Drop the hedging and state the fix plainly only when it's simple and obviously correct
-- Before replying to a bot thread, check whether a later commit on the branch already resolved it (threads marked "✅ Addressed", or fixes visible in the diff); close stale threads with a one-line pointer to the fixing commit instead of re-raising them
-- The human-facing comment text names the symbol (function, variable, constant), never `file:line`, because the name locates it and line numbers drift. `file:line` belongs to two other places only: the inline anchor the AI uses to place the comment, and the rolled-up copyable summary block (below) where a concrete location helps an agent implement
-- Write for a peer by default, giving the observation and the ask while cutting the mechanism, the why-it-matters, and the consequence a reviewer would already infer. Spell that rationale out only when I say the recipient is junior
-- The PR-level summary must not restate the inline comments in prose. Make it a copyable, AI-agent-friendly roll-up wrapped in a CodeRabbit-style `<details><summary>` block (not a backtick code block — that flattens the markdown, so checkboxes and bold stop rendering and it can't collapse) with two parts: a short preamble condensing my working defaults (ask via your clarification tool when unsure, validate against current code before changing and skip already-handled items, keep edits minimal and scoped, run checks once at the end), then ready-to-implement action items drawn from the comments, each with its `file:line` and enough detail to act on without reopening the thread. Frame the items as a consolidated post-review checklist, not a re-narration
-- The roll-up references `file:line` directly, which is known before the review posts, so inline comments and the summary go up in one `gh api`/`gh pr review` step. Skip the older two-step pattern of posting first and patching comment URLs back into the summary afterward
-- When asked to prepare review feedback for my sign-off, write a local `pr-<number>-review-comments.md` staging file for me to proofread and edit directly before posting, not a finished artifact. No numbered IDs and no status field: I delete items I don't want, and where I want a revision before the next pass I leave an unquoted `[TODO: ...]` note next to that item. Reserve `[TODO: ...]` for my own edits; when you need to flag an open decision or ask me something before finalizing an item, use `[AI: ...]` instead so the two never collide
-- Shape of that staging file: group items under "New findings" and "Bot-thread replies", each grouped by file in diff order. For every item, one unquoted meta line directly above the blockquote, in the form `` `file:line` — severity — action `` where action is `new comment`, `reply to <bot> thread`, or `general review comment`. The blockquote itself holds only the exact text to post, with no rationale or extra prose folded in (the comment text already carries whatever "why" belongs on the peer, per the habits above). Close the file with the roll-up summary block per the rule above
-- When I decide a thread doesn't need a reply (already stale, or a nit not worth a comment), represent it as a meta line only with no blockquote below it, action `skip (<short reason>)` — e.g. `` `file:line` — nit — skip (style-only, not applying) ``. This keeps the item visible as considered-and-declined rather than erasing it
-- Once I've hand-edited a comment's text in the staging file, treat it as settled on the next pass: don't re-polish it against the general Voice rules above, since those govern what you draft, not what I've already written. My phrasing may deliberately break them (a capitalized "OR", an "etc.") as a personal tick, not an error to fix. Small, conservative edits are still fine when something's clearly needed (a changed anchor, a factual correction) — just don't rewrite the sentence wholesale
-- When replying to a bot thread specifically (never a human's), I sometimes open the blockquote with `^` (e.g. `>^I think this is valid...`) as a marker that the reply is about the author in the third person rather than addressed to them. I use it selectively, not on every bot reply — preserve it where I've used it and don't add or remove it on my own judgment
-- Don't add a `(line ###)` aside pointing to another comment in the same file just to help the reader locate it. Only do this when the file has enough comments that the cross-reference is genuinely ambiguous without one
+- Before replying to a bot thread, check whether a later commit already resolved it (threads marked "✅ Addressed", or fixes visible in the diff); close stale threads with a one-line pointer to the fixing commit instead of re-raising them
+- The human-facing comment text names the symbol (function, variable, constant), never `file:line` — the name locates it and line numbers drift. `file:line` belongs only in the inline anchor the AI uses to place the comment, and in the roll-up (below) where a concrete location helps an agent implement
+- Write for a peer by default: give the observation and the ask, cut the mechanism, the why-it-matters, and the consequence a reviewer would already infer. Spell that rationale out only when I say the recipient is junior
+- Don't add a `(line ###)` cross-reference to another comment in the same file just to help the reader locate it — only when the file has enough comments that it's genuinely ambiguous without one
+
+#### The roll-up (PR-level summary)
+
+- Must not restate the inline comments in prose. It's a copyable, AI-agent-friendly checklist with two parts: a short preamble condensing my working defaults (ask via your clarification tool when unsure, validate against current code before changing and skip already-handled items, keep edits minimal and scoped, run checks once at the end), then ready-to-implement action items, each with its `file:line` and enough detail to act on without reopening the thread. Frame as a consolidated post-review checklist, not a re-narration
+- Format: `<details><summary>` wrapping a nested fenced ` ```markdown ` code block, matching CodeRabbit. The nested fence is what actually produces GitHub's hover copy button (tied to the `<pre><code>` a fence renders, not to `<details>` alone) — a plain `<details>` block, or a bare fence with no `<details>`, doesn't get it. Trade-off: content inside the fence is plain text, so checkboxes/bold/backticks don't render live — accepted cost for one-click copy
+- Reference `file:line` directly in the roll-up (known before the review posts) so inline comments and the summary go up in one `gh api`/`gh pr review` step — skip the two-step pattern of posting first and patching links back in afterward
+
+#### Staging the review before posting
+
+- When asked to prepare review feedback for my sign-off, write a local `pr-<number>-review-comments.md` staging file for me to proofread and edit directly before posting, not a finished artifact
+- Shape: group items under "New findings" and "Bot-thread replies", each grouped by file in diff order. One unquoted meta line per item, directly above its blockquote: `` `file:line` — severity — action `` where action is `new comment`, `reply to <bot> thread`, or `general review comment`. The blockquote holds only the exact text to post — no rationale or extra prose (the comment text already carries whatever "why" belongs on the peer, per the habits above). Close the file with the roll-up per the rule above
+- No numbered IDs, no status field — I delete items I don't want. `[TODO: ...]` is reserved for my own edits requesting a revision before the next pass; use `[AI: ...]` when you need to flag an open decision or ask me something, so the two never collide
+- A thread I decide not to reply to (already stale, or a nit not worth a comment) gets a meta line only, no blockquote, action `skip (<short reason>)` — e.g. `` `file:line` — nit — skip (style-only, not applying) ``. Keeps it visible as considered-and-declined rather than erased
+- Once I've hand-edited a comment's text, treat it as settled on the next pass — don't re-polish it against the Voice rules above (those govern what you draft, not what I've already written; my phrasing may deliberately break them, e.g. a capitalized "OR" or an "etc.", as a personal tick, not an error to fix). Small, conservative edits are still fine when something's clearly needed (a changed anchor, a factual correction) — just don't rewrite the sentence wholesale
+- When replying to a bot thread specifically (never a human's), I sometimes open the blockquote with `^` (e.g. `>^I think this is valid...`) marking that the reply is about the author in the third person rather than addressed to them. Used selectively, not on every bot reply — preserve it where present, don't add or remove it on your own judgment
 
 ### Proposals and longer docs (Linear, design docs)
 
