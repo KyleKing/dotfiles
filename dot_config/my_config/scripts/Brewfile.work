@@ -121,7 +121,7 @@ brew "plantuml"
 # Fast, disk space efficient package manager
 brew "pnpm"
 # Object-relational database system
-brew "postgresql@18", restart_service: :changed
+brew "postgresql@18"
 # Fast Git hook manager written in Rust, drop-in alternative to pre-commit
 brew "prek"
 # Cloud native development platform
