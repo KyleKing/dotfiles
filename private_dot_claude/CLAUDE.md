@@ -1,7 +1,6 @@
 ## General
 
-- Verify claims with web search, my input, and/or data that can be collected with Tools
-- In general, web search and ask me for guidance/input with the question tool as needed
+- Verify claims rather than asserting them: web search, my input via the question tool, or data collected with Tools; ask for guidance or input when a choice is genuinely mine to make
 - When debugging, identify multiple possible causes and reason/experiment to determine which explain the root cause
 
 ## Git
@@ -9,6 +8,10 @@
 - ONLY USE git operations to READ; DO NOT stage NOR unstage; DO NOT push
 - ONE exception is when implementing a SEQUENCE of changes where committing at checkpoints is advisable, otherwise defer to me staging/committing. NEVER include the AI model used in the description
 - If files become staged, modified, or deleted outside of your own edits mid-session (e.g. working tree changes appear that you didn't make), do not restore, unstage, or otherwise fight them. This is likely me or another AI agent working in parallel. Just note it and flag for my review rather than acting on it
+
+## Code Changes
+
+- Limit modifications to what's necessary; don't refactor adjacent code or add docs/types/tests to unmodified functions
 
 ## Design Principles
 
@@ -28,22 +31,6 @@
 - `__all__` only in `__init__.py`; refactor circular imports instead
 - Multiline strings: use `textwrap.dedent()`, not implicit parenthesized string concatenation
 
-## Code Changes
-
-- Limit modifications to what's necessary; don't refactor adjacent code or add docs/types/tests to unmodified functions
-
-## Files
-
-- Never write markdown, notes, plans, or research output to the temp/scratchpad directory; write them in the current working directory or the project root instead
-- The scratchpad directory is only for true intermediates that have no value after the task (e.g. a JSON blob being piped between steps)
-
-## Mermaid Diagrams
-
-- Keep diagrams under ~15 nodes; group related items rather than enumerating individually
-- Use the correct C4 type: System Landscape, C1 Context, C2 Container, C3 Component, Deployment, Dynamic
-- `flowchart` for decision trees; `sequenceDiagram` for request/failure flows
-- Put detail in reference tables below the diagram, not in node labels
-
 ## Comments and Documentation
 
 - No inline comments; code should be self-explanatory
@@ -58,6 +45,18 @@
 - Specific exception types; use `err` not `e` (e.g. `except Exception as err:`)
 - Use custom exceptions for domain-specific errors
 - Validate at system boundaries; trust internal code; parse-don't-validate
+
+## Mermaid Diagrams
+
+- Keep diagrams under ~15 nodes; group related items rather than enumerating individually
+- Use the correct C4 type: System Landscape, C1 Context, C2 Container, C3 Component, Deployment, Dynamic
+- `flowchart` for decision trees; `sequenceDiagram` for request/failure flows
+- Put detail in reference tables below the diagram, not in node labels
+
+## Files
+
+- Never write markdown, notes, plans, or research output to the temp/scratchpad directory; write them in the current working directory or the project root instead
+- The scratchpad directory is only for true intermediates that have no value after the task (e.g. a JSON blob being piped between steps)
 
 ## Tools
 
@@ -131,7 +130,7 @@ Adjust `REGION` to the display: `top: 33` skips the macOS menu bar; `width`/`hei
 
 ## Tone and Voice
 
-- "Voice" below governs text I author myself (messages, replies, docs, comments I write in my own words). It does NOT mean rewrite or paraphrase AI-generated analysis into something that sounds like me — that misrepresents authorship. When relaying your own research/analysis output (a summary, a comparison, findings from a search) into a human-facing surface like a PR comment, Slack message, or doc: write a short framing sentence in my actual voice (why I'm including this, what I want the reader to do with it), then paste your analysis verbatim in a fenced code block or clearly quoted/attributed section, unedited. Don't reformat it to match the rules below — those apply to my own words, not to a quoted block. See how I pasted your sirv analysis in https://github.com/coverbasedev/irm/pull/13294#discussion_r3619540311 as the reference pattern.
+- "Voice" below governs text I author myself (messages, replies, docs, comments I write in my own words). It does NOT mean rewrite or paraphrase AI-generated analysis into something that sounds like me — that misrepresents authorship. When relaying your own research/analysis output (a summary, a comparison, findings from a search) into a human-facing surface like a PR comment, Slack message, or doc: write a short framing sentence in my actual voice (why I'm including this, what I want the reader to do with it), then paste your analysis verbatim in a fenced code block or clearly quoted/attributed section, unedited. Don't reformat it to match the bullet/paragraph/no-dash rules below — those apply to my own words, not to a quoted block. See how I pasted your sirv analysis in https://github.com/coverbasedev/irm/pull/13294#discussion_r3619540311 as the reference pattern.
 
 ### The writing system (Orwell's six rules)
 
@@ -152,11 +151,12 @@ Never frame a point as "not X, but Y" / "it's not just X, it's Y" / "this isn't 
 
 ### Mechanical rules
 
+- Keep emojis to a minimum
 - Direct and action-oriented; no filler, no excessive enthusiasm, no vague language
 - Technical precision: specific about implementation details and decisions
 - Conversational but progressional: full sentences that move the reader forward, light first-person reasoning is fine, still no filler
-- Organized: bullet points, sections, hierarchy; favor paragraphs and bullets over bare lists, and don't turn everything into a list
-- Keep emojis to a minimum
+- Organized: bullet points, sections, hierarchy
+- Favor paragraphs and bullets over bare lists; don't turn everything into a list
 - Don't start bullets with a bolded lead-in phrase followed by a colon (the "**Bold phrase:** sentence" pattern); write natural sentences instead
 - No trailing period at the end of a bulleted list item (even when the item is a full sentence); keep internal punctuation as needed
 - No em/en dashes: use parentheses for asides and clarifications, "because"/"which"/"where" for causal or relative clauses, a period or comma for list-end elaborations
@@ -196,7 +196,11 @@ Report in plain sentences: what changed, what failed, what comes next. No emoji 
 - No numbered IDs, no status field — I delete items I don't want. `[TODO: ...]` is reserved for my own edits requesting a revision before the next pass; use `[AI: ...]` when you need to flag an open decision or ask me something, so the two never collide
 - A thread I decide not to reply to (already stale, or a nit not worth a comment) gets a meta line only, no blockquote, action `skip (<short reason>)` — e.g. `` `file:line` — nit — skip (style-only, not applying) ``. Keeps it visible as considered-and-declined rather than erased
 - Once I've hand-edited a comment's text, treat it as settled on the next pass — don't re-polish it against the Voice rules above (those govern what you draft, not what I've already written; my phrasing may deliberately break them, e.g. a capitalized "OR" or an "etc.", as a personal tick, not an error to fix). Small, conservative edits are still fine when something's clearly needed (a changed anchor, a factual correction) — just don't rewrite the sentence wholesale
-- When replying to a bot thread specifically (never a human's), I sometimes open the blockquote with `^` (e.g. `>^I think this is valid...`) marking that the reply is about the author in the third person rather than addressed to them. Used selectively, not on every bot reply — preserve it where present, don't add or remove it on your own judgment
+- When replying to a bot thread specifically (never a human's), I sometimes open the blockquote with `^` (e.g. `> ^I think this is valid...`) marking that the reply is about the author in the third person rather than addressed to them. Used selectively, not on every bot reply — preserve it where present, don't add or remove it on your own judgment
+- Blockquote means post-facing, non-blockquote means for my eyes only. Everything inside a blockquote is verbatim text that will be posted and a reader will see; everything outside one (meta lines, orientation header, context snippets) exists to help me review and never ships. Keep the split strict so I can skim the file and know exactly what a reader gets
+- For a bot-thread reply, put a bare permalink to the comment being replied to on (or just above) its meta line so I can open the original if I need it — don't paste the bot's comment or its diff inline, which bloats the file. New comments need no such context block; the meta line's `file:line` is enough
+- Include a "Proposed PR comment" section rendered as one fully-blockquoted block: the post-facing summary/general comment in my voice, so I can read exactly what a reader sees. This is the human-voice framing; the copyable agent-checklist roll-up (above) is a separate `<details>` block appended to it when posted (keep the roll-up out of the blockquote so its fenced copy-button survives)
+- When the PR is already merged, verify inline comments still post before proposing them: create a PENDING review with one throwaway inline comment via the API (`POST /repos/{o}/{r}/pulls/{n}/reviews` with `commit_id` + a `comments[]` entry, no `event` so it stays a draft invisible to others), confirm it anchors, then `DELETE` the pending review. Report the result. Frame the summary comment to acknowledge the merge and offer the nits as considerations for a follow-up PR rather than change requests
 
 ### Proposals and longer docs (Linear, design docs)
 
