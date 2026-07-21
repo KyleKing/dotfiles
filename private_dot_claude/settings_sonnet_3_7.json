@@ -1,4 +1,5 @@
 {
+  "alwaysThinkingEnabled": false,
   "awsAuthRefresh": "aws sso login --profile PowerUserAccess-760682031284",
   "env": {
     "ANTHROPIC_MODEL": "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
@@ -9,6 +10,5 @@
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "MAX_THINKING_TOKENS": "1024",
     "USE_BUILTIN_RIPGREP": "0"
-  },
-  "alwaysThinkingEnabled": false
+  }
 }
