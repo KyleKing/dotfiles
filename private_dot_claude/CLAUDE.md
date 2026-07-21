@@ -67,7 +67,7 @@
 ### CLIs
 
 - PostHog error tracking: the binary is `posthog-cli` but installed via mise. The agent-first surface is `posthog-cli api`: `search <regex>` to find tools, `info --json <tool>` for a schema, `call --json <tool> '<json>'` to run one. For "what errors are happening / being missed" use `query-error-tracking-issues-list` (defaults to active, last 7d, sorted by occurrences, test accounts filtered); pass `{"dateRange":{"date_from":"-30d"},"orderBy":"users"}` for impact. `assignee: null` across the board means nobody is triaging. Project is likely 420833 (`us.posthog.com`)
-- Sentry: <TODO update now that the personal, not org, Sentry-CLI token has been given READ access>
+- Sentry: `sentry-cli` uses a personal read token (`~/.sentryclirc`). The `--org` flag goes AFTER the subcommand (e.g. `sentry-cli projects --org <org> list`), not before. There is no issues-list subcommand, so query issues via the REST API with the same token: `curl -H "Authorization: Bearer <token>" "https://sentry.io/api/0/projects/<org>/<project>/issues/?statsPeriod=24h&query=is:unresolved&sort=freq&limit=15"`. Useful `query` filters: `is:unresolved`, an endpoint path, `N+1`. Parse responses with `json.loads(..., strict=False)` (bodies contain raw control chars in SQL). Org/project slugs are project-specific — check that project's `CLAUDE.local.md`
 - Hunk (interactive diff review): Drive a live session with `hunk session *` subcommands (`list`, `review --json`, `navigate`, `comment add/apply`). If no session exists, ask me to launch one. Skill at `~/node_modules/hunkdiff/skills/hunk-review/SKILL.md`
 
 ## Local OCR
