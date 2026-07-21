@@ -46,8 +46,6 @@ npm:@sourcegraph/amp                           0.0.1781166336-g02cc1e
 npm:bash-language-server                       5.6.0                   ~/.config/mise/config.toml  latest
 npm:cchistory                                  0.3.0                   ~/.config/mise/config.toml  latest
 npm:dockerfile-language-server-nodejs          0.15.0                  ~/.config/mise/config.toml  latest
-npm:hunkdiff                                   0.15.1
-npm:hunkdiff                                   0.17.2                  ~/.config/mise/config.toml  latest
 npm:jj-stack                                   1.2.1                   ~/.config/mise/config.toml  latest
 npm:n8n                                        2.2.4
 npm:n8n                                        2.25.7
