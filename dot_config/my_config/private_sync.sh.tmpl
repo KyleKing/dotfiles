@@ -44,6 +44,8 @@ back-c-ch() {
 }
 
 # Obsidian Syncing Snippets
+# DEPRECATED: vault is being archived. Excluded from the hourly freshness check
+# in _repo_freshness.sh and from back-pull-all/back-stat-all below; run manually.
 alias back-pull-obs="cd / && z {{ .obsidian.vault_name }} && git pull"
 back-c-obs() {
     # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
@@ -63,14 +65,12 @@ back-c-nvim() {
 # Pull all changes
 back-pull-all() {
     op-sign-in &&
-        printf "\n\n# back-pull-obs\n" && back-pull-obs && git status &&
         printf "\n\n# back-pull-nvim\n" && back-pull-nvim && git status &&
         printf "\n\n# back-pull-ch\n" && back-pull-ch && git status
 }
 # Just show status
 back-stat-all() {
     op-sign-in &&
-        printf "\n\n# Obsidian:\n" && cd / && z {{ .obsidian.vault_name }} && echo "$PWD" && git status &&
         printf "\n\n# nvim\n" && cd ~/.config/nvim && echo "$PWD" && git status &&
         printf "\n\n# Chezmoi\n" && cd / && z chezmoi && echo "$PWD" && git status
 }
