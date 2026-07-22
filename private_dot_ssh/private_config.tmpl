@@ -9,10 +9,12 @@ Host *
   IdentitiesOnly yes
   UseKeychain yes
 
-Host ubuntu-4gb-hel1-1
-  HostName 157.180.43.106
-  User root
-  IdentityFile ~/.ssh/id_ed25519_hetzner_demo
+Host yak-shears
+  HostName 178.156.207.6
+  Port 2222
+  User yakshears
+  IdentityFile ~/.ssh/id_ed25519_yak_shears
+  IdentitiesOnly yes
 
 Host github.com
   IdentityFile {{ .github.ssh_key_path }}
