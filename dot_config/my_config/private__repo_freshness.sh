@@ -61,12 +61,13 @@ _repo-freshness-stale() {
 }
 
 _repo-freshness-report() {
-    local status=""
+    # Not named "status": zsh reserves that as a read-only alias for $?
+    local behind=""
     if [ -r "$_REPO_FRESHNESS_DIR/behind" ]; then
-        read -r status <"$_REPO_FRESHNESS_DIR/behind"
+        read -r behind <"$_REPO_FRESHNESS_DIR/behind"
     fi
-    if [ -n "$status" ]; then
-        print -P "%F{yellow}repo freshness:%f $status %F{8}(back-pull-all / git push)%f"
+    if [ -n "$behind" ]; then
+        print -P "%F{yellow}repo freshness:%f $behind %F{8}(back-pull-all / git push)%f"
     fi
     if _repo-freshness-stale; then
         # Subshell exits at once, so the fetch is orphaned and outlives this shell
