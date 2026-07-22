@@ -16,7 +16,9 @@ import sys
 import time
 from collections import Counter
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
+
 
 ATUIN_DB = Path.home() / '.local/share/atuin/history.db'
 BREW_OPT = Path('/opt/homebrew/opt')
@@ -29,9 +31,18 @@ STALE_DAYS = 180
 SCRIPT_ROOTS = (Path.home() / 'Developer',)
 SCRIPT_INCLUDES = ('*.sh', '*.zsh', '*.bash', 'justfile', 'Makefile')
 
+LOOSE_FILES = '(outside any repo)'
+
 _COMMAND_NOISE = frozenset({'command', 'doas', 'env', 'exec', 'nohup', 'sudo', 'time', 'watch'})
 _REPOS_SHOWN = 6
-_SKIP_DIRS = ('.git', 'node_modules', '.venv', 'target')
+
+
+class SearchError(RuntimeError):
+    """A search tool failed, as opposed to finding nothing.
+
+    Worth its own type: a silent empty result reads as "nothing uses this
+    package", which is the wrong answer to act on right before an uninstall.
+    """
 
 
 @dataclass(frozen=True)
@@ -190,65 +201,74 @@ def _usage(package: Package, typed: Counter, processes: str, now: float) -> Usag
     )
 
 
-def _grep_index(terms: list[str], root: Path, extra: list[str]) -> dict[str, set[Path]]:
+def _search_index(terms: list[str], root: Path, globs: list[str]) -> dict[str, set[Path]]:
+    """Find every file under root that uses one of these names as a whole word.
+
+    ripgrep rather than grep: BSD grep takes 22 seconds to carry ~700 literal
+    patterns across even a tiny tree, where rg does the same in well under one.
+    """
     if not root.is_dir():
         return {}
     command = [
-        'grep',
-        '-rnow',
-        *(f'--exclude-dir={name}' for name in _SKIP_DIRS),
-        *extra,
+        'rg',
+        '--fixed-strings',
+        '--word-regexp',
+        '--with-filename',
+        '--line-number',
+        '--only-matching',
+        '--no-heading',
+        '--hidden',
+        '-g',
+        '!.git',
+        *(arg for glob in globs for arg in ('-g', glob)),
         '-f',
         '-',
         '.',
     ]
-    out = subprocess.run(
-        command, input='\n'.join(terms), capture_output=True, text=True, check=False, cwd=root
-    )
     wanted = set(terms)
     index: dict[str, set[Path]] = {}
-    for line in out.stdout.splitlines():
-        path, _, rest = line.partition(':')
-        _, _, term = rest.partition(':')
+    for line in _search(command, root, '\n'.join(terms)).splitlines():
+        path, _, term = line.rsplit(':', 2)
         if term in wanted:
             index.setdefault(term, set()).add(root / path.removeprefix('./'))
     return index
 
 
+def _search(command: list[str], root: Path, stdin: str) -> str:
+    """Run a search, treating anything past "found nothing" as a failure."""
+    out = subprocess.run(
+        command, input=stdin, capture_output=True, text=True, check=False, cwd=root
+    )
+    if out.returncode > 1:
+        raise SearchError(f'{command[0]} failed in {root}: {out.stderr.strip()}')
+    return out.stdout
+
+
 def _reference_index(terms: list[str]) -> dict[str, set[Path]]:
     """Map each package name to the config and scripts that mention it, in one pass each."""
-    snapshots = [
-        '--exclude=Brewfile.*',
-        '--exclude=brew_*',
-        '--exclude=mise_*',
-        '--exclude=*brew_inventory.py',
-    ]
-    index = _grep_index(terms, CHEZMOI_SRC, snapshots)
-    includes = [f'--include={glob}' for glob in SCRIPT_INCLUDES]
+    snapshots = ['!Brewfile.*', '!brew_*', '!mise_*', '!*brew_inventory.py']
+    index = _search_index(terms, CHEZMOI_SRC, snapshots)
     for root in SCRIPT_ROOTS:
-        for term, paths in _grep_index(terms, root, includes).items():
+        for term, paths in _search_index(terms, root, list(SCRIPT_INCLUDES)).items():
             index.setdefault(term, set()).update(paths)
     return index
 
 
-def _git_repos() -> list[Path]:
-    """Every checkout under the searched roots, deepest first so nested repos win."""
-    roots = []
-    for root in (CHEZMOI_SRC, *SCRIPT_ROOTS):
-        if not root.is_dir():
-            continue
-        out = subprocess.run(
-            ['find', str(root), '-maxdepth', '6', '-name', '.git', '-not', '-path', '*/node_modules/*'],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        roots.extend(Path(line).parent for line in out.stdout.splitlines())
-    return sorted(roots, key=lambda p: len(p.parts), reverse=True)
+@cache
+def _repo_root(directory: Path) -> Path | None:
+    """Walk up to the enclosing checkout, caching each directory on the way.
+
+    Cheaper than enumerating every repo up front, and it has no depth limit, so
+    a checkout nested seven deep still resolves.
+    """
+    if (directory / '.git').exists():
+        return directory
+    return None if directory == directory.parent else _repo_root(directory.parent)
 
 
-def _repo_of(path: Path, repos: list[Path]) -> str | None:
-    return next((repo.name for repo in repos if path.is_relative_to(repo)), None)
+def _repo_of(path: Path) -> str:
+    root = _repo_root(path.parent)
+    return root.name if root else LOOSE_FILES
 
 
 def _parse_brewfile(path: Path) -> dict[str, set[str]]:
@@ -279,8 +299,8 @@ def _paths_for(package: Package, index: dict[str, set[Path]]) -> list[Path]:
     return sorted({path for key in package.match_keys for path in index.get(key, ())})
 
 
-def _print_references(package: Package, index: dict[str, set[Path]], repos: list[Path]) -> None:
-    counts = Counter(_repo_of(path, repos) or '(loose files)' for path in _paths_for(package, index))
+def _print_references(package: Package, index: dict[str, set[Path]]) -> None:
+    counts = Counter(_repo_of(path) for path in _paths_for(package, index))
     if counts:
         named = ', '.join(f'{repo} ({count})' for repo, count in sorted(counts.items()))
         print(f'{"":8} {"":32}        called from: {named}')
@@ -292,17 +312,12 @@ def _report_repos(packages: list[Package], only: str | None) -> None:
     Shell files only, so anything driven from a Python or JS project is missed.
     A hit means the name appears as a word, not that the line still runs.
     """
-    chosen = [p for p in packages if p.direct and (not only or only in p.name)]
+    chosen = [p for p in packages if p.direct and (not only or only == p.name)]
     index = _reference_index(sorted({key for p in chosen for key in p.match_keys}))
-    repos = _git_repos()
 
     called, unseen = [], []
     for package in chosen:
-        counts = Counter(
-            repo
-            for path in _paths_for(package, index)
-            if (repo := _repo_of(path, repos)) is not None
-        )
+        counts = Counter(_repo_of(path) for path in _paths_for(package, index))
         (called if counts else unseen).append((package, counts))
 
     called.sort(key=lambda row: row[0].name)
@@ -357,21 +372,19 @@ def _report_prune(packages: list[Package], now: float) -> None:
     index = _reference_index(
         sorted({key for package, _ in stale + unmeasured for key in package.match_keys})
     )
-    repos = _git_repos()
-
     stale.sort(key=lambda row: (-row[1].last_run_days, row[0].name))
     print(f'## never typed, not running, and not launched in {STALE_DAYS}+ days ({len(stale)})\n')
     print('Access time is a hint, not proof: a GUI app that was quit months ago but')
     print('is still wanted looks the same as one you abandoned.\n')
     for package, usage in stale:
         print(f'{package.kind:8} {package.name:32} {usage.last_run_days:>4}d  {package.desc}')
-        _print_references(package, index, repos)
+        _print_references(package, index)
 
     print(f'\n## no usage signal to read ({len(unmeasured)})\n')
     print('Fonts and libraries install nothing that records a run. Judge by name.\n')
     for package, _ in unmeasured:
         print(f'{package.kind:8} {package.name:32}       {package.desc}')
-        _print_references(package, index, repos)
+        _print_references(package, index)
 
 
 def _report_compare(left: Path, right: Path) -> None:
