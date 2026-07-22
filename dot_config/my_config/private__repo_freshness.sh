@@ -2,7 +2,8 @@
 #      ^----- get shellcheck hints based on bash
 # https://github.com/koalaman/shellcheck/issues/809#issuecomment-631194320
 #
-# Tell me when the shared repos (chezmoi, nvim) have commits waiting to be pulled.
+# Tell me when the shared repos (chezmoi, nvim) have commits waiting to be pulled,
+# or local commits sitting unpushed for 10+ minutes.
 #
 # Shell startup never runs git and never touches the network: it reads a cached
 # answer and, if that answer is older than an hour, forks a detached refresh that
@@ -10,6 +11,7 @@
 
 _REPO_FRESHNESS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/repo-freshness"
 _REPO_FRESHNESS_MAX_AGE=3600
+_REPO_FRESHNESS_UNPUSHED_AGE=600
 
 # name:path pairs; obsidian is intentionally absent (see back-pull-obs)
 _REPO_FRESHNESS_REPOS=(
@@ -22,7 +24,7 @@ _repo-freshness-refresh() {
     # Stamp before fetching so a hung or offline fetch can't retrigger on every new shell
     : >|"$_REPO_FRESHNESS_DIR/stamp"
 
-    local entry name dir behind
+    local entry name dir behind ahead oldest_ts now
     local out=""
     for entry in "${_REPO_FRESHNESS_REPOS[@]}"; do
         name="${entry%%:*}"
@@ -37,6 +39,16 @@ _repo-freshness-refresh() {
         if [ "$behind" -gt 0 ]; then
             out="$out $name +$behind"
         fi
+        ahead=$(git -C "$dir" rev-list --count '@{upstream}..HEAD' 2>/dev/null) || continue
+        if [ "$ahead" -gt 0 ]; then
+            oldest_ts=$(git -C "$dir" log --format=%ct '@{upstream}..HEAD' | tail -1)
+            if [ -n "$oldest_ts" ]; then
+                now=$(date +%s)
+                if ((now - oldest_ts >= _REPO_FRESHNESS_UNPUSHED_AGE)); then
+                    out="$out $name unpushed+$ahead"
+                fi
+            fi
+        fi
     done
     printf '%s\n' "${out# }" >|"$_REPO_FRESHNESS_DIR/behind"
 }
@@ -49,12 +61,12 @@ _repo-freshness-stale() {
 }
 
 _repo-freshness-report() {
-    local behind=""
+    local status=""
     if [ -r "$_REPO_FRESHNESS_DIR/behind" ]; then
-        read -r behind <"$_REPO_FRESHNESS_DIR/behind"
+        read -r status <"$_REPO_FRESHNESS_DIR/behind"
     fi
-    if [ -n "$behind" ]; then
-        print -P "%F{yellow}behind upstream:%f $behind %F{8}(back-pull-all)%f"
+    if [ -n "$status" ]; then
+        print -P "%F{yellow}repo freshness:%f $status %F{8}(back-pull-all / git push)%f"
     fi
     if _repo-freshness-stale; then
         # Subshell exits at once, so the fetch is orphaned and outlives this shell
