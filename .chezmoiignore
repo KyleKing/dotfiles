@@ -3,6 +3,7 @@
 # General Ignore Patterns
 *~
 .DS_Store
+__pycache__
 
 # Repo-only files
 README.md

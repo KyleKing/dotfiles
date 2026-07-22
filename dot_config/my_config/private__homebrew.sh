@@ -13,6 +13,9 @@ alias bil="brew install"
 alias brm="brew rmtree"
 alias bo="brew update && brew outdated"
 alias bcbd="brew cleanup && brew doctor"
+# What did I install by name, and what shows no sign of use? ("brew leaves" hides
+# anything another formula depends on, so daily tools like fzf and rg fall off it)
+alias binv='$HOME/.config/my_config/brew_inventory.py'
 # Full post-upgrade + size-gated dev-cache sweep: see _cache_cleanup.sh for "bcbd-deep", "cache-status", "cache-sweep"
 # Other useful commands: "brew uninstall <cask>" and "brew uses <...>"
 
