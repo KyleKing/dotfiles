@@ -8,7 +8,9 @@ name, and marks the ones that are also pulled in as a dependency.
 """
 
 import argparse
+import hashlib
 import json
+import os
 import re
 import sqlite3
 import subprocess
@@ -22,19 +24,24 @@ from pathlib import Path
 
 ATUIN_DB = Path.home() / '.local/share/atuin/history.db'
 BREW_OPT = Path('/opt/homebrew/opt')
-CHEZMOI_SRC = Path.home() / '.local/share/chezmoi'
+BREW_STORES = (Path('/opt/homebrew/Cellar'), Path('/opt/homebrew/Caskroom'))
 STALE_DAYS = 180
 
-# Scripts outside chezmoi that invoke brew-installed tools. Searched for shell
-# files only: a word like "gum" or "walk" matches far too much prose and Python
-# to be worth reporting across a whole code checkout.
+# Where tools actually get called. The chezmoi repo is deliberately absent: it
+# configures tools rather than running them, so it matched nearly every package
+# by name and buried the real call sites, counting a tmux pane binding as proof
+# that zoom gets used. Shell files only, because a word like "gum" or "walk"
+# matches far too much prose and Python to report across a whole code checkout.
 SCRIPT_ROOTS = (Path.home() / 'Developer',)
 SCRIPT_INCLUDES = ('*.sh', '*.zsh', '*.bash', 'justfile', 'Makefile')
 
+CACHE_DIR = Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'brew-inventory'
+SEARCH_TTL = 6 * 3600
 LOOSE_FILES = '(outside any repo)'
 
 _COMMAND_NOISE = frozenset({'command', 'doas', 'env', 'exec', 'nohup', 'sudo', 'time', 'watch'})
 _REPOS_SHOWN = 6
+_STYLED = sys.stdout.isatty() and not os.environ.get('NO_COLOR')
 
 
 class SearchError(RuntimeError):
@@ -72,14 +79,47 @@ class Usage:
         return not self.typed and not self.running
 
 
+def _style(text: str, code: str) -> str:
+    return f'\033[{code}m{text}\033[0m' if _STYLED else text
+
+
+def _bold(text: str) -> str:
+    return _style(text, '1')
+
+
+def _dim(text: str) -> str:
+    return _style(text, '2')
+
+
+def _read_cache(name: str) -> dict | None:
+    path = CACHE_DIR / name
+    return json.loads(path.read_text()) if path.is_file() else None
+
+
+def _write_cache(name: str, payload: dict) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    (CACHE_DIR / name).write_text(json.dumps(payload))
+
+
 def _brew_json() -> dict:
+    """Read brew's own view of what is installed, cached until the Cellar changes.
+
+    The mtime on Cellar and Caskroom moves on every install and uninstall, so
+    this needs no expiry: the cache is either current or already invalid.
+    """
+    key = [store.stat().st_mtime for store in BREW_STORES if store.is_dir()]
+    if (cached := _read_cache('brew.json')) and cached['key'] == key:
+        return cached['data']
+
     out = subprocess.run(
         ['brew', 'info', '--json=v2', '--installed'],
         capture_output=True,
         text=True,
         check=True,
     )
-    return json.loads(out.stdout)
+    data = json.loads(out.stdout)
+    _write_cache('brew.json', {'key': key, 'data': data})
+    return data
 
 
 def _load_packages() -> list[Package]:
@@ -238,13 +278,34 @@ def _search(command: list[str], root: Path, stdin: str) -> str:
     return out.stdout
 
 
-def _reference_index(terms: list[str]) -> dict[str, set[Path]]:
-    """Map each package name to the config and scripts that mention it, in one pass each."""
-    snapshots = ['!Brewfile.*', '!brew_*', '!mise_*', '!*brew_inventory.py']
-    index = _search_index(terms, CHEZMOI_SRC, snapshots)
+def _reference_index(terms: list[str], refresh: bool = False) -> dict[str, set[Path]]:
+    """Map each package name to the scripts that call it, in one pass per root.
+
+    Cached for SEARCH_TTL. Unlike the brew cache there is no cheap way to notice
+    an edit anywhere under the search roots, so this one can go stale; the age
+    is printed and --refresh forces a rescan.
+    """
+    # Keyed by the term set so prune and repos, which ask about different
+    # packages, keep their own entry instead of evicting each other
+    name = f'references-{hashlib.sha256(" ".join(terms).encode()).hexdigest()[:12]}.json'
+    cached = None if refresh else _read_cache(name)
+    age = time.time() - cached['stamp'] if cached else None
+    if cached and age < SEARCH_TTL:
+        when = 'just now' if age < 60 else f'{int(age / 60)}m ago'
+        print(_dim(f'search cached {when}; --refresh to rescan') + '\n')
+        return {term: {Path(p) for p in paths} for term, paths in cached['index'].items()}
+
+    index: dict[str, set[Path]] = {}
     for root in SCRIPT_ROOTS:
         for term, paths in _search_index(terms, root, list(SCRIPT_INCLUDES)).items():
             index.setdefault(term, set()).update(paths)
+    _write_cache(
+        name,
+        {
+            'stamp': time.time(),
+            'index': {term: sorted(str(p) for p in paths) for term, paths in index.items()},
+        },
+    )
     return index
 
 
@@ -291,10 +352,10 @@ def _print_references(package: Package, index: dict[str, set[Path]]) -> None:
     counts = Counter(_repo_of(path) for path in _paths_for(package, index))
     if counts:
         named = ', '.join(f'{repo} ({count})' for repo, count in sorted(counts.items()))
-        print(f'{"":8} {"":32}        called from: {named}')
+        print(_dim(f'{"":42}    called from: {named}'))
 
 
-def _report_repos(packages: list[Package], only: str | None) -> None:
+def _report_repos(packages: list[Package], only: str | None, refresh: bool) -> None:
     """Show which checkouts call each tool, so a formula's blast radius is visible.
 
     Shell files only, so anything driven from a Python or JS project is missed.
@@ -303,7 +364,7 @@ def _report_repos(packages: list[Package], only: str | None) -> None:
     chosen = [p for p in packages if p.direct and (not only or only == p.name)]
     if not chosen:
         raise SearchError(f'no package installed on request is named {only!r}')
-    index = _reference_index(sorted({key for p in chosen for key in p.match_keys}))
+    index = _reference_index(sorted({key for p in chosen for key in p.match_keys}), refresh)
 
     called, unseen = [], []
     for package in chosen:
@@ -311,38 +372,38 @@ def _report_repos(packages: list[Package], only: str | None) -> None:
         (called if counts else unseen).append((package, counts))
 
     called.sort(key=lambda row: row[0].name)
-    print(f'## called from a git repo ({len(called)} of {len(chosen)})\n')
-    print('A wide spread usually means the name is a common word rather than a')
-    print('popular tool: go, code, git and github all match ordinary prose.\n')
+    print(_bold(f'## called from a git repo ({len(called)} of {len(chosen)})') + '\n')
+    print(_dim('A wide spread usually means the name is a common word rather than a'))
+    print(_dim('popular tool: go, code, git and github all match ordinary prose.') + '\n')
     for package, counts in called:
         top = counts.most_common(_REPOS_SHOWN)
         named = ', '.join(f'{repo} ({count})' for repo, count in top)
         more = f', +{len(counts) - _REPOS_SHOWN} more' if len(counts) > _REPOS_SHOWN else ''
         label = 'repo ' if len(counts) == 1 else 'repos'
-        print(f'{package.name:24} {len(counts):>3} {label}  {named}{more}')
+        print(f'{_bold(f"{package.name:24}")} {len(counts):>3} {label}  {_dim(named + more)}')
 
-    print(f'\n## nothing searched mentions these ({len(unseen)})\n')
+    print('\n' + _bold(f'## nothing searched mentions these ({len(unseen)})') + '\n')
     print(', '.join(package.name for package, _ in unseen))
 
 
 def _report_list(packages: list[Package]) -> None:
     for kind in ('formula', 'cask'):
         chosen = [p for p in packages if p.kind == kind and p.direct]
-        print(f'\n## {kind}s installed on request ({len(chosen)})\n')
+        print('\n' + _bold(f'## {kind}s installed on request ({len(chosen)})') + '\n')
         for package in chosen:
             marker = f' [also a dependency of {len(package.required_by)}]' if package.shared else ''
-            print(f'{package.full_name}{marker} — {package.desc}')
+            print(f'{_bold(package.full_name)}{marker} {_dim("— " + package.desc)}')
 
     indirect = [p for p in packages if p.kind == 'formula' and not p.direct]
     orphans = [p for p in indirect if not p.required_by]
-    print(f'\n## pulled in as dependencies ({len(indirect)})\n')
+    print('\n' + _bold(f'## pulled in as dependencies ({len(indirect)})') + '\n')
     print(f'{len(indirect) - len(orphans)} are still required by something installed.')
     if orphans:
         names = ' '.join(p.name for p in orphans)
         print(f'{len(orphans)} are required by nothing — run `brew autoremove`: {names}')
 
 
-def _report_prune(packages: list[Package], stale_days: int) -> None:
+def _report_prune(packages: list[Package], stale_days: int, refresh: bool) -> None:
     typed = _typed_commands()
     if not typed:
         print(f'No atuin history at {ATUIN_DB}; ranking on file access time alone.\n')
@@ -359,20 +420,22 @@ def _report_prune(packages: list[Package], stale_days: int) -> None:
             stale.append((package, usage))
 
     index = _reference_index(
-        sorted({key for package, _ in stale + unmeasured for key in package.match_keys})
+        sorted({key for package, _ in stale + unmeasured for key in package.match_keys}), refresh
     )
     stale.sort(key=lambda row: (-row[1].last_run_days, row[0].name))
-    print(f'## never typed, not running, and not launched in {stale_days}+ days ({len(stale)})\n')
-    print('Access time is a hint, not proof: a GUI app that was quit months ago but')
-    print('is still wanted looks the same as one you abandoned.\n')
+    header = f'## never typed, not running, and not launched in {stale_days}+ days ({len(stale)})'
+    print(_bold(header) + '\n')
+    print(_dim('Access time is a hint, not proof: a GUI app that was quit months ago but'))
+    print(_dim('is still wanted looks the same as one you abandoned.') + '\n')
     for package, usage in stale:
-        print(f'{package.kind:8} {package.name:32} {usage.last_run_days:>4}d  {package.desc}')
+        days = _style(f'{usage.last_run_days:>4}d', '33')
+        print(f'{package.kind:8} {_bold(f"{package.name:32}")} {days}  {_dim(package.desc)}')
         _print_references(package, index)
 
-    print(f'\n## no usage signal to read ({len(unmeasured)})\n')
-    print('Fonts and libraries install nothing that records a run. Judge by name.\n')
+    print('\n' + _bold(f'## no usage signal to read ({len(unmeasured)})') + '\n')
+    print(_dim('Fonts and libraries install nothing that records a run. Judge by name.') + '\n')
     for package, _ in unmeasured:
-        print(f'{package.kind:8} {package.name:32}       {package.desc}')
+        print(f'{package.kind:8} {_bold(f"{package.name:32}")}        {_dim(package.desc)}')
         _print_references(package, index)
 
 
@@ -389,10 +452,10 @@ def _report_compare(left: Path, right: Path) -> None:
             (_machine_of(right), rhs[kind], lhs[kind]),
         ):
             missing = sorted(set(mine) - set(theirs))
-            print(f'\n## {kind} only on {label} ({len(missing)})\n')
+            print('\n' + _bold(f'## {kind} only on {label} ({len(missing)})') + '\n')
             for name in missing:
-                print(f'{name} — {mine[name]}')
-        print(f'\n## {kind} on both ({len(set(lhs[kind]) & set(rhs[kind]))})')
+                print(f'{_bold(name)} {_dim("— " + mine[name])}')
+        print('\n' + _bold(f'## {kind} on both ({len(set(lhs[kind]) & set(rhs[kind]))})'))
 
 
 def main() -> int:
@@ -411,17 +474,21 @@ def main() -> int:
     compare.add_argument('right', type=Path)
     repos = sub.add_parser('repos', help='which git checkouts call each package')
     repos.add_argument('only', nargs='?', help='one package name; omit to scan them all')
+    for scanner in (prune, repos):
+        scanner.add_argument(
+            '--refresh', action='store_true', help='rescan instead of reusing the cached search'
+        )
     args = parser.parse_args()
 
     match args.command:
         case 'list':
             _report_list(_load_packages())
         case 'prune':
-            _report_prune(_load_packages(), args.days)
+            _report_prune(_load_packages(), args.days, args.refresh)
         case 'compare':
             _report_compare(args.left, args.right)
         case 'repos':
-            _report_repos(_load_packages(), args.only)
+            _report_repos(_load_packages(), args.only, args.refresh)
     return 0
 
 
