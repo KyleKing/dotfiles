@@ -31,6 +31,7 @@ hadolint
 hcloud
 hyperfine
 imagemagick
+jhlee0409/tap/cchv-server
 lazydocker
 lazygit
 lazyjj
@@ -65,6 +66,7 @@ pyright
 python@3.12
 qman
 quien
+raine/claude-history/claude-history
 rename
 repeater
 rtk

@@ -35,6 +35,7 @@ go:github.com/segmentio/golines                         0.12.2
 go:github.com/tdewolff/minify/v2/cmd/minify             2.24.13
 go:golang.org/x/tools/cmd/goimports                     0.45.0
 golangci-lint                                           2.8.0
+golangci-lint                                           2.12.2
 hadolint                                                2.14.0
 hk                                                      0.8.2
 hk                                                      1.22.0
@@ -63,6 +64,7 @@ npm:@mermaid-js/mermaid-cli                             11.16.0                 
 npm:@microsoft/compose-language-service                 0.5.0                              ~/.config/mise/config.toml  latest
 npm:@oh-my-pi/pi-coding-agent                           14.0.2
 npm:@oh-my-pi/pi-coding-agent                           16.3.4                             ~/.config/mise/config.toml  latest
+npm:@posthog/cli                                        0.8.4                              ~/.config/mise/config.toml  latest
 npm:@qodo/command                                       0.36.0                             ~/.config/mise/config.toml  latest
 npm:@sourcegraph/amp                                    0.0.1777594497-gcbffc5
 npm:@sourcegraph/amp                                    0.0.1780336675-gf27daa
@@ -70,7 +72,7 @@ npm:bash-language-server                                5.6.0                   
 npm:cchistory                                           0.3.0                              ~/.config/mise/config.toml  latest
 npm:dockerfile-language-server-nodejs                   0.15.0                             ~/.config/mise/config.toml  latest
 npm:dprint                                              0.50.2
-npm:hunkdiff                                            0.16.0                             ~/.config/mise/config.toml  latest
+npm:hunkdiff                                            0.16.0
 npm:jj-stack                                            1.2.1                              ~/.config/mise/config.toml  latest
 npm:n8n                                                 2.22.6
 npm:pagefind                                            1.4.0

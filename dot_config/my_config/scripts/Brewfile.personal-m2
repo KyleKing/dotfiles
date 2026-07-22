@@ -1,7 +1,9 @@
 tap "abhimanyu003/sttr", trusted: true
 tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
 tap "bartolli/codanna", trusted: true
+tap "jhlee0409/tap"
 tap "orlangure/tap", trusted: true
+tap "raine/claude-history"
 tap "steipete/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
@@ -225,8 +227,12 @@ brew "zsh"
 brew "abhimanyu003/sttr/sttr"
 # Code intelligence system with semantic search
 brew "bartolli/codanna/codanna"
+# Claude Code History Viewer - WebUI Server (headless HTTP server)
+brew "jhlee0409/tap/cchv-server", trusted: true
 # Go Coverage in your terminal: a tool for exploring Go Coverage reports from the command line
 brew "orlangure/tap/gocovsh"
+# Fuzzy-search Claude Code conversation history from the terminal
+brew "raine/claude-history/claude-history", trusted: true
 # Grep the GIF. Stick the landing
 brew "steipete/tap/gifgrep"
 # Spotify power CLI using web cookies
