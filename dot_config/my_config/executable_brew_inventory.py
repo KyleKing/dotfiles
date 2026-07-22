@@ -55,7 +55,6 @@ class Package:
     required_by: tuple[str, ...]
     binaries: tuple[Path, ...]
     match_keys: tuple[str, ...]
-    measurable: bool
 
     @property
     def shared(self) -> bool:
@@ -105,11 +104,10 @@ def _load_packages() -> list[Package]:
                 required_by=tuple(sorted(required_by.get(name, ()))),
                 binaries=binaries,
                 match_keys=tuple(sorted({name, *(p.name for p in binaries)})),
-                measurable=bool(binaries),
             )
         )
     for cask in data['casks']:
-        binaries, apps, measurable = _cask_artifacts(cask['artifacts'])
+        binaries, apps = _cask_artifacts(cask['artifacts'])
         token = cask['token']
         packages.append(
             Package(
@@ -123,7 +121,6 @@ def _load_packages() -> list[Package]:
                 match_keys=tuple(
                     sorted({token, token.removesuffix('-app'), *apps, *(p.name for p in binaries)})
                 ),
-                measurable=measurable,
             )
         )
     return sorted(packages, key=lambda p: (p.kind, p.name))
@@ -134,31 +131,28 @@ def _formula_binaries(name: str) -> tuple[Path, ...]:
     return tuple(p for p in bin_dir.iterdir() if p.is_file()) if bin_dir.is_dir() else ()
 
 
-def _cask_artifacts(artifacts: list) -> tuple[tuple[Path, ...], set[str], bool]:
+def _cask_artifacts(artifacts: list) -> tuple[tuple[Path, ...], set[str]]:
     """Locate what a cask installs that macOS stamps an access time on when run.
 
-    Fonts and preference panes never get one, so report them as unmeasurable
-    rather than letting them fall into the unused pile.
+    Fonts and preference panes install nothing that records a run, so they come
+    back empty and land in the report's unmeasured pile rather than the unused one.
     """
     binaries: list[Path] = []
     apps: set[str] = set()
-    measurable = False
     for artifact in artifacts:
         if not isinstance(artifact, dict):
             continue
         for key, value in artifact.items():
             if key == 'app':
-                measurable = True
                 app = Path(artifact.get('target') or f'/Applications/{value[0]}')
                 apps.add(app.stem)
                 macos = app / 'Contents/MacOS'
                 if macos.is_dir():
                     binaries.extend(p for p in macos.iterdir() if p.is_file())
             elif key == 'binary':
-                measurable = True
                 target = artifact.get('target')
                 binaries.append(Path(target) if target else Path('/opt/homebrew/bin') / value[0])
-    return tuple(binaries), apps, measurable
+    return tuple(binaries), apps
 
 
 def _typed_commands() -> Counter:
@@ -188,15 +182,15 @@ def _running_processes() -> str:
     return out.stdout.lower()
 
 
-def _days_since(paths: tuple[Path, ...], now: float) -> int | None:
+def _days_since(paths: tuple[Path, ...]) -> int | None:
     times = [p.stat().st_atime for p in paths if p.exists()]
-    return int((now - max(times)) / 86400) if times else None
+    return int((time.time() - max(times)) / 86400) if times else None
 
 
-def _usage(package: Package, typed: Counter, processes: str, now: float) -> Usage:
+def _usage(package: Package, typed: Counter, processes: str) -> Usage:
     return Usage(
         typed=sum(typed.get(key, 0) for key in package.match_keys),
-        last_run_days=_days_since(package.binaries, now),
+        last_run_days=_days_since(package.binaries),
         running=any(len(key) > 3 and key.lower() in processes for key in package.match_keys),
     )
 
@@ -271,28 +265,22 @@ def _repo_of(path: Path) -> str:
     return root.name if root else LOOSE_FILES
 
 
-def _parse_brewfile(path: Path) -> dict[str, set[str]]:
-    entries: dict[str, set[str]] = {'brew': set(), 'cask': set()}
+def _parse_brewfile(path: Path) -> dict[str, dict[str, str]]:
+    """Read a dumped Brewfile into {kind: {name: description}}.
+
+    `brew bundle dump` writes each description as a comment on the line above,
+    so the parse has to carry it forward.
+    """
+    entries: dict[str, dict[str, str]] = {'brew': {}, 'cask': {}}
     pattern = re.compile(r'^(brew|cask) "([^"]+)"')
+    pending = ''
     for line in path.read_text().splitlines():
         if match := pattern.match(line):
-            entries[match[1]].add(match[2].split('/')[-1])
-    return entries
-
-
-def _descriptions(path: Path) -> dict[str, str]:
-    lookup = {}
-    pending = ''
-    pattern = re.compile(r'^(?:brew|cask) "([^"]+)"')
-    for line in path.read_text().splitlines():
-        if line.startswith('# '):
-            pending = line[2:]
-        elif match := pattern.match(line):
-            lookup[match[1].split('/')[-1]] = pending
+            entries[match[1]][match[2].split('/')[-1]] = pending
             pending = ''
         else:
-            pending = ''
-    return lookup
+            pending = line[2:] if line.startswith('# ') else ''
+    return entries
 
 
 def _paths_for(package: Package, index: dict[str, set[Path]]) -> list[Path]:
@@ -313,6 +301,8 @@ def _report_repos(packages: list[Package], only: str | None) -> None:
     A hit means the name appears as a word, not that the line still runs.
     """
     chosen = [p for p in packages if p.direct and (not only or only == p.name)]
+    if not chosen:
+        raise SearchError(f'no package installed on request is named {only!r}')
     index = _reference_index(sorted({key for p in chosen for key in p.match_keys}))
 
     called, unseen = [], []
@@ -331,7 +321,7 @@ def _report_repos(packages: list[Package], only: str | None) -> None:
         label = 'repo ' if len(counts) == 1 else 'repos'
         print(f'{package.name:24} {len(counts):>3} {label}  {named}{more}')
 
-    print(f'\n## no shell script in any repo calls these ({len(unseen)})\n')
+    print(f'\n## nothing searched mentions these ({len(unseen)})\n')
     print(', '.join(package.name for package, _ in unseen))
 
 
@@ -352,7 +342,7 @@ def _report_list(packages: list[Package]) -> None:
         print(f'{len(orphans)} are required by nothing — run `brew autoremove`: {names}')
 
 
-def _report_prune(packages: list[Package], now: float) -> None:
+def _report_prune(packages: list[Package], stale_days: int) -> None:
     typed = _typed_commands()
     if not typed:
         print(f'No atuin history at {ATUIN_DB}; ranking on file access time alone.\n')
@@ -360,20 +350,19 @@ def _report_prune(packages: list[Package], now: float) -> None:
 
     stale, unmeasured = [], []
     for package in (p for p in packages if p.direct and not p.shared):
-        usage = _usage(package, typed, processes, now)
+        usage = _usage(package, typed, processes)
         if not usage.unused:
             continue
-        if package.measurable and usage.last_run_days is not None:
-            if usage.last_run_days >= STALE_DAYS:
-                stale.append((package, usage))
-        else:
+        if usage.last_run_days is None:
             unmeasured.append((package, usage))
+        elif usage.last_run_days >= stale_days:
+            stale.append((package, usage))
 
     index = _reference_index(
         sorted({key for package, _ in stale + unmeasured for key in package.match_keys})
     )
     stale.sort(key=lambda row: (-row[1].last_run_days, row[0].name))
-    print(f'## never typed, not running, and not launched in {STALE_DAYS}+ days ({len(stale)})\n')
+    print(f'## never typed, not running, and not launched in {stale_days}+ days ({len(stale)})\n')
     print('Access time is a hint, not proof: a GUI app that was quit months ago but')
     print('is still wanted looks the same as one you abandoned.\n')
     for package, usage in stale:
@@ -387,38 +376,48 @@ def _report_prune(packages: list[Package], now: float) -> None:
         _print_references(package, index)
 
 
+def _machine_of(path: Path) -> str:
+    """Name the machine a dumped Brewfile came from, falling back to its filename."""
+    return path.suffix.lstrip('.') or path.name
+
+
 def _report_compare(left: Path, right: Path) -> None:
     lhs, rhs = _parse_brewfile(left), _parse_brewfile(right)
-    descs = _descriptions(left) | _descriptions(right)
     for kind in ('brew', 'cask'):
-        for label, missing in (
-            (f'only on {left.suffix.lstrip(".")}', lhs[kind] - rhs[kind]),
-            (f'only on {right.suffix.lstrip(".")}', rhs[kind] - lhs[kind]),
+        for label, mine, theirs in (
+            (_machine_of(left), lhs[kind], rhs[kind]),
+            (_machine_of(right), rhs[kind], lhs[kind]),
         ):
-            print(f'\n## {kind} {label} ({len(missing)})\n')
-            for name in sorted(missing):
-                print(f'{name} — {descs.get(name, "")}')
-        print(f'\n## {kind} on both ({len(lhs[kind] & rhs[kind])})')
+            missing = sorted(set(mine) - set(theirs))
+            print(f'\n## {kind} only on {label} ({len(missing)})\n')
+            for name in missing:
+                print(f'{name} — {mine[name]}')
+        print(f'\n## {kind} on both ({len(set(lhs[kind]) & set(rhs[kind]))})')
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('list', help='every package asked for by name, with descriptions')
-    sub.add_parser('prune', help='direct packages with no sign of use')
+    prune = sub.add_parser('prune', help='direct packages with no sign of use')
+    prune.add_argument(
+        '--days',
+        type=int,
+        default=STALE_DAYS,
+        help=f'how long unused counts as stale (default {STALE_DAYS})',
+    )
     compare = sub.add_parser('compare', help='diff two checked-in Brewfiles')
     compare.add_argument('left', type=Path)
     compare.add_argument('right', type=Path)
     repos = sub.add_parser('repos', help='which git checkouts call each package')
-    repos.add_argument('only', nargs='?', help='limit to packages matching this name')
+    repos.add_argument('only', nargs='?', help='one package name; omit to scan them all')
     args = parser.parse_args()
 
-    now = time.time()
     match args.command:
         case 'list':
             _report_list(_load_packages())
         case 'prune':
-            _report_prune(_load_packages(), now)
+            _report_prune(_load_packages(), args.days)
         case 'compare':
             _report_compare(args.left, args.right)
         case 'repos':
@@ -427,4 +426,7 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except SearchError as err:
+        sys.exit(f'brew_inventory: {err}')
