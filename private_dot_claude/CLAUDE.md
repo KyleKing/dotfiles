@@ -151,6 +151,7 @@ Never frame a point as "not X, but Y" / "it's not just X, it's Y" / "this isn't 
 
 ### Mechanical rules
 
+- Use the Oxford comma in lists of three or more items ("branch, PR, and deploy state", not "branch, PR and deploy state")
 - Keep emojis to a minimum
 - Direct and action-oriented; no filler, no excessive enthusiasm, no vague language
 - Technical precision: specific about implementation details and decisions

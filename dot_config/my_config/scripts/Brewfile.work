@@ -182,8 +182,6 @@ brew "jhlee0409/tap/cchv-server", trusted: true
 brew "keidarcy/tap/e1s"
 # Single-host system diagnostics TUI — sibling to netwatch
 brew "matthart1983/tap/syswatch", trusted: true
-# Fuzzy-search Claude Code conversation history from the terminal
-brew "raine/claude-history/claude-history", trusted: true
 # Steampipe exposes APIs and services as a high-performance relational database, giving you the ability to write SQL-based queries to explore, assess and report on dynamic data.
 brew "turbot/tap/steampipe"
 # Password manager that keeps all passwords secure behind one password
