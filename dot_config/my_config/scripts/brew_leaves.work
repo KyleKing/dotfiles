@@ -2,7 +2,6 @@ act
 atuin
 awscli
 bat
-block-goose-cli
 bottom
 ccache
 chezmoi
@@ -39,7 +38,6 @@ mani
 matthart1983/tap/syswatch
 mergiraf
 mise
-mosh
 navi
 nvimpager
 oh-my-posh

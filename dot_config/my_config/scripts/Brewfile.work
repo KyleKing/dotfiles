@@ -18,8 +18,6 @@ brew "readline"
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Open source, extensible AI agent that goes beyond code suggestions
-brew "block-goose-cli"
 # Yet another cross-platform graphical process/system monitor
 brew "bottom"
 # Object-file caching compiler wrapper
@@ -92,8 +90,6 @@ brew "mani"
 brew "mergiraf"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
-# Remote terminal application
-brew "mosh"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -200,20 +196,12 @@ cask "alfred"
 cask "appcleaner"
 # Cross platform SQL editor and database management app
 cask "beekeeper-studio"
-# Open source, extensible AI agent that goes beyond code suggestions
-cask "block-goose"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
-# Visualise and analyse Claude Code session executions
-cask "claude-devtools"
-# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
-cask "cmux"
-# Write, edit, and chat about your code with AI
-cask "cursor"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
 # API documentation browser and code snippet manager
@@ -303,8 +291,6 @@ vscode "anthropic.claude-code"
 vscode "beardedbear.beardedtheme"
 vscode "coderabbit.coderabbit-vscode"
 vscode "esbenp.prettier-vscode"
-vscode "github.copilot"
-vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
 vscode "gruntfuggly.todo-tree"
