@@ -5,6 +5,10 @@
 # Add GitHub PR Number to Oh-My-Posh
 
 _gh_pr_precmd() {
+  # Disable job control for this call only, so the disowned background
+  # fetch below doesn't print a "[N] PID" line into the prompt.
+  setopt localoptions nomonitor
+
   local tracking_ref
   tracking_ref=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null)
   if [[ -z "$tracking_ref" ]]; then

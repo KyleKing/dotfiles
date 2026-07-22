@@ -33,15 +33,15 @@ back-c-ch() {
         op-sign-in || return 1
         back-scripts-ch || return 1
         # Sync with files already tracked by chezmoi
-        chezmoi re-add || return 1
+        chezmoi re-add
     else
         RED='\033[0;31m'
         NC='\033[0m'
         echo -e "${RED}Chezmoi git status must be clean before re-adding${NC}"
+        return 1
     fi
-    # open LazyGit to review changes
-    lazygit
 }
+# Review in LazyGit afterward: back-c-ch && lzg
 
 # Obsidian Syncing Snippets
 # DEPRECATED: vault is being archived. Excluded from the hourly freshness check
@@ -51,26 +51,25 @@ back-c-obs() {
     # FYI: `man strftime` provides the same information as Python docs and https://strftime.org/
     MSG="Manual vault backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd / && z {{ .obsidian.vault_name }} && ga . && gcmsg "$MSG" && lzg
+    cd / && z {{ .obsidian.vault_name }} && ga . && gcmsg "$MSG"
 }
+# Push afterward: back-c-obs && lzg
 
 # NVIM Syncing
 alias back-pull-nvim="cd ~/.config/nvim && git pull"
 back-c-nvim() {
     MSG="chore: manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
-    cd ~/.config/nvim && ga . && gcmsg "$MSG" && lzg
+    cd ~/.config/nvim && ga . && gcmsg "$MSG"
 }
+# Push afterward: back-c-nvim && lzg
 
-# Pull all changes
-back-pull-all() {
-    op-sign-in &&
-        printf "\n\n# back-pull-nvim\n" && back-pull-nvim && git status &&
-        printf "\n\n# back-pull-ch\n" && back-pull-ch && git status
+back-stat-nvim() {
+    cd ~/.config/nvim || return 1
+    echo "$PWD" && git status
 }
-# Just show status
-back-stat-all() {
-    op-sign-in &&
-        printf "\n\n# nvim\n" && cd ~/.config/nvim && echo "$PWD" && git status &&
-        printf "\n\n# Chezmoi\n" && cd / && z chezmoi && echo "$PWD" && git status
-}
+alias back-stat-ch="cd / && z chezmoi && echo \$PWD && git status"
+
+# Composed from the single-repo commands above
+alias back-pull-all="back-pull-nvim && back-pull-ch"
+alias back-stat-all="back-stat-nvim && back-stat-ch"
