@@ -52,7 +52,12 @@ _repo-freshness-refresh() {
             fi
         fi
     done
-    printf '%s\n' "${lines[@]}" >|"$_REPO_FRESHNESS_DIR/behind"
+    # printf still emits one blank line for a zero-arg "${lines[@]}", so guard it
+    if [ "${#lines[@]}" -gt 0 ]; then
+        printf '%s\n' "${lines[@]}" >|"$_REPO_FRESHNESS_DIR/behind"
+    else
+        : >|"$_REPO_FRESHNESS_DIR/behind"
+    fi
 }
 
 _repo-freshness-read() {
