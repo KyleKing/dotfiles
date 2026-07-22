@@ -31,6 +31,10 @@ brew "chezmoi"
 brew "cloc"
 # Power of curl, ease of use of httpie
 brew "curlie"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
+# TIFF library and utilities
+brew "libtiff"
 # Diff that understands syntax
 brew "difftastic"
 # Load/unload environment variables based on $PWD
@@ -41,8 +45,6 @@ brew "dotenv-linter"
 brew "duckdb"
 # More intuitive version of du in rust
 brew "dust"
-# Secure your credentials in environment variables
-brew "envchain"
 # Modern, maintained replacement for ls
 brew "eza"
 # Simple, fast and user-friendly alternative to find
@@ -73,8 +75,6 @@ brew "gnupg"
 brew "go"
 # Analyzing the dependencies in compiled Golang binaries
 brew "go-size-analyzer"
-# Tool for glamorous shell scripts
-brew "gum"
 # Smarter Dockerfile linter to validate best practices
 brew "hadolint"
 # Command-line interface for Hetzner Cloud
@@ -179,8 +179,6 @@ brew "sox"
 brew "srgn"
 # Opinionated Lua code formatter
 brew "stylua"
-# Generate scripting interfaces to C/C++ code
-brew "swig"
 # Open source continuous file synchronization application
 brew "syncthing", restart_service: :changed
 # TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
@@ -269,15 +267,12 @@ cask "cloudflare-warp"
 cask "coderabbit"
 # Menu bar usage monitor for Codex and Claude
 cask "steipete/tap/codexbar"
-# Write, edit, and chat about your code with AI
-cask "cursor"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
 # Disk space visualiser
 cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
-# API documentation browser and code snippet manager
 cask "dash6"
 # Generate a timeline of your day, automatically
 cask "dayflow"
@@ -293,7 +288,6 @@ cask "dropbox"
 cask "finetune"
 # Web browser
 cask "firefox"
-# Web browser
 cask "firefox-developer-edition"
 # Screen colour temperature controller
 cask "flux-app"
@@ -350,8 +344,6 @@ cask "microsoft-teams"
 cask "miniconda"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
-# VPN client
-cask "mullvad-vpn"
 # Knowledge base from AI chats
 cask "nessie-app"
 # Network monitor
@@ -420,8 +412,6 @@ cask "wezterm@nightly"
 cask "whatsapp"
 # VPN client for secure internet access and private browsing
 cask "windscribe"
-# Open-source version of the X.Org X Window System
-cask "xquartz"
 # Multiplayer code editor
 cask "zed"
 # Gecko based web browser
