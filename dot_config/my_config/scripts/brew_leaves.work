@@ -24,6 +24,7 @@ hadolint
 hk
 hunk
 huseyinbabal/tap/taws
+jhlee0409/tap/cchv-server
 keidarcy/tap/e1s
 krew
 ktea
@@ -52,6 +53,7 @@ pnpm
 postgresql@18
 prek
 pulumi
+raine/claude-history/claude-history
 ripsecrets
 rust
 sad

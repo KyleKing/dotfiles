@@ -2,9 +2,11 @@ tap "dlvhdr/formulae", trusted: true
 tap "gaurav-gosain/tap", "https://github.com/Gaurav-Gosain/homebrew-tap", trusted: true
 tap "hatchet-dev/hatchet", trusted: true
 tap "huseyinbabal/tap", trusted: true
+tap "jhlee0409/tap"
 tap "jonas-grgt/ktea", trusted: true
 tap "keidarcy/tap", trusted: true
 tap "matthart1983/tap"
+tap "raine/claude-history"
 tap "turbot/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
@@ -178,10 +180,14 @@ brew "zoxide"
 brew "dlvhdr/formulae/diffnav"
 # Terminal UI for AWS
 brew "huseyinbabal/tap/taws"
+# Claude Code History Viewer - WebUI Server (headless HTTP server)
+brew "jhlee0409/tap/cchv-server", trusted: true
 # e1s is a terminal application to simply browsing and manage AWS ECS resources, with a focus on Fargate. Inspired by k9s.
 brew "keidarcy/tap/e1s"
 # Single-host system diagnostics TUI — sibling to netwatch
 brew "matthart1983/tap/syswatch", trusted: true
+# Fuzzy-search Claude Code conversation history from the terminal
+brew "raine/claude-history/claude-history", trusted: true
 # Steampipe exposes APIs and services as a high-performance relational database, giving you the ability to write SQL-based queries to explore, assess and report on dynamic data.
 brew "turbot/tap/steampipe"
 # Password manager that keeps all passwords secure behind one password

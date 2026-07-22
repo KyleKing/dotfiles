@@ -13,9 +13,11 @@ c-ares 1.34.8
 ca-certificates 2026-07-16
 cairo 1.18.4
 ccache 4.13.6_1
+cchv-server 1.21.0
 certifi 2026.6.17
 cffi 2.1.0
 chezmoi 2.71.0
+claude-history 0.1.71
 cloc 2.10
 codelimit 0.21.0_8
 cryptography 49.0.0
