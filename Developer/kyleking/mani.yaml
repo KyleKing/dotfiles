@@ -25,6 +25,8 @@ projects:
     url: git@github.com:kyleking/diacea.git
     tags:
       - calcipy-template
+  djot-fmt:
+    url: git@github.com:kyleking/djot-fmt.git
   djot_formatter:
     url: git@github.com:kyleking/djot_formatter.git
   doner:
@@ -79,6 +81,8 @@ projects:
     url: git@github.com:kyleking/mise-postgres-binary.git
   my_go_template:
     url: git@github.com:kyleking/my_go_template.git
+  my_lua_template:
+    url: git@github.com:kyleking/my_lua_template.git
   paper-todo-tui:
     url: git@github.com:kyleking/paper-todo-tui.git
   patch_it.nvim:
@@ -105,15 +109,13 @@ projects:
       - calcipy-template
   textract-py3:
     url: git@github.com:kyleking/textract-py3.git
+  tlr:
+    url: git@github.com:kyleking/tlr.git
   vcr-tui:
     url: git@github.com:kyleking/vcr-tui.git
   yak-shears:
     url: git@github.com:kyleking/yak-shears.git
 
-  djot-fmt:
-    url: git@github.com:kyleking/djot-fmt.git
-  my_lua_template:
-    url: git@github.com:kyleking/my_lua_template.git
 tasks:
   git-status:
     desc: show working tree status
