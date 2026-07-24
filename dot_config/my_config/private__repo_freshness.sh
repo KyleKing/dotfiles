@@ -96,7 +96,7 @@ _repo-freshness-report() {
 }
 
 # Force a check now, ignoring the hourly window
-back-stale-all() {
+back-fresh-clear() {
     _repo-freshness-refresh
     local -a lines
     _repo-freshness-read
@@ -106,7 +106,6 @@ back-stale-all() {
         echo "all repos up to date"
     fi
 }
-alias back-fresh-clear='back-stale-all'
 
 zmodload zsh/datetime 2>/dev/null
 if [[ -o interactive ]]; then

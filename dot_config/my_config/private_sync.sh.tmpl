@@ -19,6 +19,7 @@ back-pull-ch() {
     op-sign-in || return 1
     cd "$(chezmoi source-path)" || return 1
     chezmoi update
+    back-fresh-clear
 }
 
 back-scripts-ch() {
@@ -56,7 +57,7 @@ back-c-obs() {
 # Push afterward: back-c-obs && lzg
 
 # NVIM Syncing
-alias back-pull-nvim="cd ~/.config/nvim && git pull"
+alias back-pull-nvim="cd ~/.config/nvim && git pull && back-fresh-clear"
 back-c-nvim() {
     MSG="chore: manual nvim backup - $(date -u "+%b %d, %Y %H:%M")"
     printf "Creating commit for: '%s'\n" "$MSG"
