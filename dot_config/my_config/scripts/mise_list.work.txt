@@ -6,6 +6,7 @@ cargo:selene                                   0.31.0                  ~/.config
 cargo:tree-sitter-cli                          0.26.11                 ~/.config/mise/config.toml  latest
 deno                                           2.8.2
 deno                                           2.9.3                   ~/.config/mise/config.toml  latest
+dprint                                         0.55.2
 go                                             1.26.5                  ~/.config/mise/config.toml  latest
 go:github.com/Zxilly/go-size-analyzer/cmd/gsa  1.10.2
 go:github.com/boyter/dcd                       1.1.0                   ~/.config/mise/config.toml  latest

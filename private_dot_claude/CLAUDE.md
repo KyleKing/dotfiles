@@ -2,6 +2,7 @@
 
 - Verify claims rather than asserting them: web search, my input via the question tool, or data collected with Tools; ask for guidance or input when a choice is genuinely mine to make
 - When debugging, identify multiple possible causes and reason/experiment to determine which explain the root cause
+- On any choice touching security (secrets, auth, data exposure, privilege), favor the secure default and push back on convenience that widens exposure or grants more access than needed, even when I did not ask; name the tradeoff so I can decide
 
 ## Git
 

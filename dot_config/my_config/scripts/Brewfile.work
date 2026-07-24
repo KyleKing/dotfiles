@@ -6,7 +6,6 @@ tap "jhlee0409/tap"
 tap "jonas-grgt/ktea", trusted: true
 tap "keidarcy/tap", trusted: true
 tap "matthart1983/tap"
-tap "raine/claude-history"
 tap "turbot/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
