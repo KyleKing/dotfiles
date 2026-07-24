@@ -40,6 +40,7 @@
 - No docstrings on private/internal self-explanatory functions
 - Public API: one-line docstring when signature is clear; include args/returns/raises only when non-obvious; no type repetition; no numpy-style sections; no numbered comments
 - Document non-obvious behavior (e.g. "Do not reuse after calling"), not types
+- Comments and docstrings must be evergreen: state the standing invariant or constraint a future reader needs with no memory of the change. Never narrate the change or reference the diff ("now", "moved", "was", "runs after the commit above", "released before"). Change narration belongs in the PR description and commit message, not in the code. This holds even when the task is PR-focused; the "state the why" guidance under PR inline comments is about review-thread notes on a diff, a different audience from a future reader of the code
 - Don't add or update docstrings for functions you didn't change
 
 ## Error Handling

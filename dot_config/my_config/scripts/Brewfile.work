@@ -157,12 +157,16 @@ brew "tesseract"
 brew "tmux"
 # TOML formatter, linter and language server
 brew "tombi"
+# Command-line tool for sharing terminal over the web
+brew "ttyd"
 # Terminal UI OS (Terminal Multiplexer)
 brew "tuios"
 # Extremely fast Python type checker, written in Rust
 brew "ty"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Your CLI home video recorder
+brew "vhs"
 # Convert HTML to PDF
 brew "weasyprint"
 # Yet Another Dotfiles Manager
