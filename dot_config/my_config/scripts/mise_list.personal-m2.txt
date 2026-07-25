@@ -10,7 +10,10 @@ cargo:selene                                            0.31.0                  
 cargo:tree-sitter-cli                                   0.26.10                            ~/.config/mise/config.toml  latest
 cargo:typos-cli                                         1.40.0
 conda:textract                                          2.0.0
-deno                                                    2.9.1                              ~/.config/mise/config.toml  latest
+deno                                                    2.5.1
+deno                                                    2.9.1
+deno                                                    2.9.3                              ~/.config/mise/config.toml  latest
+dprint                                                  0.55.2
 github:can1357/oh-my-pi                                 14.0.2
 go                                                      1.21.13
 go                                                      1.23.12
@@ -36,8 +39,10 @@ go:github.com/tdewolff/minify/v2/cmd/minify             2.24.13
 go:golang.org/x/tools/cmd/goimports                     0.45.0
 golangci-lint                                           2.8.0
 golangci-lint                                           2.12.2
+goreleaser                                              2.17.0
 hadolint                                                2.14.0
 hk                                                      0.8.2
+hk                                                      1.15.5
 hk                                                      1.22.0
 hk                                                      1.25.0
 hk                                                      1.27.0
@@ -46,7 +51,9 @@ hk                                                      1.32.0
 hk                                                      1.36.0
 hk                                                      1.46.0
 hk                                                      1.47.0
-hk                                                      1.49.0                             ~/.config/mise/config.toml  latest
+hk                                                      1.49.0
+hk                                                      1.51.0
+hk                                                      1.53.0                             ~/.config/mise/config.toml  latest
 lefthook                                                2.0.13
 ls-lint                                                 2.3.0
 lua-language-server                                     3.18.2                             ~/.config/mise/config.toml  latest
@@ -161,6 +168,7 @@ shellcheck                                              0.11.0                  
 stylua                                                  2.5.2
 taplo                                                   0.10.0
 terraform                                               1.14.3
+tombi                                                   1.2.4
 typos                                                   1.48.0                             ~/.config/mise/config.toml  latest
 uv                                                      0.9.11
 uv                                                      0.11.5

@@ -3,7 +3,6 @@ tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: t
 tap "bartolli/codanna", trusted: true
 tap "jhlee0409/tap"
 tap "orlangure/tap", trusted: true
-tap "raine/claude-history"
 tap "steipete/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
@@ -79,6 +78,8 @@ brew "go-size-analyzer"
 brew "hadolint"
 # Command-line interface for Hetzner Cloud
 brew "hcloud"
+# Review-first terminal diff viewer for agent-authored changesets
+brew "hunk"
 # Command-line benchmarking tool
 brew "hyperfine"
 # Tools and libraries to manipulate images in select formats
@@ -119,8 +120,6 @@ brew "neovim"
 brew "nvimpager"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
-# Create, run, and share large language models (LLMs)
-brew "ollama", restart_service: :changed
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # AI coding agent, built for the terminal
@@ -229,8 +228,6 @@ brew "bartolli/codanna/codanna"
 brew "jhlee0409/tap/cchv-server", trusted: true
 # Go Coverage in your terminal: a tool for exploring Go Coverage reports from the command line
 brew "orlangure/tap/gocovsh"
-# Fuzzy-search Claude Code conversation history from the terminal
-brew "raine/claude-history/claude-history", trusted: true
 # Grep the GIF. Stick the landing
 brew "steipete/tap/gifgrep"
 # Spotify power CLI using web cookies
@@ -263,10 +260,6 @@ cask "claude"
 cask "claude-code@latest"
 # Free app that makes your Internet safer
 cask "cloudflare-warp"
-# AI code review CLI
-cask "coderabbit"
-# Menu bar usage monitor for Codex and Claude
-cask "steipete/tap/codexbar"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
 # Disk space visualiser
@@ -274,8 +267,6 @@ cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
 cask "dash6"
-# Generate a timeline of your day, automatically
-cask "dayflow"
 # Scans for dylib hijacking
 cask "dhs"
 # Voice and text chat software
@@ -300,12 +291,8 @@ cask "font-hack-nerd-font"
 cask "frame0"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-# Desktop client for GitHub repositories
-cask "github"
 # Web browser
 cask "google-chrome"
-# Speech to text application
-cask "handy"
 # Windows manager and desktop organiser
 cask "hazeover"
 # Tool to optimise images to a smaller size
@@ -322,10 +309,6 @@ cask "keybase"
 cask "keyboard-cleaner"
 # Open-source keystroke visualiser
 cask "keycastr"
-# Use Vim in input fields and non input fields
-cask "kindavim"
-# Agent-centric IDE with spec-driven development
-cask "kiro"
 # Tool to show what is persistently installed on the computer
 cask "knockknock"
 # Free cross-platform office suite, fresh version
@@ -336,36 +319,24 @@ cask "lulu"
 cask "mactracker"
 # Scan and remove malware, spyware, and viruses
 cask "malwarebytes"
-# Multi-platform web browser
-cask "microsoft-edge"
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Minimal installer for conda
 cask "miniconda"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
-# Knowledge base from AI chats
-cask "nessie-app"
 # Network monitor
 cask "netiquette"
 # Free and open-source RSS reader
 cask "netnewswire"
-# App to write, plan, collaborate, and get organised
-cask "notion"
 # Open-source software for live streaming and screen recording
 cask "obs"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# AI coding agent desktop client
-cask "opencode-desktop"
-# LLM server built on MLX
-cask "osaurus"
 # Monitors computer mic and webcam
 cask "oversight"
 # Command palette in any application
 cask "paletro"
-# Tool to eliminate similar or duplicate photos
-cask "photosweeper-x"
 # Colour picker for colours onscreen
 cask "pika"
 # Quick Look generator for Markdown files
@@ -404,8 +375,6 @@ cask "steipete/tap/trimmy"
 cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
-# Rust-based terminal
-cask "warp"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
 # Native desktop client for WhatsApp
@@ -429,8 +398,8 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "Hive", id: 6747834729
 mas "HotKey", id: 975890633
-mas "Keynote", id: 361285480
 mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
