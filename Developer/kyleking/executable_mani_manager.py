@@ -76,9 +76,9 @@ def _find_untracked_dirs(
 
 def _prompt_project_details(dir_name: str) -> dict[str, Any]:
     """Prompt for URL and tags for a project."""
-    url = input(f"  URL [git@github.com:kyleking/{dir_name}.git]: ").strip()
+    url = input(f"  URL [git@github.com:KyleKing/{dir_name}.git]: ").strip()
     if not url:
-        url = f"git@github.com:kyleking/{dir_name}.git"
+        url = f"git@github.com:KyleKing/{dir_name}.git"
 
     tags_input = input('  Tags (comma-separated, optional): ').strip()
 
@@ -195,6 +195,7 @@ def _add_interactive(mani_path: Path, base_path: Path) -> None:
     untracked = _find_untracked_dirs(local_dirs, tracked)
 
     if _add_projects_interactively(config, untracked):
+        _sort_projects_alphabetically(config)
         _save_mani_yaml(mani_path, config, yaml)
 
 
@@ -219,9 +220,9 @@ def _add_named_project(mani_path: Path, dir_name: str) -> None:
         print(f"Project '{dir_name}' already exists in mani.yaml")
         return
 
-    url = input(f"URL [git@github.com:kyleking/{dir_name}.git]: ").strip()
+    url = input(f"URL [git@github.com:KyleKing/{dir_name}.git]: ").strip()
     if not url:
-        url = f"git@github.com:kyleking/{dir_name}.git"
+        url = f"git@github.com:KyleKing/{dir_name}.git"
 
     tags_input = input('Tags (comma-separated, optional): ').strip()
 

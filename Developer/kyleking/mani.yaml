@@ -1,120 +1,118 @@
 projects:
   app-template:
-    url: git@github.com:kyleking/app-template.git
+    url: git@github.com:KyleKing/app-template.git
   calcipy:
-    url: git@github.com:kyleking/calcipy.git
+    url: git@github.com:KyleKing/calcipy.git
     tags:
       - calcipy-template
   calcipy_template:
-    url: git@github.com:kyleking/calcipy_template.git
+    url: git@github.com:KyleKing/calcipy_template.git
   codanna.nvim:
-    url: git@github.com:kyleking/codanna.nvim.git
+    url: git@github.com:KyleKing/codanna.nvim.git
   copier-template-tester:
-    url: git@github.com:kyleking/copier-template-tester.git
+    url: git@github.com:KyleKing/copier-template-tester.git
     tags:
       - calcipy-template
   corallium:
-    url: git@github.com:kyleking/corallium.git
+    url: git@github.com:KyleKing/corallium.git
     tags:
       - calcipy-template
-  dagster-taskiq-executor-demo:
-    url: git@github.com:kyleking/dagster-taskiq-executor-demo.git
   dagtest:
-    url: git@github.com:kyleking/dagtest.git
+    url: git@github.com:KyleKing/dagtest.git
   diacea:
-    url: git@github.com:kyleking/diacea.git
+    url: git@github.com:KyleKing/diacea.git
     tags:
       - calcipy-template
   djot-fmt:
-    url: git@github.com:kyleking/djot-fmt.git
+    url: git@github.com:KyleKing/djot-fmt.git
   djot_formatter:
-    url: git@github.com:kyleking/djot_formatter.git
+    url: git@github.com:KyleKing/djot_formatter.git
   doner:
-    url: git@github.com:kyleking/doner.git
+    url: git@github.com:KyleKing/doner.git
   extract_finances:
-    url: git@github.com:kyleking/extract_finances.git
+    url: git@github.com:KyleKing/extract_finances.git
   gh-lazydispatch:
-    url: git@github.com:kyleking/gh-lazydispatch.git
+    url: git@github.com:KyleKing/gh-lazydispatch.git
   gh-repo-dashboard:
-    url: git@github.com:kyleking/gh-repo-dashboard.git
+    url: git@github.com:KyleKing/gh-repo-dashboard.git
   gh-star-search:
-    url: git@github.com:kyleking/gh-star-search.git
+    url: git@github.com:KyleKing/gh-star-search.git
   gh-sweep:
-    url: git@github.com:kyleking/gh-sweep.git
+    url: git@github.com:KyleKing/gh-sweep.git
   hk-debugging:
-    url: git@github.com:kyleking/hk-debugging.git
+    url: git@github.com:KyleKing/hk-debugging.git
   jj-diff:
-    url: git@github.com:kyleking/jj-diff.git
+    url: git@github.com:KyleKing/jj-diff.git
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
-  karabiner-config:
-    url: git@github.com:KyleKing/karabiner-config
   KyleKing:
-    url: git@github.com:kyleking/KyleKing.git
+    url: git@github.com:KyleKing/KyleKing.git
   KyleKing.github.io:
-    url: git@github.com:kyleking/KyleKing.github.io.git
+    url: git@github.com:KyleKing/KyleKing.github.io.git
   mdformat-admon:
-    url: git@github.com:kyleking/mdformat-admon.git
+    url: git@github.com:KyleKing/mdformat-admon.git
     tags: ["mdformat-plugin"]
   mdformat-front-matters:
-    url: git@github.com:kyleking/mdformat-front-matters.git
+    url: git@github.com:KyleKing/mdformat-front-matters.git
     tags: ["mdformat-plugin"]
   mdformat-gfm-alerts:
-    url: git@github.com:kyleking/mdformat-gfm-alerts.git
+    url: git@github.com:KyleKing/mdformat-gfm-alerts.git
     tags: ["mdformat-plugin"]
   mdformat-hooks:
-    url: git@github.com:kyleking/mdformat-hooks.git
+    url: git@github.com:KyleKing/mdformat-hooks.git
     tags: ["mdformat-plugin"]
   mdformat-mkdocs:
-    url: git@github.com:kyleking/mdformat-mkdocs.git
+    url: git@github.com:KyleKing/mdformat-mkdocs.git
     tags: ["mdformat-plugin"]
   mdformat-obsidian:
-    url: git@github.com:kyleking/mdformat-obsidian.git
+    url: git@github.com:KyleKing/mdformat-obsidian.git
     tags: ["mdformat-plugin"]
   mdformat-plugin-template:
-    url: git@github.com:kyleking/mdformat-plugin-template.git
+    url: git@github.com:KyleKing/mdformat-plugin-template.git
     tags: ["mdformat-plugin"]
   mdformat-slw:
-    url: git@github.com:kyleking/mdformat-slw.git
+    url: git@github.com:KyleKing/mdformat-slw.git
     tags: ["mdformat-plugin"]
   mise-postgres-binary:
-    url: git@github.com:kyleking/mise-postgres-binary.git
+    url: git@github.com:KyleKing/mise-postgres-binary.git
   my_go_template:
-    url: git@github.com:kyleking/my_go_template.git
+    url: git@github.com:KyleKing/my_go_template.git
   my_lua_template:
-    url: git@github.com:kyleking/my_lua_template.git
+    url: git@github.com:KyleKing/my_lua_template.git
   paper-todo-tui:
-    url: git@github.com:kyleking/paper-todo-tui.git
+    url: git@github.com:KyleKing/paper-todo-tui.git
   patch_it.nvim:
-    url: git@github.com:kyleking/patch_it.nvim.git
+    url: git@github.com:KyleKing/patch_it.nvim.git
   PhyloSpec:
-    url: git@github.com:kyleking/PhyloSpec.git
+    url: git@github.com:KyleKing/PhyloSpec.git
     tags:
       - calcipy-template
   private-snippets:
-    url: git@github.com:kyleking/private-snippets.git
+    url: git@github.com:KyleKing/private-snippets.git
   recipes:
-    url: git@github.com:kyleking/recipes.git
+    url: git@github.com:KyleKing/recipes.git
   shoal:
-    url: git@github.com:kyleking/shoal.git
+    url: git@github.com:KyleKing/shoal.git
     tags:
       - calcipy-template
+  simple-crypt:
+    url: git@github.com:KyleKing/simple-crypt.git
   spaghetti-comb.nvim:
-    url: git@github.com:kyleking/spaghetti-comb.nvim.git
+    url: git@github.com:KyleKing/spaghetti-comb.nvim.git
   tail-cw:
-    url: git@github.com:kyleking/tail-cw.git
+    url: git@github.com:KyleKing/tail-cw.git
   tail-jsonl:
-    url: git@github.com:kyleking/tail-jsonl.git
+    url: git@github.com:KyleKing/tail-jsonl.git
     tags:
       - calcipy-template
   textract-py3:
-    url: git@github.com:kyleking/textract-py3.git
+    url: git@github.com:KyleKing/textract-py3.git
   tlr:
-    url: git@github.com:kyleking/tlr.git
+    url: git@github.com:KyleKing/tlr.git
   vcr-tui:
-    url: git@github.com:kyleking/vcr-tui.git
+    url: git@github.com:KyleKing/vcr-tui.git
   yak-shears:
-    url: git@github.com:kyleking/yak-shears.git
+    url: git@github.com:KyleKing/yak-shears.git
 
 tasks:
   git-status:
