@@ -5,6 +5,9 @@
 # Homebrew configuration
 
 export HOMEBREW_NO_ENV_HINTS=1
+# Default is 120 days; bcbd runs weekly after updates, so anything not the
+# latest-installed version is safe to drop after 7.
+export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
 
 # A few helpful snippets not included in the homebrew zsh plugin
 alias bsh="brew search"
