@@ -628,12 +628,37 @@ config.inactive_pane_hsb = {
     brightness = 0.7, -- Dim to 70%
 }
 
+-- ============================================================================
+-- Reopen Closed Tab (remembers the cwd of recently closed tabs)
+
+local closed_tab_cwds = {}
+
+local function close_tab_and_remember(window, pane)
+    local cwd_url = pane:get_current_working_dir()
+    if cwd_url then table.insert(closed_tab_cwds, cwd_url.file_path) end
+    window:perform_action(wezterm.action.CloseCurrentTab({ confirm = true }), pane)
+end
+
+local function reopen_last_closed_tab(window, pane)
+    local cwd = table.remove(closed_tab_cwds)
+    if not cwd then
+        window:toast_notification("WezTerm", "No recently closed tabs", nil, 2000)
+        return
+    end
+    window:perform_action(wezterm.action.SpawnCommandInNewTab({ cwd = cwd }), pane)
+end
+
 local act = wezterm.action
 config.keys = {
     {
         key = "w",
         mods = "CMD",
-        action = wezterm.action.CloseCurrentTab({ confirm = true }),
+        action = wezterm.action_callback(close_tab_and_remember),
+    },
+    {
+        key = "t",
+        mods = "CMD|SHIFT",
+        action = wezterm.action_callback(reopen_last_closed_tab),
     },
     -- Map tab navigation
     { key = "LeftArrow", mods = "CMD|ALT", action = act({ ActivateTabRelative = -1 }) },
