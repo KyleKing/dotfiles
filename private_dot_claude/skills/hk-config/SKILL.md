@@ -27,6 +27,40 @@ hk check --all
 
 Then check each item in Rules below.
 
+## Debugging and validating a config
+
+Before running steps for real, ask hk what it *would* do:
+
+```sh
+# Which steps would run, and why each was included or skipped
+hk check --plan
+hk check --why              # same as --plan, plus the skip/include reason per step
+hk check --why <step>       # focus on one step
+hk check --plan --json      # machine-readable plan, for scripting or diffing
+```
+
+`--why` implies `--plan` — neither one executes a step. Reasons include things
+like `filter_no_match` (glob/exclude/type didn't match any changed file),
+`disabled via HK_SKIP_STEPS`, or a failed `condition`. Use this instead of
+adding temporary `echo` debugging to a step's `check`/`fix` command.
+
+### Timing and tracing
+
+- `--trace` (or `HK_TRACE=1` / `HK_TRACE=text`) prints a hierarchical span
+  tree with per-step timing to the console.
+- `HK_TRACE=json` (or `--trace --json`) emits newline-delimited JSON spans
+  instead, for feeding into other tooling.
+- `HK_TIMING_JSON=/path/to/file.json` writes a summary report (total wall
+  time, per-step wall time with overlapping intervals merged, and which
+  profiles each step ran under) without the verbosity of `--trace`.
+- `HK_LOG=debug` / `HK_LOG=trace` (or `-v` / `-vv`) control general log
+  verbosity, independent of `--trace`; `HK_LOG_FILE` / `HK_LOG_FILE_LEVEL`
+  redirect and re-level the log file hk always writes to
+  `~/.local/state/hk/hk.log`.
+
+Reach for `--plan`/`--why` when a step isn't running or isn't skipping when
+expected; reach for `--trace`/`HK_TIMING_JSON` when steps run but are slow.
+
 ## Rules
 
 ### 1. Pin the version as a literal, three times
@@ -155,7 +189,7 @@ For repeated step shapes across directories, use a function; for shared `dir`,
 
 ```pkl
 local function ruffStep(project: String) = new Step {
-  glob = "**/*.py"
+  glob = "**/*.py"     // matched relative to `dir`, not repo root
   dir = project
   batch = true
   check = "uv run --project \(project) ruff check {{files}}"
@@ -185,6 +219,29 @@ Keep step keys alphabetical within a mapping so additions stay reviewable.
   dependency-sync step.
 - `check = null` marks a step fix-only; hk skips it in check mode.
 - Put slow whole-suite steps on `pre-push`, not `pre-commit`.
+
+### 6. Skip a hook for one command (e.g. a merge)
+
+hk has no separate `pre-merge-commit` hook, and neither does the config need
+one: git only calls `pre-merge-commit` for a merge commit, but it falls back
+to `pre-commit` when `pre-merge-commit` isn't installed, and hk installs only
+`pre-commit`. So a merge commit runs the same `pre-commit` hook as a normal
+`git commit` — there's no separate label to target one and not the other.
+
+To skip hk for a merge without disabling `pre-commit` for regular commits
+afterward, scope `HK_SKIP_HOOK` to that single invocation instead of
+exporting it:
+
+```sh
+HK_SKIP_HOOK=pre-commit git merge --no-ff feature-branch
+```
+
+Prefixing the variable keeps the skip local to that one command; a later
+plain `git commit` in the same shell still runs `pre-commit` normally.
+`skip_hooks` (config: `HK_SKIP_HOOK` / `HK_SKIP_HOOKS`, git config
+`hk.skipHook`, or `skip_hooks` in `.hkrc.pkl`) skips the entire hook and every
+step in it — for skipping one step instead, use `skip_steps` /
+`HK_SKIP_STEPS`.
 
 ## Writing a new config
 
