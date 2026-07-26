@@ -8,6 +8,7 @@
 
 - ONLY USE git operations to READ; DO NOT stage NOR unstage; DO NOT push
 - ONE exception is when implementing a SEQUENCE of changes where committing at checkpoints is advisable, otherwise defer to me staging/committing
+- A second exception: when a skill I invoke includes a commit step (orchestrate checkpoints, the copier update procedure), invoking that skill is my authorization to commit at that step. The message rules below still apply
 - When you do commit on my behalf, write the message in my voice: Conventional Commits (`feat(scope): summary`, `fix: summary`), a single readable subject line, and typically NO description body. Add a body only when the "why" is genuinely non-obvious from the subject (referred to as 'CC')
 - NEVER reference the AI, the model, Claude, or Claude Code anywhere in a commit: no `Co-Authored-By` line, no model name, no session trailer, no "generated with" note. The commit must read as if I wrote it
 - If files become staged, modified, or deleted outside of your own edits mid-session (e.g. working tree changes appear that you didn't make), do not restore, unstage, or otherwise fight them. This is likely me or another AI agent working in parallel. Just note it and flag for my review rather than acting on it

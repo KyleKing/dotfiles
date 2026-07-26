@@ -81,6 +81,5 @@ Protocol, extension point) rather than coined metaphors like "seam".
 When proposing an abstraction, include thin pseudo-Python of current versus target
 so the delta is concrete. Keep snippets reaction-sized, not implementation-ready.
 
-Diagrams should carry real detail: prefer a run-lifecycle `sequenceDiagram` plus an
-interface `classDiagram` over a single high-level flowchart. Linear renders mermaid
-natively.
+For diagrams, load the `mermaid-diagrams` skill rather than restating its rules
+here; it covers type selection and density, and Linear renders mermaid natively.

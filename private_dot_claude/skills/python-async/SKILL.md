@@ -6,8 +6,8 @@ description: Async Python conventions and footguns — asyncio.TaskGroup over ga
 # Python async
 
 Every rule here has a failure it was written for. Where a number appears it was
-measured, in `tail-cw/docs/docs/adr/0011-async-aws-io-and-blocking-work.md` or in
-the irm incident it cites.
+measured, in the tail-cw repo (`docs/docs/adr/0011-async-aws-io-and-blocking-work.md`
+there) or in the irm incident it cites. Those paths resolve only inside tail-cw.
 
 ## Concurrency
 
@@ -103,7 +103,7 @@ The review-time tell is a blocking call inline in an `async def`. It looks fine 
 single-request test and only shows up as latency under load.
 
 These invariants are greppable, so guard them in tests rather than in review
-(pattern: `tail-cw/tests/test_async_invariants.py`, referenced from its
+(pattern: `tests/test_async_invariants.py` in the tail-cw repo, referenced from its
 `AGENTS.md`): no thread workers, no `asyncio.gather`, no module-level primitives, no
 borrowing the default executor.
 

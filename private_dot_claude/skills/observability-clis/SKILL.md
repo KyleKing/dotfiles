@@ -32,8 +32,6 @@ posthog-cli api call --json query-error-tracking-issues-list \
 
 `assignee: null` across the board means nobody is triaging.
 
-Project is likely 420833 on `us.posthog.com`.
-
 ## Sentry
 
 `sentry-cli` uses a personal read token in `~/.sentryclirc`.
@@ -45,10 +43,11 @@ sentry-cli projects --org <org> list
 ```
 
 There is no issues-list subcommand. Query issues through the REST API with the same
-token:
+token, read from the file inline so the literal stays out of shell history and
+transcripts:
 
 ```sh
-curl -H "Authorization: Bearer <token>" \
+curl -H "Authorization: Bearer $(sed -n 's/^token=//p' ~/.sentryclirc)" \
   "https://sentry.io/api/0/projects/<org>/<project>/issues/?statsPeriod=24h&query=is:unresolved&sort=freq&limit=15"
 ```
 

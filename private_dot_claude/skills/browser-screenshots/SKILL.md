@@ -17,19 +17,20 @@ specific, known way.
    than several stills, and it actually writes a file to disk and returns the path.
    It only works on the agent's managed tab group — in a regular browser session it
    fails with "not in managed tab group".
-2. `computer` / `zoom` with `save_to_disk: true` for a single still. Read the
-   warning below before relying on it.
-3. `mss` stills driven from Bash, when `gif_creator` is unavailable. Full procedure
-   in [mss-capture.md](mss-capture.md).
-
-`save_to_disk: true` does **not** write a file. It only embeds the image in the
-conversation. To persist that screenshot, follow up with `javascript_tool` to read
-the image as base64 (`document.querySelector('canvas')` or
-`chrome.tabs.captureVisibleTab`) and write it with the Write tool.
+2. `computer` / `zoom` for a single still that only needs to be seen inline.
+   `save_to_disk: true` does **not** write a file despite the name; it only embeds
+   the image in the conversation. When the target is a `<canvas>`, `javascript_tool`
+   can read it out (`canvas.toDataURL()`) for the Write tool; anything else that
+   needs a disk file goes to method 3.
+3. `mss` stills driven from Bash, when `gif_creator` is unavailable or the shot
+   must land on disk. Full procedure in [mss-capture.md](mss-capture.md).
 
 ## Dark mode
 
-Toggle via `javascript_tool`:
+Check how the app themes before toggling. The class toggle below covers
+Tailwind-style `.dark` setups; apps keyed off `prefers-color-scheme` or a
+`data-theme` attribute need `window.matchMedia` emulation or the attribute set
+instead.
 
 ```js
 document.documentElement.classList.add('dark')     // or .remove('dark')

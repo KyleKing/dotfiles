@@ -58,15 +58,36 @@ then re-applies that diff. Conflicts are failed patch hunks.
 That is why the answers file must be accurate: wrong answers mean a wrong baseline
 and therefore a wrong diff.
 
+## Local experimentation vs published tags
+
+The answers file has two legitimate states, and the invariant that governs both:
+`_commit` must name the template version the project actually reflects, reachable
+from wherever `_src_path` points.
+
+**Experimentation** — testing unpublished template changes against a real project.
+Commit in the template repo first (copier reads it through git), point `_src_path`
+at the local checkout, and update with `--vcs-ref=HEAD`. `_commit` lands on a
+`git describe` ref or bare SHA that exists only locally. This state is fine on a
+project branch or a throwaway tree, never on `main`.
+
+**Published** — `_src_path` on the `gh:` form, `_commit` on a published tag. This is
+the only state `main` and fleet runs (`mani run copier-auto-update`) may see, since
+other machines cannot resolve a local path or an unpushed SHA.
+
+Toggling back is a hand-edit both times, because `copier update` reads the source
+from the answers file and offers no CLI override. Set `_src_path` to the `gh:` form
+and `_commit` to the last published tag the project actually contains (usually the
+tag the experiment branched from), then run a normal update once the template work
+ships as a tag. Cleaner still: run the experiment on a branch, discard it with the
+answers file when done, and let the real update come from `gh:` after the tag is
+published — no answers-file archaeology.
+
 ## Footguns seen in these repos
 
-**`_commit` drift from a local `_src_path`.** Pointing `_src_path` at a local
-checkout leaves `_commit` at a `git describe` ref that was never pushed
-(`2.7.2-1-gb13734f`), and the next update fails resolving it against the `gh:`
-source. `tlr/.copier-answers.yml` is sitting on a bare SHA right now. Reset
-`_src_path` to the `gh:` form and `_commit` to the last published tag before
-updating. Copier says never to hand-edit that file; prefer `--vcs-ref=<tag>` on the
-next update, and reserve the hand-edit for a genuinely unreachable `_commit`.
+**`_commit` left in the experimentation state.** Forgetting to toggle back leaves
+`_commit` at a ref that was never pushed (`2.7.2-1-gb13734f`), and the next update
+fails resolving it against the `gh:` source. `tlr/.copier-answers.yml` is sitting on
+a bare SHA right now. Recover with the toggle-back procedure above.
 
 **An untagged template.** Copier picks the target from PEP 440-sorted git tags, so
 an untagged template gives `update` nothing to aim at. Use `--vcs-ref=HEAD`

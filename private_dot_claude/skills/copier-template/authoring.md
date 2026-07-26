@@ -5,7 +5,9 @@ Reference: https://copier.readthedocs.io/en/stable/configuring/
 ## Local dev loop
 
 From the template repo. The commit is needed because copier reads the template
-through git:
+through git. Running this against a real project puts its answers file in the
+experimentation state — see "Local experimentation vs published tags" in
+[SKILL.md](SKILL.md) for the invariant and the toggle-back procedure:
 
 ```sh
 git add . && git commit -m "tmp"

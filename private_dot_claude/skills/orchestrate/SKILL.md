@@ -37,13 +37,16 @@ to avoid.
    context when the phases are sequentially dependent; a subagent that has to be
    told everything you already know is slower than doing it.
 3. Write the code, following the path-scoped rules that apply to the files touched.
-4. Verify. Tests exist and pass, lint and type checks are clean. Run the project's
-   own commands (`mise run ...`, `hk check`, `uv run pytest`), not invented ones.
+4. Verify. Tests exist and pass, lint and type checks are clean. Check for a
+   project-level run or test skill first, then fall back to the project's own
+   commands (`mise run ...`, `hk check`, `uv run pytest`), never invented ones.
 5. Exploratory testing where the thing can actually be run — launch the CLI, the
    TUI, the server, the site. A passing unit test is not evidence the feature works.
-6. Commit at the checkpoint. Conventional Commits, one readable subject line, no
-   body unless the why is genuinely non-obvious. Never reference the AI, the model,
-   or the session anywhere in the message.
+6. Commit at the checkpoint. Invoking this skill grants the commit exception in
+   CLAUDE.md, so committing is the default; skip only if the scope question said
+   not to. Conventional Commits, one readable subject line, no body unless the why
+   is genuinely non-obvious. Never reference the AI, the model, or the session
+   anywhere in the message.
 7. Update the plan document: mark the phase done, record anything discovered that
    changes later phases.
 
