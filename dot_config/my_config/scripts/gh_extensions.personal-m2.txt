@@ -1,5 +1,2 @@
 gh dash	dlvhdr/gh-dash	v4.25.2
-gh lazydispatch		
-gh poi	seachicken/gh-poi	v0.18.2
-gh repo-dashboard		
-gh sweep		
+gh poi	seachicken/gh-poi	v0.18.3

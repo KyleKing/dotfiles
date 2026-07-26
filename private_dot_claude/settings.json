@@ -4,15 +4,24 @@
   "autoUpdatesChannel": "latest",
   "editorMode": "vim",
   "effortLevel": "medium",
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "impeccable@impeccable": true
+  },
   "env": {
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "USE_BUILTIN_RIPGREP": "0"
   },
-  "extraKnownMarketplaces": {},
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "repo": "pbakaus/impeccable",
+        "source": "github"
+      }
+    }
+  },
   "fileCheckpointingEnabled": false,
   "inputNeededNotifEnabled": true,
-  "model": "opus",
+  "model": "sonnet",
   "permissions": {
     "allow": [
       "Bash(find:*)",

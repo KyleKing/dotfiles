@@ -57,6 +57,7 @@ hk                                                      1.53.0                  
 lefthook                                                2.0.13
 ls-lint                                                 2.3.0
 lua-language-server                                     3.18.2                             ~/.config/mise/config.toml  latest
+lychee                                                  0.24.2                             ~/.config/mise/config.toml  latest
 node                                                    22.21.0
 node                                                    24.18.0                            ~/.config/mise/config.toml  lts
 node                                                    25.2.1
@@ -92,6 +93,7 @@ npm:textlint                                            15.4.0
 npm:typescript                                          5.9.2
 npm:vscode-langservers-extracted                        4.10.0                             ~/.config/mise/config.toml  latest
 npm:yaml-language-server                                1.23.0                             ~/.config/mise/config.toml  latest
+opentofu                                                1.12.5
 pipx:awscli-local                                       0.22.2
 pipx:beautysh                                           6.4.3                              ~/.config/mise/config.toml  latest
 pipx:black                                              25.12.0
