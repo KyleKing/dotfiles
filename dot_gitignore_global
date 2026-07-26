@@ -59,4 +59,8 @@ mise.local.toml
 .npmrc
 podman-build-secret*
 
+# Optional local overrides (PLANNED: revisit if this is still useful to set?)
 **/.claude/settings.local.json
+
+# Support the freshening skill to track work per-repo
+.freshening.md

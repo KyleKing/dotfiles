@@ -1,0 +1,92 @@
+---
+name: freshen
+description: Freshens the repos listed in mani.yaml - syncs each with upstream, runs local gates, fixes CI on the default branch, and rolls template releases out to copier children. Arguments are a space-separated subset of repo names from mani.yaml; default is every repo.
+disable-model-invocation: true
+---
+
+# Freshen
+
+Bring every target repo to a sound state: in sync with origin, local gates passing, CI green on the default branch, and copier children on the latest template release. The repo inventory is ~/Developer/kyleking/mani.yaml.
+
+## Orchestration model
+
+The main session thread is for coordination only: preflight, launching agents, the disposition review, user questions, and the final report. Everything else runs elsewhere:
+
+- Per-repo work (Phase 1 assessment, Phase 3 soundness, Phase 4 child updates) goes to parallel subagents, one per repo, launched in a single batch per phase
+- Waiting on CI or releases is never done by polling in the main thread. Give each repo's subagent its own watch loop, or arm a Monitor with an until-loop and keep coordinating
+- Subagents return structured facts and terse action summaries, not logs. The .freshening.md files are the durable per-repo record; the main thread reads those instead of re-deriving state
+- Sequencing constraint: template subagents must finish (tag verified) before their children's update subagents start. Non-template repos run in parallel with everything
+
+## Authority granted by invocation
+
+Invoking this skill authorizes, for the target repos only:
+
+- committing (CC-style messages in the user's voice, no AI attribution, per global rules)
+- pushing directly to the default branch
+- rerunning GitHub Actions workflows
+
+Everything else in the global CLAUDE.md still applies, especially minimal targeted changes and root-cause fixes (never skip a failing test or widen a timeout without understanding why it fails).
+
+## Standing policies
+
+- Staged-but-uncommitted files the agent did not create ride along in the freshening commit as-is. Never unstage or restore them. Exception: a pre-existing change set that looks mid-operation (a staged copier update, a half-applied refactor) is assumed incomplete. Verify what it was meant to do, and confirm with the user before committing it
+- When fixing a copier child reveals a fix that belongs in the template (lint config drift, task-runner setup, CI workflow bugs), back-port it to the template first, release, then apply the new template version to the children. Child-local fixes that the template would overwrite on the next update are wasted work
+- Ignore the content of doing.txt and roadmap/next-steps files. If one is staged, it commits along with everything else
+- If a repo contains freshen.txt in its root, complete those instructions in addition to the normal steps
+- Track per-repo actions in .freshening.md in that repo's root (globally gitignored, see Preflight). Append a dated entry per action, keep it terse
+- Concurrent-work guard: immediately before any commit, re-run `git status --porcelain` and compare against the state when work started. If files changed that the agent did not touch, stop that repo and flag it in the report instead of committing
+- CI passing means the latest completed run of every non-Dependabot workflow on the default branch is green, checked via `gh run list --branch <default>`. A repo with no workflows is noted, not failed. A failure from transient infrastructure (network timeout, runner outage) gets one `gh run rerun --failed` before any code change
+- CI fix loop cap: if CI is still failing after three fix-and-push iterations and the newest failure has no crisply identified new root cause, stop and list the repo as follow-up. A distinct, provable root cause with an unambiguous fix justifies one more iteration; say so in the report
+- Pushing a fix/feat commit triggers the Bump Version workflow, which pushes a `bump:` commit back to main. Expect non-fast-forward rejections: `git pull --rebase` then push again, and re-sync local after workflows finish
+- Batch template fixes into as few commits as possible before pushing; every push cuts a release tag, and children should update once against the final tag, not per-fix
+
+## Phase 0: Preflight
+
+1. Confirm `.freshening.md` is in the global git excludes file (`git config --get core.excludesFile`, default `~/.config/git/ignore`). Add it if missing
+2. Confirm `gh auth status` succeeds
+3. Read mani.yaml for the target list. If args were given, restrict to those names
+4. In each target repo, run `git remote set-head origin -a`. A dangling origin/HEAD (left by a deleted branch) breaks the hk pre-push commitizen check
+
+## Phase 1: Assess (read-only)
+
+Run `${CLAUDE_SKILL_DIR}/scripts/assess.sh [names...]` to gather the facts: local presence, branch, ahead/behind, dirty counts, copier `_src_path`/`_commit`, template flag, freshen.txt, archived flag, default branch, and latest CI conclusion per workflow. It emits one JSON object per line; do not re-derive any of this with ad-hoc shell.
+
+Interpretation:
+
+- `exists_locally: false` goes to disposition (likely `mani sync`)
+- `error: not found on GitHub` is an error to surface, not skip
+- `archived: true` skips the repo entirely (but shows in the report)
+- For each red CI conclusion, fetch the failing job's log tail (`gh run view --log-failed`) via a subagent before the disposition review
+
+## Phase 2: Disposition review (one confirmation)
+
+Present a single summary table: repo, state (branch, ahead/behind, dirty, CI), proposed action. Call out anything needing manual guidance:
+
+- not on the default branch (ask: freshen the PR narrowly, or skip this pass?)
+- missing locally or on GitHub
+- archived (auto-skip, but show it)
+- pre-existing staged changes that look mid-operation (for example a half-finished copier update)
+
+Get one approval, then run unattended. Return to the user only for product decisions, the concurrent-work guard, or the three-iteration cap.
+
+## Phase 3: Make each repo individually sound
+
+One subagent per repo, all launched together (parallel across repos, sequential within a repo). Each subagent owns its repo end to end, including watching CI after its push and iterating on failures up to the cap, and reports back a terse outcome:
+
+1. Resolve local state per the approved disposition: pull if behind, commit dirty work with a sensible CC message, push if ahead
+2. Discover and run the local gates: prefer a repo skill or CLAUDE.md instruction, else `mise tasks` / `./run --list` / hk. Fix what fails
+3. Check CI on the default branch. Fix, push, and re-check, up to the iteration cap
+4. Log each action to .freshening.md
+
+## Phase 4: Templates, then children
+
+Order matters: a child should update against the template's newest release.
+
+1. For each `*template*` repo: after Phase 3 it is pushed and green. Verify the release automation cut a tag for the new head (`git tag` vs `gh release list` or the Bump Version workflow). Rerun the workflow once if it failed transiently. If no tag appears, flag for the user
+2. While reviewing template changes, note improvement opportunities: things the template got wrong, shared code children could adopt, and process friction worth fixing in the template itself. Put these in the final report rather than acting unilaterally
+3. For each copier child (identified in Phase 1): invoke the copier-template skill to run the update against the latest tag, resolve .rej conflicts carefully, run local gates, commit, push, and watch CI per the iteration cap. Two .rej traps: each .rej holds LOCAL customizations that failed to re-apply, so a hunk that is pure local content (project docs, project config) must be re-applied by hand, while a hunk the new template already supersedes is discarded; and files listed in the template's `_skip_if_exists` are never updated by copier, so when a template change touches one (check the template diff), sync the child by hand from the template's `.ctt/default/` render
+4. Non-template, non-child repos need nothing beyond Phase 3 and can proceed in parallel with this phase
+
+## Phase 5: Report
+
+Produce a table of initial state versus final state per repo (branch, ahead/behind, CI before and after, template version before and after). Follow with a numbered list of items needing the user, each with the repo, the blocker, and the decision required.

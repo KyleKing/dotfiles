@@ -12,6 +12,3 @@ __pycache__
 
 # Prettier Cache
 node_modules/.cache/prettier/.prettier-caches
-
-# Support the freshening skill to track work per-repo
-.freshening.md
