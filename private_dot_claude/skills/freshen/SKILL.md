@@ -14,7 +14,7 @@ The main session thread is for coordination only: preflight, launching agents, t
 
 - Per-repo work (Phase 1 assessment, Phase 3 soundness, Phase 4 child updates) goes to parallel subagents, one per repo, launched in a single batch per phase
 - Waiting on CI or releases is never done by polling in the main thread. Give each repo's subagent its own watch loop, or arm a Monitor with an until-loop and keep coordinating
-- Subagents return structured facts and terse action summaries, not logs. The .freshening.md files are the durable per-repo record; the main thread reads those instead of re-deriving state
+- Subagents return structured facts and terse action summaries, not logs. The .freshen.md files are the durable per-repo record; the main thread reads those instead of re-deriving state
 - Sequencing constraint: template subagents must finish (tag verified) before their children's update subagents start. Non-template repos run in parallel with everything
 
 ## Authority granted by invocation
@@ -25,6 +25,8 @@ Invoking this skill authorizes, for the target repos only:
 - pushing directly to the default branch
 - rerunning GitHub Actions workflows
 
+Every commit made under this skill sets `GIT_COMMITTER_NAME=freshen-bot` so a freshen pass is greppable after the fact (`git log --format='%h %cn %s'`). Author and both email addresses stay untouched: the commit still reads as Kyle's, the ssh signature still verifies, and the committer email stays a verified address on his GitHub account.
+
 Everything else in the global CLAUDE.md still applies, especially minimal targeted changes and root-cause fixes (never skip a failing test or widen a timeout without understanding why it fails).
 
 ## Standing policies
@@ -33,19 +35,23 @@ Everything else in the global CLAUDE.md still applies, especially minimal target
 - When fixing a copier child reveals a fix that belongs in the template (lint config drift, task-runner setup, CI workflow bugs), back-port it to the template first, release, then apply the new template version to the children. Child-local fixes that the template would overwrite on the next update are wasted work
 - Ignore the content of doing.txt and roadmap/next-steps files. If one is staged, it commits along with everything else
 - If a repo contains freshen.txt in its root, complete those instructions in addition to the normal steps
-- Track per-repo actions in .freshening.md in that repo's root (globally gitignored, see Preflight). Append a dated entry per action, keep it terse
+- Track per-repo actions in .freshen.md in that repo's root (globally gitignored, see Preflight). Each pass appends one `## <YYYY-MM-DD> · session <id>` heading followed by terse action lines, newest section at the top. The file persists across passes so a repo carries its own freshen history; never truncate it. The id is the first 8 characters of `$CLAUDE_CODE_SESSION_ID`, resolved once by the orchestrator and passed to every worker so all repos in one pass share it
 - Concurrent-work guard: immediately before any commit, re-run `git status --porcelain` and compare against the state when work started. If files changed that the agent did not touch, stop that repo and flag it in the report instead of committing
+- Parallel workers share one scratchpad directory. `copier update` refuses to run with untracked files present, so a worker that stashes something aside must use a path namespaced by its repo (`<scratchpad>/<repo-name>/doing.txt`, never `<scratchpad>/doing.txt`). Two workers moving same-named files to the same path will silently restore each other's content into the wrong repo. Prefer `git stash push -- <pathspec>` or a temporary `.git/info/exclude` entry over moving files out of the tree at all
 - CI passing means the latest completed run of every non-Dependabot workflow on the default branch is green, checked via `gh run list --branch <default>`. A repo with no workflows is noted, not failed. A failure from transient infrastructure (network timeout, runner outage) gets one `gh run rerun --failed` before any code change
+- Never push a CI fix that only addresses the one error CI happened to report first. A red job stops at its first failure, so the log names one instance of what is usually a class. Before pushing, run the failing command locally under the same conditions CI uses, then sweep the repo for every other instance of that class and fix them in the same commit: the same lint rule elsewhere, the same renamed API at its other call sites, the same missing pin in the sibling workflow. Say in the commit body only what the sweep found beyond the reported error, and only when that is non-obvious. Each avoided round trip saves a full CI cycle
 - CI fix loop cap: if CI is still failing after three fix-and-push iterations and the newest failure has no crisply identified new root cause, stop and list the repo as follow-up. A distinct, provable root cause with an unambiguous fix justifies one more iteration; say so in the report
 - Pushing a fix/feat commit triggers the Bump Version workflow, which pushes a `bump:` commit back to main. Expect non-fast-forward rejections: `git pull --rebase` then push again, and re-sync local after workflows finish
-- Batch template fixes into as few commits as possible before pushing; every push cuts a release tag, and children should update once against the final tag, not per-fix
+- Batch template fixes before pushing; every push cuts a release tag, and children should update once against the final tag, not per-fix. Batching is about pushes, not commits: prefer one commit per distinct fix so each is reviewable and revertable on its own
+- Hooks that rewrite files (ctt renders, TOML re-sorting, formatters) turn a series of small commits into a series of fix-the-hook-churn commits. When making several commits that will be pushed together, commit the intermediate ones with `--no-verify`, then run the full hook suite once (`hk fix`, `prek run --all-files`, or the repo's fix task) before the final commit and push. Amend or add a cleanup commit for whatever the hooks rewrite. Never `--no-verify` a commit that is being pushed on its own, and never use it to sidestep a hook that is failing for a real reason
 
 ## Phase 0: Preflight
 
-1. Confirm `.freshening.md` is in the global git excludes file (`git config --get core.excludesFile`, default `~/.config/git/ignore`). Add it if missing
+1. Confirm `.freshen.md` is in the global git excludes file (`git config --get core.excludesFile`). Add it if missing
 2. Confirm `gh auth status` succeeds
-3. Read mani.yaml for the target list. If args were given, restrict to those names
-4. In each target repo, run `git remote set-head origin -a`. A dangling origin/HEAD (left by a deleted branch) breaks the hk pre-push commitizen check
+3. Resolve the pass id: `${CLAUDE_CODE_SESSION_ID:0:8}`. Every worker prompt carries it, and every worker writes it into that repo's .freshen.md heading
+4. Read mani.yaml for the target list. If args were given, restrict to those names
+5. In each target repo, run `git remote set-head origin -a`. A dangling origin/HEAD (left by a deleted branch) breaks the hk pre-push commitizen check
 
 ## Phase 1: Assess (read-only)
 
@@ -81,7 +87,7 @@ One subagent per repo, all launched together (parallel across repos, sequential 
    - Otherwise bump only the vulnerable module to the minimum patched version named in the advisory (Go: `go get <module>@<fixed-version> && go mod tidy`), never a blanket update of all dependencies
    - Transitive-only vulnerabilities that no release of the direct dependency fixes yet get a note in the report, not a forced replace directive
    - One `fix(deps):` commit per advisory (or per module when one bump clears several), gates re-run before each push
-5. Log each action to .freshening.md
+5. Log each action to .freshen.md
 
 ## Phase 4: Templates, then children
 
@@ -98,4 +104,9 @@ Produce a table of initial state versus final state per repo (branch, ahead/behi
 
 Always also write each repo's follow-up items into that repo itself, so they survive the session: doing.txt under a dated heading, or NEXT_STEPS.md where that is the repo's convention, one line per item. The chat report is the summary; the repo notes are the durable copy.
 
-When template maintenance is committed in this repo's checkout of the template, also run `hk fix` (or the repo's fix task) BEFORE committing: the hooks re-sort TOML and strip blank lines, and committing first wastes an iteration on hook churn. Re-run ctt after any hook fixes.
+When template maintenance is committed in this repo's checkout of the template, also run `hk fix` (or the repo's fix task) BEFORE the final commit: the hooks re-sort TOML and strip blank lines, and committing first wastes an iteration on hook churn. Re-run ctt after any hook fixes. Per the standing policy above, intermediate commits in the batch can use `--no-verify` and let that one pass clean up after all of them.
+
+Repo-specific gate notes worth knowing before you go looking:
+
+- mdformat-plugin-template has no `hk.pkl`; it uses `prek` with `.pre-commit-config.yaml`. Shelling in without `mise x --` picks up the global mise env and fails `run-tox-test-min-in-ctt-default` with "No interpreter found for CPython 3.10"
+- `.ctt/` output is a generated artifact, but copier's `_skip_if_exists` files silently never re-render into it once they exist. Any template change to such a file leaves the `.ctt` render stale, which also breaks the documented hand-sync path for children

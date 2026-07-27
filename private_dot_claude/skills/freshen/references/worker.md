@@ -10,6 +10,16 @@ Conventional Commits in Kyle's voice: single readable subject, no body unless th
 why is non-obvious. NEVER reference AI/Claude anywhere in a commit: no
 Co-Authored-By, no session trailers, no "generated with".
 
+Every commit you make sets the committer name to `freshen-bot`, so a pass is
+greppable later. Set it per command and change nothing else — author, author
+email, and committer email all stay as configured, which keeps the ssh signature
+valid and the committer email verified on Kyle's GitHub account:
+
+    GIT_COMMITTER_NAME=freshen-bot git commit -m "fix(deps): bump x/net to 0.38.0"
+
+Confirm it landed with `git log -1 --format='%an / %cn / %G?'`; expect
+`Kyle King / freshen-bot / G`.
+
 Never pipe `git commit` (or chain it with `&&` into a push) through a filter like
 `tail` — the pipe's exit code masks a hook failure, and the push then ships
 without the commit. Run commit and push as separate commands and confirm with
@@ -38,10 +48,40 @@ hook's edits and commit again.
 6. CI failure: root-cause it from the wait-ci tail. Minimal correct fixes only:
    no skipped tests, no widened timeouts, no disabled linters. Three
    fix-and-push iterations without a new root cause means stop and report
-7. Append a dated action log to .freshening.md in the repo root (globally
-   gitignored; create if missing)
-8. Leave follow-up items for Kyle in the repo's notes file (doing.txt under a
+7. Before pushing that fix, spend one round anticipating the next failure
+   (see "Anticipate the rest of the class" below). Each round trip you avoid
+   costs one full CI cycle
+8. Append the pass's actions to .freshen.md in the repo root (globally
+   gitignored; create if missing) under a
+   `## <YYYY-MM-DD> · session <id>` heading, newest section first, using the
+   pass id from the orchestrator's prompt. Never rewrite or truncate older
+   sections
+9. Leave follow-up items for Kyle in the repo's notes file (doing.txt under a
    dated heading, or NEXT_STEPS.md where that is the convention), one line each
+
+## Anticipate the rest of the class
+
+A red job stops at its first failure, so its log shows one instance of a problem
+that usually has siblings. Fixing only the reported line buys a second red run
+that names the next one. Before every fix push:
+
+1. Reproduce locally with the command CI ran, not something close to it. Read the workflow
+   step to get the real flags (`golangci-lint run ./...` with the repo config,
+   `go test ./...` with the same tags, the same Go/Python version). A local run
+   that passes while CI fails means you are running a different command
+2. Run it to completion instead of stopping at the first error. Most tools have
+   a flag for this (`golangci-lint --max-issues-per-linter=0
+   --max-same-issues=0`, `go vet ./...` over the whole module, `pytest` without
+   `-x`, `prek run --all-files`). Fix everything it reports
+3. Grep for the same class beyond that tool's reach: the renamed API at its
+   other call sites, the same lint suppression in sibling packages, the same
+   missing pin or permission in the other workflow files, the same pattern in
+   `.ctt/` renders and template sources
+4. Re-run the full local gate suite, not just the command that failed. A fix
+   that satisfies the linter often breaks a test
+
+Fold the whole sweep into one commit. Mention in the body only what the sweep
+found beyond the reported error, and only when it is non-obvious.
 
 ## Copier children
 
