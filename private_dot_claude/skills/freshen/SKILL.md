@@ -71,12 +71,17 @@ Get one approval, then run unattended. Return to the user only for product decis
 
 ## Phase 3: Make each repo individually sound
 
-One subagent per repo, all launched together (parallel across repos, sequential within a repo). Each subagent owns its repo end to end, including watching CI after its push and iterating on failures up to the cap, and reports back a terse outcome:
+One subagent per repo, all launched together (parallel across repos, sequential within a repo). Keep each prompt short: point the agent at `${CLAUDE_SKILL_DIR}/references/worker.md` for the standing playbook and paste in only that repo's assessment JSON plus its approved disposition. Agents watch CI with `${CLAUDE_SKILL_DIR}/scripts/wait-ci.sh <owner/repo> <sha>` (blocking, prints per-workflow conclusions and a filtered failure tail) instead of hand-rolled poll loops. Each subagent owns its repo end to end and reports back a terse outcome:
 
 1. Resolve local state per the approved disposition: pull if behind, commit dirty work with a sensible CC message, push if ahead
 2. Discover and run the local gates: prefer a repo skill or CLAUDE.md instruction, else `mise tasks` / `./run --list` / hk. Fix what fails
 3. Check CI on the default branch. Fix, push, and re-check, up to the iteration cap
-4. Log each action to .freshening.md
+4. Resolve open Dependabot alerts (`dependabot_alerts` in the assessment; details via `gh api repos/<slug>/dependabot/alerts?state=open`) with targeted upgrades:
+   - If an open Dependabot PR fixes the alert and its checks are green, merge it (`gh pr merge --squash`) and pull, instead of duplicating the bump
+   - Otherwise bump only the vulnerable module to the minimum patched version named in the advisory (Go: `go get <module>@<fixed-version> && go mod tidy`), never a blanket update of all dependencies
+   - Transitive-only vulnerabilities that no release of the direct dependency fixes yet get a note in the report, not a forced replace directive
+   - One `fix(deps):` commit per advisory (or per module when one bump clears several), gates re-run before each push
+5. Log each action to .freshening.md
 
 ## Phase 4: Templates, then children
 
@@ -87,6 +92,10 @@ Order matters: a child should update against the template's newest release.
 3. For each copier child (identified in Phase 1): invoke the copier-template skill to run the update against the latest tag, resolve .rej conflicts carefully, run local gates, commit, push, and watch CI per the iteration cap. Two .rej traps: each .rej holds LOCAL customizations that failed to re-apply, so a hunk that is pure local content (project docs, project config) must be re-applied by hand, while a hunk the new template already supersedes is discarded; and files listed in the template's `_skip_if_exists` are never updated by copier, so when a template change touches one (check the template diff), sync the child by hand from the template's `.ctt/default/` render
 4. Non-template, non-child repos need nothing beyond Phase 3 and can proceed in parallel with this phase
 
-## Phase 5: Report
+## Phase 5: Report and per-repo follow-ups
 
 Produce a table of initial state versus final state per repo (branch, ahead/behind, CI before and after, template version before and after). Follow with a numbered list of items needing the user, each with the repo, the blocker, and the decision required.
+
+Always also write each repo's follow-up items into that repo itself, so they survive the session: doing.txt under a dated heading, or NEXT_STEPS.md where that is the repo's convention, one line per item. The chat report is the summary; the repo notes are the durable copy.
+
+When template maintenance is committed in this repo's checkout of the template, also run `hk fix` (or the repo's fix task) BEFORE committing: the hooks re-sort TOML and strip blank lines, and committing first wastes an iteration on hook churn. Re-run ctt after any hook fixes.

@@ -39,6 +39,9 @@ for name in "${repos[@]}"; do
   gh_meta=$(gh repo view "$slug" --json isArchived,defaultBranchRef \
     -q '{archived: .isArchived, default_branch: .defaultBranchRef.name}' 2>/dev/null || echo '{"error": "not found on GitHub"}')
 
+  alerts=$(gh api "repos/$slug/dependabot/alerts?state=open&per_page=100" \
+    -q '[group_by(.security_advisory.severity) | .[] | {(.[0].security_advisory.severity): length}] | add // {}' 2>/dev/null || echo 'null')
+
   default_branch=$(jq -r '.default_branch // "main"' <<<"$gh_meta")
   ci=$(gh run list -R "$slug" --branch "$default_branch" --limit 10 \
     --json workflowName,status,conclusion,headSha 2>/dev/null |
@@ -52,9 +55,10 @@ for name in "${repos[@]}"; do
     --arg copier_src "$copier_src" --arg copier_commit "$copier_commit" \
     --argjson is_template "$(case "$name" in *template*) echo true;; *) echo false;; esac)" \
     --argjson has_freshen_txt "$([ -f "$dir/freshen.txt" ] && echo true || echo false)" \
-    --argjson gh "$gh_meta" --argjson ci "$ci" \
+    --argjson gh "$gh_meta" --argjson ci "$ci" --argjson alerts "$alerts" \
     '{name: $name, exists_locally: true, branch: $branch, ahead: $ahead, behind: $behind,
       staged: $staged, unstaged: $unstaged, untracked: $untracked,
       copier_src: $copier_src, copier_commit: $copier_commit,
-      is_template: $is_template, has_freshen_txt: $has_freshen_txt} + $gh + {ci: $ci}'
+      is_template: $is_template, has_freshen_txt: $has_freshen_txt} + $gh
+     + {ci: $ci, dependabot_alerts: $alerts}'
 done
