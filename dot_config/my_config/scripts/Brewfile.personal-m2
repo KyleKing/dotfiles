@@ -95,7 +95,7 @@ brew "lazyjj"
 # Modern TUI for Makefiles
 brew "lazymake"
 # Terminal Markdown previewer with a GUI-like experience
-brew "leaf-md"
+brew "leaf-markdown-viewer"
 # Find what models run on your hardware
 brew "llmfit"
 # Tool for linting and static analysis of Lua code

@@ -40,7 +40,9 @@ for name in "${repos[@]}"; do
     -q '{archived: .isArchived, default_branch: .defaultBranchRef.name}' 2>/dev/null || echo '{"error": "not found on GitHub"}')
 
   alerts=$(gh api "repos/$slug/dependabot/alerts?state=open&per_page=100" \
-    -q '[group_by(.security_advisory.severity) | .[] | {(.[0].security_advisory.severity): length}] | add // {}' 2>/dev/null || echo 'null')
+    -q '[group_by(.security_advisory.severity) | .[] | {(.[0].security_advisory.severity): length}] | add // {}' 2>/dev/null || true)
+  # Endpoints that deny access (archived repos) print an error object to stdout
+  jq -e 'type == "object" and has("status") == false' <<<"$alerts" >/dev/null 2>&1 || alerts='{}'
 
   default_branch=$(jq -r '.default_branch // "main"' <<<"$gh_meta")
   ci=$(gh run list -R "$slug" --branch "$default_branch" --limit 10 \
