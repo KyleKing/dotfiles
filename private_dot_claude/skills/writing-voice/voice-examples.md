@@ -27,6 +27,9 @@ Words and shapes to cut on sight. Presence of one is a signal to rewrite the sen
 - Throat-clearing openers: "It's worth noting that", "It should be mentioned that", "In today's fast-paced world", "At its core", "Simply put"
 - Hedge-stacking: "may potentially", "could possibly", "somewhat generally"
 - Filler intensifiers: "very", "really", "quite", "extremely", "incredibly"
+- Borrowed-vivid verbs: "land"/"lands"/"landed", "paint"/"paints", "reach for", "dive into", "unpack", "tee up", "spin up". These read as conversational-AI register rather than Kyle's, and each has a plain replacement: a value *is returned* or *comes back*, a step *renders* or *shows* an icon, you *use* a tool, you *read* a file, you *explain* a design, you *set up* a stack. Exception: "wire up" / "wired up" is Kyle's own usage (AGENTS.md, workflow comments) and stays.
+
+The verb bans govern drafts written for Kyle, not his existing prose. Do not rewrite a doc he already wrote to remove them.
 
 ### Corrective juxtaposition (the worst one)
 
