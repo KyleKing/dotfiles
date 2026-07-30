@@ -71,10 +71,6 @@ rewrite the sentence wholesale.
 
 ## Closing the file
 
-End with two blocks:
-
-1. **Proposed PR comment** — one fully-blockquoted block holding the post-facing
-   summary in the user's voice, so they read exactly what a reader sees.
-2. **The roll-up** — the copyable agent checklist as a separate `<details>` block,
-   kept outside the blockquote so its fenced copy button survives. Format spec is in
-   SKILL.md.
+End with a **Proposed PR comment**: one fully-blockquoted block holding the
+post-facing summary in the user's voice, so the user reads exactly what a reader
+sees.
