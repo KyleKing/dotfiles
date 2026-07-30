@@ -8,6 +8,15 @@ description: Write pull request review comments, replies to review threads, and 
 How to write review comments the user will actually post. The prose rules in
 CLAUDE.md still apply; this covers what is specific to review threads.
 
+Review comments are short and get drafted fast, which is exactly where the
+writing-voice tic catalog (`writing-voice` skill, `voice-examples.md`) gets skipped
+because nothing here restates it. Check drafts against it explicitly, not just
+CLAUDE.md's compressed rules: the borrowed-vivid-verb list ("land"/"lands"/"landed"
+included) catches spatial metaphors for plain facts ("outside the diff", not
+"didn't land on a diff line"), and the unnamed-scope-qualifier and
+bare-open-question entries catch two shapes that show up constantly in short
+comments ("too" with nothing named, a question with no proposed answer).
+
 ## Step 0: validate every anchor against local code
 
 Check out the branch, or fetch the PR to `FETCH_HEAD`, and confirm each

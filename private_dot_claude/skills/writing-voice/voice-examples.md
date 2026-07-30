@@ -31,6 +31,9 @@ Words and shapes to cut on sight. Presence of one is a signal to rewrite the sen
 
 The verb bans govern drafts written for Kyle, not his existing prose. Do not rewrite a doc he already wrote to remove them.
 
+- Unnamed-scope qualifiers: "too", "also", "as well" tacked onto a claim without saying what else is in scope. Bad: "Might be worth adding it there too." Good: "Might be worth adding it to the compose-file list, since that's the other place someone would look for it." Name the other item or audience instead of gesturing at it.
+- Open questions with no proposed answer: ending on a bare "should we do X?" or "is this the right call?" leaves the reader to invent the alternative and reads as reflexive hedging rather than a real ask. State the lean, then ask for confirmation: not "should we reconcile these two docs?" but "I'd point the other doc at this one — does that hold, or is there a reason to keep them separate?"
+
 ### Corrective juxtaposition (the worst one)
 
 The "not X, but Y" family. State Y directly.
