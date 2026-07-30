@@ -56,6 +56,9 @@ back-c-obs() {
 }
 # Push afterward: back-c-obs && lzg
 
+# Karabiner Actions Syncing
+alias back-pull-karabiner="cd ~/Developer/kyleking/karabiner-actions && git pull && npm run build"
+
 # NVIM Syncing
 alias back-pull-nvim="cd ~/.config/nvim && git pull && back-fresh-clear"
 back-c-nvim() {
@@ -72,5 +75,5 @@ back-stat-nvim() {
 alias back-stat-ch="cd / && z chezmoi && echo \$PWD && git status"
 
 # Composed from the single-repo commands above
-alias back-pull-all="back-pull-nvim && back-pull-ch"
+alias back-pull-all="back-pull-nvim && back-pull-karabiner && back-pull-ch"
 alias back-stat-all="back-stat-nvim && back-stat-ch"
