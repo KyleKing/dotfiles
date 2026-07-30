@@ -12,17 +12,22 @@ go                                             1.26.5                  ~/.config
 go:github.com/Zxilly/go-size-analyzer/cmd/gsa  1.10.2
 go:github.com/boyter/dcd                       1.1.0                   ~/.config/mise/config.toml  latest
 go:github.com/dhth/act3                        1.1.4                   ~/.config/mise/config.toml  latest
+go:github.com/golangci/golines                 0.15.0
 go:github.com/idursun/jjui/cmd/jjui            0.10.8                  ~/.config/mise/config.toml  latest
 go:github.com/jessfraz/dockfmt                 0.3.3
 go:github.com/merschformann/gotz               0.1.15                  ~/.config/mise/config.toml  latest
+golangci-lint                                  2.12.2
 hk                                             1.18.2
 hk                                             1.20.0
 hk                                             1.27.0
 hk                                             1.32.0
 hk                                             1.36.0
 hk                                             1.47.0
-hk                                             1.51.0                  ~/.config/mise/config.toml  latest
+hk                                             1.51.0
+hk                                             1.53.0                  ~/.config/mise/config.toml  latest
+ls-lint                                        2.3.1
 lua-language-server                            3.18.2                  ~/.config/mise/config.toml  latest
+lychee                                         0.24.2                  ~/.config/mise/config.toml  latest
 node                                           22.21.0
 node                                           22.21.1
 node                                           22.22.3
@@ -30,6 +35,7 @@ node                                           22.23.1
 node                                           24.10.0
 node                                           24.18.0                 ~/.config/mise/config.toml  lts
 node                                           25.2.1
+node                                           26.5.0
 npm:@browsermcp/mcp                            0.1.3                   ~/.config/mise/config.toml  latest
 npm:@fsouza/prettierd                          0.28.0                  ~/.config/mise/config.toml  latest
 npm:@getgrit/cli                               0.1.0-alpha.1743007075
@@ -59,6 +65,7 @@ npm:yaml-language-server                       1.24.0                  ~/.config
 pipx:beautysh                                  6.4.3                   ~/.config/mise/config.toml  latest
 pipx:claude-conversation-extractor             1.1.2                   ~/.config/mise/config.toml  latest
 pipx:code2flow                                 2.5.1                   ~/.config/mise/config.toml  latest
+pipx:commitizen                                4.16.5
 pipx:copier                                    9.15.1
 pipx:copier                                    9.17.0                  ~/.config/mise/config.toml  latest
 pipx:copier-template-tester                    2.5.0                   ~/.config/mise/config.toml  latest
@@ -95,6 +102,7 @@ pkl                                            0.29.1
 pkl                                            0.30.0
 pkl                                            0.30.1
 pkl                                            0.30.2
+pkl                                            0.31.1
 pkl                                            0.32.0                  ~/.config/mise/config.toml  latest
 pnpm                                           9.0.6
 pnpm                                           10.4.1
@@ -105,10 +113,12 @@ python                                         3.10.15
 python                                         3.11.11
 python                                         3.12.5
 python                                         3.13.11
+python                                         3.13.14
 python                                         3.14.2                  ~/.config/mise/config.toml  3.14.2
 ripsecrets                                     0.1.11                  ~/.config/mise/config.toml  latest
 semgrep                                        1.168.0
 shellcheck                                     0.11.0                  ~/.config/mise/config.toml  latest
+tombi                                          1.2.4
 typos                                          1.48.0                  ~/.config/mise/config.toml  latest
 uv                                             0.9.7
 uv                                             0.11.27

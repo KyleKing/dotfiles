@@ -77,6 +77,8 @@ brew "lazysql"
 brew "libffi"
 # Postgres C API library
 brew "libpq"
+# LLM inference in C/C++
+brew "llama.cpp"
 # Next-gen compiler infrastructure
 brew "llvm"
 # Sudoless performance monitoring for Apple Silicon processors
