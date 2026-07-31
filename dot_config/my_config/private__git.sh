@@ -56,6 +56,18 @@ squash-me() {
 #     notification and won't gate on optional/async reviewers.
 #   - For one-off CI watching without merging: gh pr checks --watch --fail-fast
 pr-merge-watch() {
+    echo "Waiting for CI checks to appear..."
+    local attempt=0 max_attempts=10 delay=3
+    while ! gh pr checks --json state >/dev/null 2>&1; do
+        attempt=$((attempt + 1))
+        if ((attempt >= max_attempts)); then
+            osascript -e 'display notification "No CI checks ever showed up" with title "PR Blocked" sound name "Basso"'
+            return 1
+        fi
+        sleep "$delay"
+        delay=$((delay * 2))
+    done
+
     echo "Waiting for CI checks..."
     if ! gh pr checks --watch --fail-fast; then
         osascript -e 'display notification "CI failed — check before merging" with title "PR Blocked" sound name "Basso"'
