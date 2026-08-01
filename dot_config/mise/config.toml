@@ -71,7 +71,6 @@ node = "lts"
 "pipx:uv-secure" = "latest"
 "pipx:watchgha" = "latest"
 "pipx:whisperlivekit" = {uvx_args = "--with torchaudio", version = "latest"}
-pitchfork = "latest"
 pkl = "latest"
 ripsecrets = "latest" # pragma: allowlist secret
 shellcheck = "latest"

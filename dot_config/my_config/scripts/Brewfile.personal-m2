@@ -30,6 +30,8 @@ brew "chezmoi"
 brew "cloc"
 # Power of curl, ease of use of httpie
 brew "curlie"
+# Modern diagram scripting language that turns text to diagrams
+brew "d2"
 # Image format providing lossless and lossy compression for web images
 brew "webp"
 # TIFF library and utilities

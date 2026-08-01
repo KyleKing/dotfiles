@@ -1,6 +1,8 @@
 projects:
   app-template:
     url: git@github.com:KyleKing/app-template.git
+  boardgame-teaches:
+    url: git@github.com:KyleKing/boardgame-teaches.git
   calcipy:
     url: git@github.com:KyleKing/calcipy.git
     tags:
@@ -107,6 +109,8 @@ projects:
     url: git@github.com:KyleKing/textract-py3.git
   tlr:
     url: git@github.com:KyleKing/tlr.git
+  typed-jinja:
+    url: git@github.com:KyleKing/typed-jinja.git
   vcr-tui:
     url: git@github.com:KyleKing/vcr-tui.git
   yak-shears:
