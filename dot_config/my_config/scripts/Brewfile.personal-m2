@@ -198,6 +198,8 @@ brew "television"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# Markup-based typesetting system
+brew "typst"
 # RTF to other formats converter
 brew "unrtf"
 # Extremely fast Python package installer and resolver, written in Rust

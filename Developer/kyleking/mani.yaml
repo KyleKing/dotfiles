@@ -105,8 +105,6 @@ projects:
     url: git@github.com:KyleKing/tail-jsonl.git
     tags:
       - calcipy-template
-  textract-py3:
-    url: git@github.com:KyleKing/textract-py3.git
   tlr:
     url: git@github.com:KyleKing/tlr.git
   typed-jinja:
