@@ -17,6 +17,12 @@
           "type": "jujutsu"
         },
         {
+          "foreground": "p:blue",
+          "style": "plain",
+          "template": "{{ if .Env.GH_PR_NUMBER }}#{{ .Env.GH_PR_NUMBER }} {{ end }}",
+          "type": "text"
+        },
+        {
           "foreground": "p:green",
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}",
@@ -31,7 +37,7 @@
             "github_icon": "\ue5fd"
           },
           "style": "plain",
-          "template": "{{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}",
+          "template": "{{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{ .BranchStatus }}{{ if or .Staging.Changed .Working.Changed }} \uf044{{ .Staging.String }}{{ .Working.String }}{{ end }}",
           "type": "git"
         },
         {
@@ -86,13 +92,6 @@
           "style": "plain",
           "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}in {{ .Name }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>){{ end }}{{ end }} {{ end }}",
           "type": "project"
-        },
-        {
-          "background": "transparent",
-          "foreground": "p:blue",
-          "style": "plain",
-          "template": "{{ if .Env.GH_PR_NUMBER }}#{{ .Env.GH_PR_NUMBER }} {{ end }}",
-          "type": "text"
         },
         {
           "background": "transparent",
