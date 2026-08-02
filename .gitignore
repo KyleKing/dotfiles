@@ -12,3 +12,6 @@ __pycache__
 
 # Prettier Cache
 node_modules/.cache/prettier/.prettier-caches
+
+# Override Global Ignore
+!CLAUDE.local.md
