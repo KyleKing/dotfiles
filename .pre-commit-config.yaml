@@ -51,8 +51,8 @@ repos:
     hooks:
       - id: mdformat
         additional_dependencies:
-          - "mdformat-mkdocs[recommended]>=5.0.0"
-          - "mdformat-beautysh>=1.0.0" # https://github.com/hukkin/mdformat-beautysh/issues/4
+          - "mdformat-mkdocs[recommended]>=5.2.2rc0"
+          - "mdformat-slw>=0.2.0"
         args: [--wrap=no]
         exclude: _.+\.md|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
   - repo: https://github.com/shellcheck-py/shellcheck-py

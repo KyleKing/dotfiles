@@ -67,3 +67,6 @@ podman-build-secret*
 
 # Support the freshen skill to track work per-repo
 .freshen.md
+
+# https://code.claude.com/docs/en/memory#choose-where-to-put-claude-md-files
+CLAUDE.local.md
