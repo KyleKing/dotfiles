@@ -207,6 +207,8 @@ cask "claude"
 cask "claude-code@latest"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
+# Disk space visualiser
+cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
 # App to build and share containerised applications and microservices
