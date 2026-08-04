@@ -11,7 +11,7 @@
 
 _REPO_FRESHNESS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/repo-freshness"
 _REPO_FRESHNESS_MAX_AGE=3600
-_REPO_FRESHNESS_UNPUSHED_AGE=600
+_REPO_FRESHNESS_UNPUSHED_AGE=900
 
 # name:zoxide-query:path triples; obsidian is intentionally absent (see back-pull-obs)
 _REPO_FRESHNESS_REPOS=(

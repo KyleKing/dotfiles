@@ -74,6 +74,29 @@ back-stat-nvim() {
 }
 alias back-stat-ch="cd / && z chezmoi && echo \$PWD && git status"
 
+# Mani-managed directories (each holds its own mani.yaml)
+_MANI_DIRS=(
+    "$HOME/Developer/executablebooks"
+    "$HOME/Developer/kyleking"
+)
+
+back-pull-mani() {
+    local dir
+    for dir in "${_MANI_DIRS[@]}"; do
+        echo "--- $dir ---"
+        (cd "$dir" && mani sync && mani run git-pull --all) || return 1
+    done
+}
+
+back-stat-mani() {
+    # Uses the git-ahead-behind task defined in each mani.yaml
+    local dir
+    for dir in "${_MANI_DIRS[@]}"; do
+        echo "--- $dir ---"
+        (cd "$dir" && mani run git-ahead-behind --all)
+    done
+}
+
 # Composed from the single-repo commands above
-alias back-pull-all="back-pull-nvim && back-pull-karabiner && back-pull-ch"
-alias back-stat-all="back-stat-nvim && back-stat-ch"
+alias back-pull-all="back-pull-nvim && back-pull-karabiner && back-pull-ch && back-pull-mani"
+alias back-stat-all="back-stat-nvim && back-stat-ch && back-stat-mani"
