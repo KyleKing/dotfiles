@@ -84,7 +84,7 @@ back-pull-mani() {
     local dir
     for dir in "${_MANI_DIRS[@]}"; do
         echo "--- $dir ---"
-        (cd "$dir" && mani sync && mani run git-pull --all) || return 1
+        (cd "$dir" && mani sync && mani run git-pull --all --forks 8) || return 1
     done
 }
 

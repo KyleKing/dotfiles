@@ -119,6 +119,7 @@ tasks:
 
   git-pull:
     desc: pull remote updates. Exit 0 on error
+    parallel: true
     cmd: git pull || true
 
   git-ahead-behind:
@@ -133,18 +134,21 @@ tasks:
 
   gpoi:
     desc: Run GH poi to remove closed branches
+    parallel: true
     cmd: |
       COUNT=$(git branch --format='%(HEAD) %(refname:short) -> %(upstream:short)' | wc -l)
       if (("$COUNT" > 1)); then git checkout main && gh poi && git pull; else echo "No change; only one checked out branch"; fi
 
   git-prune:
     desc: remove local branches and tags which have been deleted on remote
+    parallel: true
     env:
       remote: origin
     cmd: git fetch --prune --prune-tags
 
   git-daily:
     desc: show branch, local and remote diffs, last commit and date
+    parallel: true
     commands:
       - name: branch
         cmd: git rev-parse --abbrev-ref HEAD
@@ -166,25 +170,27 @@ tasks:
       - name: commit date
         cmd: git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" | sed 's/ //'
 
-  poetry-update:
-    desc: "Run `poetry update`. Run with: `mani run poetry-update --tags=calcipy-template`"
+  uv-update:
+    desc: "Run `uv update`. Run with: `mani run uv-update --tags=calcipy-template`"
+    parallel: true
     cmd: |
-      poetry update
+      uv lock --upgrade && uv sync
       ./run pack.install-extras
       ./run main --keep-going
 
-      git branch poetry-update
-      git checkout poetry-update
+      git branch uv-update
+      git checkout uv-update
       git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
       git add .
-      git commit --message="ci: poetry update"
+      git commit --message="ci: uv update"
       git push
-      gh pr create --assignee="@me" --title="Poetry Update" --web
+      gh pr create --assignee="@me" --title="uv Update" --web
       git status
     shell: zsh
 
   copier-auto-update:
     desc: "Run `copier-auto-update`. Run with: `mani run copier-auto-update --tags=calcipy-template`"
+    parallel: true
     cmd: |
       copier update --UNSAFE --conflict=rej --defaults
       git status
