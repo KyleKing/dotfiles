@@ -91,10 +91,6 @@ projects:
     url: git@github.com:KyleKing/private-snippets.git
   recipes:
     url: git@github.com:KyleKing/recipes.git
-  shoal:
-    url: git@github.com:KyleKing/shoal.git
-    tags:
-      - calcipy-template
   simple-crypt:
     url: git@github.com:KyleKing/simple-crypt.git
   spaghetti-comb.nvim:
@@ -107,8 +103,8 @@ projects:
       - calcipy-template
   tlr:
     url: git@github.com:KyleKing/tlr.git
-  typed-jinja:
-    url: git@github.com:KyleKing/typed-jinja.git
+  types-for-jinja:
+    url: git@github.com:KyleKing/types-for-jinja.git
   vcr-tui:
     url: git@github.com:KyleKing/vcr-tui.git
   yak-shears:
