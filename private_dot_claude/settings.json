@@ -5,6 +5,7 @@
   "editorMode": "vim",
   "effortLevel": "medium",
   "enabledPlugins": {
+    "hyperskills@hyperb1iss": true,
     "impeccable@impeccable": true
   },
   "env": {
