@@ -25,11 +25,13 @@
 
 ## Comments and Documentation
 
+- Default to zero comments. Do not add one unless the code cannot explain itself: a hidden constraint, a subtle invariant, a workaround for a specific bug, behavior that would surprise a reader. If in doubt, leave it out
 - No inline comments; code should be self-explanatory
 - No docstrings on private/internal self-explanatory functions
 - Public API: one-line docstring when signature is clear; include args/returns/raises only when non-obvious; no type repetition; no numpy-style sections; no numbered comments
 - Document non-obvious behavior (e.g. "Do not reuse after calling"), not types
 - Comments and docstrings must be evergreen: state the standing invariant or constraint a future reader needs with no memory of the change. Never narrate the change or reference the diff ("now", "moved", "was", "runs after the commit above", "released before"). Change narration belongs in the PR description and commit message, not in the code
+- Before finishing any task that touched code, reread every comment and docstring you added or left in place and delete any that don't meet the bar above
 - Don't add or update docstrings for functions you didn't change
 
 ## Files
@@ -44,7 +46,7 @@
 
 ## Tone and Voice
 
-This section governs text I author myself: messages, replies, docs, comments in my own words. It is the always-on floor. Load the `writing-voice` skill for the reasoning, the before/after pairs, the tic catalog, and the shapes for proposals and design docs.
+This section governs text I author myself: messages, replies, docs, comments, docstrings, PR/commit descriptions, in my own words. It is the always-on floor. Auto-load the `writing-voice` skill before drafting or rewriting any such prose rather than waiting for me to ask; it carries the reasoning, the before/after pairs, the tic catalog, and the shapes for proposals and design docs.
 
 It does NOT mean rewriting AI-generated analysis to sound like me — that misrepresents authorship. When relaying your own research or analysis into a human-facing surface, write a short framing sentence in my voice, then paste the analysis verbatim in a fenced block, unedited.
 
