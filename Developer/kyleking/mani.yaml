@@ -121,6 +121,16 @@ tasks:
     desc: pull remote updates. Exit 0 on error
     cmd: git pull || true
 
+  git-ahead-behind:
+    desc: show commits ahead/behind the upstream branch
+    output: table
+    parallel: true
+    cmd: |
+      git fetch --quiet 2>/dev/null || true
+      AHEAD=$(git rev-list --count '@{upstream}..HEAD' 2>/dev/null || echo "?")
+      BEHIND=$(git rev-list --count 'HEAD..@{upstream}' 2>/dev/null || echo "?")
+      echo "ahead=$AHEAD behind=$BEHIND"
+
   gpoi:
     desc: Run GH poi to remove closed branches
     cmd: |

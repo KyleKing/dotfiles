@@ -42,6 +42,11 @@
   "remoteControlAtStartup": true,
   "skipDangerousModePermissionPrompt": true,
   "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "voiceEnabled": true,
   "workflowKeywordTriggerEnabled": false,
   "worktree": {
     "baseRef": "fresh"
