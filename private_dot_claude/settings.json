@@ -13,6 +13,12 @@
     "USE_BUILTIN_RIPGREP": "0"
   },
   "extraKnownMarketplaces": {
+    "hyperb1iss": {
+      "source": {
+        "repo": "hyperb1iss/hyperskills",
+        "source": "github"
+      }
+    },
     "impeccable": {
       "source": {
         "repo": "pbakaus/impeccable",
@@ -22,7 +28,7 @@
   },
   "fileCheckpointingEnabled": false,
   "inputNeededNotifEnabled": true,
-  "model": "sonnet",
+  "model": "opus",
   "permissions": {
     "allow": [
       "Bash(find:*)",

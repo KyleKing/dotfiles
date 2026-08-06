@@ -61,6 +61,8 @@ brew "hadolint"
 brew "hk"
 # Review-first terminal diff viewer for agent-authored changesets
 brew "hunk"
+# Git-compatible distributed version control system
+brew "jj"
 # Package manager for kubectl plugins
 brew "krew"
 # Kafka TUI client
@@ -69,6 +71,8 @@ brew "ktea"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
+# TUI for Jujutsu/jj
+brew "lazyjj"
 # Modern TUI for Makefiles
 brew "lazymake"
 # Cross-platform TUI database management tool
