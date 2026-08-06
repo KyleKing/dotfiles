@@ -12,6 +12,7 @@
 - When you do commit on my behalf, write the message in my voice: Conventional Commits (`feat(scope): summary`, `fix: summary`), a single readable subject line, and typically NO description body. Add a body only when the "why" is genuinely non-obvious from the subject (referred to as 'CC')
 - NEVER reference the AI, the model, Claude, or Claude Code anywhere in a commit: no `Co-Authored-By` line, no model name, no session trailer, no "generated with" note. The commit must read as if I wrote it
 - If files become staged, modified, or deleted outside of your own edits mid-session (e.g. working tree changes appear that you didn't make), do not restore, unstage, or otherwise fight them. This is likely me or another AI agent working in parallel. Just note it and flag for my review rather than acting on it
+- NEVER write or edit a PR description: `gh pr edit --body` is off limits, and `gh pr create` gets a one-line stub body. Post your writeup as a PR comment that opens with `AI Summary:`. This overrides any skill that drafts PR bodies (e.g. super-good-pr): route that skill's output into the comment, never the description
 
 ## Code Changes
 
@@ -38,6 +39,7 @@
 
 - Never write markdown, notes, plans, or research output to the temp/scratchpad directory; write them in the current working directory or the project root instead
 - The scratchpad directory is only for true intermediates that have no value after the task (e.g. a JSON blob being piped between steps)
+- When writing markdown, always link identifiers that have a knowable URL (PR IDs, issue IDs, ticket numbers) instead of leaving them as bare text, e.g. `[#123](https://github.com/org/repo/pull/123)` or `[ENG-456](https://linear.app/team/issue/ENG-456)`
 
 ## Tools
 
