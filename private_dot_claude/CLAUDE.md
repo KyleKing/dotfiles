@@ -13,6 +13,7 @@
 - NEVER reference the AI, the model, Claude, or Claude Code anywhere in a commit: no `Co-Authored-By` line, no model name, no session trailer, no "generated with" note. The commit must read as if I wrote it
 - If files become staged, modified, or deleted outside of your own edits mid-session (e.g. working tree changes appear that you didn't make), do not restore, unstage, or otherwise fight them. This is likely me or another AI agent working in parallel. Just note it and flag for my review rather than acting on it
 - NEVER write or edit a PR description: `gh pr edit --body` is off limits, and `gh pr create` gets a one-line stub body. Post your writeup as a PR comment that opens with `AI Summary:`. This overrides any skill that drafts PR bodies (e.g. super-good-pr): route that skill's output into the comment, never the description
+- Each PR keeps exactly ONE `AI Summary:` comment, treated as the living description: when the branch changes, PATCH that comment in place (`gh api -X PATCH repos/{owner}/{repo}/issues/comments/<id>`); never append an "AI Summary: update" follow-up comment
 
 ## Code Changes
 
