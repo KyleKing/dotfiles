@@ -52,24 +52,23 @@
     This is likely me or another AI agent working in parallel.
     Just note it and flag for my review rather than acting on it
 
-- NEVER write a PR description: `gh pr create` gets a one-line stub body of `WIP`.
-    Post your writeup as a PR comment that opens with `AI Summary:`.
-    This overrides any skill that drafts PR bodies (e.g. super-good-pr): route that skill's
-    output into the comment, never the description
+- NEVER replace a PR description I've written myself.
+    Only act when the description is empty
 
-- The one permitted `gh pr edit --body` is a single pointer written after the comment
-    exists, so the description never carries content of its own:
+- Use `~/.config/my_config/ai-gh-pr.sh` (called by absolute path) for PR creation and
+    summary comments instead of raw `gh pr` calls, so the empty-only and singleton-comment
+    rules below are enforced by the script, not by memory:
 
-    ```
-    WIP
+    - `create` opens the PR as a draft, assigns me, and leaves the body as a `WIP` stub
+    - `comment <body>` posts the writeup as a PR comment that opens with `AI Summary:`; if
+        one already exists it PATCHes it in place instead of appending a new one, and only on
+        first creation, if the description is still empty or `WIP`, it replaces it once with a
+        pointer to the comment
+        This overrides any skill that drafts PR bodies (e.g. super-good-pr): route that skill's
+        output into the `comment` subcommand, never the description
 
-    See full AI Summary below: https://github.com/<org>/<repo>/pull/<n>#issuecomment-<id>
-    ```
-
-- Each PR keeps exactly ONE `AI Summary:` comment, treated as the living description: when
-    the branch changes, PATCH that comment in place
-    (`gh api -X PATCH repos/{owner}/{repo}/issues/comments/<id>`); never append an "AI
-    Summary: update" follow-up comment
+- Because the comment is a singleton edited in place, its link never goes stale; the
+    description is never touched again after that first replacement
 
 ## Code Changes
 
