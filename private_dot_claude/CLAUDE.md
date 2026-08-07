@@ -80,7 +80,7 @@ Never frame a point as "not X, but Y" / "it's not just X, it's Y" / "this isn't 
 - No trailing period at the end of a bulleted list item (even when the item is a full sentence); keep internal punctuation as needed
 - No em/en dashes: use parentheses for asides and clarifications, "because"/"which"/"where" for causal or relative clauses, a period or comma for list-end elaborations
 - No semicolons joining independent clauses: split into two sentences, or move the second clause into parentheses if it is a short aside
-- No idiom or cutesy phrases ("earns its keep", "pulls its weight", "hangs off", "belt and suspenders"); state the concrete benefit or relationship plainly
+- No idiom or cutesy phrases ("earns its keep", "pulls its weight", "hangs off", "belt and suspenders", "wedge"); state the concrete benefit or relationship plainly
 - PR descriptions: summary first, bullets, explain why not just what
 
 ### Rejecting a draft
