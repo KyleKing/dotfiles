@@ -4,8 +4,7 @@
 
 ### Wezterm
 
-Custom tab color/title.
-Discussion here:
+Custom tab color/title. Discussion here:
 <https://github.com/wez/wezterm/discussions/4945>
 
 ## Installation Instructions
@@ -53,13 +52,10 @@ chezmoi apply --verbose
 
 Setup behavior:
 
-- **New installation**:
-    Prompts for all configuration values
-- **Upgrade**:
-    Loads existing config, only prompts for new fields
-- **SSH key resolution**:
-    Run `~/.config/chezmoi/update-config.sh` to extract email and public key from
-    SSH file
+- **New installation**: Prompts for all configuration values
+- **Upgrade**: Loads existing config, only prompts for new fields
+- **SSH key resolution**: Run `~/.config/chezmoi/update-config.sh` to extract email and
+    public key from SSH file
 
 Alternatively, create config manually:
 

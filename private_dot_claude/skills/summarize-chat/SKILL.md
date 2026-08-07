@@ -1,17 +1,16 @@
 ---
-name: summarize-chat
-description: Summarize a Claude.ai conversation export into structured human-readable notes. Use when the user has a saved conversation text file and wants a dated summary .md file written to the current directory.
----
+
+## name: summarize-chat description: Summarize a Claude.ai conversation export into structured human-readable notes. Use when the user has a saved conversation text file and wants a dated summary .md file written to the current directory.
 
 # summarize-chat
 
-Runs `summarize_chat.py` against a conversation text file and writes a dated summary markdown file
-to the current working directory.
+Runs `summarize_chat.py` against a conversation text file and writes a dated summary
+markdown file to the current working directory.
 
 ## Prerequisites
 
-`ANTHROPIC_API_KEY` must be set. The script uses `uv run` with inline dependencies, so no manual
-install step is needed beyond having `uv` available.
+`ANTHROPIC_API_KEY` must be set. The script uses `uv run` with inline dependencies, so
+no manual install step is needed beyond having `uv` available.
 
 ## Usage
 
@@ -26,7 +25,8 @@ Optional flags:
 
 ## Output
 
-The script prints the output path on success. The default filename is:
+The script prints the output path on success.
+The default filename is:
 
 ```
 <cwd>/<YYYY-MM-DD>-<source-stem>-summary.md

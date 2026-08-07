@@ -1,7 +1,6 @@
 ---
-name: hunk-review
-description: Drive an interactive hunk diff review session (hunkdiff CLI). Use when the user mentions hunk, asks to review a diff hunk by hunk, or wants comments added and applied through a live hunk session.
----
+
+## name: hunk-review description: Drive an interactive hunk diff review session (hunkdiff CLI). Use when the user mentions hunk, asks to review a diff hunk by hunk, or wants comments added and applied through a live hunk session.
 
 # Hunk review
 
@@ -18,5 +17,5 @@ hunk session comment apply
 If no session exists, ask the user to launch one — do not start one on their behalf.
 
 Fuller documentation ships with the tool at
-`~/node_modules/hunkdiff/skills/hunk-review/SKILL.md`. Read that when a subcommand's
-behavior is unclear.
+`~/node_modules/hunkdiff/skills/hunk-review/SKILL.md`.
+Read that when a subcommand's behavior is unclear.

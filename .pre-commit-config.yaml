@@ -43,7 +43,7 @@ repos:
       - id: trailing-whitespace
         exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.16.5
+    rev: v4.17.0
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
@@ -51,10 +51,10 @@ repos:
     hooks:
       - id: mdformat
         additional_dependencies:
-          - "mdformat-mkdocs[recommended]>=5.2.2rc0"
-          - "mdformat-slw>=0.2.0"
-        args: [--wrap=no]
-        exclude: _.+\.md|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
+          - "mdformat-mkdocs[recommended]>=5.3.0"
+          - "mdformat-slw>=0.4.0"
+        args: ["--wrap=keep"]
+        exclude: (^|/)_[^/]+\.md$|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
@@ -88,7 +88,7 @@ repos:
           ]
         exclude: poetry\.lock|superfile/[^\.]+\.toml|dot_config/television/.+\.toml
   - repo: https://github.com/KyleKing/calcipy
-    rev: 6.1.0b0
+    rev: 6.1.0rc0
     hooks:
       - id: copier-forbidden-files
   - repo: https://github.com/Yelp/detect-secrets
