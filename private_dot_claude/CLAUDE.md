@@ -55,20 +55,16 @@
 - NEVER replace a PR description I've written myself.
     Only act when the description is empty
 
-- Use `~/.config/my_config/ai-gh-pr.sh` (called by absolute path) for PR creation and
+- Use `~/.config/my_config/ai-gh-pr.py` (called by absolute path) for PR creation and
     summary comments instead of raw `gh pr` calls, so the empty-only and singleton-comment
     rules below are enforced by the script, not by memory:
 
-    - `create` opens the PR as a draft, assigns me, and leaves the body as a `WIP` stub
-    - `comment <body>` posts the writeup as a PR comment that opens with `AI Summary:`; if
-        one already exists it PATCHes it in place instead of appending a new one, and only on
-        first creation, if the description is still empty or `WIP`, it replaces it once with a
-        pointer to the comment
-        This overrides any skill that drafts PR bodies (e.g. super-good-pr): route that skill's
-        output into the `comment` subcommand, never the description
+    - `create <title>` opens the PR
+    - `comment <body>` posts or updates the AI writeup as a singleton PR comment.
+        This guidance overrides any skill that modifies GitHub PR bodies
 
-- Because the comment is a singleton edited in place, its link never goes stale; the
-    description is never touched again after that first replacement
+- Don't put a ticket or issue number in the PR title or the AI Summary body unless I ask
+    for one
 
 ## Code Changes
 
