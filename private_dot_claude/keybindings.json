@@ -1,0 +1,275 @@
+{
+  "$docs": "https://code.claude.com/docs/en/keybindings",
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
+  "bindings": [
+    {
+      "bindings": {
+        "ctrl+]": "app:openArtifact",
+        "ctrl+o": "app:toggleTranscript",
+        "ctrl+r": "history:search",
+        "ctrl+shift+b": "app:toggleBrief",
+        "ctrl+shift+o": "app:toggleTeammatePreview",
+        "ctrl+t": "app:toggleTodos"
+      },
+      "context": "Global"
+    },
+    {
+      "bindings": {
+        "cmd+k": "chat:clearScreen",
+        "ctrl+-": "chat:undo",
+        "ctrl+_": "chat:undo",
+        "ctrl+g": "chat:externalEditor",
+        "ctrl+j": "chat:newline",
+        "ctrl+l": "chat:clearInput",
+        "ctrl+s": "chat:stash",
+        "ctrl+shift+-": "chat:undo",
+        "ctrl+shift+_": "chat:undo",
+        "ctrl+v": "chat:imagePaste",
+        "ctrl+x ctrl+e": "chat:externalEditor",
+        "ctrl+x ctrl+k": "chat:killAgents",
+        "down": "history:next",
+        "enter": "chat:submit",
+        "escape": "chat:cancel",
+        "meta+o": "chat:fastMode",
+        "meta+p": "chat:modelPicker",
+        "meta+t": "chat:thinkingToggle",
+        "meta+w": "chat:workflowKeywordToggle",
+        "shift+tab": "chat:cycleMode",
+        "space": "voice:pushToTalk",
+        "up": "history:previous"
+      },
+      "context": "Chat"
+    },
+    {
+      "bindings": {
+        "down": "autocomplete:next",
+        "escape": "autocomplete:dismiss",
+        "tab": "autocomplete:accept",
+        "up": "autocomplete:previous"
+      },
+      "context": "Autocomplete"
+    },
+    {
+      "bindings": {
+        "/": "settings:search",
+        "ctrl+n": "select:next",
+        "ctrl+p": "select:previous",
+        "ctrl+u": "scroll:halfPageUp",
+        "d": "settings:periodDay",
+        "down": "select:next",
+        "enter": "settings:close",
+        "escape": "confirm:no",
+        "j": "select:next",
+        "k": "select:previous",
+        "r": "settings:retry",
+        "space": "select:accept",
+        "t": "settings:sortByTokens",
+        "up": "select:previous",
+        "w": "settings:periodWeek"
+      },
+      "context": "Settings"
+    },
+    {
+      "bindings": {
+        "f": "doctor:fix"
+      },
+      "context": "Doctor"
+    },
+    {
+      "bindings": {
+        "ctrl+e": "confirm:toggleExplanation",
+        "down": "confirm:next",
+        "enter": "confirm:yes",
+        "escape": "confirm:no",
+        "n": "confirm:no",
+        "shift+tab": "confirm:cycleMode",
+        "space": "confirm:toggle",
+        "tab": "confirm:nextField",
+        "up": "confirm:previous",
+        "y": "confirm:yes"
+      },
+      "context": "Confirmation"
+    },
+    {
+      "bindings": {
+        "left": "tabs:previous",
+        "right": "tabs:next",
+        "shift+tab": "tabs:previous",
+        "tab": "tabs:next"
+      },
+      "context": "Tabs"
+    },
+    {
+      "bindings": {
+        "b": "scroll:fullPageUp",
+        "ctrl+b": "scroll:fullPageUp",
+        "ctrl+e": "transcript:toggleShowAll",
+        "ctrl+f": "scroll:fullPageDown",
+        "ctrl+n": "scroll:lineDown",
+        "ctrl+p": "scroll:lineUp",
+        "ctrl+u": "scroll:halfPageUp",
+        "down": "scroll:lineDown",
+        "end": "scroll:bottom",
+        "escape": "transcript:exit",
+        "g": "scroll:top",
+        "home": "scroll:top",
+        "j": "scroll:lineDown",
+        "k": "scroll:lineUp",
+        "q": "transcript:exit",
+        "shift+g": "scroll:bottom",
+        "space": "scroll:fullPageDown",
+        "up": "scroll:lineUp"
+      },
+      "context": "Transcript"
+    },
+    {
+      "bindings": {
+        "ctrl+r": "historySearch:next",
+        "ctrl+s": "historySearch:cycleScope",
+        "enter": "historySearch:execute",
+        "escape": "historySearch:accept",
+        "tab": "historySearch:accept"
+      },
+      "context": "HistorySearch"
+    },
+    {
+      "bindings": {
+        "ctrl+b": "task:background",
+        "ctrl+x ctrl+b": "task:background"
+      },
+      "context": "Task"
+    },
+    {
+      "bindings": {
+        "ctrl+e": "theme:editCustom",
+        "ctrl+t": "theme:toggleSyntaxHighlighting"
+      },
+      "context": "ThemePicker"
+    },
+    {
+      "bindings": {
+        "ctrl+end": "scroll:bottom",
+        "ctrl+home": "scroll:top",
+        "ctrl+shift+c": "selection:copy",
+        "pagedown": "scroll:pageDown",
+        "pageup": "scroll:pageUp",
+        "shift+down": "selection:extendDown",
+        "shift+end": "selection:extendLineEnd",
+        "shift+home": "selection:extendLineStart",
+        "shift+left": "selection:extendLeft",
+        "shift+right": "selection:extendRight",
+        "shift+up": "selection:extendUp",
+        "wheeldown": "scroll:lineDown",
+        "wheelup": "scroll:lineUp"
+      },
+      "context": "Scroll"
+    },
+    {
+      "bindings": {
+        "escape": "help:dismiss"
+      },
+      "context": "Help"
+    },
+    {
+      "bindings": {
+        "backspace": "attachments:remove",
+        "delete": "attachments:remove",
+        "down": "attachments:exit",
+        "escape": "attachments:exit",
+        "left": "attachments:previous",
+        "right": "attachments:next"
+      },
+      "context": "Attachments"
+    },
+    {
+      "bindings": {
+        "ctrl+n": "footer:down",
+        "ctrl+p": "footer:up",
+        "down": "footer:down",
+        "enter": "footer:openSelected",
+        "escape": "footer:clearSelection",
+        "left": "footer:previous",
+        "right": "footer:next",
+        "up": "footer:up",
+        "x": "footer:close"
+      },
+      "context": "Footer"
+    },
+    {
+      "bindings": {
+        "ctrl+down": "messageSelector:bottom",
+        "ctrl+n": "messageSelector:down",
+        "ctrl+p": "messageSelector:up",
+        "ctrl+up": "messageSelector:top",
+        "down": "messageSelector:down",
+        "enter": "messageSelector:select",
+        "j": "messageSelector:down",
+        "k": "messageSelector:up",
+        "meta+down": "messageSelector:bottom",
+        "meta+up": "messageSelector:top",
+        "shift+down": "messageSelector:bottom",
+        "shift+j": "messageSelector:bottom",
+        "shift+k": "messageSelector:top",
+        "shift+up": "messageSelector:top",
+        "up": "messageSelector:up"
+      },
+      "context": "MessageSelector"
+    },
+    {
+      "bindings": {
+        "b": "scroll:fullPageUp",
+        "down": "diff:nextFile",
+        "end": "scroll:bottom",
+        "enter": "diff:viewDetails",
+        "escape": "diff:dismiss",
+        "g": "scroll:top",
+        "home": "scroll:top",
+        "j": "diff:nextFile",
+        "k": "diff:previousFile",
+        "left": "diff:previousSource",
+        "pagedown": "scroll:pageDown",
+        "pageup": "scroll:pageUp",
+        "right": "diff:nextSource",
+        "shift+g": "scroll:bottom",
+        "shift+space": "scroll:fullPageUp",
+        "space": "scroll:fullPageDown",
+        "up": "diff:previousFile"
+      },
+      "context": "DiffDialog"
+    },
+    {
+      "bindings": {
+        "left": "modelPicker:decreaseEffort",
+        "right": "modelPicker:increaseEffort",
+        "s": "modelPicker:thisSessionOnly"
+      },
+      "context": "ModelPicker"
+    },
+    {
+      "bindings": {
+        "ctrl+g": "select:cancel",
+        "ctrl+n": "select:next",
+        "ctrl+p": "select:previous",
+        "down": "select:next",
+        "end": "select:last",
+        "enter": "select:accept",
+        "escape": null,
+        "home": "select:first",
+        "j": "select:next",
+        "k": "select:previous",
+        "pagedown": "select:pageDown",
+        "pageup": "select:pageUp",
+        "up": "select:previous"
+      },
+      "context": "Select"
+    },
+    {
+      "bindings": {
+        "f": "plugin:favorite",
+        "i": "plugin:install",
+        "space": "plugin:toggle"
+      },
+      "context": "Plugin"
+    }
+  ]
+}
