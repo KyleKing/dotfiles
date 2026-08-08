@@ -146,6 +146,31 @@ Anything you post to a shared surface is one of two things, and the first line h
 say which.
 Never let the reader guess how much human judgment is behind it.
 
+The singleton `AI Summary:` comment is outside this.
+It is a standing part of the PR process I asked for, it names its own authorship in the
+first two words, and it gets no banner.
+
+It is a place to collect context a reader cannot get from the diff: the log lines or
+stack trace that show the failure, a latency or cost measurement before and after, the
+demo or test script that proved it and what the script printed, the scenario testing you
+did for performance or security, what the issue tracker or the user actually asked for,
+what a production dashboard says now, and the alternatives you rejected with the reason.
+Distill what the problem is, how well the solution fits it, and what proof exists.
+Never restate what the code changes.
+
+Open with a summary paragraph, then use headers and bold topic lines so it can be
+scanned.
+Steps a human must perform go in `- [ ]` checkboxes.
+One or two `<details>` sections carry long scripts and the evidence another agent or a
+manual audit would need, so the visible text stays enough for most readers.
+Say what is not verified.
+
+Abbreviate file paths to their last two segments, first-lettering everything above them
+(`common/common/utils/x.py` → `c/c/utils/x.py`), and link to the blob at the reviewed
+SHA with a `#L` fragment.
+`watch-doggo`'s `docs/jobs/review/comment-format.md` is the worked reference for this
+whole shape, including the tiering and what stays collapsed.
+
 **Speaking as me.** I asked for it, I read it, I approved it.
 Write it in my voice under the Tone and Voice rules below: concise, no AI slop, no
 banner.
