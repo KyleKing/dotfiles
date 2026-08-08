@@ -1,11 +1,14 @@
 ---
-
-## name: pr-stacking description: Plan and scaffold a stack of up to 4 dependent PRs for a feature, walking-skeleton first, using merge-forward sync instead of rebase so GitHub's diff view stays stable across review rounds. Use when asked to stack a feature, split work into stacked PRs, plan a PR stack, or design an incremental rollout of a large change across dependent branches.
+name: pr-stacking
+description: Plan and scaffold a stack of up to 4 dependent PRs for a feature, walking-skeleton first, using merge-forward sync instead of rebase so GitHub's diff view stays stable across review rounds. Use when asked to stack a feature, split work into stacked PRs, plan a PR stack, or design an incremental rollout of a large change across dependent branches.
+---
 
 # PR stacking
 
 Two-phase skill: draft a stacking plan, get explicit approval, then scaffold the
 approved plan's branches and draft PRs.
+Sweeping every open PR at once (which are stacked, conflicted, or have unactioned
+reviews) is `pr-fleet`, which delegates the sync rules below.
 Never skip straight to execution — the plan is cheap to get wrong and expensive to
 unwind once branches and PRs exist.
 

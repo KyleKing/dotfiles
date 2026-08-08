@@ -1,6 +1,7 @@
 ---
-
-## name: observability-clis description: Query PostHog error tracking and Sentry issues from the command line. Use when asked what errors are happening, which errors are being missed or untriaged, for production error rates or impact by user, or whenever posthog-cli or sentry-cli is mentioned.
+name: observability-clis
+description: Query PostHog error tracking and Sentry issues from the command line. Use when asked what errors are happening, which errors are being missed or untriaged, for production error rates or impact by user, or whenever posthog-cli or sentry-cli is mentioned.
+---
 
 # Observability CLIs
 

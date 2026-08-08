@@ -1,6 +1,7 @@
 ---
-
-## name: port-from-sibling description: Carry a config, pattern, or workflow from a sibling repository into this one. Use whenever a request references another local repo by relative path ("like ../calcipy", "see ../yak-shears/hk.pkl", "the way ../my-go-template does it"), or when migrating a project onto tooling another project already uses.
+name: port-from-sibling
+description: Carry a config, pattern, or workflow from a sibling repository into this one. Use whenever a request references another local repo by relative path ("like ../calcipy", "see ../yak-shears/hk.pkl", "the way ../my-go-template does it"), or when migrating a project onto tooling another project already uses.
+---
 
 # Port from a sibling repo
 

@@ -1,6 +1,9 @@
 ---
-
-## name: deslop description: Strip AI slop from a README, docs, comments, or a diff before release. Invoke explicitly. argument-hint: "[path, or 'diff with main']" disable-model-invocation: true
+name: deslop
+description: Strip AI slop from a README, docs, comments, or a diff before release. Invoke explicitly.
+argument-hint: "[path, or 'diff with main']"
+disable-model-invocation: true
+---
 
 # Deslop
 

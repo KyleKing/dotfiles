@@ -1,6 +1,7 @@
 ---
-
-## name: hunk-review description: Drive an interactive hunk diff review session (hunkdiff CLI). Use when the user mentions hunk, asks to review a diff hunk by hunk, or wants comments added and applied through a live hunk session.
+name: hunk-review
+description: Drive an interactive hunk diff review session (hunkdiff CLI). Use when the user mentions hunk, asks to review a diff hunk by hunk, or wants comments added and applied through a live hunk session.
+---
 
 # Hunk review
 

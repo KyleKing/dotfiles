@@ -1,6 +1,7 @@
 ---
-
-## name: tui-critique description: On-demand UX critique for terminal UIs (Bubble Tea, Ratatui, Ink, Textual). Combines hyperskills:tui-design's layout/keybinding/color principles with impeccable's critique rigor (cognitive load, personas, heuristic scoring, P0-P3 severity), adapted for terminals — no CSS, no browser, no WCAG contrast math. Use when reviewing or critiquing a TUI's design, auditing keybinding discoverability, or checking terminal portability (NO_COLOR, monochrome degradation, multiplexer/SSH behavior).
+name: tui-critique
+description: On-demand UX critique for terminal UIs (Bubble Tea, Ratatui, Ink, Textual). Combines hyperskills:tui-design's layout/keybinding/color principles with impeccable's critique rigor (cognitive load, personas, heuristic scoring, P0-P3 severity), adapted for terminals — no CSS, no browser, no WCAG contrast math. Use when reviewing or critiquing a TUI's design, auditing keybinding discoverability, or checking terminal portability (NO_COLOR, monochrome degradation, multiplexer/SSH behavior).
+---
 
 # TUI Critique
 

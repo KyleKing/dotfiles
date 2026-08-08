@@ -1,6 +1,7 @@
 ---
-
-## name: coderabbit-apply description: Pull the latest CodeRabbit review's "Prompt for all review comments with AI agents" block off a PR and action it — adversarially verifying each finding, fixing the whole class of problem rather than the cited lines, committing incrementally, and resolving that review's threads. Use when asked to apply, address, or action CodeRabbit comments.
+name: coderabbit-apply
+description: Pull the latest CodeRabbit review's "Prompt for all review comments with AI agents" block off a PR and action it — adversarially verifying each finding, fixing the whole class of problem rather than the cited lines, committing incrementally, and resolving that review's threads. Use when asked to apply, address, or action CodeRabbit comments.
+---
 
 # Apply a CodeRabbit review
 
@@ -58,6 +59,8 @@ query($owner:String!,$repo:String!,$number:Int!){
 Match threads to the review id from step 1.
 Threads from earlier reviews are out of scope unless the user says otherwise — name them
 in the final report rather than silently resolving them.
+A review can be skipped entirely when a push lands before anyone actions it, so open
+threads on an older review are a real work list, not noise.
 
 ## Step 3 — Verify each finding adversarially
 
@@ -108,6 +111,8 @@ note, not an edit.
 Commit incrementally, one logical fix per commit, Conventional Commits with a
 capitalized summary.
 Do not push — the user reviews and pushes.
+The exception is a `pr-fleet` run, which
+authorizes pushing the branches in its approved plan.
 
 Run the narrowest test for what you touched as you go, then the repo's full
 format/typecheck/test ladder once over the combined diff (in IRM, the `pre-pr-qa` skill

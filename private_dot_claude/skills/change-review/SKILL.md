@@ -1,6 +1,7 @@
 ---
-
-## name: change-review description: Write pull request review comments and replies to review threads in the user's voice. Use when reviewing a PR or diff and producing comments, when replying to a bot thread (CodeRabbit, Codex), when triaging or applying review findings, or when staging review feedback in a pr-<number>-review-comments.md file for the user to proofread before posting.
+name: change-review
+description: Write pull request review comments and replies to review threads in the user's voice. Use when reviewing a PR or diff and producing comments, when replying to a bot thread (CodeRabbit, Codex), when triaging or applying review findings, or when staging review feedback in a pr-<number>-review-comments.md file for the user to proofread before posting.
+---
 
 # Change review
 

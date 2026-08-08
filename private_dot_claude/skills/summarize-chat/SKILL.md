@@ -1,6 +1,7 @@
 ---
-
-## name: summarize-chat description: Summarize a Claude.ai conversation export into structured human-readable notes. Use when the user has a saved conversation text file and wants a dated summary .md file written to the current directory.
+name: summarize-chat
+description: Summarize a Claude.ai conversation export into structured human-readable notes. Use when the user has a saved conversation text file and wants a dated summary .md file written to the current directory.
+---
 
 # summarize-chat
 

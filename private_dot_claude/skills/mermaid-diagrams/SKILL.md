@@ -1,6 +1,7 @@
 ---
-
-## name: mermaid-diagrams description: Draw mermaid diagrams to the user's conventions — C4 model diagrams, flowcharts, and sequence diagrams for docs, Linear proposals, design docs, and READMEs. Use whenever producing a mermaid block, choosing a diagram type, or reviewing an existing diagram that has grown too dense.
+name: mermaid-diagrams
+description: Draw mermaid diagrams to the user's conventions — C4 model diagrams, flowcharts, and sequence diagrams for docs, Linear proposals, design docs, and READMEs. Use whenever producing a mermaid block, choosing a diagram type, or reviewing an existing diagram that has grown too dense.
+---
 
 # Mermaid diagrams
 

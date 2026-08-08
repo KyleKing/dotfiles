@@ -1,6 +1,9 @@
 ---
-
-## name: orchestrate description: Work a multi-phase plan to completion with subagents, checkpoint commits, and questions back to the user. Invoke explicitly with a plan document. argument-hint: "[@plan-file or phase description]" disable-model-invocation: true
+name: orchestrate
+description: Work a multi-phase plan to completion with subagents, checkpoint commits, and questions back to the user. Invoke explicitly with a plan document.
+argument-hint: '[@plan-file or phase description]'
+disable-model-invocation: true
+---
 
 # Orchestrate
 

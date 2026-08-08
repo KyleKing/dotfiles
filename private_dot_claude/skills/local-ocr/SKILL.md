@@ -1,6 +1,7 @@
 ---
-
-## name: local-ocr description: Extract text from images and screenshots locally with mac-ocr, Apple's on-device Vision engine. Use when bulk-triaging screenshots or images (sorting Desktop or Downloads clutter), reading text out of a PNG or JPG, or any time image text needs extracting without spending vision tokens.
+name: local-ocr
+description: Extract text from images and screenshots locally with mac-ocr, Apple's on-device Vision engine. Use when bulk-triaging screenshots or images (sorting Desktop or Downloads clutter), reading text out of a PNG or JPG, or any time image text needs extracting without spending vision tokens.
+---
 
 # Local OCR
 

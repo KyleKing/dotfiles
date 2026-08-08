@@ -1,6 +1,9 @@
 ---
-
-## name: audit-project description: Audit a repository's state and condense scattered notes into a phased ROADMAP.md. Invoke explicitly. argument-hint: "[optional focus, e.g. 'test quality' or 'duplication']" disable-model-invocation: true
+name: audit-project
+description: Audit a repository's state and condense scattered notes into a phased ROADMAP.md. Invoke explicitly.
+argument-hint: "[optional focus, e.g. 'test quality' or 'duplication']"
+disable-model-invocation: true
+---
 
 # Audit project
 

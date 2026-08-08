@@ -1,6 +1,7 @@
 ---
-
-## name: hk-config description: Audit or write an hk.pkl config (jdx/hk git hooks). Use when creating hk.pkl, upgrading the pinned hk version, adding a linter step, or when fixes made by a pre-commit hook are not being staged. Covers version pinning, staging semantics, builtins, and DRY structure.
+name: hk-config
+description: Audit or write an hk.pkl config (jdx/hk git hooks). Use when creating hk.pkl, upgrading the pinned hk version, adding a linter step, or when fixes made by a pre-commit hook are not being staged. Covers version pinning, staging semantics, builtins, and DRY structure.
+---
 
 # hk.pkl configuration
 

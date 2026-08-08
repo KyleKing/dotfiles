@@ -1,6 +1,7 @@
 ---
-
-## name: copier-template description: Run and troubleshoot copier updates in a project generated from one of the user's templates, and maintain the templates themselves. Use when a task mentions copier, copier update, .copier-answers.yml, .rej files after an update, ctt or copier-template-tester, or one of calcipy_template, mdformat-plugin-template, my_go_template, or app-template.
+name: copier-template
+description: Run and troubleshoot copier updates in a project generated from one of the user's templates, and maintain the templates themselves. Use when a task mentions copier, copier update, .copier-answers.yml, .rej files after an update, ctt or copier-template-tester, or one of calcipy_template, mdformat-plugin-template, my_go_template, or app-template.
+---
 
 # Copier
 

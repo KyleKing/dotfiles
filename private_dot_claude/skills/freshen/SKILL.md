@@ -1,6 +1,8 @@
 ---
-
-## name: freshen description: Freshens the repos listed in mani.yaml - syncs each with upstream, runs local gates, fixes CI on the default branch, and rolls template releases out to copier children. Arguments are a space-separated subset of repo names from mani.yaml; default is every repo. disable-model-invocation: true
+name: freshen
+description: Freshens the repos listed in mani.yaml - syncs each with upstream, runs local gates, fixes CI on the default branch, and rolls template releases out to copier children. Arguments are a space-separated subset of repo names from mani.yaml; default is every repo.
+disable-model-invocation: true
+---
 
 # Freshen
 

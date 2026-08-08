@@ -1,6 +1,7 @@
 ---
-
-## name: python-async description: Async Python conventions and footguns — asyncio.TaskGroup over gather, event-loop-bound primitives, offloading blocking work to threads or processes, cancellation across the thread boundary, and dedicated executors. Use when writing or reviewing async def, await, asyncio.to_thread, run_in_executor, create_task, async generators, or when diagnosing a stalled event loop, a "bound to a different event loop" error, or latency that only appears under load.
+name: python-async
+description: Async Python conventions and footguns — asyncio.TaskGroup over gather, event-loop-bound primitives, offloading blocking work to threads or processes, cancellation across the thread boundary, and dedicated executors. Use when writing or reviewing async def, await, asyncio.to_thread, run_in_executor, create_task, async generators, or when diagnosing a stalled event loop, a "bound to a different event loop" error, or latency that only appears under load.
+---
 
 # Python async
 

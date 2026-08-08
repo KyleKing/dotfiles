@@ -1,6 +1,7 @@
 ---
-
-## name: writing-voice description: The user's full writing system for prose they author — README and docs text, landing copy, PR and commit descriptions, Linear proposals, design docs, Slack and email messages. Use when drafting or rewriting any human-facing prose, when a draft reads like AI wrote it, when stripping AI slop from documentation, or when relaying research output into a human-facing surface. CLAUDE.md carries the compressed rules; this carries the reasoning, the before/after pairs, and the per-format shapes.
+name: writing-voice
+description: The user's full writing system for prose they author — README and docs text, landing copy, PR and commit descriptions, Linear proposals, design docs, Slack and email messages. Use when drafting or rewriting any human-facing prose, when a draft reads like AI wrote it, when stripping AI slop from documentation, or when relaying research output into a human-facing surface. CLAUDE.md carries the compressed rules; this carries the reasoning, the before/after pairs, and the per-format shapes.
+---
 
 # Writing voice
 

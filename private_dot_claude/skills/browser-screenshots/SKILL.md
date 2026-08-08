@@ -1,6 +1,7 @@
 ---
-
-## name: browser-screenshots description: Capture and persist browser screenshots or GIFs for visual review of a web UI. Use when verifying a UI change visually, reviewing a page's design or layout, recording a multi-step interaction (dropdown, hover, form flow), toggling dark mode for a comparison shot, or when a screenshot needs to be written to disk rather than only shown inline.
+name: browser-screenshots
+description: Capture and persist browser screenshots or GIFs for visual review of a web UI. Use when verifying a UI change visually, reviewing a page's design or layout, recording a multi-step interaction (dropdown, hover, form flow), toggling dark mode for a comparison shot, or when a screenshot needs to be written to disk rather than only shown inline.
+---
 
 # Browser screenshots
 

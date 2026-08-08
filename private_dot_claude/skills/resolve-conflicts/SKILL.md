@@ -1,6 +1,7 @@
 ---
-
-## name: resolve-conflicts description: Resolve git merge, rebase, or cherry-pick conflicts. Use when asked to resolve merge conflicts, review git conflicts, finish an in-progress merge or rebase, or when git status shows unmerged paths. Covers the ours/theirs inversion between merge and rebase, zdiff3 markers, and mergiraf.
+name: resolve-conflicts
+description: Resolve git merge, rebase, or cherry-pick conflicts. Use when asked to resolve merge conflicts, review git conflicts, finish an in-progress merge or rebase, or when git status shows unmerged paths. Covers the ours/theirs inversion between merge and rebase, zdiff3 markers, and mergiraf.
+---
 
 # Resolving conflicts
 
@@ -74,6 +75,15 @@ A resolution that compiles is not a resolution that is correct.
 Run the tests. When the conflict involved a feature the user named (a sorting rule, a
 dedup check), confirm that feature still behaves — a conflict resolution is the easiest
 place to silently revert one.
+
+## Resolve for correctness, deduplicate separately
+
+A long-lived branch usually conflicts because the other side grew its own version of
+something the branch already has.
+Resolve the conflict for correctness first and commit that, then open a second commit
+that deletes the branch's copy in favor of what has since landed upstream.
+Folding both into one commit hides which half caused a later failure, and the
+deduplication is the half more likely to be wrong.
 
 ## -X ours is not -s ours
 
