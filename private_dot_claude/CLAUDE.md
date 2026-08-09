@@ -18,6 +18,13 @@
     (or a sibling repo) and follow it instead of duplicating.
     When there is a real choice between approaches, name the alternatives and the tradeoff
     rather than silently picking one
+- When I give a direct instruction ("never X", "always Y"), apply it fully; don't hedge it
+    with an unrequested fallback or alternative path "just in case".
+    Ask first if you think an exception is warranted
+- More generally, default to no hedging (caveats, fallbacks, alternative options I didn't
+    ask for).
+    If you're unsure whether a case genuinely needs one, ask me rather than adding it
+    preemptively
 - When a fix is a hack, make it inert by default (flag off, unset in config) and write its
     removal condition next to it, naming the PR or issue that deletes it
 - On any choice touching security (secrets, auth, data exposure, privilege), favor the
