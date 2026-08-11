@@ -37,8 +37,8 @@ def run(*cmd: str, stdin: str | None = None) -> str:
     return result.stdout.strip()
 
 
-def run_json(*cmd: str, stdin: str | None = None):
-    return json.loads(run(*cmd, stdin=stdin))
+def run_json(*cmd: str):
+    return json.loads(run(*cmd))
 
 
 def pr_context(number: int | None) -> tuple[str, int, str]:
@@ -55,16 +55,19 @@ def bot_reviews(repo: str, number: int) -> list[dict]:
     return [r for r in reviews if r['user']['login'] == BOT_REST]
 
 
-def pick_review(reviews: list[dict], review_id: int | None) -> dict:
+def pick_review(reviews: list[dict], review_id: int | None) -> tuple[dict, str]:
     if review_id is not None:
         match = next((r for r in reviews if r['id'] == review_id), None)
         if match is None:
             sys.exit(f"No CodeRabbit review {review_id} on this PR")
-        return match
-    match = next((r for r in reversed(reviews) if BLOCK_RE.search(r['body'] or '')), None)
-    if match is None:
-        sys.exit('No CodeRabbit review on this PR carries a prompt block')
-    return match
+    else:
+        match = next((r for r in reversed(reviews) if BLOCK_RE.search(r['body'] or '')), None)
+        if match is None:
+            sys.exit('No CodeRabbit review on this PR carries a prompt block')
+    block = BLOCK_RE.search(match['body'] or '')
+    if block is None:
+        sys.exit(f"Review {match['id']} has no prompt block")
+    return match, block.group(1)
 
 
 def unwrap(block: str) -> list[str]:
@@ -125,23 +128,24 @@ def fetch_threads(repo: str, number: int) -> list[dict]:
         after = page['pageInfo']['endCursor']
 
 
+def review_of(thread: dict) -> int | None:
+    return (thread['comments']['nodes'][0]['pullRequestReview'] or {}).get('databaseId')
+
+
 def thread_spans(thread: dict) -> list[tuple[int, int]]:
     pairs = ((thread['startLine'], thread['line']), (thread['originalStartLine'], thread['originalLine']))
-    spans = [(start if start is not None else end, end) for start, end in pairs if end is not None]
-    return list(dict.fromkeys(spans))
+    return [(start if start is not None else end, end) for start, end in pairs if end is not None]
 
 
 def thread_summary(thread: dict) -> dict:
-    head = thread['comments']['nodes'][0]
     spans = thread_spans(thread)
     return {
-        'comment_id': head['databaseId'],
+        'comment_id': thread['comments']['nodes'][0]['databaseId'],
         'end': spans[0][1] if spans else None,
         'is_outdated': thread['isOutdated'],
         'is_resolved': thread['isResolved'],
         'path': thread['path'],
-        'review_id': (head['pullRequestReview'] or {}).get('databaseId'),
-        'spans': spans,
+        'review_id': review_of(thread),
         'start': spans[0][0] if spans else None,
         'thread_id': thread['id'],
     }
@@ -156,7 +160,7 @@ def overlap(finding: dict, thread: dict) -> int:
     if thread['path'] != finding['path']:
         return 0
     return max((min(finding['end'], end) - max(finding['start'], start) + 1
-                for start, end in thread['spans']), default=0)
+                for start, end in thread_spans(thread)), default=0)
 
 
 def best_thread(finding: dict, threads: list[dict]) -> dict | None:
@@ -169,19 +173,18 @@ def best_thread(finding: dict, threads: list[dict]) -> dict | None:
 
 
 def join_threads(findings: list[dict], threads: list[dict], review_id: int) -> tuple[list[dict], list[dict], list[dict]]:
-    owned = [thread_summary(t) for t in threads
-             if t['comments']['nodes'][0]['author']['login'] == BOT_GRAPHQL
-             and (t['comments']['nodes'][0]['pullRequestReview'] or {}).get('databaseId') == review_id]
-    available = {t['thread_id']: t for t in owned}
+    available = {t['id']: t for t in threads
+                 if t['comments']['nodes'][0]['author']['login'] == BOT_GRAPHQL
+                 and review_of(t) == review_id}
     joined, unmatched = [], []
     for finding in sorted((f for f in findings if f['section'] == 'inline'), key=lambda f: (f['path'], f['start'])):
         hit = best_thread(finding, list(available.values()))
         if hit is None:
             unmatched.append(finding)
             continue
-        del available[hit['thread_id']]
-        joined.append({**finding, **{k: v for k, v in hit.items() if k != 'spans'}})
-    return joined, unmatched, list(available.values())
+        del available[hit['id']]
+        joined.append({**finding, **thread_summary(hit)})
+    return joined, unmatched, [thread_summary(t) for t in available.values()]
 
 
 def worktree_for(branch: str) -> str | None:
@@ -194,21 +197,14 @@ def worktree_for(branch: str) -> str | None:
     return None
 
 
-def collect(repo: str, number: int, branch: str, review_id: int | None, threads: list[dict] | None = None) -> dict:
-    review = pick_review(bot_reviews(repo, number), review_id)
-    block = BLOCK_RE.search(review['body'] or '')
-    if block is None:
-        sys.exit(f"Review {review['id']} has no prompt block")
-    findings, unparsed = parse_findings(block.group(1))
-    threads = fetch_threads(repo, number) if threads is None else threads
+def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) -> dict:
+    review, block = pick_review(bot_reviews(repo, number), review_id)
+    findings, unparsed = parse_findings(block)
     joined, unmatched, unclaimed = join_threads(findings, threads, review['id'])
     return {
-        'branch': {'name': branch, 'worktree': worktree_for(branch)},
         'findings': joined,
-        'other_open_threads': [
-            thread_summary(t) for t in threads
-            if not t['isResolved'] and (t['comments']['nodes'][0]['pullRequestReview'] or {}).get('databaseId') != review['id']
-        ],
+        'other_open_threads': [thread_summary(t) for t in threads
+                               if not t['isResolved'] and review_of(t) != review['id']],
         'outside_diff': [f for f in findings if f['section'] != 'inline'],
         'pr': number,
         'repo': repo,
@@ -265,14 +261,15 @@ def thumbs_up(node_id: str) -> None:
 
 def cmd_fetch(number: int | None, review_id: int | None) -> None:
     repo, number, branch = pr_context(number)
-    print(json.dumps(collect(repo, number, branch, review_id), indent=2))
+    state = collect(repo, number, review_id, fetch_threads(repo, number))
+    print(json.dumps({'branch': {'name': branch, 'worktree': worktree_for(branch)}, **state}, indent=2))
 
 
 def cmd_apply(number: int | None, path: str | None) -> None:
     payload = json.loads(sys.stdin.read() if path is None else open(path).read())
-    repo, number, branch = pr_context(number)
+    repo, number, _ = pr_context(number)
     threads = {t['id']: t for t in fetch_threads(repo, number)}
-    state = collect(repo, number, branch, payload.get('review_id'), list(threads.values()))
+    state = collect(repo, number, payload.get('review_id'), list(threads.values()))
     actions = payload.get('actions') or []
 
     errors = validate(actions, state['findings'])
@@ -297,8 +294,7 @@ def cmd_apply(number: int | None, path: str | None) -> None:
     if failed:
         sys.exit('Left the review un-acknowledged:\n' + '\n'.join(f"  {f}" for f in failed))
     thumbs_up(state['review']['node_id'])
-    plural = '' if len(actions) == 1 else 's'
-    print(f"👍 review {state['review']['id']} — {len(actions)} finding{plural} actioned")
+    print(f"👍 review {state['review']['id']} — {len(actions)} actioned")
 
 
 def main() -> None:
