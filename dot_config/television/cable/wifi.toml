@@ -1,0 +1,18 @@
+# Source: https://github.com/alexpasmantier/television/blob/main/cable/unix/wifi.toml (modified for macOS: upstream used nmcli from Linux NetworkManager, rewritten for networksetup)
+# macOS has no built-in CLI for scanning nearby networks since the `airport`
+# utility was removed; this lists and connects to already-known networks only.
+[metadata]
+name = "wifi"
+description = "Browse and connect to known WiFi networks (macOS)"
+requirements = ["networksetup"]
+
+[source]
+command = "networksetup -listpreferredwirelessnetworks Wi-Fi | tail -n +2 | sed 's/^[[:space:]]*//'"
+
+[preview]
+command = "networksetup -getairportnetwork Wi-Fi"
+
+[actions.connect]
+description = "Connect to the selected network (prompts for password if needed)"
+command = "networksetup -setairportnetwork Wi-Fi '{}'"
+mode = "execute"

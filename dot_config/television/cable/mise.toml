@@ -1,0 +1,21 @@
+# Source: none upstream; generated from scratch for this setup
+[metadata]
+name = "mise"
+description = "A channel to select and run mise tasks in the current project"
+requirements = ["mise", "jq"]
+
+[source]
+command = "mise tasks ls --json | jq -r '.[] | \"\\(.name)\\t\\(.description)\"'"
+display = "{split:\\t:0}  {split:\\t:1}"
+output = "{split:\\t:0}"
+
+[preview]
+command = "mise tasks info '{split:\\t:0}'"
+
+[keybindings]
+enter = "actions:run"
+
+[actions.run]
+description = "Run the selected mise task"
+command = "mise run '{split:\\t:0}'"
+mode = "execute"

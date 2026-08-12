@@ -1,0 +1,31 @@
+# Source: https://github.com/alexpasmantier/television/blob/main/cable/unix/brew-packages.toml (copied unmodified)
+[metadata]
+name = "brew-packages"
+description = "List and manage Homebrew packages"
+requirements = ["brew"]
+
+[source]
+command = [
+  { name = "Formulae", run = "brew list --formula" },
+  { name = "Casks",    run = "brew list --cask" },
+]
+
+[preview]
+command = "brew info '{}'"
+
+[ui]
+layout = "portrait"
+
+[keybindings]
+ctrl-u = "actions:upgrade"
+ctrl-d = "actions:uninstall"
+
+[actions.upgrade]
+description = "Upgrade the selected package"
+command = "brew upgrade {}"
+mode = "execute"
+
+[actions.uninstall]
+description = "Uninstall the selected package"
+command = "brew uninstall {}"
+mode = "execute"

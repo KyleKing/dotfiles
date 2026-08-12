@@ -1,0 +1,24 @@
+# Source: none upstream; generated from scratch for this setup
+# Parses navi's own .cheat files directly, since navi has no non-interactive list
+# command. Assumes the common single comment line + single command line entry
+# format; multi-line entries or ones with $variables won't interpolate on execute.
+[metadata]
+name = "navi"
+description = "A channel to select from navi cheatsheet snippets"
+requirements = ["navi", "fd", "awk"]
+
+[source]
+command = '''d="$(navi info cheats-path)"; [ -d "$d" ] && fd -e cheat . "$d" --exec awk '/^%/{next} /^$/{c="";next} {if(c==""){c=$0}else{print c"\t"$0; c=""}}' {}'''
+display = "{split:\\t:0}"
+output = "{split:\\t:1}"
+
+[preview]
+command = "echo '{split:\\t:1}'"
+
+[keybindings]
+enter = "actions:execute"
+
+[actions.execute]
+description = "Execute the selected snippet as-is"
+command = "{split:\\t:1}"
+mode = "execute"

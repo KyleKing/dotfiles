@@ -1,0 +1,23 @@
+# Source: https://github.com/alexpasmantier/television/blob/main/cable/unix/unicode.toml (modified for macOS: upstream read /usr/share/unicode/ucd/UnicodeData.txt, rewritten around python3 unicodedata)
+# macOS ships no UnicodeData.txt; python3's unicodedata module covers the same
+# data without depending on a package-manager-installed file.
+[metadata]
+name = "unicode"
+description = "Search and copy unicode characters"
+requirements = ["python3"]
+
+[source]
+command = '''python3 -c "
+import unicodedata
+for cp in range(0x110000):
+    ch = chr(cp)
+    if not ch.isprintable():
+        continue
+    try:
+        name = unicodedata.name(ch)
+    except ValueError:
+        continue
+    print(f'U+{cp:04X}|{ch}|{name}')
+"'''
+display = "{split:|:0}    {split:|:1}    {split:|:2}"
+output = "{split:|:1}"

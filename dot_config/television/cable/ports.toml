@@ -1,0 +1,20 @@
+# Source: https://github.com/alexpasmantier/television/blob/main/cable/unix/ports.toml (modified for macOS: upstream used ss/fuser from Linux iproute2, rewritten for lsof)
+[metadata]
+name = "ports"
+description = "List listening ports and associated processes"
+requirements = ["lsof", "awk"]
+
+[source]
+command = "lsof -iTCP -sTCP:LISTEN -P -n | awk 'NR>1 {n=split($9,a,\":\"); print a[n], $1, $2}' | sort -u"
+display = "{split: :0} ({split: :1} pid {split: :2})"
+
+[preview]
+command = "lsof -iTCP -sTCP:LISTEN -P -n | awk -v p=':{split: :0} ' 'NR==1 || index($9, p)'"
+
+[ui.preview_panel]
+size = 40
+
+[actions.kill]
+description = "Kill the process listening on the selected port"
+command = "kill -9 {split: :2}"
+mode = "execute"
