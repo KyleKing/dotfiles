@@ -198,6 +198,8 @@ brew "television"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Markup-based typesetting system
 brew "typst"
 # RTF to other formats converter
@@ -402,8 +404,8 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "Hive", id: 6747834729
 mas "HotKey", id: 975890633
-mas "Keynote", id: 361285480
 mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
@@ -441,8 +443,6 @@ cargo "bacon"
 cargo "cargo-insta"
 cargo "cargo-nextest"
 cargo "flamegraph"
-cargo "lazyjj"
-cargo "tree-sitter-cli"
 uv "trafilatura"
 npm "corepack"
 npm "cspell"
