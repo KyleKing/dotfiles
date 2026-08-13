@@ -5,8 +5,8 @@ tap "huseyinbabal/tap", trusted: true
 tap "jhlee0409/tap"
 tap "jonas-grgt/ktea", trusted: true
 tap "keidarcy/tap", trusted: true
-tap "matthart1983/tap"
 tap "turbot/tap", trusted: true
+tap "visigrid/tap"
 # Run your GitHub Actions locally
 brew "act"
 # Improved shell history for zsh, bash, fish and nushell
@@ -77,6 +77,8 @@ brew "lazyjj"
 brew "lazymake"
 # Cross-platform TUI database management tool
 brew "lazysql"
+# Terminal Markdown previewer with a GUI-like experience
+brew "leaf-markdown-viewer"
 # Portable Foreign Function Interface library
 brew "libffi"
 # Postgres C API library
@@ -153,10 +155,14 @@ brew "shfmt"
 brew "stylua"
 # Open source continuous file synchronization application
 brew "syncthing", restart_service: :changed
+# Cross-platform system diagnostics TUI
+brew "syswatch"
 # TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
 brew "tabiew"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
+# General purpose fuzzy finder TUI
+brew "television"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
 # Terminal multiplexer
@@ -177,6 +183,8 @@ brew "vhs"
 brew "weasyprint"
 # Yet Another Dotfiles Manager
 brew "yadm"
+# Language Server for Yaml Files
+brew "yaml-language-server"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Shell extension to navigate your filesystem faster
@@ -189,8 +197,6 @@ brew "huseyinbabal/tap/taws"
 brew "jhlee0409/tap/cchv-server", trusted: true
 # e1s is a terminal application to simply browsing and manage AWS ECS resources, with a focus on Fargate. Inspired by k9s.
 brew "keidarcy/tap/e1s"
-# Single-host system diagnostics TUI — sibling to netwatch
-brew "matthart1983/tap/syswatch", trusted: true
 # Steampipe exposes APIs and services as a high-performance relational database, giving you the ability to write SQL-based queries to explore, assess and report on dynamic data.
 brew "turbot/tap/steampipe"
 # Password manager that keeps all passwords secure behind one password
@@ -265,8 +271,6 @@ cask "notion"
 cask "obs"
 # Client program for the OpenVPN Access Server
 cask "openvpn-connect"
-# Replacement for Docker Desktop
-cask "orbstack"
 # Window snapping tool
 cask "rectangle-pro"
 # Open source virtual/remote desktop application
@@ -285,6 +289,8 @@ cask "tableplus"
 cask "tailscale-app"
 # OpenVPN client with AppleScript support
 cask "viscosity"
+# Fast, native spreadsheet with GPU-accelerated rendering
+cask "visigrid/tap/visigrid", trusted: true
 # Open-source code editor
 cask "visual-studio-code"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
