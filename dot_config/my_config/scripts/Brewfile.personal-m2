@@ -8,6 +8,8 @@ tap "steipete/tap", trusted: true
 brew "act"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
+# Code searching, linting, rewriting
+brew "ast-grep"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # General-purpose data compression with high compression ratio
@@ -76,6 +78,8 @@ brew "gnupg"
 brew "go"
 # Analyzing the dependencies in compiled Golang binaries
 brew "go-size-analyzer"
+# Deliver Go binaries as fast and easily as possible
+brew "goreleaser"
 # Smarter Dockerfile linter to validate best practices
 brew "hadolint"
 # Command-line interface for Hetzner Cloud
@@ -98,6 +102,8 @@ brew "lazyjj"
 brew "lazymake"
 # Terminal Markdown previewer with a GUI-like experience
 brew "leaf-markdown-viewer"
+# LLM inference in C/C++
+brew "llama.cpp"
 # Find what models run on your hardware
 brew "llmfit"
 # Tool for linting and static analysis of Lua code
@@ -122,6 +128,8 @@ brew "neovim"
 brew "nvimpager"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
+# Create, run, and share large language models (LLMs)
+brew "ollama"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # AI coding agent, built for the terminal
@@ -404,8 +412,8 @@ mas "Encrypto", id: 935235287
 mas "GIPHY CAPTURE", id: 668208984
 mas "Hive", id: 6747834729
 mas "HotKey", id: 975890633
-mas "Keynote", id: 409183694
 mas "Keynote", id: 361285480
+mas "Keynote", id: 409183694
 mas "Kindle", id: 302584613
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726

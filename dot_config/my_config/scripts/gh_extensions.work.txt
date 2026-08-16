@@ -1,4 +1,4 @@
 gh dash	dlvhdr/gh-dash	v4.25.2
 gh poi	seachicken/gh-poi	v0.18.3
-gh repo-dashboard	kyleking/gh-repo-dashboard	v1.8.0
+gh repo-dashboard	kyleking/gh-repo-dashboard	v1.6.0
 gh sweep	kyleking/gh-sweep	v0.6.0

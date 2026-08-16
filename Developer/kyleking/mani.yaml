@@ -107,6 +107,8 @@ projects:
     url: git@github.com:KyleKing/types-for-jinja.git
   vcr-tui:
     url: git@github.com:KyleKing/vcr-tui.git
+  wavez:
+    url: git@github.com:KyleKing/wavez.git
   yak-shears:
     url: git@github.com:KyleKing/yak-shears.git
 
