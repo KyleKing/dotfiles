@@ -430,10 +430,10 @@ wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max
         if is_same_repo then
             -- Same repo as active: white accent behind process icon
             add_segment(format, off_black, off_white, " " .. process .. " ", true)
-            add_segment(format, bg_color, fg_color, content, false)
+            add_segment(format, bg_color, fg_color, content .. " ", false)
         else
             -- Different repo: process icon with dimmed background
-            add_segment(format, bg_color, fg_color, " " .. process .. " " .. content, false)
+            add_segment(format, bg_color, fg_color, " " .. process .. " " .. content .. " ", false)
         end
     end
 
