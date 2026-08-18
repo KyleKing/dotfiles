@@ -2,9 +2,13 @@
 """Read a CodeRabbit review's findings and post verdicts back to its threads.
 
 `fetch` prints the newest review that carries a roll-up prompt block, split
-into findings and joined to the thread each one came from. `apply` reads those
-verdicts on stdin, replies, resolves, and thumbs-up the review body once every
-finding has been actioned.
+into findings and joined to the thread each one came from. `apply` reads
+verdicts as TOML (on stdin, or `--file`, since a human proofreads this one
+before it posts and TOML's triple-quoted strings hold reply prose without
+JSON's escaping), replies, resolves, and thumbs-up the review body once every
+finding has been actioned. `status` lists every review, bot or human, that
+has no thumbs-up and still has an unresolved thread or a CHANGES_REQUESTED
+verdict, so a review a later push buried doesn't go silently un-actioned.
 """
 
 import argparse
@@ -12,6 +16,7 @@ import json
 import re
 import subprocess
 import sys
+import tomllib
 
 BOT_GRAPHQL = 'coderabbitai'
 BOT_REST = 'coderabbitai[bot]'
@@ -29,6 +34,15 @@ query($owner:String!,$repo:String!,$number:Int!,$after:String){
       pageInfo{ hasNextPage endCursor }
       nodes{ id isResolved isOutdated path line startLine originalLine originalStartLine
         comments(first:100){ nodes{ databaseId body author{login} pullRequestReview{databaseId} } } } } } } }
+"""
+
+REVIEWS_QUERY = """
+query($owner:String!,$repo:String!,$number:Int!,$after:String){
+  repository(owner:$owner,name:$repo){ pullRequest(number:$number){
+    reviews(first:100,after:$after){
+      pageInfo{ hasNextPage endCursor }
+      nodes{ databaseId state submittedAt url body author{login}
+        reactions(content:THUMBS_UP){ totalCount } } } } } }
 """
 
 
@@ -187,6 +201,22 @@ def join_threads(findings: list[dict], threads: list[dict], review_id: int) -> t
     return joined, unmatched, [thread_summary(t) for t in available.values()]
 
 
+def fetch_reviews(repo: str, number: int) -> list[dict]:
+    owner, name = repo.split('/')
+    nodes: list[dict] = []
+    after: str | None = None
+    while True:
+        args = ['gh', 'api', 'graphql', '-f', f"query={REVIEWS_QUERY}",
+                '-f', f"owner={owner}", '-f', f"repo={name}", '-F', f"number={number}"]
+        if after is not None:
+            args += ['-f', f"after={after}"]
+        page = run_json(*args)['data']['repository']['pullRequest']['reviews']
+        nodes += page['nodes']
+        if not page['pageInfo']['hasNextPage']:
+            return nodes
+        after = page['pageInfo']['endCursor']
+
+
 def worktree_for(branch: str) -> str | None:
     path = None
     for line in run('git', 'worktree', 'list', '--porcelain').splitlines():
@@ -265,8 +295,50 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
     print(json.dumps({'branch': {'name': branch, 'worktree': worktree_for(branch)}, **state}, indent=2))
 
 
+def cmd_status(number: int | None) -> None:
+    """List every review (bot or human) that still needs a look.
+
+    "Needs a look" means no thumbs-up reaction and either an unresolved thread
+    tied to it or a CHANGES_REQUESTED verdict, so a review a push buried
+    doesn't go un-actioned just because a newer one landed on top of it.
+
+    A review with no open thread has nowhere to reply into (general feedback
+    in the review body itself, not an inline comment), so its `body` is
+    quoted in the output instead of a thread to fetch and act on directly.
+    """
+    repo, number, _ = pr_context(number)
+    reviews = fetch_reviews(repo, number)
+    threads = fetch_threads(repo, number)
+    open_by_review: dict[int, int] = {}
+    for thread in threads:
+        if thread['isResolved']:
+            continue
+        review_id = review_of(thread)
+        if review_id is not None:
+            open_by_review[review_id] = open_by_review.get(review_id, 0) + 1
+
+    pending = []
+    for review in reviews:
+        thumbs_up = review['reactions']['totalCount'] > 0
+        open_threads = open_by_review.get(review['databaseId'], 0)
+        if thumbs_up or (open_threads == 0 and review['state'] != 'CHANGES_REQUESTED'):
+            continue
+        entry = {
+            'author': review['author']['login'] if review['author'] else None,
+            'open_threads': open_threads,
+            'review_id': review['databaseId'],
+            'state': review['state'],
+            'submitted_at': review['submittedAt'],
+            'url': review['url'],
+        }
+        if open_threads == 0 and (review['body'] or '').strip():
+            entry['body'] = '\n'.join(f"> {line}" for line in review['body'].splitlines())
+        pending.append(entry)
+    print(json.dumps(pending, indent=2))
+
+
 def cmd_apply(number: int | None, path: str | None) -> None:
-    payload = json.loads(sys.stdin.read() if path is None else open(path).read())
+    payload = tomllib.loads(sys.stdin.read() if path is None else open(path).read())
     repo, number, _ = pr_context(number)
     threads = {t['id']: t for t in fetch_threads(repo, number)}
     state = collect(repo, number, payload.get('review_id'), list(threads.values()))
@@ -309,10 +381,15 @@ def main() -> None:
     apply_parser.add_argument('--pr', type=int)
     apply_parser.add_argument('--file')
 
+    status_parser = sub.add_parser('status')
+    status_parser.add_argument('--pr', type=int)
+
     args = parser.parse_args()
     try:
         if args.command == 'fetch':
             cmd_fetch(args.pr, args.review_id)
+        elif args.command == 'status':
+            cmd_status(args.pr)
         else:
             cmd_apply(args.pr, args.file)
     except subprocess.CalledProcessError as error:
