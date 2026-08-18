@@ -12,7 +12,7 @@ fix them concurrently across separate checkouts.
 
 This skill owns the sweep, the checkout pool, and the dispatch rules.
 The per-PR work
-is delegated: `resolve-conflicts` for conflicts, `coderabbit-apply` for reviews,
+is delegated: `resolve-conflicts` for conflicts, `change-review-apply` for reviews,
 `pr-stacking` for the merge-forward cascade.
 Do not restate those here, invoke them.
 
@@ -76,7 +76,7 @@ Three classifications, each from a specific field:
     `mergeable == "UNKNOWN"` means GitHub has
     not finished computing it, re-poll rather than reporting it as clean.
 - **Unactioned CodeRabbit.** Unresolved review threads authored by `coderabbitai[bot]`,
-    from the GraphQL query in `coderabbit-apply` step 2.
+    from the GraphQL query in `change-review-apply` step 2.
     Count threads from *every*
     CodeRabbit review, not only the newest, since a review can be skipped when a later push
     lands before it is actioned.
@@ -136,7 +136,7 @@ Order matters. Each step assumes the one above it landed.
     Confirm the ordering is single-headed afterward (`alembic heads` or the project's
     equivalent) before moving on.
 
-1. **Action the review.** Run `coderabbit-apply`.
+1. **Action the review.** Run `change-review-apply`.
     Then check explicitly for an earlier
     review whose threads are still open, because that skill scopes itself to one review id
     by default.
@@ -154,7 +154,7 @@ Order matters. Each step assumes the one above it landed.
     Never touch the PR body.
 
 Invoking this skill authorizes committing and pushing on the branches in scope, which
-overrides the "do not push" line in `coderabbit-apply`.
+overrides the "do not push" line in `change-review-apply`.
 It does not authorize touching
 branches outside the approved plan.
 
