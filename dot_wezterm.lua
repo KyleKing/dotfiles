@@ -232,19 +232,14 @@ end
 
 -- Format the main content of the tab (everything except edge whitespace)
 -- Always abbreviated to the same width, so a tab doesn't resize when it becomes active/inactive.
--- The active tab gets a left-facing arrow on the right, replacing the ".." suffix if truncated.
+-- The active tab always trades its last 3 characters for a left-facing arrow, regardless of
+-- whether those characters were the ".." truncation suffix or part of the name.
 local function format_tab_content(tab, is_active)
     local dir_name = abbreviate(get_git_dir_name(tab), 12)
     local depth_indicator = get_git_depth_indicator(tab)
     if has_multiple_git_roots(tab) then depth_indicator = icon_multi_repo .. depth_indicator end
 
-    if is_active then
-        if dir_name:sub(-2) == ".." then
-            dir_name = dir_name:sub(1, -3) .. active_arrow
-        else
-            dir_name = dir_name .. active_arrow
-        end
-    end
+    if is_active then dir_name = dir_name:sub(1, math.max(0, #dir_name - 3)) .. active_arrow end
 
     return string.format("%s%s%s%s", hair, dir_name, hair, depth_indicator)
 end
@@ -404,14 +399,11 @@ wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max
     local format = {}
 
     if tab.is_active then
-        -- Active tab: colored accent bar with right-pointing triangle, off-white main section
+        -- Active tab: off-white background with the same process icon as inactive tabs;
+        -- the arrow embedded in the content is the only extra active-tab indicator
         local content = format_tab_content(tab, true)
-        local accent_bg = base_color
-        local accent_fg = select_contrasting_fg_color(accent_bg)
-        local triangle = "▶"
-
-        add_segment(format, accent_bg, accent_fg, " " .. triangle .. " ", true)
-        add_segment(format, off_white, off_black, content .. " ", true)
+        local process = get_process(tab)
+        add_segment(format, off_white, off_black, " " .. process .. " " .. content .. " ", true)
     else
         -- Inactive tab: check if same repo as active tab
         local this_git_root = get_git_root_path(tab)
