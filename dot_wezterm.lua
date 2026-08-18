@@ -399,11 +399,15 @@ wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max
     local format = {}
 
     if tab.is_active then
-        -- Active tab: off-white background with the same process icon as inactive tabs;
+        -- Active tab: colored accent bar behind the process icon, off-white main section;
         -- the arrow embedded in the content is the only extra active-tab indicator
         local content = format_tab_content(tab, true)
         local process = get_process(tab)
-        add_segment(format, off_white, off_black, " " .. process .. " " .. content .. " ", true)
+        local accent_bg = base_color
+        local accent_fg = select_contrasting_fg_color(accent_bg)
+
+        add_segment(format, accent_bg, accent_fg, " " .. process .. " ", true)
+        add_segment(format, off_white, off_black, content .. " ", true)
     else
         -- Inactive tab: check if same repo as active tab
         local this_git_root = get_git_root_path(tab)
