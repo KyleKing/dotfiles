@@ -6,12 +6,14 @@
 __pycache__
 
 # Repo-only files
-README.md
 .pre-commit-config.yaml
+README.md
 docs/machine-performance-optimizations.md
+dot_config/mise/rust-toolchain.md
 
 # Config file managed by run_once script and update-config.sh helper
 .config/chezmoi/chezmoi.toml
+
 # Helper files (not target files)
 .config/chezmoi/.update-chezmoi-toml.tmpl
 .config/chezmoi/README.md
