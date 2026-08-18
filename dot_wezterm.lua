@@ -48,6 +48,7 @@ local process_icons = {
     ["node"] = wezterm.nerdfonts.cod_json,
     ["nvim"] = wezterm.nerdfonts.linux_neovim,
     ["npm"] = wezterm.nerdfonts.md_npm,
+    ["op"] = wezterm.nerdfonts.md_lock,
     ["opentofu"] = wezterm.nerdfonts.md_dump_truck,
     ["psql"] = wezterm.nerdfonts.md_database,
     ["pulumi"] = wezterm.nerdfonts.md_dump_truck,
