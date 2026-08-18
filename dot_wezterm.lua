@@ -241,7 +241,9 @@ local function format_tab_content(tab, is_active)
 
     if is_active then dir_name = dir_name:sub(1, math.max(0, #dir_name - 3)) .. active_arrow end
 
-    return string.format("%s%s%s%s", hair, dir_name, hair, depth_indicator)
+    -- The hair space is too thin next to the not-git-root glyph, which reads as smooshed
+    local depth_sep = depth_indicator:find(icon_not_git, 1, true) and " " or hair
+    return string.format("%s%s%s%s", hair, dir_name, depth_sep, depth_indicator)
 end
 
 -- Helper to add a segment to the format table
