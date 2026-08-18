@@ -1,6 +1,20 @@
 {
   "agentPushNotifEnabled": true,
   "alwaysThinkingEnabled": true,
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(uv sync:*)",
+      "Bash(uv lock:*)",
+      "Bash(sentry-cli releases list:*)",
+      "Bash(aws sts get-caller-identity)"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Bash(aws secretsmanager put-secret-value:*)",
+      "Bash(aws lambda delete-function:*)"
+    ]
+  },
   "autoUpdatesChannel": "latest",
   "editorMode": "vim",
   "effortLevel": "medium",
@@ -28,7 +42,7 @@
   },
   "fileCheckpointingEnabled": false,
   "inputNeededNotifEnabled": true,
-  "model": "opus",
+  "model": "sonnet",
   "permissions": {
     "allow": [
       "Bash(find:*)",

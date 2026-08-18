@@ -175,6 +175,8 @@ brew "ttyd"
 brew "tuios"
 # Extremely fast Python type checker, written in Rust
 brew "ty"
+# Language Server Protocol implementation for TypeScript wrapping tsserver
+brew "typescript-language-server"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Your CLI home video recorder
