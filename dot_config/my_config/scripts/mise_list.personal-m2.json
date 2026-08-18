@@ -49,6 +49,11 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "0.1.15"
   },
+  "go:golang.org/x/tools/gopls": {
+    "requested_version": "latest",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "0.23.0"
+  },
   "hk": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
