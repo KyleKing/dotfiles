@@ -35,6 +35,8 @@ back-c-ch() {
         back-scripts-ch || return 1
         # Sync with files already tracked by chezmoi
         chezmoi re-add
+        # Fold literal personal values that re-add just baked in back into templates
+        "$HOME/.config/my_config/detemplate.py"
     else
         RED='\033[0;31m'
         NC='\033[0m'
