@@ -13,7 +13,16 @@
           "type": "path"
         },
         {
+          "foreground": "p:green",
+          "foreground_templates": [
+            "{{ if .Working.Changed }}p:yellow{{ end }}"
+          ],
+          "properties": {
+            "fetch_ahead_counter": true,
+            "fetch_status": true
+          },
           "style": "plain",
+          "template": "\uf1fa{{ if .ClosestBookmarks }}{{ .ClosestBookmarks }}{{ else }}{{ .ChangeID }}{{ end }}{{ if .Working.Changed }} \uf044{{ .Working.String }}{{ end }}",
           "type": "jujutsu"
         },
         {
@@ -37,7 +46,7 @@
             "github_icon": "\ue5fd"
           },
           "style": "plain",
-          "template": "{{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{ .BranchStatus }}{{ if or .Staging.Changed .Working.Changed }} \uf044{{ .Staging.String }}{{ .Working.String }}{{ end }}",
+          "template": "{{ if not (.Segments.Contains \"Jujutsu\") }}{{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{ .BranchStatus }}{{ if or .Staging.Changed .Working.Changed }} \uf044{{ .Staging.String }}{{ .Working.String }}{{ end }}{{ end }}",
           "type": "git"
         },
         {
