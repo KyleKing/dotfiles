@@ -146,6 +146,10 @@
 - Language conventions load automatically from `~/.claude/rules/` when you touch a
     matching file (Python, CSS, TypeScript, HTML and templates).
     Trust them over your defaults
+- Subagents (Agent, Workflow, Task tools) should almost always run on Sonnet.
+    Only pick Opus when the subagent's work genuinely needs the extra reasoning depth
+    (hard architectural tradeoffs, ambiguous multi-file debugging), and almost never pick
+    Fable
 
 ## Posting to Linear, Slack, and GitHub
 
