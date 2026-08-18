@@ -42,6 +42,36 @@ Write for a peer. Give the observation and the ask; cut the mechanism, the
 why-it-matters, and the consequence a reviewer would already infer.
 Spell out the rationale only when the user says the recipient is junior.
 
+Link, do not retell.
+When a finding rests on a source (a ticket, a thread, a prior PR), link the narrowest
+anchor the tool gives you and title it with what the reader will find there, then state
+the conclusion in one sentence.
+A paragraph reconstructing who said what is the shape to cut: the link carries it, and
+the author will open it anyway to check you.
+
+Audit the whole item, not the claim that prompted you.
+Once a cell, hunk, or row is open, check every assertion in it.
+Correcting a grade while a false status claim sits in the next sentence is half a
+review, and the half you left is the one the author now believes you cleared.
+
+Ask whether the item belongs before correcting its fields.
+A row that should not exist, a test that should not be written, an option nobody will
+set: naming that is worth more than fixing the contents, and it is the question a
+field-level comment quietly skips.
+
+Say what should happen, not what breaks downstream.
+"So the right classification is user error" beats tracing the knock-on effect through
+the summary table; the author can trace it and would rather have the fix.
+
+Argue from why a rule exists, not by quoting the rule back.
+An author who wrote the doc does not need its wording recited; they need the reason it
+draws the line where it does.
+
+Your own confusion is a reportable finding.
+"I'm not sure what this phrase means without reading where it's defined" is evidence
+about the writing, and it is more useful than an objective-sounding claim that the text
+is unclear.
+
 Name the symbol (function, variable, constant), never `file:line`.
 The name locates it and line numbers drift.
 `file:line` belongs in the inline anchor, not in the human-facing text.

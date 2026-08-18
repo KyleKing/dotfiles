@@ -61,6 +61,15 @@ Do not rewrite a doc he already wrote to remove them.
     Good: "Might be worth adding it to the compose-file list, since that's the other place
     someone would look for it."
     Name the other item or audience instead of gesturing at it.
+- Evidence recitation: quoting timestamps, counts, and source text into a comment as
+    though building a case the reader will contest.
+    The reader can open the row. Name the thing and the doubt, keep the one number that
+    prompted it, and cut the rest.
+- Inferred-consequence clauses: closing on what the reader will feel or do about the
+    finding ("anyone working the ledger will stop here", "this is the kind of row someone
+    will re-check").
+    The reader got there before you wrote it.
+    End on the ask.
 - Open questions with no proposed answer: ending on a bare "should we do X?"
     or "is this the right call?" leaves the reader to invent the alternative and reads as
     reflexive hedging rather than a real ask.
@@ -113,6 +122,53 @@ Prompts to run against existing text. Each keeps facts, numbers, and names uncha
 > Report in plain sentences: what changed, what failed, what comes next.
 > No emoji checkmarks, no "Successfully", no "Perfect", no wall of bullets.
 > Start with the few lines that change the next action; add detail only when it does.
+
+### Review comments
+
+The shortest format, and the one that drifts back to an assistant register fastest.
+Open with the problem in plain words, not with a finding.
+Propose the fix as "maybe we could" or a question carrying a lean.
+Vary the shape across a batch so a review does not read as a template.
+
+Length is not the rule, and cutting to a sentence budget is the wrong instinct.
+Cut what the author can see for themselves; keep what they cannot.
+A comment that carries a ticket's current status, a duplicate someone else filed, or a
+merge date the author has not checked earns every line it takes.
+A comment retelling the thread the author wrote does not.
+
+Two register habits worth copying.
+Conversational check tags ("right?", "either", "I think") invite correction inside the
+sentence instead of hedging in front of it.
+A doubt that survives goes in a trailing parenthetical ("(unless there is more to
+address here?)")
+rather than qualifying the claim before it lands.
+
+> Rewrite this review comment. Open with the problem, not the finding.
+> Replace any retelling of a source with a link to the exact place in it.
+> Cut any clause about what the reader will conclude or do.
+> Offer the fix as a maybe, and say what should happen instead of what breaks downstream.
+
+Before, from a review of a status table:
+
+> This row sits exactly on the qualifier. The alarm went off at 10:11 and cleared at
+> 10:26, which is the 15 minutes the policy grades on, and the scope column says every
+> user saw failures.
+> Graded low with no owner named. If the alarm window is the evidence,
+> it reads like the higher grade right at the boundary; if the window overstates the real
+> loss, maybe say so in the cell, because anyone working the summary will stop here.
+
+After:
+
+> I'm not sure this should be the higher grade either, because it cleared almost exactly
+> within the window, right?
+> The linked fix also merged three weeks earlier, so the line about a fix not landing
+> looks wrong (unless there is more to address here?).
+
+What the first one broke: a spatial metaphor for a plain fact ("sits exactly on the
+qualifier", "reads like"), a semicolon joining independent clauses, three sentences
+retelling evidence the reader can open, and a closing clause about what the reader will
+do.
+What it missed: the second, checkable error sitting in the same cell.
 
 ## Why the word-by-word ban fails
 
