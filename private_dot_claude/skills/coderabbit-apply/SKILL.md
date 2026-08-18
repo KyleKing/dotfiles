@@ -10,7 +10,8 @@ CodeRabbit posts one review per push, and its body carries a collapsed
 place.
 `~/.config/my_config/ai-cr-review.py` (call it by absolute path) reads that block, joins
 each finding to the thread it came from, and posts the verdicts back.
-Your job is steps 2 through 4: decide what is real, fix it, and write the replies.
+Your job is steps 2 through 6: decide what is real, escalate what's out of scope, fix
+what's in scope, commit, and write the replies.
 
 ## Step 1 — Fetch the work list
 
@@ -23,21 +24,36 @@ that produced no findings is skipped without you walking reviews by hand.
 Pass `--review-id` to action an older one, which is the case when a push landed before
 anyone actioned the previous review.
 
+Before acting on that review, check whether an older one is still open:
+
+```sh
+~/.config/my_config/ai-cr-review.py status     # add --pr N for another PR
+```
+
+This lists every review, bot or human, that has no thumbs-up and still carries an
+unresolved thread or a CHANGES_REQUESTED verdict.
+A non-empty result means a review got
+buried under a later push; action the oldest un-acked one first (`--review-id`), then
+come back to the newest.
+An entry with `open_threads: 0` has no thread to reply into
+(general feedback in the review body, not an inline comment) — its text comes back
+quoted in `body`; read it and note it in the report, there is nothing to resolve.
+
 Read these keys before starting:
 
 - `findings` — the work list, each with `thread_id`, `comment_id`, `path`, `start`/`end`,
     and CodeRabbit's `prompt`
 - `outside_diff` — findings CodeRabbit raised outside the diff.
-    Real work, but there is no
-    thread to reply to or resolve, so they belong in the report instead
+    Real work with no thread to reply to or resolve; goes through Step 3's escalation
 - `unmatched_findings` and `unclaimed_threads` — a block item with no thread, or a thread
     no item claimed.
-    Both mean the join is incomplete: read the thread on GitHub and say so
-    in the report rather than acting on a guess
+    Read the thread on GitHub before deciding: if it's just the anchor drifting after an
+    unrelated edit (see Step 3), it needs nothing; otherwise it goes through Step 3's
+    escalation like any other real, out-of-scope finding
 - `unparsed_prompt_lines` — CodeRabbit changed the block format.
     Stop and report it
-- `other_open_threads` — open threads from earlier reviews, out of scope unless the user
-    says otherwise
+- `other_open_threads` — open threads from earlier reviews.
+    Out of scope for this pass, but a real one still goes through Step 3
 
 **The PR branch is usually not the checked-out `HEAD`.** `branch.worktree` is where it
 lives, or `null` when no worktree has it.
@@ -73,7 +89,25 @@ Those are often busywork. Where a finding names a security or data-loss risk, tr
 as
 real until you have disproved it.
 
-## Step 3 — Fix the class, not the line
+## Step 3 — Escalate what's out of scope, don't just note it
+
+`outside_diff`, `unmatched_findings`, `unclaimed_threads`, `other_open_threads`, and any
+Step 2 finding that names a real defect in a file this PR doesn't touch all share the
+same failure mode: dropped into a report, they don't get revisited.
+Once Step 2's verdicts are in, collect every one of those that is still real and ask the
+user once, with the whole list, whether each becomes a Linear ticket or lands on a
+branch (a follow-up commit here, a branch stacked on this one, a branch off main).
+That choice is the user's engineering-scope call, not this skill's.
+Check for an existing ticket or thread on the same defect first and link that instead of
+proposing a duplicate.
+
+Don't escalate line drift. A finding lands in `unmatched_findings` or
+`unclaimed_threads` most often because its anchor moved after an unrelated edit in the
+same push, not because it's new: expect this to happen frequently, and treat a thread
+marked outdated (`is_outdated: true`) as resolved by the edit that moved it rather than
+something to escalate or reply to.
+
+## Step 4 — Fix the class, not the line
 
 CodeRabbit cites the instances it happened to look at.
 Fix every instance of the same defect inside the PR's diff, then say what you widened
@@ -88,11 +122,11 @@ why:
 - a test fake that does not mirror the real guard, and the other fakes in that test module
     that drift the same way
 
-Stay inside the PR's scope. A defect in a file this PR does not touch is a follow-up
-note,
-not an edit.
+Stay inside the PR's scope for this edit.
+A defect in a file this PR does not touch went
+through Step 3, not a same-PR fix.
 
-## Step 4 — Commit and validate
+## Step 5 — Commit and validate
 
 Commit incrementally, one logical fix per commit, Conventional Commits with a
 capitalized
@@ -106,30 +140,26 @@ format/typecheck/test ladder once over the combined diff (in the platform repo, 
 `pre-pr-qa` skill picks the right gates).
 Report failures verbatim; never call a finding fixed on the strength of the edit alone.
 
-## Step 5 — Post the verdicts
+## Step 6 — Post the verdicts
 
-Write one action per finding into `pr-<number>-cr-actions.json` in the worktree, show it
+Write one action per finding into `pr-<number>-cr-actions.toml` in the worktree, show it
 to the user, and apply it once they approve:
 
-```json
-{
-  "review_id": 4910562275,
-  "actions": [
-    {
-      "thread_id": "PRRT_...",
-      "verdict": "fixed"
-    },
-    {
-      "thread_id": "PRRT_...",
-      "verdict": "wrong",
-      "reply": "The guard above already rejects None, so this path cannot raise."
-    }
-  ]
-}
+```toml
+review_id = 4910562275
+
+[[actions]]
+thread_id = "PRRT_..."
+verdict = "fixed"
+
+[[actions]]
+thread_id = "PRRT_..."
+verdict = "wrong"
+reply = "The guard above already rejects None, so this path cannot raise."
 ```
 
 ```sh
-~/.config/my_config/ai-cr-review.py apply --file pr-13942-cr-actions.json
+~/.config/my_config/ai-cr-review.py apply --file pr-13942-cr-actions.toml
 ```
 
 Every finding ends replied-to as needed, resolved, and the review body thumbs-upped once
@@ -137,8 +167,13 @@ the whole set lands.
 The script refuses the batch outright, before posting anything, when a `thread_id` does
 not belong to that review, a finding has no verdict, or a skipped finding carries no
 reply.
-A reply is optional for `fixed` (the diff shows the fix) and required for the three skip
-verdicts, so a rejected finding always leaves a public reason.
+A reply is optional for `fixed` and required for the three skip verdicts, so a rejected
+finding always leaves a public reason.
+Default to skipping the `fixed` reply: the diff already shows the fix, so restating that
+is noise CodeRabbit doesn't need.
+Add one only when the fix isn't visible in the file CodeRabbit flagged, e.g. it landed
+in
+a shared helper instead.
 Replies are written in the user's voice under the `change-review` skill's rules: hedged,
 one sentence naming the change, no re-explaining the bug.
 
@@ -151,6 +186,6 @@ failed.
 ## Report
 
 Lead with the review id and a one-line-per-finding verdict table, then the broader fixes
-you added beyond the block, then `outside_diff` items and anything the join could not
-match, then the gate results.
+you added beyond the block, then what Step 3 escalated and where it landed (ticket link
+or branch), then the gate results.
 Keep it to the lines that change the user's next action.
