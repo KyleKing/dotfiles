@@ -1,5 +1,5 @@
 ---
-name: coderabbit-apply
+name: change-review-apply
 description: Pull the latest CodeRabbit review's "Prompt for all review comments with AI agents" block off a PR and action it — adversarially verifying each finding, fixing the whole class of problem rather than the cited lines, committing incrementally, and replying, resolving, and thumbs-upping the review. Use when asked to apply, address, or action CodeRabbit comments.
 ---
 
