@@ -203,6 +203,32 @@ local function abbreviate(str, max_len)
 end
 
 local active_arrow = "◀"
+local icon_multi_repo = wezterm.nerdfonts.md_source_repository_multiple
+
+-- Whether the tab's panes span more than one git repo (or non-repo directory).
+-- The `panes` argument to format-tab-title always reflects the active tab (wezterm#5499),
+-- so look up this tab's own panes via the mux instead.
+local function has_multiple_git_roots(tab)
+    local mux_tab = wezterm.mux.get_tab(tab.tab_id)
+    if not mux_tab then return false end
+
+    local roots = {}
+    local root_count = 0
+    for _, pane in ipairs(mux_tab:panes()) do
+        local cwd_url = pane:get_current_working_dir()
+        if cwd_url then
+            local cwd = cwd_url.file_path or ""
+            local git_root, is_git_repo = get_cached_git_root(cwd)
+            local key = is_git_repo and git_root or cwd
+            if not roots[key] then
+                roots[key] = true
+                root_count = root_count + 1
+                if root_count > 1 then return true end
+            end
+        end
+    end
+    return false
+end
 
 -- Format the main content of the tab (everything except edge whitespace)
 -- Always abbreviated to the same width, so a tab doesn't resize when it becomes active/inactive.
@@ -210,6 +236,7 @@ local active_arrow = "◀"
 local function format_tab_content(tab, is_active)
     local dir_name = abbreviate(get_git_dir_name(tab), 12)
     local depth_indicator = get_git_depth_indicator(tab)
+    if has_multiple_git_roots(tab) then depth_indicator = icon_multi_repo .. depth_indicator end
 
     if is_active then
         if dir_name:sub(-2) == ".." then
