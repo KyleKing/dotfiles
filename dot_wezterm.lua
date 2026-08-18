@@ -237,7 +237,7 @@ end
 local function format_tab_content(tab, is_active)
     local dir_name = abbreviate(get_git_dir_name(tab), 12)
     local depth_indicator = get_git_depth_indicator(tab)
-    if has_multiple_git_roots(tab) then depth_indicator = icon_multi_repo .. depth_indicator end
+    if has_multiple_git_roots(tab) then depth_indicator = icon_multi_repo .. " " .. depth_indicator end
 
     if is_active then dir_name = dir_name:sub(1, math.max(0, #dir_name - 3)) .. active_arrow end
 
