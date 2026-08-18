@@ -13,7 +13,7 @@
           "type": "path"
         },
         {
-          "foreground": "p:green",
+          "foreground": "p:blue",
           "foreground_templates": [
             "{{ if .Working.Changed }}p:yellow{{ end }}"
           ],
@@ -26,7 +26,11 @@
           "type": "jujutsu"
         },
         {
-          "foreground": "p:blue",
+          "foreground": "p:green",
+          "foreground_templates": [
+            "{{ if .Segments.Contains \"Jujutsu\" }}{{ if .Segments.Jujutsu.Working.Changed }}p:yellow{{ else }}p:blue{{ end }}{{ end }}",
+            "{{ if .Segments.Contains \"Git\" }}{{ if or .Segments.Git.Staging.Changed .Segments.Git.Working.Changed }}p:yellow{{ else }}{{ if and (gt .Segments.Git.Ahead 0) (gt .Segments.Git.Behind 0) }}p:red{{ else }}{{ if gt .Segments.Git.Ahead 0 }}p:orange{{ else }}{{ if gt .Segments.Git.Behind 0 }}p:grey{{ end }}{{ end }}{{ end }}{{ end }}{{ end }}"
+          ],
           "style": "plain",
           "template": "{{ if .Env.GH_PR_NUMBER }}#{{ .Env.GH_PR_NUMBER }} {{ end }}",
           "type": "text"

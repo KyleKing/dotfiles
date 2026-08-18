@@ -35,6 +35,12 @@ _gh_pr_precmd() {
   GH_PR_NUMBER="$(cat "$cache_file" 2>/dev/null)"
   export GH_PR_NUMBER
 
+  # A lock outliving its fetch (killed shell, disowned job reaped, sleep) would
+  # block refreshes forever, so treat it as orphaned past this age.
+  if [[ -f "$lock_file" ]] && [[ -n "$(find "$lock_file" -mmin +1 2>/dev/null)" ]]; then
+    rm -f "$lock_file"
+  fi
+
   local stale=0
   if [[ ! -f "$cache_file" ]] || [[ -n "$(find "$cache_file" -mmin +5 2>/dev/null)" ]]; then
     stale=1
