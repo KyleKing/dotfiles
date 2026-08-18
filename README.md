@@ -7,6 +7,13 @@
 Custom tab color/title. Discussion here:
 <https://github.com/wez/wezterm/discussions/4945>
 
+### Machine performance
+
+Docker Desktop VM sizing and Firefox memory prefs, plus the
+`machine-perf-*` scripts under `dot_local/bin` that check/apply/snapshot them.
+See
+[docs/machine-performance-optimizations.md](docs/machine-performance-optimizations.md).
+
 ## Installation Instructions
 
 ### 1. Bootstrap (minimal tools)
