@@ -41,6 +41,7 @@ local process_icons = {
     ["kubectl"] = wezterm.nerdfonts.md_kubernetes,
     ["lazydocker"] = wezterm.nerdfonts.md_docker,
     ["lazygit"] = wezterm.nerdfonts.dev_git_branch,
+    ["lazyjj"] = wezterm.nerdfonts.md_bird,
     ["lua"] = wezterm.nerdfonts.seti_lua,
     ["make"] = wezterm.nerdfonts.seti_makefile,
     ["mise"] = wezterm.nerdfonts.md_carrot,
@@ -74,7 +75,6 @@ local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
 -- Unicode spacing characters for refined typography
 local nbsp = "\u{00A0}" -- Non-breaking space
 local hair = "\u{200A}" -- Hair space (thinnest)
-local en = "\u{2002}" -- En space (medium width)
 
 -- Git lookup cache to avoid repeated expensive io.popen calls
 local git_cache = {}
@@ -202,30 +202,51 @@ local function abbreviate(str, max_len)
     return str:sub(1, max_len - 2) .. ".."
 end
 
+local active_arrow = "◀"
+local icon_multi_repo = wezterm.nerdfonts.md_source_repository_multiple
+
+-- Whether the tab's panes span more than one git repo (or non-repo directory).
+-- The `panes` argument to format-tab-title always reflects the active tab (wezterm#5499),
+-- so look up this tab's own panes via the mux instead.
+local function has_multiple_git_roots(tab)
+    local mux_tab = wezterm.mux.get_tab(tab.tab_id)
+    if not mux_tab then return false end
+
+    local roots = {}
+    local root_count = 0
+    for _, pane in ipairs(mux_tab:panes()) do
+        local cwd_url = pane:get_current_working_dir()
+        if cwd_url then
+            local cwd = cwd_url.file_path or ""
+            local git_root, is_git_repo = get_cached_git_root(cwd)
+            local key = is_git_repo and git_root or cwd
+            if not roots[key] then
+                roots[key] = true
+                root_count = root_count + 1
+                if root_count > 1 then return true end
+            end
+        end
+    end
+    return false
+end
+
 -- Format the main content of the tab (everything except edge whitespace)
--- compact: use tighter spacing and abbreviated names for inactive tabs
-local function format_tab_content(tab, compact)
-    local dir_name = get_git_dir_name(tab)
+-- Always abbreviated to the same width, so a tab doesn't resize when it becomes active/inactive.
+-- The active tab gets a left-facing arrow on the right, replacing the ".." suffix if truncated.
+local function format_tab_content(tab, is_active)
+    local dir_name = abbreviate(get_git_dir_name(tab), 12)
     local depth_indicator = get_git_depth_indicator(tab)
+    if has_multiple_git_roots(tab) then depth_indicator = icon_multi_repo .. depth_indicator end
 
-    if compact then
-        -- Compact mode for inactive tabs: abbreviate and use minimal spacing
-        dir_name = abbreviate(dir_name, 12)
-        return string.format("%s%s%s%s", hair, dir_name, hair, depth_indicator)
+    if is_active then
+        if dir_name:sub(-2) == ".." then
+            dir_name = dir_name:sub(1, -3) .. active_arrow
+        else
+            dir_name = dir_name .. active_arrow
+        end
     end
 
-    -- Active tab: full width with centered padding
-    local min_width = 10
-    local dir_len = #dir_name
-    if dir_len < min_width then
-        local padding = min_width - dir_len
-        local left_pad = math.floor(padding / 2)
-        local right_pad = padding - left_pad
-        dir_name = string.rep(" ", left_pad) .. dir_name .. string.rep(" ", right_pad)
-    end
-
-    -- Use refined spacing: hair space near icons, en space for content separation
-    return string.format("%s%s%s%s", hair, en, dir_name, en)
+    return string.format("%s%s%s%s", hair, dir_name, hair, depth_indicator)
 end
 
 -- Helper to add a segment to the format table
@@ -383,14 +404,9 @@ wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max
     local format = {}
 
     if tab.is_active then
-        -- Active tab: colored accent bar with right-pointing triangle, off-white main section
-        local content = format_tab_content(tab, false)
-        local accent_bg = base_color
-        local accent_fg = select_contrasting_fg_color(accent_bg)
-        local triangle = "▶"
-
-        add_segment(format, accent_bg, accent_fg, " " .. triangle .. " ", true)
-        add_segment(format, off_white, off_black, content .. " ", true)
+        -- Active tab: off-white background; the trailing arrow in the content marks it active
+        local content = format_tab_content(tab, true)
+        add_segment(format, off_white, off_black, " " .. content .. " ", true)
     else
         -- Inactive tab: check if same repo as active tab
         local this_git_root = get_git_root_path(tab)
@@ -403,7 +419,7 @@ wezterm.on("format-tab-title", function(tab, tabs, _panes, _config, _hover, _max
         end
 
         local is_same_repo = active_git_root and this_git_root == active_git_root
-        local content = format_tab_content(tab, true) -- compact mode
+        local content = format_tab_content(tab, false)
         local bg_color = dim_color(base_color, 0.8)
         local fg_color = select_contrasting_fg_color(bg_color)
         local process = get_process(tab)

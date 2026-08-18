@@ -47,10 +47,6 @@ node_modules/*
 # For mise
 mise.local.toml
 
-# For now
-.claude/skills
-.cursor/*/*.md
-
 # nvim
 .null-ls*
 
@@ -59,9 +55,6 @@ mise.local.toml
 .npmrc
 podman-build-secret*
 
-# Optional local overrides (PLANNED: revisit if this is still useful to set?)
-**/.claude/settings.local.json
-
 # For https://impeccable.style AI Design SKILL
 .impeccable/questions
 
@@ -69,4 +62,8 @@ podman-build-secret*
 .freshen.md
 
 # https://code.claude.com/docs/en/memory#choose-where-to-put-claude-md-files
+# **/.claude/settings.local.json
 CLAUDE.local.md
+
+# local notes
+doing.txt
