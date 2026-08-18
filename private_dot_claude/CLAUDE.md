@@ -174,11 +174,22 @@ demo or test script that proved it and what the script printed, the scenario tes
 did for performance or security, what the issue tracker or the user actually asked for,
 what a production dashboard says now, and the alternatives you rejected with the reason.
 Distill what the problem is, how well the solution fits it, and what proof exists.
-Never restate what the code changes.
+Never restate what the code changes: the comment gets PATCHed in place on every push,
+so it must stay evergreen, describing the PR's current state rather than a log of
+edits.
+A later push that fixes something the summary already claimed works means rewriting the
+claim, not appending a correction.
 
 Open with a summary paragraph, then use headers and bold topic lines so it can be
 scanned.
-Steps a human must perform go in `- [ ]` checkboxes.
+Steps a human must perform go in `- [ ]` checkboxes, and each one must need actual
+judgment: a security or permissions change to confirm, a step only verifiable on
+another machine or account, a tradeoff to sign off on.
+Never add a checkbox for something CI or the merge button already gates ("mark ready
+once checks pass").
+Draft/ready status is the user's call once the PR exists: don't flip it, and don't
+assume "ready" from the diff looking finished, since the user may have already set it
+deliberately.
 One or two `<details>` sections carry long scripts and the evidence another agent or a
 manual audit would need, so the visible text stays enough for most readers.
 Say what is not verified.

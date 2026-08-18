@@ -4,6 +4,18 @@
 A description I wrote myself is never touched; an empty one gets replaced,
 once, with a pointer to a comment that starts with "AI Summary:" and is
 PATCHed in place on every later update.
+
+The comment body passed to `comment()` must describe the PR's current state,
+not its edit history: the diff and commit log already carry what changed, so
+restating that is dead weight the next PATCH won't clean up. A checklist item
+belongs there only if it needs a human judgment call the CI gate does not
+already make (a security-relevant permission change, a step that can only be
+verified on another machine) -- never a step already covered by CI or the
+merge button.
+
+`create()` only sets draft/ready at creation. Nothing here flips that status
+later: once a PR exists, draft/ready is the user's call, and no subcommand
+should be added that changes it after the fact.
 """
 
 import argparse
