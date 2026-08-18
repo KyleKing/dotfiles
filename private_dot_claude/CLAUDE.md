@@ -136,9 +136,20 @@
 - The scratchpad directory is only for true intermediates that have no value after the
     task (e.g. a JSON blob being piped between steps)
 - When writing markdown, always link identifiers that have a knowable URL (PR IDs, issue
-    IDs, ticket numbers) instead of leaving them as bare text, e.g.
-    `[#123](https://github.com/org/repo/pull/123)` or
-    `[ENG-456](https://linear.app/team/issue/ENG-456)`
+    IDs, ticket numbers, support-desk ticket numbers) instead of leaving them as bare
+    text, e.g. `[#123](https://github.com/org/repo/pull/123)` or
+    `[ENG-456](https://linear.app/team/issue/ENG-456)`.
+    This covers prose I am drafting for a shared surface (review comments, PR bodies,
+    issue-tracker posts), not just committed docs
+- Link to the narrowest anchor the tool offers, and title the link with what the reader
+    will find there: the one message in the thread rather than the thread, the comment
+    rather than the ticket, the line rather than the file.
+    Most trackers expose a per-message or per-comment permalink through their UI's share
+    or copy-link action; use it.
+    A precise link replaces a paragraph retelling what the source says
+- A channel or room name (`#on-call`) stays bare.
+    It already tells the reader where to
+    go, and a permalink to one message inside it does not
 
 ## Tools
 
@@ -175,8 +186,8 @@ Say what is not verified.
 Abbreviate file paths to their last two segments, first-lettering everything above them
 (`common/common/utils/x.py` → `c/c/utils/x.py`), and link to the blob at the reviewed
 SHA with a `#L` fragment.
-`watch-doggo`'s `docs/jobs/review/comment-format.md` is the worked reference for this
-whole shape, including the tiering and what stays collapsed.
+`reviewbot`'s `docs/review/comment-format.md` is the worked reference for this whole
+shape, including the tiering and what stays collapsed.
 
 **Speaking as me.** I asked for it, I read it, I approved it.
 Write it in my voice under the Tone and Voice rules below: concise, no AI slop, no

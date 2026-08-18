@@ -126,7 +126,7 @@ Order matters. Each step assumes the one above it landed.
 1. **Reseat sequenced artifacts.** Anything ordered by a key rather than by content
     (database migrations, changelog fragments, numbered fixtures) is stale once the base
     moves.
-    Use the project's own skill if it has one (`/alembic-rebase` in IRM), then
+    Use the project's own skill if it has one (`/alembic-rebase` in the platform repo), then
     restamp both the filename and the in-file header to UTC now:
 
     ```sh

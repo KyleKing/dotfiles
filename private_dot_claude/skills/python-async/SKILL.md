@@ -6,10 +6,11 @@ description: Async Python conventions and footguns — asyncio.TaskGroup over ga
 # Python async
 
 Every rule here has a failure it was written for.
-Where a number appears it was measured, in the tail-cw repo
-(`docs/docs/adr/0011-async-aws-io-and-blocking-work.md` there) or in the irm incident it
-cites.
-Those paths resolve only inside tail-cw.
+Where a number appears it was measured, in the beacon repo
+(`docs/docs/adr/0011-async-aws-io-and-blocking-work.md` there) or in the platform
+incident
+it cites.
+Those paths resolve only inside beacon.
 
 ## Concurrency
 
@@ -38,7 +39,7 @@ Build them inside the running loop.
 
 The failure is not subtle in production: a process hosting more than one loop raises
 `RuntimeError: ... is bound to a different event loop`, and the handler then fails
-continuously until the process restarts (irm DEV-7836).
+continuously until the process restarts (platform DEV-1234).
 
 A per-key map of locks (one lock per entity id) has the same trap — the cached
 `asyncio.Lock()` objects are loop-bound.
@@ -115,7 +116,7 @@ The review-time tell is a blocking call inline in an `async def`.
 It looks fine in a single-request test and only shows up as latency under load.
 
 These invariants are greppable, so guard them in tests rather than in review (pattern:
-`tests/test_async_invariants.py` in the tail-cw repo, referenced from its `AGENTS.md`):
+`tests/test_async_invariants.py` in the beacon repo, referenced from its `AGENTS.md`):
 no thread workers, no `asyncio.gather`, no module-level primitives, no borrowing the
 default executor.
 

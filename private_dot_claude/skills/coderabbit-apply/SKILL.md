@@ -102,8 +102,8 @@ The exception is a `pr-fleet` run, which authorizes pushing the branches in its 
 plan.
 
 Run the narrowest test for what you touched as you go, then the repo's full
-format/typecheck/test ladder once over the combined diff (in IRM, the `pre-pr-qa` skill
-picks the right gates).
+format/typecheck/test ladder once over the combined diff (in the platform repo, the
+`pre-pr-qa` skill picks the right gates).
 Report failures verbatim; never call a finding fixed on the strength of the edit alone.
 
 ## Step 5 — Post the verdicts

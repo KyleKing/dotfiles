@@ -24,7 +24,8 @@ verbatim in a fenced code block or a clearly attributed section, unedited.
 Do not reformat it to match the bullet, paragraph, or dash rules below — those apply to
 their words, not to a quoted block.
 
-Reference pattern: https://github.com/coverbasedev/irm/pull/13294#discussion_r3619540311
+Reference pattern:
+https://github.com/exampleco/platform/pull/1234#discussion_r0000000000
 
 ## The six rules
 
