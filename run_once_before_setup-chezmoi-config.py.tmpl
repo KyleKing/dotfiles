@@ -14,7 +14,7 @@ CONFIG_DIR = Path.home() / ".config/chezmoi"
 CONFIG_FILE = CONFIG_DIR / "chezmoi.toml"
 
 # Detect system defaults
-homebrew_prefix = "/usr/local" if platform.machine() == "x86_64" else "/opt/homebrew"
+homebrew_prefix = "/usr/local" if platform.machine() == "x86_64" else "{{ .homebrew_prefix }}"
 try:
     computer_name = subprocess.run(
         ["scutil", "--get", "ComputerName"],

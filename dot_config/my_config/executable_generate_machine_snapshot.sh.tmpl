@@ -26,7 +26,7 @@ gh extension upgrade --all || return 1
 (mise plugins --all > "$SCRIPT_DIR/mise_plugins.{{- .computer_name -}}.txt") || return 1
 chezmoi add "$SCRIPT_DIR" || return 1
 
-cd ~/Developer/kyleking/karabiner-actions/
+cd ~/Developer/{{ .github.username }}/karabiner-actions/
 (git pull && npm run build) || return 1
 cd ~
 

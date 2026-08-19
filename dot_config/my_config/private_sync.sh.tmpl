@@ -59,7 +59,7 @@ back-c-obs() {
 # Push afterward: back-c-obs && lzg
 
 # Karabiner Actions Syncing
-alias back-pull-karabiner="cd ~/Developer/kyleking/karabiner-actions && git pull && npm run build"
+alias back-pull-karabiner="cd ~/Developer/{{ .github.username }}/karabiner-actions && git pull && npm run build"
 
 # NVIM Syncing
 alias back-pull-nvim="cd ~/.config/nvim && git pull && back-fresh-clear"
@@ -79,7 +79,7 @@ alias back-stat-ch="cd / && z chezmoi && echo \$PWD && git status"
 # Mani-managed directories (each holds its own mani.yaml)
 _MANI_DIRS=(
     "$HOME/Developer/executablebooks"
-    "$HOME/Developer/kyleking"
+    "$HOME/Developer/{{ .github.username }}"
 )
 
 back-pull-mani() {

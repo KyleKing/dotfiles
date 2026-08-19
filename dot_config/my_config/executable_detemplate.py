@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Rewrite literal personal values back into template placeholders in chezmoi source .tmpl files.
 
 `chezmoi re-add` copies the live rendered file back into the source tree verbatim, so a

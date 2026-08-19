@@ -118,6 +118,17 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+      - id: check-chezmoi-executables-have-shebangs
+        # check-executables-have-shebangs (above) only sees the git executable bit,
+        # but chezmoi grants executability via the `executable_` filename prefix instead.
+        name: Check chezmoi executable_ files have shebangs
+        entry: >-
+          bash -c 'fail=0; while IFS= read -r f; do head -n 5 "$f" | grep -q "^#!" ||
+          { echo "Missing shebang: $f"; fail=1; }; done < <(git ls-files --
+          "**/executable_*" ":!:**/__pycache__/**"); exit $fail'
+        language: system
+        pass_filenames: false
+        always_run: true
       - id: selene
         name: Selene
         description: Lints Lua files using Selene (install with homebrew)
