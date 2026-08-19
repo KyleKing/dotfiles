@@ -9,6 +9,8 @@ tap "turbot/tap", trusted: true
 tap "visigrid/tap"
 # Run your GitHub Actions locally
 brew "act"
+# Code searching, linting, rewriting
+brew "ast-grep"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # Library for command-line editing
@@ -65,6 +67,8 @@ brew "hk"
 brew "hunk"
 # Git-compatible distributed version control system
 brew "jj"
+# TUI for interacting with the Jujutsu version control system
+brew "jjui"
 # Package manager for kubectl plugins
 brew "krew"
 # Kafka TUI client
@@ -109,6 +113,8 @@ brew "node"
 brew "nvimpager"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
+# Create, run, and share large language models (LLMs)
+brew "ollama", restart_service: :changed
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # AI coding agent, built for the terminal
