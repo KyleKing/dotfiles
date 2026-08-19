@@ -43,6 +43,12 @@
     commit at that step.
     The message rules below still apply
 
+- Clean up a worktree once its task is done: `git worktree remove` it, and delete its
+    branch if fully merged (`git merge-base --is-ancestor <branch> <target>` proves it,
+    don't guess from commit messages).
+    Orphaned worktree directories and stray local branches accumulate silently otherwise.
+    Confirm with me before deleting anything not proven merged
+
 - When you do commit on my behalf, write the message in my voice: Conventional Commits
     (`feat(scope): summary`, `fix: summary`), a single readable subject line, and typically
     NO description body.

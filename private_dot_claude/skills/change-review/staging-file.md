@@ -14,8 +14,15 @@ Keep the split strict so the file can be skimmed and the posted text is unambigu
 
 ## Shape
 
-Group items under "New findings" and "Bot-thread replies", each grouped by file in diff
-order.
+Open with an unquoted orientation header: the PR title, the branch and base, the commit
+you verified anchors against, the test commands that actually ran with their results,
+the
+suites you could not run and why, and whether any bot reviewed the PR.
+Keep it to a few lines. It exists so the user can tell how much of the review is proven
+and how much is reading.
+
+Then group items under "New findings" and "Bot-thread replies", each grouped by file in
+diff order.
 
 One unquoted meta line per item, directly above its blockquote:
 
@@ -73,5 +80,11 @@ correction); do not rewrite the sentence wholesale.
 
 ## Closing the file
 
-End with a **Proposed PR comment**: one fully-blockquoted block holding the post-facing
-summary in the user's voice, so the user reads exactly what a reader sees.
+End with a **Proposed PR comment**: one fully-blockquoted line, so the user reads
+exactly what a reader sees.
+Default it to a short, varied acknowledgment (`LGTM`, `LGTM!`, `Looks good`, `Looks good
+to me`, `Looks good!`, `Yes!`), not a summary of the findings above.
+
+Write a real paragraph here only when a "New findings" item above could not get a
+`file:line` (outside the diff, or too broad for one location) and still needs surfacing.
+Even then, keep it to that finding, not a re-summary of everything already inline.
