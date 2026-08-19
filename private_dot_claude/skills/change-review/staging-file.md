@@ -1,90 +1,73 @@
 # Staging a review before posting
 
 Write a local `pr-<number>-review-comments.md` for the user to proofread and edit
-directly.
-It is a working draft, not a finished artifact.
+directly — a working draft, not a finished artifact.
 
 ## The blockquote rule
 
-Blockquote means post-facing. Non-blockquote means for the user's eyes only.
-Everything inside a blockquote is verbatim text a reader will see; everything outside
-one (meta lines, orientation header, context snippets) helps the user review and never
-ships.
-Keep the split strict so the file can be skimmed and the posted text is unambiguous.
+Blockquote means post-facing; everything else is for the user's eyes only.
+Keep the
+split strict so the posted text stays unambiguous.
 
 ## Shape
 
-Open with an unquoted orientation header: the PR title, the branch and base, the commit
-you verified anchors against, the test commands that actually ran with their results,
-the
-suites you could not run and why, and whether any bot reviewed the PR.
-Keep it to a few lines. It exists so the user can tell how much of the review is proven
-and how much is reading.
+Open with an unquoted orientation header: PR title, branch and base, the commit you
+verified anchors against, test commands that actually ran with results, suites you
+couldn't run and why, and whether any bot reviewed the PR.
+A few lines — it shows how
+much of the review is proven versus read.
 
-Then group items under "New findings" and "Bot-thread replies", each grouped by file in
-diff order.
-
-One unquoted meta line per item, directly above its blockquote:
+Group items under "New findings" and "Bot-thread replies", by file in diff order.
+One
+unquoted meta line per item, directly above its blockquote:
 
 ```
 `file:line` — severity — action
 ```
 
 where action is `new comment`, `reply to <bot> thread`, or `general review comment`.
+The blockquote holds only the exact text to post — no rationale, no extra prose.
 
-The blockquote holds only the exact text to post.
-No rationale, no extra prose — the comment text already carries whatever "why" belongs
-on a peer.
-
-No numbered IDs and no status field; the user deletes items they do not want.
+No numbered IDs, no status field; the user deletes what they don't want.
 
 ## Markers
 
-`[TODO: ...]` is reserved for the user's own edits requesting a revision before the next
-pass.
-Use `[AI: ...]` to flag an open decision or ask a question, so the two never collide.
+`[TODO: ...]` is the user's own edit requesting a revision before the next pass.
+`[AI: ...]` flags an open decision or question, so the two never collide.
 
 ## Declined items
 
-A thread not worth replying to (already stale, or a nit not worth a comment) gets a meta
-line only, no blockquote, with action `skip (<short reason>)`:
+A thread not worth replying to (stale, or a nit not worth a comment) gets a meta line
+only, no blockquote, action `skip (<short reason>)`:
 
 ```
 `file:line` — nit — skip (style-only, not applying)
 ```
 
-That keeps it visible as considered-and-declined rather than erased.
+Visible as considered-and-declined, not erased.
 
 ## Bot-thread replies
 
-Put a bare permalink to the comment being replied to on, or just above, its meta line so
-the user can open the original.
-Do not paste the bot's comment or its diff inline; that bloats the file.
-New comments need no context block — the meta line's `file:line` is enough.
+Put a bare permalink to the comment being replied to on or just above its meta line.
+Don't paste the bot's comment or diff inline — the meta line's `file:line` is enough
+context for a new comment.
 
 The user sometimes opens a bot-thread blockquote with `^`
-(`> ^I think this is valid...`), marking that the reply is about the author in the third
-person rather than addressed to them.
-This is only ever used on bot threads, never a human's, and only selectively.
-Preserve it where it appears; do not add or remove it on your own judgment.
+(`> ^I think this is valid...`), marking third-person reference to the author rather
+than addressing them.
+Bot threads only, never human ones, and only selectively — preserve it where it appears,
+don't add or remove it yourself.
 
 ## Re-editing on a later pass
 
-Once the user has hand-edited a comment's text, treat it as settled.
-Do not re-polish it against the Voice rules — those govern what you draft, not what the
-user has already written.
-Their phrasing may deliberately break them (a capitalized "OR", an "etc.") as a personal
-tick, not an error to fix.
-Small conservative edits are still fine when clearly needed (a changed anchor, a factual
-correction); do not rewrite the sentence wholesale.
+Once the user hand-edits a comment, treat it as settled — don't re-polish it against
+Voice rules, which govern what you draft, not what they've already written.
+Small,
+clearly-needed edits (a changed anchor, a factual correction) are fine; don't rewrite
+the sentence.
 
 ## Closing the file
 
-End with a **Proposed PR comment**: one fully-blockquoted line, so the user reads
-exactly what a reader sees.
-Default it to a short, varied acknowledgment (`LGTM`, `LGTM!`, `Looks good`, `Looks good
-to me`, `Looks good!`, `Yes!`), not a summary of the findings above.
-
-Write a real paragraph here only when a "New findings" item above could not get a
-`file:line` (outside the diff, or too broad for one location) and still needs surfacing.
-Even then, keep it to that finding, not a re-summary of everything already inline.
+End with a **Proposed PR comment**: one fully-blockquoted line, following "The
+review-level comment" in `SKILL.md` — default to a short varied acknowledgment, a real
+paragraph only for a finding that couldn't get a `file:line`.
