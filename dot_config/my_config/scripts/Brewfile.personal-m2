@@ -92,6 +92,8 @@ brew "hyperfine"
 brew "imagemagick"
 # Git-compatible distributed version control system
 brew "jj"
+# TUI for interacting with the Jujutsu version control system
+brew "jjui"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
@@ -447,7 +449,6 @@ vscode "traycer.traycer-vscode"
 vscode "yoavbls.pretty-ts-errors"
 go "cmd/go"
 go "cmd/gofmt"
-go "golang.org/x/tools/gopls"
 cargo "bacon"
 cargo "cargo-insta"
 cargo "cargo-nextest"

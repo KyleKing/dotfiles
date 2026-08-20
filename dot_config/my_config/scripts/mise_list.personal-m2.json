@@ -27,7 +27,7 @@
   "go": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.26.5"
+    "version": "1.26.6"
   },
   "go:github.com/boyter/dcd": {
     "requested_version": "latest",
@@ -93,11 +93,6 @@
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "1.0.0"
-  },
-  "npm:@oh-my-pi/pi-coding-agent": {
-    "requested_version": "latest",
-    "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "17.2.1"
   },
   "npm:@posthog/cli": {
     "requested_version": "latest",
@@ -297,7 +292,7 @@
   "typos": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.48.0"
+    "version": "1.49.0"
   },
   "watchexec": {
     "requested_version": "latest",

@@ -1,6 +1,8 @@
 projects:
   app-template:
     url: git@github.com:KyleKing/app-template.git
+  aragonite:
+    url: git@github.com:KyleKing/aragonite.git
   boardgame-teaches:
     url: git@github.com:KyleKing/boardgame-teaches.git
   calcipy:
@@ -91,6 +93,8 @@ projects:
     url: git@github.com:KyleKing/private-snippets.git
   recipes:
     url: git@github.com:KyleKing/recipes.git
+  second-look:
+    url: git@github.com:KyleKing/second-look.git
   simple-crypt:
     url: git@github.com:KyleKing/simple-crypt.git
   spaghetti-comb.nvim:
