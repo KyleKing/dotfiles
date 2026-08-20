@@ -11,6 +11,7 @@
 .config/my_config/scripts/night-packages.work.txt
 .config/my_config/scripts/pipx_list.personal-m2.txt
 .config/my_config/scripts/pipx_list.work.txt
+.config/oh-my-posh/.config.omp.json
 .config/ov
 .config/pet
 .config/sourcery/

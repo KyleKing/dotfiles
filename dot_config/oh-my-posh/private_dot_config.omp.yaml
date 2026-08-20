@@ -1,0 +1,163 @@
+$schema: https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+version: 3
+final_space: true
+console_title_template: "{{ .Folder }}"
+
+palette:
+  black: "#2A2F3E"
+  blue: "#02bcce" # directory name, jj/git identity when not otherwise stated
+  green: "#8FD15A" # git branch identity (clean, attached)
+  grey: "#A8B0D9" # behind-upstream, stash
+  orange: "#E8AE5A" # ahead-of-upstream, detached HEAD
+  purple: "#A277FF" # jj bookmark identity
+  red: "#FF6F92" # diverged (ahead + behind)
+  white: "#E0DEF4"
+  yellow: "#FEAC00" # any local dirty state (added/modified/deleted/unmerged), any VCS
+
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      # Path: ancestors collapsed to their first letter (style: letter), dimmed.
+      # Final/current folder shown in full, bold blue.
+      - type: path
+        style: plain
+        foreground: p:white
+        properties:
+          style: letter
+        template: |-
+          {{ $full := .Path -}}
+          {{ if contains "/" $full -}}
+            <d>{{ dir $full }}/</d><p:blue><b>{{ base $full }}</b></>
+          {{- else -}}
+            <p:blue><b>{{ $full }}</b></>
+          {{- end }}
+
+      # jj: bookmark name constant purple. If no bookmark, the change ID's
+      # shortest-unique prefix is bright, the padded remainder is dimmed
+      # (mirrors jj's own CLI convention). Dirty files shown right of that,
+      # in yellow, one icon+count per category (git segment mirrors this).
+      - type: jujutsu
+        style: plain
+        foreground: p:white
+        properties:
+          fetch_ahead_counter: true
+          fetch_status: true
+          change_id_min_len: 8
+        template: |-
+          <p:purple> {{ if .ClosestBookmarks -}}
+            {{ .ClosestBookmarks }}
+          {{- else -}}
+            {{ .ChangeIDPrefix }}<d>{{ .ChangeIDRest }}</d>
+          {{- end }}</>
+          {{- if .Working.Changed -}}
+            <p:yellow>
+            {{- if gt .Working.Added 0 }} {{ .Working.Added }}{{ end -}}
+            {{- if gt .Working.Modified 0 }} {{ .Working.Modified }}{{ end -}}
+            {{- if gt .Working.Deleted 0 }} {{ .Working.Deleted }}{{ end -}}
+            {{- if gt .Working.Moved 0 }} {{ .Working.Moved }}{{ end -}}
+            </>
+          {{- end }}
+
+      # PR number, from $GH_PR_NUMBER (set by the gh_pr precmd hook). Color
+      # mirrors whichever VCS segment is active: yellow if dirty, otherwise
+      # the VCS's ahead/behind state color.
+      - type: text
+        style: plain
+        foreground: p:green
+        foreground_templates:
+          - '{{ if .Segments.Contains "Jujutsu" }}{{ if .Segments.Jujutsu.Working.Changed }}p:yellow{{ else }}p:blue{{ end }}{{ end }}'
+          - '{{ if .Segments.Contains "Git" }}{{ if or .Segments.Git.Staging.Changed .Segments.Git.Working.Changed }}p:yellow{{ else }}{{ if and (gt .Segments.Git.Ahead 0) (gt .Segments.Git.Behind 0) }}p:red{{ else }}{{ if gt .Segments.Git.Ahead 0 }}p:orange{{ else }}{{ if gt .Segments.Git.Behind 0 }}p:grey{{ end }}{{ end }}{{ end }}{{ end }}'
+        template: "{{ if .Env.GH_PR_NUMBER }}#{{ .Env.GH_PR_NUMBER }} {{ end }}"
+
+      # git: only renders when jj isn't already showing this repo (colocated
+      # jj+git repos let the jujutsu segment above own the identity/state).
+      # HEAD is green normally, orange when detached. Ahead/behind/diverged
+      # and dirty-file counts follow the same color scheme as jj above.
+      - type: git
+        style: plain
+        foreground: p:white
+        properties:
+          branch_icon: ""
+          branch_template: "{{ if gt (len .Branch) 20 }}{{ trunc 20 .Branch }}…{{ else }}{{ .Branch }}{{ end }}"
+          fetch_status: true
+          fetch_stash_count: true
+        template: |-
+          {{ if not (.Segments.Contains "Jujutsu") -}}
+            {{ if .Detached -}}
+              <p:orange>{{ .HEAD }}</>
+            {{- else -}}
+              <p:green>{{ .HEAD }}</>
+            {{- end }}
+            {{- if and (gt .Ahead 0) (gt .Behind 0) -}}
+              <p:red>{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}</>
+            {{- else -}}
+              {{- if gt .Ahead 0 -}}
+                <p:orange> ↑{{ .Ahead }}</>
+              {{- else -}}
+                {{- if gt .Behind 0 -}}
+                  <p:grey> ↓{{ .Behind }}</>
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
+            {{- if or .Staging.Changed .Working.Changed -}}
+              <p:yellow>
+              {{- if or (gt .Staging.Added 0) (gt .Working.Added 0) }} {{ add .Staging.Added .Working.Added }}{{ end -}}
+              {{- if or (gt .Staging.Modified 0) (gt .Working.Modified 0) }} {{ add .Staging.Modified .Working.Modified }}{{ end -}}
+              {{- if or (gt .Staging.Deleted 0) (gt .Working.Deleted 0) }} {{ add .Staging.Deleted .Working.Deleted }}{{ end -}}
+              {{- if or (gt .Staging.Unmerged 0) (gt .Working.Unmerged 0) }} {{ add .Staging.Unmerged .Working.Unmerged }}{{ end -}}
+              </>
+            {{- end -}}
+            {{- if gt .StashCount 0 -}}
+              <p:grey> {{ .StashCount }}</>
+            {{- end -}}
+          {{- end }}
+
+      # Exit code: ">" on success, "(code) X" on failure (red).
+      - type: exit
+        style: plain
+        foreground: p:blue
+        foreground_templates:
+          - "{{ if gt .Code 0 }}p:red{{ end }}"
+        properties:
+          always_enabled: true
+        template: " {{ if gt .Code 0 }}({{ .Code }}) {{ else }}>{{ end }}"
+
+  - type: rprompt
+    segments:
+      - type: node
+        style: plain
+        background: transparent
+        foreground: p:red
+        properties:
+          display_error: true
+          display_mode: files
+          fetch_package_manager: false
+          home_enabled: false
+        template: "{{ if .Error }}{{ .Error }}{{ else }} {{ .Full }} {{ end }}"
+
+      - type: python
+        style: plain
+        background: transparent
+        foreground: p:yellow
+        properties:
+          display_error: true
+          display_mode: files
+          fetch_version: true
+          fetch_virtual_env: false
+        template: "{{ if .Error }}{{ .Error }}{{ else }} {{ .Full }} {{ end }}"
+
+      - type: project
+        style: plain
+        background: transparent
+        foreground: p:white
+        properties:
+          display_error: true
+        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}in {{ .Name }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>){{ end }}{{ end }} {{ end }}"
+
+      # Right-aligned clock, dimmed, 24h HH:MM (no seconds).
+      - type: time
+        style: plain
+        background: transparent
+        foreground: p:white
+        template: '<d>{{ .CurrentDate | date "15:04" }}</d>'
