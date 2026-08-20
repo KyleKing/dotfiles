@@ -58,4 +58,8 @@ _gh_pr_precmd() {
   fi
 }
 
-autoload -Uz add-zsh-hook && add-zsh-hook precmd _gh_pr_precmd
+# A precmd hook lands after oh-my-posh renders PS1, lagging the number by a
+# prompt. Must be sourced after `oh-my-posh init`.
+set_poshcontext() {
+  _gh_pr_precmd
+}
