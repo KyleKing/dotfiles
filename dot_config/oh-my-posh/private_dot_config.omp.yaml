@@ -28,9 +28,9 @@ blocks:
         template: |-
           {{ $full := .Path -}}
           {{ if contains "/" $full -}}
-            <d>{{ dir $full }}/</d><p:blue><b>{{ base $full }}</b></>
+            <d>{{ dir $full }}/</d><p:blue><b>{{ base $full }}</b> </>
           {{- else -}}
-            <p:blue><b>{{ $full }}</b></>
+            <p:blue><b>{{ $full }}</b> </>
           {{- end }}
 
       # jj: bookmark name constant purple. If no bookmark, the change ID's
