@@ -115,6 +115,10 @@
     Keep comments in a diff much more concise than feels natural, if you add any at all.
     A comment written to help a reviewer understand the change belongs in the PR comment,
     because the file only keeps what stays true long after the diff
+- One line, two at most, never a paragraph or a multi-line block.
+    This is a hard limit
+- Don't restate what a named constant, the adjacent code, or another file in the repo
+    already says; if a reader gets it by looking two lines up, cut it
 - No inline comments; code should be self-explanatory
 - No docstrings on private/internal self-explanatory functions
 - Public API: one-line docstring when signature is clear; include args/returns/raises only
@@ -132,7 +136,8 @@
 - Keep documentation current with the change: when a change invalidates a README, ROADMAP,
     or doc section, update it in the same change rather than leaving it stale
 - Before finishing any task that touched code, reread every comment and docstring you
-    added or left in place and delete any that don't meet the bar above
+    added or left in place, delete any that don't meet the bar above, and cut the survivors
+    down to the constraint they state
 - Don't add or update docstrings for functions you didn't change
 
 ## Files
