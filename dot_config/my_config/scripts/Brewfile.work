@@ -5,6 +5,7 @@ tap "huseyinbabal/tap", trusted: true
 tap "jhlee0409/tap", trusted: true
 tap "jonas-grgt/ktea", trusted: true
 tap "keidarcy/tap", trusted: true
+tap "mcclowes/saggar", trusted: true
 tap "turbot/tap", trusted: true
 tap "visigrid/tap"
 # Run your GitHub Actions locally
@@ -285,6 +286,8 @@ cask "openvpn-connect"
 cask "rectangle-pro"
 # Open source virtual/remote desktop application
 cask "rustdesk"
+# Kiln's companion terminal manager
+cask "mcclowes/saggar/saggar", trusted: true
 # Productivity-first Dynamic Island for your Notch
 cask "seam-app"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances
