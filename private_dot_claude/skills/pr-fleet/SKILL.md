@@ -149,9 +149,12 @@ Order matters. Each step assumes the one above it landed.
     direction check before each merge.
     Retarget bases when the bottom of a stack lands.
 
-1. **Update the writeup.** `~/.config/my_config/ai-gh-pr.py comment "<body>"` only when
-    something changed that the summary should carry.
-    Never touch the PR body.
+1. **Update the writeup.** Only when something changed that the summary should carry.
+    Run `~/.config/my_config/ai-gh-pr.py get` first, edit the returned text in place (keep
+    what's still true, update what changed, drop what's stale), then submit it whole with
+    `comment "<body>"`.
+    Never draft a fresh summary from memory, and never touch the PR
+    body.
 
 Invoking this skill authorizes committing and pushing on the branches in scope, which
 overrides the "do not push" line in `change-review-apply`.

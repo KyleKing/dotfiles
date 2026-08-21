@@ -5,23 +5,38 @@ A description I wrote myself is never touched; an empty one gets replaced,
 once, with a pointer to a comment that starts with "AI Summary:" and is
 PATCHed in place on every later update.
 
-The comment body passed to `comment()` must describe the PR's current state,
-not its edit history: the diff and commit log already carry what changed, so
-restating that is dead weight the next PATCH won't clean up. A checklist item
-belongs there only if it needs a human judgment call the CI gate does not
-already make (a security-relevant permission change, a step that can only be
-verified on another machine) -- never a step already covered by CI or the
-merge button.
+`get` prints the current comment, or exits 1 if there isn't one yet, so the
+caller edits the real thing -- keep what's still true, update what changed,
+drop what's stale -- instead of drafting a fresh summary from memory and
+resubmitting that, which silently drops whatever it doesn't happen to
+restate. `comment <body>` then submits the full result; it always replaces
+the whole comment, on the assumption the caller built `<body>` from what
+`get` returned.
+
+A checklist item belongs in the comment only if it needs a human judgment
+call the CI gate does not already make (a security-relevant permission
+change, a step that can only be verified on another machine) -- never a step
+already covered by CI or the merge button.
 
 `create()` only sets draft/ready at creation. Nothing here flips that status
 later: once a PR exists, draft/ready is the user's call, and no subcommand
 should be added that changes it after the fact.
+
+`create()` rejects a title that isn't Conventional Commits
+(`<type>(<scope>): <Subject>`), since many repos gate PRs on exactly this with
+action-semantic-pull-request -- catch it here so a malformed title fails
+before `gh pr create` runs, not after CI does.
 """
 
 import argparse
 import json
+import re
 import subprocess
 import sys
+
+TITLE_RE = re.compile(
+    r'^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: [A-Z]'
+)
 
 
 def run(*cmd: str) -> str:
@@ -34,18 +49,34 @@ def run_json(*cmd: str):
 
 
 def create(title: str, ready: bool, extra: list[str]) -> None:
+    if not TITLE_RE.match(title):
+        sys.exit(
+            f"Title {title!r} is not Conventional Commits: <type>(<scope>): <Subject>."
+        )
+
     cmd = ['gh', 'pr', 'create', '--title', title, '--body', '', '--assignee', '@me']
     if not ready:
         cmd.append('--draft')
     subprocess.run([*cmd, *extra], check=True)
 
 
-def comment(body: str) -> None:
+def _find_existing_comment() -> tuple[int, str, dict | None]:
     number = run_json('gh', 'pr', 'view', '--json', 'number')['number']
     repo = run_json('gh', 'repo', 'view', '--json', 'nameWithOwner')['nameWithOwner']
-
     comments = run_json('gh', 'api', f"repos/{repo}/issues/{number}/comments")
     existing = next((c for c in comments if c['body'].startswith('AI Summary:')), None)
+    return number, repo, existing
+
+
+def get() -> None:
+    _, _, existing = _find_existing_comment()
+    if existing is None:
+        sys.exit('No AI Summary comment yet')
+    print(existing['body'])
+
+
+def comment(body: str) -> None:
+    number, repo, existing = _find_existing_comment()
 
     if existing is not None:
         run(
@@ -79,14 +110,18 @@ def main() -> None:
     create_parser.add_argument('title')
     create_parser.add_argument('--ready', action='store_true')
 
+    sub.add_parser('get', help='Print the current AI Summary comment, or exit 1 if none exists.')
+
     comment_parser = sub.add_parser('comment')
-    comment_parser.add_argument('body')
+    comment_parser.add_argument('body', help='Full comment body -- replaces the whole comment.')
 
     args = parser.parse_args(argv)
 
     try:
         if args.command == 'create':
             create(args.title, args.ready, extra)
+        elif args.command == 'get':
+            get()
         else:
             comment(args.body)
     except subprocess.CalledProcessError as error:

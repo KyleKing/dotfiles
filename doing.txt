@@ -1,2 +1,0 @@
-Consider if I can remove and/or better utilize these brew tools (eg what is linear-linear?)
-bio ccache codelimit diffnav gcc gd fmt giflib git-delta highway hiredis krew ktea krb5 kubernetes-cli lazysql leptonica luv macmon mactop merve nbytes nettle nvimpager opencode oxlint ripsecrets rpds-py sem-cli serie steampipe syswatch tabiew taws tuios unibilium uvwasi bottom linear linear-linear monarch session-manager-plugin
