@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""Read a CodeRabbit review's findings and post verdicts back to its threads.
+"""Read a review's findings and post verdicts back to its threads.
 
-`fetch` prints the newest review that carries a roll-up prompt block, split
-into findings and joined to the thread each one came from. `apply` reads
-verdicts as TOML (on stdin, or `--file`, since a human proofreads this one
-before it posts and TOML's triple-quoted strings hold reply prose without
-JSON's escaping), replies, resolves, and thumbs-up the review body once every
-finding has been actioned. `status` lists every review, bot or human, that
-has no thumbs-up and still has an unresolved thread or a CHANGES_REQUESTED
-verdict, so a review a later push buried doesn't go silently un-actioned.
+`fetch` prints the newest CodeRabbit review that carries a roll-up prompt
+block, split into findings and joined to the thread each one came from.
+`--review-id` targets any review instead, bot or human: one with a prompt
+block is parsed the same way, and one without turns every open thread tied
+to it into a finding directly, using the thread's own comment as the prompt.
+`apply` reads verdicts as TOML (on stdin, or `--file`, since a human
+proofreads this one before it posts and TOML's triple-quoted strings hold
+reply prose without JSON's escaping), replies, resolves, and thumbs-up the
+review body once every finding has been actioned. `status` lists every
+review, bot or human, that has no thumbs-up and still has an unresolved
+thread or a CHANGES_REQUESTED verdict, so a review a later push buried
+doesn't go silently un-actioned.
 """
 
 import argparse
@@ -18,7 +22,6 @@ import subprocess
 import sys
 import tomllib
 
-BOT_GRAPHQL = 'coderabbitai'
 BOT_REST = 'coderabbitai[bot]'
 BLOCK_RE = re.compile(r'Prompt for all review comments.*?\n```\n(.*?)\n```', re.DOTALL)
 ITEM_RE = re.compile(r'^- (?:Around lines?|Lines?) (?P<start>\d+)(?:\s*-\s*(?P<end>\d+))?:\s*(?P<text>.*)$')
@@ -64,24 +67,21 @@ def pr_context(number: int | None) -> tuple[str, int, str]:
     return f"{owner}/{repo}", view['number'], view['headRefName']
 
 
-def bot_reviews(repo: str, number: int) -> list[dict]:
-    reviews = run_json('gh', 'api', '--paginate', f"repos/{repo}/pulls/{number}/reviews")
-    return [r for r in reviews if r['user']['login'] == BOT_REST]
+def all_reviews(repo: str, number: int) -> list[dict]:
+    return run_json('gh', 'api', '--paginate', f"repos/{repo}/pulls/{number}/reviews")
 
 
-def pick_review(reviews: list[dict], review_id: int | None) -> tuple[dict, str]:
+def pick_review(reviews: list[dict], review_id: int | None) -> dict:
     if review_id is not None:
         match = next((r for r in reviews if r['id'] == review_id), None)
         if match is None:
-            sys.exit(f"No CodeRabbit review {review_id} on this PR")
-    else:
-        match = next((r for r in reversed(reviews) if BLOCK_RE.search(r['body'] or '')), None)
-        if match is None:
-            sys.exit('No CodeRabbit review on this PR carries a prompt block')
-    block = BLOCK_RE.search(match['body'] or '')
-    if block is None:
-        sys.exit(f"Review {match['id']} has no prompt block")
-    return match, block.group(1)
+            sys.exit(f"No review {review_id} on this PR")
+        return match
+    match = next((r for r in reversed(reviews)
+                  if r['user']['login'] == BOT_REST and BLOCK_RE.search(r['body'] or '')), None)
+    if match is None:
+        sys.exit('No CodeRabbit review on this PR carries a prompt block')
+    return match
 
 
 def unwrap(block: str) -> list[str]:
@@ -187,9 +187,7 @@ def best_thread(finding: dict, threads: list[dict]) -> dict | None:
 
 
 def join_threads(findings: list[dict], threads: list[dict], review_id: int) -> tuple[list[dict], list[dict], list[dict]]:
-    available = {t['id']: t for t in threads
-                 if t['comments']['nodes'][0]['author']['login'] == BOT_GRAPHQL
-                 and review_of(t) == review_id}
+    available = {t['id']: t for t in threads if review_of(t) == review_id}
     joined, unmatched = [], []
     for finding in sorted((f for f in findings if f['section'] == 'inline'), key=lambda f: (f['path'], f['start'])):
         hit = best_thread(finding, list(available.values()))
@@ -227,15 +225,39 @@ def worktree_for(branch: str) -> str | None:
     return None
 
 
-def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) -> dict:
-    review, block = pick_review(bot_reviews(repo, number), review_id)
-    findings, unparsed = parse_findings(block)
-    joined, unmatched, unclaimed = join_threads(findings, threads, review['id'])
+def review_findings(review: dict, threads: list[dict]) -> dict:
+    """Findings for one review, whether or not it carries a CodeRabbit prompt block.
+
+    A CodeRabbit review's block names findings by their own line ranges, joined to
+    threads by anchor overlap since the two rarely agree exactly. Any other review
+    (human, or a non-CodeRabbit bot) has no such block, so every open thread tied to
+    it becomes a finding directly, with the thread's own comment standing in for the
+    synthesized prompt.
+    """
+    block = BLOCK_RE.search(review['body'] or '')
+    if block is None:
+        review_threads = [t for t in threads if review_of(t) == review['id']]
+        findings = [{**thread_summary(t), 'prompt': t['comments']['nodes'][0]['body'], 'section': 'inline'}
+                    for t in review_threads]
+        return {'findings': findings, 'outside_diff': [], 'unclaimed_threads': [],
+                'unmatched_findings': [], 'unparsed_prompt_lines': []}
+    parsed, unparsed = parse_findings(block.group(1))
+    joined, unmatched, unclaimed = join_threads(parsed, threads, review['id'])
     return {
         'findings': joined,
+        'outside_diff': [f for f in parsed if f['section'] != 'inline'],
+        'unclaimed_threads': unclaimed,
+        'unmatched_findings': unmatched,
+        'unparsed_prompt_lines': unparsed,
+    }
+
+
+def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) -> dict:
+    review = pick_review(all_reviews(repo, number), review_id)
+    return {
+        'body': (review['body'] or '').strip() or None,
         'other_open_threads': [thread_summary(t) for t in threads
                                if not t['isResolved'] and review_of(t) != review['id']],
-        'outside_diff': [f for f in findings if f['section'] != 'inline'],
         'pr': number,
         'repo': repo,
         'review': {
@@ -245,9 +267,7 @@ def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) 
             'submitted_at': review['submitted_at'],
             'url': review['html_url'],
         },
-        'unclaimed_threads': unclaimed,
-        'unmatched_findings': unmatched,
-        'unparsed_prompt_lines': unparsed,
+        **review_findings(review, threads),
     }
 
 

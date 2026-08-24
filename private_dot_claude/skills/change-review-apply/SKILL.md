@@ -21,8 +21,10 @@ what's in scope, commit, and write the replies.
 
 The script picks the newest CodeRabbit review whose body has a prompt block, so a push
 that produced no findings is skipped without you walking reviews by hand.
-Pass `--review-id` to action an older one, which is the case when a push landed before
-anyone actioned the previous review.
+Pass `--review-id` to action an older one (a push landed before anyone actioned the
+previous review), or a human or non-CodeRabbit bot review: one with no prompt block
+turns every open thread tied to it into a finding directly, using the thread's own
+comment as the prompt.
 
 Before acting on that review, check whether an older one is still open:
 
@@ -42,14 +44,21 @@ quoted in `body`; read it and note it in the report, there is nothing to resolve
 Read these keys before starting:
 
 - `findings` — the work list, each with `thread_id`, `comment_id`, `path`, `start`/`end`,
-    and CodeRabbit's `prompt`
+    and a `prompt` (CodeRabbit's synthesized text, or the raw comment body when the
+    review has no prompt block)
+- `body` — the review's own text, always present.
+    General feedback with no thread lands only here; note it in the report, there is
+    nothing to resolve
 - `outside_diff` — findings CodeRabbit raised outside the diff.
     Real work with no thread to reply to or resolve; goes through Step 3's escalation
+    unless the file is already in the PR's diff, in which case Step 4 fixes it directly
+    (see Step 3)
 - `unmatched_findings` and `unclaimed_threads` — a block item with no thread, or a thread
     no item claimed.
     Read the thread on GitHub before deciding: if it's just the anchor drifting after an
-    unrelated edit (see Step 3), it needs nothing; otherwise it goes through Step 3's
-    escalation like any other real, out-of-scope finding
+    unrelated edit (see Step 3), it needs nothing; a real finding in a file the PR already
+    touches goes through Step 4 like any other verified finding; otherwise it goes through
+    Step 3's escalation like any other real, out-of-scope finding
 - `unparsed_prompt_lines` — CodeRabbit changed the block format.
     Stop and report it
 - `other_open_threads` — open threads from earlier reviews.
@@ -106,6 +115,16 @@ Don't escalate line drift. A finding lands in `unmatched_findings` or
 same push, not because it's new: expect this to happen frequently, and treat a thread
 marked outdated (`is_outdated: true`) as resolved by the edit that moved it rather than
 something to escalate or reply to.
+
+Don't escalate a small, real fix in a file this PR already touches just because it has
+no thread.
+`outside_diff` and the unmatched buckets mean "no thread to reply to," not
+"out of this PR's scope" — a nitpick CodeRabbit filed against a file this branch is
+already changing goes through Step 4 like any other verified finding: fix it, commit it,
+and let Step 6's thumbs-up close it out with no reply posted (there is no thread).
+Only
+route it to Step 3's escalation ask when the file itself sits outside the PR's diff, or
+the fix is large enough to want its own review.
 
 ## Step 4 — Fix the class, not the line
 
@@ -182,6 +201,12 @@ The 👍 on the review body is the signal
 that the whole review was actioned, so it lands last and never lands at all if any
 thread
 failed.
+
+When every real finding was a threadless one fixed under Step 3's carve-out (nothing in
+`findings` needs a verdict), the actions file carries no `[[actions]]` at all — just
+`review_id`.
+`apply` still validates (an empty `findings` list has nothing to check
+actions against) and posts the thumbs-up with `0 actioned`.
 
 ## Report
 
