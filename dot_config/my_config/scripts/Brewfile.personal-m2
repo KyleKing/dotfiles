@@ -2,6 +2,7 @@ tap "abhimanyu003/sttr", trusted: true
 tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
 tap "bartolli/codanna", trusted: true
 tap "jhlee0409/tap"
+tap "mcclowes/saggar", trusted: true
 tap "orlangure/tap", trusted: true
 tap "steipete/tap", trusted: true
 # Run your GitHub Actions locally
@@ -192,10 +193,12 @@ brew "srgn"
 brew "stylua"
 # Open source continuous file synchronization application
 brew "syncthing", restart_service: :changed
+# Cross-platform system diagnostics TUI
+brew "syswatch"
 # TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
 brew "tabiew"
 # Easiest, most secure way to use WireGuard and 2FA
-brew "tailscale", restart_service: :changed
+brew "tailscale"
 # TOML toolkit written in Rust
 brew "taplo"
 # TUI-based PDF viewer
@@ -365,6 +368,8 @@ cask "steipete/tap/repobar"
 cask "rocket"
 # Open source virtual/remote desktop application
 cask "rustdesk"
+# Kiln's companion terminal manager
+cask "mcclowes/saggar/saggar", trusted: true
 # Productivity-first Dynamic Island for your Notch
 cask "seam-app"
 # PDF reader and note-taking application

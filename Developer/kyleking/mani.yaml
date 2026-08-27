@@ -23,6 +23,8 @@ projects:
       - calcipy-template
   dagtest:
     url: git@github.com:KyleKing/dagtest.git
+  db-slice:
+    url: git@github.com:KyleKing/db-slice.git
   diacea:
     url: git@github.com:KyleKing/diacea.git
     tags:
