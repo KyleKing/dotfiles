@@ -10,6 +10,10 @@
 # Run "cache-status" any time to see current sizes vs. thresholds.
 # Run "cache-sweep" to clean whatever is currently over threshold (add
 # --dry-run to preview, --all to ignore thresholds and clean everything).
+#
+# Some tools (mise, conda) already know which of their own files are unused
+# and safe to remove, so pruning them doesn't need a size threshold. Run
+# "cache-prune" (--dry-run to preview) to run those.
 
 # path|threshold_GiB|cleanup_command
 CACHE_SWEEP_TARGETS=(
@@ -23,10 +27,22 @@ CACHE_SWEEP_TARGETS=(
     "$HOME/.cache/pre-commit|1|pre-commit clean"
     "$HOME/Library/Caches/node-gyp|1|rm -rf $HOME/Library/Caches/node-gyp"
     "$HOME/Library/Caches/go-build|2|go clean -cache"
+    "$HOME/Library/Caches/pypoetry|1|rm -rf $HOME/Library/Caches/pypoetry"
+    "$HOME/Library/Caches/deno|2|rm -rf $HOME/Library/Caches/deno"
+    "$HOME/.cache/puppeteer|2|rm -rf $HOME/.cache/puppeteer"
+    "$HOME/Library/Developer/Xcode/DerivedData|2|rm -rf $HOME/Library/Developer/Xcode/DerivedData"
     # Left at high thresholds and a manual command since these hold data you
     # may still want (downloaded models / browsers), not pure rebuild-cache.
     "$HOME/.cache/huggingface|20|huggingface-cli delete-cache"
     "$HOME/Library/Caches/ms-playwright|3|npx playwright uninstall --all"
+)
+
+# Tools whose own prune command already knows what's safe to remove (unused
+# mise tool versions, untracked conda package tarballs) — no size threshold
+# needed, just run them.
+CACHE_PRUNE_COMMANDS=(
+    "mise prune"
+    "conda clean --all -y"
 )
 
 _cache-du-gib() {
@@ -64,8 +80,20 @@ cache-sweep() {
     true
 }
 
+cache-prune() {
+    local dry=false
+    [ "$1" = "--dry-run" ] && dry=true
+    for cmd in "${CACHE_PRUNE_COMMANDS[@]}"; do
+        echo "==> $cmd"
+        if [ "$dry" = false ]; then
+            eval "$cmd"
+        fi
+    done
+}
+
 alias cs='cache-status'
 alias csweep='cache-sweep'
 # Full post-upgrade routine: upgrade, drop unused deps, brew cleanup/doctor, then
-# sweep any dev-tool cache that's grown past its threshold.
-alias bcbd-deep='brew upgrade && brew autoremove && bcbd && cache-sweep'
+# sweep any dev-tool cache that's grown past its threshold and prune unused
+# mise tool versions / conda package tarballs.
+alias bcbd-deep='brew upgrade && brew autoremove && bcbd && cache-sweep && cache-prune'

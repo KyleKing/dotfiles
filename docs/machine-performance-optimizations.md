@@ -97,6 +97,28 @@ Firefox.
 
 No script for either of these — just close what you're not using.
 
+## Dev-tool caches
+
+Most rebuild caches (go's module and build cache, bun, uv, pip, npm, deno, puppeteer's
+downloaded browser, Xcode's DerivedData, etc.) regrow on demand, so clearing them is
+safe and only costs a slower next build.
+They're size-gated in `_cache_cleanup.sh`'s
+`CACHE_SWEEP_TARGETS`: `cache-sweep` clears whatever's past its threshold,
+`cache-status` shows current sizes.
+No standalone script needed here since the general
+sweep already covers them.
+
+`mise` and `conda` are different: their installed tool versions and package tarballs
+aren't a flat regrowable cache, so a size threshold would risk sweeping something still
+in use.
+Both ship their own prune command that already knows what's unreferenced (`mise prune`,
+`conda clean --all`), so `_cache_cleanup.sh` runs those unconditionally via
+`cache-prune` instead of gating them on size.
+
+There's no automated schedule for any of this, matching the rest of this doc: run
+`bcbd-deep` (brew upgrade/autoremove/cleanup/doctor, then `cache-sweep` and
+`cache-prune`) whenever you're doing routine upkeep, roughly weekly.
+
 ## Before/after snapshots
 
 `machine-perf-snapshot.sh` captures load average, the top 15 processes by CPU and by
