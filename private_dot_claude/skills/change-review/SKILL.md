@@ -1,42 +1,46 @@
 ---
 name: change-review
-description: Write pull request review comments and replies to review threads in the user's voice. Use when reviewing a PR or diff and producing comments, when replying to a bot thread (CodeRabbit, Codex), when triaging or applying review findings, or when staging review feedback in a pr-<number>-review-comments.md file for the user to proofread before posting.
+description: Write pull request review comments and replies to review threads in the user's voice, staged through the second-look CLI. Use when reviewing a PR or diff and producing comments, when replying to a bot thread (CodeRabbit, Codex), when triaging or applying review findings, or when preparing a review for the user to proofread before posting.
 ---
 
 # Change review
 
-How to write review comments the user will actually post.
-CLAUDE.md and `writing-voice`
-set the prose floor; this covers what's specific to review threads.
+How to write review comments the user will actually post, and how to stage them.
 
-Review comments get drafted fast, which is exactly where the writing-voice tic catalog
-(`voice-examples.md`) gets skipped because nothing here restates it.
-Check drafts
-against it explicitly: the borrowed-vivid-verb list ("land"/"lands"/"landed") catches
-spatial metaphors for plain facts ("outside the diff", not "didn't land on a diff
-line"), and the unnamed-scope-qualifier and bare-open-question entries catch two shapes
-common in short comments (a lone "too", a question with no proposed answer).
+The prose rules in CLAUDE.md still apply.
+Review comments are short and get drafted
+fast, which is where the `writing-voice` tic catalog gets skipped because nothing here
+restates it.
+Check drafts against `voice-examples.md` explicitly: the borrowed-vivid-verb
+list ("land"/"lands"/"landed") catches spatial metaphors for plain facts ("outside the
+diff", not "didn't land on a diff line"), and the unnamed-scope-qualifier and
+bare-open-question entries catch two shapes that show up constantly in short comments
+("too" with nothing named, a question with no proposed answer).
 
-## Quick reference
+## Step 0: prepare the review
 
-1. Validate every anchor against checked-out code (Step 0a).
-1. Read the child ticket, the customer thread, and whether a bot reviewed at all (Step 0b).
-1. Attack your own findings, cost/perf/missing-default claims first (Step 0c).
-1. Run the app if a claim is about behavior, not code shape (Step 0d).
-1. Hedge every comment; name the symbol, not `file:line`; link, don't retell.
-1. Default the review body to a short LGTM variant; write more only for a finding that
-    can't get an inline anchor.
-1. Use the `[AI Bot]:` prefix only for long, dense, technical findings — otherwise the
-    user's own voice.
+Run `second-look get <pr>` first. It checks the pull request out, writes the prepared
+review, and caches the diff, and every later command reads what it leaves behind.
+
+It refuses to move a dirty working tree, so commit or stash first when it says so.
+Already being on the pull request head never blocks, however dirty the tree is.
+
+Anchors inside the diff are checked for you from there.
+Staging quotes the diff line
+each comment points at, and a comment on a line the diff does not carry is refused with
+nothing written, which is what catches a subagent or bot citing line 993 of a 137-line
+file.
+Posting compares those quotes against the live diff again and refuses if any moved.
+
+`line` is in the file's post-image when `side` is `RIGHT` and its pre-image when `LEFT`.
 
 ## Step 0a: validate every anchor against local code
 
-Check out the branch (or fetch the PR to `FETCH_HEAD`) and confirm each `file:line`
-against the checked-out code before writing a single comment.
-Bot and subagent findings
-routinely cite lines that don't exist.
-If you can't check out or fetch, stop and say so
-instead of writing from `gh pr diff` text alone.
+`second-look get` covers anchors inside the diff; still confirm anything a finding
+cites outside the diff against the checked-out code before writing a comment about it.
+Bot and subagent findings routinely cite lines that don't exist.
+If you can't check out
+or fetch, stop and say so instead of writing from `gh pr diff` text alone.
 
 ## Step 0b: read what the PR body left out
 
@@ -88,95 +92,158 @@ Three finding shapes get dropped by default and shouldn't be:
 A finding about behavior, not code shape, is worth running rather than reasoning about.
 Use the `run` skill if the project has one; report what happened, not what should.
 
-## Anchoring on GitHub
+## Staging with second-look
 
-An inline comment only anchors inside the diff.
-A finding on an unchanged line hangs off
-the nearest changed line instead, naming the symbol so the reader finds the real
-location — the common case for consistency findings, where the untouched sibling is the
-problem.
+`second-look` holds the prepared review in `.second-look/pr-<number>.toml` and posts it
+in one call.
+Run `second-look --help` for the full contract: it documents every field,
+which of them post, and what is refused.
+Read it before the first batch of a session
+rather than guessing the shape from here.
 
-## Writing the comment
+The shape of the work:
 
-Hedge by default: open with "I think", "maybe", "consider", or a question, and name more
-than one option rather than a flat imperative.
-Skip the hedge only for a trivial,
-unarguable fix (a typo, a wrong constant).
+```sh
+second-look show <pr>                      # what is already staged
+cat batch.json | second-look comment add <pr>
+second-look show <pr> --payload            # exactly what would leave the laptop
+```
 
-Write for a peer: give the observation and the ask, cut the mechanism and the
-consequence a reviewer would infer.
+Then the user proofreads the TOML and runs `second-look post <pr>` themselves.
+Do not
+post on their behalf unless they said so in this session.
 
-Link, don't retell: link the narrowest anchor, title it with what's there, then state
-the conclusion in one sentence.
+**Every comment gets a `note`.** It is local and never posted, and it is where the
+evidence goes: the command that proved the finding and what it printed, the file that
+contradicts the claim, the reason for the doubt.
+The `body` carries only what the author
+reads, so the reasoning that would clutter a review comment belongs in the note instead
+of being cut.
 
-Audit the whole item once it's open, not just the claim that prompted you.
+**Use `status` honestly.** `ready` means post it.
+`draft` means the thought is not
+finished, and `second-look post` refuses while any draft remains, so a draft is safe
+rather than risky.
+`skip` with a `skip_reason` records a finding considered and declined, which is
+worth more than deleting it: it reads as considered rather than missed.
 
-Ask whether the item belongs before you fix its fields.
+**Set `severity`** to one of blocker, major, minor, nit, or question.
+It orders what the
+user reads first.
 
-State the fix, not the downstream breakage: name the right answer and let the author
-trace the effect.
+**Put the run notes in the top-level `note`**: what was run and what it returned, suites
+that could not run and why, and whether a bot already reviewed the PR.
+It shows how much of the review is proven rather than read.
 
-Argue from why a rule exists, not by quoting it back.
+## How to write a comment
 
-Your own confusion is a finding: "I don't follow X without reading where it's defined"
-beats an objective-sounding "this is unclear."
+Hedge by default, in every comment. Open with "I think", "maybe", "consider", or a
+question, and name more than one option rather than issuing a flat imperative.
+Write it
+this way on the first pass; do not draft "Drop the default" and expect the user to
+soften
+it.
+Reserve a plain unhedged directive for something both trivial and unarguable (a typo,
+a wrong constant); when unsure whether a fix qualifies, hedge.
 
-Name the symbol, never `file:line` — names survive drift, line numbers don't.
-`file:line`
-belongs only in the inline anchor.
+Write for a peer. Give the observation and the ask; cut the mechanism, the
+why-it-matters, and the consequence a reviewer would already infer.
+Spell out the
+rationale only when the user says the recipient is junior.
 
-Skip a `(line ###)` cross-reference to another comment in the same file unless it
-carries enough comments that the location is genuinely ambiguous without one.
+Link, do not retell. When a finding rests on a source (a ticket, a thread, a prior PR),
+link the narrowest anchor the tool gives you and title it with what the reader will find
+there, then state the conclusion in one sentence.
+A paragraph reconstructing who said
+what is the shape to cut: the link carries it, and the author will open it anyway to
+check you.
 
-## The review-level comment
+Audit the whole item, not the claim that prompted you.
+Once a cell, hunk, or row is open,
+check every assertion in it.
+Correcting a grade while a false status claim sits in the
+next sentence is half a review, and the half you left is the one the author now believes
+you cleared.
 
-The GitHub review body (and, when staging, the closing "Proposed PR comment") is not a
-second draft of the findings already inline.
-Default to one short, varied line — `LGTM`,
-`LGTM!`, `Looks good`, `Looks good to me`, `Looks good!`, `Yes!` — never the same one
-twice in a row.
+Ask whether the item belongs before correcting its fields.
+A row that should not exist, a
+test that should not be written, an option nobody will set: naming that is worth more
+than fixing the contents, and it is the question a field-level comment quietly skips.
 
-Write more only for a finding that can't get a `file:line` (outside the diff, or too
-broad for one spot).
-Even then, try an inline anchor on the nearest changed file first;
-fall back to the review body only when no anchor makes sense, and keep it to that one
-finding.
+Say what should happen, not what breaks downstream.
+"So the right classification is user
+error" beats tracing the knock-on effect through the summary table; the author can trace
+it and would rather have the fix.
 
-## The `[AI Bot]:` prefix
+Argue from why a rule exists, not by quoting the rule back.
+An author who wrote the doc
+does not need its wording recited; they need the reason it draws the line where it does.
 
-Default to the hedged voice above. Prefix `[AI Bot]: ...` only for a finding that's
-long, dense, or highly technical (a multi-file trace, a re-derived calculation, a
-table) — it reads honestly as a bot's analysis instead of forcing a technical block into
-first person.
-Still open with the finding and close with a question when warranted; the
-prefix doesn't license a directive.
-This is the exception: default to the user's own
-voice and open questions even for technical findings.
+Your own confusion is a reportable finding.
+"I'm not sure what this phrase means without
+reading where it's defined" is evidence about the writing, and it is more useful than an
+objective-sounding claim that the text is unclear.
+
+Name the symbol (function, variable, constant), never `file:line`.
+The name locates it
+and line numbers drift.
+`file:line` belongs in the anchor fields, not in the body.
+
+Do not add a `(line ###)` cross-reference to another comment in the same file just to
+help the reader find it.
+Add one only when the file carries enough comments that it is
+genuinely ambiguous without it.
 
 ## By comment type
 
 Self-notes on your own code state the non-obvious why (constraint, invariant,
-workaround) — evergreen comment rules govern the code, this governs a note on the diff.
+workaround).
+Do not restate what the diff already shows.
+This is a different audience
+from a future reader of the code: evergreen comment rules govern the code itself, this
+governs a note on a diff.
 
 Replies to a review acknowledge the bug briefly, state what was fixed, and add a
-follow-up only if one's needed.
+follow-up action if one is needed ("I will confirm X after the next deploy to Stage").
+Do
+not re-explain why the bug was bad or what would have happened, and do not over-explain
+a
+fix that is visible in the diff.
 One sentence naming the change is enough.
+Set
+`in_reply_to` to the review comment's id; `second-look` sends replies to their own
+endpoint.
 
 Before replying to a bot thread, check whether a later commit already resolved it
-(marked "✅ Addressed", or visible in the diff); close stale threads with a one-line
-pointer to the fixing commit instead of re-raising them.
+(threads marked "✅ Addressed", or fixes visible in the diff).
+Close stale threads with a
+one-line pointer to the fixing commit instead of re-raising them.
 
-## Staging a review for sign-off
+The user sometimes opens a bot-thread reply with `^` ("^I think this is valid..."),
+marking third-person reference to the author rather than addressing them.
+Bot threads
+only, never human ones, and only selectively.
+Preserve it where it appears; do not add or
+remove it yourself.
 
-Write a local staging file instead of posting when asked to prepare feedback for
-sign-off.
-Full spec: [staging-file.md](staging-file.md).
+## Re-editing on a later pass
+
+Once the user hand-edits a comment, treat it as settled.
+Do not re-polish it against the
+voice rules, which govern what you draft rather than what they have already written.
+Small, clearly-needed edits (a changed anchor, a factual correction) are fine; do not
+rewrite the sentence.
+Reuse the comment's `id` so the edit replaces it rather than
+appending a duplicate.
 
 ## Merged PRs
 
-Verify inline comments still post before proposing them: create a PENDING review with
-one throwaway inline comment via the API (`POST /repos/{o}/{r}/pulls/{n}/reviews` with
-`commit_id` and a `comments[]` entry, no `event`), confirm it anchors, then `DELETE` the
-pending review.
-Frame the review-level comment to acknowledge the merge and offer nits
-as considerations for a follow-up rather than change requests.
+Verify inline comments still post before proposing them.
+Create a PENDING review with one
+throwaway inline comment via the API (`POST /repos/{o}/{r}/pulls/{n}/reviews` with
+`commit_id` and a `comments[]` entry, no `event` so it stays a draft invisible to
+others), confirm it anchors, then `DELETE` the pending review.
+Report the result. Frame
+the summary to acknowledge the merge and offer the nits as considerations for a
+follow-up
+PR rather than change requests.
