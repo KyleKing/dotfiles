@@ -47,8 +47,11 @@ Extension aliasing (`.htm` -> `.html`, `.jpeg` -> `.jpg`, etc.) lives in
     rather than replacing them).
 1. Document the new extension in `docs/index.rst`'s bullet list.
 1. **Update `docs/changelog.rst`** under `NEXT RELEASE`.
-    CI's `changelog-check` job fails any PR that touches `textract/**/*.py` without a
-    corresponding `docs/changelog.rst` edit — this is enforced, not just a convention.
+    CI's `changelog-check` job fails any PR that touches `textract/**/*.py` or
+    `pyproject.toml` without a corresponding `docs/changelog.rst` edit — this is
+    enforced, not just a convention.
+    `uv.lock`-only bumps (routine dependency updates)
+    don't trigger it.
 
 ## Warnings from third-party libraries
 
