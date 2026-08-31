@@ -85,6 +85,8 @@ local process_icons = {
 
 local icon_git_root = "./"
 local icon_not_git = wezterm.nerdfonts.md_map_marker_radius
+-- wezterm can't read foreground_process_name while claude is busy (likely races its subprocess churn)
+local icon_claude_inferred = wezterm.nerdfonts.md_robot
 
 -- Unicode spacing characters for refined typography
 local nbsp = "\u{00A0}" -- Non-breaking space
@@ -174,7 +176,16 @@ end
 
 -- Return the concise name or icon of the running process for display
 local function get_process(tab)
-    if not tab.active_pane or tab.active_pane.foreground_process_name == "" then return "[?]" end
+    if not tab.active_pane then return "[?]" end
+    if tab.active_pane.foreground_process_name == "" then
+        if tab.active_pane.title == "" then
+            wezterm.log_info(
+                "DEBUG get_process - no foreground process and no title, domain=" .. tab.active_pane.domain_name
+            )
+            return "[?]"
+        end
+        return icon_claude_inferred
+    end
 
     local raw_name = tab.active_pane.foreground_process_name
     local process_name = remove_abs_path(raw_name)
