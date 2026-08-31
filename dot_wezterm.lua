@@ -31,42 +31,55 @@ local process_icons = {
     ["claude"] = wezterm.nerdfonts.md_robot_outline,
     ["curl"] = wezterm.nerdfonts.mdi_flattr,
     ["deno"] = wezterm.nerdfonts.md_dinosaur,
+    ["diff"] = wezterm.nerdfonts.md_file_compare,
     ["docker"] = wezterm.nerdfonts.md_docker,
     ["docker-compose"] = wezterm.nerdfonts.md_docker,
     ["gh"] = wezterm.nerdfonts.dev_github_badge,
     ["git"] = wezterm.nerdfonts.fa_git,
     ["go"] = wezterm.nerdfonts.seti_go,
+    ["grep"] = wezterm.nerdfonts.md_magnify,
     ["hk"] = wezterm.nerdfonts.md_prescription,
     ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["kubectl"] = wezterm.nerdfonts.md_kubernetes,
     ["lazydocker"] = wezterm.nerdfonts.md_docker,
     ["lazygit"] = wezterm.nerdfonts.dev_git_branch,
     ["lazyjj"] = wezterm.nerdfonts.md_bird,
+    ["lazymake"] = wezterm.nerdfonts.md_hammer_wrench,
+    ["ls"] = wezterm.nerdfonts.md_format_list_bulleted,
     ["lua"] = wezterm.nerdfonts.seti_lua,
     ["make"] = wezterm.nerdfonts.seti_makefile,
+    ["mani"] = wezterm.nerdfonts.md_source_repository_multiple,
     ["mise"] = wezterm.nerdfonts.md_carrot,
+    ["mkdir"] = wezterm.nerdfonts.md_folder_plus,
     ["node"] = wezterm.nerdfonts.cod_json,
     ["nvim"] = wezterm.nerdfonts.linux_neovim,
     ["npm"] = wezterm.nerdfonts.md_npm,
     ["op"] = wezterm.nerdfonts.md_lock,
+    ["open"] = wezterm.nerdfonts.md_open_in_new,
     ["opentofu"] = wezterm.nerdfonts.md_dump_truck,
+    ["osascript"] = wezterm.nerdfonts.dev_apple,
     ["psql"] = wezterm.nerdfonts.md_database,
     ["pulumi"] = wezterm.nerdfonts.md_dump_truck,
     ["pnpm"] = wezterm.nerdfonts.md_package_variant,
     ["python"] = wezterm.nerdfonts.dev_python,
     ["python3"] = wezterm.nerdfonts.dev_python,
+    ["rm"] = wezterm.nerdfonts.md_delete,
     ["ruby"] = wezterm.nerdfonts.cod_ruby,
     ["rg"] = wezterm.nerdfonts.md_magnify,
     ["rust"] = wezterm.nerdfonts.dev_rust,
+    ["sleep"] = wezterm.nerdfonts.iec_sleep_mode,
     ["ssh"] = wezterm.nerdfonts.md_server_security,
     ["sudo"] = wezterm.nerdfonts.fa_hashtag,
+    ["syswatch"] = wezterm.nerdfonts.md_monitor_dashboard,
     ["terraform"] = wezterm.nerdfonts.md_dump_truck,
     ["top"] = wezterm.nerdfonts.mdi_chart_donut_variant,
     ["usql"] = wezterm.nerdfonts.md_database,
     ["uv"] = wezterm.nerdfonts.dev_python,
     ["vim"] = wezterm.nerdfonts.dev_vim,
+    ["wezterm-gui"] = wezterm.nerdfonts.md_console_line,
     ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
     ["yarn"] = wezterm.nerdfonts.md_nodejs,
+    ["zoxide"] = wezterm.nerdfonts.fa_compass,
     ["zsh"] = wezterm.nerdfonts.cod_terminal_bash,
 }
 
@@ -173,14 +186,15 @@ local function get_process(tab)
     end
     for i = #components, 1, -1 do
         local component = components[i]
-        if process_icons[component] then return process_icons[component] end
+        local lower_component = component:lower()
+        if process_icons[lower_component] then return process_icons[lower_component] end
     end
 
     -- Strip version numbers only if there's a base name (e.g., python3.14 -> python, node24 -> node)
-    local base_name = process_name:gsub("^(%D+)%d[%.%d]*$", "%1")
+    local base_name = process_name:gsub("^(%D+)%d[%.%d]*$", "%1"):lower()
 
     -- Try to find icon, log if not found
-    local icon = process_icons[base_name] or process_icons[process_name]
+    local icon = process_icons[base_name] or process_icons[process_name:lower()]
     if not icon then
         wezterm.log_info(
             "DEBUG get_process - no icon found: raw='"
