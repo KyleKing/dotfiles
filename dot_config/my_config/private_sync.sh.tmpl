@@ -33,8 +33,21 @@ back-c-ch() {
     if output=$(git status --porcelain) && [ -z "$output" ]; then
         op-sign-in || return 1
         back-scripts-ch || return 1
-        # Sync with files already tracked by chezmoi
-        chezmoi re-add
+        # Only re-add targets backed by a .tmpl source, so drift in a plain
+        # (non-templated) file doesn't get silently absorbed here
+        local drifted=() target src
+        while IFS= read -r target; do
+            [ -z "$target" ] && continue
+            src="$(chezmoi source-path "$target" 2>/dev/null)"
+            [[ "$src" == *.tmpl ]] && drifted+=("$target")
+        done < <(chezmoi status --include=files --path-style=absolute | awk '{print $2}')
+        if [ "${#drifted[@]}" -eq 0 ]; then
+            echo "No templated files out of sync."
+            return 0
+        fi
+        echo "Templated files out of sync:"
+        printf '  %s\n' "${drifted[@]}"
+        chezmoi re-add "${drifted[@]}"
         # Fold literal personal values that re-add just baked in back into templates
         "$HOME/.config/my_config/detemplate.py"
     else
