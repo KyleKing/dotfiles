@@ -57,7 +57,7 @@
   "hk": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.55.0"
+    "version": "1.56.1"
   },
   "lua-language-server": {
     "requested_version": "latest",
@@ -292,7 +292,7 @@
   "typos": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.49.0"
+    "version": "1.50.0"
   },
   "watchexec": {
     "requested_version": "latest",

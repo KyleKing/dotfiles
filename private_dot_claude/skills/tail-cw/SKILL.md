@@ -21,27 +21,47 @@ uv run --project ~/Developer/kyleking/tail-cw tail-cw <args>
 
 Works from any cwd. Inside the checkout, plain `uv run tail-cw` is equivalent.
 Pick the
-account with `--profile` (`read-prod`, `read-stage`, `read-devops`) or `AWS_PROFILE`.
-`--demo` on `logs`, `tail`, and `dash` uses synthetic data and needs no credentials.
+account with `--profile` (`read-prod`, `read-stage`, `read-devops`), `AWS_PROFILE`, or
+`[aws].profile` in config, which a preset may override for its own account.
+`--demo` uses synthetic data and needs no credentials: it reaches `logs`, `tail`,
+`dash`,
+the group browser, and `export logs`, `stats`, and `summary`.
 
 ## Command map
 
-| Need                               | Command                                                             |
-| ---------------------------------- | ------------------------------------------------------------------- |
-| Events for a window, as NDJSON     | `export logs <group> --start 2h [--filter '<expr>']`                |
-| Live tail                          | `export tail <group> [--filter '<expr>']`                           |
-| Which groups exist, with metadata  | `export groups '<glob>'`                                            |
-| Rank recurring errors and warnings | `export summary '<glob>' --start 1h`                                |
-| A real query (billed)              | `export insights '<glob>' --query '...' [--language sql\|ppl]`      |
-| Alarms and how often they fired    | `export alarms [<prefix>] --history`                                |
-| Metric datapoints                  | `export metrics --namespace AWS/ECS --metric CPUUtilization`        |
-| X-Ray traces in a window           | `export xray --start 1h --expression 'service("api")'`              |
-| One trace's spans, as OTLP         | `export xray-trace 1-<8hex>-<24hex>`                                |
-| Cache size against its limit       | `cache status`                                                      |
-| Interactive                        | `logs '<glob>' --start 2h` (`h` histogram, `p`/`x` pivots, `:xray`) |
+| Need                               | Command                                                                         |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| Events for a window, as NDJSON     | `export logs '<glob>' --start 2h [--filter '<expr>']`                           |
+| The decoded payload, not the line  | `export logs '<glob>' --parsed`                                                 |
+| A sample without paying for it all | `export logs '<glob>' --limit 50`                                               |
+| How many of each value             | `export stats '<glob>' --by level --by parsed.http.status`                      |
+| Live tail                          | `export tail <group> [--filter '<expr>']`                                       |
+| Which groups exist, with metadata  | `export groups '<glob>'`                                                        |
+| Rank recurring errors and warnings | `export summary '<glob>' --start 1h`                                            |
+| A real query (billed)              | `export insights '<glob>' --query '...' [--language sql\|ppl]`                  |
+| Alarms and how often they fired    | `export alarms [<prefix>] --history`                                            |
+| Metric datapoints                  | `export metrics --namespace AWS/ECS --metric CPUUtilization`                    |
+| X-Ray traces in a window           | `export xray --start 1h --expression 'service("api")'`                          |
+| One trace's spans, as OTLP         | `export xray-trace 1-<8hex>-<24hex>`                                            |
+| Cache size against its limit       | `cache status`                                                                  |
+| Interactive                        | `logs '<glob>' --start 2h` (`f` fields, `h` histogram, `p`/`x` pivots, `:xray`) |
 
 `export logs` fetches the whole window and filters locally, so a second `--filter` over
 the same window hits the cache and is free.
+It takes globs and presets like `export summary`, and only pays for
+`DescribeLogGroups` when you give it one.
+
+**Do not write a `jq 'fromjson'` step.** `--parsed` emits the payload the cache already
+decoded, in place of the raw `message` string.
+**Do not count with `jq | sort | uniq -c` or a `Counter`.** `export stats --by <field>`
+does it in DuckDB against the cache, so it costs no AWS call on a window already
+fetched; omit `--by` and it reports the most common fields it finds.
+**Do not pipe into `head -N`.** `--limit N` stops asking CloudWatch for segments instead
+of paying for the whole window first.
+
+Every export writes `Wrote N events` to stderr when it finishes.
+If you suppress stderr, you lose the only way to tell a truncated read from a complete
+one: every line of a half-kept NDJSON stream parses and the last line is whole.
 
 ## Two surfaces bill, and both mislead
 
