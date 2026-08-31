@@ -6,6 +6,9 @@ block, split into findings and joined to the thread each one came from.
 `--review-id` targets any review instead, bot or human: one with a prompt
 block is parsed the same way, and one without turns every open thread tied
 to it into a finding directly, using the thread's own comment as the prompt.
+A bot's review is actioned without asking; replying into a person's thread
+needs `replies_approved = true` in the actions file, which the caller sets only
+after the human has said yes.
 `apply` reads verdicts as TOML (on stdin, or `--file`, since a human
 proofreads this one before it posts and TOML's triple-quoted strings hold
 reply prose without JSON's escaping), replies, resolves, and thumbs-up the
@@ -261,8 +264,10 @@ def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) 
         'pr': number,
         'repo': repo,
         'review': {
+            'author': review['user']['login'],
             'commit_id': review['commit_id'],
             'id': review['id'],
+            'is_bot': is_bot(review),
             'node_id': review['node_id'],
             'submitted_at': review['submitted_at'],
             'url': review['html_url'],
@@ -271,7 +276,17 @@ def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) 
     }
 
 
-def validate(actions: list[dict], findings: list[dict]) -> list[str]:
+def is_bot(review: dict) -> bool:
+    """Whether a review was posted by a bot rather than a person.
+
+    A bot's thread is a work item: replying to it costs nobody's attention, so
+    `apply` posts without asking. A person's thread is a conversation, so a
+    reply into one needs the human's explicit go-ahead (`replies_approved`).
+    """
+    return review['user'].get('type') == 'Bot' or review['user']['login'].endswith('[bot]')
+
+
+def validate(actions: list[dict], findings: list[dict], *, bot: bool, approved: bool) -> list[str]:
     by_id = {f['thread_id']: f for f in findings}
     errors = []
     for action in actions:
@@ -284,6 +299,11 @@ def validate(actions: list[dict], findings: list[dict]) -> list[str]:
             errors.append(f"{thread_id}: a skipped finding needs a reply saying why")
     missing = sorted(set(by_id) - {a.get('thread_id') for a in actions})
     errors += [f"{thread_id}: no verdict given" for thread_id in missing]
+    if not bot and not approved and any((a.get('reply') or '').strip() for a in actions):
+        errors.append(
+            'replying to a person needs their go-ahead: ask, then set '
+            '`replies_approved = true` in the actions file'
+        )
     return errors
 
 
@@ -364,7 +384,13 @@ def cmd_apply(number: int | None, path: str | None) -> None:
     state = collect(repo, number, payload.get('review_id'), list(threads.values()))
     actions = payload.get('actions') or []
 
-    errors = validate(actions, state['findings'])
+    bot = state['review']['is_bot']
+    errors = validate(
+        actions,
+        state['findings'],
+        bot=bot,
+        approved=bool(payload.get('replies_approved')),
+    )
     if errors:
         sys.exit('Refusing to post:\n' + '\n'.join(f"  {e}" for e in errors))
 
@@ -386,7 +412,8 @@ def cmd_apply(number: int | None, path: str | None) -> None:
     if failed:
         sys.exit('Left the review un-acknowledged:\n' + '\n'.join(f"  {f}" for f in failed))
     thumbs_up(state['review']['node_id'])
-    print(f"👍 review {state['review']['id']} — {len(actions)} actioned")
+    who = state['review']['author'] + (' (bot)' if bot else '')
+    print(f"👍 review {state['review']['id']} by {who} — {len(actions)} actioned")
 
 
 def main() -> None:

@@ -55,6 +55,7 @@
       "mcp__incident_io__*",
       "Skill(incident)"
     ],
+    "defaultMode": "auto",
     "deny": [
       "Read(./dev.secret.local.env)"
     ]

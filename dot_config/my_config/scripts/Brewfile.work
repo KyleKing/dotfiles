@@ -246,6 +246,8 @@ cask "font-fira-code-nerd-font"
 cask "font-sarasa-gothic"
 # Web browser
 cask "google-chrome"
+# AI-powered notepad for meetings
+cask "granola"
 # Command-line interface for Hatchet workflow orchestration
 cask "hatchet-dev/hatchet/hatchet"
 # Windows manager and desktop organiser
@@ -334,6 +336,7 @@ vscode "traycer.traycer-vscode"
 vscode "yoavbls.pretty-ts-errors"
 go "cmd/go"
 go "cmd/gofmt"
+go "github.com/kyleking/second-look/cmd/second-look"
 cargo "cbcli"
 cargo "selene"
 npm "corepack"
