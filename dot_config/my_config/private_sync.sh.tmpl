@@ -33,23 +33,36 @@ back-c-ch() {
     if output=$(git status --porcelain) && [ -z "$output" ]; then
         op-sign-in || return 1
         back-scripts-ch || return 1
-        # Only re-add targets backed by a .tmpl source, so drift in a plain
-        # (non-templated) file doesn't get silently absorbed here
-        local drifted=() target src
+        # `chezmoi re-add` refuses to touch .tmpl-backed targets ("chezmoi
+        # will not overwrite templates"), so those need the rendered drift
+        # copied into the source by hand; detemplate.py then folds known
+        # personal values back into template placeholders
+        local drifted=() plain_drifted=() tmpl_targets=() tmpl_srcs=() target src
         while IFS= read -r target; do
             [ -z "$target" ] && continue
+            drifted+=("$target")
             src="$(chezmoi source-path "$target" 2>/dev/null)"
-            [[ "$src" == *.tmpl ]] && drifted+=("$target")
+            if [[ "$src" == *.tmpl ]]; then
+                tmpl_targets+=("$target")
+                tmpl_srcs+=("$src")
+            else
+                plain_drifted+=("$target")
+            fi
         done < <(chezmoi status --include=files --path-style=absolute | awk '{print $2}')
         if [ "${#drifted[@]}" -eq 0 ]; then
-            echo "No templated files out of sync."
+            echo "No files out of sync."
             return 0
         fi
-        echo "Templated files out of sync:"
+        echo "Files out of sync:"
         printf '  %s\n' "${drifted[@]}"
-        chezmoi re-add "${drifted[@]}"
-        # Fold literal personal values that re-add just baked in back into templates
-        "$HOME/.config/my_config/detemplate.py"
+        [ "${#plain_drifted[@]}" -gt 0 ] && chezmoi re-add "${plain_drifted[@]}"
+        if [ "${#tmpl_targets[@]}" -gt 0 ]; then
+            local i
+            for i in "${!tmpl_targets[@]}"; do
+                cp "${tmpl_targets[$i]}" "${tmpl_srcs[$i]}"
+            done
+            "$HOME/.config/my_config/detemplate.py"
+        fi
     else
         RED='\033[0;31m'
         NC='\033[0m'
