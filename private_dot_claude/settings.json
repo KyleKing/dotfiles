@@ -69,8 +69,5 @@
     "mode": "hold"
   },
   "voiceEnabled": true,
-  "workflowKeywordTriggerEnabled": false,
-  "worktree": {
-    "baseRef": "fresh"
-  }
+  "workflowKeywordTriggerEnabled": false
 }

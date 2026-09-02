@@ -62,12 +62,13 @@ Read these keys before starting:
 - `other_open_threads` — open threads from earlier reviews.
     Out of scope for this pass, but a real one still goes through Step 3
 
-**The PR branch is usually not the checked-out `HEAD`.** `branch.worktree` is where it
-lives, or `null` when no worktree has it.
-`cd` there before editing; never fetch the
-branch into the current tree and edit alongside unrelated work.
-If that worktree has uncommitted changes you did not make, stop and report it (see the
-working-tree rule in `CLAUDE.md`).
+**The PR branch is usually not the checked-out `HEAD`.** Check the current tree is clean
+(`git status`, per the working-tree rule in `CLAUDE.md`), then check out the branch
+directly in the current checkout rather than fetching it in and editing alongside
+unrelated work.
+Never use a git worktree.
+If `branch.worktree` shows the branch already
+checked out elsewhere, stop and report it instead of `cd`-ing into that worktree.
 
 ## Step 2 — Verify each finding adversarially
 

@@ -19,17 +19,11 @@ Do not restate those here, invoke them.
 ## Step 1: settle the working directories
 
 `$ARGUMENTS` may name them. If it does not, ask with AskUserQuestion before running
-anything, offering both shapes:
-
-- existing sibling checkouts (`../repo-0`, `../repo-2`), which already carry a built
-    virtualenv, `node_modules`, and a migrated dev database, so a PR can be tested in one
-    immediately
-- throwaway `git worktree add` directories, which isolate cleanly but pay the setup cost
-    per PR
-
-Prefer sibling checkouts where they exist.
-Never create a scratch database or container
-to work around a checkout whose state does not match the branch.
+anything: existing sibling checkouts (`../repo-0`, `../repo-2`), which already carry a
+built virtualenv, `node_modules`, and a migrated dev database, so a PR can be tested in
+one immediately.
+Never create a git worktree, a scratch database, or a container to
+work around a checkout whose state does not match the branch.
 
 Group the directories by upstream, because more than one repo can be in flight at once:
 
