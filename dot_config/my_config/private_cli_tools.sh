@@ -59,3 +59,31 @@ fzf-bat() {
 btail() {
     tail -f "$1" | bat --paging=never -l "${2:-${1##*.}}"
 }
+
+# Review CLI: https://github.com/kyleking/second-look
+alias sl='second-look'
+
+# Format markdown with the same mdformat plugins/args as .pre-commit-config.yaml
+# mdformat-mkdocs[recommended] already pulls in mdformat-front-matters, so it's not listed separately
+# > mdformatters README.md docs/CONTRIBUTING.md
+mdformatters() {
+    uvx --with "mdformat-mkdocs[recommended]>=5.3.0" \
+        --with "mdformat-slw>=0.4.0" \
+        mdformat --wrap=keep "$@"
+}
+
+# Same as mdformatters, but against every *.md file in and below the cwd,
+# skipping the files .pre-commit-config.yaml also excludes
+# > mdformatters-matcher
+mdformatters-matcher() {
+    local -a files
+    files=()
+    while IFS= read -r file; do
+        files+=("$file")
+    done < <(fd --extension md --exclude '_*.md' --exclude 'CHANGELOG.md' --exclude 'CODE_TAG_SUMMARY.md')
+    if [[ ${#files[@]} -eq 0 ]]; then
+        echo "No markdown files found"
+        return 0
+    fi
+    mdformatters "${files[@]}"
+}
