@@ -65,5 +65,8 @@ podman-build-secret*
 # **/.claude/settings.local.json
 CLAUDE.local.md
 
+# For gh-lazydispatch
+.github/lazydispatch.yml
+
 # local notes
 doing.txt

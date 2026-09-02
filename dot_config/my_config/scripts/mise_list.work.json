@@ -24,6 +24,11 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "2.9.5"
   },
+  "flyctl": {
+    "requested_version": "latest",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "0.4.96"
+  },
   "go": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",

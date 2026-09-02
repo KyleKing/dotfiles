@@ -1,0 +1,12 @@
+version: 1
+chains:
+  deploy-prod-after-build:
+    description: Deploy to prod (pulumi up) after the Docker build succeeds on main
+    steps:
+      - workflow: docker-build.yml
+        wait_for: success
+        on_failure: abort
+      - workflow: deploy-prod.yml
+        wait_for: none
+        inputs:
+          command: up

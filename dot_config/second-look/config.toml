@@ -1,0 +1,17 @@
+limit = 25
+
+[[section]]
+name = "my work"
+query = "author:@me org:coverbasedev archived:false is:open sort:updated-desc"
+
+[[section]]
+name = "needs my review"
+query = "review-requested:@me archived:false is:open sort:updated-desc"
+
+[[section]]
+name = "my non-work"
+query = "author:@me -org:coverbasedev archived:false is:open sort:updated-desc"
+
+[[section]]
+name = "work PRs pending review"
+query = "org:coverbasedev draft:false -review:approved -author:app/dependabot archived:false is:open sort:updated-desc"
