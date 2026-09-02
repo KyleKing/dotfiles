@@ -12,9 +12,11 @@ fix them concurrently across separate checkouts.
 
 This skill owns the sweep, the checkout pool, and the dispatch rules.
 The per-PR work
-is delegated: `resolve-conflicts` for conflicts, `change-review-apply` for reviews,
-`pr-stacking` for the merge-forward cascade.
+is delegated: `change-review-apply` for reviews, `pr-stacking` for the merge-forward
+cascade.
 Do not restate those here, invoke them.
+Merge conflicts are resolved inline (Step 4) — there's no separate conflict-resolution
+skill to delegate to.
 
 ## Step 1: settle the working directories
 
@@ -51,29 +53,18 @@ and drop it from the pool. Do not clean it, stash it, or reset it.
 
 ## Step 2: sweep and classify
 
-Per repo group:
+Per repo group, run `${CLAUDE_SKILL_DIR}/scripts/classify.sh <owner/repo>`.
+It emits one JSON object per line — stack position (chained, bottom, or orphan),
+conflict
+state (re-polling an `UNKNOWN` `mergeable` rather than reporting it clean), and failing
+check count.
+Do not re-derive this classification with ad-hoc shell.
 
-```sh
-gh pr list --author @me --state open --limit 50 \
-    --json number,title,headRefName,baseRefName,isDraft,mergeable,mergeStateStatus,statusCheckRollup
-```
-
-Three classifications, each from a specific field:
-
-- **Stacked.** A PR whose `baseRefName` matches another open PR's `headRefName` sits on
-    top of that PR.
-    Chain them; a PR based on the default branch is a stack bottom.
-    A base
-    branch that has no open PR and is not the default branch is an orphan, flag it rather
-    than guessing.
-- **Conflicted.** `mergeable == "CONFLICTING"`.
-    `mergeable == "UNKNOWN"` means GitHub has
-    not finished computing it, re-poll rather than reporting it as clean.
-- **Unactioned CodeRabbit.** Unresolved review threads authored by `coderabbitai[bot]`,
-    from the GraphQL query in `change-review-apply` step 2.
-    Count threads from *every*
-    CodeRabbit review, not only the newest, since a review can be skipped when a later push
-    lands before it is actioned.
+Add the one classification the script can't do read-only from `gh pr list` alone:
+unresolved review threads authored by `coderabbitai[bot]`, from the GraphQL query in
+`change-review-apply` step 2.
+Count threads from *every* CodeRabbit review, not only the
+newest, since a review can be skipped when a later push lands before it is actioned.
 
 Present one table, one row per PR: number, stack position, conflicts, open CodeRabbit
 threads, failing checks.
@@ -110,8 +101,9 @@ Order matters. Each step assumes the one above it landed.
 
 1. **Get onto the latest base.** Merge the base in (per `pr-stacking`, never rebase a
     branch an open PR is based on).
-    Conflicts surface here, resolve them with
-    `resolve-conflicts`.
+    Conflicts surface here — resolve them by reading both sides' intent from the
+    conflict markers and the commits that produced them (`git log -p` on each side),
+    never by blindly preferring one side.
     Split this into two commits: first make the merge correct against the current base,
     then a follow-up that drops now-duplicated code in favor of what has since landed.
     A
@@ -144,11 +136,11 @@ Order matters. Each step assumes the one above it landed.
     Retarget bases when the bottom of a stack lands.
 
 1. **Update the writeup.** Only when something changed that the summary should carry.
-    Run `~/.config/my_config/ai-gh-pr.py get` first, edit the returned text in place (keep
-    what's still true, update what changed, drop what's stale), then submit it whole with
-    `comment "<body>"`.
-    Never draft a fresh summary from memory, and never touch the PR
-    body.
+    Use the repo's own PR-writeup skill/script if it has one (`irm-pr` in the platform
+    repo), else `~/.config/my_config/ai-gh-pr.py`.
+    Either way: `get` first, edit the returned text in place (keep what's still true,
+    update what changed, drop what's stale), then submit it whole with `comment "<body>"`.
+    Never draft a fresh summary from memory, and never touch the PR body directly.
 
 Invoking this skill authorizes committing and pushing on the branches in scope, which
 overrides the "do not push" line in `change-review-apply`.

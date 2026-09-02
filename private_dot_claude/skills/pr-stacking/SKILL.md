@@ -59,7 +59,11 @@ Present the plan and stop. Wait for explicit approval before touching git.
 
 ## Phase 2: scaffold (on approval)
 
-Create the branches and draft PRs for the approved plan, bottom-up:
+Create the branches and draft PRs for the approved plan, bottom-up.
+Use the repo's own PR-creation skill/script if it has one (`irm-pr` in the platform
+repo forwards flags after `--`:
+`irm-pr.py create "<title>" -- --base <branch> --head <branch>`), else raw
+`gh pr create` as shown:
 
 ```
 git checkout -b <branch-1> main
@@ -153,28 +157,25 @@ If that check fails, you're about to merge the wrong way.
 
 ## Validating a fix before it propagates
 
-Keep the gate on each branch minimal — hk's pre-commit hooks (ruff, oxfmt, pyright,
-i18n, alembic-head checks) already run per commit and catch the bulk of what a full
-local suite would.
-Don't re-derive that coverage by hand.
+Keep the gate on each branch minimal — a hook suite (hk, pre-commit) already runs
+format/lint/type-check per commit and catches the bulk of what a full local suite would.
+Don't re-derive that coverage by hand; trust the hook's output.
 
-- Trust the commit hook's output. If it passed, format/lint/type-check are already covered
-    — no need for a separate `make check`/`ruff` pass.
-- Run targeted tests, not full suites: `pytest -k <test_name_or_module>` (or the
-    `make test-api EXP="..."`/`test-common EXP="..."` equivalent) against the specific test
-    file(s) the fix touches.
-    A full `make test-api` / `test-common` run is rarely worth the wall-clock time mid-stack
-    — it's redundant with what CI runs on push anyway.
+- Run targeted tests, not full suites: scope to the specific test file(s) or module the
+    fix touches (`pytest -k <name>`, or the project's own scoped-test flag — `pre-pr-qa`'s
+    `EXP="..."` in the platform repo).
+    A full suite run is rarely worth the wall-clock time mid-stack — it's redundant with
+    what CI runs on push anyway.
 - Let CI be the full-suite backstop. Push, open/refresh the PR, and if CI flags something
     a targeted run missed, fix forward with another small commit and re-sync upward — don't
     block the merge-forward cascade on running every suite locally first.
-- Reach for a broader local run only when the fix is genuinely cross-cutting (touches
-    shared infra many suites depend on) or CI is slow/flaky enough that a quick local check
-    is faster than waiting on it.
-- If the shared dev stack's migration state doesn't match the branch you're testing
-    (checked out a lower branch that's behind or ahead of what's currently migrated), reset
-    it with `make run-backend-reset-db` rather than building parallel test infrastructure —
-    this repo's fixtures are designed to be cheap to regenerate.
+- Reach for the project's full gate ladder (`pre-pr-qa` in the platform repo) only when
+    the fix is genuinely cross-cutting (touches shared infra many suites depend on) or CI
+    is slow/flaky enough that a local check is faster than waiting on it.
+- If the shared dev stack's migration/fixture state doesn't match the branch you're
+    testing (checked out a lower branch that's behind or ahead of what's currently
+    migrated), reset it with the project's own reset command (`make run-backend-reset-db`
+    in the platform repo) rather than building parallel test infrastructure.
     **Never spin up an ad-hoc container or scratch database to work around this — ask the
     user first** if a reset isn't appropriate (e.g. it would discard state they explicitly
     asked you to preserve).

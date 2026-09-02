@@ -1,3 +1,7 @@
+.claude/skills/change-review/staging-file.md
+.claude/skills/hunk-review/
+.claude/skills/incident/
+.claude/skills/resolve-conflicts/
 .config/.jira
 .config/cheat/
 .config/marzano

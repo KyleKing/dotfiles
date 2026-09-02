@@ -1,6 +1,11 @@
 {
   "agentPushNotifEnabled": true,
   "alwaysThinkingEnabled": true,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "autoMode": {
     "allow": [
       "$defaults",
