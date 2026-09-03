@@ -134,10 +134,20 @@ and `git merge` gives no warning either way.
 Before merging in a stack, confirm direction with:
 
 ```
-git merge-base --is-ancestor <branch-you-are-on> <other-branch> && echo "safe: other-branch is downstream, ok to merge it in"
+git merge-base --is-ancestor <other-branch> <branch-you-are-on> && echo "safe: other-branch is already below you, ok to merge it in"
 ```
 
-If that check fails, you're about to merge the wrong way.
+The operand order matters and is easy to get backwards: `--is-ancestor A B` exits 0
+when A is an ancestor of B, so the branch you name first is the one that must be
+*below* you.
+Reversing them prints "safe" for exactly the merge that auto-closes the upper PR.
+
+A silent exit is not a green light.
+Once both branches have their own commits — the normal state during a sync — neither
+is an ancestor of the other and the check fails for a correct merge as readily as for
+a wrong one.
+Treat a failure as "unproven" and settle direction from the stack order instead: the
+branch you merge in is always the one your PR is based on.
 
 **Symptoms this already happened:** a PR you didn't touch shows as merged/closed in
 `gh pr list --state all`, or a sibling PR's `baseRefName` changed on its own.

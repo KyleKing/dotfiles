@@ -49,9 +49,8 @@
     Add a body only when the "why" is genuinely non-obvious from the subject (referred to as
     'CC')
 
-- The `attribution` setting in `settings.json` suppresses the auto-appended
-    `Co-Authored-By`/session trailer, but never write that text into a commit or PR body
-    yourself either.
+- NEVER reference the AI, the model, Claude, or Claude Code anywhere in a commit: no
+    `Co-Authored-By` line, no model name, no session trailer, no "generated with" note.
     The commit must read as if I wrote it
 
 - If files become staged, modified, or deleted outside of your own edits mid-session (e.g.
@@ -130,9 +129,16 @@
     Prose that restates what the code does will diverge from it, so don't write it
 - Keep documentation current with the change: when a change invalidates a README, ROADMAP,
     or doc section, update it in the same change rather than leaving it stale
-- Before finishing any task that touched code, reread every comment and docstring you
-    added or left in place, delete any that don't meet the bar above, and cut the survivors
-    down to the constraint they state
+- The test that decides it: a comment must answer "what breaks if you change this line?"
+    A comment answering "why is this line here?"
+    or "why did I change this?" is PR text,
+    so delete it, however true it is.
+    Nothing about the code's own history, a tool's documented behavior, or the reasoning
+    that led to the current shape survives that test
+- Surrounding code is not a license. A file already full of long comments is a file with a
+    problem, so match the rule instead of the neighbors
+- Before finishing any task that touched code, list every comment you added, apply that
+    test to each one out loud, and cut the survivors down to the constraint they state
 - Don't add or update docstrings for functions you didn't change
 
 ## Files
@@ -171,6 +177,44 @@
     Only pick Opus when the subagent's work genuinely needs the extra reasoning depth
     (hard architectural tradeoffs, ambiguous multi-file debugging), and almost never pick
     Fable
+
+### My own tools
+
+I write and maintain a set of terminal tools, checked out under `~/Developer/kyleking/`
+and usually installed on `PATH`.
+Reach for the one that fits before falling back to raw `gh`, `aws`, or a hand-rolled
+loop, and read its `--help` rather than guessing at flags:
+
+| Tool                | For                                                                           |
+| ------------------- | ----------------------------------------------------------------------------- |
+| `gh-lazydispatch`   | run a `workflow_dispatch` workflow, and read a failed run (`export diagnose`) |
+| `gh-repo-dashboard` | status of every repo under a directory, with PR and CI state                  |
+| `gh-sweep`          | audit many repos: dead branches, protection drift, slow workflows             |
+| `tail-cw`           | tail and explore CloudWatch logs                                              |
+| `tlr`               | Linear and Pylon triage, capacity, and goals                                  |
+| `second-look`       | prepare a local code review                                                   |
+| `vcr-tui`           | preview VCR cassettes and machine-generated files                             |
+
+`gh-lazydispatch export diagnose <run-id>` is the one to remember: `gh run view --log`
+returns the whole log and `--log-failed` still returns every line of every failed job,
+which is the wrong shape for "why did this fail".
+
+When one of them is wrong, missing a case, or in the way, fix it in its own checkout
+instead of working around it here.
+That is the whole reason they are mine.
+Read that repo's `AGENTS.md` and `CONTRIBUTING.md` first, because each one carries its
+own
+check ladder and its own known false negatives, then run that ladder to completion and
+commit there.
+Prove the fix the same way as anywhere else: write the test, remove the fix, watch it
+fail, put the fix back.
+
+Two things to say out loud rather than do quietly.
+Tell me when you overwrite an installed binary with a local build, because the version
+on
+`PATH` then differs from the last release.
+Tell me when a tool cannot do what I asked and the reason is a real gap, so I can decide
+whether it is worth building.
 
 ## Posting to Linear, Slack, and GitHub
 

@@ -64,8 +64,6 @@ brew "gum"
 brew "hadolint"
 # Git hook and pre-commit lint manager
 brew "hk"
-# Review-first terminal diff viewer for agent-authored changesets
-brew "hunk"
 # Git-compatible distributed version control system
 brew "jj"
 # TUI for interacting with the Jujutsu version control system
