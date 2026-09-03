@@ -24,6 +24,11 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "2.9.4"
   },
+  "flyctl": {
+    "requested_version": "latest",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "0.4.97"
+  },
   "go": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
@@ -57,7 +62,7 @@
   "hk": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.54.0"
+    "version": "1.56.1"
   },
   "lua-language-server": {
     "requested_version": "latest",
@@ -292,7 +297,7 @@
   "typos": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.49.0"
+    "version": "1.50.0"
   },
   "watchexec": {
     "requested_version": "latest",

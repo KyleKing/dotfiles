@@ -213,6 +213,8 @@ brew "tmux"
 brew "tpm"
 # Parser generator tool
 brew "tree-sitter-cli"
+# Language Server Protocol implementation for TypeScript wrapping tsserver
+brew "typescript-language-server"
 # Markup-based typesetting system
 brew "typst"
 # RTF to other formats converter
@@ -402,6 +404,8 @@ cask "wezterm@nightly"
 cask "whatsapp"
 # VPN client for secure internet access and private browsing
 cask "windscribe"
+# AI-assisted development environment
+cask "zcode"
 # Multiplayer code editor
 cask "zed"
 # Gecko based web browser
