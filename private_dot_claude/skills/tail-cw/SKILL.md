@@ -153,9 +153,6 @@ fix(query): make a field search work across groups that lack the field
 docs: record what the trace scan costs
 ```
 
-Never reference the AI, the model, Claude, or Claude Code anywhere in a commit: no
-`Co-Authored-By`, no session trailer, no "generated with" note.
-
 Do not push, and do not stage or revert changes you did not make.
 `investigations/` is
 untracked on purpose and belongs to another repo, so exclude it:

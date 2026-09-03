@@ -49,8 +49,9 @@
     Add a body only when the "why" is genuinely non-obvious from the subject (referred to as
     'CC')
 
-- NEVER reference the AI, the model, Claude, or Claude Code anywhere in a commit: no
-    `Co-Authored-By` line, no model name, no session trailer, no "generated with" note.
+- The `attribution` setting in `settings.json` suppresses the auto-appended
+    `Co-Authored-By`/session trailer, but never write that text into a commit or PR body
+    yourself either.
     The commit must read as if I wrote it
 
 - If files become staged, modified, or deleted outside of your own edits mid-session (e.g.

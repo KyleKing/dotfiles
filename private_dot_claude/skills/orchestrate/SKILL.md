@@ -50,7 +50,6 @@ A blocking question with nothing delivered is the failure mode to avoid.
     so committing is the default; skip only if the scope question said not to.
     Conventional Commits, one readable subject line, no body unless the why is genuinely
     non-obvious.
-    Never reference the AI, the model, or the session anywhere in the message.
 1. Update the plan document: mark the phase done, record anything discovered that changes
     later phases.
 

@@ -260,12 +260,22 @@ end
 -- Always abbreviated to the same width, so a tab doesn't resize when it becomes active/inactive.
 -- The active tab always trades its last 3 characters for a left-facing arrow, regardless of
 -- whether those characters were the ".." truncation suffix or part of the name.
+-- Pad short names so the active-tab arrow (which replaces the last 3 chars) doesn't clobber them
+local MIN_PADDED_LEN = 5
+local function pad_for_arrow(str)
+    if #str >= MIN_PADDED_LEN then return str end
+    return str .. string.rep(" ", MIN_PADDED_LEN - #str)
+end
+
 local function format_tab_content(tab, is_active)
     local dir_name = abbreviate(get_git_dir_name(tab), 12)
     local depth_indicator = get_git_depth_indicator(tab)
     if has_multiple_git_roots(tab) then depth_indicator = icon_multi_repo .. " " .. depth_indicator end
 
-    if is_active then dir_name = dir_name:sub(1, math.max(0, #dir_name - 3)) .. active_arrow end
+    if is_active then
+        local padded = pad_for_arrow(dir_name)
+        dir_name = padded:sub(1, math.max(0, #padded - 3)) .. active_arrow
+    end
 
     -- The hair space is too thin next to the not-git-root glyph, which reads as smooshed
     local depth_sep = depth_indicator:find(icon_not_git, 1, true) and " " or hair
