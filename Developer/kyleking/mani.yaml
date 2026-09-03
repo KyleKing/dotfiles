@@ -11,6 +11,8 @@ projects:
       - calcipy-template
   calcipy_template:
     url: git@github.com:KyleKing/calcipy_template.git
+  chartui:
+    url: git@github.com:KyleKing/chartui.git
   codanna.nvim:
     url: git@github.com:KyleKing/codanna.nvim.git
   copier-template-tester:
@@ -47,6 +49,8 @@ projects:
     url: git@github.com:KyleKing/hk-debugging.git
   jj-diff:
     url: git@github.com:KyleKing/jj-diff.git
+  jj-tui:
+    url: git@github.com:KyleKing/jj-tui.git
   karabiner-actions:
     url: git@github.com:KyleKing/karabiner-actions
   KyleKing:
@@ -64,6 +68,9 @@ projects:
     tags: ["mdformat-plugin"]
   mdformat-hooks:
     url: git@github.com:KyleKing/mdformat-hooks.git
+    tags: ["mdformat-plugin"]
+  mdformat-hugo:
+    url: git@github.com:KyleKing/mdformat-hugo.git
     tags: ["mdformat-plugin"]
   mdformat-mkdocs:
     url: git@github.com:KyleKing/mdformat-mkdocs.git
@@ -123,21 +130,29 @@ tasks:
     desc: show working tree status
     output: table
     parallel: true
-    cmd: git status
+    cmd: |
+      if [ -d .jj ]; then jj status; else git status; fi
 
   git-pull:
     desc: pull remote updates. Exit 0 on error
     parallel: true
-    cmd: git pull || true
+    cmd: |
+      if [ -d .jj ]; then jj git fetch --config git.abandon-unreachable-commits=false || true; else git pull || true; fi
 
   git-ahead-behind:
-    desc: show commits ahead/behind the upstream branch
+    desc: show commits ahead/behind trunk (jj) or the upstream branch (git)
     output: table
     parallel: true
     cmd: |
-      git fetch --quiet 2>/dev/null || true
-      AHEAD=$(git rev-list --count '@{upstream}..HEAD' 2>/dev/null || echo "?")
-      BEHIND=$(git rev-list --count 'HEAD..@{upstream}' 2>/dev/null || echo "?")
+      if [ -d .jj ]; then
+        jj git fetch --config git.abandon-unreachable-commits=false --quiet 2>/dev/null || true
+        AHEAD=$(jj log -r 'trunk()..@' --no-graph -T 'commit_id ++ "\n"' 2>/dev/null | wc -l | tr -d ' ')
+        BEHIND=$(jj log -r '@..trunk()' --no-graph -T 'commit_id ++ "\n"' 2>/dev/null | wc -l | tr -d ' ')
+      else
+        git fetch --quiet 2>/dev/null || true
+        AHEAD=$(git rev-list --count '@{upstream}..HEAD' 2>/dev/null || echo "?")
+        BEHIND=$(git rev-list --count 'HEAD..@{upstream}' 2>/dev/null || echo "?")
+      fi
       echo "ahead=$AHEAD behind=$BEHIND"
 
   gpoi:
@@ -145,38 +160,56 @@ tasks:
     parallel: true
     cmd: |
       COUNT=$(git branch --format='%(HEAD) %(refname:short) -> %(upstream:short)' | wc -l)
-      if (("$COUNT" > 1)); then git checkout main && gh poi && git pull; else echo "No change; only one checked out branch"; fi
+      if (("$COUNT" > 1)); then
+        if [ -d .jj ]; then jj new main && gh poi && jj git fetch --config git.abandon-unreachable-commits=false; else git checkout main && gh poi && git pull; fi
+      else
+        echo "No change; only one checked out branch"
+      fi
 
   git-prune:
     desc: remove local branches and tags which have been deleted on remote
     parallel: true
     env:
       remote: origin
-    cmd: git fetch --prune --prune-tags
+    cmd: |
+      if [ -d .jj ]; then jj git fetch --config git.abandon-unreachable-commits=false; else git fetch --prune --prune-tags; fi
 
   git-daily:
     desc: show branch, local and remote diffs, last commit and date
     parallel: true
     commands:
       - name: branch
-        cmd: git rev-parse --abbrev-ref HEAD
+        cmd: |
+          if [ -d .jj ]; then jj log -r 'heads(::@- & bookmarks())' --no-graph -T 'bookmarks'; else git rev-parse --abbrev-ref HEAD; fi
 
       - name: status
-        cmd: git status
+        cmd: |
+          if [ -d .jj ]; then jj status; else git status; fi
 
       - name: local diff
-        cmd: git diff --name-only | wc -l
+        cmd: |
+          if [ -d .jj ]; then jj diff --name-only | wc -l; else git diff --name-only | wc -l; fi
 
       - name: remote diff
         cmd: |
-          current_branch=$(git rev-parse --abbrev-ref HEAD)
-          git diff "$current_branch" "origin/$current_branch" --name-only 2> /dev/null | wc -l
+          if [ -d .jj ]; then
+            jj log -r 'trunk()..@' --no-graph -T 'commit_id ++ "\n"' 2>/dev/null | wc -l
+          else
+            current_branch=$(git rev-parse --abbrev-ref HEAD)
+            git diff "$current_branch" "origin/$current_branch" --name-only 2> /dev/null | wc -l
+          fi
 
       - name: last commit
-        cmd: git log -1 --pretty=%B
+        cmd: |
+          if [ -d .jj ]; then jj log -r '@-' --no-graph -T 'description'; else git log -1 --pretty=%B; fi
 
       - name: commit date
-        cmd: git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" | sed 's/ //'
+        cmd: |
+          if [ -d .jj ]; then
+            jj log -r '@-' --no-graph -T 'committer.timestamp().format("%d %b %y")'
+          else
+            git log -1 --format="%cd (%cr)" -n 1 --date=format:"%d  %b %y" | sed 's/ //'
+          fi
 
   uv-update:
     desc: "Run `uv update`. Run with: `mani run uv-update --tags=calcipy-template`"
