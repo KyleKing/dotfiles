@@ -38,6 +38,8 @@ Invoking this skill authorizes, for the target repos only:
 
 Every commit made under this skill sets `GIT_COMMITTER_NAME=freshen-bot` so a freshen
 pass is greppable after the fact (`git log --format='%h %cn %s'`).
+Set it on `git pull --rebase` too: a rebase replays the commits and re-stamps the
+committer from the ambient environment, silently dropping the marker.
 Author and both email addresses stay untouched: the commit still reads as Kyle's, the
 ssh signature still verifies, and the committer email stays a verified address on his
 GitHub account.
@@ -58,15 +60,19 @@ understanding why it fails).
     release, then apply the new template version to the children.
     Child-local fixes that the template would overwrite on the next update are wasted work
 - Ignore the content of doing.txt and roadmap/next-steps files.
-    If one is staged, it commits along with everything else
+    doing.txt is in the global excludes, so a staged one is an accident: `git rm --cached`
+    it and leave the file on disk.
+    Never commit scratch notes to a public repo
 - If a repo contains freshen.txt in its root, complete those instructions in addition to
     the normal steps
 - Track per-repo actions in .freshen.md in that repo's root (globally gitignored, see
     Preflight).
     Each pass appends one `## <YYYY-MM-DD> · session <id>` heading followed by terse action
     lines, newest section at the top.
-    The file persists across passes so a repo carries its own freshen history; never
-    truncate it.
+    Keep the newest section plus any older line still describing open work, and delete the
+    rest in Phase 5.
+    A pass log that outlives what it describes is noise the next agent has to read and
+    disprove.
     The id is the first 8 characters of `$CLAUDE_CODE_SESSION_ID`, resolved once by the
     orchestrator and passed to every worker so all repos in one pass share it
 - Concurrent-work guard: immediately before any commit, re-run `git status --porcelain`
@@ -226,9 +232,29 @@ Follow with a numbered list of items needing the user, each with the repo, the b
 and the decision required.
 
 Always also write each repo's follow-up items into that repo itself, so they survive the
-session: doing.txt under a dated heading, or NEXT_STEPS.md where that is the repo's
-convention, one line per item.
-The chat report is the summary; the repo notes are the durable copy.
+session, one line per item.
+Use the file that repo already keeps (NEXT_STEPS.md, ROADMAP.md), and add NEXT_STEPS.md
+only where none exists.
+The chat report is the summary. The repo notes are the durable copy.
+
+### Prune before reporting
+
+A pass that leaves its own scaffolding behind costs the next pass more than it saved.
+Every repo ends with at most one durable notes file, so finish each one by deleting:
+
+- FINDINGS.md and freshen-doing.txt outright, once their surviving items have moved into
+    the repo's notes file.
+    These are pass artifacts, not repo content
+- every closed item in the notes file, and every entry a worker verified as already done.
+    Verify against the source before deleting, never against the entry's own claim
+- the notes file itself when nothing open is left in it
+- .freshen.md sections older than the newest one, keeping only lines that still describe
+    open work
+
+Files the pass created to hold intermediate state (renders, patches, scratch copies) go
+too.
+Say in the report what was deleted and what survived, so a wrong deletion is
+visible rather than silent.
 
 When template maintenance is committed in this repo's checkout of the template, also run
 `hk fix` (or the repo's fix task) BEFORE the final commit: the hooks re-sort TOML and

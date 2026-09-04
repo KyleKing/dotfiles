@@ -21,8 +21,13 @@ verified on Kyle's GitHub account:
 GIT_COMMITTER_NAME=freshen-bot git commit -m "fix(deps): bump x/net to 0.38.0"
 ```
 
+Set it on `git pull --rebase` as well.
+A rebase replays each commit and re-stamps the committer from the ambient environment,
+so a rebase after a rejected push silently drops the marker from everything it replays.
+
 Confirm it landed with `git log -1 --format='%an / %cn / %G?'`; expect
 `Kyle King / freshen-bot / G`.
+Check again after any rebase, not only after the commit.
 
 Never pipe `git commit` (or chain it with `&&` into a push) through a filter like `tail`
 — the pipe's exit code masks a hook failure, and the push then ships without the commit.
@@ -46,8 +51,21 @@ Hooks here rewrite files (toml-sort, whitespace fixers); when a commit fails tha
     transitive-only vulns with no reachable fix get a note, not a replace directive
 1. Push, then run the bundled `wait-ci.sh <owner/repo> <sha>` (blocking; prints
     per-workflow conclusions and a filtered failure tail).
+    Run it in the FOREGROUND and let it block.
+    Backgrounding it, or waiting on a task notification, hangs forever: nothing sends a
+    notification to a worker.
+    Four of nine workers stalled that way on 2026-08-27 and another on 2026-08-31.
     Pushing fix/feat commits triggers Bump Version, which pushes a `bump:` commit back:
     `git pull --rebase` before every push and re-sync after workflows finish
+1. After `copier update`, check `.copier-answers.yml`'s `_src_path`.
+    copier can rewrite a `gh:owner/repo` source to the temp directory it cloned into,
+    which pins the child to a path that stops existing the moment the run ends.
+    It hit all three my_lua_template children on 2026-08-31
+1. A copier update that bumps tool pins also invalidates the mise lockfile.
+    `mise install --locked` then fails in CI with "No lockfile URL found for <tool>@<ver>
+    on platform linux-x64", because a lockfile only carries the platforms it was last
+    locked for and locking on a Mac alone leaves CI red.
+    Run `mise lock --platform linux-x64,macos-arm64` and commit the lockfile with the bump
 1. CI failure: root-cause it from the wait-ci tail.
     Minimal correct fixes only: no skipped tests, no widened timeouts, no disabled linters.
     Three fix-and-push iterations without a new root cause means stop and report
@@ -57,7 +75,11 @@ Hooks here rewrite files (toml-sort, whitespace fixers); when a commit fails tha
 1. Append the pass's actions to .freshen.md in the repo root (globally gitignored; create
     if missing) under a `## <YYYY-MM-DD> · session <id>` heading, newest section first,
     using the pass id from the orchestrator's prompt.
-    Never rewrite or truncate older sections
+    Then drop older sections, keeping only lines that still describe open work
+1. Prune the repo's pass artifacts before reporting: FINDINGS.md and freshen-doing.txt go
+    once their surviving items have moved into the repo's own notes file, closed items go
+    from that file, and the file itself goes when nothing open is left.
+    Verify each entry against the source before deleting, never against its own claim
 1. Leave follow-up items for Kyle in the repo's notes file (doing.txt under a dated
     heading, or NEXT_STEPS.md where that is the convention), one line each
 

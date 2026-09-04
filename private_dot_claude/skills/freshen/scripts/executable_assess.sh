@@ -22,12 +22,16 @@ for name in "${repos[@]}"; do
 
   git -C "$dir" fetch --quiet 2>/dev/null || true
 
-  branch=$(git -C "$dir" rev-parse --abbrev-ref HEAD)
+  # An unborn branch has no HEAD commit, so rev-parse exits 128 under `set -e`
+  unborn=false
+  git -C "$dir" rev-parse --verify --quiet HEAD >/dev/null || unborn=true
+  branch=$(git -C "$dir" branch --show-current)
+  [ -n "$branch" ] || branch=$(git -C "$dir" rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD)
   counts=$(git -C "$dir" rev-list --left-right --count "origin/$branch...$branch" 2>/dev/null || echo "-1 -1")
   behind=${counts%%[[:space:]]*}
   ahead=${counts##*[[:space:]]}
-  staged=$(git -C "$dir" diff --cached --name-only | wc -l | tr -d ' ')
-  unstaged=$(git -C "$dir" diff --name-only | wc -l | tr -d ' ')
+  staged=$(git -C "$dir" diff --cached --name-only 2>/dev/null | wc -l | tr -d ' ')
+  unstaged=$(git -C "$dir" diff --name-only 2>/dev/null | wc -l | tr -d ' ')
   untracked=$(git -C "$dir" ls-files --others --exclude-standard | wc -l | tr -d ' ')
 
   copier_src=""; copier_commit=""
@@ -57,10 +61,11 @@ for name in "${repos[@]}"; do
     --arg copier_src "$copier_src" --arg copier_commit "$copier_commit" \
     --argjson is_template "$(case "$name" in *template*) echo true;; *) echo false;; esac)" \
     --argjson has_freshen_txt "$([ -f "$dir/freshen.txt" ] && echo true || echo false)" \
+    --argjson unborn "$unborn" \
     --argjson gh "$gh_meta" --argjson ci "$ci" --argjson alerts "$alerts" \
     '{name: $name, exists_locally: true, branch: $branch, ahead: $ahead, behind: $behind,
       staged: $staged, unstaged: $unstaged, untracked: $untracked,
       copier_src: $copier_src, copier_commit: $copier_commit,
-      is_template: $is_template, has_freshen_txt: $has_freshen_txt} + $gh
+      is_template: $is_template, has_freshen_txt: $has_freshen_txt, unborn: $unborn} + $gh
      + {ci: $ci, dependabot_alerts: $alerts}'
 done

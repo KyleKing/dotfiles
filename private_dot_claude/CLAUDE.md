@@ -193,15 +193,20 @@ and usually installed on `PATH`.
 Reach for the one that fits before falling back to raw `gh`, `aws`, or a hand-rolled
 loop, and read its `--help` rather than guessing at flags:
 
-| Tool                | For                                                                           |
-| ------------------- | ----------------------------------------------------------------------------- |
-| `gh-lazydispatch`   | run a `workflow_dispatch` workflow, and read a failed run (`export diagnose`) |
-| `gh-repo-dashboard` | status of every repo under a directory, with PR and CI state                  |
-| `gh-sweep`          | audit many repos: dead branches, protection drift, slow workflows             |
-| `tail-cw`           | tail and explore CloudWatch logs                                              |
-| `tlr`               | Linear and Pylon triage, capacity, and goals                                  |
-| `second-look`       | prepare a local code review                                                   |
-| `vcr-tui`           | preview VCR cassettes and machine-generated files                             |
+| Tool                | For                                                                                 |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| `chartui`           | terminal charting library for Rich and Textual apps                                 |
+| `db-slice`          | render database records as a shareable styled HTML report                           |
+| `extract_finances`  | pull personal finance data and triage it in a terminal UI                           |
+| `gh-lazydispatch`   | run a `workflow_dispatch` workflow, and read a failed run (`export diagnose`)       |
+| `gh-repo-dashboard` | status of every repo under a directory, with PR and CI state                        |
+| `gh-sweep`          | audit many repos: dead branches, protection drift, slow workflows                   |
+| `jj-diff`           | jj's interactive diff editor: move hunks or lines between revisions, split a commit |
+| `jj-tui`            | lazygit-style TUI for Jujutsu, replacing daily `jj` commands (planning stage)       |
+| `tail-cw`           | tail and explore CloudWatch logs                                                    |
+| `tlr`               | Linear and Pylon triage, capacity, and goals                                        |
+| `second-look`       | prepare a local code review                                                         |
+| `vcr-tui`           | preview VCR cassettes and machine-generated files                                   |
 
 `gh-lazydispatch export diagnose <run-id>` is the one to remember: `gh run view --log`
 returns the whole log and `--log-failed` still returns every line of every failed job,
