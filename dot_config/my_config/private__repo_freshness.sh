@@ -24,7 +24,7 @@ _repo-freshness-refresh() {
     # Stamp before fetching so a hung or offline fetch can't retrigger on every new shell
     : >|"$_REPO_FRESHNESS_DIR/stamp"
 
-    local entry name zquery dir rest behind ahead oldest_ts now
+    local entry name zquery dir rest behind ahead ahead_aged oldest_ts now
     local -a lines=()
     for entry in "${_REPO_FRESHNESS_REPOS[@]}"; do
         name="${entry%%:*}"
@@ -38,18 +38,22 @@ _repo-freshness-refresh() {
             continue
         fi
         behind=$(git -C "$dir" rev-list --count 'HEAD..@{upstream}' 2>/dev/null) || continue
-        if [ "$behind" -gt 0 ]; then
-            lines+=("$name +$behind (z $zquery && git pull)")
-        fi
         ahead=$(git -C "$dir" rev-list --count '@{upstream}..HEAD' 2>/dev/null) || continue
+        ahead_aged=0
         if [ "$ahead" -gt 0 ]; then
             oldest_ts=$(git -C "$dir" log --format=%ct '@{upstream}..HEAD' | tail -1)
             if [ -n "$oldest_ts" ]; then
                 now=$(date +%s)
-                if ((now - oldest_ts >= _REPO_FRESHNESS_UNPUSHED_AGE)); then
-                    lines+=("$name unpushed+$ahead (z $zquery && git push)")
-                fi
+                ((now - oldest_ts >= _REPO_FRESHNESS_UNPUSHED_AGE)) && ahead_aged=1
             fi
+        fi
+        # Colors follow the oh-my-posh git segment: grey behind, orange ahead, red diverged
+        if [ "$behind" -gt 0 ] && [ "$ahead_aged" -eq 1 ]; then
+            lines+=("%F{1}$name ↓$behind ↑$ahead%f (z $zquery && git pull; z $zquery && git push)")
+        elif [ "$behind" -gt 0 ]; then
+            lines+=("%F{8}$name ↓$behind%f (z $zquery && git pull)")
+        elif [ "$ahead_aged" -eq 1 ]; then
+            lines+=("%F{3}$name ↑$ahead%f (z $zquery && git push)")
         fi
     done
     # printf still emits one blank line for a zero-arg "${lines[@]}", so guard it

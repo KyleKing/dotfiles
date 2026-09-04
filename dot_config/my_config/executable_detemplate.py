@@ -25,6 +25,10 @@ WHITELIST_KEYS = [
 
 SHELL_FILENAME_MARKERS = ('zshrc', 'zprofile', 'bashrc', 'bash_profile')
 
+IGNORE_MARKER = '# tmpl-ignore'
+"""Placed alone on the line above one to exempt from substitution (e.g. a line a tool like
+Docker Desktop rewrites in place, where folding it into a template placeholder would be wrong)."""
+
 
 def _flatten(data: dict, prefix: str = '') -> dict[str, str]:
     flat = {}
@@ -70,11 +74,21 @@ def detemplate() -> None:
         if '.git' in path.parts:
             continue
         original = path.read_text()
-        text = original
-        for value, replacement, shell_only in substitutions:
-            if shell_only and not _is_shell_file(path):
+        lines = original.splitlines(keepends=True)
+        skip_next = False
+        for i, line in enumerate(lines):
+            if line.strip() == IGNORE_MARKER:
+                skip_next = True
                 continue
-            text = text.replace(value, replacement)
+            if skip_next:
+                skip_next = False
+                continue
+            for value, replacement, shell_only in substitutions:
+                if shell_only and not _is_shell_file(path):
+                    continue
+                line = line.replace(value, replacement)
+            lines[i] = line
+        text = ''.join(lines)
         if text != original:
             path.write_text(text)
             changed.append(path.relative_to(source_dir))
