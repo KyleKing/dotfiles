@@ -5,7 +5,22 @@ description: Write pull request review comments and replies to review threads in
 
 # Change review
 
-How to write review comments the user will actually post, and how to stage them.
+How to write review comments the user will actually post.
+
+The mechanics belong to the `second-look` skill, which is generated from the binary and
+carries the commands, the batch shape, which fields post, and what is refused.
+Read it
+before the first batch of a session and do not work from a remembered schema.
+This file
+is the half the binary cannot know: whose voice a comment is in, what to read before
+writing one, and which findings get dropped by default.
+
+Refresh it whenever second-look is upgraded, since the generated copy goes stale
+silently:
+
+```sh
+second-look skill > ~/.claude/skills/second-look/SKILL.md
+```
 
 The prose rules in CLAUDE.md still apply.
 Review comments are short and get drafted
@@ -23,116 +38,75 @@ Writing comments on a pull request is this skill.
 Actioning a review somebody left on
 one is `change-review-apply`.
 Catching up on reviews nobody actioned before the pull
-request merged is `change-review-retroactive`, which sweeps a window of merged pull
+request merged is `change-review-apply-retroactive`, which sweeps a window of merged
+pull
 requests and lands the surviving findings as one new pull request.
 
-## Step 0-queue: a batch rather than one pull request
+## A batch rather than one pull request
 
-When the ask is every pull request waiting on review rather than a named one, the queue
-is `second-look inbox --json` and it comes in the order to work it: what is already
-started, then the cheapest of what an earlier read rated, then what has waited longest,
-with drafts under all of it.
-Take that order.
-Each row carries `reviewed`, `cost`, `rated`,
-`added`, and `removed`, so a row with no `rated` is one nobody has rated rather than one
-that is cheap.
-
-Filter before spending an agent on anything.
-A draft is not waiting on you, and a bot's
-draft least of all:
+`second-look inbox --json` is the queue and the second-look skill says how to read the
+order it comes in.
+Filter it before spending an agent on anything: a draft is not waiting
+on you, and a bot's draft least of all.
 
 ```sh
 second-look inbox --json | jq -r '.[] | select(.bucket=="needs my review")
   | .items[] | select(.draft==false) | "\(.repository)#\(.number)"'
 ```
 
-Stand anywhere, including a directory that is not a checkout of anything.
-A repository
-with no clone there keeps its reviews under the user config directory, one directory per
-repository, so a tree holding several clones of the same repository still has one set of
-reviews and which clone you run from does not matter.
+Parallelize across two or three full checkouts of the repository, one review at a time
+in
+each, never a worktree.
+The reviews all land in one place whichever clone you run from,
+so the clone is only there to hold a branch.
+Take the ones that are clean and on the
+default branch and leave the rest alone, since a dirty tree is somebody's parked work.
+More rows than clones is fine: the extra ones are read from the API, and the review's
+own
+`note` says which got a checkout and which did not.
 
-Stage the whole batch first, then read the order back:
+## Prepare the whole stack, not the top of it
 
-```sh
-second-look get <owner/repo#n>             # once per row, no checkout needed, ~3s each
-second-look reviews --json                 # every staged review, stacks bottom first
-```
+Run `ai-pr-stack.py <pr>` (by absolute path, `~/.config/my_config/ai-pr-stack.py`)
+unless
+the batch is already staged and `second-look reviews --json` has answered the same
+question.
+It prints the chain the requested pull request sits on, bottom first, or says
+plainly that it isn't stacked, and it is the way to find the chain above a single pull
+request you have not staged.
 
-`reviews` is where the stack order comes from once the batch is staged, because `get`
-records the branches each pull request joins and a chain is only visible with both ends
-on disk.
-Use it in place of `ai-pr-stack.py` when the whole queue is already staged; the
-script is still the way to find the chain above a single pull request you have not
-staged.
+Run `second-look get` against **every level it printed, bottom to top**.
+A stacked pull
+request's diff already excludes the levels below it, so getting only the top silently
+skips whatever the lower ones introduce.
 
-Most of a review needs no checkout.
-Two things do: checking a finding that cites code the
-diff does not carry, and running the tests or the app for a claim about behavior.
-A clone
-can only be on one branch, so those go one at a time in whichever clone is free and the
-rest are read from the API.
-Say in the review's own `note` which of the two a review got.
+Read them in that same order.
+A shape introduced low in the stack (a new accessor, a
+changed signature, a widened type) is often only fully legible once you have seen the
+upper pull request that calls it.
 
-Finding nothing is an answer.
-A prepared review with no comments reads the same whether it
-was read carefully or never opened, so write the run log into the review's `note` either
-way.
+Attribute every finding to the pull request that introduces the code, not the one whose
+diff you happened to be reading, and stage it there.
+Do not restage the same finding at
+every level it is still visible from; note the dependency in the upper review's note
+instead.
 
-## Step 0: prepare the review
+## Validate every anchor against local code
 
-Run `ai-pr-stack.py <pr>` first (called by absolute path,
-`~/.config/my_config/ai-pr-stack.py`), unless the whole queue is already staged and
-`second-look reviews --json` has answered the same question.
-It prints the chain of PRs the requested one is
-stacked on, bottom first, or says plainly that it isn't stacked.
-The output names every
-level to run `second-look get` against — read it off the tool rather than re-deriving it
-from `gh pr view`/`gh pr list` by hand.
-
-Run `second-look get <pr>` for **every PR number `ai-pr-stack.py` printed, bottom to
-top**, not only the one asked for.
-A stacked PR's diff already excludes the levels below
-it, so getting only the top level silently skips whatever the lower PRs introduce.
-
-It refuses to move a dirty working tree, so commit or stash first when it says so.
-Already being on a PR's head never blocks that PR's `get`, however dirty the tree is.
-
-Anchors inside the diff are checked for you from there.
-Staging quotes the diff line
-each comment points at, and a comment on a line the diff does not carry is refused with
-nothing written, which is what catches a subagent or bot citing line 993 of a 137-line
-file.
-Posting compares those quotes against the live diff again and refuses if any moved.
+Staging checks anchors inside the diff.
+Anything a finding cites outside it is yours to
+confirm against the checked-out code before you write a comment about it, because bot
+and
+subagent findings routinely cite lines that do not exist.
+If you cannot check out or
+fetch, stop and say so instead of writing from `gh pr diff` text alone.
 
 `line` is in the file's post-image when `side` is `RIGHT` and its pre-image when `LEFT`.
 
-## Step 0-stack: review bottom to top, stage findings at their own level
+## Read what the PR body left out
 
-Read each level in the order `ai-pr-stack.py` printed it, bottom first.
-A shape
-introduced low in the stack (a new accessor, a changed signature, a widened type) is
-often only fully legible once you've seen the upper PR that calls it.
-
-Attribute every finding to the PR that actually introduces the code in question, not the
-PR whose diff you happened to be reading when you noticed it — stage it with
-`second-look comment add <that-pr>`.
-Don't restage the same finding at every level it's
-still visible from; note the dependency in the upper PR's review note instead of
-duplicating the comment.
-
-## Step 0a: validate every anchor against local code
-
-`second-look get` covers anchors inside the diff; still confirm anything a finding
-cites outside the diff against the checked-out code before writing a comment about it.
-Bot and subagent findings routinely cite lines that don't exist.
-If you can't check out
-or fetch, stop and say so instead of writing from `gh pr diff` text alone.
-
-## Step 0b: read what the PR body left out
-
-Do this for every level of the stack, not just the one asked for — a lower PR usually
-carries its own ticket and thread links, separate from the top PR's.
+Do this for every level of the stack, not just the one asked for — a lower pull request
+usually carries its own ticket and thread links, separate from the top one's.
 
 Three sources carry findings the diff and PR body can't; skipping any produces a review
 that reads thorough while missing its best comment.
@@ -155,7 +129,7 @@ entirely for it.
 Check, and say which in the PR comment — the author reads silence as
 approval.
 
-## Step 0c: attack your own findings before staging them
+## Attack your own findings before staging them
 
 Every finding gets a second pass; cost, performance, and missing-default claims first,
 because those are usually already handled somewhere the diff doesn't show.
@@ -181,53 +155,10 @@ Three finding shapes get dropped by default and shouldn't be:
 - A question the code can't settle needs the experiment that would answer it, not a bare
     "does this work?"
 
-## Step 0d: run the app for behavior claims
+## Run the app for behavior claims
 
 A finding about behavior, not code shape, is worth running rather than reasoning about.
 Use the `run` skill if the project has one; report what happened, not what should.
-
-## Staging with second-look
-
-`second-look` holds the prepared review in `.second-look/pr-<number>.toml` and posts it
-in one call.
-Run `second-look --help` for the full contract: it documents every field,
-which of them post, and what is refused.
-Read it before the first batch of a session
-rather than guessing the shape from here.
-
-The shape of the work:
-
-```sh
-second-look show <pr>                      # what is already staged
-cat batch.json | second-look comment add <pr>
-second-look show <pr> --payload            # exactly what would leave the laptop
-```
-
-Then the user proofreads the TOML and runs `second-look post <pr>` themselves.
-Do not
-post on their behalf unless they said so in this session.
-
-**Every comment gets a `note`.** It is local and never posted, and it is where the
-evidence goes: the command that proved the finding and what it printed, the file that
-contradicts the claim, the reason for the doubt.
-The `body` carries only what the author
-reads, so the reasoning that would clutter a review comment belongs in the note instead
-of being cut.
-
-**Use `status` honestly.** `ready` means post it.
-`draft` means the thought is not
-finished, and `second-look post` refuses while any draft remains, so a draft is safe
-rather than risky.
-`skip` with a `skip_reason` records a finding considered and declined, which is
-worth more than deleting it: it reads as considered rather than missed.
-
-**Set `severity`** to one of blocker, major, minor, nit, or question.
-It orders what the
-user reads first.
-
-**Put the run notes in the top-level `note`**: what was run and what it returned, suites
-that could not run and why, and whether a bot already reviewed the PR.
-It shows how much of the review is proven rather than read.
 
 ## How to write a comment
 
@@ -304,9 +235,6 @@ not re-explain why the bug was bad or what would have happened, and do not over-
 a
 fix that is visible in the diff.
 One sentence naming the change is enough.
-Set
-`in_reply_to` to the review comment's id; `second-look` sends replies to their own
-endpoint.
 
 Before replying to a bot thread, check whether a later commit already resolved it
 (threads marked "✅ Addressed", or fixes visible in the diff).
@@ -327,8 +255,6 @@ Do not re-polish it against the
 voice rules, which govern what you draft rather than what they have already written.
 Small, clearly-needed edits (a changed anchor, a factual correction) are fine; do not
 rewrite the sentence.
-Reuse the comment's `id` so the edit replaces it rather than
-appending a duplicate.
 
 ## Merged PRs
 
