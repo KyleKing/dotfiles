@@ -15,10 +15,13 @@ reply prose without JSON's escaping), replies, resolves, and thumbs-up the
 review body once every finding has been actioned. `status` lists every
 review, bot or human, that has no thumbs-up and still has an unresolved
 thread or a CHANGES_REQUESTED verdict, so a review a later push buried
-doesn't go silently un-actioned.
+doesn't go silently un-actioned. `sweep` runs that same rule across every
+merged pull request an author landed in a window, which is where a review that
+arrived at merge time or after it turns up.
 """
 
 import argparse
+import datetime as dt
 import json
 import re
 import subprocess
@@ -49,6 +52,21 @@ query($owner:String!,$repo:String!,$number:Int!,$after:String){
       pageInfo{ hasNextPage endCursor }
       nodes{ databaseId state submittedAt url body author{login}
         reactions(content:THUMBS_UP){ totalCount } } } } } }
+"""
+
+SWEEP_QUERY = """
+query($owner:String!,$repo:String!,$number:Int!){
+  repository(owner:$owner,name:$repo){ pullRequest(number:$number){
+    reviews(first:100){
+      pageInfo{ hasNextPage }
+      nodes{ databaseId state submittedAt url body author{login}
+        reactions(content:THUMBS_UP){ totalCount } }
+    }
+    reviewThreads(first:100){
+      pageInfo{ hasNextPage }
+      nodes{ id isResolved isOutdated path line startLine originalLine originalStartLine
+        comments(first:100){ nodes{ databaseId body author{login} pullRequestReview{databaseId} } } }
+    } } } }
 """
 
 
@@ -347,8 +365,10 @@ def cmd_status(number: int | None) -> None:
     quoted in the output instead of a thread to fetch and act on directly.
     """
     repo, number, _ = pr_context(number)
-    reviews = fetch_reviews(repo, number)
-    threads = fetch_threads(repo, number)
+    print(json.dumps(pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number)), indent=2))
+
+
+def pending_reviews(reviews: list[dict], threads: list[dict]) -> list[dict]:
     open_by_review: dict[int, int] = {}
     for thread in threads:
         if thread['isResolved']:
@@ -374,7 +394,55 @@ def cmd_status(number: int | None) -> None:
         if open_threads == 0 and (review['body'] or '').strip():
             entry['body'] = '\n'.join(f"> {line}" for line in review['body'].splitlines())
         pending.append(entry)
-    print(json.dumps(pending, indent=2))
+    return pending
+
+
+def since_date(since: str) -> str:
+    """A --since of "7d" or "2026-08-28", as the date GitHub search wants."""
+    if since.endswith('d') and since[:-1].isdigit():
+        return (dt.date.today() - dt.timedelta(days=int(since[:-1]))).isoformat()
+    try:
+        return dt.date.fromisoformat(since).isoformat()
+    except ValueError:
+        sys.exit(f"--since takes Nd or YYYY-MM-DD, not {since!r}")
+
+
+def merged_prs(repo: str, author: str, since: str, limit: int) -> list[dict]:
+    return run_json('gh', 'search', 'prs', f"--repo={repo}", f"--author={author}",
+                    '--merged', f"--merged-at=>={since}", f"--limit={limit}",
+                    '--json', 'number,title,url,closedAt')
+
+
+def sweep_pr(repo: str, number: int) -> list[dict]:
+    """Every un-acked review on one pull request, in one read where a page holds it."""
+    owner, name = repo.split('/')
+    data = run_json('gh', 'api', 'graphql', '-f', f"query={SWEEP_QUERY}",
+                    '-f', f"owner={owner}", '-f', f"repo={name}",
+                    '-F', f"number={number}")['data']['repository']['pullRequest']
+    reviews, threads = data['reviews'], data['reviewThreads']
+    if reviews['pageInfo']['hasNextPage'] or threads['pageInfo']['hasNextPage']:
+        return pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number))
+    return pending_reviews(reviews['nodes'], threads['nodes'])
+
+
+def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
+    """Un-acked reviews across the pull requests an author merged in a window.
+
+    A review submitted at merge time or after it never blocks anything, so it
+    goes unread; this is the only surface that finds one. The rule is `status`'s,
+    per pull request, and a pull request with nothing pending is left out.
+    """
+    repo = repo or run_json('gh', 'repo', 'view', '--json', 'nameWithOwner')['nameWithOwner']
+    cutoff = since_date(since)
+    prs = merged_prs(repo, author, cutoff, limit)
+    swept = []
+    for pr in prs:
+        pending = sweep_pr(repo, pr['number'])
+        if pending:
+            swept.append({'merged_at': pr['closedAt'], 'number': pr['number'],
+                          'pending': pending, 'title': pr['title'], 'url': pr['url']})
+    print(json.dumps({'author': author, 'pull_requests': sorted(swept, key=lambda p: p['number']),
+                      'repo': repo, 'scanned': len(prs), 'since': cutoff}, indent=2))
 
 
 def cmd_apply(number: int | None, path: str | None) -> None:
@@ -431,12 +499,20 @@ def main() -> None:
     status_parser = sub.add_parser('status')
     status_parser.add_argument('--pr', type=int)
 
+    sweep_parser = sub.add_parser('sweep')
+    sweep_parser.add_argument('--repo')
+    sweep_parser.add_argument('--author', default='@me')
+    sweep_parser.add_argument('--since', default='7d')
+    sweep_parser.add_argument('--limit', type=int, default=100)
+
     args = parser.parse_args()
     try:
         if args.command == 'fetch':
             cmd_fetch(args.pr, args.review_id)
         elif args.command == 'status':
             cmd_status(args.pr)
+        elif args.command == 'sweep':
+            cmd_sweep(args.repo, args.author, args.since, args.limit)
         else:
             cmd_apply(args.pr, args.file)
     except subprocess.CalledProcessError as error:

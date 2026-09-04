@@ -17,10 +17,73 @@ diff", not "didn't land on a diff line"), and the unnamed-scope-qualifier and
 bare-open-question entries catch two shapes that show up constantly in short comments
 ("too" with nothing named, a question with no proposed answer).
 
+## Which skill
+
+Writing comments on a pull request is this skill.
+Actioning a review somebody left on
+one is `change-review-apply`.
+Catching up on reviews nobody actioned before the pull
+request merged is `change-review-retroactive`, which sweeps a window of merged pull
+requests and lands the surviving findings as one new pull request.
+
+## Step 0-queue: a batch rather than one pull request
+
+When the ask is every pull request waiting on review rather than a named one, the queue
+is `second-look inbox --json` and it comes in the order to work it: what is already
+started, then the cheapest of what an earlier read rated, then what has waited longest,
+with drafts under all of it.
+Take that order.
+Each row carries `reviewed`, `cost`, `rated`,
+`added`, and `removed`, so a row with no `rated` is one nobody has rated rather than one
+that is cheap.
+
+Filter before spending an agent on anything.
+A draft is not waiting on you, and a bot's
+draft least of all:
+
+```sh
+second-look inbox --json | jq -r '.[] | select(.bucket=="needs my review")
+  | .items[] | select(.draft==false) | "\(.repository)#\(.number)"'
+```
+
+Stand anywhere, including a directory that is not a checkout of anything.
+A repository
+with no clone there keeps its reviews under the user config directory, one directory per
+repository, so a tree holding several clones of the same repository still has one set of
+reviews and which clone you run from does not matter.
+
+Stage the whole batch first, then read the order back:
+
+```sh
+second-look get <owner/repo#n>             # once per row, no checkout needed, ~3s each
+second-look reviews --json                 # every staged review, stacks bottom first
+```
+
+`reviews` is where the stack order comes from once the batch is staged, because `get`
+records the branches each pull request joins and a chain is only visible with both ends
+on disk.
+Use it in place of `ai-pr-stack.py` when the whole queue is already staged; the
+script is still the way to find the chain above a single pull request you have not
+staged.
+
+Most of a review needs no checkout.
+Two things do: checking a finding that cites code the
+diff does not carry, and running the tests or the app for a claim about behavior.
+A clone
+can only be on one branch, so those go one at a time in whichever clone is free and the
+rest are read from the API.
+Say in the review's own `note` which of the two a review got.
+
+Finding nothing is an answer.
+A prepared review with no comments reads the same whether it
+was read carefully or never opened, so write the run log into the review's `note` either
+way.
+
 ## Step 0: prepare the review
 
 Run `ai-pr-stack.py <pr>` first (called by absolute path,
-`~/.config/my_config/ai-pr-stack.py`).
+`~/.config/my_config/ai-pr-stack.py`), unless the whole queue is already staged and
+`second-look reviews --json` has answered the same question.
 It prints the chain of PRs the requested one is
 stacked on, bottom first, or says plainly that it isn't stacked.
 The output names every
