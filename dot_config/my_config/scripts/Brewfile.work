@@ -212,6 +212,8 @@ brew "turbot/tap/steampipe"
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
+# Menu bar system monitor
+cask "airstats"
 # Application launcher and productivity software
 cask "alfred"
 # Application uninstaller

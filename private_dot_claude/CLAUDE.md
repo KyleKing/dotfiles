@@ -33,6 +33,14 @@
 
 ## Git
 
+- Check for `.jj/` before running anything that writes.
+    A colocated repository is driven with `jj`, not `git`: work in incremental changes off
+    the `main` bookmark, no branches, `jj describe -m` to name the working change and
+    `jj new` to start the next.
+    A detached git HEAD there is normal and is not something to fix.
+    `git` stays read-only in that repository, and `git commit`, `git add`,
+    `git checkout -b`, and `git stash` are all wrong
+
 - ONLY USE git operations to READ; DO NOT stage NOR unstage; DO NOT push
 
 - ONE exception is when implementing a SEQUENCE of changes where committing at checkpoints
