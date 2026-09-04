@@ -19,11 +19,21 @@ bare-open-question entries catch two shapes that show up constantly in short com
 
 ## Step 0: prepare the review
 
-Run `second-look get <pr>` first. It checks the pull request out, writes the prepared
-review, and caches the diff, and every later command reads what it leaves behind.
+Run `ai-pr-stack.py <pr>` first (called by absolute path,
+`~/.config/my_config/ai-pr-stack.py`).
+It prints the chain of PRs the requested one is
+stacked on, bottom first, or says plainly that it isn't stacked.
+The output names every
+level to run `second-look get` against — read it off the tool rather than re-deriving it
+from `gh pr view`/`gh pr list` by hand.
+
+Run `second-look get <pr>` for **every PR number `ai-pr-stack.py` printed, bottom to
+top**, not only the one asked for.
+A stacked PR's diff already excludes the levels below
+it, so getting only the top level silently skips whatever the lower PRs introduce.
 
 It refuses to move a dirty working tree, so commit or stash first when it says so.
-Already being on the pull request head never blocks, however dirty the tree is.
+Already being on a PR's head never blocks that PR's `get`, however dirty the tree is.
 
 Anchors inside the diff are checked for you from there.
 Staging quotes the diff line
@@ -34,6 +44,20 @@ Posting compares those quotes against the live diff again and refuses if any mov
 
 `line` is in the file's post-image when `side` is `RIGHT` and its pre-image when `LEFT`.
 
+## Step 0-stack: review bottom to top, stage findings at their own level
+
+Read each level in the order `ai-pr-stack.py` printed it, bottom first.
+A shape
+introduced low in the stack (a new accessor, a changed signature, a widened type) is
+often only fully legible once you've seen the upper PR that calls it.
+
+Attribute every finding to the PR that actually introduces the code in question, not the
+PR whose diff you happened to be reading when you noticed it — stage it with
+`second-look comment add <that-pr>`.
+Don't restage the same finding at every level it's
+still visible from; note the dependency in the upper PR's review note instead of
+duplicating the comment.
+
 ## Step 0a: validate every anchor against local code
 
 `second-look get` covers anchors inside the diff; still confirm anything a finding
@@ -43,6 +67,9 @@ If you can't check out
 or fetch, stop and say so instead of writing from `gh pr diff` text alone.
 
 ## Step 0b: read what the PR body left out
+
+Do this for every level of the stack, not just the one asked for — a lower PR usually
+carries its own ticket and thread links, separate from the top PR's.
 
 Three sources carry findings the diff and PR body can't; skipping any produces a review
 that reads thorough while missing its best comment.
@@ -59,7 +86,11 @@ whether it needs updating.
 Whether a bot reviewed at all: absence of findings has innocent causes that look
 identical to a clean review (non-default base, CodeRabbit out of credits, an unlinked
 account).
-Check, and say which in the PR comment — the author reads silence as approval.
+A stacked PR's non-default base is one such cause and not itself a problem, but
+confirm the bot actually reviewed against that base rather than skipping the PR
+entirely for it.
+Check, and say which in the PR comment — the author reads silence as
+approval.
 
 ## Step 0c: attack your own findings before staging them
 
