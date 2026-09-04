@@ -8,6 +8,7 @@ Run this after `chezmoi re-add` to catch that.
 """
 
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -25,9 +26,8 @@ WHITELIST_KEYS = [
 
 SHELL_FILENAME_MARKERS = ('zshrc', 'zprofile', 'bashrc', 'bash_profile')
 
-IGNORE_MARKER = '# tmpl-ignore'
-"""Placed alone on the line above one to exempt from substitution (e.g. a line a tool like
-Docker Desktop rewrites in place, where folding it into a template placeholder would be wrong)."""
+IGNORE_MARKER_RE = re.compile(r'^# tmpl-ignore\[\+(?P<offset>\d+)\] (?P<reason>\S.*)$')
+"""`# tmpl-ignore[+N] <reason>` exempts the single line N lines below it from substitution."""
 
 
 def _flatten(data: dict, prefix: str = '') -> dict[str, str]:
@@ -75,13 +75,17 @@ def detemplate() -> None:
             continue
         original = path.read_text()
         lines = original.splitlines(keepends=True)
-        skip_next = False
+        ignored_line_index = None
         for i, line in enumerate(lines):
-            if line.strip() == IGNORE_MARKER:
-                skip_next = True
+            stripped = line.strip()
+            if stripped.startswith('# tmpl-ignore'):
+                match = IGNORE_MARKER_RE.match(stripped)
+                if not match:
+                    msg = f'{path}:{i + 1}: malformed tmpl-ignore marker: {stripped!r}'
+                    raise ValueError(msg)
+                ignored_line_index = i + int(match['offset'])
                 continue
-            if skip_next:
-                skip_next = False
+            if i == ignored_line_index:
                 continue
             for value, replacement, shell_only in substitutions:
                 if shell_only and not _is_shell_file(path):
