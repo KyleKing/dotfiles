@@ -104,12 +104,8 @@ brew "mergiraf"
 brew "mise"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
-# Use NeoVim as a pager to view manpages, diffs, etc.
-brew "nvimpager"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
 # Create, run, and share large language models (LLMs)

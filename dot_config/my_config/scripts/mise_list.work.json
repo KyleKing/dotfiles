@@ -74,6 +74,11 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "0.24.2"
   },
+  "neovim": {
+    "requested_version": "nightly",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "nightly"
+  },
   "node": {
     "requested_version": "lts",
     "source": "/Users/kyleking/.config/mise/config.toml",
