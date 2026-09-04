@@ -1,4 +1,26 @@
+# T hands the todo set to Claude Code, with the file it wrote as the prompt.
+# The tool list is scoped to reading and to this binary: a review agent stages
+# comments through second-look and needs nothing else. Widen it deliberately if
+# you want the agent running tests.
+
+dispatch = [
+  "--chrome",
+  "--dangerously-skip-permissions",
+  "--model=sonnet",
+  "-p",
+  "claude",
+]
 limit = 25
+# Once the agent has recorded its session with `second-look session`, T resumes
+# that one instead of starting a stranger who has to read the diff again.
+resume = [
+  "--chrome",
+  "--dangerously-skip-permissions",
+  "--resume",
+  "-p",
+  "claude",
+  "{session}",
+]
 
 [[section]]
 name = "my work"
