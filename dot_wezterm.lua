@@ -292,27 +292,56 @@ end
 
 -- Convert arbitrary strings to a unique hex color using constrained HSL
 -- Goals: muted/sophisticated tones, good variety, readable with black/white text
+-- djb2 accumulation, then a MurmurHash3-style fmix32 avalanche finalizer. Plain djb2
+-- alone diffuses poorly for shared-prefix inputs (e.g. "sandbox-0-null" vs "sandbox-1-review"
+-- only diverge in their last few bytes), which left same-parent-directory siblings only
+-- 1-8 degrees apart on the hue wheel. fmix32 spreads any single-bit input difference
+-- across the whole output. Uses native Lua integers (bitwise ops require them) rather
+-- than `% (2 ^ 31)`, which forces float and silently rounds once products exceed 2^53
+local MASK32 = 0xFFFFFFFF
+
+local function fmix32(h)
+    h = h & MASK32
+    h = h ~ (h >> 16)
+    h = (h * 0x85ebca6b) & MASK32
+    h = h ~ (h >> 13)
+    h = (h * 0xc2b2ae35) & MASK32
+    h = h ~ (h >> 16)
+    return h
+end
+
+local function hash_string(str)
+    local hash = 5381
+    for i = 1, #str do
+        hash = ((hash * 33) + string.byte(str, i)) & MASK32
+    end
+    return fmix32(hash)
+end
+
+-- Re-avalanche the base hash with a salt so saturation/lightness are decorrelated from
+-- hue instead of being sliced from the same value (which made near-miss hues also land
+-- in the same saturation/lightness bucket)
+local function mix_hash(hash, salt) return fmix32(hash ~ salt) end
+
 local function string_to_color(str)
     -- Use only the directory name (last path component) for better hash distribution
     local name = str:match("([^/]+)$") or str
 
-    -- djb2 hash with better mixing
-    local hash = 5381
-    for i = 1, #name do
-        hash = ((hash * 33) + string.byte(name, i)) % (2 ^ 31)
-    end
-    hash = ((hash * 31337) + 12345) % (2 ^ 31)
+    local base_hash = hash_string(name)
+    local hue_hash = base_hash
+    local sat_hash = mix_hash(base_hash, 0x9E3779B9)
+    local light_hash = mix_hash(base_hash, 0x85EBCA6B)
 
     -- Generate hue from hash (full spectrum, 0-360)
-    local h_deg = hash % 360
+    local h_deg = hue_hash % 360
 
     -- Muted saturation range: 25-45% (avoids both gray and highlighter)
-    local sat_index = math.floor(hash / 360) % 5
+    local sat_index = sat_hash % 5
     local saturations = { 0.25, 0.30, 0.35, 0.40, 0.45 }
     local s = saturations[sat_index + 1]
 
     -- Comfortable lightness range: 55-75% (readable, not too dark or bright)
-    local light_index = math.floor(hash / 1800) % 5
+    local light_index = light_hash % 5
     local lightnesses = { 0.55, 0.60, 0.65, 0.70, 0.75 }
     local l = lightnesses[light_index + 1]
 
@@ -357,12 +386,74 @@ local function run_color_tests()
         end
     end
 
+    -- Regression tests for the fmix32 avalanche fix: plain djb2 diffused shared-prefix
+    -- inputs so poorly that these pairs landed within 1-8 deg of each other on the hue
+    -- wheel and read as the same color in the tab bar
+    local function circular_hue_diff(a, b)
+        local diff = math.abs(a - b) % 360
+        if diff > 180 then diff = 360 - diff end
+        return diff
+    end
+
+    local function hue_of(name) return (wezterm.color.parse(string_to_color(name)):hsla()) end
+
+    local hue_spread_tests = {
+        { "calcipy", "tail-jsonl", 20 },
+        { "jj-diff", "second-look", 20 },
+    }
+    for _, test in ipairs(hue_spread_tests) do
+        local name_a, name_b, min_diff = test[1], test[2], test[3]
+        local diff = circular_hue_diff(hue_of(name_a), hue_of(name_b))
+        if diff < min_diff then
+            table.insert(
+                failures,
+                string.format("hue spread %s/%s: only %.1f deg apart (want >= %d)", name_a, name_b, diff, min_diff)
+            )
+        end
+    end
+
+    -- The invariant that actually matters: sort_tabs_by_path sorts open tabs by git root
+    -- path, so directories sharing a parent (e.g. worktree siblings sandbox-0-null,
+    -- sandbox-1-review, ...) end up as literal neighbors in the tab bar. Verify every
+    -- adjacent pair in that sorted order clears the same hue-separation bar as the
+    -- standalone pairs above.
+    local sibling_names = {
+        "sandbox-0-null",
+        "sandbox-1-review",
+        "sandbox-2-two",
+        "sandbox-3-three",
+        "sandbox-4-four",
+        "sandbox-5-five",
+        "sandbox-5-five-wt-resource-diet",
+        "sandbox-review",
+        "sandbox-wt",
+    }
+    table.sort(sibling_names)
+    for i = 1, #sibling_names - 1 do
+        local name_a, name_b = sibling_names[i], sibling_names[i + 1]
+        local diff = circular_hue_diff(hue_of(name_a), hue_of(name_b))
+        local min_diff = 20
+        if diff < min_diff then
+            table.insert(
+                failures,
+                string.format(
+                    "sibling hue spread %s/%s (adjacent when sorted): only %.1f deg apart (want >= %d)",
+                    name_a,
+                    name_b,
+                    diff,
+                    min_diff
+                )
+            )
+        end
+    end
+
     local color_names = {
         "calcipy",
         "chezmoi",
         "mdformat",
         "mdformat-gfm-alerts",
         "mdformat-mkdocs",
+        "sandbox-0-null",
         "tail-jsonl",
         "textract-py3",
         "yak-shears",
