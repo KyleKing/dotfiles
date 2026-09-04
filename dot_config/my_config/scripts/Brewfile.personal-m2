@@ -125,10 +125,6 @@ brew "mergiraf"
 brew "mise"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
-# Use NeoVim as a pager to view manpages, diffs, etc.
-brew "nvimpager"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
 # Create, run, and share large language models (LLMs)
@@ -462,7 +458,6 @@ cargo "bacon"
 cargo "cargo-insta"
 cargo "cargo-nextest"
 cargo "flamegraph"
-uv "trafilatura"
 npm "corepack"
 npm "cspell"
 npm "markdown-link-check"
