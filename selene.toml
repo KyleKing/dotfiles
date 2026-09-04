@@ -1,3 +1,7 @@
+# selene's parser can't handle Lua 5.2+ bitwise operators (&, ~, >>) in any released
+# version, so the module using them is split out and excluded here
+
+exclude = ["dot_wezterm_hash.lua"]
 std = "lua53+vim" # Defined in vim.toml (https://kampfkarren.github.io/selene/usage/std.html)
 
 [lints]

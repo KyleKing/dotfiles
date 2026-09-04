@@ -292,45 +292,18 @@ end
 
 -- Convert arbitrary strings to a unique hex color using constrained HSL
 -- Goals: muted/sophisticated tones, good variety, readable with black/white text
--- djb2 accumulation, then a MurmurHash3-style fmix32 avalanche finalizer. Plain djb2
--- alone diffuses poorly for shared-prefix inputs (e.g. "sandbox-0-null" vs "sandbox-1-review"
--- only diverge in their last few bytes), which left same-parent-directory siblings only
--- 1-8 degrees apart on the hue wheel. fmix32 spreads any single-bit input difference
--- across the whole output. Uses native Lua integers (bitwise ops require them) rather
--- than `% (2 ^ 31)`, which forces float and silently rounds once products exceed 2^53
-local MASK32 = 0xFFFFFFFF
-
-local function fmix32(h)
-    h = h & MASK32
-    h = h ~ (h >> 16)
-    h = (h * 0x85ebca6b) & MASK32
-    h = h ~ (h >> 13)
-    h = (h * 0xc2b2ae35) & MASK32
-    h = h ~ (h >> 16)
-    return h
-end
-
-local function hash_string(str)
-    local hash = 5381
-    for i = 1, #str do
-        hash = ((hash * 33) + string.byte(str, i)) & MASK32
-    end
-    return fmix32(hash)
-end
-
--- Re-avalanche the base hash with a salt so saturation/lightness are decorrelated from
--- hue instead of being sliced from the same value (which made near-miss hues also land
--- in the same saturation/lightness bucket)
-local function mix_hash(hash, salt) return fmix32(hash ~ salt) end
+-- hash_string/mix_hash live in wezterm_hash.lua: selene can't parse their bitwise
+-- operators, so that file is excluded from selene's lint pass instead of this one
+local hash_utils = dofile(wezterm.config_dir .. "/.wezterm_hash.lua")
 
 local function string_to_color(str)
     -- Use only the directory name (last path component) for better hash distribution
     local name = str:match("([^/]+)$") or str
 
-    local base_hash = hash_string(name)
+    local base_hash = hash_utils.hash_string(name)
     local hue_hash = base_hash
-    local sat_hash = mix_hash(base_hash, 0x9E3779B9)
-    local light_hash = mix_hash(base_hash, 0x85EBCA6B)
+    local sat_hash = hash_utils.mix_hash(base_hash, 0x9E3779B9)
+    local light_hash = hash_utils.mix_hash(base_hash, 0x85EBCA6B)
 
     -- Generate hue from hash (full spectrum, 0-360)
     local h_deg = hue_hash % 360
