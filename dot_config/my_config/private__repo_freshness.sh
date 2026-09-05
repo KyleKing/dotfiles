@@ -105,7 +105,10 @@ back-fresh-clear() {
     local -a lines
     _repo-freshness-read
     if [ "${#lines[@]}" -gt 0 ]; then
-        printf '%s\n' "${lines[@]}"
+        local line
+        for line in "${lines[@]}"; do
+            print -P "$line"
+        done
     else
         echo "all repos up to date"
     fi
