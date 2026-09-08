@@ -33,10 +33,31 @@ blocks:
             <p:blue><b>{{ $full }}</b> </>
           {{- end }}
 
+      # Non-empty doing.txt at the repo root: flag it loudly, in a color
+      # nothing else uses. Resolved from the active VCS segment's root dir
+      # (not cwd), since doing.txt lives at the repo root, not per-subdirectory.
+      - type: text
+        style: plain
+        foreground: "#FF00AA"
+        template: |-
+          {{- $root := "" -}}
+          {{- if .Segments.Contains "Jujutsu" -}}
+            {{- $root = .Segments.Jujutsu.Dir -}}
+          {{- else if .Segments.Contains "Git" -}}
+            {{- $root = .Segments.Git.Dir -}}
+          {{- end -}}
+          {{- if hasPrefix "~" $root -}}
+            {{- $root = printf "%s%s" .Env.HOME (trimPrefix "~" $root) -}}
+          {{- end -}}
+          {{- if $root -}}
+            {{- $f := printf "%s/doing.txt" $root -}}
+            {{- if and (glob $f) (ne (trim (readFile $f)) "") -}}⎈ {{ end -}}
+          {{- end -}}
+
       # jj: bookmark name constant purple. If no bookmark, the change ID's
       # shortest-unique prefix is bright, the padded remainder is dimmed
       # (mirrors jj's own CLI convention). Dirty files shown right of that,
-      # in yellow, one icon+count per category (git segment mirrors this).
+      # in yellow, as plain +/~/-/» counts (git segment mirrors this).
       - type: jujutsu
         style: plain
         foreground: p:white
@@ -45,17 +66,17 @@ blocks:
           fetch_status: true
           change_id_min_len: 8
         template: |-
-          <p:purple> {{ if .ClosestBookmarks -}}
+          <p:purple>{{ if .ClosestBookmarks -}}
             {{ .ClosestBookmarks }}
           {{- else -}}
             {{ .ChangeIDPrefix }}<d>{{ .ChangeIDRest }}</d>
           {{- end }}</>
           {{- if .Working.Changed -}}
             <p:yellow>
-            {{- if gt .Working.Added 0 }} {{ .Working.Added }}{{ end -}}
-            {{- if gt .Working.Modified 0 }} {{ .Working.Modified }}{{ end -}}
-            {{- if gt .Working.Deleted 0 }} {{ .Working.Deleted }}{{ end -}}
-            {{- if gt .Working.Moved 0 }} {{ .Working.Moved }}{{ end -}}
+            {{- if gt .Working.Added 0 }} +{{ .Working.Added }}{{ end -}}
+            {{- if gt .Working.Modified 0 }} ~{{ .Working.Modified }}{{ end -}}
+            {{- if gt .Working.Deleted 0 }} -{{ .Working.Deleted }}{{ end -}}
+            {{- if gt .Working.Moved 0 }} »{{ .Working.Moved }}{{ end -}}
             </>
           {{- end }}
 
@@ -73,12 +94,12 @@ blocks:
       # git: only renders when jj isn't already showing this repo (colocated
       # jj+git repos let the jujutsu segment above own the identity/state).
       # HEAD is green normally, orange when detached. Ahead/behind/diverged
-      # and dirty-file counts follow the same color scheme as jj above.
+      # and dirty-file counts follow the same +/~/-/»/! scheme as jj above.
       - type: git
         style: plain
         foreground: p:white
         properties:
-          branch_icon: ""
+          branch_icon: ""
           branch_template: "{{ if gt (len .Branch) 20 }}{{ trunc 20 .Branch }}…{{ else }}{{ .Branch }}{{ end }}"
           fetch_status: true
           fetch_stash_count: true
@@ -102,58 +123,37 @@ blocks:
             {{- end -}}
             {{- if or .Staging.Changed .Working.Changed -}}
               <p:yellow>
-              {{- if or (gt .Staging.Added 0) (gt .Working.Added 0) }} {{ add .Staging.Added .Working.Added }}{{ end -}}
-              {{- if or (gt .Staging.Modified 0) (gt .Working.Modified 0) }} {{ add .Staging.Modified .Working.Modified }}{{ end -}}
-              {{- if or (gt .Staging.Deleted 0) (gt .Working.Deleted 0) }} {{ add .Staging.Deleted .Working.Deleted }}{{ end -}}
-              {{- if or (gt .Staging.Unmerged 0) (gt .Working.Unmerged 0) }} {{ add .Staging.Unmerged .Working.Unmerged }}{{ end -}}
+              {{- if or (gt .Staging.Added 0) (gt .Working.Added 0) }} +{{ add .Staging.Added .Working.Added }}{{ end -}}
+              {{- if or (gt .Staging.Modified 0) (gt .Working.Modified 0) }} ~{{ add .Staging.Modified .Working.Modified }}{{ end -}}
+              {{- if or (gt .Staging.Deleted 0) (gt .Working.Deleted 0) }} -{{ add .Staging.Deleted .Working.Deleted }}{{ end -}}
+              {{- if or (gt .Staging.Unmerged 0) (gt .Working.Unmerged 0) }} !{{ add .Staging.Unmerged .Working.Unmerged }}{{ end -}}
               </>
             {{- end -}}
             {{- if gt .StashCount 0 -}}
-              <p:grey> {{ .StashCount }}</>
+              <p:grey> ${{ .StashCount }}</>
             {{- end -}}
           {{- end }}
 
-      # Exit code: ">" on success, "(code) X" on failure (red).
-      - type: exit
+      # Exit code: ">" on success, "(code) x" on failure (red).
+      - type: status
         style: plain
         foreground: p:blue
         foreground_templates:
           - "{{ if gt .Code 0 }}p:red{{ end }}"
         properties:
           always_enabled: true
-        template: " {{ if gt .Code 0 }}({{ .Code }}) {{ else }}>{{ end }}"
+        template: " {{ if gt .Code 0 }}({{ .Code }}) x{{ else }}>{{ end }}"
 
   - type: rprompt
     segments:
-      - type: node
-        style: plain
-        background: transparent
-        foreground: p:red
-        properties:
-          display_error: true
-          display_mode: files
-          fetch_package_manager: false
-          home_enabled: false
-        template: "{{ if .Error }}{{ .Error }}{{ else }} {{ .Full }} {{ end }}"
-
-      - type: python
-        style: plain
-        background: transparent
-        foreground: p:yellow
-        properties:
-          display_error: true
-          display_mode: files
-          fetch_version: true
-          fetch_virtual_env: false
-        template: "{{ if .Error }}{{ .Error }}{{ else }} {{ .Full }} {{ end }}"
-
+      # Project name (truncated to 10 chars) and version, when found.
       - type: project
         style: plain
         background: transparent
         foreground: p:white
         properties:
           display_error: true
-        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}in {{ .Name }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>){{ end }}{{ end }} {{ end }}"
+        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}{{ if gt (len .Name) 10 }}{{ trunc 10 .Name }}…{{ else }}{{ .Name }}{{ end }}{{ if .Version }}(<p:blue><b>{{.Version}}</b></>){{ end }}{{ end }} {{ end }}"
 
       # Right-aligned clock, dimmed, 24h HH:MM (no seconds).
       - type: time
