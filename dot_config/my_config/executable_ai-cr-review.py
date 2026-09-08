@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Read a review's findings and post verdicts back to its threads.
 
-`fetch` prints the newest CodeRabbit review that carries a roll-up prompt
-block, split into findings and joined to the thread each one came from.
-`--review-id` targets any review instead, bot or human: one with a prompt
-block is parsed the same way, and one without turns every open thread tied
-to it into a finding directly, using the thread's own comment as the prompt.
+`fetch` prints the newest un-acked bot review (CodeRabbit or any other bot), split into findings and joined to the thread each one came
+from. A review with a CodeRabbit-style roll-up prompt block is parsed for its
+per-finding line ranges; a review without one has every open thread tied to
+it turned into a finding directly, using the thread's own comment as the
+prompt. `--review-id` targets any review instead, including a human's.
 A bot's review is actioned without asking; replying into a person's thread
 needs `replies_approved = true` in the actions file, which the caller sets only
 after the human has said yes.
@@ -28,7 +28,6 @@ import subprocess
 import sys
 import tomllib
 
-BOT_REST = 'coderabbitai[bot]'
 BLOCK_RE = re.compile(r'Prompt for all review comments.*?\n```\n(.*?)\n```', re.DOTALL)
 ITEM_RE = re.compile(r'^- (?:Around lines?|Lines?) (?P<start>\d+)(?:\s*-\s*(?P<end>\d+))?:\s*(?P<text>.*)$')
 PATH_RE = re.compile(r'^In `?@(?P<path>.+?)`?:$')
@@ -92,16 +91,16 @@ def all_reviews(repo: str, number: int) -> list[dict]:
     return run_json('gh', 'api', '--paginate', f"repos/{repo}/pulls/{number}/reviews")
 
 
-def pick_review(reviews: list[dict], review_id: int | None) -> dict:
+def pick_review(reviews: list[dict], review_id: int | None, pending_ids: set[int] | None = None) -> dict:
     if review_id is not None:
         match = next((r for r in reviews if r['id'] == review_id), None)
         if match is None:
             sys.exit(f"No review {review_id} on this PR")
         return match
-    match = next((r for r in reversed(reviews)
-                  if r['user']['login'] == BOT_REST and BLOCK_RE.search(r['body'] or '')), None)
+    candidates = reviews if pending_ids is None else [r for r in reviews if r['id'] in pending_ids]
+    match = next((r for r in reversed(candidates) if is_bot(r)), None)
     if match is None:
-        sys.exit('No CodeRabbit review on this PR carries a prompt block')
+        sys.exit('No un-acked bot review on this PR')
     return match
 
 
@@ -273,8 +272,14 @@ def review_findings(review: dict, threads: list[dict]) -> dict:
     }
 
 
+def pending_review_ids(repo: str, number: int, threads: list[dict]) -> set[int]:
+    """Database ids of reviews `status` would still call un-acked."""
+    return {p['review_id'] for p in pending_reviews(fetch_reviews(repo, number), threads)}
+
+
 def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) -> dict:
-    review = pick_review(all_reviews(repo, number), review_id)
+    pending_ids = None if review_id is not None else pending_review_ids(repo, number, threads)
+    review = pick_review(all_reviews(repo, number), review_id, pending_ids)
     return {
         'body': (review['body'] or '').strip() or None,
         'other_open_threads': [thread_summary(t) for t in threads

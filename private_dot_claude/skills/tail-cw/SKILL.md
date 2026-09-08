@@ -51,6 +51,13 @@ the same window hits the cache and is free.
 It takes globs and presets like `export summary`, and only pays for
 `DescribeLogGroups` when you give it one.
 
+On an account you have not mapped yet, run `export groups '<narrower-glob>'` first
+rather than starting from a bare `'*'`.
+A wildcard across every group in the account
+caps at a fixed count and drops the rest, with only a `Capped at N of M matching groups`
+line on stderr to say so, so a first `'*'` can quietly answer from a fraction
+of what exists.
+
 **Do not write a `jq 'fromjson'` step.** `--parsed` emits the payload the cache already
 decoded, in place of the raw `message` string.
 **Do not count with `jq | sort | uniq -c` or a `Counter`.** `export stats --by <field>`
@@ -103,6 +110,17 @@ Full reference:
 
 Live tail is the one path that sends the filter to AWS, and it refuses expressions
 CloudWatch would answer wrongly rather than sending them.
+
+## Not every failure lands here
+
+A trigger that calls AWS from CI (a GitHub Actions step running
+`aws codebuild start-build`, or any `aws` call from a pipeline) executes on the runner,
+not inside a
+build, so tail-cw never sees it: CloudWatch has no record of it at all.
+Check `gh run view --log-failed` (or the equivalent for whatever CI system is in play)
+before
+assuming CloudWatch has the answer, whenever the failing call is one the trigger made
+itself rather than one the running job made.
 
 ## When tail-cw cannot do it
 
