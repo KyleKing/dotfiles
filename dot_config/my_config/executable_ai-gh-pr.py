@@ -13,6 +13,10 @@ restate. `comment <body>` then submits the full result; it always replaces
 the whole comment, on the assumption the caller built `<body>` from what
 `get` returned.
 
+Both take `--pr <number|branch>` and default to the current branch. A stack of
+PRs is the case that needs it: only one branch is checked out at a time, so
+without it the summary for every PR but that one is unreachable.
+
 A checklist item belongs in the comment only if it needs a human judgment
 call the CI gate does not already make (a security-relevant permission
 change, a step that can only be verified on another machine) -- never a step
@@ -33,6 +37,8 @@ import json
 import re
 import subprocess
 import sys
+
+MARKER = 'AI Summary:'
 
 TITLE_RE = re.compile(
     r'^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: [A-Z]'
@@ -60,23 +66,31 @@ def create(title: str, ready: bool, extra: list[str]) -> None:
     subprocess.run([*cmd, *extra], check=True)
 
 
-def _find_existing_comment() -> tuple[int, str, dict | None]:
-    number = run_json('gh', 'pr', 'view', '--json', 'number')['number']
+def _find_existing_comment(pr: str | None) -> tuple[int, str, dict | None]:
+    view = ['gh', 'pr', 'view', *([pr] if pr else []), '--json', 'number']
+    number = run_json(*view)['number']
     repo = run_json('gh', 'repo', 'view', '--json', 'nameWithOwner')['nameWithOwner']
     comments = run_json('gh', 'api', f"repos/{repo}/issues/{number}/comments")
-    existing = next((c for c in comments if c['body'].startswith('AI Summary:')), None)
+    existing = next((c for c in comments if c['body'].startswith(MARKER)), None)
     return number, repo, existing
 
 
-def get() -> None:
-    _, _, existing = _find_existing_comment()
+def get(pr: str | None) -> None:
+    _, _, existing = _find_existing_comment(pr)
     if existing is None:
         sys.exit('No AI Summary comment yet')
     print(existing['body'])
 
 
-def comment(body: str) -> None:
-    number, repo, existing = _find_existing_comment()
+def comment(body: str, pr: str | None) -> None:
+    if not body.startswith(MARKER):
+        sys.exit(
+            f"Comment body must start with {MARKER!r}: it is how the singleton comment is"
+            ' found and re-PATCHed, and how the comment names its own authorship. Without'
+            ' it every update posts a second comment.'
+        )
+
+    number, repo, existing = _find_existing_comment(pr)
 
     if existing is not None:
         run(
@@ -110,10 +124,19 @@ def main() -> None:
     create_parser.add_argument('title')
     create_parser.add_argument('--ready', action='store_true')
 
-    sub.add_parser('get', help='Print the current AI Summary comment, or exit 1 if none exists.')
+    get_parser = sub.add_parser(
+        'get', help='Print the current AI Summary comment, or exit 1 if none exists.'
+    )
 
     comment_parser = sub.add_parser('comment')
     comment_parser.add_argument('body', help='Full comment body -- replaces the whole comment.')
+
+    for target in (get_parser, comment_parser):
+        target.add_argument(
+            '--pr',
+            metavar='<number|branch>',
+            help='Which PR to read or write. Defaults to the current branch.',
+        )
 
     args = parser.parse_args(argv)
 
@@ -121,9 +144,9 @@ def main() -> None:
         if args.command == 'create':
             create(args.title, args.ready, extra)
         elif args.command == 'get':
-            get()
+            get(args.pr)
         else:
-            comment(args.body)
+            comment(args.body, args.pr)
     except subprocess.CalledProcessError as error:
         sys.exit(error.stderr or str(error))
 
