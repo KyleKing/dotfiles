@@ -165,6 +165,35 @@ branch you merge in is always the one your PR is based on.
 1. Retarget any PR that got auto-shifted back to its correct base:
     `gh pr edit <n> --base <correct-branch>`.
 
+### Never retarget a base in the same window as a push to that branch
+
+Pushing to a branch and then changing its PR's base seconds later can leave the new head
+SHA with no workflow runs at all.
+The API returns no run object of any status, cancelled included, so GitHub never queued
+one.
+It recomputes `refs/pull/<n>/merge` on a base change, and a `synchronize` delivery
+arriving mid-recompute can be dropped.
+Observed once, where a force-push at 16:16:44 followed by a retarget at 16:17:23
+produced
+zero runs, while a sibling PR force-pushed 4 seconds later by the same actor with no
+retarget had its runs 5 seconds after the push.
+
+So do the retarget first, let it settle, then push.
+When restacking several PRs at once,
+that ordering matters for each one separately, because a bulk restack fires every base
+change in the same second.
+
+**Symptoms:** `gh pr checks <n>` prints nothing and
+`gh api repos/<owner>/<repo>/actions/runs?head_sha=<sha>` returns `total_count: 0`.
+Check the SHA rather than the branch, since older runs on the branch make
+`gh run list --branch` look healthy.
+
+**Recovery:** push an empty commit to trigger a fresh `synchronize`, or close and reopen
+the PR (`gh pr close <n> && gh pr reopen <n>`), which creates the runs within a couple
+of
+seconds.
+Reopening loses nothing, though it does move the PR to the top of anyone's review queue.
+
 ## Validating a fix before it propagates
 
 Keep the gate on each branch minimal — a hook suite (hk, pre-commit) already runs

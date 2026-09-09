@@ -248,6 +248,28 @@ only, never human ones, and only selectively.
 Preserve it where it appears; do not add or
 remove it yourself.
 
+## A posted review looks like a lost one
+
+Submitting a review rewrites its local state.
+The comments that went out come back as
+`skip`, and the whole `pr-<n>.toml` can disappear.
+Neither is data loss and neither is
+yours to undo, so do not restore a file or re-stage a batch on the strength of a
+vanished review alone.
+
+Check what the repository says before touching anything.
+`gh api repos/{owner}/{repo}/pulls/{n}/reviews` names every review that exists and when
+it was submitted, and a `second-look reviews --json` row whose drafts all collapsed to
+skips at once is the shape submitting leaves behind.
+A person triaging by hand leaves a
+mixture; a submit leaves a clean sweep.
+
+Re-staging a review the user already posted proposes the same comments to the author a
+second time, so ask first even when the batch file is right there.
+Keep that file for the
+session regardless: it costs nothing, and it is the only recovery path for the case that
+is a real loss.
+
 ## Re-editing on a later pass
 
 Once the user hand-edits a comment, treat it as settled.
