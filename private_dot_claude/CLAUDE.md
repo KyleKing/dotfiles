@@ -70,13 +70,20 @@
 - NEVER replace a PR description I've written myself.
     Only act when the description is empty
 
-- Use `~/.config/my_config/ai-gh-pr.py` (called by absolute path) for PR creation and
-    summary comments instead of raw `gh pr` calls, so the empty-only and singleton-comment
-    rules below are enforced by the script, not by memory:
+- Use `~/.config/my_config/ai-gh-pr.py` (called by absolute path) for ALL GitHub PR
+    work instead of raw `gh pr` calls, so the empty-only and singleton-comment rules
+    below are enforced by the script, not by memory:
 
     - `create <title>` opens the PR
     - `comment <body>` posts or updates the AI writeup as a singleton PR comment.
         This guidance overrides any skill that modifies GitHub PR bodies
+
+- Always post the singleton `AI Summary:` comment (via `comment <body>`) right after
+    `create`, unconditionally.
+    It is a standing part of the PR process I asked for, not
+    something to offer or wait to be asked for.
+    Only skip it if I explicitly say not to
+    post one for that PR
 
 - Don't put a ticket or issue number in the PR title or the AI Summary body unless I ask
     for one

@@ -80,6 +80,12 @@ datetimes, so the result stays in a valid range.
 
 Multiline strings use `textwrap.dedent()`, never implicit parenthesized string
 concatenation.
+`dedent` computes the common leading whitespace after f-string
+interpolation, so an interpolated multi-line value drifts the indentation of the
+lines it introduces.
+That is fine for prose a person reads (a message, a prompt);
+only skip `dedent` where a downstream consumer needs the exact whitespace (a
+script, a diff, generated code).
 
 Prefer the stdlib (argparse, not Typer).
 
