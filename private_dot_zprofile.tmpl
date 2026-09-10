@@ -1,4 +1,5 @@
-# tmpl-ignore[+2] Docker Desktop matches this block literally to avoid re-adding it
+# tmpl-ignore[+3] Docker Desktop matches this block literally to avoid re-adding it
+
 # The following lines were added by Docker Desktop to add commands to your PATH.
 export PATH="$PATH:$HOME/.docker/bin"
 # End of Docker Desktop section.
@@ -7,14 +8,14 @@ export PATH="$PATH:$HOME/.docker/bin"
 
 # Add sbin and bin from homebrew
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
-export PATH="{{- .homebrew_prefix -}}/sbin:{{- .homebrew_prefix -}}/bin:$PATH"
+export PATH="{{ .homebrew_prefix }}/sbin:{{ .homebrew_prefix }}/bin:$PATH"
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # For mise-postgres (https://github.com/smashedtoatoms/asdf-postgres/issues/52#issuecomment-1926189618), export the brew prefix
-export HOMEBREW_PREFIX={{- .homebrew_prefix }}
+export HOMEBREW_PREFIX={{ .homebrew_prefix }}
 #
 # Adapted from `brew info icu4c` guidance
 export PREFIX_ICU4C=$(brew --prefix icu4c)

@@ -76,8 +76,6 @@ brew "ktea"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
-# TUI for Jujutsu/jj
-brew "lazyjj"
 # Modern TUI for Makefiles
 brew "lazymake"
 # Cross-platform TUI database management tool

@@ -11,6 +11,9 @@ MISE_PYTHON_UV_VENV_AUTO = "true"
 disable_hints = ["python_multi"]
 experimental = true
 idiomatic_version_file_enable_tools = ["node"]
+# bun's global cache races when mise installs multiple npm-backend tools
+# concurrently (EEXIST on shared transitive deps), so cap concurrency to 1.
+jobs = 1
 npm.package_manager = "bun"
 pipx.uvx = true
 
@@ -22,7 +25,7 @@ bun = "latest"
 "cargo:tree-sitter-cli" = "latest"
 deno = "latest"
 flyctl = "latest"
-go = "latest"
+go = "1.26.6"
 "go:github.com/boyter/dcd" = "latest"
 "go:github.com/dhth/act3" = "latest"
 "go:github.com/idursun/jjui/cmd/jjui" = "latest"

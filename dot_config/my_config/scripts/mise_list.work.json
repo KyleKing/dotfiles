@@ -30,9 +30,9 @@
     "version": "0.4.101"
   },
   "go": {
-    "requested_version": "latest",
+    "requested_version": "1.26.6",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.27.1"
+    "version": "1.26.6"
   },
   "go:github.com/boyter/dcd": {
     "requested_version": "latest",

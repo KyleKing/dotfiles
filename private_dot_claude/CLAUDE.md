@@ -115,6 +115,14 @@
 
 ## Comments and Documentation
 
+- Two different surfaces, two different rules.
+    A code comment has to hold up as a
+    standing invariant, read with no memory of the diff that added it.
+    A PR description or the singleton `AI Summary:` comment (see "Posting to Linear,
+    Slack, and GitHub" below) is where the reviewer-facing why, the diff narration, and
+    "this fixes X" context belong instead.
+    When explaining a change for a reviewer's benefit, that explanation goes in the PR,
+    never copied into a code comment
 - Default to zero comments. Do not add one unless the code cannot explain itself: a
     footgun, a hidden constraint, a subtle invariant, a workaround for a specific bug,
     behavior that would surprise a reader.
@@ -125,7 +133,10 @@
     A comment written to help a reviewer understand the change belongs in the PR comment,
     because the file only keeps what stays true long after the diff
 - One line, two at most, never a paragraph or a multi-line block.
-    This is a hard limit
+    This is a hard limit, and it binds Dockerfile/YAML/Pulumi/IaC comments exactly
+    like code comments — infra files are not a docs surface with looser rules
+- Before writing an infra or config comment (Dockerfile, YAML, Pulumi, Terraform),
+    draft it, then cut it to one line before it's shown, not after a complaint
 - Don't restate what a named constant, the adjacent code, or another file in the repo
     already says; if a reader gets it by looking two lines up, cut it
 - No inline comments; code should be self-explanatory
