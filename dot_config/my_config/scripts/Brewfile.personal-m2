@@ -43,6 +43,8 @@ brew "libtiff"
 brew "difftastic"
 # Load/unload environment variables based on $PWD
 brew "direnv"
+# Language server for Dockerfiles, Compose files, and Bake files
+brew "docker-language-server"
 # Lightning-fast linter for .env files written in Rust
 brew "dotenv-linter"
 # Embeddable SQL OLAP Database Management System
@@ -99,8 +101,6 @@ brew "jjui"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
-# TUI for Jujutsu/jj
-brew "lazyjj"
 # Modern TUI for Makefiles
 brew "lazymake"
 # Terminal Markdown previewer with a GUI-like experience
@@ -223,6 +223,8 @@ brew "vale"
 brew "vhs"
 # Terminal navigator
 brew "walk"
+# Language Server for Yaml Files
+brew "yaml-language-server"
 # Linter for YAML files
 brew "yamllint"
 # Blazing fast terminal file manager written in Rust, based on async I/O
@@ -255,14 +257,14 @@ cask "1password"
 cask "1password-cli"
 # Time tracker
 cask "activitywatch"
+# Menu bar system monitor
+cask "airstats"
 # Application launcher and productivity software
 cask "alfred"
 # AI dictation app
 cask "amical"
 # Memory training application
 cask "anki"
-# Terminal interface for Antigravity agents
-cask "antigravity-cli"
 # Application uninstaller
 cask "appcleaner"
 # Monitors common persistence locations
@@ -283,7 +285,6 @@ cask "customshortcuts"
 cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
-cask "dash6"
 # Scans for dylib hijacking
 cask "dhs"
 # Voice and text chat software
@@ -332,6 +333,8 @@ cask "knockknock"
 cask "libreoffice"
 # Open-source firewall to block unknown outgoing connections
 cask "lulu"
+# Screenshot and screen recording tool
+cask "macshot"
 # Detailed information on every Apple product ever made
 cask "mactracker"
 # Scan and remove malware, spyware, and viruses
@@ -340,6 +343,8 @@ cask "malwarebytes"
 cask "microsoft-teams"
 # Minimal installer for conda
 cask "miniconda"
+# Spotlight Search
+cask "monarch"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
 # Network monitor
@@ -384,6 +389,8 @@ cask "suspicious-package"
 cask "tailscale-app"
 # Tool to explore all the running tasks (processes)
 cask "taskexplorer"
+# Terminal-based web browser
+cask "terminal-browser"
 # LaTeX editor
 cask "texifier"
 # Unpacks archive files
@@ -454,6 +461,7 @@ vscode "traycer.traycer-vscode"
 vscode "yoavbls.pretty-ts-errors"
 go "cmd/go"
 go "cmd/gofmt"
+go "github.com/kyleking/second-look/cmd/second-look"
 cargo "bacon"
 cargo "cargo-insta"
 cargo "cargo-nextest"
