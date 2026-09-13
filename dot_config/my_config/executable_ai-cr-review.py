@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Read a review's findings and post verdicts back to its threads.
 
-`fetch` prints the newest un-acked bot review (CodeRabbit or any other bot), split into findings and joined to the thread each one came
-from. A review with a CodeRabbit-style roll-up prompt block is parsed for its
-per-finding line ranges; a review without one has every open thread tied to
-it turned into a finding directly, using the thread's own comment as the
-prompt. `--review-id` targets any review instead, including a human's.
+`fetch` prints the sole un-acked bot review (CodeRabbit or any other bot), split into findings and joined to the thread each one came
+from, and refuses to guess when more than one is pending at once — pass
+`--review-id` to pick among them. A review with a CodeRabbit-style roll-up
+prompt block is parsed for its per-finding line ranges; a review without one
+has every open thread tied to it turned into a finding directly, using the
+thread's own comment as the prompt. `--review-id` also targets any review
+outright, including a human's.
 A bot's review is actioned without asking; replying into a person's thread
 needs `replies_approved = true` in the actions file, which the caller sets only
 after the human has said yes.
@@ -98,10 +100,18 @@ def pick_review(reviews: list[dict], review_id: int | None, pending_ids: set[int
             sys.exit(f"No review {review_id} on this PR")
         return match
     candidates = reviews if pending_ids is None else [r for r in reviews if r['id'] in pending_ids]
-    match = next((r for r in reversed(candidates) if is_bot(r)), None)
-    if match is None:
+    bot_candidates = [r for r in candidates if is_bot(r)]
+    if not bot_candidates:
         sys.exit('No un-acked bot review on this PR')
-    return match
+    if len(bot_candidates) > 1:
+        listing = '\n'.join(
+            f"  {r['id']} {r['user']['login']} {r['submitted_at']}" for r in bot_candidates
+        )
+        sys.exit(
+            'More than one un-acked bot review is pending on this PR — '
+            f"pick one with --review-id:\n{listing}"
+        )
+    return bot_candidates[0]
 
 
 def unwrap(block: str) -> list[str]:

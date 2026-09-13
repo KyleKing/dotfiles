@@ -18,15 +18,16 @@ known way.
     disk and returns the path.
     It only works on the agent's managed tab group — in a regular browser session it fails
     with "not in managed tab group".
-1. `computer` / `zoom` for a single still that only needs to be seen inline.
-    `save_to_disk: true` does **not** write a file despite the name; it only embeds the
-    image in the conversation.
+1. `computer` with `save_to_disk: true` for a still, including one that must land on
+    disk.
+    It writes a `.jpg` under a temp directory and returns the path in the tool result.
     When the target is a `<canvas>`, `javascript_tool` can read it out
-    (`canvas.toDataURL()`) for the Write tool; anything else that needs a disk file goes to
-    method 3.
-1. `mss` stills driven from Bash, when `gif_creator` is unavailable or the shot must land
-    on disk.
+    (`canvas.toDataURL()`) for the Write tool instead.
+1. `mss` stills driven from Bash, only when the browser tools are unavailable — a
+    classifier denial, or a page outside the managed tab group.
     Full procedure in [mss-capture.md](mss-capture.md).
+    It photographs the whole screen, so a macOS screen-recording prompt can overlay the
+    shot and only the user can clear it.
 
 ## Dark mode
 

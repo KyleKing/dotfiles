@@ -19,18 +19,23 @@ threads without asking.
 On a human's review, resolve and thumbs-up freely, but a *reply*
 goes out only after they say yes — Step 6 has the mechanics.
 
-## Step 1 — Fetch the work list
+## Step 1 — Find every un-acked review, then fetch each
 
 ```sh
 ~/.config/my_config/ai-cr-review.py fetch > cr-review.json     # add --pr N for another PR
 ```
 
-The script picks the newest CodeRabbit review whose body has a prompt block, so a push
-that produced no findings is skipped without you walking reviews by hand.
-Pass `--review-id` to action any other review: an older CodeRabbit one a later push
-buried, or a human's, which `fetch` never picks on its own.
+`fetch` with no `--review-id` picks the sole un-acked review from any bot (CodeRabbit,
+watch-doggo, a linter, a security scanner) and refuses outright when more than one bot
+review is pending at once, rather than silently picking just the newest.
+A review that arrives on a PR after your last pass — a second bot, or the same bot again
+on a later push — won't retroactively trigger this skill; only a fresh invocation
+notices it, so re-run `/change-review-apply` (or check `status`) after any push that
+might have drawn a new review, not just once per PR.
+Pass `--review-id` to action a human's review, which `fetch` never picks on its own, or
+to pick among several pending bot reviews once `fetch` has listed them.
 
-Before acting on that review, check whether an older one is still open:
+Check whether anything is buried or a human review is also waiting:
 
 ```sh
 ~/.config/my_config/ai-cr-review.py status     # add --pr N for another PR
@@ -38,9 +43,8 @@ Before acting on that review, check whether an older one is still open:
 
 This lists every review, bot or human, that has no thumbs-up and still carries an
 unresolved thread or a CHANGES_REQUESTED verdict.
-A non-empty result means a review got
-buried under a later push; action the oldest un-acked one first (`--review-id`), then
-come back to the newest.
+A non-empty result beyond what `fetch` already grabbed means action the oldest un-acked
+one next (`--review-id`), then work forward.
 An entry with `open_threads: 0` has no thread to reply into
 (general feedback in the review body, not an inline comment) — its text comes back
 quoted in `body`; read it and note it in the report, there is nothing to resolve.

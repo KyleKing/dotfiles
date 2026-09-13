@@ -92,6 +92,17 @@ pr-merge-watch() {
             end
         ')
 
+    # `state == CHANGES_REQUESTED` misses a bot review left as COMMENTED with
+    # real blocking findings (e.g. watch-doggo), so also check the un-acked
+    # definition ai-cr-review.py status/change-review-apply already use.
+    if [[ -z "$blockers" ]]; then
+        local unacked
+        unacked=$(~/.config/my_config/ai-cr-review.py status 2>/dev/null | jq 'length')
+        if [[ "${unacked:-0}" -gt 0 ]]; then
+            blockers="unacked-reviews($unacked)"
+        fi
+    fi
+
     if [[ -n "$blockers" ]]; then
         osascript -e "display notification \"Blocked: $blockers\" with title \"PR Not Merged\" sound name \"Basso\""
         gh pr view --web
