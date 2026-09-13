@@ -30,6 +30,12 @@ should be added that changes it after the fact.
 (`<type>(<scope>): <Subject>`), since many repos gate PRs on exactly this with
 action-semantic-pull-request -- catch it here so a malformed title fails
 before `gh pr create` runs, not after CI does.
+
+`create --base <branch>` opens the PR against something other than the
+repository default. A stack needs it on every level but the bottom, and
+getting it wrong is expensive: a PR opened against the default branch shows
+the levels below it in its own diff, and retargeting later is manual. Anything
+else `gh pr create` accepts still goes through after a bare `--`.
 """
 
 import argparse
@@ -54,13 +60,15 @@ def run_json(*cmd: str):
     return json.loads(run(*cmd))
 
 
-def create(title: str, ready: bool, extra: list[str]) -> None:
+def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
     if not TITLE_RE.match(title):
         sys.exit(
             f"Title {title!r} is not Conventional Commits: <type>(<scope>): <Subject>."
         )
 
     cmd = ['gh', 'pr', 'create', '--title', title, '--body', '', '--assignee', '@me']
+    if base:
+        cmd += ['--base', base]
     if not ready:
         cmd.append('--draft')
     subprocess.run([*cmd, *extra], check=True)
@@ -120,9 +128,18 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest='command', required=True)
 
-    create_parser = sub.add_parser('create')
+    create_parser = sub.add_parser(
+        'create',
+        help='Open the PR. Pass any other `gh pr create` flag after a bare `--`.',
+    )
     create_parser.add_argument('title')
     create_parser.add_argument('--ready', action='store_true')
+    create_parser.add_argument(
+        '--base',
+        metavar='<branch>',
+        help='Branch to open against. Defaults to the repository default; a stacked'
+        ' PR needs the branch below it.',
+    )
 
     get_parser = sub.add_parser(
         'get', help='Print the current AI Summary comment, or exit 1 if none exists.'
@@ -142,7 +159,7 @@ def main() -> None:
 
     try:
         if args.command == 'create':
-            create(args.title, args.ready, extra)
+            create(args.title, args.ready, args.base, extra)
         elif args.command == 'get':
             get(args.pr)
         else:

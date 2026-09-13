@@ -82,6 +82,45 @@ implementation still needs to happen on each branch after scaffolding.
 Each PR description should link the PR below it (its base) and note it's part of a
 stack, so a reviewer landing on any single PR can find the rest.
 
+## Splitting a stack that touches a security boundary
+
+Where a repo keeps numbered security invariants, read them before you draw the stack,
+because they decide the split as much as the layering does.
+Treat them as two kinds rather than one.
+
+A few are absolute: the breach costs more than any capability is worth, and there is no
+mitigating factor that buys them back.
+The rest are risk-priced, meaning the invariant names what full compliance would cost,
+what the current shape gives up, and what stands in for the control it does not have.
+"Cannot meet the invariant" is a question about which tier the change belongs in and
+what
+replaces the missing control, not an automatic no.
+
+Three rules follow:
+
+- A change that relaxes a boundary goes in its own PR, alone, at the bottom of the stack.
+    Not because it is risky to review alongside other work, but because the reviewer's
+    question for that PR ("which tier, and what buys it back?")
+    is a different question
+    from every other PR's, and a diff that answers both at once gets one of them skimmed.
+- That PR's description names the tier, the capability being bought, and the control
+    standing in.
+    A widening presented as a config change is the failure mode the tiering exists to
+    prevent, so say the word.
+- Everything above it stays inside whatever paths the repo's own policy already permits.
+    Where a bot or a policy file denies approval on some paths, keep those paths in the
+    isolated PR so the rest of the stack is reviewable under the normal rules.
+
+The corollary is worth stating because it reverses the usual instinct: a capability that
+runs untrusted code in a credential-free environment is ordinary work, not a security
+PR.
+Refusing to boot a stack or run a test suite where there is nothing in the environment
+to
+steal buys nothing, and splitting it out as though it were sensitive wastes a review
+cycle.
+Check what the environment actually holds before deciding which kind of PR you are
+writing.
+
 ## Syncing the stack (merge-forward, not rebase)
 
 This is the one non-negotiable: never rebase or force-push a branch that's part of an

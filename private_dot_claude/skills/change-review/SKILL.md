@@ -140,11 +140,16 @@ claiming a missing default.
 Verify any load-bearing premise you hand a subagent yourself — a wrong premise comes
 back wearing the subagent's confidence.
 
-Run the tests, don't reason about them, and say which command actually ran.
-A
-`make test-*` target that shells into Docker can fail on an expired SSO token and prove
-nothing; check the Makefile for what a target really does before calling a suite
-unrunnable.
+Never run the branch's test suite.
+CI already runs it, and re-running it costs
+minutes to learn what the checks tab reports for free.
+Read CI's result instead.
+
+What is worth running is the product: the case static analysis turned up that no test
+covers, exercised against the running app or a one-off script, so a finding about
+behavior arrives with what it actually printed.
+That is the only reason to spend time
+executing anything during a review.
 
 Three finding shapes get dropped by default and shouldn't be:
 
