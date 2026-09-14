@@ -13,9 +13,9 @@ needs `replies_approved = true` in the actions file, which the caller sets only
 after the human has said yes.
 `apply` reads verdicts as TOML (on stdin, or `--file`, since a human
 proofreads this one before it posts and TOML's triple-quoted strings hold
-reply prose without JSON's escaping), replies, resolves, and thumbs-up the
+reply prose without JSON's escaping), replies, resolves, and rockets the
 review body once every finding has been actioned. `status` lists every
-review, bot or human, that has no thumbs-up and still has an unresolved
+review, bot or human, that has no rocket reaction and still has an unresolved
 thread or a CHANGES_REQUESTED verdict, so a review a later push buried
 doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
@@ -52,7 +52,7 @@ query($owner:String!,$repo:String!,$number:Int!,$after:String){
     reviews(first:100,after:$after){
       pageInfo{ hasNextPage endCursor }
       nodes{ databaseId state submittedAt url body author{login}
-        reactions(content:THUMBS_UP){ totalCount } } } } } }
+        reactions(content:ROCKET){ totalCount } } } } } }
 """
 
 SWEEP_QUERY = """
@@ -61,7 +61,7 @@ query($owner:String!,$repo:String!,$number:Int!){
     reviews(first:100){
       pageInfo{ hasNextPage }
       nodes{ databaseId state submittedAt url body author{login}
-        reactions(content:THUMBS_UP){ totalCount } }
+        reactions(content:ROCKET){ totalCount } }
     }
     reviewThreads(first:100){
       pageInfo{ hasNextPage }
@@ -356,9 +356,9 @@ def resolve_thread(thread_id: str) -> None:
         '-f', f"id={thread_id}")
 
 
-def thumbs_up(node_id: str) -> None:
+def rocket(node_id: str) -> None:
     run('gh', 'api', 'graphql',
-        '-f', 'query=mutation($id:ID!){addReaction(input:{subjectId:$id,content:THUMBS_UP}){reaction{content}}}',
+        '-f', 'query=mutation($id:ID!){addReaction(input:{subjectId:$id,content:ROCKET}){reaction{content}}}',
         '-f', f"id={node_id}")
 
 
@@ -371,7 +371,7 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
 def cmd_status(number: int | None) -> None:
     """List every review (bot or human) that still needs a look.
 
-    "Needs a look" means no thumbs-up reaction and either an unresolved thread
+    "Needs a look" means no rocket reaction and either an unresolved thread
     tied to it or a CHANGES_REQUESTED verdict, so a review a push buried
     doesn't go un-actioned just because a newer one landed on top of it.
 
@@ -394,9 +394,9 @@ def pending_reviews(reviews: list[dict], threads: list[dict]) -> list[dict]:
 
     pending = []
     for review in reviews:
-        thumbs_up = review['reactions']['totalCount'] > 0
+        rocketed = review['reactions']['totalCount'] > 0
         open_threads = open_by_review.get(review['databaseId'], 0)
-        if thumbs_up or (open_threads == 0 and review['state'] != 'CHANGES_REQUESTED'):
+        if rocketed or (open_threads == 0 and review['state'] != 'CHANGES_REQUESTED'):
             continue
         entry = {
             'author': review['author']['login'] if review['author'] else None,
@@ -494,9 +494,9 @@ def cmd_apply(number: int | None, path: str | None) -> None:
 
     if failed:
         sys.exit('Left the review un-acknowledged:\n' + '\n'.join(f"  {f}" for f in failed))
-    thumbs_up(state['review']['node_id'])
+    rocket(state['review']['node_id'])
     who = state['review']['author'] + (' (bot)' if bot else '')
-    print(f"👍 review {state['review']['id']} by {who} — {len(actions)} actioned")
+    print(f"🚀 review {state['review']['id']} by {who} — {len(actions)} actioned")
 
 
 def main() -> None:

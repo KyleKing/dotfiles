@@ -12,6 +12,30 @@ reviews) is `pr-fleet`, which delegates the sync rules below.
 Never skip straight to execution — the plan is cheap to get wrong and expensive to
 unwind once branches and PRs exist.
 
+## Identifying an existing stack via gh CLI
+
+When invoked against a PR that already exists, rather than a fresh feature
+description, use `gh` to discover the full stack instead of asking the user to
+enumerate it or assuming the named PR is the only one:
+
+```
+gh pr view <n> --json number,baseRefName,headRefName,title,url
+```
+
+Walk downward (toward `main`) by repeating this with the branch named in
+`baseRefName`, using
+`gh pr list --head <branch> --state all --json number,baseRefName,headRefName,title`
+to find the PR whose head is that branch.
+Stop when `baseRefName` is the default branch.
+
+Walk upward by using
+`gh pr list --base <branch> --state open --json number,baseRefName,headRefName,title`
+with the current PR's `headRefName`, to find any PR based on it.
+Repeat until no PR is found with that base.
+
+Report the resolved chain (e.g. `15238 > 15246 > 15253 > 15255`) before doing anything
+else with it, so the user can correct it if `gh` and their mental model disagree.
+
 ## Phase 1: plan
 
 Given a feature description (or ticket), produce a stack of at most 4 PRs.

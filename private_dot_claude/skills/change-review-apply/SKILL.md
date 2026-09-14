@@ -1,6 +1,6 @@
 ---
 name: change-review-apply
-description: Action a PR review — CodeRabbit's, another bot's, or a teammate's — by adversarially verifying each finding, fixing the whole class of problem rather than the cited lines, committing incrementally, and replying, resolving, and thumbs-upping the review. Use when asked to apply, address, or action review comments, whoever left them.
+description: Action a PR review — CodeRabbit's, another bot's, or a teammate's — by adversarially verifying each finding, fixing the whole class of problem rather than the cited lines, committing incrementally, and replying, resolving, and rocketing the review. Use when asked to apply, address, or action review comments, whoever left them.
 ---
 
 # Apply a PR review
@@ -16,7 +16,7 @@ what's in scope, commit, and write the replies.
 
 **A bot's review is yours to close out; a person's is not.** Post and resolve a bot's
 threads without asking.
-On a human's review, resolve and thumbs-up freely, but a *reply*
+On a human's review, resolve and rocket freely, but a *reply*
 goes out only after they say yes — Step 6 has the mechanics.
 
 ## Step 1 — Find every un-acked review, then fetch each
@@ -41,7 +41,7 @@ Check whether anything is buried or a human review is also waiting:
 ~/.config/my_config/ai-cr-review.py status     # add --pr N for another PR
 ```
 
-This lists every review, bot or human, that has no thumbs-up and still carries an
+This lists every review, bot or human, that has no rocket reaction and still carries an
 unresolved thread or a CHANGES_REQUESTED verdict.
 A non-empty result beyond what `fetch` already grabbed means action the oldest un-acked
 one next (`--review-id`), then work forward.
@@ -117,7 +117,7 @@ Two things are not escalations. Line drift: an anchor that moved after an unrela
 in the same push lands in `unmatched_findings` or `unclaimed_threads` routinely, and a
 thread marked `is_outdated: true` was resolved by the edit that moved it.
 And a small, real fix in a file this PR already touches — those buckets mean "no thread
-to reply to," not "out of scope", so it goes through Step 4 and Step 6's thumbs-up
+to reply to," not "out of scope", so it goes through Step 4 and Step 6's rocket
 closes it out with no reply posted.
 Escalate only when the file sits outside the PR's diff, or the fix wants its own review.
 
@@ -180,7 +180,7 @@ with `AskUserQuestion` so it is unmistakable that something is about to be poste
 their name.
 Set `replies_approved = true` only after they say yes; the script refuses the batch
 without it whenever an action carries reply text.
-An actions file with no reply text needs no approval, so resolving and thumbs-upping a
+An actions file with no reply text needs no approval, so resolving and rocketing a
 human review is never gated.
 A human thread is a conversation, so answer it: a bare resolve on a question the
 reviewer asked reads as ignoring them.
@@ -194,12 +194,12 @@ the fix landed somewhere else, like a shared helper.
 Replies are written in the user's voice under the `change-review` skill's rules: hedged,
 one sentence naming the change, no re-explaining the bug.
 
-The 👍 on the review body is the signal that the whole review was actioned, so it lands
+The 🚀 on the review body is the signal that the whole review was actioned, so it lands
 last and never lands at all if any thread failed.
 
 When every real finding was a threadless one (nothing in `findings` needs a verdict),
 the
-actions file carries just `review_id`, and `apply` posts the thumbs-up with
+actions file carries just `review_id`, and `apply` posts the rocket with
 `0 actioned`.
 
 ## Report

@@ -25,7 +25,8 @@ Run from inside a checkout of the repository (the script reads `gh`'s repo conte
 ```
 
 It searches the pull requests the author merged since that date and applies `status`'s
-rule to each: a review with no thumbs-up that still carries an unresolved thread or a
+rule to each: a review with no rocket reaction that still carries an unresolved thread
+or a
 `CHANGES_REQUESTED` verdict.
 A pull request with nothing pending is left out, and
 `scanned` says how many were read, so an empty result is an answer rather than a
@@ -102,7 +103,7 @@ One actions file per source pull request, applied against that pull request:
 ~/.config/my_config/ai-cr-review.py apply --pr 14793 --file pr-14793-coderabbit-actions.toml
 ```
 
-Replies, resolves, and the thumbs-up all work on a merged pull request, so the original
+Replies, resolves, and the rocket all work on a merged pull request, so the original
 thread ends up recording where the fix went rather than staying open forever.
 
 **Every reply links forward.** A `fixed` verdict on an open PR needs no reply because
