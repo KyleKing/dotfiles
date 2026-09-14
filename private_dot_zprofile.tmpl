@@ -1,8 +1,8 @@
-# tmpl-ignore[+3] Docker Desktop matches this block literally to avoid re-adding it
-
 # The following lines were added by Docker Desktop to add commands to your PATH.
 export PATH="$PATH:$HOME/.docker/bin"
 # End of Docker Desktop section.
+
+# tmpl-ignore[-3] Docker Desktop matches this block literally to avoid re-adding it
 
 # Sourced once before ~/.zshrc - https://unix.stackexchange.com/a/487889
 
@@ -28,10 +28,10 @@ export CPPFLAGS="-I$PREFIX_ICU4C/include"
 export PKG_CONFIG_PATH="$PREFIX_ICU4C/lib/pkgconfig"
 
 # Created by `pipx` and used by `uv` tools as well
-export PATH="{{ .chezmoi.homeDir }}/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Source cargo-installed global packages like cbcli
-export PATH="{{ .chezmoi.homeDir }}/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Source User Configuration Files
 export MY_CONFIG=$HOME/.config/my_config

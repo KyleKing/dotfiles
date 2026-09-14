@@ -36,6 +36,7 @@ local process_icons = {
     ["docker-compose"] = wezterm.nerdfonts.md_docker,
     ["gh"] = wezterm.nerdfonts.dev_github_badge,
     ["git"] = wezterm.nerdfonts.fa_git,
+    ["gnumake"] = wezterm.nerdfonts.seti_makefile,
     ["go"] = wezterm.nerdfonts.seti_go,
     ["grep"] = wezterm.nerdfonts.md_magnify,
     ["hk"] = wezterm.nerdfonts.md_prescription,

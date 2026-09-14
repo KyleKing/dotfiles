@@ -24,11 +24,6 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "2.9.6"
   },
-  "flyctl": {
-    "requested_version": "latest",
-    "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.4.101"
-  },
   "go": {
     "requested_version": "1.26.6",
     "source": "/Users/kyleking/.config/mise/config.toml",
@@ -62,7 +57,7 @@
   "hk": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.58.1"
+    "version": "2.0.0"
   },
   "lua-language-server": {
     "requested_version": "latest",
@@ -107,7 +102,7 @@
   "npm:@posthog/cli": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.18.1"
+    "version": "0.18.2"
   },
   "npm:@qodo/command": {
     "requested_version": "latest",
@@ -207,7 +202,7 @@
   "pipx:pint": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.25.3"
+    "version": "0.26.1"
   },
   "pipx:pygments": {
     "requested_version": "latest",
@@ -222,7 +217,7 @@
   "pipx:pyright": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.1.411"
+    "version": "1.1.414"
   },
   "pipx:pysentry-rs": {
     "requested_version": "latest",
@@ -237,7 +232,7 @@
   "pipx:ruff": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.16.6"
+    "version": "0.16.7"
   },
   "pipx:sqlfluff": {
     "requested_version": "latest",
@@ -252,7 +247,7 @@
   "pipx:toml-sort": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.24.4"
+    "version": "0.25.0"
   },
   "pipx:tox": {
     "requested_version": "latest",

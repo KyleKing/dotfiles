@@ -26,8 +26,8 @@ WHITELIST_KEYS = [
 
 SHELL_FILENAME_MARKERS = ('zshrc', 'zprofile', 'bashrc', 'bash_profile')
 
-IGNORE_MARKER_RE = re.compile(r'^# tmpl-ignore\[\+(?P<offset>\d+)\] (?P<reason>\S.*)$')
-"""`# tmpl-ignore[+N] <reason>` exempts the single line N lines below it from substitution."""
+IGNORE_MARKER_RE = re.compile(r'^# tmpl-ignore\[(?P<offset>[+-]\d+)\] (?P<reason>\S.*)$')
+"""`# tmpl-ignore[+N] <reason>` (or `[-N]`) exempts the line N lines below (or above) it."""
 
 
 def _flatten(data: dict, prefix: str = '') -> dict[str, str]:

@@ -108,10 +108,6 @@ brew "node"
 brew "oh-my-posh"
 # Create, run, and share large language models (LLMs)
 brew "ollama", restart_service: :changed
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
-# AI coding agent, built for the terminal
-brew "opencode"
 # ISO-C API and CLI for generating UUIDs
 brew "ossp-uuid"
 # High-performance linter for JavaScript and TypeScript written in Rust
@@ -132,6 +128,8 @@ brew "postgresql@18"
 brew "prek"
 # Cloud native development platform
 brew "pulumi"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
 # Prevent committing secret keys into your source code
 brew "ripsecrets"
 # Safe, concurrent, practical language
