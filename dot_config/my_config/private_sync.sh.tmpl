@@ -48,7 +48,7 @@ back-c-ch() {
             else
                 plain_drifted+=("$target")
             fi
-        done < <(chezmoi status --include=files --path-style=absolute | awk '{print $2}')
+        done < <(chezmoi status --include=files --path-style=absolute | cut -c4-)
         if [ "${#drifted[@]}" -eq 0 ]; then
             echo "No files out of sync."
             return 0
