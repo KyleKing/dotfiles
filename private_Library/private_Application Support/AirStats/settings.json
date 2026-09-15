@@ -1,0 +1,139 @@
+{
+  "charts": {
+    "historyDuration": 300,
+    "style": "filledLine"
+  },
+  "general": {
+    "appearance": "system",
+    "byteUnitStyle": "decimal",
+    "fetchesPublicIP": true,
+    "launchAtLogin": true,
+    "networkRateUnit": "bytes",
+    "pausesOnLowPower": false,
+    "showsDockIcon": false,
+    "showsPercentSign": false,
+    "temperatureUnit": "fahrenheit",
+    "throttlesWhenOccluded": true,
+    "updateInterval": 5
+  },
+  "menuBar": {
+    "isVisible": true,
+    "items": [
+      {
+        "id": "30369B57-1AF7-4289-B471-8D74CED04878",
+        "isEnabled": true,
+        "metric": "cpuUsage",
+        "showsCaption": true,
+        "style": "text"
+      },
+      {
+        "id": "F8E62FAE-B62F-4D3B-9785-D8050DE70D40",
+        "isEnabled": true,
+        "metric": "memoryPressure",
+        "showsCaption": true,
+        "style": "text"
+      }
+    ],
+    "usesCombinedItem": true
+  },
+  "notifications": {
+    "isEnabled": true,
+    "rules": [
+      {
+        "cooldown": 900,
+        "id": "411FE4D3-BB85-4846-A7CB-AE7EAC76E11E",
+        "isEnabled": true,
+        "metric": "cpuUsage",
+        "sustainedFor": 30,
+        "threshold": 90
+      },
+      {
+        "cooldown": 900,
+        "id": "3F8C3D97-1671-4BEE-A3EA-C64BAA1588E2",
+        "isEnabled": true,
+        "metric": "memoryPressure",
+        "sustainedFor": 30,
+        "threshold": 85
+      },
+      {
+        "cooldown": 900,
+        "id": "4FEDFE92-F9DA-47D0-A288-29CD68F7A668",
+        "isEnabled": false,
+        "metric": "diskFree",
+        "sustainedFor": 30,
+        "threshold": 10
+      },
+      {
+        "cooldown": 900,
+        "id": "920F431A-904F-4E65-B3D2-90BDF475F513",
+        "isEnabled": true,
+        "metric": "batteryLow",
+        "sustainedFor": 30,
+        "threshold": 10
+      },
+      {
+        "cooldown": 900,
+        "id": "6E3F2A68-22A3-49D0-8297-79152D89F896",
+        "isEnabled": false,
+        "metric": "batteryFull",
+        "sustainedFor": 30,
+        "threshold": 100
+      },
+      {
+        "cooldown": 900,
+        "id": "6D9EF6F9-7AF0-48EB-BF25-31FA2063FAF5",
+        "isEnabled": false,
+        "metric": "cpuTemperature",
+        "sustainedFor": 30,
+        "threshold": 95
+      },
+      {
+        "cooldown": 900,
+        "id": "989D712D-755C-4F70-AE61-A8334FDDCF71",
+        "isEnabled": true,
+        "metric": "thermalPressure",
+        "sustainedFor": 30,
+        "threshold": 2
+      }
+    ]
+  },
+  "overlay": {
+    "corner": "bottomLeft",
+    "depth": "wallpaper",
+    "dimsWhenInactive": false,
+    "inactiveOpacity": 0.4,
+    "isClickThrough": false,
+    "isCompact": false,
+    "isEnabled": true,
+    "modules": [
+      "cpu",
+      "memory",
+      "network",
+      "gpu",
+      "disk",
+      "thermal",
+      "processes"
+    ],
+    "opacity": 1,
+    "showsOnAllSpaces": true,
+    "width": 252
+  },
+  "panel": {
+    "collapsedModules": [
+      "gpu",
+      "battery",
+      "network",
+      "system",
+      "memory",
+      "cpu",
+      "thermal"
+    ]
+  },
+  "schemaVersion": 1,
+  "shortcuts": {
+    "bindings": []
+  },
+  "theme": {
+    "metrics": {}
+  }
+}
