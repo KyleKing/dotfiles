@@ -33,15 +33,20 @@ A pull request with nothing pending is left out, and
 misfire.
 One read per pull request, about a second each.
 
-**Carry each `review_id` into `fetch`.**
+**Carry every `review_id` `sweep` listed for a pull request into its own `fetch`.**
 
 ```sh
 ~/.config/my_config/ai-cr-review.py fetch --pr 14793 --review-id 5107979864 > cr-14793.json
 ```
 
-Without `--review-id`, `fetch` picks the newest CodeRabbit review carrying a prompt
-block, which on a merged pull request is routinely not the one the sweep flagged.
-Passing the wrong one silently actions a review that was already answered.
+`sweep`'s `pending` list can name several reviews on one pull request — the same PR
+collecting three un-acked CodeRabbit passes before it merged is exactly the case this
+skill exists for.
+Fetch and action each `review_id` `sweep` named, not just one; `fetch` with no
+`--review-id` returns every pending *bot* review on the PR in one call, which is a
+shortcut for the same set as long as none of `sweep`'s entries are a human review —
+those
+still need their own explicit `--review-id`.
 
 A review whose author is the user themselves is self-notes on their own code, not
 findings.
@@ -75,13 +80,15 @@ Branch under the requesting human's handle off current `main`, never off a merge
 Keep one commit per source pull request even when its findings touch unrelated files,
 because that is the unit a reviewer of the new PR checks against a review they can open.
 
-The commit body is the exception to the usual no-body rule: one line naming the review
-the commit answers, so `git log` carries the provenance the branch name cannot.
+The commit body is the exception to the usual no-body rule: one line per review the
+commit answers, so `git log` carries the provenance the branch name cannot — a source PR
+that collected several un-acked reviews still gets one commit, naming all of them.
 
 ```
 fix(dashboard): Hold the pending lock until the contract update lands
 
 Answers https://github.com/org/repo/pull/14793#pullrequestreview-5107979864
+Answers https://github.com/org/repo/pull/14793#pullrequestreview-5108041223
 ```
 
 Fix the class, not the cited line (`change-review-apply` Step 4), and stay inside what
@@ -97,10 +104,11 @@ what the sweep covered, one row per source PR, and which findings were declined.
 
 ## Step 5 — Answer each thread where it was left
 
-One actions file per source pull request, applied against that pull request:
+One actions file per pending review (a source pull request with three un-acked
+CodeRabbit passes gets three files), each applied against its own source pull request:
 
 ```sh
-~/.config/my_config/ai-cr-review.py apply --pr 14793 --file pr-14793-coderabbit-actions.toml
+~/.config/my_config/ai-cr-review.py apply --pr 14793 --file pr-14793-5107979864-actions.toml
 ```
 
 Replies, resolves, and the rocket all work on a merged pull request, so the original

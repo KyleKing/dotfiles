@@ -88,6 +88,25 @@
 - Don't put a ticket or issue number in the PR title or the AI Summary body unless I ask
     for one
 
+- When a merge used the `mergiraf` driver, `.git/MERGE_MSG`'s `Conflicts:` list is the
+    only files it actually adjudicated; everything else in `git status` merged cleanly
+    without it.
+    Check that list before suspecting mergiraf of anything
+
+- To verify a mergiraf-resolved file, diff each side against `git merge-base` (not just
+    `git diff HEAD`, which shows only one side and can look alarming on its own), then
+    grep the whole tree for dangling references (imports, call sites) to anything the
+    chosen side removed.
+    Parses/typechecks clean is not sufficient proof by itself
+
+- A hook or lint failure on the merge commit is not automatically mergiraf's fault, even
+    on a file mergiraf touched.
+    It is often a pre-existing tool bug or newly-tightened
+    rule running for the first time against the combined diff.
+    Rule out mergiraf via
+    the `Conflicts:` list first, then debug the tool itself before reaching for
+    `--no-verify` or blaming the merge
+
 ## Code Changes
 
 - Limit modifications to what's necessary; don't refactor adjacent code or add

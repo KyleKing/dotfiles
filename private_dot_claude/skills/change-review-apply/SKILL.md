@@ -19,37 +19,47 @@ threads without asking.
 On a human's review, resolve and rocket freely, but a *reply*
 goes out only after they say yes — Step 6 has the mechanics.
 
-## Step 1 — Find every un-acked review, then fetch each
+## Step 1 — Fetch every pending review, then action each one
 
 ```sh
 ~/.config/my_config/ai-cr-review.py fetch > cr-review.json     # add --pr N for another PR
 ```
 
-`fetch` with no `--review-id` picks the sole un-acked review from any bot (CodeRabbit,
-watch-doggo, a linter, a security scanner) and refuses outright when more than one bot
-review is pending at once, rather than silently picking just the newest.
-A review that arrives on a PR after your last pass — a second bot, or the same bot again
-on a later push — won't retroactively trigger this skill; only a fresh invocation
-notices it, so re-run `/change-review-apply` (or check `status`) after any push that
-might have drawn a new review, not just once per PR.
-Pass `--review-id` to action a human's review, which `fetch` never picks on its own, or
-to pick among several pending bot reviews once `fetch` has listed them.
+`fetch` with no `--review-id` returns **every** un-acked bot review on the PR
+(CodeRabbit,
+watch-doggo, a linter, a security scanner), not just the newest — a PR that collected
+three CodeRabbit passes across three pushes gets all three in one call, under a
+top-level
+`reviews` array.
+Work through the array in submission order (oldest first): a later review sometimes
+references a finding an earlier one already raised, and fixing in order avoids
+re-deriving
+the same fix twice.
+Steps 2 through 6 below apply per entry in `reviews`, exactly as if each had come from
+its
+own `fetch --review-id`.
+A review that lands on the PR after this `fetch` ran (a push mid-session drawing a new
+CodeRabbit pass) isn't in that array — re-run `fetch` once you're done with this batch
+to
+catch it, don't assume one call finds everything forever.
+Pass `--review-id` to action one specific review outright, which is how you reach a
+human's review — `fetch`'s default array only ever holds bot reviews.
 
-Check whether anything is buried or a human review is also waiting:
+Check whether anything is buried, including a human review:
 
 ```sh
 ~/.config/my_config/ai-cr-review.py status     # add --pr N for another PR
 ```
 
 This lists every review, bot or human, that has no rocket reaction and still carries an
-unresolved thread or a CHANGES_REQUESTED verdict.
-A non-empty result beyond what `fetch` already grabbed means action the oldest un-acked
-one next (`--review-id`), then work forward.
+unresolved thread or a CHANGES_REQUESTED verdict — the same set `fetch`'s array covers
+for
+bots, plus any human review, which needs `--review-id` to actually fetch.
 An entry with `open_threads: 0` has no thread to reply into
 (general feedback in the review body, not an inline comment) — its text comes back
 quoted in `body`; read it and note it in the report, there is nothing to resolve.
 
-Read these keys before starting:
+Read these keys per review before starting work on it:
 
 - `review.author` and `review.is_bot` — which posting rule Step 6 applies
 - `findings` — the work list, each with `thread_id`, `comment_id`, `path`, `start`/`end`,
@@ -63,8 +73,9 @@ Read these keys before starting:
     escalation like any other real, out-of-scope finding
 - `unparsed_prompt_lines` — CodeRabbit changed the block format.
     Stop and report it
-- `other_open_threads` — open threads from earlier reviews.
-    Out of scope for this pass, but a real one still goes through Step 3
+- `other_open_threads` — open threads tied to a *different* review than this entry's.
+    Out of scope for this entry specifically (it's that other review's own `findings`
+    once you reach it in the array), but a real one still goes through Step 3
 
 **The PR branch is usually not the checked-out `HEAD`.** Check the current tree is clean
 (`git status`, per the working-tree rule in `CLAUDE.md`), then check out the branch
@@ -146,8 +157,11 @@ Report failures verbatim; never call a finding fixed on the strength of the edit
 
 ## Step 6 — Post the verdicts
 
-Write one action per finding into `pr-<number>-<reviewer>-actions.toml` in the worktree,
-then apply it once the fixes are committed:
+Write one action per finding into `pr-<number>-<reviewer>-<review_id>-actions.toml` in
+the
+worktree (the `review_id` suffix matters: a PR with three CodeRabbit passes needs three
+separate files, one per entry in `fetch`'s `reviews` array, not one shared file), then
+apply each once its fixes are committed:
 
 ```toml
 review_id = 4910562275
@@ -191,13 +205,16 @@ the fix landed somewhere else, like a shared helper.
 Replies are written in the user's voice under the `change-review` skill's rules: hedged,
 one sentence naming the change, no re-explaining the bug.
 
-The 🚀 on the review body is the signal that the whole review was actioned, so it lands
-last and never lands at all if any thread failed.
+The 🚀 on each review's body is the signal that *that* review was actioned, so it lands
+last for that review and never lands at all if one of its threads failed.
+Post it per review as you finish that entry — don't hold all the rockets back until the
+whole `reviews` array is done, since a later review's `apply` failing shouldn't leave an
+earlier, already-fixed review still looking un-actioned.
 
-Once the rocket lands, push the branch: `git push` in a plain git checkout, or
-`jj git push --bookmark <name>` when `.jj/` is present, per the git-vs-jj rule in
-`CLAUDE.md`.
-This applies whether the review was a bot's or a human's.
+Once every review in this pass has its rocket, push the branch once: `git push` in a
+plain git checkout, or `jj git push --bookmark <name>` when `.jj/` is present, per the
+git-vs-jj rule in `CLAUDE.md`.
+This applies whether a given review was a bot's or a human's.
 
 When every real finding was a threadless one (nothing in `findings` needs a verdict),
 the
@@ -206,7 +223,9 @@ actions file carries just `review_id`, and `apply` posts the rocket with
 
 ## Report
 
-Lead with the review id and a one-line-per-finding verdict table, then the broader fixes
-you added beyond the block, then what Step 3 escalated and where it landed (ticket link
-or branch), then the gate results.
+One section per review actioned, each leading with its review id and a
+one-line-per-finding
+verdict table, then the broader fixes you added beyond its block.
+After all of them, one shared list of what Step 3 escalated and where it landed (ticket
+link or branch), then the gate results.
 Keep it to the lines that change the user's next action.

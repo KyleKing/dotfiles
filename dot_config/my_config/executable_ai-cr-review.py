@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Read a review's findings and post verdicts back to its threads.
 
-`fetch` prints the sole un-acked bot review (CodeRabbit or any other bot), split into findings and joined to the thread each one came
-from, and refuses to guess when more than one is pending at once — pass
-`--review-id` to pick among them. A review with a CodeRabbit-style roll-up
-prompt block is parsed for its per-finding line ranges; a review without one
-has every open thread tied to it turned into a finding directly, using the
-thread's own comment as the prompt. `--review-id` also targets any review
-outright, including a human's.
+`fetch` prints every un-acked bot review (CodeRabbit or any other bot) at
+once, each split into findings and joined to the thread it came from — a PR
+with three pending CodeRabbit passes gets all three, not just the newest.
+A review with a CodeRabbit-style roll-up prompt block is parsed for its
+per-finding line ranges; a review without one has every open thread tied to
+it turned into a finding directly, using the thread's own comment as the
+prompt. `--review-id` targets one review outright, including a human's,
+which `fetch`'s default sweep never picks on its own.
 A bot's review is actioned without asking; replying into a person's thread
 needs `replies_approved = true` in the actions file, which the caller sets only
 after the human has said yes.
@@ -93,25 +94,11 @@ def all_reviews(repo: str, number: int) -> list[dict]:
     return run_json('gh', 'api', '--paginate', f"repos/{repo}/pulls/{number}/reviews")
 
 
-def pick_review(reviews: list[dict], review_id: int | None, pending_ids: set[int] | None = None) -> dict:
-    if review_id is not None:
-        match = next((r for r in reviews if r['id'] == review_id), None)
-        if match is None:
-            sys.exit(f"No review {review_id} on this PR")
-        return match
-    candidates = reviews if pending_ids is None else [r for r in reviews if r['id'] in pending_ids]
-    bot_candidates = [r for r in candidates if is_bot(r)]
-    if not bot_candidates:
-        sys.exit('No un-acked bot review on this PR')
-    if len(bot_candidates) > 1:
-        listing = '\n'.join(
-            f"  {r['id']} {r['user']['login']} {r['submitted_at']}" for r in bot_candidates
-        )
-        sys.exit(
-            'More than one un-acked bot review is pending on this PR — '
-            f"pick one with --review-id:\n{listing}"
-        )
-    return bot_candidates[0]
+def pick_review(reviews: list[dict], review_id: int) -> dict:
+    match = next((r for r in reviews if r['id'] == review_id), None)
+    if match is None:
+        sys.exit(f"No review {review_id} on this PR")
+    return match
 
 
 def unwrap(block: str) -> list[str]:
@@ -287,9 +274,8 @@ def pending_review_ids(repo: str, number: int, threads: list[dict]) -> set[int]:
     return {p['review_id'] for p in pending_reviews(fetch_reviews(repo, number), threads)}
 
 
-def collect(repo: str, number: int, review_id: int | None, threads: list[dict]) -> dict:
-    pending_ids = None if review_id is not None else pending_review_ids(repo, number, threads)
-    review = pick_review(all_reviews(repo, number), review_id, pending_ids)
+def collect(repo: str, number: int, review_id: int, threads: list[dict]) -> dict:
+    review = pick_review(all_reviews(repo, number), review_id)
     return {
         'body': (review['body'] or '').strip() or None,
         'other_open_threads': [thread_summary(t) for t in threads
@@ -363,9 +349,25 @@ def rocket(node_id: str) -> None:
 
 
 def cmd_fetch(number: int | None, review_id: int | None) -> None:
+    """A single review with `--review-id`; every un-acked bot review without it.
+
+    The default sweep is what lets one invocation action a PR that collected several
+    pending CodeRabbit passes instead of only the one `fetch` happened to be run
+    against — a review left unpicked here never gets a rocket, and stays silently
+    un-actioned.
+    """
     repo, number, branch = pr_context(number)
-    state = collect(repo, number, review_id, fetch_threads(repo, number))
-    print(json.dumps({'branch': {'name': branch, 'worktree': worktree_for(branch)}, **state}, indent=2))
+    threads = fetch_threads(repo, number)
+    branch_info = {'name': branch, 'worktree': worktree_for(branch)}
+    if review_id is not None:
+        state = collect(repo, number, review_id, threads)
+        print(json.dumps({'branch': branch_info, **state}, indent=2))
+        return
+    reviews = all_reviews(repo, number)
+    pending_ids = pending_review_ids(repo, number, threads)
+    bot_ids = [r['id'] for r in reviews if r['id'] in pending_ids and is_bot(r)]
+    states = [collect(repo, number, rid, threads) for rid in bot_ids]
+    print(json.dumps({'branch': branch_info, 'reviews': states}, indent=2))
 
 
 def cmd_status(number: int | None) -> None:
@@ -462,9 +464,12 @@ def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
 
 def cmd_apply(number: int | None, path: str | None) -> None:
     payload = tomllib.loads(sys.stdin.read() if path is None else open(path).read())
+    review_id = payload.get('review_id')
+    if review_id is None:
+        sys.exit('Actions file needs a review_id')
     repo, number, _ = pr_context(number)
     threads = {t['id']: t for t in fetch_threads(repo, number)}
-    state = collect(repo, number, payload.get('review_id'), list(threads.values()))
+    state = collect(repo, number, review_id, list(threads.values()))
     actions = payload.get('actions') or []
 
     bot = state['review']['is_bot']
