@@ -142,8 +142,6 @@ brew "selene"
 brew "sem-cli"
 # Easily detect and prevent bugs and anti-patterns in your codebase
 brew "semgrep"
-# Command-line utility to interact with Sentry
-brew "sentry-cli"
 # Rich git commit graph in your terminal
 brew "serie"
 # Smart session manager for the terminal

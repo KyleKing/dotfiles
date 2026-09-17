@@ -25,13 +25,20 @@
   "effortLevel": "medium",
   "enabledPlugins": {
     "hyperskills@hyperb1iss": true,
-    "impeccable@impeccable": true
+    "impeccable@impeccable": true,
+    "slack@claude-plugins-official": true
   },
   "env": {
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "USE_BUILTIN_RIPGREP": "0"
   },
   "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "repo": "anthropics/claude-plugins-official",
+        "source": "github"
+      }
+    },
     "hyperb1iss": {
       "source": {
         "repo": "hyperb1iss/hyperskills",

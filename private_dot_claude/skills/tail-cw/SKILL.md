@@ -98,6 +98,26 @@ converts for you; `export xray-trace` does not.
 Reading logs (`export logs`, `tail`, `summary`, `groups`, `alarms`) is not billed per
 GB.
 
+## Free is not the same as fast
+
+`export logs`/`export summary` push a `--filter` to CloudWatch as a server-side
+`FilterPattern`, but `FilterLogEvents` scans a busy, high-volume group (many streams,
+continuous writers — a prod worker or API fleet) far slower than Insights answers the
+same keyword search.
+A 2-3h keyword filter against a multi-GB group can run past a two-
+minute timeout with no output; the equivalent
+`export insights '<glob>' --query "fields @timestamp, @message | filter @message like /keyword/" --yes`
+over the same
+window typically answers in single-digit seconds, because Insights is a parallel,
+indexed query engine and `FilterLogEvents` is not.
+`export groups '<glob>'` shows a
+group's `stored_bytes` — treat anything in the multi-GB range, combined with a keyword
+`--filter` over more than about an hour, as a signal to reach for `export insights`
+first rather than wait out a `export logs` call.
+This is a real gap, not just guidance:
+see `plans/roadmap-2026-07.md` under `## Open` in the checkout for the fix under
+consideration (auto-routing or an early warning based on group size).
+
 ## Filters
 
 `ERROR`, `"exact phrase"`, `%regex%`, `level:error`, `status:>=500`, `user.id:*`,

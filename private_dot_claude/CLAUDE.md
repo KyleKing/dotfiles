@@ -195,6 +195,13 @@
     subagent run) — they're incompatible with too many tasks (running services, shared dev
     stacks, tools that assume the checkout root).
     Work directly in the current checkout, on a branch, instead
+- Since worktrees are off the table, never dispatch more than one subagent at a time
+    against the same checkout when each is expected to `git checkout`/branch/commit.
+    A `git checkout -b` in one agent carries the whole working tree (including another
+    agent's uncommitted edits) onto its branch, so concurrent agents silently tangle or
+    overwrite each other's diffs and a commit's worth of work can vanish with no trace in
+    git at all.
+    Land one agent's branch (or at least get it committed) before starting the next
 - Do not run Docker commands without instruction
 - Language conventions load automatically from `~/.claude/rules/` when you touch a
     matching file (Python, CSS, TypeScript, HTML and templates).

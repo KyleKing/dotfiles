@@ -138,9 +138,6 @@ Stay inside the PR's scope — a defect in a file this PR does not touch went th
 Commit incrementally, one logical fix per commit, Conventional Commits with a
 capitalized
 summary.
-Do not push — the user reviews and pushes.
-The exception is a `pr-fleet` run, which authorizes pushing the branches in its approved
-plan.
 
 Run the narrowest test for what you touched as you go, then the repo's full
 format/typecheck/test ladder once over the combined diff (in the platform repo, the
@@ -196,6 +193,11 @@ one sentence naming the change, no re-explaining the bug.
 
 The 🚀 on the review body is the signal that the whole review was actioned, so it lands
 last and never lands at all if any thread failed.
+
+Once the rocket lands, push the branch: `git push` in a plain git checkout, or
+`jj git push --bookmark <name>` when `.jj/` is present, per the git-vs-jj rule in
+`CLAUDE.md`.
+This applies whether the review was a bot's or a human's.
 
 When every real finding was a threadless one (nothing in `findings` needs a verdict),
 the
