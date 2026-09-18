@@ -295,6 +295,17 @@ edits.
 A later push that fixes something the summary already claimed works means rewriting the
 claim, not appending a correction.
 
+A before/after screenshot belongs beside the claim it proves.
+`gh pr comment`,
+`gh issue create`, and `gh issue comment` take a real `--attach <file>#<alt text>`
+flag: it uploads the image/video to `github.com/user-attachments/assets/...` and,
+if the body already has a matching `![alt](./file)` reference, rewrites it in
+place to the uploaded URL.
+Write the body with local-path image references first,
+then pass the same paths to `--attach` (repeatable, up to 50).
+`gh gist create`
+rejects binary files outright — don't reach for it for images.
+
 Open with a summary paragraph, then use headers and bold topic lines so it can be
 scanned.
 Steps a human must perform go in `- [ ]` checkboxes, and each one must need actual
