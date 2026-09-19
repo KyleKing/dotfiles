@@ -90,7 +90,7 @@ def get(pr: str | None) -> None:
     print(existing['body'])
 
 
-def comment(body: str, pr: str | None) -> None:
+def comment(body: str, pr: str | None, extra: list[str]) -> None:
     if not body.startswith(MARKER):
         sys.exit(
             f"Comment body must start with {MARKER!r}: it is how the singleton comment is"
@@ -101,6 +101,12 @@ def comment(body: str, pr: str | None) -> None:
     number, repo, existing = _find_existing_comment(pr)
 
     if existing is not None:
+        if extra:
+            sys.exit(
+                'The AI Summary comment already exists, so it is updated with a PATCH, which'
+                f" cannot upload files: {' '.join(extra)} would be silently dropped. Attachments"
+                ' have to go on the first post. Delete the comment and re-run to re-upload.'
+            )
         run(
             'gh', 'api', '-X', 'PATCH',
             f"repos/{repo}/issues/comments/{existing['id']}",
@@ -109,7 +115,7 @@ def comment(body: str, pr: str | None) -> None:
         print(f"Updated AI Summary comment on #{number}")
         return
 
-    comment_url = run('gh', 'pr', 'comment', str(number), '--body', body)
+    comment_url = run('gh', 'pr', 'comment', str(number), '--body', body, *extra)
     print(f"Posted AI Summary comment: {comment_url}")
 
     current_body = run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
@@ -163,7 +169,7 @@ def main() -> None:
         elif args.command == 'get':
             get(args.pr)
         else:
-            comment(args.body, args.pr)
+            comment(args.body, args.pr, extra)
     except subprocess.CalledProcessError as error:
         sys.exit(error.stderr or str(error))
 

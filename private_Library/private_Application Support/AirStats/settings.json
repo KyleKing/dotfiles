@@ -120,14 +120,14 @@
   },
   "panel": {
     "collapsedModules": [
-      "gpu",
-      "system",
+      "network",
       "battery",
-      "disk",
-      "memory",
+      "system",
+      "gpu",
       "cpu",
+      "disk",
       "thermal",
-      "network"
+      "memory"
     ]
   },
   "schemaVersion": 1,
