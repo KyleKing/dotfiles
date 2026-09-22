@@ -9,6 +9,11 @@ per-finding line ranges; a review without one has every open thread tied to
 it turned into a finding directly, using the thread's own comment as the
 prompt. `--review-id` targets one review outright, including a human's,
 which `fetch`'s default sweep never picks on its own.
+Every finding gets a reply, whatever its verdict, and every reply opens with
+`[AI Bot]: `. A thread nobody answers reads as unaddressed to the next reader
+and to the next round of a reviewer that re-reads its own threads, and the
+prefix is the only thing in a thread saying a model wrote what my account
+posted. `apply` refuses an action missing either.
 A bot's review is actioned without asking; replying into a person's thread
 needs `replies_approved = true` in the actions file, which the caller sets only
 after the human has said yes.
@@ -37,6 +42,11 @@ PATH_RE = re.compile(r'^In `?@(?P<path>.+?)`?:$')
 SECTION_RE = re.compile(r'^(?P<name>[A-Za-z][A-Za-z ]*) comments:$')
 SKIP_VERDICTS = ('policy', 'stale', 'wrong')
 VERDICTS = ('fixed', *SKIP_VERDICTS)
+# A reply posts under my account, so nothing else in the thread says a model wrote
+# it. Watch Doggo's own gate reads a reply from a write-access human as an argument
+# that can clear a blocking finding, so the prefix is the only marker of authorship
+# a later reader or a later round gets.
+AI_REPLY_PREFIX = '[AI Bot]: '
 
 THREADS_QUERY = """
 query($owner:String!,$repo:String!,$number:Int!,$after:String){
@@ -314,8 +324,11 @@ def validate(actions: list[dict], findings: list[dict], *, bot: bool, approved: 
             errors.append(f"{thread_id}: not a finding of this review")
         if action.get('verdict') not in VERDICTS:
             errors.append(f"{thread_id}: verdict must be one of {', '.join(VERDICTS)}")
-        if action.get('verdict') in SKIP_VERDICTS and not (action.get('reply') or '').strip():
-            errors.append(f"{thread_id}: a skipped finding needs a reply saying why")
+        reply = (action.get('reply') or '').strip()
+        if not reply:
+            errors.append(f"{thread_id}: every finding needs a reply, whatever the verdict")
+        elif not reply.startswith(AI_REPLY_PREFIX):
+            errors.append(f"{thread_id}: a reply must open with {AI_REPLY_PREFIX!r}")
     missing = sorted(set(by_id) - {a.get('thread_id') for a in actions})
     errors += [f"{thread_id}: no verdict given" for thread_id in missing]
     if not bot and not approved and any((a.get('reply') or '').strip() for a in actions):

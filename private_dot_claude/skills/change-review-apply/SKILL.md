@@ -57,7 +57,12 @@ for
 bots, plus any human review, which needs `--review-id` to actually fetch.
 An entry with `open_threads: 0` has no thread to reply into
 (general feedback in the review body, not an inline comment) — its text comes back
-quoted in `body`; read it and note it in the report, there is nothing to resolve.
+quoted in `body`.
+There is nothing to resolve, and it still gets answered: read it, and where it asked
+something or claimed something, post one `[AI Bot]: ` comment on the PR naming the
+review and answering it point by point.
+A numbered list in a review body (Watch Doggo's open questions are the common case)
+is answered by number.
 
 Read these keys per review before starting work on it:
 
@@ -171,11 +176,12 @@ replies_approved = true
 [[actions]]
 thread_id = "PRRT_..."
 verdict = "fixed"
+reply = "[AI Bot]: Moved the org check into `require_scope` so every caller gets it."
 
 [[actions]]
 thread_id = "PRRT_..."
 verdict = "wrong"
-reply = "The guard above already rejects None, so this path cannot raise."
+reply = "[AI Bot]: The guard above already rejects None, so this path cannot raise."
 ```
 
 ```sh
@@ -190,20 +196,37 @@ spent on a reply to a bot.
 with `AskUserQuestion` so it is unmistakable that something is about to be posted under
 their name.
 Set `replies_approved = true` only after they say yes; the script refuses the batch
-without it whenever an action carries reply text.
-An actions file with no reply text needs no approval, so resolving and rocketing a
-human review is never gated.
+without it whenever an action carries reply text, which every action now does, so a
+human's review is always gated.
 A human thread is a conversation, so answer it: a bare resolve on a question the
 reviewer asked reads as ignoring them.
+The `[AI Bot]: ` prefix stays on here too.
+It is what tells them they are reading a
+draft the user approved rather than one the user wrote, which is the distinction
+`CLAUDE.md` asks every shared-surface post to make in its first line.
 
 The script refuses the whole batch before posting anything when a `thread_id` does not
-belong to that review, a finding has no verdict, or a skipped finding carries no reply.
-A reply is optional for `fixed` and required for the three skip verdicts, so a rejected
-finding always leaves a public reason.
-On a *bot's* `fixed`, default to no reply — the diff already shows it; add one only when
-the fix landed somewhere else, like a shared helper.
-Replies are written in the user's voice under the `change-review` skill's rules: hedged,
-one sentence naming the change, no re-explaining the bug.
+belong to that review, a finding has no verdict, or an action carries no reply.
+
+**Every finding gets a reply, and every reply opens with `[AI Bot]: `.** That holds for
+a `fixed` verdict as much as for a skip, on a bot's thread and a human's alike, so a
+thread never closes with nothing in it saying what happened.
+Two reasons, and both bite:
+
+- A thread nobody answered reads as a finding nobody looked at.
+    A reviewer that re-reads its own threads punishes the silence harder than a person
+    does: Watch Doggo hands each prior finding's replies to the next round
+    (`REVIEW_FEEDBACK.md`), and a finding that drew silence gets raised again unchanged
+- The reply posts under the user's own account, so GitHub attributes it to a
+    write-access human and nothing else in the thread says otherwise.
+    Watch Doggo's `rebuttal.py` counts exactly that as an argument that can clear a
+    blocking finding with no code change behind it.
+    The prefix is the whole marker
+
+Keep it to one sentence after the prefix, in the user's voice under the `change-review`
+skill's rules: name the change, do not re-explain the bug.
+Say where the fix went whenever the thread's own diff does not show it (a shared
+helper, a sibling call site, another file).
 
 The 🚀 on each review's body is the signal that *that* review was actioned, so it lands
 last for that review and never lands at all if one of its threads failed.

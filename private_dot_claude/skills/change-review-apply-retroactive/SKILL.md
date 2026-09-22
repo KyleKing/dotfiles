@@ -124,8 +124,11 @@ and pointing at the commit:
 [[actions]]
 thread_id = "PRRT_kwDOKbit4c6fHy7N"
 verdict = "fixed"
-reply = "Fixed in https://github.com/org/repo/pull/14930 (commit abc1234) — the upload task now awaits the contract update, so the lock outlives it."
+reply = "[AI Bot]: Fixed in https://github.com/org/repo/pull/14930 (commit abc1234) — the upload task now awaits the contract update, so the lock outlives it."
 ```
+
+The `[AI Bot]: ` prefix is required on every reply here as it is on an open PR
+(`change-review-apply` Step 6), and `apply` refuses a batch without it.
 
 A skip verdict still needs its reason, and `stale` is the one to write carefully: name
 the pull request or commit that already fixed it, because the reader's next question is

@@ -13,6 +13,14 @@ restate. `comment <body>` then submits the full result; it always replaces
 the whole comment, on the assumption the caller built `<body>` from what
 `get` returned.
 
+`comment` re-stamps the body with the short SHA and subject line of the commit
+it describes, stripping the previous stamp first. The SHA is what says the
+summary is out of sync; the subject is what survives a rebase, which changes
+every SHA on the branch and leaves the subjects alone, so a stale SHA under a
+matching subject reads as a rebase rather than as new work the summary missed.
+Never write or edit the stamp by hand: `get` returns it and `comment` replaces
+it.
+
 Both take `--pr <number|branch>` and default to the current branch. A stack of
 PRs is the case that needs it: only one branch is checked out at a time, so
 without it the summary for every PR but that one is unreachable.
@@ -45,6 +53,12 @@ import subprocess
 import sys
 
 MARKER = 'AI Summary:'
+STAMP_MARKER = '<!-- ai-gh-pr:commit -->'
+# Anchored on the stamp's exact one-line shape at the very end: a body that quotes
+# the marker (an Evidence block showing a stamp) must not truncate from there.
+STAMP_RE = re.compile(rf"\n*{re.escape(STAMP_MARKER)}\n_Describes [^\n]*_\s*\Z")
+# The stamp's subject sits inside `_..._`; an unescaped one of these closes it early.
+EMPHASIS_RE = re.compile(r'([_*])')
 
 TITLE_RE = re.compile(
     r'^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: [A-Z]'
@@ -83,6 +97,29 @@ def _find_existing_comment(pr: str | None) -> tuple[int, str, dict | None]:
     return number, repo, existing
 
 
+def _commit_stamp(repo: str, number: int) -> str:
+    """Record which commit the summary describes, so a stale summary is visible."""
+    sha = run('git', 'rev-parse', 'HEAD')
+    pr_head = run_json('gh', 'pr', 'view', str(number), '--json', 'headRefOid')['headRefOid']
+    if sha != pr_head:
+        print(
+            f"warning: local HEAD {sha[:10]} is not the PR head {pr_head[:10]}; push"
+            ' first, or the stamp points at a commit the reviewer cannot open.',
+            file=sys.stderr,
+        )
+    if run('git', 'status', '--porcelain', '-uno'):
+        print(
+            'warning: tracked files have uncommitted changes; commit and push them,'
+            ' or the stamp describes a commit that predates them.',
+            file=sys.stderr,
+        )
+    subject = EMPHASIS_RE.sub(r'\\\1', run('git', 'log', '-1', '--format=%s', sha))
+    return (
+        f"\n\n{STAMP_MARKER}\n_Describes "
+        f"[`{sha[:10]}`](https://github.com/{repo}/commit/{sha}) — {subject}._"
+    )
+
+
 def get(pr: str | None) -> None:
     _, _, existing = _find_existing_comment(pr)
     if existing is None:
@@ -99,6 +136,7 @@ def comment(body: str, pr: str | None, extra: list[str]) -> None:
         )
 
     number, repo, existing = _find_existing_comment(pr)
+    body = STAMP_RE.sub('', body).rstrip() + _commit_stamp(repo, number)
 
     if existing is not None:
         if extra:
