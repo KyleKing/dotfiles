@@ -154,31 +154,31 @@ incremental re-review and discards inline comment anchoring.
 Squashed, one-commit-per-PR history is not a goal here — multiple commits per branch are
 fine.
 
-When a lower PR in the stack changes after review feedback:
+Whenever a branch gains commits the stack above it doesn't have yet — review-feedback
+fixes on a lower PR, or `main` moving forward underneath the bottom PR — merge-forward
+from that point, one level at a time, pushing (not force-pushing) as you go:
 
-1. Commit the fix on the lower branch normally, push (not force-push).
-1. Starting from the branch directly above it and working upward through the stack,
-    `git merge` the updated lower branch into each branch above it:
-    ```
-    git checkout <branch-2>
-    git merge <branch-1>
-    git push
-    git checkout <branch-3>
-    git merge <branch-2>
-    git push
-    ```
-    This creates merge commits and leaves prior history intact.
-    GitHub's diff view for each PR keeps showing only that PR's own changes.
+```
+git checkout <branch-1>
+git merge main          # only when syncing from main; skip if the fix already landed here
+git push
+git checkout <branch-2>
+git merge <branch-1>
+git push
+git checkout <branch-3>
+git merge <branch-2>
+git push
+```
 
-When the bottom PR of the stack merges to `main`:
+This creates merge commits and leaves prior history intact, so GitHub's diff view for
+each PR keeps showing only that PR's own changes.
+Squash-merge or regular merge to
+`main` is fine per PR; the only constraint is never force-pushing a branch other open
+PRs in the stack are based on.
 
-1. Retarget the next PR's base to `main` (`gh pr edit <n> --base main`, or let GitHub's
-    native stacked-PR retargeting handle it if available).
-1. `git merge main` into that branch to drop the now-landed diff from its view, push,
-    repeat up the stack.
-
-Squash-merge or regular merge to `main` is fine per PR; the constraint above is only
-about not force-pushing branches that other open PRs in the stack are based on.
+When the bottom PR itself merges to `main`, retarget the next PR's base first
+(`gh pr edit <n> --base main`, or GitHub's native stacked-PR retargeting) and only then
+`git merge main` into it, per the retarget-then-push ordering below.
 
 ### Direction matters: only merge downward-base into upward-dependent
 

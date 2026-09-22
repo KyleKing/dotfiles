@@ -21,9 +21,10 @@ after the human has said yes.
 proofreads this one before it posts and TOML's triple-quoted strings hold
 reply prose without JSON's escaping), replies, resolves, and rockets the
 review body once every finding has been actioned. `status` lists every
-review, bot or human, that has no rocket reaction and still has an unresolved
-thread or a CHANGES_REQUESTED verdict, so a review a later push buried
-doesn't go silently un-actioned. `sweep` runs that same rule across every
+review, bot or human, that still has an unresolved thread tied to it (even a
+review already rocketed once, since a reply or a manual unresolve can reopen
+a thread afterward) or a CHANGES_REQUESTED verdict with nothing left open, so
+a review a later push buried doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
 arrived at merge time or after it turns up.
 """
@@ -280,7 +281,7 @@ def review_findings(review: dict, threads: list[dict]) -> dict:
 
 
 def pending_review_ids(repo: str, number: int, threads: list[dict]) -> set[int]:
-    """Database ids of reviews `status` would still call un-acked."""
+    """Database ids of reviews `status` would still call un-acked, rocketed or not."""
     return {p['review_id'] for p in pending_reviews(fetch_reviews(repo, number), threads)}
 
 
@@ -386,9 +387,11 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
 def cmd_status(number: int | None) -> None:
     """List every review (bot or human) that still needs a look.
 
-    "Needs a look" means no rocket reaction and either an unresolved thread
-    tied to it or a CHANGES_REQUESTED verdict, so a review a push buried
-    doesn't go un-actioned just because a newer one landed on top of it.
+    "Needs a look" means it has an unresolved thread tied to it (even one from
+    a review already rocketed, since a reply or a manual unresolve can reopen
+    a thread after the rocket) or a CHANGES_REQUESTED verdict with no open
+    thread left to close it out. A rocketed review with every thread resolved
+    is done and stays out.
 
     A review with no open thread has nowhere to reply into (general feedback
     in the review body itself, not an inline comment), so its `body` is
@@ -411,11 +414,12 @@ def pending_reviews(reviews: list[dict], threads: list[dict]) -> list[dict]:
     for review in reviews:
         rocketed = review['reactions']['totalCount'] > 0
         open_threads = open_by_review.get(review['databaseId'], 0)
-        if rocketed or (open_threads == 0 and review['state'] != 'CHANGES_REQUESTED'):
+        if open_threads == 0 and (rocketed or review['state'] != 'CHANGES_REQUESTED'):
             continue
         entry = {
             'author': review['author']['login'] if review['author'] else None,
             'open_threads': open_threads,
+            'previously_rocketed': rocketed,
             'review_id': review['databaseId'],
             'state': review['state'],
             'submitted_at': review['submittedAt'],
