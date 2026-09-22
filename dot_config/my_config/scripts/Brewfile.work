@@ -222,6 +222,8 @@ cask "customshortcuts"
 cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
+# Coding agent with Devin Cloud integration
+cask "devin-cli"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Security audit software
