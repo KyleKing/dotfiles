@@ -121,13 +121,13 @@
   "panel": {
     "collapsedModules": [
       "battery",
-      "gpu",
-      "system",
       "network",
-      "cpu",
       "disk",
+      "cpu",
+      "system",
       "memory",
-      "thermal"
+      "thermal",
+      "gpu"
     ]
   },
   "schemaVersion": 1,

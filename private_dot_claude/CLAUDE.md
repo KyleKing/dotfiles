@@ -5,8 +5,8 @@
     make
 - When debugging, identify multiple possible causes and reason/experiment to determine
     which explain the root cause
-- Fix the cause, not the symptom, and prove which cause it is with evidence (a log line, a
-    trace, an experiment that flips the behavior).
+- Fix the cause, not the symptom, and prove which cause it is with evidence (a log line or
+    a trace).
     A plausible explanation is not a proven one.
     Where you cannot prove it, say so and mark the fix as unverified rather than claiming
     resolution
@@ -124,6 +124,8 @@
 - Design for parallel execution and speed: no shared mutable state, no ordering between
     tests, no sleeps
 - Extract helpers and parameterize instead of copying a test body
+- Run a test once, against the change. Never revert, stash, or comment out a fix to watch
+    its test fail, and never rerun a suite on the base branch to compare
 
 ## Design Principles
 
@@ -263,8 +265,6 @@ Read that repo's `AGENTS.md` and `CONTRIBUTING.md` first, because each one carri
 own
 check ladder and its own known false negatives, then run that ladder to completion and
 commit there.
-Prove the fix the same way as anywhere else: write the test, remove the fix, watch it
-fail, put the fix back.
 
 Two things to say out loud rather than do quietly.
 Tell me when you overwrite an installed binary with a local build, because the version

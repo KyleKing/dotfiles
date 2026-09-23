@@ -224,6 +224,8 @@ cask "daisydisk"
 cask "dash"
 # Coding agent with Devin Cloud integration
 cask "devin-cli"
+# Agentic IDE with AI agent command center
+cask "devin-desktop"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Security audit software
@@ -248,8 +250,6 @@ cask "hazeover"
 cask "imageoptim"
 # Incident management platform
 cask "incident-io"
-# Menu bar manager
-cask "jordanbaird-ice@beta"
 # Keyboard customiser
 cask "karabiner-elements"
 # Tool to prevent the system from going into sleep mode

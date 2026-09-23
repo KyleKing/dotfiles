@@ -98,7 +98,7 @@ A human is worth more trust, and still
 wrong sometimes.
 For every finding, read the current file and pick the verdict:
 
-- `fixed` — reproduce the failure in your head or in a test first.
+- `fixed` — reproduce the failure in your head first.
     State the concrete input or interleaving that breaks.
     If you cannot, it is not yet real
 - `stale` — a later commit already fixed it.
