@@ -23,7 +23,8 @@ reply prose without JSON's escaping), replies, resolves, and rockets the
 review body once every finding has been actioned. `status` lists every
 review, bot or human, that still has an unresolved thread tied to it (even a
 review already rocketed once, since a reply or a manual unresolve can reopen
-a thread afterward) or a CHANGES_REQUESTED verdict with nothing left open, so
+a thread afterward) or a CHANGES_REQUESTED verdict (or a Watch Doggo body still
+withholding approval) with nothing left open, so
 a review a later push buried doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
 arrived at merge time or after it turns up.
@@ -48,6 +49,8 @@ VERDICTS = ('fixed', *SKIP_VERDICTS)
 # that can clear a blocking finding, so the prefix is the only marker of authorship
 # a later reader or a later round gets.
 AI_REPLY_PREFIX = '[AI Bot]: '
+WATCH_DOGGO_APPROVED = '✅ approved'
+WATCH_DOGGO_MARKER = '<!-- watchdoggo-review '
 
 THREADS_QUERY = """
 query($owner:String!,$repo:String!,$number:Int!,$after:String){
@@ -81,6 +84,7 @@ query($owner:String!,$repo:String!,$number:Int!){
         comments(first:100){ nodes{ databaseId body author{login} pullRequestReview{databaseId} } } }
     } } } }
 """
+
 
 
 def run(*cmd: str, stdin: str | None = None) -> str:
@@ -410,11 +414,13 @@ def pending_reviews(reviews: list[dict], threads: list[dict]) -> list[dict]:
         if review_id is not None:
             open_by_review[review_id] = open_by_review.get(review_id, 0) + 1
 
+    watch_doggo_rounds = [r for r in reviews if WATCH_DOGGO_MARKER in (r['body'] or '')]
+    latest_round = max(watch_doggo_rounds, key=lambda r: r['submittedAt'], default=None)
     pending = []
     for review in reviews:
         rocketed = review['reactions']['totalCount'] > 0
         open_threads = open_by_review.get(review['databaseId'], 0)
-        if open_threads == 0 and (rocketed or review['state'] != 'CHANGES_REQUESTED'):
+        if open_threads == 0 and (rocketed or not withholds_approval(review, latest_round)):
             continue
         entry = {
             'author': review['author']['login'] if review['author'] else None,
@@ -429,6 +435,18 @@ def pending_reviews(reviews: list[dict], threads: list[dict]) -> list[dict]:
             entry['body'] = '\n'.join(f"> {line}" for line in review['body'].splitlines())
         pending.append(entry)
     return pending
+
+
+def withholds_approval(review: dict, latest_round: dict | None) -> bool:
+    """A verdict that still blocks with no thread left open to carry it.
+
+    Watch Doggo posts COMMENTED and lists earlier blocking findings only in the
+    body ("Still open from earlier rounds"), and each round supersedes the last,
+    so only its newest body's headline counts.
+    """
+    if review['state'] == 'CHANGES_REQUESTED':
+        return True
+    return review is latest_round and WATCH_DOGGO_APPROVED not in (review['body'] or '')
 
 
 def since_date(since: str) -> str:
