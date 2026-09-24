@@ -41,7 +41,7 @@ BLOCK_RE = re.compile(r'Prompt for all review comments.*?\n```\n(.*?)\n```', re.
 ITEM_RE = re.compile(r'^- (?:Around lines?|Lines?) (?P<start>\d+)(?:\s*-\s*(?P<end>\d+))?:\s*(?P<text>.*)$')
 PATH_RE = re.compile(r'^In `?@(?P<path>.+?)`?:$')
 SECTION_RE = re.compile(r'^(?P<name>[A-Za-z][A-Za-z ]*) comments:$')
-SKIP_VERDICTS = ('policy', 'stale', 'wrong')
+SKIP_VERDICTS = ('answered', 'noted', 'policy', 'stale', 'wrong')
 VERDICTS = ('fixed', *SKIP_VERDICTS)
 # A reply posts under my account, so nothing else in the thread says a model wrote
 # it. Watch Doggo's own gate reads a reply from a write-access human as an argument

@@ -111,6 +111,10 @@ For every finding, read the current file and pick the verdict:
     docstrings on private helpers, layering violations, hand-rolled versions of a shared
     component.
     Do the policy-compliant equivalent and mark it `fixed`, or skip it as `policy`
+- `answered` — the thread asked a question rather than naming a defect.
+    The reply is the answer
+- `noted` — the thread is an FYI or a suggestion with nothing to change.
+    Say what it was checked against
 
 Push back hardest on findings that widen scope for its own sake: version pinning, extra
 abstraction, "add a contract test" for behavior a real test already covers.
