@@ -49,11 +49,17 @@ those
 still need their own explicit `--review-id`.
 
 `sweep` also lists each pull request's `open_checkboxes`: every unchecked `- [ ]` in its
-`AI Summary:` comment.
+`AI Summary:` comment, and every unchecked `- [ ]` in any review's own body, such as
+Watch Doggo's non-blocking "Ticket progress" checklist (a merged production-data or
+follow-up task the bot flagged but did not block on).
 Each one is a judgment call the user still owes after the merge (a security sign-off, a
-check on another account, a tradeoff), so a pull request with only open boxes is still
-in scope.
-Settle each box on its source pull request with `tick`, one TOML file per pull request:
+check on another account, a tradeoff, a "someone re-links these two records" note), so a
+pull request with only open boxes is still in scope.
+Each entry carries a `source`: `summary` boxes live in the `AI Summary:` comment and
+`tick` can check them off in place; `review` boxes live in a review body that a bot
+regenerates on its own next pass, so there's no comment to PATCH.
+Settle every `summary` box on its source pull request with `tick`, one TOML file per
+pull request:
 
 ```toml
 [[boxes]]
@@ -85,6 +91,12 @@ to that pull request grouping every box by how it settled, so the record sits wh
 box was.
 Carry every `open` box into the new pull request's summary as its own `- [ ]` linking
 back to the source comment.
+
+A `review` box gets the same research and, if it needs one, the same question to the
+user, but never a `tick` call: there's no comment to check it against, and the same bot
+may repost the checklist on its next round anyway.
+Record how it settled in the report and, for anything still open, as a `- [ ]` in the
+new pull request's summary linking to the review, exactly like an `open` `summary` box.
 
 A review whose author is the user themselves is self-notes on their own code, not
 findings.

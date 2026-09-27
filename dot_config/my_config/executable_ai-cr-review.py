@@ -28,7 +28,8 @@ withholding approval) with nothing left open, so
 a review a later push buried doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
 arrived at merge time or after it turns up. `status` and `sweep` also list every
-unchecked `- [ ]` in the pull request's `AI Summary:` comment, since each one is a
+unchecked `- [ ]` in the pull request's `AI Summary:` comment and in any review's own
+body (a bot's non-blocking ticket checklist, e.g.), since each one is a
 step a human still owes. `tick` checks boxes off from a TOML file and appends one
 `[AI Bot]: ` comment to the pull request saying how each box was settled: verified
 automatically, confirmed by the human, or left open on purpose.
@@ -419,9 +420,10 @@ def cmd_status(number: int | None) -> None:
     quoted in the output instead of a thread to fetch and act on directly.
     """
     repo, number, _ = pr_context(number)
+    reviews = fetch_reviews(repo, number)
     print(json.dumps({
-        'open_checkboxes': open_checkboxes(fetch_comments(repo, number)),
-        'pending': pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number)),
+        'open_checkboxes': open_checkboxes(fetch_comments(repo, number)) + review_checkboxes(reviews),
+        'pending': pending_reviews(reviews, fetch_threads(repo, number)),
     }, indent=2))
 
 
@@ -501,11 +503,29 @@ def box_lines(body: str) -> list[tuple[int, str]]:
 
 
 def open_checkboxes(comments: list[dict]) -> list[dict]:
-    """Unchecked boxes in the `AI Summary:` comment, skipping fenced code."""
+    """Unchecked boxes in the `AI Summary:` comment, skipping fenced code.
+
+    These are the only boxes `tick` can check off in place, since it PATCHes this
+    same comment.
+    """
     summary = summary_comment(comments)
     if summary is None:
         return []
-    return [{'text': text, 'url': summary['url']} for _, text in box_lines(summary['body'])]
+    return [{'source': 'summary', 'text': text, 'url': summary['url']}
+            for _, text in box_lines(summary['body'])]
+
+
+def review_checkboxes(reviews: list[dict]) -> list[dict]:
+    """Unchecked boxes in a review's own body, e.g. Watch Doggo's non-blocking
+    "Ticket progress" checklist.
+
+    These sit outside the review's approval state, so an approved review can
+    still carry one, and outside the `AI Summary:` comment `tick` patches, so
+    settling one is recorded in the report or the new PR rather than checked
+    off in place.
+    """
+    return [{'source': 'review', 'text': text, 'url': review['url']}
+            for review in reviews for _, text in box_lines(review['body'] or '')]
 
 
 def fetch_comments(repo: str, number: int) -> list[dict]:
@@ -514,20 +534,25 @@ def fetch_comments(repo: str, number: int) -> list[dict]:
 
 
 def sweep_pr(repo: str, number: int) -> tuple[list[dict], list[dict]]:
-    """Every un-acked review and unchecked summary box on one pull request, in one
-    read where a page holds it."""
+    """Every un-acked review and unchecked box (summary or review body) on one
+    pull request, in one read where a page holds it."""
     owner, name = repo.split('/')
     data = run_json('gh', 'api', 'graphql', '-f', f"query={SWEEP_QUERY}",
                     '-f', f"owner={owner}", '-f', f"repo={name}",
                     '-F', f"number={number}")['data']['repository']['pullRequest']
     reviews, threads, comments = data['reviews'], data['reviewThreads'], data['comments']
     if reviews['pageInfo']['hasNextPage'] or threads['pageInfo']['hasNextPage']:
-        pending = pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number))
+        review_nodes = fetch_reviews(repo, number)
+        pending = pending_reviews(review_nodes, fetch_threads(repo, number))
     else:
-        pending = pending_reviews(reviews['nodes'], threads['nodes'])
+        review_nodes = reviews['nodes']
+        pending = pending_reviews(review_nodes, threads['nodes'])
+    boxes = review_checkboxes(review_nodes)
     if comments['pageInfo']['hasPreviousPage']:
-        return pending, open_checkboxes(fetch_comments(repo, number))
-    return pending, open_checkboxes(comments['nodes'])
+        boxes += open_checkboxes(fetch_comments(repo, number))
+    else:
+        boxes += open_checkboxes(comments['nodes'])
+    return pending, boxes
 
 
 def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
@@ -630,7 +655,9 @@ def cmd_tick(number: int | None, path: str | None) -> None:
     `how` is `auto` (verified by the agent), `asked` (the human confirmed it), or
     `open` (deliberately left unchecked, and still reported so the reader knows it
     was looked at). Every entry needs a `note` and must name one unchecked box
-    verbatim, or nothing is posted.
+    verbatim, or nothing is posted. A box from a review's own body (`source:
+    "review"` in `sweep`/`status` output) has no comment here to PATCH, so it isn't
+    a valid target; settle it in the report or the new PR instead.
     """
     payload = tomllib.loads(sys.stdin.read() if path is None else open(path).read())
     ticks = payload.get('boxes') or []

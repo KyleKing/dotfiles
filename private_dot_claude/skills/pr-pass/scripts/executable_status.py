@@ -6,6 +6,7 @@ Read-only. Run from inside a checkout: gh and ai-cr-review.py resolve the repo f
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -15,8 +16,22 @@ CR_REVIEW = Path.home() / '.config/my_config/ai-cr-review.py'
 PR_FIELDS = 'number,title,url,headRefName,baseRefName,headRefOid,isDraft,mergeable,statusCheckRollup'
 FAILED = {'FAILURE', 'ERROR', 'TIMED_OUT', 'CANCELLED', 'ACTION_REQUIRED', 'STARTUP_FAILURE'}
 PENDING = {'PENDING', 'EXPECTED', 'QUEUED', 'IN_PROGRESS', 'WAITING', 'REQUESTED'}
-WARNING_NOISE = ('Node.js 16 actions are deprecated', 'Node.js 20 actions are deprecated',
-                 'The following actions use a deprecated Node.js version')
+WARNING_NOISE = ('Failed to restore: getCacheEntry failed', 'Failed to save: ',
+                 'ERROR: failed to remove one or more builders',
+                 'No files were found with the provided path: post-deploy/smoke/artifacts')
+TEST_ANNOTATION = re.compile(r'/home/runner/work/[^/]+/[^/]+/(\S+\.(?:test|stories)\.tsx?) >')
+# Actions with no release on a newer Node runtime; a deprecation warning naming only these is noise.
+NODE_NO_UPGRADE: set[str] = set()
+NODE_ACTION = re.compile(r'[\w.-]+/[\w./-]+@[\w.-]+')
+
+
+def is_noise(msg: str, full: str) -> bool:
+    if msg.startswith(WARNING_NOISE):
+        return True
+    if 'Node.js' in msg and 'deprecated' in msg:
+        named = {a.split('@')[0] for a in NODE_ACTION.findall(full)}
+        return bool(named) and named <= NODE_NO_UPGRADE
+    return False
 
 
 def run(*cmd: str) -> str:
@@ -91,16 +106,27 @@ def checks(rollup: list[dict]) -> dict:
     return {'failed': sorted(set(failed)), 'pending': sorted(set(pending)), 'passed': passed}
 
 
-def warnings(repo: str, sha: str) -> list[str]:
+def pr_files(number: int) -> set[str]:
+    return set(run('gh', 'pr', 'diff', str(number), '--name-only').split())
+
+
+def warnings(repo: str, sha: str, number: int) -> list[str]:
     runs = run_json('gh', 'api', '--paginate', f'repos/{repo}/commits/{sha}/check-runs?per_page=100',
                     '--jq', '[.check_runs[] | select(.output.annotations_count > 0) | {id, name}]')
-    found = []
+    found, files = [], None
     for r in runs:
         notes = run_json('gh', 'api', f"repos/{repo}/check-runs/{r['id']}/annotations?per_page=100")
         for n in notes:
-            msg = n.get('message', '').strip().splitlines()[0] if n.get('message') else ''
-            if n.get('annotation_level') == 'warning' and not msg.startswith(WARNING_NOISE):
-                found.append(f"{r['name']}: {n.get('path', '')}:{n.get('start_line', '')} {msg}"[:200])
+            full = (n.get('message') or '').strip()
+            msg = full.splitlines()[0] if full else ''
+            if n.get('annotation_level') != 'warning' or is_noise(msg, full):
+                continue
+            # A test-runner annotation on a test file outside this PR's diff is repo-wide, not this PR's.
+            if (test := TEST_ANNOTATION.search(msg)):
+                files = pr_files(number) if files is None else files
+                if test.group(1) not in files:
+                    continue
+            found.append(f"{r['name']}: {n.get('path', '')}:{n.get('start_line', '')} {msg}"[:200])
     return found
 
 
@@ -108,13 +134,16 @@ def behind_base(repo: str, head: str, base: str) -> int:
     return run_json('gh', 'api', f'repos/{repo}/compare/{head}...{base}', '--jq', '{n: .ahead_by}')['n']
 
 
-def reviews(number: int) -> list[dict]:
-    pending = run_json(str(CR_REVIEW), 'status', '--pr', str(number))
-    return [{'author': r['author'], 'open_threads': r['open_threads'], 'url': r['url']} for r in pending]
+def review_status(number: int) -> tuple[list[dict], list[dict]]:
+    out = run_json(str(CR_REVIEW), 'status', '--pr', str(number))
+    pending, boxes = (out, []) if isinstance(out, list) else (out['pending'], out.get('open_checkboxes', []))
+    return ([{'author': r['author'], 'open_threads': r['open_threads'], 'url': r['url']} for r in pending],
+            [{'text': b['text'], 'url': b['url']} for b in boxes])
 
 
-def describe(repo: str, pr: dict, heads: dict[str, int]) -> dict:
+def describe(repo: str, trunk: str, pr: dict, heads: dict[str, int]) -> dict:
     ci = checks(pr['statusCheckRollup'])
+    pending_reviews, open_checkboxes = review_status(pr['number'])
     entry = {
         'number': pr['number'],
         'title': pr['title'],
@@ -126,10 +155,13 @@ def describe(repo: str, pr: dict, heads: dict[str, int]) -> dict:
         'behind_base': behind_base(repo, pr['headRefName'], pr['baseRefName']),
         'ci_failed': ci['failed'],
         'ci_pending': ci['pending'],
-        'ci_warnings': warnings(repo, pr['headRefOid']),
-        'reviews': reviews(pr['number']),
+        'ci_warnings': warnings(repo, pr['headRefOid'], pr['number']),
+        'reviews': pending_reviews,
+        'open_checkboxes': open_checkboxes,
     }
-    entry['done'] = not (entry['conflicted'] or entry['behind_base'] or entry['ci_failed']
+    # A squash-merged PR behind trunk needs no sync unless it conflicts; a stacked PR must track its base.
+    stale_base = entry['behind_base'] and pr['baseRefName'] != trunk
+    entry['done'] = not (entry['conflicted'] or stale_base or entry['ci_failed']
                          or entry['ci_pending'] or entry['ci_warnings'] or entry['reviews'])
     return entry
 
@@ -143,6 +175,7 @@ def needs(p: dict) -> list[str]:
         (f"{len(p['ci_pending'])} pending", p['ci_pending']),
         (f"{len(p['ci_warnings'])} warnings", p['ci_warnings']),
         (f"{threads} open threads in {len(p['reviews'])} reviews", p['reviews']),
+        (f"{len(p['open_checkboxes'])} open checkboxes for the user", p['open_checkboxes']),
     ]
     return [label for label, present in candidates if present]
 
@@ -160,6 +193,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('prs', nargs='*', type=int, help='PR numbers; none means every open PR you authored')
     parser.add_argument('--no-expand', action='store_true', help='do not pull in stack-mates of the PRs named')
+    parser.add_argument('--non-draft', action='store_true',
+                        help='only units holding a ready PR; drafts inside those stacks stay in')
     parser.add_argument('--json', action='store_true')
     args = parser.parse_args()
 
@@ -167,8 +202,10 @@ def main() -> None:
     prs = select(open_prs(repo), args.prs, expand=not args.no_expand)
     heads = {p['headRefName']: p['number'] for p in prs}
     with ThreadPoolExecutor(max_workers=6) as pool:
-        described = {d['number']: d for d in pool.map(lambda p: describe(repo, p, heads), prs)}
-    grouped = [[described[p['number']] for p in unit] for unit in units(prs)]
+        described = {d['number']: d for d in pool.map(lambda p: describe(repo, trunk, p, heads), prs)}
+    chains = [u for u in units(prs) if not args.non_draft or any(not p['isDraft'] for p in u)]
+    grouped = [[described[p['number']] for p in unit] for unit in chains]
+    described = {p['number']: p for unit in grouped for p in unit}
     result = {'repo': repo, 'trunk': trunk, 'units': grouped, 'done': all(d['done'] for d in described.values())}
     if args.json:
         print(json.dumps(result, indent=2))
