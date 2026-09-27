@@ -68,9 +68,14 @@ note = "Kyle confirmed the widening on 2026-09-27; the domain is still in networ
 
 `auto` is for a box whose claim you proved from current `main` or the live system, and
 the note names the evidence.
-`asked` is for a box you put to the user with the question tool and they settled; batch
-every such box into one round of questions rather than one per pull request, and quote
-their answer in the note.
+`asked` is for a box you put to the user with the question tool and they settled.
+Research every such box before asking: what the change widened or decided, what the
+live system says now (logs, DNS, the deployed config), and what is still unproven.
+Then ask with that evidence and your recommendation in each option, one question per
+sign-off rather than one multi-select over several, so the user decides each on its
+merits instead of approving a list.
+Batch every such box into as few rounds of questions as that allows, not one round per
+pull request, and quote their answer in the note.
 `open` is for a box that still needs a judgment nobody has made; it stays unchecked, and
 the note says why.
 Security sign-offs are never `auto`: they go to the user, or stay `open`.
