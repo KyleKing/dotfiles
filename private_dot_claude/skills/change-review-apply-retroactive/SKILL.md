@@ -53,10 +53,33 @@ still need their own explicit `--review-id`.
 Each one is a judgment call the user still owes after the merge (a security sign-off, a
 check on another account, a tradeoff), so a pull request with only open boxes is still
 in scope.
-Never tick a box on the user's behalf.
-Check each against current `main` or the live system where that is possible, then carry
-it into the new pull request's summary as its own `- [ ]` linking back to the source
-comment, noting what the check found (already done, still open, or not checkable here).
+Settle each box on its source pull request with `tick`, one TOML file per pull request:
+
+```toml
+[[boxes]]
+text = "Sign off on the `ALLOWED_DOMAINS` widening (security decision per AGENTS.md)"
+how = "asked"                                                                          # auto | asked | open
+note = "Kyle confirmed the widening on 2026-09-27; the domain is still in network.ts."
+```
+
+```sh
+~/.config/my_config/ai-cr-review.py tick --pr 688 --file pr-688-boxes.toml
+```
+
+`auto` is for a box whose claim you proved from current `main` or the live system, and
+the note names the evidence.
+`asked` is for a box you put to the user with the question tool and they settled; batch
+every such box into one round of questions rather than one per pull request, and quote
+their answer in the note.
+`open` is for a box that still needs a judgment nobody has made; it stays unchecked, and
+the note says why.
+Security sign-offs are never `auto`: they go to the user, or stay `open`.
+`tick` checks the boxes in the `AI Summary:` comment and appends one `[AI Bot]: `
+comment
+to that pull request grouping every box by how it settled, so the record sits where the
+box was.
+Carry every `open` box into the new pull request's summary as its own `- [ ]` linking
+back to the source comment.
 
 A review whose author is the user themselves is self-notes on their own code, not
 findings.
@@ -154,5 +177,5 @@ once rather than per pull request.
 Lead with the window, how many pull requests were scanned, and how many carried
 un-actioned reviews or open summary checkboxes.
 Then one row per source PR: findings, verdicts, and where the fix
-landed.
+landed, plus its boxes and how each settled.
 Then the new PR's URL, what was escalated to a ticket, and the gate results.

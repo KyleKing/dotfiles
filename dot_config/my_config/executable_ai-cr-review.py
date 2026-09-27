@@ -27,9 +27,11 @@ a thread afterward) or a CHANGES_REQUESTED verdict (or a Watch Doggo body still
 withholding approval) with nothing left open, so
 a review a later push buried doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
-arrived at merge time or after it turns up. It also lists every unchecked `- [ ]`
-in each pull request's `AI Summary:` comment, since each one is a step a human
-still owes after the merge.
+arrived at merge time or after it turns up. `status` and `sweep` also list every
+unchecked `- [ ]` in the pull request's `AI Summary:` comment, since each one is a
+step a human still owes. `tick` checks boxes off from a TOML file and appends one
+`[AI Bot]: ` comment to the pull request saying how each box was settled: verified
+automatically, confirmed by the human, or left open on purpose.
 """
 
 import argparse
@@ -56,6 +58,11 @@ WATCH_DOGGO_MARKER = '<!-- watchdoggo-review '
 # ai-gh-pr.py's singleton marker; the two scripts must agree on it.
 SUMMARY_MARKER = 'AI Summary:'
 OPEN_BOX_RE = re.compile(r'^\s*[-*] \[ \] (?P<text>.+)$')
+TICK_HOW = {
+    'auto': 'Checked automatically',
+    'asked': 'Checked with your confirmation',
+    'open': 'Left open on purpose',
+}
 
 THREADS_QUERY = """
 query($owner:String!,$repo:String!,$number:Int!,$after:String){
@@ -404,14 +411,18 @@ def cmd_status(number: int | None) -> None:
     a review already rocketed, since a reply or a manual unresolve can reopen
     a thread after the rocket) or a CHANGES_REQUESTED verdict with no open
     thread left to close it out. A rocketed review with every thread resolved
-    is done and stays out.
+    is done and stays out. Unchecked boxes in the `AI Summary:` comment come back
+    under `open_checkboxes`, beside the reviews under `pending`.
 
     A review with no open thread has nowhere to reply into (general feedback
     in the review body itself, not an inline comment), so its `body` is
     quoted in the output instead of a thread to fetch and act on directly.
     """
     repo, number, _ = pr_context(number)
-    print(json.dumps(pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number)), indent=2))
+    print(json.dumps({
+        'open_checkboxes': open_checkboxes(fetch_comments(repo, number)),
+        'pending': pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number)),
+    }, indent=2))
 
 
 def pending_reviews(reviews: list[dict], threads: list[dict]) -> list[dict]:
@@ -474,23 +485,32 @@ def merged_prs(repo: str, author: str, since: str, limit: int) -> list[dict]:
                     '--json', 'number,title,url,closedAt')
 
 
-def open_checkboxes(comments: list[dict]) -> list[dict]:
-    """Unchecked boxes in the `AI Summary:` comment, skipping fenced code."""
-    summary = next((c for c in comments if (c['body'] or '').startswith(SUMMARY_MARKER)), None)
-    if summary is None:
-        return []
+def summary_comment(comments: list[dict]) -> dict | None:
+    return next((c for c in comments if (c['body'] or '').startswith(SUMMARY_MARKER)), None)
+
+
+def box_lines(body: str) -> list[tuple[int, str]]:
+    """Index and text of every unchecked box outside fenced code."""
     boxes, fenced = [], False
-    for line in summary['body'].splitlines():
+    for index, line in enumerate(body.splitlines()):
         if line.lstrip().startswith('```'):
             fenced = not fenced
         elif not fenced and (match := OPEN_BOX_RE.match(line)):
-            boxes.append({'text': match['text'].strip(), 'url': summary['url']})
+            boxes.append((index, match['text'].strip()))
     return boxes
+
+
+def open_checkboxes(comments: list[dict]) -> list[dict]:
+    """Unchecked boxes in the `AI Summary:` comment, skipping fenced code."""
+    summary = summary_comment(comments)
+    if summary is None:
+        return []
+    return [{'text': text, 'url': summary['url']} for _, text in box_lines(summary['body'])]
 
 
 def fetch_comments(repo: str, number: int) -> list[dict]:
     comments = run_json('gh', 'api', '--paginate', f"repos/{repo}/issues/{number}/comments")
-    return [{'body': c['body'], 'url': c['html_url']} for c in comments]
+    return [{'body': c['body'], 'id': c['id'], 'url': c['html_url']} for c in comments]
 
 
 def sweep_pr(repo: str, number: int) -> tuple[list[dict], list[dict]]:
@@ -574,6 +594,66 @@ def cmd_apply(number: int | None, path: str | None) -> None:
     print(f"🚀 review {state['review']['id']} by {who} — {len(actions)} actioned")
 
 
+def validate_ticks(ticks: list[dict], open_texts: list[str]) -> list[str]:
+    errors = []
+    for tick in ticks:
+        text = tick.get('text', '')
+        if tick.get('how') not in TICK_HOW:
+            errors.append(f"{text[:60]!r}: how must be one of {', '.join(TICK_HOW)}")
+        if not (tick.get('note') or '').strip():
+            errors.append(f"{text[:60]!r}: note is required, it is the reader's only evidence")
+        if open_texts.count(text) != 1:
+            errors.append(f"{text[:60]!r}: must match exactly one unchecked box, verbatim")
+    return errors
+
+
+def ticked_body(body: str, texts: set[str]) -> str:
+    lines = body.splitlines()
+    for index, text in box_lines(body):
+        if text in texts:
+            lines[index] = lines[index].replace('[ ]', '[x]', 1)
+    return '\n'.join(lines)
+
+
+def tick_report(ticks: list[dict], summary_url: str) -> str:
+    sections = [f"{AI_REPLY_PREFIX}Settled checkboxes in the [AI Summary]({summary_url})."]
+    for how, label in TICK_HOW.items():
+        rows = [f"- {t['text']}\n  {t['note'].strip()}" for t in ticks if t['how'] == how]
+        if rows:
+            sections.append(f"**{label}**\n\n" + '\n'.join(rows))
+    return '\n\n'.join(sections)
+
+
+def cmd_tick(number: int | None, path: str | None) -> None:
+    """Check off `AI Summary:` boxes and append one comment saying how each settled.
+
+    `how` is `auto` (verified by the agent), `asked` (the human confirmed it), or
+    `open` (deliberately left unchecked, and still reported so the reader knows it
+    was looked at). Every entry needs a `note` and must name one unchecked box
+    verbatim, or nothing is posted.
+    """
+    payload = tomllib.loads(sys.stdin.read() if path is None else open(path).read())
+    ticks = payload.get('boxes') or []
+    if not ticks:
+        sys.exit('Tick file needs at least one [[boxes]] entry')
+    repo, number, _ = pr_context(number)
+    summary = summary_comment(fetch_comments(repo, number))
+    if summary is None:
+        sys.exit(f"No {SUMMARY_MARKER!r} comment on #{number}")
+    errors = validate_ticks(ticks, [text for _, text in box_lines(summary['body'])])
+    if errors:
+        sys.exit('Refusing to tick:\n' + '\n'.join(f"  {e}" for e in errors))
+
+    checked = {t['text'] for t in ticks if t['how'] != 'open'}
+    if checked:
+        run('gh', 'api', '--input', '-', '-X', 'PATCH',
+            f"repos/{repo}/issues/comments/{summary['id']}",
+            stdin=json.dumps({'body': ticked_body(summary['body'], checked)}))
+    run('gh', 'api', '--input', '-', '-X', 'POST', f"repos/{repo}/issues/{number}/comments",
+        stdin=json.dumps({'body': tick_report(ticks, summary['url'])}))
+    print(f"#{number}: ticked {len(checked)}, left {len(ticks) - len(checked)} open")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest='command', required=True)
@@ -589,6 +669,10 @@ def main() -> None:
     status_parser = sub.add_parser('status')
     status_parser.add_argument('--pr', type=int)
 
+    tick_parser = sub.add_parser('tick')
+    tick_parser.add_argument('--pr', type=int)
+    tick_parser.add_argument('--file')
+
     sweep_parser = sub.add_parser('sweep')
     sweep_parser.add_argument('--repo')
     sweep_parser.add_argument('--author', default='@me')
@@ -603,6 +687,8 @@ def main() -> None:
             cmd_status(args.pr)
         elif args.command == 'sweep':
             cmd_sweep(args.repo, args.author, args.since, args.limit)
+        elif args.command == 'tick':
+            cmd_tick(args.pr, args.file)
         else:
             cmd_apply(args.pr, args.file)
     except subprocess.CalledProcessError as error:

@@ -51,7 +51,8 @@ Check whether anything is buried, including a human review:
 ~/.config/my_config/ai-cr-review.py status     # add --pr N for another PR
 ```
 
-This lists every review, bot or human, that has no rocket reaction and still carries an
+Its `pending` key lists every review, bot or human, that has no rocket reaction and
+still carries an
 unresolved thread or a CHANGES_REQUESTED verdict — the same set `fetch`'s array covers
 for
 bots, plus any human review, which needs `--review-id` to actually fetch.
@@ -63,6 +64,10 @@ something or claimed something, post one `[AI Bot]: ` comment on the PR naming t
 review and answering it point by point.
 A numbered list in a review body (Watch Doggo's open questions are the common case)
 is answered by number.
+
+Its `open_checkboxes` key lists the unchecked boxes in the `AI Summary:` comment.
+Settle them with `tick` the way `change-review-apply-retroactive` describes, since the
+same `auto`, `asked`, and `open` rules apply before a merge as after one.
 
 Read these keys per review before starting work on it:
 

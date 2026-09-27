@@ -97,7 +97,7 @@ pr-merge-watch() {
     # definition ai-cr-review.py status/change-review-apply already use.
     if [[ -z "$blockers" ]]; then
         local unacked
-        unacked=$(~/.config/my_config/ai-cr-review.py status 2>/dev/null | jq 'length')
+        unacked=$(~/.config/my_config/ai-cr-review.py status 2>/dev/null | jq '.pending | length')
         if [[ "${unacked:-0}" -gt 0 ]]; then
             blockers="unacked-reviews($unacked)"
         fi
