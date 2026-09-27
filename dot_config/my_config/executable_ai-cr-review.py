@@ -27,7 +27,9 @@ a thread afterward) or a CHANGES_REQUESTED verdict (or a Watch Doggo body still
 withholding approval) with nothing left open, so
 a review a later push buried doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
-arrived at merge time or after it turns up.
+arrived at merge time or after it turns up. It also lists every unchecked `- [ ]`
+in each pull request's `AI Summary:` comment, since each one is a step a human
+still owes after the merge.
 """
 
 import argparse
@@ -51,6 +53,9 @@ VERDICTS = ('fixed', *SKIP_VERDICTS)
 AI_REPLY_PREFIX = '[AI Bot]: '
 WATCH_DOGGO_APPROVED = '✅ approved'
 WATCH_DOGGO_MARKER = '<!-- watchdoggo-review '
+# ai-gh-pr.py's singleton marker; the two scripts must agree on it.
+SUMMARY_MARKER = 'AI Summary:'
+OPEN_BOX_RE = re.compile(r'^\s*[-*] \[ \] (?P<text>.+)$')
 
 THREADS_QUERY = """
 query($owner:String!,$repo:String!,$number:Int!,$after:String){
@@ -82,6 +87,10 @@ query($owner:String!,$repo:String!,$number:Int!){
       pageInfo{ hasNextPage }
       nodes{ id isResolved isOutdated path line startLine originalLine originalStartLine
         comments(first:100){ nodes{ databaseId body author{login} pullRequestReview{databaseId} } } }
+    }
+    comments(last:100){
+      pageInfo{ hasPreviousPage }
+      nodes{ body url }
     } } } }
 """
 
@@ -465,16 +474,40 @@ def merged_prs(repo: str, author: str, since: str, limit: int) -> list[dict]:
                     '--json', 'number,title,url,closedAt')
 
 
-def sweep_pr(repo: str, number: int) -> list[dict]:
-    """Every un-acked review on one pull request, in one read where a page holds it."""
+def open_checkboxes(comments: list[dict]) -> list[dict]:
+    """Unchecked boxes in the `AI Summary:` comment, skipping fenced code."""
+    summary = next((c for c in comments if (c['body'] or '').startswith(SUMMARY_MARKER)), None)
+    if summary is None:
+        return []
+    boxes, fenced = [], False
+    for line in summary['body'].splitlines():
+        if line.lstrip().startswith('```'):
+            fenced = not fenced
+        elif not fenced and (match := OPEN_BOX_RE.match(line)):
+            boxes.append({'text': match['text'].strip(), 'url': summary['url']})
+    return boxes
+
+
+def fetch_comments(repo: str, number: int) -> list[dict]:
+    comments = run_json('gh', 'api', '--paginate', f"repos/{repo}/issues/{number}/comments")
+    return [{'body': c['body'], 'url': c['html_url']} for c in comments]
+
+
+def sweep_pr(repo: str, number: int) -> tuple[list[dict], list[dict]]:
+    """Every un-acked review and unchecked summary box on one pull request, in one
+    read where a page holds it."""
     owner, name = repo.split('/')
     data = run_json('gh', 'api', 'graphql', '-f', f"query={SWEEP_QUERY}",
                     '-f', f"owner={owner}", '-f', f"repo={name}",
                     '-F', f"number={number}")['data']['repository']['pullRequest']
-    reviews, threads = data['reviews'], data['reviewThreads']
+    reviews, threads, comments = data['reviews'], data['reviewThreads'], data['comments']
     if reviews['pageInfo']['hasNextPage'] or threads['pageInfo']['hasNextPage']:
-        return pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number))
-    return pending_reviews(reviews['nodes'], threads['nodes'])
+        pending = pending_reviews(fetch_reviews(repo, number), fetch_threads(repo, number))
+    else:
+        pending = pending_reviews(reviews['nodes'], threads['nodes'])
+    if comments['pageInfo']['hasPreviousPage']:
+        return pending, open_checkboxes(fetch_comments(repo, number))
+    return pending, open_checkboxes(comments['nodes'])
 
 
 def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
@@ -482,17 +515,19 @@ def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
 
     A review submitted at merge time or after it never blocks anything, so it
     goes unread; this is the only surface that finds one. The rule is `status`'s,
-    per pull request, and a pull request with nothing pending is left out.
+    per pull request, plus any unchecked box in its `AI Summary:` comment, and a
+    pull request with neither is left out.
     """
     repo = repo or run_json('gh', 'repo', 'view', '--json', 'nameWithOwner')['nameWithOwner']
     cutoff = since_date(since)
     prs = merged_prs(repo, author, cutoff, limit)
     swept = []
     for pr in prs:
-        pending = sweep_pr(repo, pr['number'])
-        if pending:
+        pending, boxes = sweep_pr(repo, pr['number'])
+        if pending or boxes:
             swept.append({'merged_at': pr['closedAt'], 'number': pr['number'],
-                          'pending': pending, 'title': pr['title'], 'url': pr['url']})
+                          'open_checkboxes': boxes, 'pending': pending,
+                          'title': pr['title'], 'url': pr['url']})
     print(json.dumps({'author': author, 'pull_requests': sorted(swept, key=lambda p: p['number']),
                       'repo': repo, 'scanned': len(prs), 'since': cutoff}, indent=2))
 

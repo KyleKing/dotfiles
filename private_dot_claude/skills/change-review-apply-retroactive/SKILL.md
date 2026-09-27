@@ -48,6 +48,16 @@ shortcut for the same set as long as none of `sweep`'s entries are a human revie
 those
 still need their own explicit `--review-id`.
 
+`sweep` also lists each pull request's `open_checkboxes`: every unchecked `- [ ]` in its
+`AI Summary:` comment.
+Each one is a judgment call the user still owes after the merge (a security sign-off, a
+check on another account, a tradeoff), so a pull request with only open boxes is still
+in scope.
+Never tick a box on the user's behalf.
+Check each against current `main` or the live system where that is possible, then carry
+it into the new pull request's summary as its own `- [ ]` linking back to the source
+comment, noting what the check found (already done, still open, or not checkable here).
+
 A review whose author is the user themselves is self-notes on their own code, not
 findings.
 Report those rows and leave them: nothing to verify, nobody to reply to.
@@ -142,7 +152,7 @@ once rather than per pull request.
 ## Report
 
 Lead with the window, how many pull requests were scanned, and how many carried
-un-actioned reviews.
+un-actioned reviews or open summary checkboxes.
 Then one row per source PR: findings, verdicts, and where the fix
 landed.
 Then the new PR's URL, what was escalated to a ticket, and the gate results.
