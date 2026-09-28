@@ -106,8 +106,9 @@ def checks(rollup: list[dict]) -> dict:
     return {'failed': sorted(set(failed)), 'pending': sorted(set(pending)), 'passed': passed}
 
 
-def pr_files(number: int) -> set[str]:
-    return set(run('gh', 'pr', 'diff', str(number), '--name-only').split())
+def pr_files(repo: str, number: int) -> set[str]:
+    return set(run('gh', 'api', '--paginate', f'repos/{repo}/pulls/{number}/files?per_page=100',
+                   '--jq', '.[].filename').split())
 
 
 def warnings(repo: str, sha: str, number: int) -> list[str]:
@@ -123,7 +124,7 @@ def warnings(repo: str, sha: str, number: int) -> list[str]:
                 continue
             # A test-runner annotation on a test file outside this PR's diff is repo-wide, not this PR's.
             if (test := TEST_ANNOTATION.search(msg)):
-                files = pr_files(number) if files is None else files
+                files = pr_files(repo, number) if files is None else files
                 if test.group(1) not in files:
                     continue
             found.append(f"{r['name']}: {n.get('path', '')}:{n.get('start_line', '')} {msg}"[:200])
