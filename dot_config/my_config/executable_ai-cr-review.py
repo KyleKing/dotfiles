@@ -351,7 +351,9 @@ def validate(actions: list[dict], findings: list[dict], *, bot: bool, approved: 
             errors.append(f"{thread_id}: every finding needs a reply, whatever the verdict")
         elif not reply.startswith(AI_REPLY_PREFIX):
             errors.append(f"{thread_id}: a reply must open with {AI_REPLY_PREFIX!r}")
-    missing = sorted(set(by_id) - {a.get('thread_id') for a in actions})
+    # A thread already resolved was actioned on an earlier pass; only an open one still owes a verdict.
+    open_ids = {thread_id for thread_id, f in by_id.items() if not f['is_resolved']}
+    missing = sorted(open_ids - {a.get('thread_id') for a in actions})
     errors += [f"{thread_id}: no verdict given" for thread_id in missing]
     if not bot and not approved and any((a.get('reply') or '').strip() for a in actions):
         errors.append(
