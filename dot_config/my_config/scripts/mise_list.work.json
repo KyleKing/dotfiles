@@ -22,7 +22,7 @@
   "deno": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.9.6"
+    "version": "2.9.7"
   },
   "go": {
     "requested_version": "1.26.6",
@@ -42,7 +42,7 @@
   "go:github.com/idursun/jjui/cmd/jjui": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.10.10"
+    "version": "0.10.11"
   },
   "go:github.com/merschformann/gotz": {
     "requested_version": "latest",
@@ -92,7 +92,7 @@
   "npm:@mermaid-js/mermaid-cli": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "11.17.0"
+    "version": "12.0.0"
   },
   "npm:@microsoft/compose-language-service": {
     "requested_version": "latest",
@@ -102,7 +102,7 @@
   "npm:@posthog/cli": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.18.2"
+    "version": "0.18.7"
   },
   "npm:@qodo/command": {
     "requested_version": "latest",
@@ -112,7 +112,7 @@
   "npm:bash-language-server": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "5.6.0"
+    "version": "5.8.1"
   },
   "npm:cchistory": {
     "requested_version": "latest",
@@ -182,7 +182,7 @@
   "pipx:harlequin": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.13.0"
+    "version": "2.15.0"
   },
   "pipx:macnotesapp": {
     "requested_version": "latest",
@@ -212,7 +212,7 @@
   "pipx:pylint": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "4.0.8"
+    "version": "4.0.9"
   },
   "pipx:pyright": {
     "requested_version": "latest",
@@ -232,7 +232,7 @@
   "pipx:ruff": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.16.7"
+    "version": "0.16.9"
   },
   "pipx:sqlfluff": {
     "requested_version": "latest",
@@ -252,12 +252,12 @@
   "pipx:tox": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "4.61.4"
+    "version": "4.64.4"
   },
   "pipx:trcli": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.15.2"
+    "version": "1.15.3"
   },
   "pipx:uv-secure": {
     "requested_version": "latest",
@@ -297,12 +297,12 @@
   "typos": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.50.1"
+    "version": "1.50.3"
   },
   "watchexec": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.7.2"
+    "version": "2.7.3"
   },
   "yq": {
     "requested_version": "latest",

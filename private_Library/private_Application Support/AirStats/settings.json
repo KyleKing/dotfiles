@@ -115,20 +115,22 @@
       "processes"
     ],
     "opacity": 1,
+    "showsHistoryChart": false,
     "showsOnAllSpaces": true,
     "width": 252
   },
   "panel": {
     "collapsedModules": [
-      "battery",
       "network",
       "disk",
       "cpu",
-      "system",
+      "gpu",
       "memory",
       "thermal",
-      "gpu"
-    ]
+      "battery",
+      "system"
+    ],
+    "showsHistoryChart": true
   },
   "schemaVersion": 1,
   "shortcuts": {

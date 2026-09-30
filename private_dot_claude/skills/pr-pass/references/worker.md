@@ -5,6 +5,12 @@ You may commit and push its branch.
 The coordinator's prompt gives you the PR's status entry, the directory, the repo
 profile, and the pass number.
 Work only in that directory, and only on that PR's branch.
+Your shell's cwd resets to a default between Bash calls, not to your directory, so every
+command that touches the repo (`sync.sh`, `heavy.sh`, bare `git`) needs an explicit
+`cd <your directory> &&` prefix even mid-task.
+A bare `sync.sh`/`heavy.sh` call silently runs
+against whatever the default cwd is checked out to, switching and merging a branch you
+don't own.
 Never create a git worktree, a scratch database, or an ad-hoc container, and never
 `git stash`.
 Do the work yourself: never spawn or fork a sub-agent, because a second agent in the

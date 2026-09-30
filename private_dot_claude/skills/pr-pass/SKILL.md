@@ -94,6 +94,32 @@ it applies, known CI noise, and the repo profile.
 Record the lanes in `pr-pass.json`; a directory added mid-run is re-laned the same way.
 Every worker prompt points at that file rather than restating it.
 
+## Resource-aware dispatch
+
+Before dispatching each pass, check machine health, not just the approved-PR list:
+`uptime` (1-minute load average against `sysctl -n hw.ncpu` cores) and free memory
+(`vm_stat`, or `memory_pressure -Q` if available).
+A 1-minute load average past
+roughly 1.5x the core count, or memory that's tight enough to be swapping, means the
+machine is already saturated — often a stuck job (check `lockq.sh` for a holder past
+~20 minutes) or simply too many Docker stacks and dev servers running at once
+(`docker ps`, `docker stats --no-stream` show which).
+A single wedged command can hold the
+heavy-job lock for hours and stall every lane behind it without any single process
+looking like a runaway on its own — check wall-clock time held, not just CPU%.
+
+When the machine is saturated, cut back on the intensive lanes rather than piling on
+more: run only one Docker lane's worker this round (queue the other Docker
+directory's next PR for the following pass) while still dispatching every no-docker
+directory's worker as normal — those don't touch the heavy-job lock's Docker slot and
+stay cheap.
+Re-check at the start of the next pass and every time `lockq.sh` or a
+worker's report suggests things are slow; resume the normal two-Docker-lane cap once
+load has settled.
+Never spin up a Docker stack "just to keep it warm" while load is
+already high — an idle stack a lane isn't actively using is a candidate to stop, not
+a reason to add a third.
+
 ## Each pass
 
 1. Re-run `status.py --json` for the approved PRs.
@@ -121,7 +147,10 @@ Every worker prompt points at that file rather than restating it.
     Check it whenever a worker reports waiting for long.
     A holder past about 20 minutes is suspect: inspect it (container CPU and memory,
     whether the database is doing work) and kill a run that is thrashing, then send its
-    worker narrower targets
+    worker narrower targets.
+    If `lockq.sh` alone looks clear but things still feel slow, re-run the
+    Resource-aware dispatch check above — overall load can be high with no single
+    holder to blame
 1. Collect each worker's report.
     Questions come back to you, never to the user directly: batch them into one
     AskUserQuestion per pause point, then act on the answers (post approved human-review

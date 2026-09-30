@@ -14,8 +14,10 @@ from pathlib import Path
 
 WHITELIST_KEYS = [
     'email',
+    'github.email',
     'github.username',
     'github.ssh_key_path',
+    'github.ssh_public_key',
     'onepassword.domain',
     'onepassword.account_id',
     'obsidian.vault_name',
@@ -60,14 +62,18 @@ def detemplate() -> None:
         ).stdout
     )
     flat = _flatten(data)
+    home_dir = data['chezmoi']['homeDir']
 
-    substitutions = [(data['chezmoi']['homeDir'], '$HOME', True)]
-    for key in WHITELIST_KEYS:
-        value = flat.get(key)
-        if value and len(value) >= 6:
-            substitutions.append((value, '{{ .' + key + ' }}', False))
-    # Longest values first so a shorter value can't clobber part of a longer match.
-    substitutions.sort(key=lambda item: len(item[0]), reverse=True)
+    def substitutions_for(path: Path) -> list[tuple[str, str]]:
+        home_replacement = '$HOME' if _is_shell_file(path) else '{{ .chezmoi.homeDir }}'
+        subs = [(home_dir, home_replacement)]
+        for key in WHITELIST_KEYS:
+            value = flat.get(key)
+            if value and len(value) >= 6:
+                subs.append((value, '{{ .' + key + ' }}'))
+        # Longest values first so a shorter value can't clobber part of a longer match.
+        subs.sort(key=lambda item: len(item[0]), reverse=True)
+        return subs
 
     changed = []
     for path in source_dir.rglob('*.tmpl'):
@@ -75,6 +81,7 @@ def detemplate() -> None:
             continue
         original = path.read_text()
         lines = original.splitlines(keepends=True)
+        substitutions = substitutions_for(path)
         ignored_line_index = None
         for i, line in enumerate(lines):
             stripped = line.strip()
@@ -87,9 +94,7 @@ def detemplate() -> None:
                 continue
             if i == ignored_line_index:
                 continue
-            for value, replacement, shell_only in substitutions:
-                if shell_only and not _is_shell_file(path):
-                    continue
+            for value, replacement in substitutions:
                 line = line.replace(value, replacement)
             lines[i] = line
         text = ''.join(lines)

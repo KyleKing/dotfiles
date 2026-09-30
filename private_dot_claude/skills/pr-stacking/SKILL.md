@@ -157,9 +157,22 @@ fine.
 
 Whenever a branch gains commits the stack above it doesn't have yet — review-feedback
 fixes on a lower PR, or `main` moving forward underneath the bottom PR — merge-forward
-from that point, one level at a time, pushing (not force-pushing) as you go:
+from that point, one level at a time, pushing (not force-pushing) as you go.
+
+Before merging `main` into anything, fast-forward the local branch first
+(`git fetch origin main:main`, or `git checkout main && git pull --ff-only`) so the
+merge and any conflict resolution work against the current tip, not a stale local
+`main` that predates commits already on `origin/main`.
+Merging a stale local `main`
+can silently miss reorg/refactor commits a conflict would otherwise have surfaced,
+and produce a "clean" merge that's actually behind.
+`origin/<base>` in `sync.sh`
+(pr-pass, pr-fleet) already fetches directly and needs no separate fast-forward step;
+this only applies to a manual merge-forward loop like the one below, or any other
+conflict resolution done by hand against `main`.
 
 ```
+git fetch origin main:main   # fast-forward local main before merging or resolving conflicts against it
 git checkout <branch-1>
 git merge main          # only when syncing from main; skip if the fix already landed here
 git push
