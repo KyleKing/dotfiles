@@ -129,6 +129,19 @@ entirely for it.
 Check, and say which in the PR comment — the author reads silence as
 approval.
 
+How the system runs, when the PR fixes an alarm, a scheduled job, or a monitor: what
+triggers it, which ref it runs, what it runs against, and how far that target lags the
+code.
+A ticket's prescribed mechanism is a claim, and a fix built on a wrong premise reads
+correct line by line.
+Trace every fallback to its end state, and once a fix has merged, read its real runs
+(`gh run list --workflow <file>`) before calling it fixed.
+
+A gate, flag, or version branch with a stated removal condition: check whether the
+condition already holds and ask for the removal in the same review.
+In irm, `.github/scripts/check-synthetic-version-gates.sh` lists synthetic-check gates
+prod already carries.
+
 ## Attack your own findings before staging them
 
 Every finding gets a second pass; cost, performance, and missing-default claims first,

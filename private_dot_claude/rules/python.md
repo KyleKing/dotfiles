@@ -9,8 +9,10 @@ paths:
 
 Async work has its own rules with real failure modes behind them.
 Load the
-`python-async` skill before writing or reviewing `async def`, `await`,
-`asyncio.to_thread`, or any executor code.
+`async-python` skill before writing or reviewing `async def`, `await`,
+`asyncio.to_thread`, or any executor code, plus the repo's own async skill when it has
+one
+(irm's is `python-async`).
 
 ## Structure
 

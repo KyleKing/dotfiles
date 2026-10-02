@@ -158,7 +158,7 @@ that does not mirror the real guard and the others in that module drifting the s
 Stay inside the PR's scope — a defect in a file this PR does not touch went through Step
 3, not a same-PR fix.
 
-## Step 5 — Commit and validate
+## Step 5 — Commit, validate, and push
 
 Commit incrementally, one logical fix per commit, Conventional Commits with a
 capitalized
@@ -169,13 +169,21 @@ format/typecheck/test ladder once over the combined diff (in the platform repo, 
 `pre-pr-qa` skill picks the right gates).
 Report failures verbatim; never call a finding fixed on the strength of the edit alone.
 
+Push the branch once, before any reply goes out: `git push` in a plain git checkout, or
+`jj git push --bookmark <name>` when `.jj/` is present, per the git-vs-jj rule in
+`CLAUDE.md`.
+This applies whether a given review was a bot's or a human's.
+A `fixed` reply has to point at code the reviewer can open, and Watch Doggo's next round
+reads every reply against the pushed head, so `apply` refuses while the PR branch holds
+commits the PR does not.
+
 ## Step 6 — Post the verdicts
 
 Write one action per finding into `pr-<number>-<reviewer>-<review_id>-actions.toml` in
 the
 worktree (the `review_id` suffix matters: a PR with three CodeRabbit passes needs three
 separate files, one per entry in `fetch`'s `reviews` array, not one shared file), then
-apply each once its fixes are committed:
+apply each once its fixes are pushed:
 
 ```toml
 review_id = 4910562275
@@ -242,11 +250,6 @@ last for that review and never lands at all if one of its threads failed.
 Post it per review as you finish that entry — don't hold all the rockets back until the
 whole `reviews` array is done, since a later review's `apply` failing shouldn't leave an
 earlier, already-fixed review still looking un-actioned.
-
-Once every review in this pass has its rocket, push the branch once: `git push` in a
-plain git checkout, or `jj git push --bookmark <name>` when `.jj/` is present, per the
-git-vs-jj rule in `CLAUDE.md`.
-This applies whether a given review was a bot's or a human's.
 
 When every real finding was a threadless one (nothing in `findings` needs a verdict),
 the

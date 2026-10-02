@@ -164,9 +164,9 @@ CodeRabbit passes gets three files), each applied against its own source pull re
 Replies, resolves, and the rocket all work on a merged pull request, so the original
 thread ends up recording where the fix went rather than staying open forever.
 
-**Every reply links forward.** A `fixed` verdict on an open PR needs no reply because
-the diff shows it; here the diff is somewhere else entirely, so the link is the whole
-point.
+**Every reply links forward.** On an open PR the thread's own diff shows a `fixed`
+change.
+Here the diff is somewhere else entirely, so the link is the whole point.
 One sentence, in the user's voice under `change-review`'s rules, naming the change
 and pointing at the commit:
 

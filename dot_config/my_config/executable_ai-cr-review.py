@@ -20,7 +20,8 @@ after the human has said yes.
 `apply` reads verdicts as TOML (on stdin, or `--file`, since a human
 proofreads this one before it posts and TOML's triple-quoted strings hold
 reply prose without JSON's escaping), replies, resolves, and rockets the
-review body once every finding has been actioned. `status` lists every
+review body once every finding has been actioned. It refuses while the local PR branch holds
+commits the PR does not, so every reply describes code the reviewer can open. `status` lists every
 review, bot or human, that still has an unresolved thread tied to it (even a
 review already rocketed once, since a reply or a manual unresolve can reopen
 a thread afterward) or a CHANGES_REQUESTED verdict (or a Watch Doggo body still
@@ -579,12 +580,34 @@ def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
                       'repo': repo, 'scanned': len(prs), 'since': cutoff}, indent=2))
 
 
+def require_pushed(number: int, branch: str) -> None:
+    """A reply must describe code the reviewer can open, so the local branch may not be ahead of the PR."""
+    local = subprocess.run(
+        ['git', 'rev-parse', '--verify', '--quiet', f"refs/heads/{branch}^{{commit}}"],
+        text=True, capture_output=True,
+    ).stdout.strip()
+    if not local:
+        print(f"note: no local {branch} branch here, skipping the push check", file=sys.stderr)
+        return
+    head = run('gh', 'pr', 'view', str(number), '--json', 'headRefOid', '--jq', '.headRefOid')
+    if local == head:
+        return
+    if subprocess.run(['git', 'cat-file', '-e', f"{head}^{{commit}}"], capture_output=True).returncode:
+        run('git', 'fetch', '--quiet', 'origin', head)
+    ancestor = subprocess.run(['git', 'merge-base', '--is-ancestor', local, head], capture_output=True, text=True)
+    if ancestor.returncode == 1:
+        sys.exit(f"Refusing to post: {branch} ({local[:10]}) has commits #{number} ({head[:10]}) does not. Push first.")
+    if ancestor.returncode:
+        sys.exit(f"Could not compare {branch} with #{number}'s head: {ancestor.stderr.strip()}")
+
+
 def cmd_apply(number: int | None, path: str | None) -> None:
     payload = tomllib.loads(sys.stdin.read() if path is None else open(path).read())
     review_id = payload.get('review_id')
     if review_id is None:
         sys.exit('Actions file needs a review_id')
-    repo, number, _ = pr_context(number)
+    repo, number, branch = pr_context(number)
+    require_pushed(number, branch)
     threads = {t['id']: t for t in fetch_threads(repo, number)}
     state = collect(repo, number, review_id, list(threads.values()))
     actions = payload.get('actions') or []

@@ -51,6 +51,12 @@
     commit at that step.
     The message rules below still apply
 
+- When a workflow I authorized both pushes and posts to a PR (a review reply, a resolved
+    thread, a refreshed `AI Summary:`), push first and post after.
+    A reply that calls a finding fixed must point at a commit the reviewer can open, and a
+    bot reviewer's next round reads the reply against the pushed head.
+    `ai-cr-review.py apply` refuses while the PR branch has commits the PR does not
+
 - When you do commit on my behalf, write the message in my voice: Conventional Commits
     (`feat(scope): summary`, `fix: summary`), a single readable subject line, and typically
     NO description body.
@@ -133,6 +139,41 @@
 - Favor composition over inheritance
 - Insert new items alphabetically into list-like structures; don't re-sort existing
     unordered lists
+- Pick the name, default, and placement a reader would guess, and make every exception
+    loud.
+    A default that tracks a lagging "latest" key, or a file titled for one package and
+    symlinked into another, costs every reader a lookup.
+    When code drops input, falls back, or retries, it raises, returns a typed result, or
+    warns
+- Keep each fact in one place: a constant, a rule, a list, a schema, a prompt.
+    Before adding one, grep for its value and its name, then import or link the copy that
+    exists.
+    irm kept one Storybook reference date in two constants, and its docs index listed a
+    shipped module twice, once as "PROPOSAL, not built".
+    Code that looks alike but changes for different reasons can stay separate
+- Build for a caller that exists today.
+    Every flag, gate, or option names the condition that retires it, and the change that
+    meets that condition deletes it along with its docs.
+    In irm a removed gate was still named in two docs, and a "default will flip once…" note
+    never flipped
+- Keep the design simple.
+    Complexity is what a reader has to track to change the code safely: states, layers,
+    writers to one value, and places that make the same decision.
+    Give each decision one path, because two mechanisms answering the same question drift
+    apart, as Watch Doggo's poll and its label trigger did over drafts.
+    Add a layer, cache, or state only when a measurement or a second real caller needs it
+- Disclose progressively: the always-loaded surface answers the common case and points
+    one hop away for the rest, with each pointer saying when to follow it.
+    That covers agent guidance (a module index belongs in docs, out of every session's
+    context), a CLI (the bare command does the common thing and `--help` fits a screen),
+    and UI (a row shows title and state, and one expand shows the rest)
+- In UI, build hierarchy from weight, color, and grouping.
+    Sections of one story share one surface and split with dividers.
+    The item that needs action gets the color and the primary button, and finished items
+    recede.
+    irm's assessment sidebar stacks eight boxed cards, while the ZTA result page reads as
+    one column with a section rail, and the team singled it out as the least "just white
+    boxes" page
 
 ## Comments and Documentation
 
