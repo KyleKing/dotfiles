@@ -41,6 +41,12 @@
     gpgsign = true
 [credential]
     helper = osxkeychain
+[credential "https://github.com"]
+	helper =
+	helper = !{{ .homebrew_prefix }}/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !{{ .homebrew_prefix }}/bin/gh auth git-credential
 
 # -- Core repo defaults (line endings, ignore files, editor)
 [core]
