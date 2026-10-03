@@ -285,6 +285,8 @@ cask "customshortcuts"
 cask "daisydisk"
 # API documentation browser and code snippet manager
 cask "dash"
+# Coding agent with Devin Cloud integration
+cask "devin-cli"
 # Scans for dylib hijacking
 cask "dhs"
 # Voice and text chat software
@@ -459,10 +461,13 @@ vscode "ms-python.vscode-python-envs"
 vscode "redhat.vscode-yaml"
 vscode "traycer.traycer-vscode"
 vscode "yoavbls.pretty-ts-errors"
+go "golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment"
 go "cmd/go"
 go "cmd/gofmt"
 go "github.com/golangci/golangci-lint/v2/cmd/golangci-lint"
 go "github.com/kyleking/second-look/cmd/second-look"
+go "github.com/kyleking/wavez/cmd/wavez"
+go "github.com/kyleking/wavez/cmd/wavezd"
 cargo "bacon"
 cargo "cargo-insta"
 cargo "cargo-nextest"

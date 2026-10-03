@@ -1,6 +1,6 @@
 {
   "agent": {
-    "model": "fusion-gpt-5-6-sol-medium-sidekick-swe-2-medium",
+    "model": "swe-2-high",
     "preferred_family_models": {
       "fusion": "fusion-gpt-5-6-sol-medium-sidekick-swe-2-medium",
       "swe-2": "swe-2-high"
@@ -88,7 +88,15 @@
       "Exec(which *)",
       "Exec(whoami *)",
       "Exec(git branch)",
-      "Exec(second-look todo)"
+      "Exec(second-look todo)",
+      "Fetch(domain:*)",
+      "Exec(uv run)",
+      "Exec(mise run)",
+      "Exec(djot-fmt)",
+      "Exec(true)",
+      "Exec(git add)",
+      "Exec(git remote)",
+      "Exec(mv)"
     ]
   },
   "shell": {

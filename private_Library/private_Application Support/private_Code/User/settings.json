@@ -24,6 +24,7 @@
   "python.venvPath": "./.venv/bin/python",
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.enableImages": true,
   "traycer.additionalAgents": [
     "Claude Code",
     "Codex",
