@@ -44,6 +44,9 @@ repository default. A stack needs it on every level but the bottom, and
 getting it wrong is expensive: a PR opened against the default branch shows
 the levels below it in its own diff, and retargeting later is manual. Anything
 else `gh pr create` accepts still goes through after a bare `--`.
+
+`create --ready` adds the `watch-doggo-review` label wherever the repo defines it,
+so the review starts on open instead of waiting for the repo's poll.
 """
 
 import argparse
@@ -60,6 +63,8 @@ STAMP_RE = re.compile(rf"\n*{re.escape(STAMP_MARKER)}\n_Describes [^\n]*_\s*\Z")
 # The stamp's subject sits inside `_..._`; an unescaped one of these closes it early.
 EMPHASIS_RE = re.compile(r'([_*])')
 
+REVIEW_LABEL = 'watch-doggo-review'
+
 TITLE_RE = re.compile(
     r'^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: [A-Z]'
 )
@@ -74,6 +79,12 @@ def run_json(*cmd: str):
     return json.loads(run(*cmd))
 
 
+def _repo_has_label(name: str) -> bool:
+    # A search with no match prints nothing rather than `[]`.
+    labels = json.loads(run('gh', 'label', 'list', '--search', name, '--json', 'name') or '[]')
+    return any(label['name'] == name for label in labels)
+
+
 def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
     if not TITLE_RE.match(title):
         sys.exit(
@@ -85,6 +96,8 @@ def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
         cmd += ['--base', base]
     if not ready:
         cmd.append('--draft')
+    elif _repo_has_label(REVIEW_LABEL):
+        cmd += ['--label', REVIEW_LABEL]
     subprocess.run([*cmd, *extra], check=True)
 
 

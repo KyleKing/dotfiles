@@ -47,8 +47,9 @@ def repo_and_trunk() -> tuple[str, str]:
     return meta['nameWithOwner'], meta['defaultBranchRef']['name']
 
 
-def open_prs(repo: str) -> list[dict]:
-    return run_json('gh', 'pr', 'list', '--repo', repo, '--author', '@me', '--state', 'open',
+def open_prs(repo: str, mine: bool) -> list[dict]:
+    author = ['--author', '@me'] if mine else []
+    return run_json('gh', 'pr', 'list', '--repo', repo, *author, '--state', 'open',
                     '--limit', '100', '--json', PR_FIELDS)
 
 
@@ -59,7 +60,7 @@ def select(prs: list[dict], wanted: list[int], expand: bool) -> list[dict]:
     chosen = {p['number'] for p in prs if p['number'] in wanted}
     missing = set(wanted) - chosen
     if missing:
-        sys.exit(f"not an open PR authored by you: {sorted(missing)}")
+        sys.exit(f"not an open PR: {sorted(missing)}")
     while expand:
         grown = set(chosen)
         for p in prs:
@@ -192,7 +193,7 @@ def render(result: dict) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('prs', nargs='*', type=int, help='PR numbers; none means every open PR you authored')
+    parser.add_argument('prs', nargs='*', type=int, help='PR numbers, by any author; none means every open PR you authored')
     parser.add_argument('--no-expand', action='store_true', help='do not pull in stack-mates of the PRs named')
     parser.add_argument('--non-draft', action='store_true',
                         help='only units holding a ready PR; drafts inside those stacks stay in')
@@ -200,7 +201,7 @@ def main() -> None:
     args = parser.parse_args()
 
     repo, trunk = repo_and_trunk()
-    prs = select(open_prs(repo), args.prs, expand=not args.no_expand)
+    prs = select(open_prs(repo, mine=not args.prs), args.prs, expand=not args.no_expand)
     heads = {p['headRefName']: p['number'] for p in prs}
     with ThreadPoolExecutor(max_workers=6) as pool:
         described = {d['number']: d for d in pool.map(lambda p: describe(repo, trunk, p, heads), prs)}

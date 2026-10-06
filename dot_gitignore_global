@@ -61,6 +61,9 @@ podman-build-secret*
 # Support the freshen skill to track work per-repo
 .freshen.md
 
+# MCPs
+.playwright-mcp
+
 # https://code.claude.com/docs/en/memory#choose-where-to-put-claude-md-files
 # **/.claude/settings.local.json
 CLAUDE.local.md

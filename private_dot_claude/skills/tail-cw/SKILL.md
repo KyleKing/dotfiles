@@ -42,12 +42,14 @@ the group browser, and `export logs`, `stats`, and `summary`.
 | Alarms and how often they fired    | `export alarms [<prefix>] --history`                                            |
 | Metric datapoints                  | `export metrics --namespace AWS/ECS --metric CPUUtilization`                    |
 | X-Ray traces in a window           | `export xray --start 1h --expression 'service("api")'`                          |
-| One trace's spans, as OTLP         | `export xray-trace 1-<8hex>-<24hex>`                                            |
+| One trace's spans, as OTLP         | `export xray-trace <id>` (dashed, or the 32 digits a log line carries)          |
 | Cache size against its limit       | `cache status`                                                                  |
 | Interactive                        | `logs '<glob>' --start 2h` (`f` fields, `h` histogram, `p`/`x` pivots, `:xray`) |
 
-`export logs` fetches the whole window and filters locally, so a second `--filter` over
-the same window hits the cache and is free.
+A cold `export logs`, `stats`, or `summary` sends a `--filter` CloudWatch can match
+exactly (text, phrases, `field:value`) as a server-side pattern and caches the result
+under its own key.
+A window already cached whole serves any later filter for free.
 It takes globs and presets like `export summary`, and only pays for
 `DescribeLogGroups` when you give it one.
 
@@ -80,6 +82,11 @@ query names its own log groups in `FROM`, so no estimate is possible: it says so
 requires `--yes`.
 A query that names its own sources (any SQL, or PPL with a `SOURCE`
 clause) takes no log group arguments; PPL without one needs them, and gets an estimate.
+There is no window cap: the estimate prices any window, so "when did this start" over
+30 days is one query (`filter ... | stats min(@timestamp)`) behind the same ceiling.
+A `| limit N` in the query decides the row count, and `--limit` overrides it.
+Insights rejects a `stats ... as x` whose name a `fields ... as x` already took
+(`Ephemeral field is already defined`), so give the `stats` output its own name.
 
 **X-Ray** charges per trace *scanned*, and a filter expression does not reduce it —
 `TracesProcessedCount` counts the traces it rejected.
@@ -92,31 +99,24 @@ Our services log a trace id as 32 bare hex digits (`6a89ad51596c…`) and X-Ray 
 only
 to `1-6a89ad51-596c…`.
 Same digits, dashes after the 1st and 9th.
-The TUI's `x` pivot
-converts for you; `export xray-trace` does not.
+`export xray-trace` takes either form.
+The TUI's `x` pivot converts too, but refuses a worker id whose leading digits are not a
+recent epoch, even though X-Ray holds those traces (see the roadmap).
 
 Reading logs (`export logs`, `tail`, `summary`, `groups`, `alarms`) is not billed per
 GB.
 
 ## Free is not the same as fast
 
-`export logs`/`export summary` push a `--filter` to CloudWatch as a server-side
-`FilterPattern`, but `FilterLogEvents` scans a busy, high-volume group (many streams,
-continuous writers — a prod worker or API fleet) far slower than Insights answers the
-same keyword search.
-A 2-3h keyword filter against a multi-GB group can run past a two-
-minute timeout with no output; the equivalent
-`export insights '<glob>' --query "fields @timestamp, @message | filter @message like /keyword/" --yes`
-over the same
-window typically answers in single-digit seconds, because Insights is a parallel,
-indexed query engine and `FilterLogEvents` is not.
-`export groups '<glob>'` shows a
-group's `stored_bytes` — treat anything in the multi-GB range, combined with a keyword
-`--filter` over more than about an hour, as a signal to reach for `export insights`
-first rather than wait out a `export logs` call.
-This is a real gap, not just guidance:
-see `plans/roadmap-2026-07.md` under `## Open` in the checkout for the fix under
-consideration (auto-routing or an early warning based on group size).
+A cold export with a filter CloudWatch can match runs server-side: a 30h phrase search
+over a 12 GB group took 51 seconds.
+Without one (no `--filter`, a regex, a numeric comparison, or `NOT` over a field) the
+export downloads every event in the window before filtering, and stderr says so.
+On a busy group that ran 26 minutes for 30 hours without finishing, printed nothing
+meanwhile, and ignored Ctrl+C.
+Check `export groups '<glob>'` for `stored_bytes` first.
+On a multi-GB group, give an unfiltered or regex question a short window, or ask
+`export insights` instead.
 
 ## Filters
 
@@ -128,8 +128,11 @@ number compares numerically; quote it for a string.
 Full reference:
 `docs/docs/FILTER_GUIDE.md` in the checkout.
 
-Live tail is the one path that sends the filter to AWS, and it refuses expressions
-CloudWatch would answer wrongly rather than sending them.
+Text matches case-sensitively, as CloudWatch does, so `error` does not find `ERROR`.
+`%(?i)error%` finds any case, and runs locally.
+Live tail and cold exports send the filter to AWS only when CloudWatch matches it
+exactly.
+Live tail refuses anything else, and an export filters it locally after the download.
 
 ## Not every failure lands here
 

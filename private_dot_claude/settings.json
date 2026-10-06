@@ -55,6 +55,11 @@
   "fileCheckpointingEnabled": false,
   "inputNeededNotifEnabled": true,
   "model": "sonnet",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "permissions": {
     "allow": [
       "Bash(find:*)",

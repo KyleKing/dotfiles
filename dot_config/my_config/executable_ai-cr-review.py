@@ -475,13 +475,16 @@ def withholds_approval(review: dict, latest_round: dict | None) -> bool:
 
 
 def since_date(since: str) -> str:
-    """A --since of "7d" or "2026-08-28", as the date GitHub search wants."""
+    """A --since of "8h", "7d", or "2026-08-28", as the date or UTC instant GitHub search wants."""
+    if since.endswith('h') and since[:-1].isdigit():
+        cutoff = dt.datetime.now(dt.UTC) - dt.timedelta(hours=int(since[:-1]))
+        return cutoff.strftime('%Y-%m-%dT%H:%M:%SZ')
     if since.endswith('d') and since[:-1].isdigit():
         return (dt.date.today() - dt.timedelta(days=int(since[:-1]))).isoformat()
     try:
         return dt.date.fromisoformat(since).isoformat()
     except ValueError:
-        sys.exit(f"--since takes Nd or YYYY-MM-DD, not {since!r}")
+        sys.exit(f"--since takes Nh, Nd, or YYYY-MM-DD, not {since!r}")
 
 
 def merged_prs(repo: str, author: str, since: str, limit: int) -> list[dict]:
