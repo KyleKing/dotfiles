@@ -29,11 +29,12 @@ withholding approval) with nothing left open, so
 a review a later push buried doesn't go silently un-actioned. `sweep` runs that same rule across every
 merged pull request an author landed in a window, which is where a review that
 arrived at merge time or after it turns up. `status` and `sweep` also list every
-unchecked `- [ ]` in the pull request's `AI Summary:` comment and in any review's own
-body (a bot's non-blocking ticket checklist, e.g.), since each one is a
-step a human still owes. `tick` checks boxes off from a TOML file and appends one
-`[AI Bot]: ` comment to the pull request saying how each box was settled: verified
-automatically, confirmed by the human, or left open on purpose.
+unchecked `- [ ]` in the pull request's own description, its `AI Summary:` comment,
+and in any review's own body (a bot's non-blocking ticket checklist, e.g.), since each
+one is a step a human still owes. `tick` checks boxes off in the description or the
+`AI Summary:` comment from a TOML file and appends one `[AI Bot]: ` comment to the
+pull request saying how each box was settled: verified automatically, confirmed by the
+human, or left open on purpose.
 """
 
 import argparse
@@ -114,13 +115,13 @@ def run_json(*cmd: str):
     return json.loads(run(*cmd))
 
 
-def pr_context(number: int | None) -> tuple[str, int, str]:
+def pr_context(number: int | None) -> tuple[str, int, str, dict]:
     cmd = ['gh', 'pr', 'view']
     if number is not None:
         cmd.append(str(number))
-    view = run_json(*cmd, '--json', 'headRefName,number,url')
+    view = run_json(*cmd, '--json', 'body,headRefName,number,url')
     owner, repo = view['url'].split('/')[3:5]
-    return f"{owner}/{repo}", view['number'], view['headRefName']
+    return f"{owner}/{repo}", view['number'], view['headRefName'], view
 
 
 def all_reviews(repo: str, number: int) -> list[dict]:
@@ -394,7 +395,7 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
     against — a review left unpicked here never gets a rocket, and stays silently
     un-actioned.
     """
-    repo, number, branch = pr_context(number)
+    repo, number, branch, _ = pr_context(number)
     threads = fetch_threads(repo, number)
     branch_info = {'name': branch, 'worktree': worktree_for(branch)}
     if review_id is not None:
@@ -415,17 +416,19 @@ def cmd_status(number: int | None) -> None:
     a review already rocketed, since a reply or a manual unresolve can reopen
     a thread after the rocket) or a CHANGES_REQUESTED verdict with no open
     thread left to close it out. A rocketed review with every thread resolved
-    is done and stays out. Unchecked boxes in the `AI Summary:` comment come back
-    under `open_checkboxes`, beside the reviews under `pending`.
+    is done and stays out. Unchecked boxes in the pull request's description,
+    its `AI Summary:` comment, and each review's own body come back under
+    `open_checkboxes`, beside the reviews under `pending`.
 
     A review with no open thread has nowhere to reply into (general feedback
     in the review body itself, not an inline comment), so its `body` is
     quoted in the output instead of a thread to fetch and act on directly.
     """
-    repo, number, _ = pr_context(number)
+    repo, number, _, pr = pr_context(number)
     reviews = fetch_reviews(repo, number)
     print(json.dumps({
-        'open_checkboxes': open_checkboxes(fetch_comments(repo, number)) + review_checkboxes(reviews),
+        'open_checkboxes': (description_checkboxes(pr) + open_checkboxes(fetch_comments(repo, number))
+                            + review_checkboxes(reviews)),
         'pending': pending_reviews(reviews, fetch_threads(repo, number)),
     }, indent=2))
 
@@ -490,7 +493,7 @@ def since_date(since: str) -> str:
 def merged_prs(repo: str, author: str, since: str, limit: int) -> list[dict]:
     return run_json('gh', 'search', 'prs', f"--repo={repo}", f"--author={author}",
                     '--merged', f"--merged-at=>={since}", f"--limit={limit}",
-                    '--json', 'number,title,url,closedAt')
+                    '--json', 'body,number,title,url,closedAt')
 
 
 def summary_comment(comments: list[dict]) -> dict | None:
@@ -508,11 +511,21 @@ def box_lines(body: str) -> list[tuple[int, str]]:
     return boxes
 
 
+def description_checkboxes(pr: dict) -> list[dict]:
+    """Unchecked boxes in the pull request's own description, skipping fenced code.
+
+    `tick` can check these off too, PATCHing the pull request body directly
+    rather than the `AI Summary:` comment.
+    """
+    return [{'source': 'description', 'text': text, 'url': pr['url']}
+            for _, text in box_lines(pr['body'] or '')]
+
+
 def open_checkboxes(comments: list[dict]) -> list[dict]:
     """Unchecked boxes in the `AI Summary:` comment, skipping fenced code.
 
-    These are the only boxes `tick` can check off in place, since it PATCHes this
-    same comment.
+    `tick` checks these off in place, by PATCHing this same comment, the same
+    as it does the pull request description.
     """
     summary = summary_comment(comments)
     if summary is None:
@@ -539,9 +552,10 @@ def fetch_comments(repo: str, number: int) -> list[dict]:
     return [{'body': c['body'], 'id': c['id'], 'url': c['html_url']} for c in comments]
 
 
-def sweep_pr(repo: str, number: int) -> tuple[list[dict], list[dict]]:
-    """Every un-acked review and unchecked box (summary or review body) on one
-    pull request, in one read where a page holds it."""
+def sweep_pr(repo: str, pr: dict) -> tuple[list[dict], list[dict]]:
+    """Every un-acked review and unchecked box (description, summary, or review
+    body) on one pull request, in one read where a page holds it."""
+    number = pr['number']
     owner, name = repo.split('/')
     data = run_json('gh', 'api', 'graphql', '-f', f"query={SWEEP_QUERY}",
                     '-f', f"owner={owner}", '-f', f"repo={name}",
@@ -553,7 +567,7 @@ def sweep_pr(repo: str, number: int) -> tuple[list[dict], list[dict]]:
     else:
         review_nodes = reviews['nodes']
         pending = pending_reviews(review_nodes, threads['nodes'])
-    boxes = review_checkboxes(review_nodes)
+    boxes = description_checkboxes(pr) + review_checkboxes(review_nodes)
     if comments['pageInfo']['hasPreviousPage']:
         boxes += open_checkboxes(fetch_comments(repo, number))
     else:
@@ -566,15 +580,15 @@ def cmd_sweep(repo: str | None, author: str, since: str, limit: int) -> None:
 
     A review submitted at merge time or after it never blocks anything, so it
     goes unread; this is the only surface that finds one. The rule is `status`'s,
-    per pull request, plus any unchecked box in its `AI Summary:` comment, and a
-    pull request with neither is left out.
+    per pull request, plus any unchecked box in its description or `AI Summary:`
+    comment, and a pull request with neither is left out.
     """
     repo = repo or run_json('gh', 'repo', 'view', '--json', 'nameWithOwner')['nameWithOwner']
     cutoff = since_date(since)
     prs = merged_prs(repo, author, cutoff, limit)
     swept = []
     for pr in prs:
-        pending, boxes = sweep_pr(repo, pr['number'])
+        pending, boxes = sweep_pr(repo, pr)
         if pending or boxes:
             swept.append({'merged_at': pr['closedAt'], 'number': pr['number'],
                           'open_checkboxes': boxes, 'pending': pending,
@@ -609,7 +623,7 @@ def cmd_apply(number: int | None, path: str | None) -> None:
     review_id = payload.get('review_id')
     if review_id is None:
         sys.exit('Actions file needs a review_id')
-    repo, number, branch = pr_context(number)
+    repo, number, branch, _ = pr_context(number)
     require_pushed(number, branch)
     threads = {t['id']: t for t in fetch_threads(repo, number)}
     state = collect(repo, number, review_id, list(threads.values()))
@@ -668,8 +682,9 @@ def ticked_body(body: str, texts: set[str]) -> str:
     return '\n'.join(lines)
 
 
-def tick_report(ticks: list[dict], summary_url: str) -> str:
-    sections = [f"{AI_REPLY_PREFIX}Settled checkboxes in the [AI Summary]({summary_url})."]
+def tick_report(ticks: list[dict], locations: list[tuple[str, str]]) -> str:
+    where = ' and '.join(f"the [{label}]({url})" for label, url in locations)
+    sections = [f"{AI_REPLY_PREFIX}Settled checkboxes in {where}."]
     for how, label in TICK_HOW.items():
         rows = [f"- {t['text']}\n  {t['note'].strip()}" for t in ticks if t['how'] == how]
         if rows:
@@ -678,34 +693,48 @@ def tick_report(ticks: list[dict], summary_url: str) -> str:
 
 
 def cmd_tick(number: int | None, path: str | None) -> None:
-    """Check off `AI Summary:` boxes and append one comment saying how each settled.
+    """Check off description or `AI Summary:` boxes and append one comment saying
+    how each settled.
 
     `how` is `auto` (verified by the agent), `asked` (the human confirmed it), or
     `open` (deliberately left unchecked, and still reported so the reader knows it
     was looked at). Every entry needs a `note` and must name one unchecked box
-    verbatim, or nothing is posted. A box from a review's own body (`source:
-    "review"` in `sweep`/`status` output) has no comment here to PATCH, so it isn't
-    a valid target; settle it in the report or the new PR instead.
+    verbatim, in either place, or nothing is posted. A box from a review's own body
+    (`source: "review"` in `sweep`/`status` output) has no comment or description
+    `tick` can PATCH, so it isn't a valid target; settle it in the report or the new
+    PR instead.
     """
     payload = tomllib.loads(sys.stdin.read() if path is None else open(path).read())
     ticks = payload.get('boxes') or []
     if not ticks:
         sys.exit('Tick file needs at least one [[boxes]] entry')
-    repo, number, _ = pr_context(number)
+    repo, number, _, pr = pr_context(number)
     summary = summary_comment(fetch_comments(repo, number))
-    if summary is None:
-        sys.exit(f"No {SUMMARY_MARKER!r} comment on #{number}")
-    errors = validate_ticks(ticks, [text for _, text in box_lines(summary['body'])])
+    description_texts = [text for _, text in box_lines(pr['body'] or '')]
+    summary_texts = [text for _, text in box_lines(summary['body'])] if summary else []
+    errors = validate_ticks(ticks, description_texts + summary_texts)
     if errors:
         sys.exit('Refusing to tick:\n' + '\n'.join(f"  {e}" for e in errors))
 
     checked = {t['text'] for t in ticks if t['how'] != 'open'}
-    if checked:
-        run('gh', 'api', '--input', '-', '-X', 'PATCH',
-            f"repos/{repo}/issues/comments/{summary['id']}",
-            stdin=json.dumps({'body': ticked_body(summary['body'], checked)}))
+    tick_texts = {t['text'] for t in ticks}
+    description_set, summary_set = set(description_texts), set(summary_texts)
+    locations = []
+
+    if tick_texts & description_set:
+        locations.append(('description', pr['url']))
+        if checked & description_set:
+            run('gh', 'api', '-X', 'PATCH', f"repos/{repo}/pulls/{number}",
+                '-f', f"body={ticked_body(pr['body'] or '', checked)}")
+    if summary is not None and tick_texts & summary_set:
+        locations.append(('AI Summary', summary['url']))
+        if checked & summary_set:
+            run('gh', 'api', '--input', '-', '-X', 'PATCH',
+                f"repos/{repo}/issues/comments/{summary['id']}",
+                stdin=json.dumps({'body': ticked_body(summary['body'], checked)}))
+
     run('gh', 'api', '--input', '-', '-X', 'POST', f"repos/{repo}/issues/{number}/comments",
-        stdin=json.dumps({'body': tick_report(ticks, summary['url'])}))
+        stdin=json.dumps({'body': tick_report(ticks, locations)}))
     print(f"#{number}: ticked {len(checked)}, left {len(ticks) - len(checked)} open")
 
 
