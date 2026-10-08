@@ -4,10 +4,12 @@
 *~
 .DS_Store
 __pycache__
+*.pyc
 
 # Repo-only files
 .pre-commit-config.yaml
 README.md
+docs/chezmoi-inconsistent-state.md
 docs/machine-performance-optimizations.md
 dot_config/mise/rust-toolchain.md
 
