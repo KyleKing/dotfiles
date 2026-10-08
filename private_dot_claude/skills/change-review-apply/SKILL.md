@@ -60,14 +60,19 @@ An entry with `open_threads: 0` has no thread to reply into
 (general feedback in the review body, not an inline comment) — its text comes back
 quoted in `body`.
 There is nothing to resolve, and it still gets answered: read it, and where it asked
-something or claimed something, post one `[AI Bot]: ` comment on the PR naming the
-review and answering it point by point.
+something or claimed something, answer it point by point in the actions file's top-level
+`body_reply` (Step 6), which `apply` posts as one `[AI Bot]: ` PR comment linking the
+review, before the rocket.
 A numbered list in a review body (Watch Doggo's open questions are the common case)
 is answered by number.
 
-Its `open_checkboxes` key lists the unchecked boxes in the `AI Summary:` comment.
-Settle them with `tick` the way `change-review-apply-retroactive` describes, since the
-same `auto`, `asked`, and `open` rules apply before a merge as after one.
+Its `open_checkboxes` key lists the unchecked boxes in the pull request's own
+description, its `AI Summary:` comment, and each review's own body, each tagged with
+its `source`.
+Settle a `description` or `summary` box with `tick` the way
+`change-review-apply-retroactive`
+describes, since the same `auto`, `asked`, and `open` rules apply before a merge as
+after one.
 
 Read these keys per review before starting work on it:
 
@@ -126,6 +131,13 @@ abstraction, "add a contract test" for behavior a real test already covers.
 Where a finding names a security or data-loss risk, treat it as real until you have
 disproved it.
 
+A finding about how an outside system behaves (a vendor's token claims, which IAM
+condition keys exist, an API's response shape) is checked against that system's primary
+source, its docs page or its code, before any verdict, and the reply cites it.
+Neither a typecheck nor the reviewer's confidence proves it: on watch-doggo #917 two
+workers accepted a false claim about GitHub's OIDC token and swapped in a condition key
+AWS never evaluates, so nothing could assume the role.
+
 ## Step 3 — Escalate what's out of scope, don't just note it
 
 `outside_diff`, `unmatched_findings`, `unclaimed_threads`, `other_open_threads`, and any
@@ -157,6 +169,12 @@ unbound exception variable and every other swallowed exception in the file, a te
 that does not mirror the real guard and the others in that module drifting the same way.
 Stay inside the PR's scope — a defect in a file this PR does not touch went through Step
 3, not a same-PR fix.
+
+Before widening across instances, check whether the fix belongs a level up.
+List what each caller already holds (an ID it resolved, a payload field, a check it
+ran).
+When the code re-derives something a caller already knows, or grows one branch per input
+shape seen today, pass the known value down instead.
 
 ## Step 5 — Commit, validate, and push
 
@@ -253,8 +271,10 @@ earlier, already-fixed review still looking un-actioned.
 
 When every real finding was a threadless one (nothing in `findings` needs a verdict),
 the
-actions file carries just `review_id`, and `apply` posts the rocket with
-`0 actioned`.
+actions file carries just `review_id`, plus `body_reply` when the body asked or claimed
+something, and `apply` posts the rocket with `0 actioned`.
+`body_reply` takes the same `[AI Bot]: ` prefix and, on a person's review, the same
+`replies_approved` gate as a thread reply.
 
 ## Report
 

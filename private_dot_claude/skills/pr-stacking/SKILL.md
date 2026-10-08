@@ -159,13 +159,21 @@ Whenever a branch gains commits the stack above it doesn't have yet — review-f
 fixes on a lower PR, or `main` moving forward underneath the bottom PR — merge-forward
 from that point, one level at a time, pushing (not force-pushing) as you go.
 
-Before merging `main` into anything, fast-forward the local branch first
-(`git fetch origin main:main`, or `git checkout main && git pull --ff-only`) so the
-merge and any conflict resolution work against the current tip, not a stale local
-`main` that predates commits already on `origin/main`.
-Merging a stale local `main`
-can silently miss reorg/refactor commits a conflict would otherwise have surfaced,
-and produce a "clean" merge that's actually behind.
+**MUST fast-forward local `main` immediately before you act on it** — not once at the
+start of a session, every time, right before the merge or the diagnosis that depends on
+it.
+Run `git fetch origin main:main` (or `git checkout main && git pull --ff-only`) as the
+last step before merging main into anything, and again before trusting any conflict
+signal that involves main: GitHub's `mergeable`/`mergeStateStatus` on a PR based on
+main, or a local test-merge you're using to decide whether a reported conflict is real.
+A fetch from earlier in the session is not good enough — commits can land on `main`
+in the gap, and a local branch or test-merge built on that stale tip will look clean
+while the real, current `main` has a conflict it would have surfaced.
+This produced a real false negative: a PR's base had drifted behind the fetched `main`
+between an initial fetch and a later diagnosis, a local merge of two feature branches
+looked clean, and GitHub's `mergeable: false` was dismissed as a stale cache — when the
+actual fix was re-fetching `main` and merging it into the bottom of the stack, which is
+what the drift had been hiding.
 `origin/<base>` in `sync.sh`
 (pr-pass, pr-fleet) already fetches directly and needs no separate fast-forward step;
 this only applies to a manual merge-forward loop like the one below, or any other

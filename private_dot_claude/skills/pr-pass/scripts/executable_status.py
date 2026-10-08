@@ -13,7 +13,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 CR_REVIEW = Path.home() / '.config/my_config/ai-cr-review.py'
-PR_FIELDS = 'number,title,url,headRefName,baseRefName,headRefOid,isDraft,mergeable,statusCheckRollup'
+# statusCheckRollup is fetched per selected PR: listing it for 100 PRs times out (HTTP 504) on check-heavy repos.
+PR_FIELDS = 'number,title,url,headRefName,baseRefName,headRefOid,isDraft,mergeable'
 FAILED = {'FAILURE', 'ERROR', 'TIMED_OUT', 'CANCELLED', 'ACTION_REQUIRED', 'STARTUP_FAILURE'}
 PENDING = {'PENDING', 'EXPECTED', 'QUEUED', 'IN_PROGRESS', 'WAITING', 'REQUESTED'}
 WARNING_NOISE = ('Failed to restore: getCacheEntry failed', 'Failed to save: ',
@@ -144,7 +145,8 @@ def review_status(number: int) -> tuple[list[dict], list[dict]]:
 
 
 def describe(repo: str, trunk: str, pr: dict, heads: dict[str, int]) -> dict:
-    ci = checks(pr['statusCheckRollup'])
+    rollup = run_json('gh', 'pr', 'view', str(pr['number']), '--repo', repo, '--json', 'statusCheckRollup')
+    ci = checks(rollup['statusCheckRollup'])
     pending_reviews, open_checkboxes = review_status(pr['number'])
     entry = {
         'number': pr['number'],

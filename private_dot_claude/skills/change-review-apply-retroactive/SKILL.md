@@ -49,17 +49,19 @@ those
 still need their own explicit `--review-id`.
 
 `sweep` also lists each pull request's `open_checkboxes`: every unchecked `- [ ]` in its
-`AI Summary:` comment, and every unchecked `- [ ]` in any review's own body, such as
-Watch Doggo's non-blocking "Ticket progress" checklist (a merged production-data or
-follow-up task the bot flagged but did not block on).
+own description, every unchecked `- [ ]` in its `AI Summary:` comment, and every
+unchecked `- [ ]` in any review's own body, such as Watch Doggo's non-blocking "Ticket
+progress" checklist (a merged production-data or follow-up task the bot flagged but did
+not block on).
 Each one is a judgment call the user still owes after the merge (a security sign-off, a
 check on another account, a tradeoff, a "someone re-links these two records" note), so a
 pull request with only open boxes is still in scope.
-Each entry carries a `source`: `summary` boxes live in the `AI Summary:` comment and
-`tick` can check them off in place; `review` boxes live in a review body that a bot
-regenerates on its own next pass, so there's no comment to PATCH.
-Settle every `summary` box on its source pull request with `tick`, one TOML file per
-pull request:
+Each entry carries a `source`: `description` boxes live in the pull request body and
+`summary` boxes live in the `AI Summary:` comment, and `tick` can check either off in
+place; `review` boxes live in a review body that a bot regenerates on its own next
+pass, so there's no comment or description to PATCH.
+Settle every `description` or `summary` box on its source pull request with `tick`, one
+TOML file per pull request:
 
 ```toml
 [[boxes]]
@@ -85,12 +87,11 @@ pull request, and quote their answer in the note.
 `open` is for a box that still needs a judgment nobody has made; it stays unchecked, and
 the note says why.
 Security sign-offs are never `auto`: they go to the user, or stay `open`.
-`tick` checks the boxes in the `AI Summary:` comment and appends one `[AI Bot]: `
-comment
-to that pull request grouping every box by how it settled, so the record sits where the
-box was.
+`tick` checks the boxes in the description or the `AI Summary:` comment and appends one
+`[AI Bot]: ` comment to that pull request grouping every box by how it settled, so the
+record sits where the box was.
 Carry every `open` box into the new pull request's summary as its own `- [ ]` linking
-back to the source comment.
+back to the source comment or description.
 
 A `review` box gets the same research and, if it needs one, the same question to the
 user, but never a `tick` call: there's no comment to check it against, and the same bot
@@ -192,7 +193,7 @@ once rather than per pull request.
 ## Report
 
 Lead with the window, how many pull requests were scanned, and how many carried
-un-actioned reviews or open summary checkboxes.
+un-actioned reviews or open description/summary checkboxes.
 Then one row per source PR: findings, verdicts, and where the fix
 landed, plus its boxes and how each settled.
 Then the new PR's URL, what was escalated to a ticket, and the gate results.

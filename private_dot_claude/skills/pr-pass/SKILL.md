@@ -14,6 +14,16 @@ Naming one PR of a stack pulls in the whole stack.
 The rest is plain text: instructions that bind the whole run (for example "overnight",
 "max 2 passes") and globs or paths of directories to use or skip.
 
+A PR a bot opened that requests the user's review counts as the user's own, so `all` and
+`non-draft` include it.
+List them with
+`gh pr list --search "is:open is:pr user-review-requested:@me" --json number,author`
+filtered to bot authors (`app/...` or a `[bot]` login), and pass their numbers to
+`status.py` along with the user's.
+Before the first push to one, remove the label that tells the bot it still maintains the
+branch (Watch Doggo's is `watch-doggo-maintained`), so its next round doesn't race the
+worker's push.
+
 Directories come from where the skill runs.
 From inside a checkout with no directory named, the pool is that checkout alone.
 From a parent of several checkouts, every child git checkout is a candidate: group them
@@ -34,6 +44,7 @@ Committing and pushing on the branches in scope, including the merge commits a s
 makes.
 In an unattended run, it also covers prepending a blockers block to a PR's description
 (see Unattended runs).
+On a bot-opened PR in scope, it also covers removing the bot's maintenance label.
 This overrides the push restrictions in the global rules and in `change-review-apply`.
 It does not cover force-pushing, rebasing a branch an open PR depends on, touching any
 branch outside the approved set, or flipping a PR's draft state.
@@ -182,9 +193,9 @@ Then say that this is a safe point to run `/compact`.
 A built-in command cannot be run from inside a turn, so the user has to type it; the
 state file is what makes that lossless.
 
-Wait at least 15 minutes before the next pass, so CI and review bots can finish on the
+Wait at least 10 minutes before the next pass, so CI and review bots can finish on the
 pushes this pass made.
-Start the wait as a background shell (`sleep 900` with `run_in_background`) and end the
+Start the wait as a background shell (`sleep 600` with `run_in_background`) and end the
 turn; its completion re-invokes you.
 Do not watch CI, arm a Monitor on checks, or poll `gh pr checks`.
 The next pass's `status.py` run finds whatever CI and the bots turned up.

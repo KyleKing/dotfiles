@@ -29,6 +29,13 @@ Never run those bare, and never skip hooks (`HK=0`, `--no-verify`) to dodge the 
 Move fast. The coordinator runs up to four passes, and CI is the full-suite backstop.
 Do not wait on CI: never `gh pr checks --watch`, never a poll loop, never a Monitor.
 Read the checks as they stand now and move on.
+This covers GitHub's remote Actions/checks
+and a full local suite alike: never run `mise run ci` or the equivalent full ladder
+yourself, since the next pass's `status.py` reads the real CI run instead and a local
+full suite just burns CPU/memory this pass doesn't need.
+Run only the targeted tests in
+section 4, in the foreground, and report their real result; never background a test
+command and then stall on it.
 
 ## 1. Sync with the base
 
