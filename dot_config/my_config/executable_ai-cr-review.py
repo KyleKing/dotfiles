@@ -20,7 +20,10 @@ after the human has said yes.
 `apply` reads verdicts as TOML (on stdin, or `--file`, since a human
 proofreads this one before it posts and TOML's triple-quoted strings hold
 reply prose without JSON's escaping), replies, resolves, and rockets the
-review body once every finding has been actioned. It refuses while the local PR branch holds
+review body once every finding has been actioned. An optional top-level `body_reply`
+posts one PR conversation comment, closing with a link to the review it answers, before
+the rocket, for a review with no threads to reply into or alongside thread actions in the
+same file. It refuses while the local PR branch holds
 commits the PR does not, so every reply describes code the reviewer can open. `status` lists every
 review, bot or human, that still has an unresolved thread tied to it (even a
 review already rocketed once, since a reply or a manual unresolve can reopen
@@ -339,7 +342,8 @@ def is_bot(review: dict) -> bool:
     return review['user'].get('type') == 'Bot' or review['user']['login'].endswith('[bot]')
 
 
-def validate(actions: list[dict], findings: list[dict], *, bot: bool, approved: bool) -> list[str]:
+def validate(actions: list[dict], findings: list[dict], *, bot: bool, approved: bool,
+             body_reply: str | None = None) -> list[str]:
     by_id = {f['thread_id']: f for f in findings}
     errors = []
     for action in actions:
@@ -357,7 +361,9 @@ def validate(actions: list[dict], findings: list[dict], *, bot: bool, approved: 
     open_ids = {thread_id for thread_id, f in by_id.items() if not f['is_resolved']}
     missing = sorted(open_ids - {a.get('thread_id') for a in actions})
     errors += [f"{thread_id}: no verdict given" for thread_id in missing]
-    if not bot and not approved and any((a.get('reply') or '').strip() for a in actions):
+    if body_reply is not None and not body_reply.startswith(AI_REPLY_PREFIX):
+        errors.append(f"body_reply must open with {AI_REPLY_PREFIX!r}")
+    if not bot and not approved and (body_reply or any((a.get('reply') or '').strip() for a in actions)):
         errors.append(
             'replying to a person needs their go-ahead: ask, then set '
             '`replies_approved = true` in the actions file'
@@ -387,6 +393,28 @@ def rocket(node_id: str) -> None:
         '-f', f"id={node_id}")
 
 
+def post_issue_comment(repo: str, number: int, body: str) -> None:
+    run('gh', 'api', '--input', '-', '-X', 'POST', f"repos/{repo}/issues/{number}/comments",
+        stdin=json.dumps({'body': body}))
+
+
+def split_resolved(state: dict) -> dict:
+    """Pull already-resolved findings out of `findings` into their own key.
+
+    A thread someone (often the PR author, replying directly on GitHub) already
+    resolved owes no verdict — `validate` already knows this — but leaving it mixed
+    into `findings` next to every open item is exactly how a resolved finding gets
+    re-actioned: the only signal it carries is an `is_resolved` flag buried in the
+    object, easy to miss when scanning a list for what still needs a verdict.
+    """
+    findings = state['findings']
+    return {
+        **state,
+        'findings': [f for f in findings if not f['is_resolved']],
+        'already_resolved': [f for f in findings if f['is_resolved']],
+    }
+
+
 def cmd_fetch(number: int | None, review_id: int | None) -> None:
     """A single review with `--review-id`; every un-acked bot review without it.
 
@@ -399,13 +427,13 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
     threads = fetch_threads(repo, number)
     branch_info = {'name': branch, 'worktree': worktree_for(branch)}
     if review_id is not None:
-        state = collect(repo, number, review_id, threads)
+        state = split_resolved(collect(repo, number, review_id, threads))
         print(json.dumps({'branch': branch_info, **state}, indent=2))
         return
     reviews = all_reviews(repo, number)
     pending_ids = pending_review_ids(repo, number, threads)
     bot_ids = [r['id'] for r in reviews if r['id'] in pending_ids and is_bot(r)]
-    states = [collect(repo, number, rid, threads) for rid in bot_ids]
+    states = [split_resolved(collect(repo, number, rid, threads)) for rid in bot_ids]
     print(json.dumps({'branch': branch_info, 'reviews': states}, indent=2))
 
 
@@ -628,6 +656,7 @@ def cmd_apply(number: int | None, path: str | None) -> None:
     threads = {t['id']: t for t in fetch_threads(repo, number)}
     state = collect(repo, number, review_id, list(threads.values()))
     actions = payload.get('actions') or []
+    body_reply = payload.get('body_reply')
 
     bot = state['review']['is_bot']
     errors = validate(
@@ -635,6 +664,7 @@ def cmd_apply(number: int | None, path: str | None) -> None:
         state['findings'],
         bot=bot,
         approved=bool(payload.get('replies_approved')),
+        body_reply=body_reply,
     )
     if errors:
         sys.exit('Refusing to post:\n' + '\n'.join(f"  {e}" for e in errors))
@@ -653,6 +683,15 @@ def cmd_apply(number: int | None, path: str | None) -> None:
             print(f"actioned {label}")
         except subprocess.CalledProcessError as error:
             failed.append(f"{label}: {error.stderr.strip() or error}")
+
+    if body_reply:
+        try:
+            review = state['review']
+            post_issue_comment(repo, number,
+                               f"{body_reply}\n\nIn reply to [{review['author']}'s review]({review['url']})")
+            print('posted body_reply')
+        except subprocess.CalledProcessError as error:
+            failed.append(f"body_reply: {error.stderr.strip() or error}")
 
     if failed:
         sys.exit('Left the review un-acknowledged:\n' + '\n'.join(f"  {f}" for f in failed))
@@ -733,8 +772,7 @@ def cmd_tick(number: int | None, path: str | None) -> None:
                 f"repos/{repo}/issues/comments/{summary['id']}",
                 stdin=json.dumps({'body': ticked_body(summary['body'], checked)}))
 
-    run('gh', 'api', '--input', '-', '-X', 'POST', f"repos/{repo}/issues/{number}/comments",
-        stdin=json.dumps({'body': tick_report(ticks, locations)}))
+    post_issue_comment(repo, number, tick_report(ticks, locations))
     print(f"#{number}: ticked {len(checked)}, left {len(ticks) - len(checked)} open")
 
 

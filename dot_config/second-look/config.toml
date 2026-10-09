@@ -22,6 +22,16 @@ resume = [
   "{session}",
 ]
 
+# ACP adapters T runs in a pane beside the diff; first listed is the default
+# and SECOND_LOOK_AGENT picks one by name.
+[[agent]]
+command = ["acp", "devin"]
+name = "devin"
+
+[[agent]]
+command = ["-y", "@zed-industries/claude-code-acp", "npx"]
+name = "claude"
+
 [[section]]
 name = "my work"
 query = "author:@me org:coverbasedev archived:false is:open sort:updated-desc"

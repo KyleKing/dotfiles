@@ -47,6 +47,10 @@ else `gh pr create` accepts still goes through after a bare `--`.
 
 `create --ready` adds the `watch-doggo-review` label wherever the repo defines it,
 so the review starts on open instead of waiting for the repo's poll.
+
+`title <title>` retitles an open PR under the same Conventional Commits check
+as `create`, and touches nothing else. The title becomes the squash-merge
+subject, so a plan that changed after the PR opened needs it to follow.
 """
 
 import argparse
@@ -85,12 +89,15 @@ def _repo_has_label(name: str) -> bool:
     return any(label['name'] == name for label in labels)
 
 
-def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
+def _require_conventional(title: str) -> None:
     if not TITLE_RE.match(title):
         sys.exit(
             f"Title {title!r} is not Conventional Commits: <type>(<scope>): <Subject>."
         )
 
+
+def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
+    _require_conventional(title)
     cmd = ['gh', 'pr', 'create', '--title', title, '--body', '', '--assignee', '@me']
     if base:
         cmd += ['--base', base]
@@ -131,6 +138,16 @@ def _commit_stamp(repo: str, number: int) -> str:
         f"\n\n{STAMP_MARKER}\n_Describes "
         f"[`{sha[:10]}`](https://github.com/{repo}/commit/{sha}) — {subject}._"
     )
+
+
+def retitle(new: str, pr: str | None) -> None:
+    _require_conventional(new)
+    view = run_json('gh', 'pr', 'view', *([pr] if pr else []), '--json', 'number,title')
+    if view['title'] == new:
+        print(f"#{view['number']} is already titled {new!r}")
+        return
+    run('gh', 'pr', 'edit', str(view['number']), '--title', new)
+    print(f"Retitled #{view['number']}: {view['title']!r} -> {new!r}")
 
 
 def get(pr: str | None) -> None:
@@ -205,7 +222,12 @@ def main() -> None:
     comment_parser = sub.add_parser('comment')
     comment_parser.add_argument('body', help='Full comment body -- replaces the whole comment.')
 
-    for target in (get_parser, comment_parser):
+    title_parser = sub.add_parser(
+        'title', help='Retitle the PR, under the same Conventional Commits check as create.'
+    )
+    title_parser.add_argument('title')
+
+    for target in (get_parser, comment_parser, title_parser):
         target.add_argument(
             '--pr',
             metavar='<number|branch>',
@@ -219,6 +241,8 @@ def main() -> None:
             create(args.title, args.ready, args.base, extra)
         elif args.command == 'get':
             get(args.pr)
+        elif args.command == 'title':
+            retitle(args.title, args.pr)
         else:
             comment(args.body, args.pr, extra)
     except subprocess.CalledProcessError as error:

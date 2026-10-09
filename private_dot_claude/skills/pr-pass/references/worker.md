@@ -84,6 +84,8 @@ or return the conflict as a question.
 
 Post a reply that points at a fix only once that fix is pushed, including a fix that
 lands on another PR in the stack.
+Send every reply for a push in one `apply`, and never add a second reply to a thread
+already answered for the same head: Watch Doggo starts a full round for each reply.
 
 A manual step the PR asks a human to take (a production database write, a deploy, a
 console setting) is never a worker's, even when the exact command is written out.

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-spec = importlib.util.spec_from_file_location('ai_cr_review', Path(__file__).parent / 'executable_ai-cr-review.py')
+spec = importlib.util.spec_from_file_location('ai_cr_review', Path(__file__).parent / 'ai-cr-review.py')
 ai_cr_review = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ai_cr_review)
 
