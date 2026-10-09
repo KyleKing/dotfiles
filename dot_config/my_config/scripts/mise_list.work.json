@@ -102,7 +102,7 @@
   "npm:@posthog/cli": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.18.7"
+    "version": "0.18.10"
   },
   "npm:@qodo/command": {
     "requested_version": "latest",
@@ -132,7 +132,7 @@
   "npm:stylelint": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "17.15.0"
+    "version": "17.16.0"
   },
   "npm:vscode-langservers-extracted": {
     "requested_version": "latest",
@@ -182,7 +182,7 @@
   "pipx:harlequin": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.15.0"
+    "version": "2.16.1"
   },
   "pipx:macnotesapp": {
     "requested_version": "latest",
@@ -197,7 +197,7 @@
   "pipx:norwegianblue": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.25.0"
+    "version": "0.26.0"
   },
   "pipx:pint": {
     "requested_version": "latest",
@@ -212,7 +212,7 @@
   "pipx:pylint": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "4.0.9"
+    "version": "4.1.2"
   },
   "pipx:pyright": {
     "requested_version": "latest",
@@ -232,12 +232,12 @@
   "pipx:ruff": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.16.9"
+    "version": "0.16.10"
   },
   "pipx:sqlfluff": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "4.3.0"
+    "version": "4.4.0"
   },
   "pipx:sqlit-tui": {
     "requested_version": "latest",
@@ -252,7 +252,7 @@
   "pipx:tox": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "4.64.4"
+    "version": "4.64.9"
   },
   "pipx:trcli": {
     "requested_version": "latest",
@@ -302,11 +302,11 @@
   "watchexec": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.7.3"
+    "version": "2.8.0"
   },
   "yq": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "4.53.6"
+    "version": "4.54.1"
   }
 }

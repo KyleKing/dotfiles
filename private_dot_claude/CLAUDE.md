@@ -91,8 +91,10 @@
     Only skip it if I explicitly say not to
     post one for that PR
 
-- Don't put a ticket or issue number in the PR title or the AI Summary body unless I ask
-    for one
+- Link the ticket a PR works on from its `AI Summary:` comment.
+    A ticket in the title is the repo's convention to follow, because Linear links a PR
+    from an issue ID in its branch name, title, or description but never from a comment.
+    Where the PR tool places the ID itself (irm's `create --ticket`), let it
 
 - When a merge used the `mergiraf` driver, `.git/MERGE_MSG`'s `Conflicts:` list is the
     only files it actually adjudicated; everything else in `git status` merged cleanly
@@ -211,6 +213,13 @@
     Never narrate the change or reference the diff ("now", "moved", "was", "runs after the
     commit above", "released before").
     Change narration belongs in the PR description and commit message, not in the code
+- Ticket IDs follow the same split.
+    In code, comments, docstrings, and committed docs, a ticket appears only as a forward
+    pointer: the issue that retires a hack or finishes a TODO.
+    The ticket that motivated a line ("fixes DEV-123", "see DEV-123 for why") is history
+    and goes in the PR.
+    PR titles, bodies, the `AI Summary:` comment, review replies, commit messages, Linear,
+    and Slack are temporal, so cite and link tickets there freely
 - The same evergreen rule governs documentation.
     Docs carry high-level decisions, architecture, and the human-readable context a reader
     cannot recover from the source: the code stays the source of truth for behavior.
