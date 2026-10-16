@@ -162,6 +162,11 @@ a reason to add a third.
     If `lockq.sh` alone looks clear but things still feel slow, re-run the
     Resource-aware dispatch check above — overall load can be high with no single
     holder to blame
+1. While workers run, keep `~/.config/my_config/ai-pr-wait.py owner/repo#N ...` running in
+    the background on every PR in the pass, and restart it on each exit.
+    It exits on the first review, push, CI result, comment, or merge.
+    A worker's notification, or "waiting on round N", says nothing about the PR, so open
+    the review and CI yourself on each event
 1. Collect each worker's report.
     Questions come back to you, never to the user directly: batch them into one
     AskUserQuestion per pause point, then act on the answers (post approved human-review

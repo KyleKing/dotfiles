@@ -123,12 +123,12 @@
     "collapsedModules": [
       "network",
       "disk",
-      "cpu",
-      "gpu",
-      "memory",
-      "thermal",
       "battery",
-      "system"
+      "gpu",
+      "system",
+      "cpu",
+      "memory",
+      "thermal"
     ],
     "showsHistoryChart": true
   },

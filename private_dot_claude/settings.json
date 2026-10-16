@@ -54,10 +54,10 @@
   },
   "fileCheckpointingEnabled": false,
   "inputNeededNotifEnabled": true,
-  "model": "opus",
+  "model": "sonnet",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "high"
+      "effortLevel": "low"
     }
   },
   "permissions": {

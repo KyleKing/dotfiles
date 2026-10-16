@@ -51,7 +51,7 @@ def repo_and_trunk() -> tuple[str, str]:
 def open_prs(repo: str, mine: bool) -> list[dict]:
     author = ['--author', '@me'] if mine else []
     return run_json('gh', 'pr', 'list', '--repo', repo, *author, '--state', 'open',
-                    '--limit', '100', '--json', PR_FIELDS)
+                    '--limit', '1000', '--json', PR_FIELDS)
 
 
 def select(prs: list[dict], wanted: list[int], expand: bool) -> list[dict]:

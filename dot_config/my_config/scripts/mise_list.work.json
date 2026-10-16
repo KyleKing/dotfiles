@@ -279,6 +279,11 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "0.32.1"
   },
+  "postgres-binary:postgres": {
+    "requested_version": "17.10.0",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "17.10.0"
+  },
   "python": {
     "requested_version": "3.14.2",
     "source": "/Users/kyleking/.config/mise/config.toml",

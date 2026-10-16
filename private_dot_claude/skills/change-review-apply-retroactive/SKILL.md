@@ -31,7 +31,13 @@ or a
 A pull request with nothing pending is left out, and
 `scanned` says how many were read, so an empty result is an answer rather than a
 misfire.
-One read per pull request, about a second each.
+One GraphQL read per pull request (about a second each) that reads only each thread's
+first comment, so a 100-PR window costs single-digit rate-limit points.
+`sweep` stops
+with the reset time when fewer than 500 points remain.
+Run it once per window and keep the
+JSON; to cover a longer span, widen `--since` in one call rather than looping per PR or
+per author.
 
 **Carry every `review_id` `sweep` listed for a pull request into its own `fetch`.**
 
@@ -39,6 +45,12 @@ One read per pull request, about a second each.
 ~/.config/my_config/ai-cr-review.py fetch --pr 14793 --review-id 5107979864 > cr-14793.json
 ```
 
+`fetch` and `apply` read every comment on every thread (a full page costs about 100
+points), so run each once per review and work from the saved file.
+Check
+`gh api rate_limit --jq .resources.graphql` before a large batch, and do not rerun
+`fetch`
+to re-read what the file already holds.
 `sweep`'s `pending` list can name several reviews on one pull request — the same PR
 collecting three un-acked CodeRabbit passes before it merged is exactly the case this
 skill exists for.

@@ -63,6 +63,7 @@ WATCH_DOGGO_APPROVED = '✅ approved'
 WATCH_DOGGO_MARKER = '<!-- watchdoggo-review '
 # ai-gh-pr.py's singleton marker; the two scripts must agree on it.
 SUMMARY_MARKER = 'AI Summary:'
+SWEEP_MIN_REMAINING = 500
 OPEN_BOX_RE = re.compile(r'^\s*[-*] \[ \] (?P<text>.+)$')
 TICK_HOW = {
     'auto': 'Checked automatically',
@@ -71,12 +72,12 @@ TICK_HOW = {
 }
 
 THREADS_QUERY = """
-query($owner:String!,$repo:String!,$number:Int!,$after:String){
+query($owner:String!,$repo:String!,$number:Int!,$after:String,$comments:Int!){
   repository(owner:$owner,name:$repo){ pullRequest(number:$number){
     reviewThreads(first:100,after:$after){
       pageInfo{ hasNextPage endCursor }
       nodes{ id isResolved isOutdated path line startLine originalLine originalStartLine
-        comments(first:100){ nodes{ databaseId body author{login} pullRequestReview{databaseId} } } } } } } }
+        comments(first:$comments){ nodes{ databaseId body author{login} pullRequestReview{databaseId} } } } } } } }
 """
 
 REVIEWS_QUERY = """
@@ -90,6 +91,7 @@ query($owner:String!,$repo:String!,$number:Int!,$after:String){
 
 SWEEP_QUERY = """
 query($owner:String!,$repo:String!,$number:Int!){
+  rateLimit{ remaining resetAt }
   repository(owner:$owner,name:$repo){ pullRequest(number:$number){
     reviews(first:100){
       pageInfo{ hasNextPage }
@@ -180,13 +182,19 @@ def parse_findings(block: str) -> tuple[list[dict], list[str]]:
     return findings, unparsed
 
 
-def fetch_threads(repo: str, number: int) -> list[dict]:
+def fetch_threads(repo: str, number: int, comments: int = 100) -> list[dict]:
+    """Every review thread; `comments` caps the comments read per thread.
+
+    A page costs roughly 1 + 100 * comments / 100 GraphQL points, so a caller that
+    only needs a thread's first comment passes 1 and pays about 3 points a page.
+    """
     owner, name = repo.split('/')
     nodes: list[dict] = []
     after: str | None = None
     while True:
         args = ['gh', 'api', 'graphql', '-f', f"query={THREADS_QUERY}",
-                '-f', f"owner={owner}", '-f', f"repo={name}", '-F', f"number={number}"]
+                '-f', f"owner={owner}", '-f', f"repo={name}", '-F', f"number={number}",
+                '-F', f"comments={comments}"]
         if after is not None:
             args += ['-f', f"after={after}"]
         page = run_json(*args)['data']['repository']['pullRequest']['reviewThreads']
@@ -457,7 +465,7 @@ def cmd_status(number: int | None) -> None:
     print(json.dumps({
         'open_checkboxes': (description_checkboxes(pr) + open_checkboxes(fetch_comments(repo, number))
                             + review_checkboxes(reviews)),
-        'pending': pending_reviews(reviews, fetch_threads(repo, number)),
+        'pending': pending_reviews(reviews, fetch_threads(repo, number, comments=1)),
     }, indent=2))
 
 
@@ -585,13 +593,18 @@ def sweep_pr(repo: str, pr: dict) -> tuple[list[dict], list[dict]]:
     body) on one pull request, in one read where a page holds it."""
     number = pr['number']
     owner, name = repo.split('/')
-    data = run_json('gh', 'api', 'graphql', '-f', f"query={SWEEP_QUERY}",
-                    '-f', f"owner={owner}", '-f', f"repo={name}",
-                    '-F', f"number={number}")['data']['repository']['pullRequest']
+    result = run_json('gh', 'api', 'graphql', '-f', f"query={SWEEP_QUERY}",
+                      '-f', f"owner={owner}", '-f', f"repo={name}",
+                      '-F', f"number={number}")['data']
+    remaining = result['rateLimit']['remaining']
+    if remaining < SWEEP_MIN_REMAINING:
+        sys.exit(f"Stopping at #{number}: {remaining} GraphQL points left, "
+                 f"resets {result['rateLimit']['resetAt']}. Rerun with --since after the reset.")
+    data = result['repository']['pullRequest']
     reviews, threads, comments = data['reviews'], data['reviewThreads'], data['comments']
     if reviews['pageInfo']['hasNextPage'] or threads['pageInfo']['hasNextPage']:
         review_nodes = fetch_reviews(repo, number)
-        pending = pending_reviews(review_nodes, fetch_threads(repo, number))
+        pending = pending_reviews(review_nodes, fetch_threads(repo, number, comments=1))
     else:
         review_nodes = reviews['nodes']
         pending = pending_reviews(review_nodes, threads['nodes'])

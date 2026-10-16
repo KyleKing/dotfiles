@@ -76,6 +76,7 @@ node = "lts"
 "pipx:watchgha" = "latest"
 "pipx:whisperlivekit" = {uvx_args = "--with torchaudio", version = "latest"}
 pkl = "latest"
+"postgres-binary:postgres" = "17.10.0"
 ripsecrets = "latest" # pragma: allowlist secret
 shellcheck = "latest"
 typos = "latest"
