@@ -15,6 +15,7 @@ from pathlib import Path
 CR_REVIEW = Path.home() / '.config/my_config/ai-cr-review.py'
 # statusCheckRollup is fetched per selected PR: listing it for 100 PRs times out (HTTP 504) on check-heavy repos.
 PR_FIELDS = 'number,title,url,headRefName,baseRefName,headRefOid,isDraft,mergeable'
+POINTS_PER_PR = 15
 FAILED = {'FAILURE', 'ERROR', 'TIMED_OUT', 'CANCELLED', 'ACTION_REQUIRED', 'STARTUP_FAILURE'}
 PENDING = {'PENDING', 'EXPECTED', 'QUEUED', 'IN_PROGRESS', 'WAITING', 'REQUESTED'}
 WARNING_NOISE = ('Failed to restore: getCacheEntry failed', 'Failed to save: ',
@@ -41,6 +42,13 @@ def run(*cmd: str) -> str:
 
 def run_json(*cmd: str):
     return json.loads(run(*cmd))
+
+
+def require_budget(prs: int) -> None:
+    left = run_json('gh', 'api', 'rate_limit', '--jq', '.resources.graphql')
+    needed = prs * POINTS_PER_PR
+    if left['remaining'] < needed:
+        sys.exit(f"{left['remaining']} GraphQL points left, {prs} PRs need about {needed}; resets at epoch {left['reset']}")
 
 
 def repo_and_trunk() -> tuple[str, str]:
@@ -204,8 +212,9 @@ def main() -> None:
 
     repo, trunk = repo_and_trunk()
     prs = select(open_prs(repo, mine=not args.prs), args.prs, expand=not args.no_expand)
+    require_budget(len(prs))
     heads = {p['headRefName']: p['number'] for p in prs}
-    with ThreadPoolExecutor(max_workers=6) as pool:
+    with ThreadPoolExecutor(max_workers=2) as pool:
         described = {d['number']: d for d in pool.map(lambda p: describe(repo, trunk, p, heads), prs)}
     chains = [u for u in units(prs) if not args.non_draft or any(not p['isDraft'] for p in u)]
     grouped = [[described[p['number']] for p in unit] for unit in chains]

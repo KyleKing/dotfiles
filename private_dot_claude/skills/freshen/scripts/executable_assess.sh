@@ -6,6 +6,8 @@ set -euo pipefail
 BASE_DIR="${FRESHEN_BASE_DIR:-$HOME/Developer/kyleking}"
 MANI="$BASE_DIR/mani.yaml"
 
+~/.config/my_config/gh-budget.sh 300
+
 repos=("$@")
 if [ ${#repos[@]} -eq 0 ]; then
   while IFS= read -r name; do repos+=("$name"); done < <(yq -r '.projects | keys | .[]' "$MANI")

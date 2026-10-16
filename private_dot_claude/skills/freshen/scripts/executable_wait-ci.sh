@@ -19,7 +19,7 @@ while true; do
     echo "TIMEOUT after ${timeout}s ($count runs, $pending pending)"
     exit 2
   fi
-  sleep 30
+  sleep 60
 done
 
 jq -r '.[] | "\(.workflowName): \(.conclusion)"' <<<"$runs"

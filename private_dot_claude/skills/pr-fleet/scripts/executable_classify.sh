@@ -8,6 +8,8 @@ set -euo pipefail
 
 repo="${1:?usage: classify.sh <owner/repo>}"
 
+~/.config/my_config/gh-budget.sh 200
+
 default_branch=$(gh repo view "$repo" --json defaultBranchRef -q '.defaultBranchRef.name')
 
 prs=$(gh pr list --repo "$repo" --author @me --state open --limit 50 \

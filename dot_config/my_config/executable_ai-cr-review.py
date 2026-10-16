@@ -319,8 +319,9 @@ def pending_review_ids(repo: str, number: int, threads: list[dict]) -> set[int]:
     return {p['review_id'] for p in pending_reviews(fetch_reviews(repo, number), threads)}
 
 
-def collect(repo: str, number: int, review_id: int, threads: list[dict]) -> dict:
-    review = pick_review(all_reviews(repo, number), review_id)
+def collect(repo: str, number: int, review_id: int, threads: list[dict],
+            reviews: list[dict] | None = None) -> dict:
+    review = pick_review(reviews if reviews is not None else all_reviews(repo, number), review_id)
     return {
         'body': (review['body'] or '').strip() or None,
         'other_open_threads': [thread_summary(t) for t in threads
@@ -441,7 +442,7 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
     reviews = all_reviews(repo, number)
     pending_ids = pending_review_ids(repo, number, threads)
     bot_ids = [r['id'] for r in reviews if r['id'] in pending_ids and is_bot(r)]
-    states = [split_resolved(collect(repo, number, rid, threads)) for rid in bot_ids]
+    states = [split_resolved(collect(repo, number, rid, threads, reviews)) for rid in bot_ids]
     print(json.dumps({'branch': branch_info, 'reviews': states}, indent=2))
 
 

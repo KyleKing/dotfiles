@@ -26,7 +26,8 @@ The prose rules in CLAUDE.md still apply.
 Review comments are short and get drafted
 fast, which is where the `writing-voice` tic catalog gets skipped because nothing here
 restates it.
-Check drafts against `voice-examples.md` explicitly: the borrowed-vivid-verb
+Check drafts against the `writing-voice` skill's `voice-examples.md` explicitly: the
+borrowed-vivid-verb
 list ("land"/"lands"/"landed") catches spatial metaphors for plain facts ("outside the
 diff", not "didn't land on a diff line"), and the unnamed-scope-qualifier and
 bare-open-question entries catch two shapes that show up constantly in short comments
