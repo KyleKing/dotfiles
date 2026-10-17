@@ -37,11 +37,14 @@ rgso() {
     fi
 }
 
-# Replace ls with eza
-alias ls='eza --icons'
-alias lsa='ls --all'
-alias lsl='ls --long --header --created --git'
-alias lst='lsl -TL 2'
+# Replace ls with eza outside agent shells, whose scripts pass POSIX flags eza rejects (-t)
+if [[ -z "${CLAUDECODE:-}" ]]; then
+    # Bare --icons takes an optional value and swallows a following path
+    alias ls='eza --icons=auto'
+    alias lsa='ls --all'
+    alias lsl='ls --long --header --created --git'
+    alias lst='lsl -TL 2'
+fi
 
 # Use fd to filter files based on gitignore rules
 # From: https://github.com/junegunn/fzf/tree/d01ae551090bb2f7c7ad6a9013937b65e08921cc#respecting-gitignore
