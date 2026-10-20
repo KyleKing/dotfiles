@@ -696,7 +696,10 @@ def cmd_apply(number: int | None, path: str | None) -> None:
                 resolve_thread(action['thread_id'])
             print(f"actioned {label}")
         except subprocess.CalledProcessError as error:
-            failed.append(f"{label}: {error.stderr.strip() or error}")
+            detail = error.stderr.strip() or str(error)
+            if 'HTTP 422' in detail:
+                detail += ' (a draft review of yours on this PR blocks replies: submit or discard it, then rerun apply)'
+            failed.append(f"{label}: {detail}")
 
     if body_reply:
         try:

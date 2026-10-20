@@ -125,6 +125,12 @@
 - Don't write trivial tests. Write the fewest tests that maximize coverage and actually
     exercise the behavior we care about
 - Look to merge into an existing test before adding a new one
+- Never write a test that reads source, config, or docs files to assert they agree (an AST
+    or call-graph walk, a permission-to-call join, a doc-to-code table, a comment or
+    docstring budget).
+    Such a test passes the day it is written and then taxes every unrelated edit.
+    Keep each fact in one place that both sides import, or let the type checker hold it,
+    and make a test call code
 - Test against realistic behavior over monkeypatching: in Python reach for
     pytest-recording, a real (or in-process) gRPC server, and fixtures at the boundary;
     patch internals only when there is no other way.
