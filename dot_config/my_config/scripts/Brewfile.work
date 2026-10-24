@@ -301,6 +301,8 @@ cask "viscosity"
 cask "visigrid/tap/visigrid", trusted: true
 # Open-source code editor
 cask "visual-studio-code"
+# Multimedia player
+cask "vlc"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
 # Multiplayer code editor

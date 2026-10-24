@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 """Read a review's findings and post verdicts back to its threads.
 
-`fetch` prints every un-acked bot review (CodeRabbit or any other bot) at
-once, each split into findings and joined to the thread it came from — a PR
-with three pending CodeRabbit passes gets all three, not just the newest.
-A review with a CodeRabbit-style roll-up prompt block is parsed for its
-per-finding line ranges; a review without one has every open thread tied to
-it turned into a finding directly, using the thread's own comment as the
-prompt. `--review-id` targets one review outright, including a human's,
+`fetch` prints every un-acked bot review at once, one finding per open thread
+tied to it, using the thread's own comment as the prompt. `--review-id` targets one review outright, including a human's,
 which `fetch`'s default sweep never picks on its own.
 Every finding gets a reply, whatever its verdict, and every reply opens with
 `[AI Bot]: `. A thread nobody answers reads as unaddressed to the next reader
@@ -48,10 +43,6 @@ import subprocess
 import sys
 import tomllib
 
-BLOCK_RE = re.compile(r'Prompt for all review comments.*?\n```\n(.*?)\n```', re.DOTALL)
-ITEM_RE = re.compile(r'^- (?:Around lines?|Lines?) (?P<start>\d+)(?:\s*-\s*(?P<end>\d+))?:\s*(?P<text>.*)$')
-PATH_RE = re.compile(r'^In `?@(?P<path>.+?)`?:$')
-SECTION_RE = re.compile(r'^(?P<name>[A-Za-z][A-Za-z ]*) comments:$')
 SKIP_VERDICTS = ('answered', 'noted', 'policy', 'stale', 'wrong')
 VERDICTS = ('fixed', *SKIP_VERDICTS)
 # A reply posts under my account, so nothing else in the thread says a model wrote
@@ -110,7 +101,6 @@ query($owner:String!,$repo:String!,$number:Int!){
 """
 
 
-
 def run(*cmd: str, stdin: str | None = None) -> str:
     result = subprocess.run(cmd, check=True, text=True, capture_output=True, input=stdin)
     return result.stdout.strip()
@@ -138,48 +128,6 @@ def pick_review(reviews: list[dict], review_id: int) -> dict:
     if match is None:
         sys.exit(f"No review {review_id} on this PR")
     return match
-
-
-def unwrap(block: str) -> list[str]:
-    """Rejoin CodeRabbit's hard-wrapped block into one line per header or item."""
-    logical: list[str] = []
-    for raw in block.splitlines():
-        line = raw.strip()
-        if not line:
-            continue
-        starts_entry = line == 'In' or line.startswith(('- ', 'In @', 'In `')) or SECTION_RE.match(line)
-        if starts_entry or not logical:
-            logical.append(line)
-        else:
-            logical[-1] += ' ' + line
-    return logical
-
-
-def parse_findings(block: str) -> tuple[list[dict], list[str]]:
-    findings: list[dict] = []
-    unparsed: list[str] = []
-    path, section, started = None, 'inline', False
-    for line in unwrap(block):
-        header = SECTION_RE.match(line)
-        if header:
-            path, section, started = None, header['name'].strip().lower(), True
-            continue
-        location = PATH_RE.match(line)
-        if location:
-            path, started = location['path'], True
-            continue
-        item = ITEM_RE.match(line)
-        if item and path:
-            findings.append({
-                'end': int(item['end'] or item['start']),
-                'path': path,
-                'prompt': item['text'],
-                'section': section,
-                'start': int(item['start']),
-            })
-        elif started and line != '---':
-            unparsed.append(line)
-    return findings, unparsed
 
 
 def fetch_threads(repo: str, number: int, comments: int = 100) -> list[dict]:
@@ -227,40 +175,6 @@ def thread_summary(thread: dict) -> dict:
     }
 
 
-def overlap(finding: dict, thread: dict) -> int:
-    """Longest run of lines the finding shares with any of the thread's anchors.
-
-    The block records the range the prompt talks about, which routinely differs
-    from where the comment anchors, so anchors are matched by overlap.
-    """
-    if thread['path'] != finding['path']:
-        return 0
-    return max((min(finding['end'], end) - max(finding['start'], start) + 1
-                for start, end in thread_spans(thread)), default=0)
-
-
-def best_thread(finding: dict, threads: list[dict]) -> dict | None:
-    scored = sorted(((overlap(finding, t), t) for t in threads), key=lambda pair: pair[0], reverse=True)
-    if not scored or scored[0][0] <= 0:
-        return None
-    if len(scored) > 1 and scored[1][0] == scored[0][0]:
-        return None
-    return scored[0][1]
-
-
-def join_threads(findings: list[dict], threads: list[dict], review_id: int) -> tuple[list[dict], list[dict], list[dict]]:
-    available = {t['id']: t for t in threads if review_of(t) == review_id}
-    joined, unmatched = [], []
-    for finding in sorted((f for f in findings if f['section'] == 'inline'), key=lambda f: (f['path'], f['start'])):
-        hit = best_thread(finding, list(available.values()))
-        if hit is None:
-            unmatched.append(finding)
-            continue
-        del available[hit['id']]
-        joined.append({**finding, **thread_summary(hit)})
-    return joined, unmatched, [thread_summary(t) for t in available.values()]
-
-
 def fetch_reviews(repo: str, number: int) -> list[dict]:
     owner, name = repo.split('/')
     nodes: list[dict] = []
@@ -287,31 +201,10 @@ def worktree_for(branch: str) -> str | None:
     return None
 
 
-def review_findings(review: dict, threads: list[dict]) -> dict:
-    """Findings for one review, whether or not it carries a CodeRabbit prompt block.
-
-    A CodeRabbit review's block names findings by their own line ranges, joined to
-    threads by anchor overlap since the two rarely agree exactly. Any other review
-    (human, or a non-CodeRabbit bot) has no such block, so every open thread tied to
-    it becomes a finding directly, with the thread's own comment standing in for the
-    synthesized prompt.
-    """
-    block = BLOCK_RE.search(review['body'] or '')
-    if block is None:
-        review_threads = [t for t in threads if review_of(t) == review['id']]
-        findings = [{**thread_summary(t), 'prompt': t['comments']['nodes'][0]['body'], 'section': 'inline'}
-                    for t in review_threads]
-        return {'findings': findings, 'outside_diff': [], 'unclaimed_threads': [],
-                'unmatched_findings': [], 'unparsed_prompt_lines': []}
-    parsed, unparsed = parse_findings(block.group(1))
-    joined, unmatched, unclaimed = join_threads(parsed, threads, review['id'])
-    return {
-        'findings': joined,
-        'outside_diff': [f for f in parsed if f['section'] != 'inline'],
-        'unclaimed_threads': unclaimed,
-        'unmatched_findings': unmatched,
-        'unparsed_prompt_lines': unparsed,
-    }
+def review_findings(review: dict, threads: list[dict]) -> list[dict]:
+    """Every thread tied to the review, with its first comment standing in as the prompt."""
+    return [{**thread_summary(t), 'prompt': t['comments']['nodes'][0]['body']}
+            for t in threads if review_of(t) == review['id']]
 
 
 def pending_review_ids(repo: str, number: int, threads: list[dict]) -> set[int]:
@@ -337,7 +230,7 @@ def collect(repo: str, number: int, review_id: int, threads: list[dict],
             'submitted_at': review['submitted_at'],
             'url': review['html_url'],
         },
-        **review_findings(review, threads),
+        'findings': review_findings(review, threads),
     }
 
 
@@ -428,7 +321,7 @@ def cmd_fetch(number: int | None, review_id: int | None) -> None:
     """A single review with `--review-id`; every un-acked bot review without it.
 
     The default sweep is what lets one invocation action a PR that collected several
-    pending CodeRabbit passes instead of only the one `fetch` happened to be run
+    pending bot reviews instead of only the one `fetch` happened to be run
     against — a review left unpicked here never gets a rocket, and stays silently
     un-actioned.
     """

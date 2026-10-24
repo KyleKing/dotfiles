@@ -254,8 +254,8 @@ Two reasons, and both bite:
     (`REVIEW_FEEDBACK.md`), and a finding that drew silence gets raised again unchanged
 - The reply posts under the user's own account, so GitHub attributes it to a
     write-access human and nothing else in the thread says otherwise.
-    Watch Doggo's `rebuttal.py` counts exactly that as an argument that can clear a
-    blocking finding with no code change behind it.
+    Watch Doggo settles a finding on the first reply from a person's account, so that
+    reply clears a blocking finding with no code change behind it.
     The prefix is the whole marker
 
 Keep it to one sentence after the prefix, in the user's voice under the `change-review`

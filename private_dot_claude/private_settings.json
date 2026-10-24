@@ -21,11 +21,17 @@
     ]
   },
   "autoUpdatesChannel": "latest",
+  "deniedMcpServers": [
+    {
+      "serverUrl": "https://mcp.incident.io/*"
+    }
+  ],
   "editorMode": "vim",
   "effortLevel": "medium",
   "enabledPlugins": {
     "hyperskills@hyperb1iss": true,
     "impeccable@impeccable": true,
+    "incident.io@anthropic-plugin-directory": true,
     "slack@claude-plugins-official": true
   },
   "env": {
@@ -58,8 +64,12 @@
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "low"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
     }
   },
+  "outputStyle": "Concise",
   "permissions": {
     "allow": [
       "Bash(find:*)",

@@ -101,6 +101,12 @@ git push -u origin <branch-2>
 gh pr create --base <branch-1> --head <branch-2> --draft --title "..." --body "..."
 ```
 
+Then link the levels into a GitHub native stack, bottom to top:
+`gh stack link <branch-1> <branch-2> ...`.
+`ai-gh-pr.py create --base` does this itself, and irm's `irm-pr.py create --base`
+will once its own change lands; a raw `gh pr create` needs the explicit `gh stack link`.
+Every PR whose base is not `main` belongs in a native stack.
+
 Continue for each PR in the plan. Mark PRs as drafts unless told otherwise —
 implementation still needs to happen on each branch after scaffolding.
 
@@ -201,6 +207,13 @@ PRs in the stack are based on.
 When the bottom PR itself merges to `main`, retarget the next PR's base first
 (`gh pr edit <n> --base main`, or GitHub's native stacked-PR retargeting) and only then
 `git merge main` into it, per the retarget-then-push ordering below.
+
+When GitHub has linked the PRs as a native stack (`gh stack view`, or the stack bar on
+the
+PR page), `gh pr merge` on the bottom PR fails with "Auto-merge is not supported for
+stacked pull requests" and `gh pr edit --base` fails with "part of a stack".
+Merge it with `gh stack merge <bottom-pr> --yes` instead, which queues only that PR (and
+anything below it) on a merge-queue base, and GitHub retargets the next PR itself.
 
 ### Direction matters: only merge downward-base into upward-dependent
 

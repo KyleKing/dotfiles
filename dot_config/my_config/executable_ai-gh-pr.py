@@ -42,8 +42,11 @@ before `gh pr create` runs, not after CI does.
 `create --base <branch>` opens the PR against something other than the
 repository default. A stack needs it on every level but the bottom, and
 getting it wrong is expensive: a PR opened against the default branch shows
-the levels below it in its own diff, and retargeting later is manual. Anything
-else `gh pr create` accepts still goes through after a bare `--`.
+the levels below it in its own diff, and retargeting later is manual. When the
+base is not the default branch, `create` also runs `gh stack link <base> <head>`
+so the PR joins a GitHub native stack; land its bottom PR with
+`gh stack merge <pr> --yes`. Anything else `gh pr create` accepts still goes
+through after a bare `--`.
 
 `create --ready` adds the `watch-doggo-review` label wherever the repo defines it,
 so the review starts on open instead of waiting for the repo's poll.
@@ -68,6 +71,8 @@ STAMP_RE = re.compile(rf"\n*{re.escape(STAMP_MARKER)}\n_Describes [^\n]*_\s*\Z")
 EMPHASIS_RE = re.compile(r'([_*])')
 
 REVIEW_LABEL = 'watch-doggo-review'
+
+CODESMITH_FOOTER = '<!-- codesmith:footer -->'
 
 TITLE_RE = re.compile(
     r'^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: [A-Z]'
@@ -106,6 +111,27 @@ def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
     elif _repo_has_label(REVIEW_LABEL):
         cmd += ['--label', REVIEW_LABEL]
     subprocess.run([*cmd, *extra], check=True)
+    default = run_json('gh', 'repo', 'view', '--json', 'defaultBranchRef')['defaultBranchRef']['name']
+    if base and base != default:
+        _link_stack(base, _forwarded_head(extra) or run('git', 'branch', '--show-current'))
+
+
+def _forwarded_head(extra: list[str]) -> str | None:
+    for i, arg in enumerate(extra):
+        if arg == '--head' and i + 1 < len(extra):
+            return extra[i + 1]
+        if arg.startswith('--head='):
+            return arg.split('=', 1)[1]
+    return None
+
+
+def _link_stack(base: str, head: str) -> None:
+    result = subprocess.run(['gh', 'stack', 'link', base, head], check=False)
+    if result.returncode != 0:
+        sys.exit(
+            f"PR for {head} was created, but `gh stack link {base} {head}` failed;"
+            ' install github/gh-stack (`gh extension install github/gh-stack`) and rerun it.'
+        )
 
 
 def _find_existing_comment(pr: str | None) -> tuple[int, str, dict | None]:
@@ -186,10 +212,29 @@ def comment(body: str, pr: str | None, extra: list[str]) -> None:
     comment_url = run('gh', 'pr', 'comment', str(number), '--body', body, *extra)
     print(f"Posted AI Summary comment: {comment_url}")
 
-    current_body = run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
-    if not current_body:
-        run('gh', 'pr', 'edit', str(number), '--body', f"See full AI Summary below: {comment_url}")
-        print('Replaced empty description with pointer')
+    _point_description_at(number, comment_url)
+
+
+def _point_description_at(number: int, comment_url: str) -> None:
+    """Fill an empty PR description with a pointer, never touching one a human wrote.
+
+    Blacksmith appends its own footer to an otherwise empty description; the footer is
+    kept and does not count as human text.
+    """
+    current = run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
+    written, marker, footer = current.partition(CODESMITH_FOOTER)
+    if written.strip():
+        return
+    pointer = f"See full AI Summary below: {comment_url}"
+    run(
+        'gh',
+        'pr',
+        'edit',
+        str(number),
+        '--body',
+        f"{pointer}\n\n{marker}{footer}" if marker else pointer,
+    )
+    print('Replaced empty description with pointer')
 
 
 def main() -> None:
