@@ -1,8 +1,6 @@
-# T hands the todo set to Claude Code, with the file it wrote as the prompt.
-# The tool list is scoped to reading and to this binary: a review agent stages
-# comments through second-look and needs nothing else. Widen it deliberately if
-# you want the agent running tests.
+# Every command below is an argv list, so order matters: never sort these arrays.
 
+# T hands the todo set to Claude Code, with the file it wrote as the prompt.
 dispatch = [
   "--chrome",
   "--dangerously-skip-permissions",
@@ -22,7 +20,7 @@ resume = [
   "{session}",
 ]
 
-# ACP adapters T runs in a pane beside the diff; first listed is the default
+# ACP adapters T runs in a pane beside the diff. The first listed is the default
 # and SECOND_LOOK_AGENT picks one by name.
 [[agent]]
 command = ["acp", "devin"]
@@ -31,19 +29,3 @@ name = "devin"
 [[agent]]
 command = ["-y", "@zed-industries/claude-code-acp", "npx"]
 name = "claude"
-
-[[section]]
-name = "my work"
-query = "author:@me org:coverbasedev archived:false is:open sort:updated-desc"
-
-[[section]]
-name = "needs my review"
-query = "review-requested:@me archived:false is:open sort:updated-desc"
-
-[[section]]
-name = "my non-work"
-query = "author:@me -org:coverbasedev archived:false is:open sort:updated-desc"
-
-[[section]]
-name = "work PRs pending review"
-query = "org:coverbasedev draft:false -review:approved -author:app/dependabot archived:false is:open sort:updated-desc"

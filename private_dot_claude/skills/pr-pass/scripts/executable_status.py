@@ -122,8 +122,9 @@ def pr_files(repo: str, number: int) -> set[str]:
 
 
 def warnings(repo: str, sha: str, number: int) -> list[str]:
-    runs = run_json('gh', 'api', '--paginate', f'repos/{repo}/commits/{sha}/check-runs?per_page=100',
-                    '--jq', '[.check_runs[] | select(.output.annotations_count > 0) | {id, name}]')
+    runs = [json.loads(line) for line in run(
+        'gh', 'api', '--paginate', f'repos/{repo}/commits/{sha}/check-runs?per_page=100',
+        '--jq', '.check_runs[] | select(.output.annotations_count > 0) | {id, name}').splitlines()]
     found, files = [], None
     for r in runs:
         notes = run_json('gh', 'api', f"repos/{repo}/check-runs/{r['id']}/annotations?per_page=100")

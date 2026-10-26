@@ -277,7 +277,7 @@
   "pkl": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.32.1"
+    "version": "0.32.2"
   },
   "postgres-binary:postgres": {
     "requested_version": "17.10.0",
