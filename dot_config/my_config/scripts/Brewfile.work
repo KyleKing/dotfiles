@@ -239,6 +239,8 @@ cask "firefox"
 cask "firefox@developer-edition"
 cask "font-fira-code-nerd-font"
 cask "font-sarasa-gothic"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
 # Web browser
 cask "google-chrome"
 # AI-powered notepad for meetings
@@ -336,6 +338,7 @@ go "cmd/gofmt"
 go "github.com/kyleking/second-look/cmd/second-look"
 cargo "cbcli"
 cargo "selene"
+uv "py-spy"
 npm "corepack"
 npm "cspell"
 npm "markdown-link-check"

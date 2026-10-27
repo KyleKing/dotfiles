@@ -6,7 +6,8 @@
       "claude-haiku-5-5": "claude-haiku-5-5-medium",
       "fusion": "fusion-gpt-5-6-sol-medium-sidekick-swe-2-medium",
       "swe-2": "swe-2-high"
-    }
+    },
+    "subagent_model": "claude-haiku-5-5-medium"
   },
   "devin": {
     "org_id": "org-257dc86dff7d4fe4842adb6679c1b3c7"

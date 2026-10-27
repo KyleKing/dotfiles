@@ -80,5 +80,6 @@ pkl = "latest"
 ripsecrets = "latest" # pragma: allowlist secret
 shellcheck = "latest"
 typos = "latest"
+uv = "latest"
 watchexec = "latest"
 yq = "latest"

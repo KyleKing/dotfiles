@@ -7,7 +7,7 @@
   "bun": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.4.3"
+    "version": "1.4.4"
   },
   "cargo:selene": {
     "requested_version": "latest",
@@ -22,7 +22,7 @@
   "deno": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.9.7"
+    "version": "2.9.8"
   },
   "go": {
     "requested_version": "1.26.6",
@@ -57,7 +57,7 @@
   "hk": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "2.8.0"
+    "version": "2.8.2"
   },
   "lua-language-server": {
     "requested_version": "latest",
@@ -102,7 +102,7 @@
   "npm:@posthog/cli": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.18.11"
+    "version": "0.18.12"
   },
   "npm:@qodo/command": {
     "requested_version": "latest",
@@ -232,7 +232,7 @@
   "pipx:ruff": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "0.17.1"
+    "version": "0.17.2"
   },
   "pipx:sqlfluff": {
     "requested_version": "latest",
@@ -242,7 +242,7 @@
   "pipx:sqlit-tui": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.6.4"
+    "version": "1.6.5"
   },
   "pipx:toml-sort": {
     "requested_version": "latest",
@@ -303,6 +303,11 @@
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "1.51.1"
+  },
+  "uv": {
+    "requested_version": "latest",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "0.13.5"
   },
   "watchexec": {
     "requested_version": "latest",
