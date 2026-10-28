@@ -30,9 +30,7 @@ call the CI gate does not already make (a security-relevant permission
 change, a step that can only be verified on another machine) -- never a step
 already covered by CI or the merge button.
 
-`create()` only sets draft/ready at creation. Nothing here flips that status
-later: once a PR exists, draft/ready is the user's call, and no subcommand
-should be added that changes it after the fact.
+`create()` always opens the PR ready for review; there is no draft option.
 
 `create()` rejects a title that isn't Conventional Commits
 (`<type>(<scope>): <Subject>`), since many repos gate PRs on exactly this with
@@ -48,7 +46,7 @@ so the PR joins a GitHub native stack; land its bottom PR with
 `gh stack merge <pr> --yes`. Anything else `gh pr create` accepts still goes
 through after a bare `--`.
 
-`create --ready` adds the `watch-doggo-review` label wherever the repo defines it,
+`create` adds the `watch-doggo-review` label wherever the repo defines it,
 so the review starts on open instead of waiting for the repo's poll.
 
 `title <title>` retitles an open PR under the same Conventional Commits check
@@ -101,14 +99,12 @@ def _require_conventional(title: str) -> None:
         )
 
 
-def create(title: str, ready: bool, base: str | None, extra: list[str]) -> None:
+def create(title: str, base: str | None, extra: list[str]) -> None:
     _require_conventional(title)
     cmd = ['gh', 'pr', 'create', '--title', title, '--body', '', '--assignee', '@me']
     if base:
         cmd += ['--base', base]
-    if not ready:
-        cmd.append('--draft')
-    elif _repo_has_label(REVIEW_LABEL):
+    if _repo_has_label(REVIEW_LABEL):
         cmd += ['--label', REVIEW_LABEL]
     subprocess.run([*cmd, *extra], check=True)
     default = run_json('gh', 'repo', 'view', '--json', 'defaultBranchRef')['defaultBranchRef']['name']
@@ -252,7 +248,6 @@ def main() -> None:
         help='Open the PR. Pass any other `gh pr create` flag after a bare `--`.',
     )
     create_parser.add_argument('title')
-    create_parser.add_argument('--ready', action='store_true')
     create_parser.add_argument(
         '--base',
         metavar='<branch>',
@@ -283,7 +278,7 @@ def main() -> None:
 
     try:
         if args.command == 'create':
-            create(args.title, args.ready, args.base, extra)
+            create(args.title, args.base, extra)
         elif args.command == 'get':
             get(args.pr)
         elif args.command == 'title':

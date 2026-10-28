@@ -23,7 +23,6 @@ CACHE_SWEEP_TARGETS=(
     "$HOME/.cache/uv|10|uv cache clean"
     "$HOME/Library/pnpm/store|5|pnpm store prune"
     "$HOME/Library/Caches/mise|2|mise cache clear"
-    "$HOME/Library/Caches/camoufox|2|rm -rf $HOME/Library/Caches/camoufox"
     "$HOME/Library/Caches/com.spotify.client|3|pgrep -qx Spotify || rm -rf $HOME/Library/Caches/com.spotify.client"
     "$HOME/.cache/prek|1|prek cache gc"
     "/private/tmp/node-compile-cache|1|rm -rf /private/tmp/node-compile-cache"
@@ -35,19 +34,17 @@ CACHE_SWEEP_TARGETS=(
     "$HOME/Library/Caches/go-build|2|go clean -cache"
     "$HOME/Library/Caches/pypoetry|1|rm -rf $HOME/Library/Caches/pypoetry"
     "$HOME/Library/Caches/deno|2|rm -rf $HOME/Library/Caches/deno"
-    "$HOME/.cache/puppeteer|2|rm -rf $HOME/.cache/puppeteer"
     "$HOME/Library/Developer/Xcode/DerivedData|2|rm -rf $HOME/Library/Developer/Xcode/DerivedData"
     # Left at high thresholds and a manual command since these hold data you
-    # may still want (downloaded models / browsers), not pure rebuild-cache.
+    # may still want (downloaded models), not pure rebuild-cache.
     "$HOME/.cache/huggingface|20|huggingface-cli delete-cache"
-    "$HOME/Library/Caches/ms-playwright|3|npx playwright uninstall --all"
 )
 
 # Tools whose own prune command already knows what's safe to remove (unused
 # mise tool versions, untracked conda package tarballs) — no size threshold
 # needed, just run them.
 CACHE_PRUNE_COMMANDS=(
-    "mise prune"
+    "mise prune --yes"
     "conda clean --all -y"
 )
 
@@ -125,6 +122,30 @@ temp-sweep() {
     echo "$((total_kb / 1024))MiB stale (older than ${TEMP_SWEEP_MAX_AGE_DAYS}d)"
 }
 
+BROWSER_PRUNE_DAYS=30
+BROWSER_CACHES=("$HOME/Library/Caches/ms-playwright" "$HOME/Library/Caches/camoufox")
+BROWSER_CACHES_DEEP=("$HOME/.cache/puppeteer")
+
+browser-prune() {
+    # Browser versions change too often to keep: clear monthly, or now with --deep (adds puppeteer)
+    local dry=false deep=false stamp="$HOME/.local/state/cache-cleanup/browser-prune" dir targets
+    for arg in "$@"; do
+        [ "$arg" = "--dry-run" ] && dry=true
+        [ "$arg" = "--deep" ] && deep=true
+    done
+    if [ "$deep" = false ] && [ -n "$(find "$stamp" -mtime "-$BROWSER_PRUNE_DAYS" 2>/dev/null)" ]; then
+        echo "browser caches cleared within ${BROWSER_PRUNE_DAYS}d, use --deep to force"
+        return
+    fi
+    targets=("${BROWSER_CACHES[@]}")
+    [ "$deep" = true ] && targets+=("${BROWSER_CACHES_DEEP[@]}")
+    for dir in "${targets[@]}"; do
+        echo "==> $dir"
+        [ "$dry" = true ] || rm -rf "$dir"
+    done
+    [ "$dry" = true ] || { mkdir -p "${stamp%/*}" && touch "$stamp"; }
+}
+
 docker-prune() {
     # Explicit only: not part of bcbd-deep, so Docker is never touched implicitly
     docker system df
@@ -136,5 +157,6 @@ alias cs='cache-status'
 alias csweep='cache-sweep'
 # Full post-upgrade routine: upgrade, drop unused deps, brew cleanup/doctor, then
 # sweep any dev-tool cache that's grown past its threshold, prune unused
-# mise tool versions / conda package tarballs, and clear stale temp dirs.
-alias bcbd-deep='brew upgrade && brew autoremove && bcbd && cache-sweep && cache-prune && temp-sweep'
+# mise tool versions / conda package tarballs, clear browser caches monthly, and clear
+# stale temp dirs.
+alias bcbd-deep='brew upgrade && brew autoremove && bcbd && cache-sweep && cache-prune && browser-prune && temp-sweep'
