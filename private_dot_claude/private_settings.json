@@ -62,6 +62,9 @@
   "inputNeededNotifEnabled": true,
   "model": "sonnet",
   "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "low"
+    },
     "claude-opus-5-5": {
       "effortLevel": "low"
     },

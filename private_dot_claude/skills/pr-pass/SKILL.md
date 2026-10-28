@@ -88,6 +88,8 @@ branch outside the approved set, or flipping a PR's draft state.
     first, so builds stay warm and at most two stacks ever run; every other directory is
     Docker-free and takes the rest.
     A longer Docker queue is the accepted cost.
+    Workers run no tests locally, so a Docker lane is used only to reproduce a CI failure
+    and the queue is usually idle.
     A stack stays in one directory, except that its Docker PRs may move to a Docker
     directory; they still start only after the PR below has pushed.
     With more units than directories, queue them, balancing PR count per directory.

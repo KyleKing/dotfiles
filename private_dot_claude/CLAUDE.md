@@ -279,6 +279,9 @@
     overwrite each other's diffs and a commit's worth of work can vanish with no trace in
     git at all.
     Land one agent's branch (or at least get it committed) before starting the next
+- Never create a new checkout directory (a clone or copy beside the current one, such as
+    `watch-doggo-N-*`, or a `cp -r` of a repo) to get a clean tree or parallel work.
+    Use the current checkout and a branch, or ask me because I would have delete it later
 - Do not run Docker commands without instruction
 - Language conventions load automatically from `~/.claude/rules/` when you touch a
     matching file (Python, CSS, TypeScript, HTML and templates).
