@@ -44,7 +44,15 @@ Rollback: same panel, back to 10 CPUs / 12GB, Apply & Restart.
 ## Firefox
 
 A long-running Firefox session (~20 tabs) had grown to several GB.
-Firefox has its own
+Firefox has no native per-tab memory cap (Mozilla's
+[per-tab limit request](https://connect.mozilla.org/t5/ideas/add-per-tab-memory-limits-to-prevent-system-freeze-possible-dos/idi-p/103226)
+is still open), and macOS has no per-app RAM ceiling, so idle tabs have to be unloaded.
+
+The standing fix is the Auto Tab Discard extension, which suspends tabs after a set idle
+time and can whitelist tabs that must stay live.
+`about:unloads` lists the tabs Firefox itself would evict.
+
+When memory is high anyway, Firefox has its own
 tooling for finding the culprit before touching anything:
 
 - **`about:processes`** — Firefox's task manager.
@@ -55,6 +63,8 @@ tooling for finding the culprit before touching anything:
     frees.
     If it drops a lot, it was reclaimable; if not, something's genuinely holding
     references.
+    To tell a leak from a large page, use **Measure and save** twice, 30-60 minutes apart,
+    and compare what grew.
 - **Troubleshoot Mode** (Menu → Help → Troubleshoot Mode) rules extensions and custom
     prefs in or out in one step.
 
@@ -115,9 +125,19 @@ Both ship their own prune command that already knows what's unreferenced (`mise 
 `conda clean --all`), so `_cache_cleanup.sh` runs those unconditionally via
 `cache-prune` instead of gating them on size.
 
+`temp-sweep` removes allowlisted entries in `$TMPDIR` and `/private/tmp` that nothing
+has
+touched for three days (watch-doggo replay dirs, Claude task output, pytest and
+Playwright scratch).
+`docker-prune` is separate and only runs when called by name.
+
+`du` overstates uv venvs and pnpm `node_modules` on APFS: both import by clone, so the
+files share blocks with the cache and `du` counts every copy in full.
+Compare `df` before and after a change to see real usage.
+
 There's no automated schedule for any of this, matching the rest of this doc: run
-`bcbd-deep` (brew upgrade/autoremove/cleanup/doctor, then `cache-sweep` and
-`cache-prune`) whenever you're doing routine upkeep, roughly weekly.
+`bcbd-deep` (brew upgrade/autoremove/cleanup/doctor, then `cache-sweep`, `cache-prune`,
+and `temp-sweep`) whenever you're doing routine upkeep, roughly weekly.
 
 ## Before/after snapshots
 

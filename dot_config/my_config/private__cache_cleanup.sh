@@ -20,7 +20,13 @@ CACHE_SWEEP_TARGETS=(
     "$HOME/Library/Caches/Homebrew|10|brew cleanup -s"
     "$HOME/.bun/install/cache|5|bun pm cache rm"
     "$HOME/go/pkg/mod|5|go clean -modcache"
-    "$HOME/.cache/uv|2|uv cache prune"
+    "$HOME/.cache/uv|10|uv cache clean"
+    "$HOME/Library/pnpm/store|5|pnpm store prune"
+    "$HOME/Library/Caches/mise|2|mise cache clear"
+    "$HOME/Library/Caches/camoufox|2|rm -rf $HOME/Library/Caches/camoufox"
+    "$HOME/Library/Caches/com.spotify.client|3|pgrep -qx Spotify || rm -rf $HOME/Library/Caches/com.spotify.client"
+    "$HOME/.cache/prek|1|prek cache gc"
+    "/private/tmp/node-compile-cache|1|rm -rf /private/tmp/node-compile-cache"
     "$HOME/Library/Caches/pip|2|pip cache purge"
     "$HOME/.npm|2|npm cache clean --force"
     "$HOME/Library/Caches/Yarn|2|yarn cache clean"
@@ -91,9 +97,44 @@ cache-prune() {
     done
 }
 
+TEMP_SWEEP_MAX_AGE_DAYS=3
+
+_temp-stale-entries() {
+    local tmp="${TMPDIR:-/tmp}" entry
+    tmp="${tmp%/}"
+    {
+        find "$tmp" /private/tmp -mindepth 1 -maxdepth 1 \( -name 'go-build*' -o -name 'npm-*' \
+            -o -name 'pip-*' -o -name 'playwright*' -o -name 'pytest-of-*' -o -name 'tmp*' \
+            -o -name 'watchdoggo-*' \) 2>/dev/null
+        find /private/tmp/claude-501 -mindepth 2 -maxdepth 2 2>/dev/null
+    } | while IFS= read -r entry; do
+        # Stale means nothing inside changed within the window, so live sessions are never touched
+        [ -z "$(find "$entry" -mtime "-$TEMP_SWEEP_MAX_AGE_DAYS" -print -quit 2>/dev/null)" ] && echo "$entry"
+    done
+}
+
+temp-sweep() {
+    local dry=false total_kb=0 kb entry
+    [ "$1" = "--dry-run" ] && dry=true
+    while IFS= read -r entry; do
+        kb=$(du -sk "$entry" 2>/dev/null | cut -f1)
+        total_kb=$((total_kb + ${kb:-0}))
+        echo "==> $((${kb:-0} / 1024))MiB $entry"
+        [ "$dry" = true ] || rm -rf "$entry"
+    done < <(_temp-stale-entries)
+    echo "$((total_kb / 1024))MiB stale (older than ${TEMP_SWEEP_MAX_AGE_DAYS}d)"
+}
+
+docker-prune() {
+    # Explicit only: not part of bcbd-deep, so Docker is never touched implicitly
+    docker system df
+    docker builder prune -f --filter "until=168h"
+    docker image prune -af --filter "until=168h"
+}
+
 alias cs='cache-status'
 alias csweep='cache-sweep'
 # Full post-upgrade routine: upgrade, drop unused deps, brew cleanup/doctor, then
-# sweep any dev-tool cache that's grown past its threshold and prune unused
-# mise tool versions / conda package tarballs.
-alias bcbd-deep='brew upgrade && brew autoremove && bcbd && cache-sweep && cache-prune'
+# sweep any dev-tool cache that's grown past its threshold, prune unused
+# mise tool versions / conda package tarballs, and clear stale temp dirs.
+alias bcbd-deep='brew upgrade && brew autoremove && bcbd && cache-sweep && cache-prune && temp-sweep'
