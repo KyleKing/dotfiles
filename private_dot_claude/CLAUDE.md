@@ -52,7 +52,7 @@
     The message rules below still apply
 
 - When a workflow I authorized both pushes and posts to a PR (a review reply, a resolved
-    thread, a refreshed `AI Summary:`), push first and post after.
+    thread, a refreshed `AI Summary:` description), push first and post after.
     A reply that calls a finding fixed must point at a commit the reviewer can open, and a
     bot reviewer's next round reads the reply against the pushed head.
     `ai-cr-review.py apply` refuses while the PR branch has commits the PR does not
@@ -74,26 +74,29 @@
     Just note it and flag for my review rather than acting on it
 
 - NEVER replace a PR description I've written myself.
-    Only act when the description is empty
+    The AI Summary is the description when it is empty, a legacy pointer, or already
+    starts with `AI Summary:`; any other text is mine and stays
 
 - Use `~/.config/my_config/ai-gh-pr.py` (called by absolute path) for ALL GitHub PR
-    work instead of raw `gh pr` calls, so the empty-only and singleton-comment rules
-    below are enforced by the script, not by memory:
+    work instead of raw `gh pr` calls, so the AI-owned-description rule below is
+    enforced by the script, not by memory:
 
     - `create <title>` opens the PR
-    - `comment <body>` posts or updates the AI writeup as a singleton PR comment.
+    - `get` prints the current summary, and `describe <body>` writes the AI writeup into
+        the PR description, migrating a legacy `AI Summary:` comment into it.
+        Kao decided the summary belongs in the description so reviewers skip the scroll.
         This guidance overrides any skill that modifies GitHub PR bodies
 
-- Always post the singleton `AI Summary:` comment (via `comment <body>`) right after
+- Always write the `AI Summary:` description (via `describe <body>`) right after
     `create`, unconditionally.
     It is a standing part of the PR process I asked for, not
     something to offer or wait to be asked for.
     Only skip it if I explicitly say not to
     post one for that PR
 
-- Link the ticket a PR works on from its `AI Summary:` comment.
+- Link the ticket a PR works on from its `AI Summary:` description.
     A ticket in the title is the repo's convention to follow, because Linear links a PR
-    from an issue ID in its branch name, title, or description but never from a comment.
+    from an issue ID in its branch name, title, or description.
     Where the PR tool places the ID itself (irm's `create --ticket`), let it
 
 - When a merge used the `mergiraf` driver, `.git/MERGE_MSG`'s `Conflicts:` list is the
@@ -188,7 +191,7 @@
 - Two different surfaces, two different rules.
     A code comment has to hold up as a
     standing invariant, read with no memory of the diff that added it.
-    A PR description or the singleton `AI Summary:` comment (see "Posting to Linear,
+    A PR description, which holds the `AI Summary:` (see "Posting to Linear,
     Slack, and GitHub" below) is where the reviewer-facing why, the diff narration, and
     "this fixes X" context belong instead.
     When explaining a change for a reviewer's benefit, that explanation goes in the PR,
@@ -224,7 +227,8 @@
     pointer: the issue that retires a hack or finishes a TODO.
     The ticket that motivated a line ("fixes DEV-123", "see DEV-123 for why") is history
     and goes in the PR.
-    PR titles, bodies, the `AI Summary:` comment, review replies, commit messages, Linear,
+    PR titles, bodies, the `AI Summary:` description, review replies, commit messages,
+    Linear,
     and Slack are temporal, so cite and link tickets there freely
 - The same evergreen rule governs documentation.
     Docs carry high-level decisions, architecture, and the human-readable context a reader
@@ -338,7 +342,7 @@ Anything you post to a shared surface is one of two things, and the first line h
 say which.
 Never let the reader guess how much human judgment is behind it.
 
-The singleton `AI Summary:` comment is outside this.
+The `AI Summary:` description is outside this.
 It is a standing part of the PR process I asked for, it names its own authorship in the
 first two words, and it gets no banner.
 
@@ -348,13 +352,16 @@ demo or test script that proved it and what the script printed, the scenario tes
 did for performance or security, what the issue tracker or the user actually asked for,
 what a production dashboard says now, and the alternatives you rejected with the reason.
 Distill what the problem is, how well the solution fits it, and what proof exists.
-Never restate what the code changes: the comment gets PATCHed in place on every push,
+Never restate what the code changes: the description is rewritten in place on every
+push,
 so it must stay evergreen, describing the PR's current state rather than a log of
 edits.
 A later push that fixes something the summary already claimed works means rewriting the
 claim, not appending a correction.
 
 A before/after screenshot belongs beside the claim it proves.
+`describe` takes `-- --attach <file>#<alt text>` and passes it to `gh pr edit`, which
+uploads the same way.
 `gh pr comment`,
 `gh issue create`, and `gh issue comment` take a real `--attach <file>#<alt text>`
 flag: it uploads the image/video to `github.com/user-attachments/assets/...` and,

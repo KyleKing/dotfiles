@@ -129,6 +129,8 @@ brew "postgresql@18"
 brew "prek"
 # Cloud native development platform
 brew "pulumi"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Prevent committing secret keys into your source code
@@ -339,7 +341,6 @@ go "github.com/kyleking/second-look/cmd/second-look"
 cargo "cbcli"
 cargo "selene"
 uv "py-spy"
-npm "corepack"
 npm "cspell"
 npm "markdown-link-check"
 npm "neovim"

@@ -19,6 +19,8 @@ resume = [
   "claude",
   "{session}",
 ]
+# Orgs the inbox counts as work for the w toggle; every other owner is personal.
+work_orgs = ["coverbasedev"]
 
 # ACP adapters T runs in a pane beside the diff. The first listed is the default
 # and SECOND_LOOK_AGENT picks one by name.

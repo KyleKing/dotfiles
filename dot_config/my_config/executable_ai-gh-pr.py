@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
-"""Wrap `gh pr` so an AI-authored PR keeps a stable, singleton description.
+"""Wrap `gh pr` so an AI-authored PR keeps its summary in the description.
 
-A description I wrote myself is never touched; an empty one gets replaced,
-once, with a pointer to a comment that starts with "AI Summary:" and is
-PATCHed in place on every later update.
+A description I wrote myself is never touched. An empty one, a legacy pointer,
+or one that already starts with "AI Summary:" belongs to the AI and is
+rewritten in place on every update. The summary opens the description so the
+reviewer does not scroll for it.
 
-`get` prints the current comment, or exits 1 if there isn't one yet, so the
+`get` prints the current summary, or exits 1 if there isn't one yet, so the
 caller edits the real thing -- keep what's still true, update what changed,
 drop what's stale -- instead of drafting a fresh summary from memory and
 resubmitting that, which silently drops whatever it doesn't happen to
-restate. `comment <body>` then submits the full result; it always replaces
-the whole comment, on the assumption the caller built `<body>` from what
-`get` returned.
+restate. `describe <body>` then submits the full result; it always replaces
+the whole summary, on the assumption the caller built `<body>` from what
+`get` returned. A PR that still carries its summary in a comment is migrated:
+the comment's text moves into the description and the comment is deleted.
 
-`comment` re-stamps the body with the short SHA and subject line of the commit
+Anything after a bare `--` on `describe` goes to `gh pr edit`, so `-- --attach
+'shot.png#alt'` uploads an image and rewrites a matching `![alt](./shot.png)` in the body.
+
+`describe` re-stamps the body with the short SHA and subject line of the commit
 it describes, stripping the previous stamp first. The SHA is what says the
 summary is out of sync; the subject is what survives a rebase, which changes
 every SHA on the branch and leaves the subjects alone, so a stale SHA under a
 matching subject reads as a rebase rather than as new work the summary missed.
-Never write or edit the stamp by hand: `get` returns it and `comment` replaces
+Never write or edit the stamp by hand: `get` returns it and `describe` replaces
 it.
 
-Both take `--pr <number|branch>` and default to the current branch. A stack of
+`get` and `describe` take `--pr <number|branch>` and default to the current branch. A stack of
 PRs is the case that needs it: only one branch is checked out at a time, so
 without it the summary for every PR but that one is unreachable.
 
-A checklist item belongs in the comment only if it needs a human judgment
+A checklist item belongs in the summary only if it needs a human judgment
 call the CI gate does not already make (a security-relevant permission
 change, a step that can only be verified on another machine) -- never a step
 already covered by CI or the merge button.
@@ -172,65 +177,59 @@ def retitle(new: str, pr: str | None) -> None:
     print(f"Retitled #{view['number']}: {view['title']!r} -> {new!r}")
 
 
+LEGACY_POINTER = 'See full AI Summary below:'
+
+
+def _split_description(body: str) -> tuple[str, str]:
+    """Return the written text and the Blacksmith footer, which is never human text."""
+    written, marker, footer = body.partition(CODESMITH_FOOTER)
+    return written.strip(), (marker + footer) if marker else ''
+
+
+def _ai_owned(written: str) -> bool:
+    return not written or written.startswith((MARKER, LEGACY_POINTER))
+
+
 def get(pr: str | None) -> None:
-    _, _, existing = _find_existing_comment(pr)
-    if existing is None:
-        sys.exit('No AI Summary comment yet')
-    print(existing['body'])
+    number, _, existing = _find_existing_comment(pr)
+    written, _ = _split_description(
+        run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
+    )
+    if written.startswith(MARKER):
+        print(written)
+    elif existing is not None:
+        print(existing['body'])
+    else:
+        sys.exit('No AI Summary yet')
 
 
-def comment(body: str, pr: str | None, extra: list[str]) -> None:
+def describe(body: str, pr: str | None, extra: list[str]) -> None:
     if not body.startswith(MARKER):
         sys.exit(
-            f"Comment body must start with {MARKER!r}: it is how the singleton comment is"
-            ' found and re-PATCHed, and how the comment names its own authorship. Without'
-            ' it every update posts a second comment.'
+            f"Summary body must start with {MARKER!r}: it is how the description is"
+            ' recognised as AI-owned and re-written, and how it names its own authorship.'
+        )
+    number, repo, existing = _find_existing_comment(pr)
+    written, footer = _split_description(
+        run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
+    )
+    if not _ai_owned(written):
+        sys.exit(
+            f"#{number} has a description someone wrote; it is left alone."
+            ' Put the summary in a PR comment by hand if it is needed.'
         )
 
-    number, repo, existing = _find_existing_comment(pr)
     body = STAMP_RE.sub('', body).rstrip() + _commit_stamp(repo, number)
+    run(
+        'gh', 'pr', 'edit', str(number),
+        '--body', f"{body}\n\n{footer}" if footer else body,
+        *extra,
+    )
+    print(f"Wrote AI Summary into the description of #{number}")
 
     if existing is not None:
-        if extra:
-            sys.exit(
-                'The AI Summary comment already exists, so it is updated with a PATCH, which'
-                f" cannot upload files: {' '.join(extra)} would be silently dropped. Attachments"
-                ' have to go on the first post. Delete the comment and re-run to re-upload.'
-            )
-        run(
-            'gh', 'api', '-X', 'PATCH',
-            f"repos/{repo}/issues/comments/{existing['id']}",
-            '-f', f"body={body}",
-        )
-        print(f"Updated AI Summary comment on #{number}")
-        return
-
-    comment_url = run('gh', 'pr', 'comment', str(number), '--body', body, *extra)
-    print(f"Posted AI Summary comment: {comment_url}")
-
-    _point_description_at(number, comment_url)
-
-
-def _point_description_at(number: int, comment_url: str) -> None:
-    """Fill an empty PR description with a pointer, never touching one a human wrote.
-
-    Blacksmith appends its own footer to an otherwise empty description; the footer is
-    kept and does not count as human text.
-    """
-    current = run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
-    written, marker, footer = current.partition(CODESMITH_FOOTER)
-    if written.strip():
-        return
-    pointer = f"See full AI Summary below: {comment_url}"
-    run(
-        'gh',
-        'pr',
-        'edit',
-        str(number),
-        '--body',
-        f"{pointer}\n\n{marker}{footer}" if marker else pointer,
-    )
-    print('Replaced empty description with pointer')
+        run('gh', 'api', '-X', 'DELETE', f"repos/{repo}/issues/comments/{existing['id']}")
+        print('Deleted the legacy AI Summary comment')
 
 
 def main() -> None:
@@ -256,18 +255,20 @@ def main() -> None:
     )
 
     get_parser = sub.add_parser(
-        'get', help='Print the current AI Summary comment, or exit 1 if none exists.'
+        'get', help='Print the current AI Summary, or exit 1 if none exists.'
     )
 
-    comment_parser = sub.add_parser('comment')
-    comment_parser.add_argument('body', help='Full comment body -- replaces the whole comment.')
+    describe_parser = sub.add_parser(
+        'describe', help='Write the AI Summary into the PR description.'
+    )
+    describe_parser.add_argument('body', help='Full summary -- replaces the whole AI Summary.')
 
     title_parser = sub.add_parser(
         'title', help='Retitle the PR, under the same Conventional Commits check as create.'
     )
     title_parser.add_argument('title')
 
-    for target in (get_parser, comment_parser, title_parser):
+    for target in (get_parser, describe_parser, title_parser):
         target.add_argument(
             '--pr',
             metavar='<number|branch>',
@@ -284,7 +285,7 @@ def main() -> None:
         elif args.command == 'title':
             retitle(args.title, args.pr)
         else:
-            comment(args.body, args.pr, extra)
+            describe(args.body, args.pr, extra)
     except subprocess.CalledProcessError as error:
         sys.exit(error.stderr or str(error))
 
