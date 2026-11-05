@@ -73,3 +73,14 @@ CLAUDE.local.md
 
 # local notes
 doing.txt
+
+# Semantic code-intel index dirs (per-project, never committed)
+# vera-ai: .vera/ index + .vera.lock lockfile
+# codanna: .codanna/ index + .fastembed_cache model-cache symlink
+#   (note: .codannaignore is authored config — tracked)
+# osgrep: .osgrep/ index
+.vera/
+.vera.lock
+.codanna/
+.fastembed_cache
+.osgrep/

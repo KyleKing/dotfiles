@@ -107,6 +107,20 @@ a real risk of a hunk landing in a similar-looking block elsewhere in the file.
 behavior can change underfoot.
 Check the installed version before blaming a config.
 
+**Stale VCS clone cache.** A second `copier update` right after tagging a new template
+version can die with `git worktree add … <new-tag>` → `fatal: invalid reference` — the
+clone under `$TMPDIR/copier._vcs.clone.*` (and `~/.cache/copier` on Linux) was made
+before
+the tag existed and is never refetched.
+Deleting the clone dirs and retrying does not
+always help (copier may re-create a partial clone the same way); when the delta is
+small,
+hand-apply it, set `_commit` to the new tag yourself, and record
+`build: copier-auto-update`
+as usual.
+Also watch for `_src_path` being rewritten to the tmp clone path in the same
+run — restore the `gh:` form before committing.
+
 ## update vs recopy
 
 Use `update`. Reach for `recopy` only when the recorded `_commit` is unreachable, the
