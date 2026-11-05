@@ -91,6 +91,10 @@ brew "libpq"
 brew "llama.cpp"
 # Next-gen compiler infrastructure
 brew "llvm"
+# Powerful, lightweight programming language
+brew "lua"
+# Package manager for the Lua programming language
+brew "luarocks"
 # Sudoless performance monitoring for Apple Silicon processors
 brew "macmon"
 # Apple Silicon Monitor Top written in Go Lang
@@ -337,10 +341,15 @@ go "github.com/kyleking/gh-lazydispatch/cmd/gh-lazydispatch"
 go "github.com/kyleking/gh-repo-dashboard/cmd/gh-repo-dashboard"
 go "cmd/go"
 go "cmd/gofmt"
+go "github.com/kyleking/jojo/cmd/jojo"
 go "github.com/kyleking/second-look/cmd/second-look"
 cargo "cbcli"
+cargo "codanna"
+cargo "codesearch"
 cargo "selene"
 uv "py-spy"
+uv "semble"
+uv "vera-ai"
 npm "cspell"
 npm "markdown-link-check"
 npm "neovim"

@@ -23,11 +23,14 @@ resume = [
 work_orgs = ["coverbasedev"]
 
 # ACP adapters T runs in a pane beside the diff. The first listed is the default
-# and SECOND_LOOK_AGENT picks one by name.
+# and SECOND_LOOK_AGENT picks one by name. mode asks the session for a named
+# mode once it is up — `second-look agent check` lists what each offers.
 [[agent]]
 command = ["acp", "devin"]
+mode = "bypass"
 name = "devin"
 
 [[agent]]
 command = ["-y", "@zed-industries/claude-code-acp", "npx"]
+mode = "bypassPermissions"
 name = "claude"

@@ -372,6 +372,13 @@ then pass the same paths to `--attach` (repeatable, up to 50).
 `gh gist create`
 rejects binary files outright — don't reach for it for images.
 
+second-look review comments attach the same files as
+`![alt](attach:path)` — a path with spaces as `attach:<path>` — and the body uploads
+to user-attachments when the review posts.
+A missing or unreadable file fails the post before anything reaches GitHub.
+Inside the review screen, `u` then `i` previews the images on the row where the
+terminal speaks kitty, iTerm2, or sixel.
+
 Open with a summary paragraph, then use headers and bold topic lines so it can be
 scanned.
 Steps a human must perform go in `- [ ]` checkboxes, and each one must need actual

@@ -121,14 +121,14 @@
   },
   "panel": {
     "collapsedModules": [
-      "disk",
       "battery",
       "gpu",
-      "system",
       "thermal",
+      "system",
+      "cpu",
       "memory",
       "network",
-      "cpu"
+      "disk"
     ],
     "showsHistoryChart": true
   },

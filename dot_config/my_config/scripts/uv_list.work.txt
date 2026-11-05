@@ -1,2 +1,6 @@
 py-spy v0.4.2
 - py-spy
+semble v0.7.2
+- semble
+vera-ai v2.3.1
+- vera-ai

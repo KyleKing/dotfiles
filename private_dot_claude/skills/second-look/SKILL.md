@@ -180,6 +180,22 @@ has, so a range crossing a removed line is refused when the comment is staged ra
 than
 when it is posted.
 
+## Screenshots and clips
+
+A body embeds a local image or video as `![alt](attach:path)`, a path with
+spaces as `attach:<path>`.
+Each file uploads to user-attachments as the body posts — png, jpg, gif, webp,
+mp4, and mov render — and the posted text carries the URL GitHub answered,
+which every reader of the comment can load.
+`~` and `/` do what they do anywhere else; anything shorter resolves under the
+review's root, the directory `.second-look/` sits beside.
+A file that is missing or unreadable fails the whole post before anything
+reaches GitHub, and the same file named twice uploads once.
+
+`second-look image <file-or-url>` draws an image on the terminal where the
+terminal speaks kitty, iTerm2, or sixel graphics, which is also what the
+review screen's `u` then `i` runs for the images on the row under the cursor.
+
 ## Replies
 
 `second-look get <pr>` caches the pull request's unresolved review threads, and
