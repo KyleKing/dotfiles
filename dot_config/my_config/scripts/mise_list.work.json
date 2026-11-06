@@ -299,6 +299,11 @@
     "source": "/Users/kyleking/.config/mise/config.toml",
     "version": "0.11.0"
   },
+  "ty": {
+    "requested_version": "latest",
+    "source": "/Users/kyleking/.config/mise/config.toml",
+    "version": "0.0.97"
+  },
   "typos": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",

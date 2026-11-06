@@ -35,6 +35,8 @@ brew "docker-language-server"
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Toolkit for image loading and pixel buffer manipulation
+brew "gdk-pixbuf"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -43,6 +45,8 @@ brew "git"
 brew "git-lfs"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # Tool for glamorous shell scripts
 brew "gum"
 # Smarter Dockerfile linter to validate best practices
@@ -79,6 +83,8 @@ brew "mergiraf"
 brew "mise"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
 # Create, run, and share large language models (LLMs)
@@ -97,6 +103,8 @@ brew "plantuml"
 brew "prek"
 # Cloud native development platform
 brew "pulumi"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Prevent committing secret keys into your source code
