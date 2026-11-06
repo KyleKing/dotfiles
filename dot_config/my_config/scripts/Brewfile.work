@@ -1,11 +1,7 @@
-tap "dlvhdr/formulae", trusted: true
 tap "hatchet-dev/hatchet", trusted: true
-tap "huseyinbabal/tap", trusted: true
 tap "jhlee0409/tap", trusted: true
-tap "jonas-grgt/ktea", trusted: true
 tap "keidarcy/tap", trusted: true
 tap "mcclowes/saggar", trusted: true
-tap "turbot/tap", trusted: true
 tap "visigrid/tap"
 # Run your GitHub Actions locally
 brew "act"
@@ -21,16 +17,10 @@ brew "awscli"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Yet another cross-platform graphical process/system monitor
-brew "bottom"
-# Object-file caching compiler wrapper
-brew "ccache"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Statistics utility to count lines of code
 brew "cloc"
-# Your Refactoring Alarm
-brew "codelimit"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Power of curl, ease of use of httpie
@@ -45,8 +35,6 @@ brew "docker-language-server"
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# GNU compiler collection
-brew "gcc"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
 # GitHub command-line tool
@@ -69,18 +57,12 @@ brew "hk"
 brew "jj"
 # TUI for interacting with the Jujutsu version control system
 brew "jjui"
-# Package manager for kubectl plugins
-brew "krew"
-# Kafka TUI client
-brew "ktea"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Modern TUI for Makefiles
 brew "lazymake"
-# Cross-platform TUI database management tool
-brew "lazysql"
 # Terminal Markdown previewer with a GUI-like experience
 brew "leaf-markdown-viewer"
 # Portable Foreign Function Interface library
@@ -95,10 +77,6 @@ brew "llvm"
 brew "lua"
 # Package manager for the Lua programming language
 brew "luarocks"
-# Sudoless performance monitoring for Apple Silicon processors
-brew "macmon"
-# Apple Silicon Monitor Top written in Go Lang
-brew "mactop"
 # CLI tool to help you manage repositories
 brew "mani"
 # Syntax-aware git merge driver
@@ -115,8 +93,6 @@ brew "oh-my-posh"
 brew "ollama", restart_service: :changed
 # ISO-C API and CLI for generating UUIDs
 brew "ossp-uuid"
-# High-performance linter for JavaScript and TypeScript written in Rust
-brew "oxlint"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Package compiler and linker metadata toolkit
@@ -145,12 +121,8 @@ brew "rust"
 brew "sad"
 # Blazing-fast modern Lua linter
 brew "selene"
-# Semantic version control CLI with entity-level diffs and blame
-brew "sem-cli"
 # Easily detect and prevent bugs and anti-patterns in your codebase
 brew "semgrep"
-# Rich git commit graph in your terminal
-brew "serie"
 # Smart session manager for the terminal
 brew "sesh"
 # Autoformat shell script source code
@@ -161,8 +133,6 @@ brew "stylua"
 brew "syncthing", restart_service: :changed
 # Cross-platform system diagnostics TUI
 brew "syswatch"
-# TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
-brew "tabiew"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
 # General purpose fuzzy finder TUI
@@ -175,8 +145,6 @@ brew "tmux"
 brew "tombi"
 # Command-line tool for sharing terminal over the web
 brew "ttyd"
-# Terminal UI OS (Terminal Multiplexer)
-brew "tuios"
 # Extremely fast Python type checker, written in Rust
 brew "ty"
 # Language Server Protocol implementation for TypeScript wrapping tsserver
@@ -195,16 +163,10 @@ brew "yaml-language-server"
 brew "zlib"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Git diff pager based on delta but with a file tree, à la GitHub
-brew "dlvhdr/formulae/diffnav"
-# Terminal UI for AWS
-brew "huseyinbabal/tap/taws"
 # Claude Code History Viewer - WebUI Server (headless HTTP server)
 brew "jhlee0409/tap/cchv-server", trusted: true
 # e1s is a terminal application to simply browsing and manage AWS ECS resources, with a focus on Fargate. Inspired by k9s.
 brew "keidarcy/tap/e1s"
-# Steampipe exposes APIs and services as a high-performance relational database, giving you the ability to write SQL-based queries to explore, assess and report on dynamic data.
-brew "turbot/tap/steampipe"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password

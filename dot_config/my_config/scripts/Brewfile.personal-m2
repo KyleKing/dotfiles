@@ -21,8 +21,6 @@ brew "awscli"
 brew "bat"
 # Open source, extensible AI agent that goes beyond code suggestions
 brew "block-goose-cli"
-# Yet another cross-platform graphical process/system monitor
-brew "bottom"
 # Perl compatible regular expressions library with a new API
 brew "pcre2"
 # Vector graphics library with cross-device output support
@@ -61,8 +59,6 @@ brew "ffmpeg"
 brew "fracturedjson"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# GNU compiler collection
-brew "gcc"
 # GitHub command-line tool
 brew "gh"
 # OCR (Optical Character Recognition) engine
@@ -71,8 +67,6 @@ brew "tesseract"
 brew "ghostscript"
 # Distributed revision control system
 brew "git"
-# Syntax-highlighting pager for git and diff output
-brew "git-delta"
 # Git extension for versioning large files
 brew "git-lfs"
 # GNU Privacy Guard (OpenPGP)
@@ -113,8 +107,6 @@ brew "llmfit"
 brew "luacheck"
 # Package manager for the Lua programming language
 brew "luarocks"
-# Apple Silicon Monitor Top written in Go Lang
-brew "mactop"
 # CLI tool to help you manage repositories
 brew "mani"
 # Mac App Store command-line interface
@@ -191,8 +183,6 @@ brew "stylua"
 brew "syncthing", restart_service: :changed
 # Cross-platform system diagnostics TUI
 brew "syswatch"
-# TUI to view and query tabular files (CSV,TSV, Parquet, etc.)
-brew "tabiew"
 # Easiest, most secure way to use WireGuard and 2FA
 brew "tailscale"
 # TOML toolkit written in Rust

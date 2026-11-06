@@ -43,7 +43,7 @@ repos:
       - id: trailing-whitespace
         exclude: dot_config/my_config/scripts/.+\..+
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.17.0
+    rev: v4.19.3
     hooks:
       - id: commitizen
   - repo: https://github.com/executablebooks/mdformat
@@ -57,7 +57,7 @@ repos:
         args: ["--wrap=keep"]
         exclude: (^|/)_[^/]+\.md$|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.11.0.1
+    rev: v0.11.0.1-1
     hooks:
       - id: shellcheck
         args: [--severity=warning]
@@ -77,7 +77,7 @@ repos:
     hooks:
       - id: yamllint
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.4
+    rev: v0.25.0
     hooks:
       - id: toml-sort-fix
         args:
@@ -103,7 +103,7 @@ repos:
         stages:
           - pre-push
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v2.5.2
+    rev: v2.6.0
     hooks:
       - id: stylua-system
   - repo: https://github.com/sirwart/ripsecrets
