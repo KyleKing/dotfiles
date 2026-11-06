@@ -87,7 +87,7 @@ repos:
             --trailing-comma-inline-array,
             --sort-first=python,
           ]
-        exclude: poetry\.lock|superfile/[^\.]+\.toml|dot_config/television/.+\.toml
+        exclude: poetry\.lock|superfile/[^\.]+\.toml|dot_config/television/.+\.toml|dot_config/second-look/.+\.toml
   - repo: https://github.com/KyleKing/calcipy
     rev: 6.1.0rc0
     hooks:

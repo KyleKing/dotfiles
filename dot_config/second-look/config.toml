@@ -2,22 +2,22 @@
 
 # T hands the todo set to Claude Code, with the file it wrote as the prompt.
 dispatch = [
+  "claude",
   "--chrome",
   "--dangerously-skip-permissions",
   "--model=sonnet",
   "-p",
-  "claude",
 ]
 limit = 25
 # Once the agent has recorded its session with `second-look session`, T resumes
 # that one instead of starting a stranger who has to read the diff again.
 resume = [
+  "claude",
   "--chrome",
   "--dangerously-skip-permissions",
   "--resume",
-  "-p",
-  "claude",
   "{session}",
+  "-p",
 ]
 # Orgs the inbox counts as work for the w toggle; every other owner is personal.
 work_orgs = ["coverbasedev"]
@@ -26,11 +26,11 @@ work_orgs = ["coverbasedev"]
 # and SECOND_LOOK_AGENT picks one by name. mode asks the session for a named
 # mode once it is up — `second-look agent check` lists what each offers.
 [[agent]]
-command = ["acp", "devin"]
+command = ["devin", "acp"]
 mode = "bypass"
 name = "devin"
 
 [[agent]]
-command = ["-y", "@zed-industries/claude-code-acp", "npx"]
+command = ["npx", "-y", "@zed-industries/claude-code-acp"]
 mode = "bypassPermissions"
 name = "claude"
