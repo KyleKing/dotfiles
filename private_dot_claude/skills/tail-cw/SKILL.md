@@ -20,6 +20,8 @@ uv run --project ~/Developer/kyleking/tail-cw tail-cw <args>
 ```
 
 Works from any cwd. Inside the checkout, plain `uv run tail-cw` is equivalent.
+A mise-pinned shell (watch-doggo pins Python 3.12) exports `UV_PYTHON`, which beats
+`requires-python`, so add `--python 3.13` there.
 Pick the
 account with `--profile` (`read-prod`, `read-stage`, `read-devops`), `AWS_PROFILE`, or
 `[aws].profile` in config, which a preset may override for its own account.
@@ -41,6 +43,7 @@ the group browser, and `export logs`, `stats`, and `summary`.
 | A real query (billed)              | `export insights '<glob>' --query '...' [--language sql\|ppl]`                  |
 | Alarms and how often they fired    | `export alarms [<prefix>] --history`                                            |
 | Metric datapoints                  | `export metrics --namespace AWS/ECS --metric CPUUtilization`                    |
+| A metric's dimension names, values | `export dimensions --namespace WatchDoggo/App [--metric ErrorLogged]`           |
 | X-Ray traces in a window           | `export xray --start 1h --expression 'service("api")'`                          |
 | One trace's spans, as OTLP         | `export xray-trace <id>` (dashed, or the 32 digits a log line carries)          |
 | Cache size against its limit       | `cache status`                                                                  |

@@ -46,8 +46,8 @@ before `gh pr create` runs, not after CI does.
 repository default. A stack needs it on every level but the bottom, and
 getting it wrong is expensive: a PR opened against the default branch shows
 the levels below it in its own diff, and retargeting later is manual. When the
-base is not the default branch, `create` also runs `gh stack link <base> <head>`
-so the PR joins a GitHub native stack; land its bottom PR with
+base is not the default branch, `create` also runs `gh stack link` by PR number (the
+base's stack number when it has one), so the PR joins a GitHub native stack; land its bottom PR with
 `gh stack merge <pr> --yes`. Anything else `gh pr create` accepts still goes
 through after a bare `--`.
 
@@ -126,13 +126,33 @@ def _forwarded_head(extra: list[str]) -> str | None:
     return None
 
 
+def _pr_number(branch: str) -> int:
+    prs = run_json('gh', 'pr', 'list', '--head', branch, '--state', 'all', '--json', 'number,headRefName')
+    return next(pr['number'] for pr in prs if pr['headRefName'] == branch)
+
+
+def _stack_anchor(base_pr: int) -> int:
+    stack = run_json('gh', 'api', f"repos/{{owner}}/{{repo}}/pulls/{base_pr}").get('stack')
+    return stack['number'] if stack else base_pr
+
+
+def _gh_stack_installed() -> bool:
+    return any('gh-stack' in line for line in run('gh', 'extension', 'list').splitlines())
+
+
 def _link_stack(base: str, head: str) -> None:
-    result = subprocess.run(['gh', 'stack', 'link', base, head], check=False)
-    if result.returncode != 0:
-        sys.exit(
-            f"PR for {head} was created, but `gh stack link {base} {head}` failed;"
-            ' install github/gh-stack (`gh extension install github/gh-stack`) and rerun it.'
-        )
+    args = [str(_stack_anchor(_pr_number(base))), str(_pr_number(head))]
+    result = subprocess.run(['gh', 'stack', 'link', *args], check=False, text=True, capture_output=True)
+    sys.stdout.write(result.stdout)
+    if result.returncode == 0:
+        return
+    sys.stderr.write(result.stderr)
+    hint = (
+        ''
+        if _gh_stack_installed()
+        else ' Install it with `gh extension install github/gh-stack`.'
+    )
+    sys.exit(f"PR for {head} was created, but `gh stack link {' '.join(args)}` failed.{hint}")
 
 
 def _find_existing_comment(pr: str | None) -> tuple[int, str, dict | None]:
