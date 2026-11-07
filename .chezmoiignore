@@ -1,10 +1,12 @@
 # Docs: https://www.chezmoi.io/reference/special-files-and-directories/chezmoiignore
 
 # General Ignore Patterns
-*~
-.DS_Store
-__pycache__
-*.pyc
+# chezmoi patterns match full target paths: no-slash patterns only match at the
+# top level, so depth-varying junk needs the **/ prefix (unlike .gitignore).
+**/*~
+**/.DS_Store
+**/__pycache__
+**/*.pyc
 
 # Repo-only files
 .pre-commit-config.yaml
