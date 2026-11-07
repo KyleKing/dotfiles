@@ -7,6 +7,9 @@
 Custom tab color/title. Discussion here:
 <https://github.com/wez/wezterm/discussions/4945>
 
+Crash recovery snapshots and the `wezterm-restore.py` picker: see
+[docs/wezterm-crash-recovery.md](docs/wezterm-crash-recovery.md).
+
 ### Machine performance
 
 Docker Desktop VM sizing and Firefox memory prefs, plus the
