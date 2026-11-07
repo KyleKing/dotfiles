@@ -244,9 +244,8 @@ local function take_snapshot()
 
     local now = os.time()
 
-    -- Rewrite-in-place for retention: file is bounded (~360 lines at 2min cadence).
-    -- Multiple wezterm-gui processes each run this timer, so dedupe is checked
-    -- against the last retained line on disk, not just this process's memory
+    -- Multiple wezterm-gui processes run this timer: dedupe reads the last
+    -- retained on-disk line, and writes use tmp+rename to stay atomic.
     local keep = {}
     local cutoff = now - RETENTION_S
     local f = io.open(SNAPSHOT_PATH, "r")
@@ -271,13 +270,17 @@ local function take_snapshot()
         windows = windows,
         tmux = tmux,
     })
-    f = io.open(SNAPSHOT_PATH, "w")
+    -- Sig-named so equal writers share a path; differing writers can't tear it.
+    local tmp = SNAPSHOT_PATH .. ".tmp." .. tostring(sig)
+    f = io.open(tmp, "w")
     if not f then
-        wezterm.log_error("snapshot: cannot write " .. SNAPSHOT_PATH)
+        wezterm.log_error("snapshot: cannot write " .. tmp)
         return
     end
     f:write(table.concat(keep, "\n"), "\n")
     f:close()
+    local ok, err = os.rename(tmp, SNAPSHOT_PATH)
+    if not ok then wezterm.log_error("snapshot: rename failed: " .. tostring(err)) end
 end
 
 local function tick()
@@ -287,4 +290,5 @@ local function tick()
 end
 
 os.execute("mkdir -p " .. shellq(SNAPSHOT_DIR))
+os.execute("rm -f " .. shellq(SNAPSHOT_DIR) .. "/snapshots.jsonl.tmp.*")
 tick()
