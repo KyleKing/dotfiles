@@ -93,6 +93,7 @@
   "preferredNotifChannel": "auto",
   "remoteControlAtStartup": true,
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "tui": "fullscreen",
   "voice": {
     "enabled": true,
