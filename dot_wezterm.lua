@@ -901,4 +901,9 @@ config.window_padding = {
     bottom = 0,
 }
 
+-- ============================================================================
+-- Session Snapshots (crash recovery; restore via ~/.local/bin/wezterm-restore.py)
+
+dofile(wezterm.config_dir .. "/.wezterm_snapshot.lua")
+
 return config
