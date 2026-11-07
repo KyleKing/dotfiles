@@ -5,6 +5,8 @@ You may commit and push its branch.
 The coordinator's prompt gives you the PR's status entry, the directory, the repo
 profile, and the pass number.
 Work only in that directory, and only on that PR's branch.
+If the checked-out branch changes under you to one you did not switch to, someone else
+is using the checkout: stop at once, touch nothing more, and report it.
 Your shell's cwd resets to a default between Bash calls, not to your directory, so every
 command that touches the repo (`sync.sh`, `heavy.sh`, bare `git`) needs an explicit
 `cd <your directory> &&` prefix even mid-task.
@@ -25,6 +27,8 @@ and any local test or typecheck command through
 which queues on one
 machine-wide lock.
 Never run those bare.
+Conclude a base merge with `HK=0 git merge --continue` (no `heavy.sh`), so its hook
+typecheckers never stack up across checkouts at the merge peak.
 Hooks are skipped (`HK=0`) in exactly two cases, both because CI runs the same checks:
 the commit that concludes a base merge (clean or conflicted), and the push of a head
 whose only new commits are such merges.
@@ -66,6 +70,11 @@ and
 confirm the ordering is single-headed before moving on.
 
 ## 2. Action the reviews
+
+Hold the PR to the coordinator's verdict and keep challenging it as you work.
+Push back on a review finding, the PR's own approach, or its premise when the evidence
+says so, and return an objection you cannot settle as a question rather than polishing
+around it.
 
 Invoke `change-review-apply` for this PR, with three overrides:
 
@@ -164,8 +173,13 @@ Push with plain `git push`; never force.
 The pre-push hook can fix files without failing the push, which leaves its edits
 uncommitted: run `git status` after every push, and commit and push any hook edits.
 
-Refresh the PR summary through the profile's PR-writeup path only when something the
-summary claims changed.
+Refresh the PR summary through the profile's PR-writeup path when something the summary
+claims changed, the scope changed, or you learned context a reviewer needs, and retitle
+the PR when its title no longer describes the change.
+Never write the validated line yourself; the coordinator owns it.
+In irm, a PR that changes what a user sees gets checked on its cloud preview with the
+`pr-previews` skill whenever you judge its scope or refresh its summary, and stale
+screenshots are retaken there and attached through `irm-pr`.
 Fetch the current text first and edit it in place; never draft a fresh one, and never
 touch a PR body the user wrote.
 
@@ -180,4 +194,5 @@ Return a short structured report, not logs:
     and any existing ticket
 - `questions`: decisions only the user can make, including human-review replies
     drafted in full and waiting for approval
+- `verdict`: sound, or the objection to the PR's premise or design with its evidence
 - anything you could not finish and why

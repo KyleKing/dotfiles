@@ -77,27 +77,8 @@
     The AI Summary is the description when it is empty, a legacy pointer, or already
     starts with `AI Summary:`; any other text is mine and stays
 
-- Use `~/.config/my_config/ai-gh-pr.py` (called by absolute path) for ALL GitHub PR
-    work instead of raw `gh pr` calls, so the AI-owned-description rule below is
-    enforced by the script, not by memory:
-
-    - `create <title>` opens the PR
-    - `get` prints the current summary, and `describe <body>` writes the AI writeup into
-        the PR description, migrating a legacy `AI Summary:` comment into it.
-        Kao decided the summary belongs in the description so reviewers skip the scroll.
-        This guidance overrides any skill that modifies GitHub PR bodies
-
-- Always write the `AI Summary:` description (via `describe <body>`) right after
-    `create`, unconditionally.
-    It is a standing part of the PR process I asked for, not
-    something to offer or wait to be asked for.
-    Only skip it if I explicitly say not to
-    post one for that PR
-
-- Link the ticket a PR works on from its `AI Summary:` description.
-    A ticket in the title is the repo's convention to follow, because Linear links a PR
-    from an issue ID in its branch name, title, or description.
-    Where the PR tool places the ID itself (irm's `create --ticket`), let it
+- For every PR create, retitle, and `AI Summary:` description, follow the `ai-gh-pr`
+    skill (or the repo's own PR-writeup skill, such as irm's `irm-pr`)
 
 - When a merge used the `mergiraf` driver, `.git/MERGE_MSG`'s `Conflicts:` list is the
     only files it actually adjudicated; everything else in `git status` merged cleanly
@@ -346,22 +327,7 @@ The `AI Summary:` description is outside this.
 It is a standing part of the PR process I asked for, it names its own authorship in the
 first two words, and it gets no banner.
 
-It is a place to collect context a reader cannot get from the diff: the log lines or
-stack trace that show the failure, a latency or cost measurement before and after, the
-demo or test script that proved it and what the script printed, the scenario testing you
-did for performance or security, what the issue tracker or the user actually asked for,
-what a production dashboard says now, and the alternatives you rejected with the reason.
-Distill what the problem is, how well the solution fits it, and what proof exists.
-Never restate what the code changes: the description is rewritten in place on every
-push,
-so it must stay evergreen, describing the PR's current state rather than a log of
-edits.
-A later push that fixes something the summary already claimed works means rewriting the
-claim, not appending a correction.
-
 A before/after screenshot belongs beside the claim it proves.
-`describe` takes `-- --attach <file>#<alt text>` and passes it to `gh pr edit`, which
-uploads the same way.
 `gh pr comment`,
 `gh issue create`, and `gh issue comment` take a real `--attach <file>#<alt text>`
 flag: it uploads the image/video to `github.com/user-attachments/assets/...` and,

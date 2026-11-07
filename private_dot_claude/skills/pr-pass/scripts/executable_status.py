@@ -56,10 +56,20 @@ def repo_and_trunk() -> tuple[str, str]:
     return meta['nameWithOwner'], meta['defaultBranchRef']['name']
 
 
-def open_prs(repo: str, mine: bool) -> list[dict]:
-    author = ['--author', '@me'] if mine else []
-    return run_json('gh', 'pr', 'list', '--repo', repo, *author, '--state', 'open',
+PEEPS = ('@me', 'app/github-actions', 'app/watch-doggo', 'app/dependabot')
+
+
+def listed(repo: str, *flags: str) -> list[dict]:
+    return run_json('gh', 'pr', 'list', '--repo', repo, *flags, '--state', 'open',
                     '--limit', '1000', '--json', PR_FIELDS)
+
+
+def matching(repo: str, authors: str) -> list[int]:
+    """`me`, `peeps`, or any other text as a `gh pr list --search` query."""
+    if authors in ('me', 'peeps'):
+        logins = ('@me',) if authors == 'me' else PEEPS
+        return sorted({p['number'] for a in logins for p in listed(repo, '--author', a)})
+    return [p['number'] for p in listed(repo, '--search', authors)]
 
 
 def select(prs: list[dict], wanted: list[int], expand: bool) -> list[dict]:
@@ -204,20 +214,23 @@ def render(result: dict) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('prs', nargs='*', type=int, help='PR numbers, by any author; none means every open PR you authored')
+    parser.add_argument('prs', nargs='*', type=int, help='PR numbers, by any author; overrides --authors')
     parser.add_argument('--no-expand', action='store_true', help='do not pull in stack-mates of the PRs named')
-    parser.add_argument('--non-draft', action='store_true',
-                        help='only units holding a ready PR; drafts inside those stacks stay in')
+    parser.add_argument('--authors', default='me',
+                        help=f"me, peeps ({', '.join(PEEPS)}), or a gh search query")
+    parser.add_argument('--draft', choices=['yes', 'no'], default='yes',
+                        help='no keeps only units holding a ready PR; drafts inside those stacks stay in')
     parser.add_argument('--json', action='store_true')
     args = parser.parse_args()
 
     repo, trunk = repo_and_trunk()
-    prs = select(open_prs(repo, mine=not args.prs), args.prs, expand=not args.no_expand)
+    wanted = args.prs or matching(repo, args.authors)
+    prs = select(listed(repo), wanted, expand=not args.no_expand) if wanted else []
     require_budget(len(prs))
     heads = {p['headRefName']: p['number'] for p in prs}
     with ThreadPoolExecutor(max_workers=2) as pool:
         described = {d['number']: d for d in pool.map(lambda p: describe(repo, trunk, p, heads), prs)}
-    chains = [u for u in units(prs) if not args.non_draft or any(not p['isDraft'] for p in u)]
+    chains = [u for u in units(prs) if args.draft == 'yes' or any(not p['isDraft'] for p in u)]
     grouped = [[described[p['number']] for p in unit] for unit in chains]
     described = {p['number']: p for unit in grouped for p in unit}
     result = {'repo': repo, 'trunk': trunk, 'units': grouped, 'done': all(d['done'] for d in described.values())}

@@ -1,25 +1,25 @@
 ---
 name: pr-pass
 description: Work a set of PRs (stacked or not) to green in repeated passes. Each pass merges the latest base, actions reviews, fixes CI, pushes, and cascades up any stack, with Sonnet workers running one PR at a time per checkout. Stops after four passes or once every PR is green with nothing left to action. Invoke explicitly.
-argument-hint: <all|non-draft|PR numbers> [plain-text instructions, dir globs to use or skip], e.g. 'all overnight' or '15729 15742 irm-1-* skip irm-2-*'
+argument-hint: <me|peeps|"query"> <yes|no drafts> [dir globs], e.g. 'peeps no irm-1-* irm-2-*'
 disable-model-invocation: true
 ---
 
 # PR pass
 
-Target: `$ARGUMENTS`.
-The first word selects PRs: `all` is every open PR the user authored, `non-draft` drops
-units with no ready PR (`status.py --non-draft`), and numbers name PRs.
-Naming one PR of a stack pulls in the whole stack.
-The rest is plain text: instructions that bind the whole run (for example "overnight",
-"max 2 passes") and globs or paths of directories to use or skip.
+Target: `$ARGUMENTS`, three positional parts and nothing else.
 
-A PR a bot opened that requests the user's review counts as the user's own, so `all` and
-`non-draft` include it.
-List them with
-`gh pr list --search "is:open is:pr user-review-requested:@me" --json number,author`
-filtered to bot authors (`app/...` or a `[bot]` login), and pass their numbers to
-`status.py` along with the user's.
+1. Authors: `me` is every open PR the user authored, `peeps` adds those by
+    `app/github-actions`, `app/watch-doggo`, and `app/dependabot`, and anything else in
+    quotes is a `gh pr list --search` query (`"label:deps"`).
+    `status.py --authors <value>` resolves it per repo, and pulls in each match's
+    whole stack
+1. Drafts: `yes` keeps drafts, `no` drops units with no ready PR
+    (`status.py --draft <value>`)
+1. Directory globs to use; none means every candidate directory
+
+After pass 0, `status.py` takes the approved PR numbers directly.
+
 Before the first push to one, remove the label that tells the bot it still maintains the
 branch (Watch Doggo's is `watch-doggo-maintained`), so its next round doesn't race the
 worker's push.
@@ -36,15 +36,15 @@ Sonnet workers do the per-PR work, one PR per checkout at a time.
 This skill owns the pass loop and the dispatch rules.
 Per-PR work delegates to `change-review-apply` for reviews and `pr-stacking` for the
 merge-forward rules; read those rather than restating them.
-`pr-fleet` is the sweep-and-classify front end that hands its approved list here.
 
 ## Authority granted by invocation
 
 Committing and pushing on the branches in scope, including the merge commits a sync
 makes.
-In an unattended run, it also covers prepending a blockers block to a PR's description
-(see Unattended runs).
+It also covers prepending a blockers block to a PR's description (see Unattended runs).
 On a bot-opened PR in scope, it also covers removing the bot's maintenance label.
+It covers retitling a PR and rewriting its AI Summary through the profile's PR-writeup
+path, and writing the validated line (see Challenge every PR).
 This overrides the push restrictions in the global rules and in `change-review-apply`.
 It does not cover force-pushing, rebasing a branch an open PR depends on, touching any
 branch outside the approved set, or flipping a PR's draft state.
@@ -56,8 +56,17 @@ branch outside the approved set, or flipping a PR's draft state.
     no `MERGE_HEAD`, `rebase-merge`, or `CHERRY_PICK_HEAD` in its git dir.
     A dirty or mid-operation directory is probably the user or another agent.
     Report it and drop it from the pool; never clean, stash, or reset it.
-    If `.jj/` exists, stop and ask, because the worker playbook assumes plain git
-1. Run `${CLAUDE_SKILL_DIR}/scripts/status.py [PRs] [--non-draft]` from one checkout
+    If `.jj/` exists, stop and ask, because the worker playbook assumes plain git.
+    Refresh a clean directory with
+    `git checkout <trunk> && gh poi && git fetch --prune origin && git pull --prune`, one
+    directory at a time so the hooks never run in
+    parallel.
+    Record each directory's current branch in `pr-pass.json`, and list commits from the
+    last 20 minutes on any local branch
+    (`git log --all --since=20.minutes.ago --format='%h %cr %an %s'`): a recent commit means
+    someone may still be working there
+1. Refresh each directory, then run
+    `${CLAUDE_SKILL_DIR}/scripts/status.py --authors <a> --draft <d>` from one checkout
     per repo.
     It prints each unit (a stack bottom-up, or a single PR) and what every PR still
     needs: conflicts, commits behind its base, failed or pending checks, warning
@@ -93,8 +102,13 @@ branch outside the approved set, or flipping a PR's draft state.
     A stack stays in one directory, except that its Docker PRs may move to a Docker
     directory; they still start only after the PR below has pushed.
     With more units than directories, queue them, balancing PR count per directory.
-1. Show one table (unit, directory, what each PR needs) and the repo profile, then get a
-    single approval with AskUserQuestion.
+1. Challenge every PR (below) and add each verdict to the table.
+1. Show one table (unit, directory, what each PR needs, verdict) and the repo profile,
+    then get a single approval with AskUserQuestion, which also asks whether the run is
+    unattended.
+    Put a warning for every directory with commits in the last 20 minutes at the top of
+    that question, naming the commits, so the user can drop the directory before
+    anything runs.
     From here the loop runs unattended, returning to the user only for questions.
 
 Write the profile, the assignments, and the pass counter to
@@ -106,6 +120,38 @@ lanes (which directories may use Docker, only their own stack), the unattended r
 it applies, known CI noise, and the repo profile.
 Record the lanes in `pr-pass.json`; a directory added mid-run is re-laned the same way.
 Every worker prompt points at that file rather than restating it.
+
+## Challenge every PR
+
+Approving a PR's own framing is not the job.
+Before any worker polishes a PR, read it as a skeptical reviewer and argue against it:
+is the problem it names real and worth solving (read the ticket, thread, or alarm it
+cites, and check the claim against code or data), does the change fix the cause or a
+symptom, is there a smaller change or one that deletes code, does it fight the repo's
+conventions or duplicate something that exists, and does its scope match its title.
+In irm, judge a user-visible PR's scope on its cloud preview (`pr-previews` skill), not
+only from the diff.
+Bot PRs get the same bar, so a Dependabot bump that breaks an API or a Watch Doggo fix
+for the wrong cause is a finding.
+
+Each PR leaves pass 0 with a verdict: sound, or the specific objection with the evidence
+for it.
+An objection to the premise or design is a question for the user (a blocker in an
+unattended run), and no worker polishes that PR until it is answered.
+A PR whose premise holds but whose title or summary is wrong or stale gets both
+rewritten through the PR-writeup path, as does any PR whose scope changes or whose
+context grows during the run.
+
+Once a PR is sound and green with nothing left to action, mark it validated:
+`${CLAUDE_SKILL_DIR}/scripts/validated.py <pr> "<note>"` from a checkout.
+It writes `<!-- pr-pass:validated <UTC timestamp> <note> -->` as the description's first
+line, replacing any earlier one, where the note is at most two sentences of context a
+future session needs (what was checked, what was deliberately left).
+A validated PR still gets the normal checks (CI, new reviews, conflicts).
+Its challenge reruns only when commits landed after the timestamp and they change the
+scope or implementation meaningfully: scan the commit messages first, then the diff
+since
+the timestamp, and fully revalidate only if that scan finds a real change.
 
 ## Resource-aware dispatch
 
@@ -141,6 +187,12 @@ a reason to add a third.
     New PRs the user opened mid-run stay out unless the user adds them.
     If `done` is true, stop and report.
     Stop too once four passes have completed
+1. Before dispatching to a directory, compare its checked-out branch with the one
+    `pr-pass.json` says the last worker left.
+    A branch that changed when no worker ran there means someone else took the
+    checkout: drop the directory from the pool for the rest of the run, requeue its PRs
+    elsewhere, and report it.
+    Never switch it back
 1. Dispatch per directory, bottom of each stack first.
     Each directory runs one worker at a time.
     Different directories run in parallel, so launch the first worker for every
@@ -180,7 +232,7 @@ a reason to add a third.
 
 ## Unattended runs
 
-When the instructions say the run is unattended ("overnight", "while I'm away"), never
+When the user answers in pass 0 that the run is unattended, never
 pause on AskUserQuestion after pass 0.
 A question that blocks a PR goes at the top of that PR's description instead, written in
 the user's voice as a short list of what is blocked and the decision needed:
@@ -206,6 +258,16 @@ Start the wait as a background shell (`sleep 600` with `run_in_background`) and 
 turn; its completion re-invokes you.
 Do not watch CI, arm a Monitor on checks, or poll `gh pr checks`.
 The next pass's `status.py` run finds whatever CI and the bots turned up.
+
+## Cleanup
+
+Once the loop ends, run the pass 0 refresh again in each directory still in the pool,
+one
+at a time:
+`git checkout <trunk> && gh poi && git fetch --prune origin && git pull --prune`.
+Run `gh poi --dry-run` first and stop if it lists a branch whose PR is still open.
+Skip a directory that was dropped, is dirty, or has commits from the last 20 minutes,
+and say which.
 
 ## Final report
 

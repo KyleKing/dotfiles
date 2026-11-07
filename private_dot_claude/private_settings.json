@@ -60,7 +60,7 @@
   },
   "fileCheckpointingEnabled": false,
   "inputNeededNotifEnabled": true,
-  "model": "opus",
+  "model": "sonnet",
   "modelSettings": {
     "claude-fable-5-1": {
       "effortLevel": "low"

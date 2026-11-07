@@ -200,10 +200,22 @@ def retitle(new: str, pr: str | None) -> None:
 LEGACY_POINTER = 'See full AI Summary below:'
 
 
-def _split_description(body: str) -> tuple[str, str]:
-    """Return the written text and the Blacksmith footer, which is never human text."""
-    written, marker, footer = body.partition(CODESMITH_FOOTER)
-    return written.strip(), (marker + footer) if marker else ''
+PR_PASS_HEAD_RE = re.compile(
+    r'\A\s*(?:<!-- pr-pass:validated [^\n]*?-->\s*'
+    r'|<!-- pr-pass:blockers -->.*?<!-- /pr-pass:blockers -->\s*)+',
+    re.DOTALL,
+)
+
+
+def _split_description(body: str) -> tuple[str, str, str]:
+    """Return pr-pass's leading markers, the written text, and the Blacksmith footer.
+
+    Neither the markers nor the footer is human text, and `describe` keeps both.
+    """
+    match = PR_PASS_HEAD_RE.match(body)
+    head = match.group(0).strip() if match else ''
+    written, marker, footer = body[match.end() if match else 0:].partition(CODESMITH_FOOTER)
+    return head, written.strip(), (marker + footer) if marker else ''
 
 
 def _ai_owned(written: str) -> bool:
@@ -212,7 +224,7 @@ def _ai_owned(written: str) -> bool:
 
 def get(pr: str | None) -> None:
     number, _, existing = _find_existing_comment(pr)
-    written, _ = _split_description(
+    _, written, _ = _split_description(
         run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
     )
     if written.startswith(MARKER):
@@ -230,7 +242,7 @@ def describe(body: str, pr: str | None, extra: list[str]) -> None:
             ' recognised as AI-owned and re-written, and how it names its own authorship.'
         )
     number, repo, existing = _find_existing_comment(pr)
-    written, footer = _split_description(
+    head, written, footer = _split_description(
         run_json('gh', 'pr', 'view', str(number), '--json', 'body')['body']
     )
     if not _ai_owned(written):
@@ -240,9 +252,10 @@ def describe(body: str, pr: str | None, extra: list[str]) -> None:
         )
 
     body = STAMP_RE.sub('', body).rstrip() + _commit_stamp(repo, number)
+    body = '\n\n'.join(part for part in (head, body, footer) if part)
     run(
         'gh', 'pr', 'edit', str(number),
-        '--body', f"{body}\n\n{footer}" if footer else body,
+        '--body', body,
         *extra,
     )
     print(f"Wrote AI Summary into the description of #{number}")

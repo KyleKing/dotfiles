@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Prepend, replace, or clear the pr-pass blockers block at the top of a PR description.
 
+The block sits below the validated line (validated.py) when one is present.
+
 Everything outside the markers is left byte-for-byte, so a human-written body survives.
 Run from inside a checkout of the PR's repo.
 """
@@ -13,6 +15,7 @@ import sys
 
 START, END = '<!-- pr-pass:blockers -->', '<!-- /pr-pass:blockers -->'
 BLOCK = re.compile(re.escape(START) + r'.*?' + re.escape(END) + r'\n*', re.DOTALL)
+VALIDATED = re.compile(r'\A<!-- pr-pass:validated [^\n]*?-->\n')
 
 
 def body_of(pr: int) -> str:
@@ -32,14 +35,16 @@ def main() -> None:
     parser.add_argument('--file', help='markdown for the block (set only); - reads stdin')
     args = parser.parse_args()
 
-    rest = BLOCK.sub('', body_of(args.pr), count=1)
+    body = BLOCK.sub('', body_of(args.pr), count=1)
+    top = match.group(0) if (match := VALIDATED.match(body)) else ''
+    rest = body[len(top):]
     if args.action == 'clear':
-        write(args.pr, rest)
+        write(args.pr, top + rest)
         return
     if not args.file:
         sys.exit('set needs --file')
     text = (sys.stdin.read() if args.file == '-' else open(args.file).read()).strip()
-    write(args.pr, f'{START}\n{text}\n{END}\n\n{rest}')
+    write(args.pr, f'{top}{START}\n{text}\n{END}\n\n{rest}')
 
 
 if __name__ == '__main__':

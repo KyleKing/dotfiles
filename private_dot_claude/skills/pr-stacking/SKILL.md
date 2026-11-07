@@ -7,9 +7,8 @@ description: Plan and scaffold a stack of up to 4 dependent PRs for a feature, w
 
 Two-phase skill: draft a stacking plan, get explicit approval, then scaffold the
 approved plan's branches and draft PRs.
-Sweeping every open PR at once (which are stacked, conflicted, or have unactioned
-reviews) is `pr-fleet`, and working a set of PRs to green in repeated passes is
-`pr-pass`; both delegate the sync rules below.
+Sweeping open PRs and working them to green in repeated passes is `pr-pass`, which
+delegates the sync rules below.
 Never skip straight to execution — the plan is cheap to get wrong and expensive to
 unwind once branches and PRs exist.
 
@@ -181,7 +180,7 @@ looked clean, and GitHub's `mergeable: false` was dismissed as a stale cache —
 actual fix was re-fetching `main` and merging it into the bottom of the stack, which is
 what the drift had been hiding.
 `origin/<base>` in `sync.sh`
-(pr-pass, pr-fleet) already fetches directly and needs no separate fast-forward step;
+(pr-pass) already fetches directly and needs no separate fast-forward step;
 this only applies to a manual merge-forward loop like the one below, or any other
 conflict resolution done by hand against `main`.
 

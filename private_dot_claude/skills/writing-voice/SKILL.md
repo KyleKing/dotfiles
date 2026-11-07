@@ -48,6 +48,62 @@ every fact, number, and name unchanged.
 Worked before/after pairs, the full tic catalog, and ready-to-run rewrite prompts:
 [voice-examples.md](voice-examples.md).
 
+## Hollow is slop too
+
+Slop fails in two directions.
+Inflated prose reaches for marketing words, metaphors, and flourish, and cutting tells
+fixes it.
+Hollow prose is plain on the surface and says nothing: "All documents and what they say"
+names a feeling about a link instead of where it goes.
+Only saying something fixes hollow prose, so write toward the fact first and sweep for
+tells after.
+
+Read the sentence aloud as if you were telling a colleague on a call.
+If you would never say it, or would have to explain it afterwards, rewrite it.
+
+Hollow tells, each a reason to rewrite the sentence:
+
+- Feeling for mechanism ("everything in one place"): name the behavior or object.
+    If the sentence could sit unchanged in another product or doc, cut it
+- Vague link words ("associated with", "related") when the relation is known
+- Taglines: a sentence under a heading that restates the heading
+- Leaked internals in reader-facing text: ids, enum values, env vars, HTTP codes, raw
+    exception text appended to a sentence, and the services behind a feature
+- Over-compression: arrows, dropped articles, and verbless fragments inside a sentence.
+    Labels, table cells, and status lines may stay short
+- Unnamed actor, when the actor is known and matters
+
+Shapes that are tells regardless of wording: "serves as" or "stands as" for "is",
+"Think of it as…" in place of what the thing does, punchy fragments ("No setup.
+No
+waiting."), forced threes (use the number of items there are), a trailing "-ing" clause
+("…, ensuring every vendor is covered"), and synonym cycling (one concept keeps one
+name).
+
+When a rewrite needs a fact you don't have (a count, a cause, a time), leave a marked
+slot and ask.
+Never invent the number.
+
+## Short UI and status copy
+
+Each element has a job, and a string with no tells can still fail it:
+
+- Button: the verb and the object of the outcome ("Send questionnaire", never "Submit")
+- Link: the destination, in words that match the page it opens
+- Toast: the result in past tense ("Portal created"), no "successfully" and no "!"
+- Empty state: what is missing and the one action that fills it
+- Error: own the failure, give the cause, name the next step ("We couldn't sync: the
+    integration user can't read incidents.
+    Ask your admin to grant that role").
+    "We'll look into it" is a promise a screen can't keep
+- Destructive confirm: the title asks the action ("Delete this vendor?"), and the body
+    says what goes with it and whether it can be undone
+- Helper text: a consequence, limit, or format the label can't carry, in one or two
+    sentences
+
+In a repo with its own copy skill (irm's `unslop`), that skill's voice and scope win for
+product strings.
+
 ## Rejecting a draft
 
 When a draft reads wrong, do not just delete and retry.
