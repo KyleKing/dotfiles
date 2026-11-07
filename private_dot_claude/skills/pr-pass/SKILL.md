@@ -13,14 +13,19 @@ Target: `$ARGUMENTS`, three positional parts and nothing else.
     `app/github-actions`, `app/watch-doggo`, and `app/dependabot`, and anything else in
     quotes is a `gh pr list --search` query (`"label:deps"`).
     `status.py --authors <value>` resolves it per repo, and pulls in each match's
-    whole stack
+    whole stack.
+    A query that matches nothing in a repo fails, so fix the query or narrow the
+    directory globs to the repos it targets
 1. Drafts: `yes` keeps drafts, `no` drops units with no ready PR
     (`status.py --draft <value>`)
 1. Directory globs to use; none means every candidate directory
 
 After pass 0, `status.py` takes the approved PR numbers directly.
 
-Before the first push to one, remove the label that tells the bot it still maintains the
+Bot PRs from `peeps` are worked like any other, Dependabot's included, even though a
+pushed commit stops Dependabot from updating that branch.
+Before the first push to a bot PR, remove the label that tells the bot it still
+maintains the
 branch (Watch Doggo's is `watch-doggo-maintained`), so its next round doesn't race the
 worker's push.
 
@@ -44,7 +49,7 @@ makes.
 It also covers prepending a blockers block to a PR's description (see Unattended runs).
 On a bot-opened PR in scope, it also covers removing the bot's maintenance label.
 It covers retitling a PR and rewriting its AI Summary through the profile's PR-writeup
-path, and writing the validated line (see Challenge every PR).
+path, and writing the challenge comment (see Challenge every PR).
 This overrides the push restrictions in the global rules and in `change-review-apply`.
 It does not cover force-pushing, rebasing a branch an open PR depends on, touching any
 branch outside the approved set, or flipping a PR's draft state.
@@ -58,7 +63,7 @@ branch outside the approved set, or flipping a PR's draft state.
     Report it and drop it from the pool; never clean, stash, or reset it.
     If `.jj/` exists, stop and ask, because the worker playbook assumes plain git.
     Refresh a clean directory with
-    `git checkout <trunk> && gh poi && git fetch --prune origin && git pull --prune`, one
+    `git checkout <trunk> && git fetch --prune origin && git pull --prune`, one
     directory at a time so the hooks never run in
     parallel.
     Record each directory's current branch in `pr-pass.json`, and list commits from the
@@ -142,11 +147,15 @@ A PR whose premise holds but whose title or summary is wrong or stale gets both
 rewritten through the PR-writeup path, as does any PR whose scope changes or whose
 context grows during the run.
 
-Once a PR is sound and green with nothing left to action, mark it validated:
-`${CLAUDE_SKILL_DIR}/scripts/validated.py <pr> "<note>"` from a checkout.
-It writes `<!-- pr-pass:validated <UTC timestamp> <note> -->` as the description's first
-line, replacing any earlier one, where the note is at most two sentences of context a
-future session needs (what was checked, what was deliberately left).
+Each verdict lives in one PR comment that
+`${CLAUDE_SKILL_DIR}/scripts/challenge.py <pr> <validated|objection> "<note>"` creates
+and then edits in place, so a PR never collects more than one, and Watch Doggo's
+rewrites of its own descriptions can't erase it.
+Record `objection` with the objection and its evidence when the challenge fails.
+Record `validated` once the PR is sound and green with nothing left to action, with a
+note of at most two sentences a future session needs (what was checked, what was
+deliberately left).
+Read that comment first on every pass.
 A validated PR still gets the normal checks (CI, new reviews, conflicts).
 Its challenge reruns only when commits landed after the timestamp and they change the
 scope or implementation meaningfully: scan the commit messages first, then the diff
@@ -264,8 +273,7 @@ The next pass's `status.py` run finds whatever CI and the bots turned up.
 Once the loop ends, run the pass 0 refresh again in each directory still in the pool,
 one
 at a time:
-`git checkout <trunk> && gh poi && git fetch --prune origin && git pull --prune`.
-Run `gh poi --dry-run` first and stop if it lists a branch whose PR is still open.
+`git checkout <trunk> && git fetch --prune origin && git pull --prune`.
 Skip a directory that was dropped, is dirty, or has commits from the last 20 minutes,
 and say which.
 

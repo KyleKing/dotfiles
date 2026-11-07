@@ -69,7 +69,10 @@ def matching(repo: str, authors: str) -> list[int]:
     if authors in ('me', 'peeps'):
         logins = ('@me',) if authors == 'me' else PEEPS
         return sorted({p['number'] for a in logins for p in listed(repo, '--author', a)})
-    return [p['number'] for p in listed(repo, '--search', authors)]
+    found = [p['number'] for p in listed(repo, '--search', authors)]
+    if not found:
+        sys.exit(f"query {authors!r} matched no open PR in {repo}")
+    return found
 
 
 def select(prs: list[dict], wanted: list[int], expand: bool) -> list[dict]:

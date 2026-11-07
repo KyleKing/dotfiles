@@ -176,7 +176,7 @@ uncommitted: run `git status` after every push, and commit and push any hook edi
 Refresh the PR summary through the profile's PR-writeup path when something the summary
 claims changed, the scope changed, or you learned context a reviewer needs, and retitle
 the PR when its title no longer describes the change.
-Never write the validated line yourself; the coordinator owns it.
+Never write the challenge comment yourself; the coordinator owns it.
 In irm, a PR that changes what a user sees gets checked on its cloud preview with the
 `pr-previews` skill whenever you judge its scope or refresh its summary, and stale
 screenshots are retaken there and attached through `irm-pr`.

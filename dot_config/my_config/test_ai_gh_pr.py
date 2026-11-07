@@ -41,16 +41,12 @@ def test_link_stack_uses_pr_numbers_and_prefers_the_stack_number(monkeypatch, st
     assert calls == [['gh', 'stack', 'link', *expected]]
 
 
-@pytest.mark.parametrize(
-    'body',
-    [
-        '<!-- pr-pass:validated 2026-11-07T14:02Z premise checked -->\nAI Summary: x',
-        '<!-- pr-pass:blockers -->\n- decide y\n<!-- /pr-pass:blockers -->\n\nAI Summary: x',
-    ],
-)
-def test_pr_pass_markers_stay_outside_the_summary(body):
-    head, written, footer = ai_gh_pr._split_description(body + '\n<!-- codesmith:footer -->\nfoot')
-    assert head.startswith('<!-- pr-pass:')
+def test_pr_pass_blockers_stay_outside_the_summary():
+    head, written, footer = ai_gh_pr._split_description(
+        '<!-- pr-pass:blockers -->\n- decide y\n<!-- /pr-pass:blockers -->\n\n'
+        'AI Summary: x\n<!-- codesmith:footer -->\nfoot'
+    )
+    assert head.startswith('<!-- pr-pass:blockers -->')
     assert written == 'AI Summary: x'
     assert ai_gh_pr._ai_owned(written)
     assert footer.startswith('<!-- codesmith:footer -->')

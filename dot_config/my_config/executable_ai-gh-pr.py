@@ -201,16 +201,14 @@ LEGACY_POINTER = 'See full AI Summary below:'
 
 
 PR_PASS_HEAD_RE = re.compile(
-    r'\A\s*(?:<!-- pr-pass:validated [^\n]*?-->\s*'
-    r'|<!-- pr-pass:blockers -->.*?<!-- /pr-pass:blockers -->\s*)+',
-    re.DOTALL,
+    r'\A\s*<!-- pr-pass:blockers -->.*?<!-- /pr-pass:blockers -->\s*', re.DOTALL
 )
 
 
 def _split_description(body: str) -> tuple[str, str, str]:
-    """Return pr-pass's leading markers, the written text, and the Blacksmith footer.
+    """Return pr-pass's blockers block, the written text, and the Blacksmith footer.
 
-    Neither the markers nor the footer is human text, and `describe` keeps both.
+    Neither the block nor the footer is human text, and `describe` keeps both.
     """
     match = PR_PASS_HEAD_RE.match(body)
     head = match.group(0).strip() if match else ''
