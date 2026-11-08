@@ -352,9 +352,9 @@ judgment: a security or permissions change to confirm, a step only verifiable on
 another machine or account, a tradeoff to sign off on.
 Never add a checkbox for something CI or the merge button already gates ("mark ready
 once checks pass").
-Draft/ready status is the user's call once the PR exists: don't flip it, and don't
-assume "ready" from the diff looking finished, since the user may have already set it
-deliberately.
+Flip draft/ready with `gh pr ready` (or `--undo`) when a workflow I authorized has
+validated the PR (challenge passed, CI green, review settled); don't flip on the diff
+merely looking finished.
 One or two `<details>` sections carry long scripts and the evidence another agent or a
 manual audit would need, so the visible text stays enough for most readers.
 Say what is not verified.

@@ -52,7 +52,22 @@ It covers retitling a PR and rewriting its AI Summary through the profile's PR-w
 path, and writing the challenge comment (see Challenge every PR).
 This overrides the push restrictions in the global rules and in `change-review-apply`.
 It does not cover force-pushing, rebasing a branch an open PR depends on, touching any
-branch outside the approved set, or flipping a PR's draft state.
+branch outside the approved set.
+It covers flipping a PR to ready (`gh pr ready`) once its challenge is validated and CI
+is green, so a draft never blocks a merge the run is allowed to make.
+
+## Merge policy
+
+- hq and account-manager: the coordinator merges on green without asking.
+    Each PR gets
+    at least one Watch Doggo review; fix and push until a round has no critical
+    findings.
+    If approval is still missing after the third round, merge with
+    `gh pr merge --admin` and report why
+- irm: never merge without the user. When a PR is green, validated, and reviewed, open
+    it in Chrome (`open -a "Google Chrome" <url>`) and ask with AskUserQuestion; the user
+    merges or queues it.
+    Batch these asks with the pass's other questions
 
 ## Pass 0: settle scope (once)
 
@@ -285,3 +300,35 @@ with where it landed (ticket link or branch).
 Lead with the lines that change the user's next action.
 Delete `pr-pass.json` once the loop ends with every PR done; keep it when something is
 still open, and say which.
+
+## Pacing (lessons from the 2026-11-07 run)
+
+- Pipeline pass 0: dispatch a PR's worker as soon as its own challenge is validated,
+    instead of waiting for every verdict and one big approval table
+- Attended runs ask a question when it arrives (batching only questions that arrive
+    together); a reply waiting a whole pass costs ten minutes per round trip
+- `status.py` reports `draft`, `review_decision`, and `merge_state`; use them to merge
+    or flip ready instead of extra `gh` calls
+- A PR with no Watch Doggo review 30 minutes after its last push is a Watch Doggo bug:
+    re-request once, then treat it as an HQ finding (below), not as waiting
+- Errands with no checkout work (posting an approved reply, flipping ready, a merge)
+    go to a Haiku agent or the coordinator, not a Sonnet lane worker
+
+## Improve HQ while running
+
+The run also audits Watch Doggo (HQ) and lands fixes.
+Pick model by stakes: Haiku for
+errands and lookups, Sonnet for lane work, triage and ops audits, and Opus
+(`opus-xhigh`)
+for judging review quality and design.
+Audits are read-only and write to
+`ai-output/hq-audit/<date>/`; the coordinator then turns ranked findings into PRs on hq
+(or irm and account-manager where the fix lives there), worked through the same lanes.
+Cover: review quality (testing evidence, first-round findings, scope, pushback,
+performance, thoughtless media), triage root-cause accuracy and stored memory, codegen
+speed and correctness and how plainly it reports a failed step, ops errors and
+throughput caps or AWS quotas, and moving PR fix-ups to the cloud (the
+`watch-doggo-fix` label or HQ's UI and MCP) instead of local lanes.
+Spot-check peers'
+PRs before auditing them in depth.
+Use idle time between passes for this.

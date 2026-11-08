@@ -238,6 +238,7 @@ local function take_snapshot()
     end
 
     local tmux = capture_tmux()
+    if #windows == 0 and not tmux then return end
     signature_parts[#signature_parts + 1] = wezterm.json_encode(tmux)
     local sig = hash_utils.hash_string(table.concat(signature_parts, "|"))
     if sig == last_signature then return end
@@ -291,4 +292,4 @@ end
 
 os.execute("mkdir -p " .. shellq(SNAPSHOT_DIR))
 os.execute("rm -f " .. shellq(SNAPSHOT_DIR) .. "/snapshots.jsonl.tmp.*")
-tick()
+wezterm.time.call_after(5, tick)

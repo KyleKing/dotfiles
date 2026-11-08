@@ -155,8 +155,14 @@ def warnings(repo: str, sha: str, number: int) -> list[str]:
     return found
 
 
-def behind_base(repo: str, head: str, base: str) -> int:
-    return run_json('gh', 'api', f'repos/{repo}/compare/{head}...{base}', '--jq', '{n: .ahead_by}')['n']
+def behind_base(repo: str, head: str, base: str) -> int | None:
+    """Commits head lacks from base, or None when either branch is gone (merged or deleted mid-run)."""
+    try:
+        return run_json('gh', 'api', f'repos/{repo}/compare/{head}...{base}', '--jq', '{n: .ahead_by}')['n']
+    except subprocess.CalledProcessError as err:
+        if 'HTTP 404' not in (err.stderr or ''):
+            raise
+        return None
 
 
 def review_status(number: int) -> tuple[list[dict], list[dict]]:
@@ -167,7 +173,7 @@ def review_status(number: int) -> tuple[list[dict], list[dict]]:
 
 
 def describe(repo: str, trunk: str, pr: dict, heads: dict[str, int]) -> dict:
-    rollup = run_json('gh', 'pr', 'view', str(pr['number']), '--repo', repo, '--json', 'statusCheckRollup')
+    rollup = run_json('gh', 'pr', 'view', str(pr['number']), '--repo', repo, '--json', 'statusCheckRollup,reviewDecision,mergeStateStatus')
     ci = checks(rollup['statusCheckRollup'])
     pending_reviews, open_checkboxes = review_status(pr['number'])
     entry = {
@@ -184,10 +190,13 @@ def describe(repo: str, trunk: str, pr: dict, heads: dict[str, int]) -> dict:
         'ci_warnings': warnings(repo, pr['headRefOid'], pr['number']),
         'reviews': pending_reviews,
         'open_checkboxes': open_checkboxes,
+        'draft': pr['isDraft'],
+        'review_decision': rollup['reviewDecision'] or None,
+        'merge_state': rollup['mergeStateStatus'],
     }
     # A squash-merged PR behind trunk needs no sync unless it conflicts; a stacked PR must track its base.
     stale_base = entry['behind_base'] and pr['baseRefName'] != trunk
-    entry['done'] = not (entry['conflicted'] or stale_base or entry['ci_failed']
+    entry['done'] = entry['behind_base'] is not None and not (entry['conflicted'] or stale_base or entry['ci_failed']
                          or entry['ci_pending'] or entry['ci_warnings'] or entry['reviews'])
     return entry
 
@@ -195,6 +204,7 @@ def describe(repo: str, trunk: str, pr: dict, heads: dict[str, int]) -> dict:
 def needs(p: dict) -> list[str]:
     threads = sum(r['open_threads'] for r in p['reviews'])
     candidates = [
+        (f"{p['head']} or {p['base']} no longer exists", p['behind_base'] is None),
         ('conflict', p['conflicted']),
         (f"behind {p['base']} by {p['behind_base']}", p['behind_base']),
         (f"failed {', '.join(p['ci_failed'])}", p['ci_failed']),
@@ -202,6 +212,8 @@ def needs(p: dict) -> list[str]:
         (f"{len(p['ci_warnings'])} warnings", p['ci_warnings']),
         (f"{threads} open threads in {len(p['reviews'])} reviews", p['reviews']),
         (f"{len(p['open_checkboxes'])} open checkboxes for the user", p['open_checkboxes']),
+        ('draft', p['draft']),
+        ('awaiting approval', p['review_decision'] == 'REVIEW_REQUIRED'),
     ]
     return [label for label, present in candidates if present]
 
