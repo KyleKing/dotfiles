@@ -16,6 +16,8 @@ CR_REVIEW = Path.home() / '.config/my_config/ai-cr-review.py'
 # statusCheckRollup is fetched per selected PR: listing it for 100 PRs times out (HTTP 504) on check-heavy repos.
 PR_FIELDS = 'number,title,url,headRefName,baseRefName,headRefOid,isDraft,mergeable'
 POINTS_PER_PR = 15
+REST_PER_PR = 6
+BUDGET = Path.home() / '.config/my_config/gh-budget.sh'
 FAILED = {'FAILURE', 'ERROR', 'TIMED_OUT', 'CANCELLED', 'ACTION_REQUIRED', 'STARTUP_FAILURE'}
 PENDING = {'PENDING', 'EXPECTED', 'QUEUED', 'IN_PROGRESS', 'WAITING', 'REQUESTED'}
 WARNING_NOISE = ('Failed to restore: getCacheEntry failed', 'Failed to save: ',
@@ -45,10 +47,9 @@ def run_json(*cmd: str):
 
 
 def require_budget(prs: int) -> None:
-    left = run_json('gh', 'api', 'rate_limit', '--jq', '.resources.graphql')
-    needed = prs * POINTS_PER_PR
-    if left['remaining'] < needed:
-        sys.exit(f"{left['remaining']} GraphQL points left, {prs} PRs need about {needed}; resets at epoch {left['reset']}")
+    for bucket, per_pr in (('', POINTS_PER_PR), ('--rest', REST_PER_PR)):
+        if subprocess.run([str(BUDGET), *filter(None, [bucket]), str(prs * per_pr)], check=False).returncode:
+            sys.exit(1)
 
 
 def repo_and_trunk() -> tuple[str, str]:
@@ -137,10 +138,11 @@ def pr_files(repo: str, number: int) -> set[str]:
 def warnings(repo: str, sha: str, number: int) -> list[str]:
     runs = [json.loads(line) for line in run(
         'gh', 'api', '--paginate', f'repos/{repo}/commits/{sha}/check-runs?per_page=100',
-        '--jq', '.check_runs[] | select(.output.annotations_count > 0) | {id, name}').splitlines()]
+        '--jq', '.check_runs[] | select(.output.annotations_count > 0) | {id, name, status}').splitlines()]
     found, files = [], None
     for r in runs:
-        notes = run_json('gh', 'api', f"repos/{repo}/check-runs/{r['id']}/annotations?per_page=100")
+        cache = ['--cache', '24h'] if r['status'] == 'completed' else []
+        notes = run_json('gh', 'api', *cache, f"repos/{repo}/check-runs/{r['id']}/annotations?per_page=100")
         for n in notes:
             full = (n.get('message') or '').strip()
             msg = full.splitlines()[0] if full else ''
