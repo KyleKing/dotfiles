@@ -305,8 +305,14 @@ still open, and say which.
 
 - Pipeline pass 0: dispatch a PR's worker as soon as its own challenge is validated,
     instead of waiting for every verdict and one big approval table
-- Attended runs ask a question when it arrives (batching only questions that arrive
-    together); a reply waiting a whole pass costs ten minutes per round trip
+- Batch questions at the end of a pass and keep working everything they don't block,
+    using subagents for side work while an answer is pending; never hold a question
+    longer than two passes
+- A PR whose premise is valid but whose change misses the cause (a no-op fix for a
+    real flake) gets the issue investigated in the run: fix it on that PR, or open a new
+    PR and close the old one with a comment linking it
+- A PR closed for an unproven premise is a Watch Doggo eval case: HQ should have
+    recommended the close itself
 - `status.py` reports `draft`, `review_decision`, and `merge_state`; use them to merge
     or flip ready instead of extra `gh` calls
 - A PR with no Watch Doggo review 30 minutes after its last push is a Watch Doggo bug:

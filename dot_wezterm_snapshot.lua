@@ -16,11 +16,8 @@ local RETENTION_S = 12 * 60 * 60
 local CODEX_SCAN_LIMIT = 60
 
 local function sh(cmd)
-    local handle = io.popen(cmd)
-    if not handle then return "" end
-    local out = handle:read("*a") or ""
-    handle:close()
-    return out
+    local _, out = wezterm.run_child_process({ "/bin/sh", "-c", cmd })
+    return out or ""
 end
 
 local function shellq(str) return "'" .. str:gsub("'", "'\\''") .. "'" end
@@ -69,7 +66,7 @@ local devin_locks
 local function devin_lock_map()
     if devin_locks then return devin_locks end
     devin_locks = {}
-    local out = sh("lsof -F pn +d " .. shellq(HOME .. "/.local/share/devin/cli/session_locks") .. " 2>/dev/null")
+    local out = sh("lsof -nP -F pn +d " .. shellq(HOME .. "/.local/share/devin/cli/session_locks") .. " 2>/dev/null")
     local pid
     for line in out:gmatch("[^\n]+") do
         local tag, val = line:sub(1, 1), line:sub(2)
