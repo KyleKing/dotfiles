@@ -10,7 +10,7 @@ disable-model-invocation: true
 Target: `$ARGUMENTS`, three positional parts and nothing else.
 
 1. Authors: `me` is every open PR the user authored, `peeps` adds those by
-    `app/github-actions`, `app/watch-doggo`, and `app/dependabot`, and anything else in
+    `app/coverbase-hq-bot`, `app/dependabot`, and `app/github-actions`, and anything else in
     quotes is a `gh pr list --search` query (`"label:deps"`).
     `status.py --authors <value>` resolves it per repo, and pulls in each match's
     whole stack.
@@ -25,8 +25,7 @@ After pass 0, `status.py` takes the approved PR numbers directly.
 Bot PRs from `peeps` are worked like any other, Dependabot's included, even though a
 pushed commit stops Dependabot from updating that branch.
 Before the first push to a bot PR, remove the label that tells the bot it still
-maintains the
-branch (Watch Doggo's is `watch-doggo-maintained`), so its next round doesn't race the
+maintains the branch (HQ's is in `hq-review-merge`), so its next round doesn't race the
 worker's push.
 
 Directories come from where the skill runs.
@@ -40,7 +39,8 @@ The main thread coordinates and never edits code.
 Sonnet workers do the per-PR work, one PR per checkout at a time.
 This skill owns the pass loop and the dispatch rules.
 Per-PR work delegates to `change-review-apply` for reviews and `pr-stacking` for the
-merge-forward rules; read those rather than restating them.
+merge-forward rules, and HQ interaction and merging follow `hq-review-merge`; read those
+rather than restating them.
 
 ## Authority granted by invocation
 
@@ -58,16 +58,9 @@ is green, so a draft never blocks a merge the run is allowed to make.
 
 ## Merge policy
 
-- hq and account-manager: the coordinator merges on green without asking.
-    Each PR gets
-    at least one Watch Doggo review; fix and push until a round has no critical
-    findings.
-    If approval is still missing after the third round, merge with
-    `gh pr merge --admin` and report why
-- irm: never merge without the user. When a PR is green, validated, and reviewed, open
-    it in Chrome (`open -a "Google Chrome" <url>`) and ask with AskUserQuestion; the user
-    merges or queues it.
-    Batch these asks with the pass's other questions
+The coordinator merges per `hq-review-merge`, with each repo's default profile unless
+the
+user named one at invocation.
 
 ## Pass 0: settle scope (once)
 
@@ -80,7 +73,7 @@ is green, so a draft never blocks a merge the run is allowed to make.
     Refresh a clean directory with
     `git checkout <trunk> && git fetch --prune origin && git pull --prune`, one
     directory at a time so the hooks never run in
-    parallel.
+    parallel, then prune its stale branches (Cleanup).
     Record each directory's current branch in `pr-pass.json`, and list commits from the
     last 20 minutes on any local branch
     (`git log --all --since=20.minutes.ago --format='%h %cr %an %s'`): a recent commit means
@@ -293,6 +286,22 @@ at a time:
 Skip a directory that was dropped, is dirty, or has commits from the last 20 minutes,
 and say which.
 
+Then prune local branches in each refreshed directory, so the next run never starts on a
+branch that needs a rebase:
+
+1. List candidates: `git branch -vv` entries whose upstream shows `[gone]`, plus any
+    branch where `gh pr list --state all --head <branch> --json state` reports only
+    `MERGED` or `CLOSED`
+1. For each, find commits the merged PR never got: `git cherry -v origin/<trunk> <branch>`
+    lists them, but a squash merge makes every commit look new, so compare
+    each against the merged PR's diff (`gh pr diff <n>`) and keep only work it lacks
+1. Salvage that work onto a fresh branch from trunk (`git switch -c <name> origin/<trunk>`
+    and `git cherry-pick`), never by rebasing the old branch, and
+    report the new branch for the user to open a PR from
+1. Delete the old branch with `git branch -D`.
+    Never delete the remote branch of an
+    open PR, and leave any branch with a commit from the last 20 minutes
+
 ## Final report
 
 The pass 0 table beside the final one, so the user sees what moved.
@@ -312,14 +321,9 @@ still open, and say which.
 - A PR whose premise is valid but whose change misses the cause (a no-op fix for a
     real flake) gets the issue investigated in the run: fix it on that PR, or open a new
     PR and close the old one with a comment linking it
-- Never push to a PR while HQ has a `watch-doggo-fix` round in flight on it: a local
-    sync or fix moves the branch and HQ's push is rejected (hq#2754).
-    Hand a PR to
-    either HQ or a local worker, and wait for HQ's round reply before taking it back
+- Choose per PR whether HQ or a local worker owns its fixes, by `hq-review-merge`
 - `status.py` reports `draft`, `review_decision`, and `merge_state`; use them to merge
     or flip ready instead of extra `gh` calls
-- A PR with no Watch Doggo review 30 minutes after its last push is a Watch Doggo bug:
-    re-request once, then treat it as an HQ finding (below), not as waiting
 - Errands with no checkout work (posting an approved reply, flipping ready, a merge)
     go to a Haiku agent or the coordinator, not a Sonnet lane worker
 
@@ -336,8 +340,8 @@ Audits are read-only and write to
 Cover: review quality (testing evidence, first-round findings, scope, pushback,
 performance, thoughtless media), triage root-cause accuracy and stored memory, codegen
 speed and correctness and how plainly it reports a failed step, ops errors and
-throughput caps or AWS quotas, and moving PR fix-ups to the cloud (the
-`watch-doggo-fix` label or HQ's UI and MCP) instead of local lanes.
+throughput caps or AWS quotas, and moving PR fix-ups to the cloud (the fix label in
+`hq-review-merge`, or HQ's UI and MCP) instead of local lanes.
 Fold in each worker's
 `hq_findings` (the reference says what they record), and treat a PR closed for an
 unproven premise as an eval case, since HQ should have recommended the close itself.

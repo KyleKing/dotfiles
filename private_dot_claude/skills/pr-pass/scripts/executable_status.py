@@ -57,7 +57,7 @@ def repo_and_trunk() -> tuple[str, str]:
     return meta['nameWithOwner'], meta['defaultBranchRef']['name']
 
 
-PEEPS = ('@me', 'app/github-actions', 'app/watch-doggo', 'app/dependabot')
+PEEPS = ('@me', 'app/coverbase-hq-bot', 'app/dependabot', 'app/github-actions')
 
 
 def listed(repo: str, *flags: str) -> list[dict]:

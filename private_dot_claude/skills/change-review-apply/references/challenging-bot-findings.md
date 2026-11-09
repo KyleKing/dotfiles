@@ -61,8 +61,7 @@ After the verdicts, write down in the report:
 - what it missed, meaning a real problem on a PR it approved, or open threads under an
     approval
 
-Round limits and merge rules live in memory (`review-round-cap`,
-`approval-is-not-no-findings`).
+Round limits and merge rules live in the `hq-review-merge` skill.
 
 A Watch Doggo miss or false positive is a product defect.
 Under `pr-pass`, record it in `ai-output/hq-audit/<date>/`.

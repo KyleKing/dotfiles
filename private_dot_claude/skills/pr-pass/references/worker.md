@@ -48,6 +48,10 @@ command and then stall on it.
 
 ## 1. Sync with the base
 
+If the PR already merged, or the local branch holds commits its squash-merged PR never
+got, do not rebase it: move that work to a fresh branch from the base per the
+coordinator's Cleanup steps in `SKILL.md`, and report the new branch.
+
 Run `<skill-dir>/scripts/sync.sh <pr>` from the directory.
 It checks the tree is clean, switches to the branch, fast-forwards it from origin, and
 merges the PR's base as GitHub reports it (the only safe direction in a stack).
@@ -99,8 +103,9 @@ or return the conflict as a question.
 
 Post a reply that points at a fix only once that fix is pushed, including a fix that
 lands on another PR in the stack.
-Send every reply for a push in one `apply`, and never add a second reply to a thread
-already answered for the same head: Watch Doggo starts a full round for each reply.
+Send every reply for a push in one `apply`, and never answer a thread twice for the same
+head (`challenging-bot-findings.md` says why).
+Whether HQ or you own a fix follows `hq-review-merge`.
 
 A manual step the PR asks a human to take (a production database write, a deploy, a
 console setting) is never a worker's, even when the exact command is written out.

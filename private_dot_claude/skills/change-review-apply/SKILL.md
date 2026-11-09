@@ -13,6 +13,7 @@ bot or human, has no such block, so every open thread tied to it becomes a findi
 the thread's own comment as the prompt.
 Your job is steps 2 through 6: decide what is real, escalate what's out of scope, fix
 what's in scope, commit, and write the replies.
+Requesting HQ rounds, handing fixes to HQ, and merging follow `hq-review-merge`.
 
 **A bot's review is yours to close out; a person's is not.** Post and resolve a bot's
 threads without asking.
