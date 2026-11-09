@@ -72,9 +72,10 @@ confirm the ordering is single-headed before moving on.
 ## 2. Action the reviews
 
 Hold the PR to the coordinator's verdict and keep challenging it as you work.
-Push back on a review finding, the PR's own approach, or its premise when the evidence
-says so, and return an objection you cannot settle as a question rather than polishing
-around it.
+Challenge review findings per
+`change-review-apply/references/challenging-bot-findings.md`.
+Push back on the PR's own approach or premise when the evidence says so, and return an
+objection you cannot settle as a question rather than polishing around it.
 
 Invoke `change-review-apply` for this PR, with three overrides:
 
@@ -194,5 +195,7 @@ Return a short structured report, not logs:
     and any existing ticket
 - `questions`: decisions only the user can make, including human-review replies
     drafted in full and waiting for approval
+- `hq_findings`: where Watch Doggo raised something wrongly or missed something, per the
+    reference, each with the thread and one line of evidence
 - `verdict`: sound, or the objection to the PR's premise or design with its evidence
 - anything you could not finish and why

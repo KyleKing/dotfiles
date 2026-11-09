@@ -102,15 +102,11 @@ checked out elsewhere, stop and report it instead of `cd`-ing into that worktree
 
 ## Step 2 — Verify each finding adversarially
 
-A bot reasons about a diff snapshot and is confidently wrong often enough that
-applying its prompt verbatim regresses code.
-A human is worth more trust, and still
-wrong sometimes.
+Judge each finding with `references/challenging-bot-findings.md`: its checklist,
+reply shapes, and the per-round quality notes apply to every review, bot or human.
 For every finding, read the current file and pick the verdict:
 
-- `fixed` — reproduce the failure in your head first.
-    State the concrete input or interleaving that breaks.
-    If you cannot, it is not yet real
+- `fixed` — the finding is real and the whole class is fixed
 - `stale` — a later commit already fixed it.
     Cite the commit or line
 - `wrong` — the premise misreads the code (a guard it did not see, a caller that cannot
@@ -125,18 +121,6 @@ For every finding, read the current file and pick the verdict:
     The reply is the answer
 - `noted` — the thread is an FYI or a suggestion with nothing to change.
     Say what it was checked against
-
-Push back hardest on findings that widen scope for its own sake: version pinning, extra
-abstraction, "add a contract test" for behavior a real test already covers.
-Where a finding names a security or data-loss risk, treat it as real until you have
-disproved it.
-
-A finding about how an outside system behaves (a vendor's token claims, which IAM
-condition keys exist, an API's response shape) is checked against that system's primary
-source, its docs page or its code, before any verdict, and the reply cites it.
-Neither a typecheck nor the reviewer's confidence proves it: on watch-doggo #917 two
-workers accepted a false claim about GitHub's OIDC token and swapped in a condition key
-AWS never evaluates, so nothing could assume the role.
 
 ## Step 3 — Escalate what's out of scope, don't just note it
 
@@ -284,3 +268,6 @@ verdict table, then the broader fixes you added beyond its block.
 After all of them, one shared list of what Step 3 escalated and where it landed (ticket
 link or branch), then the gate results.
 Keep it to the lines that change the user's next action.
+
+End with the reviewer-quality notes the reference asks for (`hq_findings`) when the
+reviewer was Watch Doggo.

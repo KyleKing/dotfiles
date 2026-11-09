@@ -276,6 +276,20 @@
     (hard architectural tradeoffs, ambiguous multi-file debugging), and almost never pick
     Fable
 
+### GitHub API budget
+
+All local agents share one personal token: 5,000 REST calls an hour, plus a separate
+5,000-point GraphQL budget that usually sits idle.
+Read commits, diffs, blame, and history from local git, and PR state from
+`gh pr view/list/checks --json` or `gh api graphql`, before reaching for
+`gh api repos/...`.
+A loop that makes more than about 100 REST calls runs
+`~/.config/my_config/gh-budget.sh --rest --wait 2500` before each batch and caches
+anything immutable (a merged PR, a completed run, its jobs and logs) on disk by id.
+When `gh-budget.sh --rest` says the budget is low, read the PR or Actions log in Chrome
+until the reset it names, and run `~/.config/my_config/gh-spend.py report` to see who
+spent it.
+
 ### My own tools
 
 I write and maintain a set of terminal tools, checked out under `~/Developer/kyleking/`

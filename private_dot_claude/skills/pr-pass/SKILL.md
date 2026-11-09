@@ -153,6 +153,7 @@ In irm, judge a user-visible PR's scope on its cloud preview (`pr-previews` skil
 only from the diff.
 Bot PRs get the same bar, so a Dependabot bump that breaks an API or a Watch Doggo fix
 for the wrong cause is a finding.
+Judge review findings by `change-review-apply/references/challenging-bot-findings.md`.
 
 Each PR leaves pass 0 with a verdict: sound, or the specific objection with the evidence
 for it.
@@ -311,8 +312,10 @@ still open, and say which.
 - A PR whose premise is valid but whose change misses the cause (a no-op fix for a
     real flake) gets the issue investigated in the run: fix it on that PR, or open a new
     PR and close the old one with a comment linking it
-- A PR closed for an unproven premise is a Watch Doggo eval case: HQ should have
-    recommended the close itself
+- Never push to a PR while HQ has a `watch-doggo-fix` round in flight on it: a local
+    sync or fix moves the branch and HQ's push is rejected (hq#2754).
+    Hand a PR to
+    either HQ or a local worker, and wait for HQ's round reply before taking it back
 - `status.py` reports `draft`, `review_decision`, and `merge_state`; use them to merge
     or flip ready instead of extra `gh` calls
 - A PR with no Watch Doggo review 30 minutes after its last push is a Watch Doggo bug:
@@ -335,6 +338,8 @@ performance, thoughtless media), triage root-cause accuracy and stored memory, c
 speed and correctness and how plainly it reports a failed step, ops errors and
 throughput caps or AWS quotas, and moving PR fix-ups to the cloud (the
 `watch-doggo-fix` label or HQ's UI and MCP) instead of local lanes.
-Spot-check peers'
-PRs before auditing them in depth.
+Fold in each worker's
+`hq_findings` (the reference says what they record), and treat a PR closed for an
+unproven premise as an eval case, since HQ should have recommended the close itself.
+Spot-check peers' PRs before auditing them in depth.
 Use idle time between passes for this.
