@@ -7,6 +7,7 @@
 .config/marzano
 .config/my_config/_go.sh
 .config/my_config/_r.sh
+.config/my_config/backup_template.py
 .config/my_config/scripts/asdf_info.personal-m2.txt
 .config/my_config/scripts/asdf_info.work.txt
 .config/my_config/scripts/mise_info.personal-m2.txt
