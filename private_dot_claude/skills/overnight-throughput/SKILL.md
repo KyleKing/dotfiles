@@ -196,6 +196,11 @@ Do not hold a lane idle through either.
 
 ## Brief agents for a finish, not a handoff
 
+- Every brief carries two hard lines.
+    Never merge or queue an irm PR, or a PR in a repo Kyle did not name, without his
+    explicit OK in this session.
+    Never dispatch, rerun, or cancel a prod deploy by hand: fix the cause and let the
+    next push deploy
 - One agent per lane, working a queue of PRs: branch to green CI to AI Summary, then swap
     branches while the review runs (see above).
     Say "do not merge", and merge from here.

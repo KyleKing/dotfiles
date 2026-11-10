@@ -19,9 +19,9 @@ Agree only with what you verified, and when a finding is valid, fix the whole cl
 1. Does the guard it asks for protect a case that cannot happen?
     Check the callers and the types.
     An error path for an impossible state is complexity, so decline it
-1. Does it ask for tests of declarative code (config, IaC, a schema) or of behavior a
-    real test already covers?
-    Decline
+1. Does it ask for tests of declarative code (config, IaC, a schema), of trivial CRUD or a
+    low-level unit, or of behavior a real test already covers?
+    Decline, and prefer deleting or merging the low-level test
 1. Does it add abstraction, pinning, or a flag where deleting code would do?
     Counter with the simpler change
 1. Is it security-shaped?

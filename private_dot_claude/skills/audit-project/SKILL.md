@@ -26,7 +26,9 @@ conversation.
 - **Code quality**: duplication, verbosity, complexity, dead code, AI slop in docs and
     comments.
 - **Test quality**: coverage gaps, tests that assert nothing, tests that would pass if the
-    feature were deleted, missing parameterization.
+    feature were deleted, missing parameterization, and trivial or low-level tests to delete
+    or
+    merge under a higher-level one.
 - **Tooling**: whether lint, type checks, and pre-commit actually run and pass right now.
     Report what fails rather than fixing it.
 

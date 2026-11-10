@@ -106,9 +106,11 @@
 
 ## Tests
 
-- Don't write trivial tests. Write the fewest tests that maximize coverage and actually
-    exercise the behavior we care about
-- Look to merge into an existing test before adding a new one
+- Don't write trivial tests. Write the fewest tests that actually exercise the behavior we
+    care about: fast, high-level integration tests or tests of genuinely complicated
+    behavior, never trivial CRUD or a unit a higher-level test already reaches
+- Look to merge into or delete an existing test before adding a new one, and delete
+    low-level tests you touch that fail this bar
 - Never write a test that reads source, config, or docs files to assert they agree (an AST
     or call-graph walk, a permission-to-call join, a doc-to-code table, a comment or
     docstring budget).
@@ -122,8 +124,10 @@
 - Design for parallel execution and speed: no shared mutable state, no ordering between
     tests, no sleeps
 - Extract helpers and parameterize instead of copying a test body
-- Run a test once, against the change. Never revert, stash, or comment out a fix to watch
-    its test fail, and never rerun a suite on the base branch to compare
+- Run a test once, against the change. A new test need not fail on the base: read its
+    inputs and assertions instead.
+    Never revert, stash, or comment out a fix to watch it
+    fail, and never rerun a suite on the base branch to compare
 
 ## Design Principles
 
