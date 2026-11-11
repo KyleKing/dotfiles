@@ -62,7 +62,7 @@ still need their own explicit `--review-id`.
 
 `sweep` also lists each pull request's `open_checkboxes`: every unchecked `- [ ]` in its
 own description, every unchecked `- [ ]` in its `AI Summary:` comment, and every
-unchecked `- [ ]` in any review's own body, such as Watch Doggo's non-blocking "Ticket
+unchecked `- [ ]` in any review's own body, such as HQ's non-blocking "Ticket
 progress" checklist (a merged production-data or follow-up task the bot flagged but did
 not block on).
 Each one is a judgment call the user still owes after the merge (a security sign-off, a

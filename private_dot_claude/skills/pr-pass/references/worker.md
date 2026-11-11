@@ -20,24 +20,23 @@ same
 checkout races your edits and its report cannot be trusted over the repo state.
 
 Other workers run in sibling checkouts at the same time, and hook typecheckers take
-gigabytes each.
-Run every `git commit` that carries authored changes, its `git push`,
-and any local test or typecheck command through
-`<skill-dir>/scripts/heavy.sh <command>`,
-which queues on one
-machine-wide lock.
-Never run those bare.
-Conclude a base merge with `HK=0 git merge --continue` (no `heavy.sh`), so its hook
-typecheckers never stack up across checkouts at the merge peak.
-Hooks are skipped (`HK=0`) in exactly two cases, both because CI runs the same checks:
-the commit that concludes a base merge (clean or conflicted), and the push of a head
-whose only new commits are such merges.
-Never use `--no-verify`, and never skip hooks on a commit that carries authored changes.
-Skipped commands need no `heavy.sh`, since the lock exists for hook typecheckers.
+gigabytes each, so in a pr-pass run every `git commit`, `git merge --continue`, and
+`git push` skips the local hooks with `HK=0` and CI judges the change.
+Set it on the one command (`HK=0 git commit ...`), never export it, and never carry it
+outside a pr-pass run.
+The tradeoff is that a format or lint miss costs a CI round instead of a local fix, so
+run the repo's formatter on the files you touched when it is cheap.
+Never use `--no-verify`.
+Run any local test or typecheck through `<skill-dir>/scripts/heavy.sh <command>`, which
+queues on one machine-wide lock; never run those bare.
 
 Move fast. The coordinator runs up to four passes, and CI is the full-suite backstop.
 Do not wait on CI: never `gh pr checks --watch`, never a poll loop, never a Monitor.
 Read the checks as they stand now and move on.
+Once your last round is committed and pushed, report and end the run.
+Never stay alive to watch CI, re-request a review and wait on it, or merge: a
+background watcher or Monitor counts as waiting.
+The coordinator reads CI and reviews on its next pass and merges.
 This covers GitHub's remote Actions/checks
 and a full local suite alike: never run `mise run ci` or the equivalent full ladder
 yourself, since the next pass's `status.py` reads the real CI run instead and a local
@@ -105,7 +104,8 @@ Post a reply that points at a fix only once that fix is pushed, including a fix 
 lands on another PR in the stack.
 Send every reply for a push in one `apply`, and never answer a thread twice for the same
 head (`challenging-bot-findings.md` says why).
-Whether HQ or you own a fix follows `hq-review-merge`.
+Hand a fix to HQ (`hq-bot-fix`) by default and fix locally only in the cases
+`hq-review-merge` lists; when HQ takes it, push nothing and report.
 
 A manual step the PR asks a human to take (a production database write, a deploy, a
 console setting) is never a worker's, even when the exact command is written out.
@@ -170,14 +170,12 @@ where that needs no Docker, and otherwise report it as unverified.
 
 Conventional Commits in the user's voice, one readable subject, no body unless the why
 is non-obvious, and nothing that references AI or a model.
-Run commit and push as separate commands (`heavy.sh` unless the HK=0 cases above apply),
+Run commit and push as separate commands, each with `HK=0`,
 and confirm with `git log -1` that
 the commit
 landed before pushing, because a hook failure piped through a filter can look like
 success.
 Push with plain `git push`; never force.
-The pre-push hook can fix files without failing the push, which leaves its edits
-uncommitted: run `git status` after every push, and commit and push any hook edits.
 
 Refresh the PR summary through the profile's PR-writeup path when something the summary
 claims changed, the scope changed, or you learned context a reviewer needs, and retitle
@@ -200,7 +198,7 @@ Return a short structured report, not logs:
     and any existing ticket
 - `questions`: decisions only the user can make, including human-review replies
     drafted in full and waiting for approval
-- `hq_findings`: where Watch Doggo raised something wrongly or missed something, per the
+- `hq_findings`: where HQ raised something wrongly or missed something, per the
     reference, each with the thread and one line of evidence
 - `verdict`: sound, or the objection to the PR's premise or design with its evidence
 - anything you could not finish and why

@@ -80,13 +80,13 @@ understanding why it fails).
     If files changed that the agent did not touch, stop that repo and flag it in the report
     instead of committing
 - Parallel workers share one scratchpad directory.
-    `copier update` refuses to run with untracked files present, so a worker that stashes
+    `copier update` refuses to run with untracked files present, so a worker that moves
     something aside must use a path namespaced by its repo
     (`<scratchpad>/<repo-name>/doing.txt`, never `<scratchpad>/doing.txt`).
     Two workers moving same-named files to the same path will silently restore each other's
     content into the wrong repo.
-    Prefer `git stash push -- <pathspec>` or a temporary `.git/info/exclude` entry over
-    moving files out of the tree at all
+    Prefer a temporary `.git/info/exclude` entry over moving files out of the tree at all,
+    and never `git stash`
 - CI passing means the latest completed run of every non-Dependabot workflow on the
     default branch is green, checked via `gh run list --branch <default>`.
     A repo with no workflows is noted, not failed.

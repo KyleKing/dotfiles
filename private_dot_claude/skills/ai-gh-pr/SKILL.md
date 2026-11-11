@@ -100,6 +100,12 @@ Screenshots: reference each file by local path with the label as alt text, then 
 `-- --attach ./after.png#after: <label>` to `describe`.
 Run `get` afterward to confirm each URL landed.
 Never link an image hosted elsewhere.
+Upload the same files to the Linear issue the PR implements (named in the title or
+branch):
+one file at a time, `prepare_attachment_upload`, a curl PUT with the signed headers
+verbatim
+(the URL expires in 60s), then `create_attachment_from_upload`, and embed them in a
+comment.
 
 ## Updating
 

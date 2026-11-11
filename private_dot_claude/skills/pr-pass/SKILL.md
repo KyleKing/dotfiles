@@ -48,6 +48,8 @@ Committing and pushing on the branches in scope, including the merge commits a s
 makes.
 It also covers prepending a blockers block to a PR's description (see Unattended runs).
 On a bot-opened PR in scope, it also covers removing the bot's maintenance label.
+It covers adding `hq-bot-fix` and posting the review that names the fix for HQ (request
+changes, or a plain comment on the user's own PR, where GitHub refuses one).
 It covers retitling a PR and rewriting its AI Summary through the profile's PR-writeup
 path, and writing the challenge comment (see Challenge every PR).
 This overrides the push restrictions in the global rules and in `change-review-apply`.
@@ -99,9 +101,6 @@ user named one at invocation.
     - per-checkout env the Docker targets depend on (`COMPOSE_ID` from
         `mise.local.toml`, for instance) and how a non-interactive shell gets it
         (`mise exec --`), because worker shells do not load it
-    - which hook steps are memory-heavy (typecheckers such as tsgo or pyright) and
-        whether they run at commit, push, or both, so the report can say what the
-        heavy-job lock is serializing
 1. Assign each unit to one directory and keep it there for every pass, so the checkout
     stays warm.
     Classify each PR by the paths it touches (`gh pr diff --name-only`): a PR is a Docker
@@ -128,7 +127,8 @@ Write the profile, the assignments, and the pass counter to
 `$(git rev-parse --git-common-dir)/pr-pass.json` in the first checkout of each repo.
 That file is the durable state, so a compaction loses nothing: re-read it at the start
 of every pass instead of relying on memory.
-Beside it, write `pr-pass-rules.md`: the authority line, the heavy-job rule, the Docker
+Beside it, write `pr-pass-rules.md`: the authority line, the `HK=0` and heavy-job rules,
+the Docker
 lanes (which directories may use Docker, only their own stack), the unattended rule when
 it applies, known CI noise, and the repo profile.
 Record the lanes in `pr-pass.json`; a directory added mid-run is re-laned the same way.
@@ -144,7 +144,7 @@ symptom, is there a smaller change or one that deletes code, does it fight the r
 conventions or duplicate something that exists, and does its scope match its title.
 In irm, judge a user-visible PR's scope on its cloud preview (`pr-previews` skill), not
 only from the diff.
-Bot PRs get the same bar, so a Dependabot bump that breaks an API or a Watch Doggo fix
+Bot PRs get the same bar, so a Dependabot bump that breaks an API or a HQ fix
 for the wrong cause is a finding.
 Judge review findings by `change-review-apply/references/challenging-bot-findings.md`.
 
@@ -158,7 +158,7 @@ context grows during the run.
 
 Each verdict lives in one PR comment that
 `${CLAUDE_SKILL_DIR}/scripts/challenge.py <pr> <validated|objection> "<note>"` creates
-and then edits in place, so a PR never collects more than one, and Watch Doggo's
+and then edits in place, so a PR never collects more than one, and HQ's
 rewrites of its own descriptions can't erase it.
 Record `objection` with the objection and its evidence when the challenge fails.
 Record `validated` once the PR is sound and green with nothing left to action, with a
@@ -223,8 +223,15 @@ a reason to add a third.
     PR's status entry, its directory, `pr-pass-rules.md`, the pass number, and what the
     PR below it just pushed.
     Skip a PR whose entry is `done` and whose base did not move this pass.
-    The heavy-job rule in the rules file is what stops parallel hook typecheckers from
-    several checkouts exhausting the laptop's memory, so never drop it from that file
+    The `HK=0` and heavy-job rules in the rules file are what stop parallel typecheckers
+    in several checkouts from exhausting the laptop's memory, so never drop them from
+    that file.
+    A worker pushes, reports, and stops (`worker.md`), and so does any agent the
+    coordinator starts outside a pass (a feature build, a sync, a follow-up fix): its
+    prompt says to push, report, and stop, never to take the PR through review to a
+    merge.
+    Workers that wait on HQ rounds hold checkouts for an hour and flood the coordinator
+    with notifications, worst when HQ's review itself is failing
 1. While workers run, `${CLAUDE_SKILL_DIR}/scripts/lockq.sh` shows the heavy-job lock's
     holder and queue.
     Check it whenever a worker reports waiting for long.
@@ -242,7 +249,8 @@ a reason to add a third.
 1. Collect each worker's report.
     Questions come back to you, never to the user directly: batch them into one
     AskUserQuestion per pause point, then act on the answers (post approved human-review
-    replies with `ai-cr-review.py apply`, or `SendMessage` the worker to finish).
+    replies with `ai-cr-review.py apply`, or start a fresh Sonnet agent with a short
+    handoff, not `SendMessage` into a large worker).
     A wrong conflict resolution costs far more than a question, so ask liberally.
     In an unattended run, questions become blockers instead (below)
 1. Append the pass's outcome to `pr-pass.json`: per PR, what was merged, fixed, pushed,
@@ -321,7 +329,10 @@ still open, and say which.
 - A PR whose premise is valid but whose change misses the cause (a no-op fix for a
     real flake) gets the issue investigated in the run: fix it on that PR, or open a new
     PR and close the old one with a comment linking it
-- Choose per PR whether HQ or a local worker owns its fixes, by `hq-review-merge`
+- HQ owns a PR's fixes by default: add `hq-bot-fix`, first posting a review that names
+    the fix when HQ's own review did not.
+    A local worker takes the fix only in the cases `hq-review-merge` lists, so lanes stay
+    free for what HQ cannot do
 - `status.py` reports `draft`, `review_decision`, and `merge_state`; use them to merge
     or flip ready instead of extra `gh` calls
 - Errands with no checkout work (posting an approved reply, flipping ready, a merge)
@@ -329,7 +340,7 @@ still open, and say which.
 
 ## Improve HQ while running
 
-The run also audits Watch Doggo (HQ) and lands fixes.
+The run also audits HQ and lands fixes.
 Pick model by stakes: Haiku for
 errands and lookups, Sonnet for lane work, triage and ops audits, and Opus
 (`opus-xhigh`)

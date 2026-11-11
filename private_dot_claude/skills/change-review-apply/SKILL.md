@@ -28,7 +28,7 @@ goes out only after they say yes — Step 6 has the mechanics.
 
 `fetch` with no `--review-id` returns **every** un-acked bot review on the PR
 (CodeRabbit,
-watch-doggo, a linter, a security scanner), not just the newest — a PR that collected
+HQ, a linter, a security scanner), not just the newest — a PR that collected
 three CodeRabbit passes across three pushes gets all three in one call, under a
 top-level
 `reviews` array.
@@ -64,7 +64,7 @@ There is nothing to resolve, and it still gets answered: read it, and where it a
 something or claimed something, answer it point by point in the actions file's top-level
 `body_reply` (Step 6), which `apply` posts as one `[AI Bot]: ` PR comment linking the
 review, before the rocket.
-A numbered list in a review body (Watch Doggo's open questions are the common case)
+A numbered list in a review body (HQ's open questions are the common case)
 is answered by number.
 
 Its `open_checkboxes` key lists the unchecked boxes in the pull request's own
@@ -176,7 +176,7 @@ Push the branch once, before any reply goes out: `git push` in a plain git check
 `jj git push --bookmark <name>` when `.jj/` is present, per the git-vs-jj rule in
 `CLAUDE.md`.
 This applies whether a given review was a bot's or a human's.
-A `fixed` reply has to point at code the reviewer can open, and Watch Doggo's next round
+A `fixed` reply has to point at code the reviewer can open, and HQ's next round
 reads every reply against the pushed head, so `apply` refuses while the PR branch holds
 commits the PR does not.
 
@@ -235,11 +235,11 @@ Two reasons, and both bite:
 
 - A thread nobody answered reads as a finding nobody looked at.
     A reviewer that re-reads its own threads punishes the silence harder than a person
-    does: Watch Doggo hands each prior finding's replies to the next round
+    does: HQ hands each prior finding's replies to the next round
     (`REVIEW_FEEDBACK.md`), and a finding that drew silence gets raised again unchanged
 - The reply posts under the user's own account, so GitHub attributes it to a
     write-access human and nothing else in the thread says otherwise.
-    Watch Doggo settles a finding on the first reply from a person's account, so that
+    HQ settles a finding on the first reply from a person's account, so that
     reply clears a blocking finding with no code change behind it.
     The prefix is the whole marker
 
@@ -271,4 +271,4 @@ link or branch), then the gate results.
 Keep it to the lines that change the user's next action.
 
 End with the reviewer-quality notes the reference asks for (`hq_findings`) when the
-reviewer was Watch Doggo.
+reviewer was HQ.

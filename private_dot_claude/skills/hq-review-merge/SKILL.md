@@ -9,6 +9,8 @@ argument-hint: <pr> [involved|light], e.g. '2821 light'
 Target: `$ARGUMENTS`, a PR (number or URL) and an optional profile.
 With no profile, irm is `involved` and hq, account-manager, and heyavocado are `light`.
 A profile Kyle names wins over the repo default.
+Merge on green applies only to hq, account-manager, and heyavocado; irm PRs are never
+merged without Kyle's explicit OK in the session.
 
 ## Get an HQ round
 
@@ -35,11 +37,11 @@ Record what HQ raised wrongly or missed as `hq_findings`
 
 ## Fix in the cloud or locally
 
-Hand a fix to HQ with the `hq-bot-fix` label when the findings are inside the PR's diff,
-HQ's own finding says what to change, and the fix needs no local Docker, data, or
-judgment call.
-Fix locally when the fix spans a stack, needs a reproduction, or turns on product
-intent, and when a local session already holds the branch.
+HQ fixes by default: add the `hq-bot-fix` label.
+When HQ's review did not say what to change, post a review that does first (request
+changes, or a comment on Kyle's own PR, where GitHub refuses one).
+Fix locally only when the fix spans a stack, needs a reproduction or local Docker, or
+turns on product intent, or when a local session already holds the branch.
 
 A PR has one owner at a time.
 Never push while an HQ fix round is in flight, because HQ's push is then rejected
@@ -84,12 +86,20 @@ Workers never merge; the coordinating session does.
     its `down_revision` with origin/main's `alembic heads`.
     If main ends up with two
     heads, look for another session's head-merge PR before opening one
+- An unstacked PR that needs a bypass takes `gh pr merge N --admin --squash`.
 - A PR that ever had a child PR counts as stacked, and `gh pr merge` refuses it.
     Use
     `gh api -X PUT repos/coverbasedev/<repo>/pulls/<n>/merge-async -H "X-GitHub-Api-Version: 2026-03-10" -f merge_action=merge_queue -f sha=<full sha>`
     (no `merge_method`, which returns 422 with the queue), then poll
-    `.../merge-async/<uuid>` for `merged`
+    `.../merge-async/<uuid>` for `merged`.
+    The admin bypass is the same endpoint with
+    `-f merge_action=direct_merge -F bypass_rules=true`.
+    If it sits enqueued after one retry (the merge box says "Rebase stack"), merge in
+    Chrome with "Merge without waiting for requirements (bypass rules)", after checking
+    the commit message carries no attribution
 - hq deploys itself: after a merge, check that the deploy and its alarms stay green.
+    After two consecutive failed deploys, merge nothing more to hq until a deploy is
+    green; the next work item is the pipeline, and merges resume one at a time.
     When a breakage gets no auto-fix PR, the work item is the auto-fix loop (trigger,
     dispatch, auto-merge, deploy), not the symptom
 

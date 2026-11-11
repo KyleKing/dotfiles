@@ -51,7 +51,7 @@ the core count (`sysctl -n hw.ncpu`):
     Never kill
     a process owned by another session, the user's own tools (browser, editors, `claude`),
     or anything you cannot trace to this session.
-    Ask via `AskUserQuestion` instead.
+    Put it on the goals file's Waiting on Kyle list instead.
 1. Fix the cause. A background loop must stop on its own exit condition, so give every
     `Monitor` and `run_in_background` loop a bounded count or deadline.
     Stopping the task
@@ -68,7 +68,9 @@ and GitHub CI runs the whole suite, so:
 
 - Run only targeted tests for what the change touches (`pytest path::test -n 0`, one file,
     or one `-k` expression), plus the type check of the touched package if it is quick.
-- Commit normally so `hk` runs. Never `--no-verify`.
+- Commit normally so `hk` runs. Skipping hooks with `HK=0` belongs to pr-pass runs
+    only (`pr-pass/references/worker.md` owns that rule).
+    Never `--no-verify`.
 - Push, then check CI later with `gh pr checks N` and a `Monitor` until-loop.
     Do other work
     meanwhile (the lane-swap rule above).
@@ -105,6 +107,21 @@ A goal with no movement across two revisits gets a new owner, a
 smaller next step, or a question to the user.
 A progress report that cannot point at the
 file's status changes means the board was not worked.
+Commit `ai-output/` after each check-in (`git -C ai-output add -A && git commit`), so a
+crash or a parallel session never strands a night of notes uncommitted.
+
+## Unattended means no questions
+
+Once Kyle is away, never call `AskUserQuestion`: it blocks the coordinator, and every
+dispatch and check-in, until he answers (one question stalled a night for four hours).
+Append the question to Waiting on Kyle, take the safest path that needs no new access,
+and keep dispatching.
+
+## Freeze merges on a red deploy
+
+After two consecutive failed deploys of a repo, stop merging there and make the
+pipeline the top work item; `hq-review-merge` owns the rule.
+Merges queued behind a red deploy only stack more unshipped changes onto the failure.
 
 ## Every turn ends with a full board
 
@@ -146,28 +163,14 @@ and unstarted work is a miss.
 
 ## Landing recipes (stop rediscovering them)
 
-- Plain PR: `gh pr merge N --auto` (the queue picks the method).
-- Stacked PR (own base is a PR branch, or another PR is based on it): auto-merge is
-    refused.
-    `gh api -X PUT repos/O/R/pulls/N/merge-async -f merge_action=merge_queue`.
-- Admin bypass of a stacked or blocked PR: same endpoint with
-    `-f merge_action=direct_merge -F bypass_rules=true`.
-    Valid actions are only `default`, `direct_merge`, `merge_queue`.
-- The `merge-async` bypass can sit "enqueued" forever on a PR whose stack is out of date
-    (the merge box says "Rebase stack" and "Unable to merge").
-    After one retry, stop and use
-    Chrome: open the PR, tick "Merge without waiting for requirements (bypass rules)", click
-    "Bypass rules and merge (squash)", then confirm.
-    Check the commit message carries no
-    attribution first.
-    An unstacked PR takes `gh pr merge N --admin --squash`.
+- Merging, admin bypass, stacked PRs, and the Alembic-heads check: `hq-review-merge`.
 - A red check whose log shows a 5xx from a vendor service: `gh run rerun RUN --failed`,
     once.
 - A stale-branch test failure: merge main forward (no rebase), rerun the narrow test.
 
 ## Keep a lane working while a review runs
 
-The first WD review of a PR is a deep pass and takes up to about 30 minutes.
+The first HQ review of a PR is a deep pass and takes up to about 30 minutes.
 Later rounds on
 a small push take about 7.
 Do not hold a lane idle through either.
@@ -181,6 +184,11 @@ Do not hold a lane idle through either.
 - One agent owns the lane at a time, so branch swaps are serial and safe.
     Never start a
     second agent in the same checkout, and never swap with a dirty tree.
+- A lane changes hands only by explicit handoff: the owner commits, pushes, reports,
+    and stops (check `ListAgents`, since a "completed" agent with background work still
+    owns the lane), then a fresh agent starts with a short handoff (branch, PR, what is
+    left, what was decided).
+    Never `SendMessage` a large finished worker into a new task.
 - Check back on a schedule that matches the pass: about 30 minutes after the first push,
     and
     about 7 after a fix push.
@@ -197,8 +205,7 @@ Do not hold a lane idle through either.
 ## Brief agents for a finish, not a handoff
 
 - Every brief carries two hard lines.
-    Never merge or queue an irm PR, or a PR in a repo Kyle did not name, without his
-    explicit OK in this session.
+    Workers never merge (merge policy is `hq-review-merge`'s).
     Never dispatch, rerun, or cancel a prod deploy by hand: fix the cause and let the
     next push deploy
 - One agent per lane, working a queue of PRs: branch to green CI to AI Summary, then swap
@@ -206,14 +213,17 @@ Do not hold a lane idle through either.
     Say "do not merge", and merge from here.
 - Give the agent the audit findings and file paths inline so it starts without
     rediscovery.
+- State the defect, the invariant, and the evidence, never the shape of the fix (see
+    Design principles below).
+- Never `git stash`: commit work in progress to the branch instead.
 - Sonnet at medium effort by default. Opus only for audits or design that need depth.
 - Tell each agent: no full local CI, targeted tests only, let `hk` and GitHub CI do the
     rest.
 - Ask each agent to end by reporting only what changes the next action.
 
-## Offload to Watch Doggo codegen and triage, then critique what comes back
+## Offload to HQ codegen and triage, then critique what comes back
 
-Idle lanes are not the only capacity. Watch Doggo builds and triages on its own, so hand
+Idle lanes are not the only capacity. HQ builds and triages on its own, so hand
 it
 work that is well specified and low risk, and spend local agents on what it cannot do.
 
@@ -225,13 +235,13 @@ work that is well specified and low risk, and spend local agents on what it cann
     a fix with a clear alarm or log line behind it.
     Poor fits: security, IAM, or design
     calls (those stay local or go to the user).
-- Triage: send a firing alarm or a vague error to WD triage (HQ on-call page) before
+- Triage: send a firing alarm or a vague error to HQ triage (on-call page) before
     investigating by hand.
     Compare its answer with your own read of the logs.
 - Before filing a "gap" or an offload, read the owning package's `AGENTS.md` and the
     ticket for a rule that makes it intentional, and prove the premise (a log line, a run
     page).
-    An unproven premise is a question for the user, not a ticket for WD.
+    An unproven premise is a question for the user, not a ticket for HQ.
 - Mined outcomes mix findings from before and after fixes shipped.
     Before building from a
     mined report, slice its examples by the merge date of the rule it blames and check the
@@ -272,7 +282,7 @@ DRY, KISS, and YAGNI hold broadly, for code written here and for PRs reviewed he
     than
     one that adds a layer.
 
-## Review unfamiliar PRs adversarially, and judge WD's review the same way
+## Review unfamiliar PRs adversarially, and judge HQ's review the same way
 
 An approval, a green CI, or a plausible AI Summary settles nothing.
 For a PR you did not
@@ -287,7 +297,7 @@ write or follow, push back on three layers before landing it:
 1. Implementation: read the diff for the cases the tests skip (pagination, 5xx, empty,
     permissions, concurrency, stale heads) and for tests that assert nothing.
 
-Hold WD's review to the same standard. After each review, record in
+Hold HQ's review to the same standard. After each review, record in
 `ai-output/<YYYY-MM-DD>-wd-review-quality.md` (the orchestrating directory's
 `ai-output/`,
 one entry per PR) with direct links to the review, the comment or finding, the diff
@@ -295,7 +305,7 @@ line, and
 any screenshot or recording:
 
 - findings that were incorrect, and why
-- defects WD missed that a person or agent later found
+- defects HQ missed that a person or agent later found
 - how the review presents images and text: does the screenshot show the claim, is the
     annotation readable, is the summary scannable, is the evidence linked or only described
 - a concrete change to the reviewer prompt, checks, or presentation

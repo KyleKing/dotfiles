@@ -1,12 +1,12 @@
 # Challenging bot findings
 
 A bot's finding is a claim to check, not an instruction.
-Watch Doggo (HQ, on irm, hq, and account-manager) and CodeRabbit are confidently wrong
+HQ (on irm, hq, and account-manager) and CodeRabbit are confidently wrong
 often enough that applying a prompt verbatim regresses code.
 A person's review gets more trust and the same check.
 
 Pushing back is how the reviewer improves.
-A specific reply in the thread usually makes Watch Doggo stand down, and the reply also
+A specific reply in the thread usually makes HQ stand down, and the reply also
 feeds its review metrics.
 Agree only with what you verified, and when a finding is valid, fix the whole class.
 
@@ -48,7 +48,7 @@ Cite the line, caller, or doc, and skip "I disagree".
     `[AI Bot]: Moved the org check into \`require_scope\`, so all four routes get it.\`
 
 A finding that merely lacks evidence still gets the reason.
-Never answer a thread twice for the same head, because Watch Doggo starts a full round
+Never answer a thread twice for the same head, because HQ starts a full round
 per reply.
 
 ## Reflect on the review each round
@@ -63,7 +63,7 @@ After the verdicts, write down in the report:
 
 Round limits and merge rules live in the `hq-review-merge` skill.
 
-A Watch Doggo miss or false positive is a product defect.
+A HQ miss or false positive is a product defect.
 Under `pr-pass`, record it in `ai-output/hq-audit/<date>/`.
 Otherwise list it under `hq_findings` in the report, each with the PR, the thread, and
 one line of evidence, so the user can open an hq issue.
