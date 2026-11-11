@@ -1,6 +1,6 @@
 tap "jhlee0409/tap", trusted: true
 tap "keidarcy/tap", trusted: true
-tap "kyleking/tap"
+tap "kyleking/tap", trusted: true
 tap "mcclowes/saggar", trusted: true
 tap "visigrid/tap"
 # Run your GitHub Actions locally
