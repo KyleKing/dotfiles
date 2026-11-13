@@ -6,408 +6,155 @@ description: Write pull request review comments and replies to review threads in
 # Change review
 
 How to write review comments the user will actually post.
-
-The mechanics belong to the `second-look` skill, which is generated from the binary and
-carries the commands, the batch shape, which fields post, and what is refused.
-Read it
-before the first batch of a session and do not work from a remembered schema.
-This file
-is the half the binary cannot know: whose voice a comment is in, what to read before
-writing one, and which findings get dropped by default.
-
-Refresh it whenever second-look is upgraded, since the generated copy goes stale
-silently:
+The `second-look` skill owns the mechanics (commands, batch shape, what posts, what is
+refused) and is generated from the binary, so read it before the first batch instead of
+working from memory, and refresh it after an upgrade:
 
 ```sh
 second-look skill > ~/.claude/skills/second-look/SKILL.md
 ```
 
-The prose rules in CLAUDE.md still apply.
-Review comments are short and get drafted
-fast, which is where the `writing-voice` tic catalog gets skipped because nothing here
-restates it.
-Check drafts against the `writing-voice` skill's `voice-examples.md` explicitly: the
-borrowed-vivid-verb
-list ("land"/"lands"/"landed") catches spatial metaphors for plain facts ("outside the
-diff", not "didn't land on a diff line"), and the unnamed-scope-qualifier and
-bare-open-question entries catch two shapes that show up constantly in short comments
-("too" with nothing named, a question with no proposed answer).
+This file is the half the binary cannot know: what to read, what to run, what to say,
+and
+in whose voice.
+The CLAUDE.md prose rules apply.
+Check drafts against `writing-voice`'s `voice-examples.md`, because short comments are
+where its tics slip through (spatial verbs like "land" for plain facts, "too" with
+nothing
+named, a question with no proposed answer).
 
-## Which skill
+Related skills: `change-review-apply` actions a review someone left, and
+`change-review-apply-retroactive` sweeps merged PRs for reviews nobody actioned.
 
-Writing comments on a pull request is this skill.
-Actioning a review somebody left on
-one is `change-review-apply`.
-Catching up on reviews nobody actioned before the pull
-request merged is `change-review-apply-retroactive`, which sweeps a window of merged
-pull
-requests and lands the surviving findings as one new pull request.
-
-## A batch rather than one pull request
-
-`second-look inbox --json` is the queue and the second-look skill says how to read the
-order it comes in.
-Filter it before spending an agent on anything: a draft is not waiting
-on you, and a bot's draft least of all.
+## Queue and stacks
 
 ```sh
 second-look inbox --json | jq -r '.[] | select(.bucket=="to review")
   | .items[]? | select(.draft==false) | "\(.repository)#\(.number)"'
 ```
 
-Parallelize across two or three full checkouts of the repository, one review at a time
-in
-each, never a worktree.
-The reviews all land in one place whichever clone you run from,
-so the clone is only there to hold a branch.
-Take the ones that are clean and on the
-default branch and leave the rest alone, since a dirty tree is somebody's parked work.
-More rows than clones is fine: the extra ones are read from the API, and the review's
-own
-`note` says which got a checkout and which did not.
+Skip drafts. Parallelize across two or three full checkouts at most, one review each,
+never a worktree, and leave a dirty tree alone because it is somebody's parked work.
 
-## Prepare the whole stack, not the top of it
+`~/.config/my_config/ai-pr-stack.py <pr>` prints the stack bottom first.
+`second-look get` every level and read them bottom up, since an upper diff excludes the
+lower ones.
+Stage each finding on the PR that introduces the code, once, and note the dependency in
+the upper review.
 
-Run `ai-pr-stack.py <pr>` (by absolute path, `~/.config/my_config/ai-pr-stack.py`)
-unless
-the batch is already staged and `second-look reviews --json` has answered the same
-question.
-It prints the chain the requested pull request sits on, bottom first, or says
-plainly that it isn't stacked, and it is the way to find the chain above a single pull
-request you have not staged.
+## Before writing anything
 
-Run `second-look get` against **every level it printed, bottom to top**.
-A stacked pull
-request's diff already excludes the levels below it, so getting only the top silently
-skips whatever the lower ones introduce.
+Gather what the diff cannot show, for every level of the stack:
 
-Read them in that same order.
-A shape introduced low in the stack (a new accessor, a
-changed signature, a widened type) is often only fully legible once you have seen the
-upper pull request that calls it.
+- The child ticket holding the real spec (walk down from the epic) and each acceptance
+    criterion against the code
+- The customer thread behind a support ticket, where scope and competing diagnoses get
+    lost in Linear's one-line summary
+- Whether a bot reviewed at all, since a non-default base, exhausted credits, or an
+    unlinked account looks identical to a clean review.
+    Say which in the review
+- For an alarm, scheduled job, or monitor: what triggers it, which ref and target it runs
+    against, and how far that lags.
+    Trace each fallback to its end state
+- Any gate or flag with a removal condition that already holds
 
-Attribute every finding to the pull request that introduces the code, not the one whose
-diff you happened to be reading, and stage it there.
-Do not restage the same finding at
-every level it is still visible from; note the dependency in the upper review's note
-instead.
+Confirm every anchor outside the diff against the checked-out code, because bot and
+subagent findings cite lines that do not exist.
+`line` is post-image on `RIGHT`, pre-image on `LEFT`.
 
-## Validate every anchor against local code
+## Your own pass comes first
 
-Staging checks anchors inside the diff.
-Anything a finding cites outside it is yours to
-confirm against the checked-out code before you write a comment about it, because bot
-and
-subagent findings routinely cite lines that do not exist.
-If you cannot check out or
-fetch, stop and say so instead of writing from `gh pr diff` text alone.
+Read every source file in the diff yourself before opening a bot thread, and stage what
+you find as top-level comments.
+A review made only of replies to bots gives the user nothing to post beyond "LGTM".
+Bots catch line-level mechanism bugs well, so look hardest at what they miss: one rule
+decided in two places, an argument whose meaning shifts or that is silently ignored,
+churn the change did not need, a skipped iteration that still consumes shared state,
+comments and docs that break the repo's rules, and tests that restate a neighbor.
+Ask whether an item belongs at all before correcting its fields.
 
-`line` is in the file's post-image when `side` is `RIGHT` and its pre-image when `LEFT`.
+In a batch, a subagent per PR told to ignore the bot threads works well.
+Verify any premise you hand it, and give its findings the same attack pass as a bot's.
+When your pass finds nothing, list what you checked in the review `note`.
 
-## Read what the PR body left out
+## Every finding is a claim to break
 
-Do this for every level of the stack, not just the one asked for — a lower pull request
-usually carries its own ticket and thread links, separate from the top one's.
+Treat bot, subagent, and your own findings alike: try to refute each one first (the
+caller that never passes the bad value, the guard upstream, the lock already held, the
+helper that already caches).
+Judge mechanism, severity, and fix separately, at the current head.
+Record the verdict in the comment's `note`: `refuted`, `real but overstated`,
+`real, fix wrong`, `confirmed by reading`, or `confirmed by running`.
+Only `confirmed by running` supports a blocker or major on a behavior claim, and an
+all-confirmed tally means re-arguing the weakest one.
 
-Three sources carry findings the diff and PR body can't; skipping any produces a review
-that reads thorough while missing its best comment.
+Worth keeping even though they get dropped by default: a preserved bad behavior the
+ticket asked to fix (say it predates the PR), a constraint met only by a library
+default, and a question the code cannot settle (propose the experiment).
 
-The child ticket, not the one the body cites: walk down from the linked epic to the
-subissue holding the actual spec, and check each acceptance criterion against the code.
+## Run behavior claims
 
-The customer thread, when a support ticket started this: Linear compresses a Pylon or
-Slack report into one line, and that's where scope goes missing (a wider blast radius, a
-competing earlier diagnosis, a thread still waiting on a reply).
-Link the message, say
-whether it needs updating.
+A claim about behavior gets executed, using the cheapest thing that prints the answer:
+one
+targeted test (in irm `make test-<svc> EXP=…` or one Vitest file, never the whole
+suite),
+a scratch script, or the running app (`pr-previews`, `ui-verify`, or `run`).
+Put the command and its output in the `note`, and when running was impossible, say why.
+A red CI check is evidence only after you read its log
+(`gh-lazydispatch export diagnose <run-id>`).
 
-Whether a bot reviewed at all: absence of findings has innocent causes that look
-identical to a clean review (non-default base, CodeRabbit out of credits, an unlinked
-account).
-A stacked PR's non-default base is one such cause and not itself a problem, but
-confirm the bot actually reviewed against that base rather than skipping the PR
-entirely for it.
-Check, and say which in the PR comment — the author reads silence as
-approval.
+Tricks that worked in irm: subclass the PR's test class in a scratch file to reuse its
+fixtures; reproduce a race by patching an awaited call between two phases to do the
+competing write; run a flaky file several times with `--retry=0`, then the test alone.
+Keep evidence outside the checkout, because `second-look get` refuses untracked files.
+On macOS, a dead `make test-*` run can leave Postgres servers holding SysV shared
+memory:
+stop only `postgres -D` processes with parent PID 1 whose pytest is gone, never a
+`.pgdata` dev database.
 
-How the system runs, when the PR fixes an alarm, a scheduled job, or a monitor: what
-triggers it, which ref it runs, what it runs against, and how far that target lags the
-code.
-A ticket's prescribed mechanism is a claim, and a fix built on a wrong premise reads
-correct line by line.
-Trace every fallback to its end state, and once a fix has merged, read its real runs
-(`gh run list --workflow <file>`) before calling it fixed.
+## Writing the comment
 
-A gate, flag, or version branch with a stated removal condition: check whether the
-condition already holds and ask for the removal in the same review.
-In irm, `.github/scripts/check-synthetic-version-gates.sh` lists synthetic-check gates
-prod already carries.
+- Hedge the ask ("I think", "consider", a question with options), not the verdict.
+    "I
+    don't think this holds, because `sync_items` already takes the lock" still disagrees.
+    A flat directive is only for the trivial and unarguable
+- No praise or sign-off. The body says what you checked and found, and approving is the
+    user's call
+- Write for a peer: the observation and the ask, without the downstream consequence they
+    would infer.
+    Say what should happen
+- Link the narrowest source and state its conclusion in one sentence instead of
+    retelling it.
+    Argue from why a rule exists, not its wording
+- Audit every assertion in the hunk you opened, not only the one that prompted you
+- Your own confusion is a finding worth reporting
+- Name symbols, not `file:line`, and skip `(line ###)` cross-references unless genuinely
+    ambiguous
 
-## Read the diff yourself before the bot threads
+## Replies and self-notes
 
-Do your own pass over every source file in the diff before opening any bot thread, and
-stage what it turns up as top-level comments of your own.
-A review whose only comments are replies to HQ Bot or CodeRabbit is the failure this
-section exists for: the user posts a bare "LGTM" because the review gave them nothing
-the
-bot had not already said.
-
-The bots reliably catch line-level mechanism bugs, so spend your pass on what they miss:
-
-- One rule decided in two places: a constant copied as a literal, a second SQL derivation
-    of a state a checker already owns, a global read beside the parameter that replaces it
-- An API whose meaning shifts with another argument, or an argument silently ignored
-- Refactors of adjacent code the change did not need, and helpers that differ only in a
-    type
-- A skipped or early-continued loop iteration that still consumes shared state (a
-    round-robin turn, a counter, a quota)
-- Comments that break the repo's comment rule (multi-line, narrating history) and docs
-    that restate the code
-- Tests that mock what a DB-backed test beside them already covers
-
-For a batch, a subagent per pull request told to ignore the bot threads and return
-anchored findings with draft text works well, and its findings still get the attack pass
-below.
-A clean pass still goes in the review `note` as the list of what you checked, so
-"nothing
-of my own" reads as considered.
-
-## Attack your own findings before staging them
-
-Every finding gets a second pass; cost, performance, and missing-default claims first,
-because those are usually already handled somewhere the diff doesn't show.
-Check the
-helper before claiming repeated work; read the installed library's signature before
-claiming a missing default.
-
-Verify any load-bearing premise you hand a subagent yourself — a wrong premise comes
-back wearing the subagent's confidence.
-
-Three finding shapes get dropped by default and shouldn't be:
-
-- A preserved bad behavior is still worth a comment when the ticket asked to fix it, not
-    just port it; say plainly that it predates the PR.
-- A constraint met only by inheriting a library default is worth writing down before the
-    next contributor "fixes" it for consistency.
-- A question the code can't settle needs the experiment that would answer it, not a bare
-    "does this work?"
-
-## Automated findings are claims to refute
-
-A bot's finding (HQ Bot, CodeRabbit, Codex, a subagent) is a hypothesis, and the default
-outcome of checking one is that it does not hold as written.
-Before agreeing, try to break it: find the caller that never passes the bad value, the
-guard upstream, the lock already taken, the test that already covers the case.
-Then judge three things separately, because a bot usually gets at most two right:
-
-- Is the mechanism real, on the code at the current head (not the commit the bot read)?
-- Is the severity right? A real race that needs two humans clicking within a second is a
-    nit, not a blocker
-- Is the proposed fix right, and is it in scope?
-    A correct finding often comes with a fix
-    that moves the problem or widens the diff past the ticket
-
-Write the verdict into the comment's `note` as one of `refuted`, `real but overstated`,
-`real, fix wrong`, `confirmed by reading`, or `confirmed by running`, with what you ran.
-Only `confirmed by running` supports a blocker or major on a behavior claim.
-
-Agreeing with every bot finding on a pull request is a signal to go back, not a result.
-When the tally is all-confirmed, re-open the weakest one and argue the other side before
-staging anything.
-
-## Run the change for behavior claims
-
-A finding about behavior, not code shape, gets executed rather than reasoned about, the
-bot's findings above all.
-"Confirmed by reading" is the fallback for when running is impossible, and the review
-`note` says why it was impossible.
-Pick the cheapest thing that prints the answer:
-
-- One targeted test, existing or written in scratch for the claim (in irm,
-    `make test-api EXP="<kw>"`, `make test-common EXP=…`, `make test-workers EXP=…`, or a
-    single Vitest file).
-    Never the whole suite: CI runs that, so read its result instead
-- A one-off script against the checkout (in irm, inside `make api-shell`) that builds
-    the state the finding needs and prints the outcome
-- The running app: the PR's cloud preview (`pr-previews` skill, no checkout needed) or
-    the local stack (`ui-verify` skill) for anything a user would see
-- `run` skill when the project has no specific one
-
-Techniques that worked:
-
-- Subclass the PR's own test class in a scratch file beside it, so its fixtures and
-    helpers build the state, print what comes back, and delete the file afterwards
-- For a race, patch an awaited call that sits between the two phases (planning and
-    reconcile, read and write) so it does the competing write, then let the pass finish
-- For a flaky test, run its file several times with `--retry=0`, then the test alone.
-    Fails
-    in the file and passes alone means state leaks between tests
-- Keep screenshots and other evidence outside the checkout, because `second-look get`
-    refuses a tree with untracked files
-
-A reply that widens a bot's claim ("and the scoped path has the same hole") is a new
-behavior claim and needs its own run.
-When a PR higher in the stack already fixes a finding, the reply is a pointer to that
-PR,
-not a restatement.
-
-In irm on macOS, a `make test-*` run that dies leaves its per-worker Postgres servers
-running, and they hold the 32 SysV shared-memory slots until `initdb` fails with "could
-not
-create shared memory segment".
-Stop only the servers whose parent is PID 1 and whose pytest run no longer exists
-(`ps -eo pid,ppid,etime,command | grep "[p]ostgres -D"`), never the `.pgdata` dev
-databases
-from hq checkouts.
-
-Paste the command and its output into the comment's `note`.
-Report what happened, not what should.
-A failed CI check counts as evidence only after you read its log
-(`gh-lazydispatch export diagnose <run-id>`) and know whether the PR caused it.
-
-## How to write a comment
-
-Hedge by default, in every comment. Open with "I think", "maybe", "consider", or a
-question, and name more than one option rather than issuing a flat imperative.
-Write it
-this way on the first pass; do not draft "Drop the default" and expect the user to
-soften
-it.
-Reserve a plain unhedged directive for something both trivial and unarguable (a typo,
-a wrong constant); when unsure whether a fix qualifies, hedge.
-
-Hedge the fix, never the verdict.
-"I don't think this holds, because `sync_items` already takes the row lock" is hedged in
-tone and still disagrees.
-Softening a disagreement into "maybe worth double-checking" turns a refutation into
-agreement the author will act on.
-
-Never open with praise or a sign-off ("reads well", "the right shape", "Looks good!").
-The review body says what you checked and what you found; whether to approve is the
-user's call when they submit.
-
-Write for a peer. Give the observation and the ask; cut the mechanism, the
-why-it-matters, and the consequence a reviewer would already infer.
-Spell out the
-rationale only when the user says the recipient is junior.
-
-Link, do not retell. When a finding rests on a source (a ticket, a thread, a prior PR),
-link the narrowest anchor the tool gives you and title it with what the reader will find
-there, then state the conclusion in one sentence.
-A paragraph reconstructing who said
-what is the shape to cut: the link carries it, and the author will open it anyway to
-check you.
-
-Audit the whole item, not the claim that prompted you.
-Once a cell, hunk, or row is open,
-check every assertion in it.
-Correcting a grade while a false status claim sits in the
-next sentence is half a review, and the half you left is the one the author now believes
-you cleared.
-
-Ask whether the item belongs before correcting its fields.
-A row that should not exist, a
-test that should not be written, an option nobody will set: naming that is worth more
-than fixing the contents, and it is the question a field-level comment quietly skips.
-
-Say what should happen, not what breaks downstream.
-"So the right classification is user
-error" beats tracing the knock-on effect through the summary table; the author can trace
-it and would rather have the fix.
-
-Argue from why a rule exists, not by quoting the rule back.
-An author who wrote the doc
-does not need its wording recited; they need the reason it draws the line where it does.
-
-Your own confusion is a reportable finding.
-"I'm not sure what this phrase means without
-reading where it's defined" is evidence about the writing, and it is more useful than an
-objective-sounding claim that the text is unclear.
-
-Name the symbol (function, variable, constant), never `file:line`.
-The name locates it
-and line numbers drift.
-`file:line` belongs in the anchor fields, not in the body.
-
-Do not add a `(line ###)` cross-reference to another comment in the same file just to
-help the reader find it.
-Add one only when the file carries enough comments that it is
-genuinely ambiguous without it.
-
-## By comment type
-
-Self-notes on your own code state the non-obvious why (constraint, invariant,
-workaround).
-Do not restate what the diff already shows.
-This is a different audience
-from a future reader of the code: evergreen comment rules govern the code itself, this
-governs a note on a diff.
-
-Replies to a review acknowledge the bug briefly, state what was fixed, and add a
-follow-up action if one is needed ("I will confirm X after the next deploy to Stage").
-Do
-not re-explain why the bug was bad or what would have happened, and do not over-explain
+A reply to a review on the user's PR acknowledges briefly, names the fix in one
+sentence,
+and adds a follow-up only if one exists.
+A reply on someone else's bot thread must add something the thread lacks (a refutation,
 a
-fix that is visible in the diff.
-One sentence naming the change is enough.
+corrected severity, a better fix, a run's output).
+Mere agreement is a `skip`.
+Point a thread a later commit or a higher PR already fixed at that fix instead of
+restating it.
+Preserve a leading `^` the user wrote on a bot reply, and never add or remove one.
 
-Before replying to a bot thread, check whether a later commit already resolved it
-(threads marked "✅ Addressed", or fixes visible in the diff).
-Close stale threads with a
-one-line pointer to the fixing commit instead of re-raising them.
+A self-note on the user's own code states the non-obvious why, not what the diff shows.
 
-A reply on someone else's bot thread earns its place only by adding something the thread
-lacks: a refutation, a corrected severity, a better fix, or the output of running it.
-"Confirmed, this is real" adds nothing the author can act on, so stage it as `skip` with
-that reason instead.
-When the bot is wrong, say so first and give the one fact that breaks it, so the author
-does not spend a commit on it.
+## After posting, and later passes
 
-The user sometimes opens a bot-thread reply with `^` ("^I think this is valid..."),
-marking third-person reference to the author rather than addressing them.
-Bot threads
-only, never human ones, and only selectively.
-Preserve it where it appears; do not add or
-remove it yourself.
+Submitting turns posted comments into `skip` and can delete `pr-<n>.toml`.
+Check `gh api repos/{o}/{r}/pulls/{n}/reviews` before treating that as loss, and ask
+before re-staging a posted review, since the author would see it twice.
+Keep the batch file for the session either way.
 
-## A posted review looks like a lost one
+Once the user hand-edits a comment it is settled: fix anchors or facts, never rephrase.
 
-Submitting a review rewrites its local state.
-The comments that went out come back as
-`skip`, and the whole `pr-<n>.toml` can disappear.
-Neither is data loss and neither is
-yours to undo, so do not restore a file or re-stage a batch on the strength of a
-vanished review alone.
-
-Check what the repository says before touching anything.
-`gh api repos/{owner}/{repo}/pulls/{n}/reviews` names every review that exists and when
-it was submitted, and a `second-look reviews --json` row whose drafts all collapsed to
-skips at once is the shape submitting leaves behind.
-A person triaging by hand leaves a
-mixture; a submit leaves a clean sweep.
-
-Re-staging a review the user already posted proposes the same comments to the author a
-second time, so ask first even when the batch file is right there.
-Keep that file for the
-session regardless: it costs nothing, and it is the only recovery path for the case that
-is a real loss.
-
-## Re-editing on a later pass
-
-Once the user hand-edits a comment, treat it as settled.
-Do not re-polish it against the
-voice rules, which govern what you draft rather than what they have already written.
-Small, clearly-needed edits (a changed anchor, a factual correction) are fine; do not
-rewrite the sentence.
-
-## Merged PRs
-
-Verify inline comments still post before proposing them.
-Create a PENDING review with one
-throwaway inline comment via the API (`POST /repos/{o}/{r}/pulls/{n}/reviews` with
-`commit_id` and a `comments[]` entry, no `event` so it stays a draft invisible to
-others), confirm it anchors, then `DELETE` the pending review.
-Report the result. Frame
-the summary to acknowledge the merge and offer the nits as considerations for a
-follow-up
-PR rather than change requests.
+On a merged PR, prove inline comments still anchor with a throwaway PENDING review
+(`POST .../pulls/{n}/reviews` with `commit_id` and one comment, no `event`), delete it,
+and frame the findings as follow-up considerations.
