@@ -167,6 +167,46 @@ append to what is already on disk, so send only what is new.
 The comment is held as a
 draft, which puts it back in front of the author.
 
+## Say which session you are, once
+
+The first thing to do in a run started from the review screen is record your own
+session,
+so the next hand-over on the same pull request reaches you rather than starting a
+stranger
+who has to read the diff again:
+
+```sh
+second-look session <pr> "$CLAUDE_CODE_SESSION_ID" claude-code
+```
+
+Whatever your tool calls its resumable id goes there, with the tool's name after it: a
+Claude Code session id, a wavez thread id.
+It is recorded on the review, so it goes when
+the review posts, and a second round is a session of its own against a diff that exists.
+
+`second-look session <pr>` with no id prints what is recorded, which is how to tell a
+follow-up from a first pass.
+
+## The reading plan
+
+A large change is read in chapters, and you can shape them.
+Each verb takes one JSON
+object on stdin, anchored to the diff like a comment, and none of it ever posts;
+`second-look plan` prints the shapes.
+
+```sh
+second-look plan claim <pr> <<< '{"claim": "what the change does, in a sentence"}'
+second-look plan stop <pr> < stops.json      # where the tour pauses: what, and then what
+second-look plan chapter <pr> < chapters.json  # rename, explain, or move hunks between chapters
+second-look plan mode <pr> <<< '{"chapter": "internal/tui", "mode": "skim"}'
+second-look plan ask <pr> < asks.json        # answer a question the user asked about a range
+```
+
+Name the stops a reader needs to understand the change, in the order to read them,
+and say what each one does and what follows from it.
+Leave the chapters alone unless
+the commits and directories put something where it does not belong.
+
 ## Suggestions
 
 A body whose text is fenced with \`\`\`suggestion posts as a GitHub suggestion the
@@ -179,22 +219,6 @@ A suggestion has to hang from the RIGHT side and cover only lines the file that 
 has, so a range crossing a removed line is refused when the comment is staged rather
 than
 when it is posted.
-
-## Screenshots and clips
-
-A body embeds a local image or video as `![alt](attach:path)`, a path with
-spaces as `attach:<path>`.
-Each file uploads to user-attachments as the body posts — png, jpg, gif, webp,
-mp4, and mov render — and the posted text carries the URL GitHub answered,
-which every reader of the comment can load.
-`~` and `/` do what they do anywhere else; anything shorter resolves under the
-review's root, the directory `.second-look/` sits beside.
-A file that is missing or unreadable fails the whole post before anything
-reaches GitHub, and the same file named twice uploads once.
-
-`second-look image <file-or-url>` draws an image on the terminal where the
-terminal speaks kitty, iTerm2, or sixel graphics, which is also what the
-review screen's `u` then `i` runs for the images on the row under the cursor.
 
 ## Replies
 

@@ -192,19 +192,48 @@ Keep step keys alphabetical within a mapping so additions stay reviewable.
 - `check = null` marks a step fix-only; hk skips it in check mode.
 - Put slow whole-suite steps on `pre-push`, not `pre-commit`.
 
+## Merge commits
+
+A merge that `git merge` commits on its own does not run `pre-commit`.
+Git calls only
+`pre-merge-commit` for it, and does not fall back to `pre-commit` when that hook is
+missing.
+The fallback lives only in git's optional sample hook.
+([githooks](https://git-scm.com/docs/githooks#_pre_merge_commit))
+A conflicted merge finished with `git commit` is an ordinary commit and does run
+`pre-commit`.
+
+Without a `pre-merge-commit` hook, a clean auto-merge skips every fixer.
+In coverbasedev/hq
+that left duplicated import blocks on three merges in one night, and CI caught them.
+
+Declare the hook with `fail_on_fix = true`.
+Git builds the merge's tree before
+`pre-merge-commit` runs, so a fix the hook stages never reaches that merge commit.
+Failing
+stops the merge with the fix staged, and `git commit --no-edit` finishes it, running
+`pre-commit` on the fixed tree:
+
+```pkl
+["pre-merge-commit"] {
+  fix = true
+  fail_on_fix = true
+  steps = linters
+}
+```
+
+Run `hk install` again after adding it, because only installed hooks fire.
+
 ## Skip a hook for one command (e.g. a merge)
 
-hk has no separate `pre-merge-commit` hook, and neither does the config need one: git
-only calls `pre-merge-commit` for a merge commit, but it falls back to `pre-commit` when
-`pre-merge-commit` isn't installed, and hk installs only `pre-commit`.
-So a merge commit runs the same `pre-commit` hook as a normal `git commit` — there's no
-separate label to target one and not the other.
-
-To skip hk for a merge without disabling `pre-commit` for regular commits afterward,
-scope `HK_SKIP_HOOK` to that single invocation instead of exporting it:
+To skip hk for one command without exporting the variable, scope `HK_SKIP_HOOK` to that
+invocation.
+For a clean auto-merge, name `pre-merge-commit`.
+For a conflicted merge finished
+with `git commit`, name `pre-commit`:
 
 ```sh
-HK_SKIP_HOOK=pre-commit git merge --no-ff feature-branch
+HK_SKIP_HOOK=pre-merge-commit git merge --no-ff feature-branch
 ```
 
 Prefixing the variable keeps the skip local to that one command; a later plain

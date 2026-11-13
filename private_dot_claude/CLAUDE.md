@@ -346,8 +346,9 @@ It is a standing part of the PR process I asked for, it names its own authorship
 first two words, and it gets no banner.
 
 A before/after screenshot belongs beside the claim it proves.
-`gh pr comment`,
-`gh issue create`, and `gh issue comment` take a real `--attach <file>#<alt text>`
+Never open a GitHub issue (`gh issue create`): work goes to Linear, agent context goes
+on the HQ work item, and a lasting principle goes on Atlas.
+`gh pr comment` takes a real `--attach <file>#<alt text>`
 flag: it uploads the image/video to `github.com/user-attachments/assets/...` and,
 if the body already has a matching `![alt](./file)` reference, rewrites it in
 place to the uploaded URL.
@@ -391,6 +392,7 @@ I've told you to in that session.
 
 **A bot dropping context.** A session turned up something worth keeping and the point is
 to save it for the next agent, not to make a claim I stand behind.
+Post it on the HQ work item or Linear ticket it belongs to, never a new GitHub issue.
 Open with a bold callout in this shape, adapted to the surface:
 
 ```

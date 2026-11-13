@@ -307,7 +307,7 @@
   "typos": {
     "requested_version": "latest",
     "source": "/Users/kyleking/.config/mise/config.toml",
-    "version": "1.52.0"
+    "version": "1.52.1"
   },
   "uv": {
     "requested_version": "latest",

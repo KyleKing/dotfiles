@@ -51,8 +51,8 @@ Filter it before spending an agent on anything: a draft is not waiting
 on you, and a bot's draft least of all.
 
 ```sh
-second-look inbox --json | jq -r '.[] | select(.bucket=="needs my review")
-  | .items[] | select(.draft==false) | "\(.repository)#\(.number)"'
+second-look inbox --json | jq -r '.[] | select(.bucket=="to review")
+  | .items[]? | select(.draft==false) | "\(.repository)#\(.number)"'
 ```
 
 Parallelize across two or three full checkouts of the repository, one review at a time
@@ -143,6 +143,35 @@ condition already holds and ask for the removal in the same review.
 In irm, `.github/scripts/check-synthetic-version-gates.sh` lists synthetic-check gates
 prod already carries.
 
+## Read the diff yourself before the bot threads
+
+Do your own pass over every source file in the diff before opening any bot thread, and
+stage what it turns up as top-level comments of your own.
+A review whose only comments are replies to HQ Bot or CodeRabbit is the failure this
+section exists for: the user posts a bare "LGTM" because the review gave them nothing
+the
+bot had not already said.
+
+The bots reliably catch line-level mechanism bugs, so spend your pass on what they miss:
+
+- One rule decided in two places: a constant copied as a literal, a second SQL derivation
+    of a state a checker already owns, a global read beside the parameter that replaces it
+- An API whose meaning shifts with another argument, or an argument silently ignored
+- Refactors of adjacent code the change did not need, and helpers that differ only in a
+    type
+- A skipped or early-continued loop iteration that still consumes shared state (a
+    round-robin turn, a counter, a quota)
+- Comments that break the repo's comment rule (multi-line, narrating history) and docs
+    that restate the code
+- Tests that mock what a DB-backed test beside them already covers
+
+For a batch, a subagent per pull request told to ignore the bot threads and return
+anchored findings with draft text works well, and its findings still get the attack pass
+below.
+A clean pass still goes in the review `note` as the list of what you checked, so
+"nothing
+of my own" reads as considered.
+
 ## Attack your own findings before staging them
 
 Every finding gets a second pass; cost, performance, and missing-default claims first,
@@ -154,17 +183,6 @@ claiming a missing default.
 Verify any load-bearing premise you hand a subagent yourself — a wrong premise comes
 back wearing the subagent's confidence.
 
-Never run the branch's test suite.
-CI already runs it, and re-running it costs
-minutes to learn what the checks tab reports for free.
-Read CI's result instead.
-
-What is worth running is the product: the case static analysis turned up that no test
-covers, exercised against the running app or a one-off script, so a finding about
-behavior arrives with what it actually printed.
-That is the only reason to spend time
-executing anything during a review.
-
 Three finding shapes get dropped by default and shouldn't be:
 
 - A preserved bad behavior is still worth a comment when the ticket asked to fix it, not
@@ -174,10 +192,78 @@ Three finding shapes get dropped by default and shouldn't be:
 - A question the code can't settle needs the experiment that would answer it, not a bare
     "does this work?"
 
-## Run the app for behavior claims
+## Automated findings are claims to refute
 
-A finding about behavior, not code shape, is worth running rather than reasoning about.
-Use the `run` skill if the project has one; report what happened, not what should.
+A bot's finding (HQ Bot, CodeRabbit, Codex, a subagent) is a hypothesis, and the default
+outcome of checking one is that it does not hold as written.
+Before agreeing, try to break it: find the caller that never passes the bad value, the
+guard upstream, the lock already taken, the test that already covers the case.
+Then judge three things separately, because a bot usually gets at most two right:
+
+- Is the mechanism real, on the code at the current head (not the commit the bot read)?
+- Is the severity right? A real race that needs two humans clicking within a second is a
+    nit, not a blocker
+- Is the proposed fix right, and is it in scope?
+    A correct finding often comes with a fix
+    that moves the problem or widens the diff past the ticket
+
+Write the verdict into the comment's `note` as one of `refuted`, `real but overstated`,
+`real, fix wrong`, `confirmed by reading`, or `confirmed by running`, with what you ran.
+Only `confirmed by running` supports a blocker or major on a behavior claim.
+
+Agreeing with every bot finding on a pull request is a signal to go back, not a result.
+When the tally is all-confirmed, re-open the weakest one and argue the other side before
+staging anything.
+
+## Run the change for behavior claims
+
+A finding about behavior, not code shape, gets executed rather than reasoned about, the
+bot's findings above all.
+"Confirmed by reading" is the fallback for when running is impossible, and the review
+`note` says why it was impossible.
+Pick the cheapest thing that prints the answer:
+
+- One targeted test, existing or written in scratch for the claim (in irm,
+    `make test-api EXP="<kw>"`, `make test-common EXP=…`, `make test-workers EXP=…`, or a
+    single Vitest file).
+    Never the whole suite: CI runs that, so read its result instead
+- A one-off script against the checkout (in irm, inside `make api-shell`) that builds
+    the state the finding needs and prints the outcome
+- The running app: the PR's cloud preview (`pr-previews` skill, no checkout needed) or
+    the local stack (`ui-verify` skill) for anything a user would see
+- `run` skill when the project has no specific one
+
+Techniques that worked:
+
+- Subclass the PR's own test class in a scratch file beside it, so its fixtures and
+    helpers build the state, print what comes back, and delete the file afterwards
+- For a race, patch an awaited call that sits between the two phases (planning and
+    reconcile, read and write) so it does the competing write, then let the pass finish
+- For a flaky test, run its file several times with `--retry=0`, then the test alone.
+    Fails
+    in the file and passes alone means state leaks between tests
+- Keep screenshots and other evidence outside the checkout, because `second-look get`
+    refuses a tree with untracked files
+
+A reply that widens a bot's claim ("and the scoped path has the same hole") is a new
+behavior claim and needs its own run.
+When a PR higher in the stack already fixes a finding, the reply is a pointer to that
+PR,
+not a restatement.
+
+In irm on macOS, a `make test-*` run that dies leaves its per-worker Postgres servers
+running, and they hold the 32 SysV shared-memory slots until `initdb` fails with "could
+not
+create shared memory segment".
+Stop only the servers whose parent is PID 1 and whose pytest run no longer exists
+(`ps -eo pid,ppid,etime,command | grep "[p]ostgres -D"`), never the `.pgdata` dev
+databases
+from hq checkouts.
+
+Paste the command and its output into the comment's `note`.
+Report what happened, not what should.
+A failed CI check counts as evidence only after you read its log
+(`gh-lazydispatch export diagnose <run-id>`) and know whether the PR caused it.
 
 ## How to write a comment
 
@@ -189,6 +275,16 @@ soften
 it.
 Reserve a plain unhedged directive for something both trivial and unarguable (a typo,
 a wrong constant); when unsure whether a fix qualifies, hedge.
+
+Hedge the fix, never the verdict.
+"I don't think this holds, because `sync_items` already takes the row lock" is hedged in
+tone and still disagrees.
+Softening a disagreement into "maybe worth double-checking" turns a refutation into
+agreement the author will act on.
+
+Never open with praise or a sign-off ("reads well", "the right shape", "Looks good!").
+The review body says what you checked and what you found; whether to approve is the
+user's call when they submit.
 
 Write for a peer. Give the observation and the ask; cut the mechanism, the
 why-it-matters, and the consequence a reviewer would already infer.
@@ -259,6 +355,13 @@ Before replying to a bot thread, check whether a later commit already resolved i
 (threads marked "✅ Addressed", or fixes visible in the diff).
 Close stale threads with a
 one-line pointer to the fixing commit instead of re-raising them.
+
+A reply on someone else's bot thread earns its place only by adding something the thread
+lacks: a refutation, a corrected severity, a better fix, or the output of running it.
+"Confirmed, this is real" adds nothing the author can act on, so stage it as `skip` with
+that reason instead.
+When the bot is wrong, say so first and give the one fact that breaks it, so the author
+does not spend a commit on it.
 
 The user sometimes opens a bot-thread reply with `^` ("^I think this is valid..."),
 marking third-person reference to the author rather than addressing them.

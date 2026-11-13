@@ -63,6 +63,13 @@ is green, so a draft never blocks a merge the run is allowed to make.
 The coordinator merges per `hq-review-merge`, with each repo's default profile unless
 the
 user named one at invocation.
+Before every merge, queued or `--admin`, run `ai-cr-review.py status --pr <n>`.
+Any pending review means the PR is not ready: action it with `change-review-apply`, or
+bypass a finding only under `hq-review-merge`'s light-profile rules and name it in the
+report.
+When a PR is blocked on Kyle (a peer gate HQ's rules leave to a person, a security or
+scope call), open it in Chrome and ask with AskUserQuestion in the same pause, rather
+than listing it as waiting.
 
 ## Pass 0: settle scope (once)
 
@@ -202,7 +209,14 @@ a reason to add a third.
 1. Re-run `status.py --json` for the approved PRs.
     A PR behind trunk with nothing else open counts as done (squash merge needs no
     sync), and a test annotation on a file outside the PR's diff is not the PR's.
-    New PRs the user opened mid-run stay out unless the user adds them.
+    An author-scoped run (`me`, `peeps`) covers every open PR by those authors, so
+    re-list them each pass and add any PR opened mid-run; only a query-scoped run
+    keeps its pass 0 list.
+    A PR whose entry lists open review threads goes to a `change-review-apply` worker
+    this pass whatever its `review_decision` says: approval, a peer gate, or a draft never
+    makes an open thread someone else's.
+    Never report a PR as "waiting on a peer" or "waiting on review" while
+    `needs` holds anything but the approval itself
     If `done` is true, stop and report.
     Stop too once four passes have completed
 1. Before dispatching to a directory, compare its checked-out branch with the one
